@@ -292,12 +292,15 @@ class ModuleInstall :
             
             outfile = os.path.join(temp_folder, self.name + ".zip")
             if force or not os.path.exists(outfile) :
-                zipurl = "https://github.com/sdpython/{0}/archive/master.zip".format(self.name)
+                zipurl = "https://github.com/{1}/{0}/archive/master.zip".format(self.name, self.gitrepo)
                 fLOG("downloading", zipurl)
-                req = urllib.request.Request(zipurl, headers= { 'User-agent': 'Mozilla/5.0' })
-                u = urllib.request.urlopen(req)
-                text = u.read()
-                u.close()
+                try :
+                    req = urllib.request.Request(zipurl, headers= { 'User-agent': 'Mozilla/5.0' })
+                    u = urllib.request.urlopen(req)
+                    text = u.read()
+                    u.close()
+                except urllib.error.HTTPError as e :
+                    raise Exception("unable to get archive from: " + zipurl) from e
             
                 if not os.path.exists(temp_folder) : 
                     os.makedirs(temp_folder)
@@ -374,14 +377,13 @@ def complete_installation():
                 ModuleInstall("python-pptx", "github", "sdpython"),
                 ModuleInstall("python-nvd3", "github", "sdpython"),
                 ModuleInstall("d3py", "github", "sdpython"),
-                ModuleInstall("splinter", "github", "cobrateam"),
+                ModuleInstall("Pillow", "exe", mname = "PIL"),
                 ModuleInstall("sphinx", "pip"),
                 ModuleInstall("jinja2", "pip"),
                 ModuleInstall("rpy2", "exe"),
                 ModuleInstall("pywin32", "exe", mname = "win32api" ),
                 ModuleInstall("ipython", "exe"),
                 ModuleInstall("pandas", "exe"),
-                ModuleInstall("Pillow", "exe", mname = "PIL"),
                 ModuleInstall("pygments", "pip"),
                 ModuleInstall("pyparsing", "pip"),
                 ModuleInstall("networkx", "exe"),
@@ -391,6 +393,7 @@ def complete_installation():
                 ModuleInstall("scikit-learn", "exe", mname="sklearn"),
                 #ModuleInstall("PyQt", "exe", mname="pyqt"),
                 ModuleInstall("pygame", "exe"),
+                #ModuleInstall("splinter", "github", "cobrateam"),
                 #ModuleInstall("pythonnet", "exe"),
             ]
                 

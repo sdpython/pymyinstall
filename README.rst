@@ -10,10 +10,17 @@ README
 Introduction
 ------------
 
-This extension gathers three functionalities:
-    * a logging function
-    * a function to synchronize two folders
-    * a function to generate a copy of a module, converting doxygen documentation in rst format
+This module contains a function which installs a module from pipy, using pip or from a setup::
+
+    from pymyinstall import complete_installation
+    for _ in complete_installation() :
+        _.install(temp_folder="install")
+        
+Or::
+
+    from pymyinstall import ModuleInstall
+    ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+    
     
 The documentation is available at 
 `pymyinstall documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_.

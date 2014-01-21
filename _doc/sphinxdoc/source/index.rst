@@ -13,11 +13,18 @@ Welcome to pymyinstall documentation
 Description
 -----------
 
-This extension gathers three functionalities:
-    * a logging function: :func:`fLOG <loghelper.flog.fLOG>`
-    * a function to synchronize two folders: :func:`synchronize_folder <sync.synchelper.synchronize_folder>`
-    * a function to generate a copy of a module, converting doxygen documentation in rst format: :func:`generate_help_sphinx <helpgen.sphinx_main.generate_help_sphinx>` (see also :func:`prepare_file_for_sphinx_help_generation <helpgen.utils_sphinx_doc.prepare_file_for_sphinx_help_generation>`)
-    
+This module contains a function which installs a module from pipy, using pip or from a setup::
+
+    from pymyinstall import complete_installation
+    for _ in complete_installation() :
+        _.install(temp_folder="install")
+        
+Or::
+
+    from pymyinstall import ModuleInstall
+    ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+
+
 The module is available on `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_ and
 on `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_.
 
