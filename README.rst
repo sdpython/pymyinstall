@@ -38,12 +38,5 @@ This project contains various helper about logging functions, unit tests and hel
    * a _doc folder: ``_doc``, it will contains the documentation
    * a file ``setup.py`` to build and to install the module
    * a file ``make_help.py`` to build the sphinx documentation
-    
-    
-    
-Dependencies
-------------
 
-To build the documentation, you need:
-   * `Sphinx <http://sphinx-doc.org/>`_ and its dependencies.
 
