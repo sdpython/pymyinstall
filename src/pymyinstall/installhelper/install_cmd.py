@@ -4,7 +4,6 @@
 @brief Various function to install various python module from various location.
 """
 import sys, re, platform, webbrowser, os, urllib, urllib.request, imp, zipfile,time, subprocess, io
-fLOG = print
 
 def python_version():
     """
@@ -23,7 +22,8 @@ def run_cmd (   cmd,
                 stop_waiting_if = None,
                 do_not_log      = False,
                 encerror        = "ignore",
-                encoding        = "utf8") :
+                encoding        = "utf8",
+                fLOG            = print) :
     """
     run a command line and wait for the result
     @param      cmd                 command line
@@ -38,6 +38,7 @@ def run_cmd (   cmd,
     @param      do_not_log          do not log the output
     @param      encerror            encoding errors (ignore by default) while converting the output into a string
     @param      encoding            encoding of the output
+    @param      fLOG                logging function
     @return                         content of stdout, stdres  (only if wait is True)  
     """
     if secure != None :
@@ -128,7 +129,7 @@ class ModuleInstall :
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     gitexe = r"C:\Program Files (x86)\Git"
     
-    def __init__(self, name, kind = "pip", gitrepo = None, mname = None):
+    def __init__(self, name, kind = "pip", gitrepo = None, mname = None, fLOG = print):
         """
         constructor
         
@@ -136,6 +137,7 @@ class ModuleInstall :
         @param      kind            kind of installation (pip, github, exe)
         @param      gitrepo         github repository (example: sdpython)
         @param      mname           sometimes, the module name is different from its official name
+        @param      fLOG            logging function
         
         exe is only for Windows.
         """
@@ -147,6 +149,7 @@ class ModuleInstall :
             raise Exception("unable to interpret kind {0}, it should be in {1}".format(kind, ",".join(ModuleInstall.allowedKind)))
         if self.kind == "github" and self.gitrepo == None :
             raise Exception("gitrepo cannot be empty")
+        self.fLOG = fLOG
             
     def __str__(self):
         """
@@ -244,56 +247,40 @@ class ModuleInstall :
                 if not os.path.exists (tos) :
                     finalfolder = os.path.split(tos)[0]
                     if not os.path.exists (finalfolder) :
-                        fLOG ("    creating folder ", finalfolder)
+                        self.fLOG ("    creating folder ", finalfolder)
                         os.makedirs (finalfolder)
                     if not info.filename.endswith ("/") :
                         u = open (tos, "wb")
                         u.write ( data )
                         u.close()
                         files.append (tos)
-                        fLOG ("    unzipped ", info.filename, " to ", tos)
+                        self.fLOG ("    unzipped ", info.filename, " to ", tos)
                 elif not tos.endswith("/") :
                     files.append (tos)
             elif not info.filename.endswith ("/") :
                 files.append (info.filename)
         return files
         
-    def install(self, force_kind = None, force = False, temp_folder = "."):
+    def download(self, temp_folder = ".", force = False, unzipFile = True):
         """
-        install the package
+        download the module without installation
         
-        @param      force_kind      overwrite self.kind
+        @param      temp_folder     destination
         @param      force           force the installation even if already installed
-        @param      temp_folder     folder where to download the setup
-        @return                     boolean
+        @param      unzipFile       if it can be unzipped, it will be (for github, mostly)
+        @return                     downloaded files
         """
-        
-        if not force and self.IsInstalled() :
-            return True
-            
-        fLOG("installation of ", self)        
-        kind = force_kind if force_kind != None else self.kind
+        kind = self.kind
         
         if kind == "pip" :
-            pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
-            cmd = pip + " install {0}".format(self.name)
-            out, err = run_cmd(cmd, wait = True, do_not_log = True)
-            if "Successfully installed" not in out :
-                raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
-            return True
+            # see http://www.pip-installer.org/en/latest/usage.html
+            raise Exception("this functionality is not available for packages installed using pip")
             
         elif kind == "github" :
-            # the following code requires admin rights
-            #if python_version()[0].startswith("win") and kind == "git" and not os.path.exists(ModuleInstall.gitexe) :
-            #    raise FileNotFoundError("you need to install github first: see http://windows.github.com/")
-            #if python_version()[0].startswith("win"):
-            #    os.chdir(os.path.join(ModuleInstall.gitexe,"bin"))
-            #cmd = pip + " install -e git://github.com/{0}/{1}-python.git#egg={1}".format(self.gitrepo, self.name)
-            
             outfile = os.path.join(temp_folder, self.name + ".zip")
             if force or not os.path.exists(outfile) :
                 zipurl = "https://github.com/{1}/{0}/archive/master.zip".format(self.name, self.gitrepo)
-                fLOG("downloading", zipurl)
+                self.fLOG("downloading", zipurl)
                 try :
                     req = urllib.request.Request(zipurl, headers= { 'User-agent': 'Mozilla/5.0' })
                     u = urllib.request.urlopen(req)
@@ -308,18 +295,78 @@ class ModuleInstall :
                 u.write ( text )
                 u.close()            
             
-            fLOG("unzipping ", outfile)
-            files = self.unzipfiles(outfile, temp_folder)
+            if unzipFile :
+                self.fLOG("unzipping ", outfile)
+                files = self.unzipfiles(outfile, temp_folder)
+                return files
+            else :
+                return outfile
+            
+        elif kind == "exe":
+            ver = python_version()
+            if ver[0] != "win32":
+                raise Exception("this option is not available on others system than Windows")
+                return self.install("pip")
+            else :
+                url,exe = self.get_exe_url_link()
+
+                self.fLOG("downloading", exe)
+                req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
+                u = urllib.request.urlopen(req)
+                text = u.read()
+                u.close()
+                
+                if not os.path.exists(temp_folder) : 
+                    os.makedirs(temp_folder)
+                
+                exename = os.path.join(temp_folder,exe)
+                self.fLOG("writing", exe)
+                with open(exename,"wb") as f : f.write(text)
+                return exename
+        
+    def install(self, force_kind = None, force = False, temp_folder = "."):
+        """
+        install the package
+        
+        @param      force_kind      overwrite self.kind
+        @param      force           force the installation even if already installed
+        @param      temp_folder     folder where to download the setup
+        @return                     boolean
+        """
+        
+        if not force and self.IsInstalled() :
+            return True
+            
+        self.fLOG("installation of ", self)        
+        kind = force_kind if force_kind != None else self.kind
+        
+        if kind == "pip" :
+            pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
+            cmd = pip + " install {0}".format(self.name)
+            out, err = run_cmd(cmd, wait = True, do_not_log = True, fLOG = self.fLOG)
+            if "Successfully installed" not in out :
+                raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
+            return True
+            
+        elif kind == "github" :
+            # the following code requires admin rights
+            #if python_version()[0].startswith("win") and kind == "git" and not os.path.exists(ModuleInstall.gitexe) :
+            #    raise FileNotFoundError("you need to install github first: see http://windows.github.com/")
+            #if python_version()[0].startswith("win"):
+            #    os.chdir(os.path.join(ModuleInstall.gitexe,"bin"))
+            #cmd = pip + " install -e git://github.com/{0}/{1}-python.git#egg={1}".format(self.gitrepo, self.name)
+            
+            files = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
             setu = [ _ for _ in files if _.endswith("setup.py") ]
             if len(setu) != 1 :
                 raise Exception("unable to find setup.py for module " + self.name)
             setu = os.path.abspath(setu[0])
             
-            fLOG("install ", outfile)
+            self.fLOG("install ", outfile)
             cwd = os.getcwd()
             os.chdir(os.path.split(setu)[0])
             cmd = "{0} setup.py install".format(sys.executable.replace("pythonw.ewe","python.exe"))
-            out, err = run_cmd(cmd, wait = True, do_not_log = True)
+            out, err = run_cmd(cmd, wait = True, do_not_log = True, fLOG = self.fLOG)
             os.chdir(cwd)
             if "Successfully installed" not in out :
                 raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
@@ -330,23 +377,9 @@ class ModuleInstall :
             if ver[0] != "win32":
                 return self.install("pip")
             else :
-                url,exe = self.get_exe_url_link()
-
-                fLOG("downloading", exe)
-                req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
-                u = urllib.request.urlopen(req)
-                text = u.read()
-                u.close()
-                
-                if not os.path.exists(temp_folder) : 
-                    os.makedirs(temp_folder)
-                
-                exename = os.path.join(temp_folder,exe)
-                fLOG("writing", exe)
-                with open(exename,"wb") as f : f.write(text)
-                
-                fLOG("executing", exe)
-                out,err = run_cmd(exename, wait=True, do_not_log = True)
+                exename = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
+                self.fLOG("executing", os.path.split(exe)[-1])
+                out,err = run_cmd(exename, wait=True, do_not_log = True, fLOG = self.fLOG)
                 return len(err) == 0
                 
                 
@@ -376,6 +409,7 @@ def complete_installation():
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 ModuleInstall("python-pptx", "github", "sdpython"),
                 ModuleInstall("python-nvd3", "github", "sdpython"),
+                ModuleInstall("openpyxl", "pip"),
                 ModuleInstall("d3py", "github", "sdpython"),
                 ModuleInstall("Pillow", "exe", mname = "PIL"),
                 ModuleInstall("sphinx", "pip"),
@@ -386,6 +420,8 @@ def complete_installation():
                 ModuleInstall("pandas", "exe"),
                 ModuleInstall("pygments", "pip"),
                 ModuleInstall("pyparsing", "pip"),
+                ModuleInstall("python-dateutil", "pip", "dateutil"),
+                ModuleInstall("six", "pip"),
                 ModuleInstall("networkx", "exe"),
                 #ModuleInstall("cvxopt", "exe"),
                 ModuleInstall("coverage", "pip"),
