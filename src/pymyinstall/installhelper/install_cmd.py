@@ -362,15 +362,18 @@ class ModuleInstall :
                 raise Exception("unable to find setup.py for module " + self.name)
             setu = os.path.abspath(setu[0])
             
-            self.fLOG("install ", outfile)
+            self.fLOG("install ", setu[0])
             cwd = os.getcwd()
             os.chdir(os.path.split(setu)[0])
             cmd = "{0} setup.py install".format(sys.executable.replace("pythonw.ewe","python.exe"))
             out, err = run_cmd(cmd, wait = True, do_not_log = True, fLOG = self.fLOG)
             os.chdir(cwd)
             if "Successfully installed" not in out :
-                raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
-            return "Successfully installed" in out
+                if "Finished processing dependencies" not in out :
+                    raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
+                else :
+                    self.fLOG("warning: Successfully installed not found")
+            return True
             
         elif kind == "exe":
             ver = python_version()
