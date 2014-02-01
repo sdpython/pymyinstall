@@ -6,8 +6,13 @@
 Welcome to pymyinstall documentation
 ====================================
 
-.. contents::
-   :depth: 3
+   
+   
+**Links:**
+    * `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_
+    * `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall/>`_
+    * `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
+    * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_
 
 
 Description
@@ -25,16 +30,22 @@ Or::
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
 
 
-The module is available on `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_ and
-on `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_.
+Functionalities
+---------------
+
+    - help installing module from GitHub
+    
 
 About this documentation
 ------------------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
+    doctestunit
     generatedoc
+    generatesetup
+    installation
     glossary
 
     

@@ -6,6 +6,8 @@
 #
 
 import sys, os, datetime
+import sphinx_readable_theme
+
 
 project_var_name = "pymyinstall"
 author           = "Xavier Dupré"
@@ -48,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = project_var_name + ' documentation'
-copyright = '2013, ' + author
+copyright = '2014, ' + author
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -107,12 +109,14 @@ modindex_common_prefix = [
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #html_theme = 'default'
-html_theme = 'sphinxdoc'
+#html_theme = 'agogo' # 'sphinxdoc'
+html_theme_path = [sphinx_readable_theme.get_html_theme_path()]
+html_theme = 'readable'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+#shtml_theme_options = { "bodyfont":"Calibri"}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []

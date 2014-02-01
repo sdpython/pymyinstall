@@ -6,12 +6,19 @@
 
 import unittest, os, sys, io
 
-try:
+try :
+    import src
     import pyquickhelper
-except ImportError:
-    sys.path.append ( os.path.normpath (os.path.abspath("../../pyquickhelper/src")))
+except ImportError :
+    import os, sys
+    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..")))
+    if path not in sys.path : sys.path.append (path)
+    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "pyquickhelper", "src")))
+    if path not in sys.path : sys.path.append (path)
+    import src
     import pyquickhelper
-    
+
+import unittest, os, sys, io
 from pyquickhelper import fLOG
 from pyquickhelper.unittests.utils_tests import main 
 

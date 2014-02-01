@@ -3,12 +3,17 @@
 README
 ======
 
-.. contents::
-   :depth: 3
+   
+   
+**Links:**
+    * `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_
+    * `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_
+    * `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
+    * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_
 
 
-Introduction
-------------
+Description
+-----------
 
 This module contains a function which installs a module from pipy, using pip or from a setup::
 
@@ -20,13 +25,12 @@ Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
-    
-    
-The documentation is available at 
-`pymyinstall documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_.
-You can download the setup  `here <http://www.xavierdupre.fr/site2013/index_code.html>`_.
-The module is available on `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_ and
-on `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_.
+
+
+Functionalities
+---------------
+
+    - help installing module from GitHub
 
 
 Design
