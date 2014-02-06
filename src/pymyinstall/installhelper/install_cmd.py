@@ -101,13 +101,9 @@ def run_cmd (   cmd,
                         break
                 time.sleep(0.1)
          
-        if not do_not_log : 
-            fLOG("end waiting 0")
         if not skip_waiting :
             proc.wait ()
         
-        if not do_not_log : 
-            fLOG("end waiting")
         out = "\n".join(out)
         err = proc.stderr.read().decode(encoding, errors=encerror)
         if not do_not_log : 
