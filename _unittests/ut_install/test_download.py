@@ -20,7 +20,7 @@ except ImportError :
     import pyquickhelper
     
 
-from src.pymyinstall.installhelper.install_cmd import run_cmd, ModuleInstall
+from src.pymyinstall.installhelper.install_cmd import ModuleInstall
 from pyquickhelper import fLOG
 
 class TestDownload (unittest.TestCase):

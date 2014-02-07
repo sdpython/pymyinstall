@@ -3,7 +3,7 @@
 @file
 @brief Various function to install various python module from various location.
 """
-import sys, re, platform, webbrowser, os, urllib, urllib.request, imp, zipfile,time, subprocess, io
+import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
 
 def python_version():
     """
@@ -12,6 +12,32 @@ def python_version():
     @return     tuple, example: ("win32","32bit") or ("win32","64bit")
     """
     return sys.platform, platform.architecture()[0]
+    
+def split_cmp_command(cmd, remove_quotes = True) :
+    """
+    
+    splits a command line
+
+    @param      cmd             command line
+    @param      remove_quotes   True by default
+    @return                     list
+        
+    """
+    if isinstance (cmd, str) :
+        spl = cmd.split()
+        res = []
+        for s in spl :
+            if len(res) == 0 :
+                res.append(s)
+            elif res[-1].startswith('"') and not res[-1].endswith('"') :
+                res[-1] += " " + s
+            else : 
+                res.append(s)
+        if remove_quotes :
+            res = [ _.strip('"') for _ in res ]
+        return res
+    else : 
+        return cmd
     
 def run_cmd (   cmd, 
                 sin             = "", 
@@ -320,14 +346,20 @@ class ModuleInstall :
                 with open(exename,"wb") as f : f.write(text)
                 return exename
         
-    def install(self, force_kind = None, force = False, temp_folder = "."):
+    def install(self, force_kind = None, force = False, temp_folder = ".", *options):
         """
         install the package
         
         @param      force_kind      overwrite self.kind
         @param      force           force the installation even if already installed
         @param      temp_folder     folder where to download the setup
+        @param      options         others options to add to the command line (see below)
         @return                     boolean
+        
+        The options mentioned in parameter ``options``
+        are described here: `pip install <http://www.pip-installer.org/en/latest/usage.html>`_
+        or `setup.py options <http://docs.python.org/3.3/install/>`_ if you
+        installing a module from github.
         """
         
         if not force and self.IsInstalled() :
@@ -339,6 +371,8 @@ class ModuleInstall :
         if kind == "pip" :
             pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
             cmd = pip + " install {0}".format(self.name)
+            if len(options) > 0 :
+                cmd += " " + " ".join(*options)
             out, err = run_cmd(cmd, wait = True, do_not_log = True, fLOG = self.fLOG)
             if "Successfully installed" not in out :
                 raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
@@ -362,6 +396,8 @@ class ModuleInstall :
             cwd = os.getcwd()
             os.chdir(os.path.split(setu)[0])
             cmd = "{0} setup.py install".format(sys.executable.replace("pythonw.ewe","python.exe"))
+            if len(options) > 0 :
+                cmd += " " + " ".join(*options)
             out, err = run_cmd(cmd, wait = True, do_not_log = True, fLOG = self.fLOG)
             os.chdir(cwd)
             if "Successfully installed" not in out :
