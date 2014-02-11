@@ -50,7 +50,7 @@ else :
     subversion = 1   
 
 project_var_name    = "pymyinstall"
-sversion            = "0.1"
+sversion            = "0.2"
 versionPython       = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path                = "Lib/site-packages/" + project_var_name
 readme              = 'README.rst'

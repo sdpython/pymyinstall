@@ -11,7 +11,7 @@ import sphinx_readable_theme
 
 project_var_name = "pymyinstall"
 author           = "Xavier Dupré"
-version          = '0.1'
+version          = '0.2'
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
