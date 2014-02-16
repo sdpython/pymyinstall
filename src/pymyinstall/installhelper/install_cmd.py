@@ -144,6 +144,12 @@ def run_cmd (   cmd,
 class ModuleInstall :
     """
     defines the necessary information for a module
+    
+    @example(Installation from GitHub)
+    @code
+    ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+    @endcode
+    @endexample
     """
     
     allowedKind = ["pip", "github", "exe"]
