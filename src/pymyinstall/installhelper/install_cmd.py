@@ -100,9 +100,9 @@ def run_cmd (   cmd,
         if secure == None :
             for line in proc.stdout :
                 if not do_not_log : 
-                    fLOG(line.decode(encoding, errors=encerror))
+                    fLOG(line.decode(encoding, errors=encerror).strip("\n"))
                 try :
-                    out.append(line.decode(encoding, errors=encerror))
+                    out.append(line.decode(encoding, errors=encerror).strip("\n"))
                 except UnicodeDecodeError as exu :
                     raise Exception("issue with cmd:" + str(cmd) + "\n" + str(exu))
                 if proc.stdout.closed: 
@@ -119,8 +119,8 @@ def run_cmd (   cmd,
                     if len(lines) > len(last) :
                         for line in lines[len(last):] :
                             if not do_not_log : 
-                                fLOG(line)
-                            out.append(line)
+                                fLOG(line.strip("\n"))
+                            out.append(line.strip("\n"))
                         last = lines
                     if stop_waiting_if != None and len(last)>0 and stop_waiting_if(last[-1]) :
                         skip_waiting = True
@@ -352,13 +352,18 @@ class ModuleInstall :
                 with open(exename,"wb") as f : f.write(text)
                 return exename
         
-    def install(self, force_kind = None, force = False, temp_folder = ".", *options):
+    def install(self,   force_kind = None, 
+                        force = False, 
+                        temp_folder = ".", 
+                        log = False,
+                        *options):
         """
         install the package
         
         @param      force_kind      overwrite self.kind
         @param      force           force the installation even if already installed
         @param      temp_folder     folder where to download the setup
+        @param      log             display logs or not
         @param      options         others options to add to the command line (see below)
         @return                     boolean
         
@@ -379,7 +384,7 @@ class ModuleInstall :
             cmd = pip + " install {0}".format(self.name)
             if len(options) > 0 :
                 cmd += " " + " ".join(*options)
-            out, err = run_cmd(cmd, wait = True, do_not_log = True, fLOG = self.fLOG)
+            out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)
             if "Successfully installed" not in out :
                 raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
             return True
@@ -404,7 +409,7 @@ class ModuleInstall :
             cmd = "{0} setup.py install".format(sys.executable.replace("pythonw.ewe","python.exe"))
             if len(options) > 0 :
                 cmd += " " + " ".join(*options)
-            out, err = run_cmd(cmd, wait = True, do_not_log = True, fLOG = self.fLOG)
+            out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)
             os.chdir(cwd)
             if "Successfully installed" not in out :
                 if "Finished processing dependencies" not in out :
@@ -420,7 +425,7 @@ class ModuleInstall :
             else :
                 exename = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
                 self.fLOG("executing", os.path.split(exe)[-1])
-                out,err = run_cmd(exename, wait=True, do_not_log = True, fLOG = self.fLOG)
+                out,err = run_cmd(exename, wait=True, do_not_log = not log, fLOG = self.fLOG)
                 return len(err) == 0
                 
                 
