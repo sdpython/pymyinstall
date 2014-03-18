@@ -229,7 +229,7 @@ class ModuleInstall :
             text = text.replace("&quot;","'")
             self.cached_page = text
             
-        page = self.cached_page
+        page = self.cached_page.replace("&#8209;","-")
         all  = expre.findall(page)
         if len(all) == 0 :
             raise Exception("unable to find regex with pattern: " + pattern)
@@ -442,8 +442,6 @@ def complete_installation():
     @endcode
     """
     return [   
-                ModuleInstall("setuptools", "exe"),
-                ModuleInstall("pip", "exe"),
                 ModuleInstall("numpy", "exe"),
                 ModuleInstall("scipy", "exe"),
                 ModuleInstall("matplotlib", "exe"),
@@ -469,7 +467,7 @@ def complete_installation():
                 ModuleInstall("python-dateutil", "pip", "dateutil"),
                 ModuleInstall("six", "pip"),
                 ModuleInstall("networkx", "exe"),
-                #ModuleInstall("cvxopt", "exe"),
+                ModuleInstall("cvxopt", "exe"),
                 ModuleInstall("coverage", "pip"),
                 ModuleInstall("pyreadline", "pip"),
                 ModuleInstall("scikit-learn", "exe", mname="sklearn"),
