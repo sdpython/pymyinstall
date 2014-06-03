@@ -157,7 +157,7 @@ class ModuleInstall :
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     gitexe = r"C:\Program Files (x86)\Git"
     
-    def __init__(self, name, kind = "pip", gitrepo = None, mname = None, fLOG = print):
+    def __init__(self, name, kind = "pip", gitrepo = None, mname = None, fLOG = print, version = None):
         """
         constructor
         
@@ -165,13 +165,21 @@ class ModuleInstall :
         @param      kind            kind of installation (pip, github, exe)
         @param      gitrepo         github repository (example: sdpython)
         @param      mname           sometimes, the module name is different from its official name
+        @param      version         to install a specific version (None for the latest)
         @param      fLOG            logging function
         
         exe is only for Windows.
         """
+        if name.startswith("PyQt") and kind == "exe":
+            raise NotImplementedError("not yet implemented for PyQt in exe mode")
+            
+        if kind != "pip" and version != None :
+            raise NotImplementedError("version can be only specified if kind=='pip'")
+        
         self.name = name
         self.kind = kind
         self.gitrepo = gitrepo
+        self.version = version
         self.mname = mname
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception("unable to interpret kind {0}, it should be in {1}".format(kind, ",".join(ModuleInstall.allowedKind)))
@@ -212,6 +220,7 @@ class ModuleInstall :
         """
         version = python_version()
         plat    = version[0] if version[0] == "win32" else version[1]
+        if version[1] == '64bit' and version[0] == 'win32' : plat = "amd64"
         pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe","{0}-py{1}.{2}.exe".format(plat,sys.version_info.major,sys.version_info.minor))
         expre   = re.compile(pattern)
         
@@ -382,11 +391,13 @@ class ModuleInstall :
         if kind == "pip" :
             pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
             cmd = pip + " install {0}".format(self.name)
+            if self.version != None : cmd += "=={0}".format(self.version)
             if len(options) > 0 :
                 cmd += " " + " ".join(*options)
             out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)
             if "Successfully installed" not in out :
-                raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
+                if "Requirement already satisfied" not in out :
+                    raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
             return True
             
         elif kind == "github" :
@@ -424,7 +435,7 @@ class ModuleInstall :
                 return self.install("pip")
             else :
                 exename = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
-                self.fLOG("executing", os.path.split(exe)[-1])
+                self.fLOG("executing", os.path.split(exename)[-1])
                 out,err = run_cmd(exename, wait=True, do_not_log = not log, fLOG = self.fLOG)
                 return len(err) == 0
                 
@@ -448,18 +459,18 @@ def complete_installation():
                 ModuleInstall("lxml", "exe"),
                 ModuleInstall("scipy", "exe"),
                 ModuleInstall("selenium", "pip"),
-                #ModuleInstall("pyquickhelper", "github", "sdpython"),
-                #ModuleInstall("pyensae", "github", "sdpython"),
+                ModuleInstall("pyquickhelper", "github", "sdpython"),
+                ModuleInstall("pyensae", "github", "sdpython"),
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 ModuleInstall("python-pptx", "github", "sdpython"),
                 ModuleInstall("python-nvd3", "github", "sdpython"),
-                ModuleInstall("openpyxl", "pip"),
+                ModuleInstall("openpyxl", "pip", version="1.8.6"),
                 ModuleInstall("d3py", "github", "sdpython"),
                 ModuleInstall("Pillow", "exe", mname = "PIL"),
                 ModuleInstall("sphinx", "pip"),
                 ModuleInstall("jinja2", "pip"),
                 ModuleInstall("rpy2", "exe"),
-                ModuleInstall("pywin32", "exe", mname = "win32api" ),
+                #ModuleInstall("pywin32", "exe", mname = "win32api" ),
                 ModuleInstall("ipython", "exe"),
                 ModuleInstall("pandas", "exe"),
                 ModuleInstall("pygments", "pip"),
@@ -471,10 +482,23 @@ def complete_installation():
                 ModuleInstall("coverage", "pip"),
                 ModuleInstall("pyreadline", "pip"),
                 ModuleInstall("scikit-learn", "exe", mname="sklearn"),
-                #ModuleInstall("PyQt", "exe", mname="pyqt"),
+                ModuleInstall("PyQt", "exe", mname="pyqt"),
                 ModuleInstall("pygame", "exe"),
                 #ModuleInstall("splinter", "github", "cobrateam"),
-                #ModuleInstall("pythonnet", "exe"),
+                ModuleInstall("pythonnet", "exe"),
+                ModuleInstall("markupsafe", "pip"),
+                ModuleInstall("pyzmq", "exe", mname="zmq"),
+                ModuleInstall("tornado", "exe"),
+                ModuleInstall("plotly", "pip"),
+                ModuleInstall("statsmodels", "exe"),
+                ModuleInstall("flask", "pip"),
+                #
+                ModuleInstall("sphinxcontrib-fancybox", "pip"),
+                ModuleInstall("sphinx_rtd_theme", "pip"),
+                ModuleInstall("sphinxcontrib-fancybox", "pip"),
+                ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
+                ModuleInstall("solar_theme", "pip"),
+                ModuleInstall("cloud_sptheme", "pip"),
             ]
                 
 
