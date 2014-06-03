@@ -499,6 +499,8 @@ def complete_installation():
                 ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
                 ModuleInstall("solar_theme", "pip"),
                 ModuleInstall("cloud_sptheme", "pip"),
+                ModuleInstall("sphinx_readable_theme", "pip"),
+                ModuleInstall("hachibee-sphinx-theme", "pip"),
             ]
                 
 
