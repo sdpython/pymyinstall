@@ -30,3 +30,5 @@ def check( log = False):
     return True
     
 from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation
+from .installhelper.install_custom import install_pandoc
+from .installhelper.install_manual import get_install_list, open_tool_on_browser
