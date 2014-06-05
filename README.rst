@@ -49,4 +49,5 @@ Versions
 * **v0.3 - 2014/06/03**
     * **changes:** add a version parameter
     * **fix:** fix the method install when platform is ``amd64``
+    * **add:** list of website for popular tools
 
