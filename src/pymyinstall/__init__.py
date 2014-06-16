@@ -4,9 +4,12 @@ Documentation for this file.
 
 To install a list of modules for a machine learner:
 @code
-from pymyinstall import complete_installation
+from pymyinstall import complete_installation, install_scite, install_pandoc, open_tool_on_browser
 for _ in complete_installation() :
     _.install(temp_folder="install")
+install_scite("install")  
+install_pandoc("install")
+open_tool_on_browser()
 @endcode
 """
 
@@ -29,6 +32,6 @@ def check( log = False):
     """
     return True
     
-from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation
-from .installhelper.install_custom import install_pandoc
+from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files
+from .installhelper.install_custom import install_pandoc, install_scite, download_from_sourceforge, download_file, download_page
 from .installhelper.install_manual import get_install_list, open_tool_on_browser

@@ -140,6 +140,38 @@ def run_cmd (   cmd,
         return out, err
     else :
         return "",""    
+        
+def unzip_files(zipf, whereTo, fLOG = print):
+    """
+    unzip files from a zip archive
+    
+    @param      zipf        archive
+    @param      whereTo     destinatation folder
+    @param      fLOG        logging function
+    @return                 list of unzipped files
+    """
+    file = zipfile.ZipFile (zipf, "r")
+    files = []
+    for info in file.infolist () :
+        if not os.path.exists (info.filename) :
+            data = file.read (info.filename)
+            tos = os.path.join (whereTo, info.filename)
+            if not os.path.exists (tos) :
+                finalfolder = os.path.split(tos)[0]
+                if not os.path.exists (finalfolder) :
+                    fLOG ("    creating folder ", finalfolder)
+                    os.makedirs (finalfolder)
+                if not info.filename.endswith ("/") :
+                    u = open (tos, "wb")
+                    u.write ( data )
+                    u.close()
+                    files.append (tos)
+                    fLOG ("    unzipped ", info.filename, " to ", tos)
+            elif not tos.endswith("/") :
+                files.append (tos)
+        elif not info.filename.endswith ("/") :
+            files.append (info.filename)
+    return files        
 
 class ModuleInstall :
     """
@@ -275,28 +307,7 @@ class ModuleInstall :
         @param      whereTo     destinatation folder
         @return                 list of unzipped files
         """
-        file = zipfile.ZipFile (zipf, "r")
-        files = []
-        for info in file.infolist () :
-            if not os.path.exists (info.filename) :
-                data = file.read (info.filename)
-                tos = os.path.join (whereTo, info.filename)
-                if not os.path.exists (tos) :
-                    finalfolder = os.path.split(tos)[0]
-                    if not os.path.exists (finalfolder) :
-                        self.fLOG ("    creating folder ", finalfolder)
-                        os.makedirs (finalfolder)
-                    if not info.filename.endswith ("/") :
-                        u = open (tos, "wb")
-                        u.write ( data )
-                        u.close()
-                        files.append (tos)
-                        self.fLOG ("    unzipped ", info.filename, " to ", tos)
-                elif not tos.endswith("/") :
-                    files.append (tos)
-            elif not info.filename.endswith ("/") :
-                files.append (info.filename)
-        return files
+        return unzip_files(zipf, whereTo, self.fLOG)
         
     def download(self, temp_folder = ".", force = False, unzipFile = True):
         """
@@ -492,6 +503,7 @@ def complete_installation():
                 ModuleInstall("plotly", "pip"),
                 ModuleInstall("statsmodels", "exe"),
                 ModuleInstall("flask", "pip"),
+                ModuleInstall("requests", "pip"),
                 #
                 ModuleInstall("sphinxcontrib-fancybox", "pip"),
                 ModuleInstall("sphinx_rtd_theme", "pip"),

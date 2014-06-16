@@ -1,5 +1,5 @@
 """
-@brief      test log(time=140s)
+@brief      test log(time=45s)
 """
 
 import sys, os, unittest
@@ -19,22 +19,26 @@ except ImportError :
     import pyquickhelper
     
 
-from src.pymyinstall.installhelper.install_custom import install_pandoc
+from src.pymyinstall.installhelper.install_custom import install_scite
 from pyquickhelper import fLOG
 
-class TestPandoc (unittest.TestCase):
+class TestScite (unittest.TestCase):
     
-    def test_pandoc(self) :
+    def test_install(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold,"temp_pandoc")
+        temp = os.path.join(fold,"temp_scite")
         if not os.path.exists(temp) : os.mkdir(temp)
         for _ in os.listdir(temp):
-            if ".msi" in _ :
+            if os.path.isfile(os.path.join(temp,_)) :
                 os.remove(os.path.join(temp,_))
-        r = install_pandoc (temp_folder = temp, fLOG = fLOG, install = False)
-        assert os.path.exists(r)
         
+        exe = install_scite(temp, fLOG = fLOG)
+        assert os.path.exists(exe)
+        conf = exe.replace("SciTE.exe", "python.properties")
+        assert os.path.exists(conf)
+        with open(conf,"r") as f : content = f.read()
+        assert sys.executable in content
         
 
 

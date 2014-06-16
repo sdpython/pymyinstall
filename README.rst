@@ -46,6 +46,8 @@ This project contains various helper about logging functions, unit tests and hel
 Versions
 --------
 
+* **v0.4 - 2014/??/??**
+    * **new:** add a function to install SciTE, see :func:`install_scite <installhelper.install_custom.install_scite>`
 * **v0.3 - 2014/06/03**
     * **changes:** add a version parameter
     * **fix:** fix the method install when platform is ``amd64``

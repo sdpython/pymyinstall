@@ -5,7 +5,7 @@
 """
 import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
 
-from .install_cmd import run_cmd
+from .install_cmd import run_cmd, ModuleInstall, unzip_files
 
 def download_page(url):
     """
@@ -29,18 +29,55 @@ def download_file(url, outfile):
     download a file from a url, the function does not download the file
     again if outfile already exists
     
-    @param      url     url
-    @param      outfile outfile
-    @return             outfile
+    @param      url         url
+    @param      outfile     outfile
+    @return                 outfile
     """
     if os.path.exists(outfile):
         return outfile
         
     try :
-        req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
+        req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' }, )
         u = urllib.request.urlopen(req)
         text = u.read()
         u.close()
+    except urllib.error.HTTPError as e :
+        raise Exception("unable to get archive from: " + url) from e
+        
+    with open(outfile,"wb") as f :
+        f.write(text)
+        
+    return outfile
+    
+def download_from_sourceforge(url, outfile, fLOG = print, temp_folder = "."):
+    """    
+    download a file from a url using redirection, 
+    the function does not download the file
+    again if outfile already exists
+    
+    @param      url         url
+    @param      outfile     outfile
+    @param      fLOG        logging function
+    @param      temp_folder only used if installation of module requests is needed
+    @return                 outfile
+    
+    The function will install module `requests <http://docs.python-requests.org/en/latest/>`_ 
+    if not present.
+    """
+    if os.path.exists(outfile):
+        return outfile
+        
+    try :
+        import requests
+    except ImportError:
+        fLOG("installing module requests")
+        ModuleInstall ("requests", fLOG = fLOG).install(temp_folder = temp_folder)
+        import requests
+        
+    try :
+        req = requests.get(url, allow_redirects = True, stream=True)
+        text = req.raw.read()
+        fLOG("len ", len(text))
     except urllib.error.HTTPError as e :
         raise Exception("unable to get archive from: " + url) from e
         
@@ -80,4 +117,67 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
         return local
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
+        
+def install_scite(dest_folder=".", fLOG = print, install = True):
+    """
+    install `SciTE <http://www.scintilla.org/SciTE.html>`_ (only on Windows)
+    
+    @param      dest_folder     where to download the setup
+    @param      fLOG            logging function
+    @param      install         install (otherwise only download)
+    @return                     temporary file
+    
+    @example(install SciTE)
+    The function downloads the latest version of SciTE.
+    It also changes some settings for Python (no tabs, Courier New as a police).
+    @code
+    install_scite("my_folder_for_scite")
+    @endcode
+    @endexample
+    """
+    if not sys.platform.startswith("win"):
+        raise NotImplementedError("SciTE can only be installed on Windows at the moment")
+    
+    url = "http://www.scintilla.org/SciTEDownload.html"
+    page = download_page(url)
+    
+    rel = re.compile ("Release ([0-9.]+)")
+    rel = rel.findall(page)
+    if len(rel) == 0 : raise Exception("unable to find the release version")
+    rel = rel[0]
+    fLOG("SciTE, release version ", rel)
+    
+    #reg = re.compile("<a href=\\\"(.*zip.*)\\\">full download</a>")
+    #find = reg.findall(page)
+    #if len(find) != 1 :
+    #    raise Exception("unable to find the file to download at " + url + "\nfound: " + str(len(find)) + "\n" + "\n".join(find))
+        
+    newurl = "http://sourceforge.net/projects/scintilla/files/SciTE/{0}/wscite{1}.zip/download?use_mirror=autoselect".format(rel, rel.replace(".",""))
+    outfile = os.path.join(dest_folder, "scite.zip")
+    fLOG("SciTE, download from ", newurl)
+    file = download_from_sourceforge(newurl, outfile, fLOG = fLOG, temp_folder = dest_folder)
+    unzip_files(file, whereTo = dest_folder, fLOG = fLOG)
+    
+    # we change the path
+    config = os.path.join(dest_folder, "wscite", "python.properties")
+    with open(config,"r") as f : content = f.read()
+    content = content.replace("=pythonw", "=" + sys.executable)
+    with open(config,"w") as f : f.write(content)
+    
+    # we change the options
+    config = os.path.join(dest_folder, "wscite", "SciTEGlobal.properties")
+    with open(config,"r") as f : content = f.read()
+    content = content.replace("tabsize=8", "tabsize=4")
+    content = content.replace("indent.size=8", "indent.size=4")
+    content = content.replace("use.tabs=1", "use.tabs=0")
+    content = content.replace("font:Verdana,","font:Courier New,")
+    with open(config,"w") as f : f.write(content)
+    
+    
+    
+    return os.path.join(dest_folder, "wscite", "SciTE.exe")
+    
+    
+    
+    
             
