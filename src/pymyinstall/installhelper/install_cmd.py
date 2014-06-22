@@ -467,6 +467,7 @@ def complete_installation():
                 ModuleInstall("numpy", "exe"),
                 ModuleInstall("scipy", "exe"),
                 ModuleInstall("matplotlib", "exe"),
+                ModuleInstall("ggplot", "pip"),
                 ModuleInstall("lxml", "exe"),
                 ModuleInstall("scipy", "exe"),
                 ModuleInstall("selenium", "pip"),
