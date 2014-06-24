@@ -28,6 +28,11 @@ Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+    
+Or::
+
+    from pymyinstall import datascientist
+    datascientist(
 
 
 Functionalities
@@ -36,8 +41,22 @@ Functionalities
     - help installing module from GitHub
     
 
-About this documentation
-------------------------
+
+    
+Indices and tables
+==================
+
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+| :ref:`l-modules` |  :ref:`l-functions` | :ref:`l-classes`    | :ref:`l-methods` | :ref:`l-staticmethods` | :ref:`l-properties` |
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+| :ref:`genindex`  |  :ref:`modindex`    | :ref:`search`       | :ref:`l-license` | :ref:`l-changes`       | :ref:`l-README`     |
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+| :ref:`l-example` |  :ref:`l-FAQ`       | :ref:`l-notebooks`  |                  |                        |                     |
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+   
+
+Navigation
+==========
 
 .. toctree::
     :maxdepth: 1
@@ -51,17 +70,7 @@ About this documentation
     all_notebooks
     glossary
     index_module
-
-    
-Indices and tables
-==================
-
-+------------------+---------------------+------------------+------------------+------------------------+---------------------+
-| :ref:`l-modules` |  :ref:`l-functions` | :ref:`l-classes` | :ref:`l-methods` | :ref:`l-staticmethods` | :ref:`l-properties` |
-+------------------+---------------------+------------------+------------------+------------------------+---------------------+
-| :ref:`genindex`  |  :ref:`modindex`    | :ref:`search`    | :ref:`l-license` | :ref:`l-changes`       | :ref:`l-README`     |
-+------------------+---------------------+------------------+------------------+------------------------+---------------------+
-| :ref:`l-example` |  :ref:`l-FAQ`       |                  |                  |                        |                     |
-+------------------+---------------------+------------------+------------------+------------------------+---------------------+
-   
-
+    license
+    filechanges
+    README
+    all_indexes

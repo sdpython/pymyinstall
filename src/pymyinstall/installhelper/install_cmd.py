@@ -505,7 +505,8 @@ def complete_installation():
                 ModuleInstall("statsmodels", "exe"),
                 ModuleInstall("flask", "pip"),
                 ModuleInstall("requests", "pip"),
-                ModuleInstall("pypdf2", "pip"),
+                #ModuleInstall("pypdf2", "pip"),
+                #ModuleInstall("pdfminer", "pip"),
                 #
                 ModuleInstall("sphinxcontrib-fancybox", "pip"),
                 ModuleInstall("sphinx_rtd_theme", "pip"),

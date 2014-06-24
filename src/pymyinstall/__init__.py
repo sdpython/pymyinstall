@@ -37,16 +37,20 @@ def datascientist(  folder = "install",
                     website = True, 
                     scite = True,
                     pandoc = True,
+                    ipython = True,
+                    ipython_folder = ".",
                     fLOG = print):
     """
     
     install all necessary modules for a data scientist
     
-    @param      folder      where to install everything
-    @param      modules     go through the list of necessary modules
-    @param      website     open website when the routine to install a software is not implemented yet
-    @param      scite       install Scite (and modify the config file to remove tab, adjust python path)
-    @param      pandoc      install pandoc
+    @param      folder          where to install everything
+    @param      modules         go through the list of necessary modules
+    @param      website         open website when the routine to install a software is not implemented yet
+    @param      scite           install Scite (and modify the config file to remove tab, adjust python path)
+    @param      ipython         setup ipython
+    @param      ipython_folder  current folder for ipython
+    @param      pandoc          install pandoc
     
     @example(Install manything for a Data Scientist)
     @code
@@ -68,8 +72,12 @@ def datascientist(  folder = "install",
     
     if pandoc :
         install_pandoc(folder, fLOG = fLOG)
+        
+    if ipython :
+        setup_ipython(ipython_folder, fLOG = fLOG)
     
     
 from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files
 from .installhelper.install_custom import install_pandoc, install_scite, download_from_sourceforge, download_file, download_page
 from .installhelper.install_manual import get_install_list, open_tool_on_browser
+from .setuphelper.ipython_helper import setup_ipython
