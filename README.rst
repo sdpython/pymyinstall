@@ -50,6 +50,7 @@ Versions
     * **new:** add a function to install SciTE, see :func:`install_scite <installhelper.install_custom.install_scite>`
     * **new:** add a function to setup ipython, see :func:`setup_ipython <setuphelper.setup_ipython>`
     * **new:** add a function to setup an environment for a `Data Scientist <http://en.wikipedia.org/wiki/Data_science>`_
+    * **new:** add shortcuts on Windows desktop
 * **v0.3 - 2014/06/03**
     * **changes:** add a version parameter
     * **fix:** fix the method install when platform is ``amd64``

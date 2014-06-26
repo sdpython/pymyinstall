@@ -5,21 +5,35 @@
 """
 import sys, os, re
 
+from ..installhelper.link_shortcuts import add_shortcut_to_desktop        
+
+
 def noLOG(*l, **p) :
     pass
 
 def setup_ipython(  current_path = None,
                     additional_path = [ ],
-                    apply_modification = True
+                    apply_modification = True,
+                    shortcut = True
                 ) :
     """
     the function applies the modification suggested in this blog post:
     `Travailler avec IPython notebook <http://www.xavierdupre.fr/blog/2014-02-24_nojs.html>`_ (written in French).
     
-    @param      additional_path     additional path to add to ipython
+    @param      additional_path     additional paths to add to ipython
     @param      current_path        change the current path when running a notebook
     @param      apply_modification  apply the modification, otherwise, just create the profile
+    @param      shortcut            add short cut the desktop
     @return                         path the config file
+    
+    If you need to create a shortcut with the appropriate paths, you can use the following instructions
+    to open IPython notebook on a specific folder:
+    
+    @code
+    set path=%path%;c:\Python34;c:\Python34\Scripts
+    ipython3 notebook --notebook-dir=_doc\notebooks
+    @endcode
+    
     """
     if sys.platform.startswith("win32"):
         user_profile = os.environ['USERPROFILE']
@@ -29,12 +43,12 @@ def setup_ipython(  current_path = None,
         
         if not os.path.exists(ipython_config):
             from ..installhelper.install_cmd import run_cmd
-            exe = os.path.join(sys.executable, "Scripts", "ipython3.exe")
-            cmd = exe + " create"
+            exe = os.path.join(os.path.split(sys.executable)[0], "Scripts", "ipython3.exe")
+            cmd = exe + " profile create"
             out,err = run_cmd(cmd, wait=True, fLOG = noLOG)
             
             if not os.path.exists(ipython_config):
-                raise Exception("unable to create ipython configuration because of:\n{0}\nERR:\n{1}".format(out,err))
+                raise Exception("unable to create ipython configuration because of:\n{0}\nERR:\n{1}\ncmd={2}".format(out,err,cmd))
 
 
         with open(ipython_notebook_config,"r") as f : text = f.read()
@@ -77,6 +91,16 @@ def setup_ipython(  current_path = None,
     else :
         raise NotImplementedError("implemented only for Windows")
         
+def add_shortcut_to_desktop_for_ipython(folder):
+    """
+    create a shortcut on your desktop
+    
+    @param      folder      notebook dir
+    @return                 filename
+    """
+    file = os.path.join(os.path.split(sys.executable)[0], "Scripts", "ipython3")
+    arguments = " notebook --notebook_dir=" + folder
+    return add_shortcut_to_desktop(file, "notebook", "IPython Notebook ({0})".format(folder), arguments)
                     
 if __name__ == "__main__" :
     setup_ipython(r"C:\temp", [], apply_modification = False)

@@ -241,9 +241,14 @@ class ModuleInstall :
         try :
             r = imp.find_module(self.ImportName)
             return True
-        except ImportError :
-            return False
-        
+        except ImportError as e :
+            txt = "import {0}".format(self.ImportName)
+            try :
+                exec(txt)
+                return True
+            except Exception as ee :
+                return False
+                
     def get_exe_url_link(self) :
         """
         for windows, get the url of the setup using a webpage
@@ -463,7 +468,7 @@ def complete_installation():
         _.install(temp_folder="install")
     @endcode
     """
-    return [   
+    mod = [   
                 ModuleInstall("numpy", "exe"),
                 ModuleInstall("scipy", "exe"),
                 ModuleInstall("matplotlib", "exe"),
@@ -492,12 +497,12 @@ def complete_installation():
                 ModuleInstall("networkx", "exe"),
                 ModuleInstall("cvxopt", "exe"),
                 ModuleInstall("coverage", "pip"),
-                ModuleInstall("pyreadline", "pip"),
+                ModuleInstall("pyreadline", "pip",mname="pyreadline"),
                 ModuleInstall("scikit-learn", "exe", mname="sklearn"),
-                ModuleInstall("PyQt", "exe", mname="pyqt"),
+                #ModuleInstall("PyQt", "exe", mname="pyqt"),
                 ModuleInstall("pygame", "exe"),
                 #ModuleInstall("splinter", "github", "cobrateam"),
-                ModuleInstall("pythonnet", "exe"),
+                ModuleInstall("pythonnet", "exe", mname="clr"),
                 ModuleInstall("markupsafe", "pip"),
                 ModuleInstall("pyzmq", "exe", mname="zmq"),
                 ModuleInstall("tornado", "exe"),
@@ -508,16 +513,20 @@ def complete_installation():
                 #ModuleInstall("pypdf2", "pip"),
                 #ModuleInstall("pdfminer", "pip"),
                 #
-                ModuleInstall("sphinxcontrib-fancybox", "pip"),
+                ModuleInstall("sphinxcontrib-fancybox", "pip", mname="sphinxcontrib.fancybox"),
                 ModuleInstall("sphinx_rtd_theme", "pip"),
-                ModuleInstall("sphinxcontrib-fancybox", "pip"),
                 ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
                 ModuleInstall("solar_theme", "pip"),
                 ModuleInstall("cloud_sptheme", "pip"),
                 ModuleInstall("sphinx_readable_theme", "pip"),
-                ModuleInstall("hachibee-sphinx-theme", "pip"),
+                ModuleInstall("hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
             ]
-                
+    
+    if sys.platform.startswith("win"):
+        mod.append ( ModuleInstall("pywin32", "exe", mname = "win32com") )
+        mod.append ( ModuleInstall("winshell", "pip") )
+    
+    return mod
 
 if __name__ == "__main__" :
     for _ in complete_installation() :

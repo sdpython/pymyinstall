@@ -13,7 +13,7 @@ open_tool_on_browser()
 @endcode
 """
 
-__version__ = "0.3"
+__version__ = "0.4"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pymyinstall"
 __url__ = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html"
@@ -39,18 +39,22 @@ def datascientist(  folder = "install",
                     pandoc = True,
                     ipython = True,
                     ipython_folder = ".",
-                    fLOG = print):
+                    shortcuts = True,
+                    fLOG = print,
+                    additional_path= []):
     """
     
     install all necessary modules for a data scientist
     
-    @param      folder          where to install everything
-    @param      modules         go through the list of necessary modules
-    @param      website         open website when the routine to install a software is not implemented yet
-    @param      scite           install Scite (and modify the config file to remove tab, adjust python path)
-    @param      ipython         setup ipython
-    @param      ipython_folder  current folder for ipython
-    @param      pandoc          install pandoc
+    @param      additional_path     additional paths to add to ipython
+    @param      folder              where to install everything
+    @param      modules             go through the list of necessary modules
+    @param      website             open website when the routine to install a software is not implemented yet
+    @param      scite               install Scite (and modify the config file to remove tab, adjust python path)
+    @param      ipython             setup ipython
+    @param      ipython_folder      current folder for ipython
+    @param      pandoc              install pandoc
+    @param      shortcuts           add shortcuts on the desktop
     
     @example(Install manything for a Data Scientist)
     @code
@@ -68,16 +72,21 @@ def datascientist(  folder = "install",
         get_install_list()
         
     if scite :
-        install_scite(folder, fLOG = fLOG)
+        scite = install_scite(folder, fLOG = fLOG)
     
     if pandoc :
         install_pandoc(folder, fLOG = fLOG)
         
     if ipython :
-        setup_ipython(ipython_folder, fLOG = fLOG)
+        setup_ipython(ipython_folder, additional_path=additional_path)
+        
+    if shortcuts :
+        add_shortcut_to_desktop_for_ipython(ipython_folder)
+        add_shortcut_to_desktop_for_scite(scite)
     
     
 from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files
-from .installhelper.install_custom import install_pandoc, install_scite, download_from_sourceforge, download_file, download_page
+from .installhelper.install_custom import install_pandoc, install_scite, download_from_sourceforge, download_file, download_page, add_shortcut_to_desktop_for_scite
 from .installhelper.install_manual import get_install_list, open_tool_on_browser
-from .setuphelper.ipython_helper import setup_ipython
+from .setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
+from .installhelper.link_shortcuts import add_shortcut_to_desktop

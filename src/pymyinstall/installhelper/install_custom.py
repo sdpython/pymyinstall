@@ -6,6 +6,7 @@
 import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
 
 from .install_cmd import run_cmd, ModuleInstall, unzip_files
+from .link_shortcuts import add_shortcut_to_desktop    
 
 def download_page(url):
     """
@@ -86,15 +87,29 @@ def download_from_sourceforge(url, outfile, fLOG = print, temp_folder = "."):
         
     return outfile
 
+def IsPandocInstalled():
+    """
+    @return     True of False whether or not it was installed
+    """
+    if sys.platform.startswith("win"):
+        path = r"C:\Users\{0}\AppData\Local\Pandoc\pandoc.exe".format(os.environ["USERNAME"])
+        return os.path.exists(path)
+    else:
+        raise NotImplementedError("not available on platform " + sys.platform)
+
 def install_pandoc(temp_folder=".", fLOG = print, install = True):
     """
-    install `pandoc <http://johnmacfarlane.net/pandoc/>`_
+    Install `pandoc <http://johnmacfarlane.net/pandoc/>`_.
+    It does not do it a second time if it is already installed.
     
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
     @return                     temporary file
     """
+    if IsPandocInstalled():
+        return True
+        
     link  = "https://github.com/jgm/pandoc/releases/latest"
     page = download_page(link)
     if sys.platform.startswith("win"):
@@ -118,6 +133,19 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
         
+def IsSciteInstalled(dest_folder):
+    """
+    check if Scite was already installed
+    
+    @param      dest_folder     where it was installed
+    @return                     boolean
+    """
+    if sys.platform.startswith("win"):
+        file = os.path.join(dest_folder, "wscite", "SciTE.exe")
+        return os.path.exists(file)
+    else:
+        raise NotImplementedError("not available on platform " + sys.platform)
+        
 def install_scite(dest_folder=".", fLOG = print, install = True):
     """
     install `SciTE <http://www.scintilla.org/SciTE.html>`_ (only on Windows)
@@ -135,6 +163,9 @@ def install_scite(dest_folder=".", fLOG = print, install = True):
     @endcode
     @endexample
     """
+    if IsSciteInstalled(dest_folder):
+        return os.path.join(dest_folder, "wscite", "SciTE.exe")
+    
     if not sys.platform.startswith("win"):
         raise NotImplementedError("SciTE can only be installed on Windows at the moment")
     
@@ -173,10 +204,16 @@ def install_scite(dest_folder=".", fLOG = print, install = True):
     content = content.replace("font:Verdana,","font:Courier New,")
     with open(config,"w") as f : f.write(content)
     
-    
-    
     return os.path.join(dest_folder, "wscite", "SciTE.exe")
     
+def add_shortcut_to_desktop_for_scite(scite):
+    """
+    create a shortcut on your desktop
+    
+    @param      scite      scite location (SciTE.exe
+    @return                filename
+    """
+    return add_shortcut_to_desktop(scite, "SciTE", "SciTE")
     
     
     
