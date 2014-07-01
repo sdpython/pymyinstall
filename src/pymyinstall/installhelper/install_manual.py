@@ -15,6 +15,8 @@ _tools = {
     "cygwin":"https://cygwin.com/install.html",
     "chrome":"http://www.google.com/chrome/browser/",
     "firefox":"http://www.mozilla.org/firefox/new/",
+    "graphviz":"http://www.graphviz.org/",
+    "doxygen":"http://www.stack.nl/~dimitri/doxygen/download.html",
     # "innosetup":"http://www.jrsoftware.org/isdl.php",
     }
     

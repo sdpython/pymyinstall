@@ -99,7 +99,7 @@ def add_shortcut_to_desktop_for_ipython(folder):
     @return                 filename
     """
     file = os.path.join(os.path.split(sys.executable)[0], "Scripts", "ipython3")
-    arguments = " notebook --notebook_dir=" + folder
+    arguments = " notebook --notebook-dir=" + folder
     return add_shortcut_to_desktop(file, "notebook", "IPython Notebook ({0})".format(folder), arguments)
                     
 if __name__ == "__main__" :

@@ -164,7 +164,7 @@ def install_scite(dest_folder=".", fLOG = print, install = True):
     @endexample
     """
     if IsSciteInstalled(dest_folder):
-        return os.path.join(dest_folder, "wscite", "SciTE.exe")
+        return os.path.join(os.path.abspath(dest_folder), "wscite", "SciTE.exe")
     
     if not sys.platform.startswith("win"):
         raise NotImplementedError("SciTE can only be installed on Windows at the moment")
@@ -204,7 +204,7 @@ def install_scite(dest_folder=".", fLOG = print, install = True):
     content = content.replace("font:Verdana,","font:Courier New,")
     with open(config,"w") as f : f.write(content)
     
-    return os.path.join(dest_folder, "wscite", "SciTE.exe")
+    return os.path.join(os.path.abspath(dest_folder), "wscite", "SciTE.exe")
     
 def add_shortcut_to_desktop_for_scite(scite):
     """
