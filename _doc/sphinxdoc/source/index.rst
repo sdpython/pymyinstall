@@ -20,19 +20,13 @@ Description
 
 This module contains a function which installs a module from pipy, using pip or from a setup::
 
-    from pymyinstall import complete_installation
-    for _ in complete_installation() :
-        _.install(temp_folder="install")
+    from pymyinstall import datascientist
+    datascientist ("install")
         
 Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
-    
-Or::
-
-    from pymyinstall import datascientist
-    datascientist(
 
 
 Functionalities
