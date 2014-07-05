@@ -486,6 +486,7 @@ def complete_installation():
                 ModuleInstall("tornado",        "exe"),
                 ModuleInstall("patsy",          "pip"),
                 ModuleInstall("statsmodels",    "exe"),
+                ModuleInstall("virtualenv",     "exe"),
 
                 ModuleInstall("ggplot",         "pip"),
                 ModuleInstall("selenium",       "pip"),
