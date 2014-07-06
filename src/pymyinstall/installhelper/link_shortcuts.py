@@ -21,7 +21,7 @@ def add_shortcut_to_desktop(file, name, description = "", arguments = ""):
     try:
         import winshell
     except ImportError as e :
-        if "ImportError: DLL load failed: The specified module could not be found" in str(e):
+        if "DLL load failed" in str(e):
             os.environ["PATH"] = os.environ["PATH"] + ";" + os.path.split(sys.executable)[0] + r"\lib\site-packages\pywin32_system32"
             try:
                 import winshell
