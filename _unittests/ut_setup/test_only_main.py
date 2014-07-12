@@ -19,17 +19,15 @@ except ImportError :
     import pyquickhelper
     
 
-from src.pymyinstall.setuphelper.ipython_helper import setup_ipython
+from src.pymyinstall import add_shortcut_to_desktop_for_module
 from pyquickhelper import fLOG
 
-class TestSetupIPython (unittest.TestCase):
+class TestOnlyMain (unittest.TestCase):
     
-    def test_setup(self) :
+    def test_spyder(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        r = setup_ipython(r"C:\temp", [], apply_modification = False)
-        assert len(r) > 0
-        fLOG(r)
-        for _ in r : assert os.path.exists(_)
+        if __name__ == "__main__":
+            add_shortcut_to_desktop_for_module("spyder")
 
 if __name__ == "__main__"  :
     unittest.main ()    

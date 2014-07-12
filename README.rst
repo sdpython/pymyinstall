@@ -15,11 +15,10 @@ README
 Description
 -----------
 
-This module contains a function which installs a module from pipy, using pip or from a setup::
+This module contains functions which install a module from pipy, using pip or from a setup::
 
-    from pymyinstall import complete_installation
-    for _ in complete_installation() :
-        _.install(temp_folder="install")
+    from pymyinstall import datascientist
+    datascientist ("install")
         
 Or::
 
@@ -51,6 +50,8 @@ Versions
     * **new:** add a function to setup ipython, see :func:`setup_ipython <setuphelper.setup_ipython>`
     * **new:** add a function to setup an environment for a `Data Scientist <http://en.wikipedia.org/wiki/Data_science>`_
     * **new:** add shortcuts on Windows desktop
+    * **new:** class ``ModuleInstall`` can now install an application such as ``Spyder`` (not an extension which can be imported)
+    * **new:** add a function to add a shortcut on the desktop for Spyder
 * **v0.3 - 2014/06/03**
     * **changes:** add a version parameter
     * **fix:** fix the method install when platform is ``amd64``

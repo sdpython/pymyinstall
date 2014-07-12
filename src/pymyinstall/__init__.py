@@ -32,16 +32,16 @@ def check( log = False):
     """
     return True
     
-def datascientist(  folder = "install", 
-                    modules = True, 
-                    website = True, 
-                    scite = True,
-                    pandoc = True,
-                    ipython = True,
-                    ipython_folder = ".",
-                    shortcuts = True,
-                    fLOG = print,
-                    additional_path= []):
+def datascientist(  folder          = "install", 
+                    modules         = True, 
+                    website         = True, 
+                    scite           = True,
+                    pandoc          = True,
+                    ipython         = True,
+                    ipython_folder  = ".",
+                    shortcuts       = True,
+                    fLOG            = print,
+                    additional_path = []):
     """
     
     install all necessary modules for a data scientist
@@ -54,7 +54,7 @@ def datascientist(  folder = "install",
     @param      ipython             setup ipython
     @param      ipython_folder      current folder for ipython
     @param      pandoc              install pandoc
-    @param      shortcuts           add shortcuts on the desktop
+    @param      shortcuts           add shortcuts on the desktop (scite, ipython, spyder)
     
     @example(Install manything for a Data Scientist)
     @code
@@ -83,9 +83,10 @@ def datascientist(  folder = "install",
     if shortcuts :
         add_shortcut_to_desktop_for_ipython(ipython_folder)
         add_shortcut_to_desktop_for_scite(scite)
+        add_shortcut_to_desktop_for_module("spyder")
     
     
-from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files
+from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files, add_shortcut_to_desktop_for_module
 from .installhelper.install_custom import install_pandoc, install_scite, download_from_sourceforge, download_file, download_page, add_shortcut_to_desktop_for_scite
 from .installhelper.install_manual import get_install_list, open_tool_on_browser
 from .setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython

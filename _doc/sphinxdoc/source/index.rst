@@ -18,7 +18,7 @@ pymyinstall documentation
 Description
 -----------
 
-This module contains a function which installs a module from pipy, using pip or from a setup::
+This module contains functions which install a module from pipy, using pip or from a setup::
 
     from pymyinstall import datascientist
     datascientist ("install")

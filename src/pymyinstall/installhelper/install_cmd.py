@@ -189,7 +189,13 @@ class ModuleInstall :
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     gitexe = r"C:\Program Files (x86)\Git"
     
-    def __init__(self, name, kind = "pip", gitrepo = None, mname = None, fLOG = print, version = None):
+    def __init__(self,  name, 
+                        kind    = "pip", 
+                        gitrepo = None, 
+                        mname   = None, 
+                        fLOG    = print, 
+                        version = None,
+                        script  = None):
         """
         constructor
         
@@ -199,6 +205,8 @@ class ModuleInstall :
         @param      mname           sometimes, the module name is different from its official name
         @param      version         to install a specific version (None for the latest)
         @param      fLOG            logging function
+        @param      script          some extensions are not a module but an application (such as ``spyder``),
+                                    the class will check this script is available
         
         exe is only for Windows.
         """
@@ -208,22 +216,40 @@ class ModuleInstall :
         if kind != "pip" and version != None :
             raise NotImplementedError("version can be only specified if kind=='pip'")
         
-        self.name = name
-        self.kind = kind
-        self.gitrepo = gitrepo
-        self.version = version
-        self.mname = mname
+        self.name       = name
+        self.kind       = kind
+        self.gitrepo    = gitrepo
+        self.version    = version
+        self.mname      = mname
+        self.script     = script
+        
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception("unable to interpret kind {0}, it should be in {1}".format(kind, ",".join(ModuleInstall.allowedKind)))
         if self.kind == "github" and self.gitrepo == None :
             raise Exception("gitrepo cannot be empty")
+            
         self.fLOG = fLOG
+        
+    @property
+    def Script(self):
+        """
+        returns the script to run if the extension is an application and not a module
+        """
+        exe = os.path.split(sys.executable)[0]
+        if sys.platform.startswith("win"):
+            sc = os.path.join(exe, "Scripts", self.script)
+        else:
+            sc = os.path.join(exe, "Scripts", os.path.splitext(self.script)[0])
+        return sc
             
     def __str__(self):
         """
         usual
         """
-        return "{0}:{1}:import {2}".format(self.name,self.kind, self.ImportName)
+        if self.script is None:
+            return "{0}:{1}:import {2}".format(self.name,self.kind, self.ImportName)
+        else :
+            return "{0}:{1}:{2}".format(self.name,self.kind, self.Script)
     
     @property
     def ImportName(self):
@@ -238,16 +264,19 @@ class ModuleInstall :
         """
         checks if a module is installed
         """
-        try :
-            r = imp.find_module(self.ImportName)
-            return True
-        except ImportError as e :
-            txt = "import {0}".format(self.ImportName)
+        if self.script is None :
             try :
-                exec(txt)
+                r = imp.find_module(self.ImportName)
                 return True
-            except Exception as ee :
-                return False
+            except ImportError as e :
+                txt = "import {0}".format(self.ImportName)
+                try :
+                    exec(txt)
+                    return True
+                except Exception as ee :
+                    return False
+        else:
+            return os.path.exists(self.Script)
                 
     def get_exe_url_link(self) :
         """
@@ -394,7 +423,7 @@ class ModuleInstall :
         
         The options mentioned in parameter ``options``
         are described here: `pip install <http://www.pip-installer.org/en/latest/usage.html>`_
-        or `setup.py options <http://docs.python.org/3.3/install/>`_ if you
+        or `setup.py options <http://docs.python.org/3.4/install/>`_ if you
         installing a module from github.
         """
         
@@ -414,7 +443,7 @@ class ModuleInstall :
             if "Successfully installed" not in out :
                 if "Requirement already satisfied" not in out :
                     raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
-            return True
+            ret = True
             
         elif kind == "github" :
             # the following code requires admin rights
@@ -443,18 +472,74 @@ class ModuleInstall :
                     raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
                 else :
                     self.fLOG("warning: Successfully installed not found")
-            return True
+            ret = True
             
         elif kind == "exe":
             ver = python_version()
             if ver[0] != "win32":
-                return self.install("pip")
+                ret = self.install("pip")
             else :
                 exename = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out,err = run_cmd(exename, wait=True, do_not_log = not log, fLOG = self.fLOG)
-                return len(err) == 0
+                ret = len(err) == 0
+        else :
+            raise Exception("unknown kind: {0} for module {1}".format(kind, self.name))
+        
+        # at this stage, there is a bug, for some executable, the execution
+        # takes longer than expected
+        # if not self.IsInstalled() :
+        #    raise Exception("unable to install module: {0}, str:{1}".format(self.name, self))
                 
+        if ret and self.script is not None:
+            if sys.platform.startswith("win"):
+                # here, we have to wait until the script is installed
+                ti = 0
+                while not self.IsInstalled():
+                    time.sleep(0.5)
+                    ti += 0.5
+                    if ti > 60 :
+                        self.fLOG("wait for the end of execution of ", self.name)
+                    ti = 0
+                
+                # we add set path=%path%;PYTHONPATH
+                with open(self.Script,"r") as f :
+                    full = f.read()
+                
+                exe = os.path.split(sys.executable)[0]
+                cmd = "set path=%path%;{0}".format(exe)
+                if cmd not in full :
+                    self.fLOG("add {0} to {1}".format(cmd,self.Script))
+                    with open(self.Script,"w") as f :
+                        if full.startswith("@echo off"):
+                            f.write(full.replace("@echo off", "@echo off\n{0}".format(cmd)))
+                        else :
+                            f.write(cmd)
+                            f.write("\n")
+                            f.write(full)
+                    
+        return ret
+            
+            
+def add_shortcut_to_desktop_for_module(name):
+    """
+    add a shortcut on a module which includes a script
+    
+    @param      name        name of the module
+    @return                 shortcut was added or not
+    """
+    if name == "spyder":
+        from .link_shortcuts import add_shortcut_to_desktop
+        md = ModuleInstall("spyder", "exe", script="spyder.bat")
+        sc = md.Script
+        if os.path.exists(sc):
+            ver = ".".join( str(_) for _ in sys.version_info[:2] )
+            r = add_shortcut_to_desktop(sc, name + "." + ver,name + "." + ver)
+            return os.path.exists(r)
+        else :
+            return False
+    else :
+        raise NotImplementedError("nothing implemented for module: {0}".format(name))
                 
 def complete_installation():
     """
@@ -469,60 +554,92 @@ def complete_installation():
     @endcode
     """
     mod = [   
-                ModuleInstall("numpy",          "exe"),
-                ModuleInstall("scipy",          "exe"),
-                ModuleInstall("matplotlib",     "exe"),
-                ModuleInstall("pandas",         "exe"),
-                ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
-                ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
+                ModuleInstall("virtualenv",     "exe"),
+                ModuleInstall("setuptools",     "exe"),
+                #
+                ModuleInstall("lxml",           "exe"),
                 ModuleInstall("jinja2",         "pip"),
-                ModuleInstall("openpyxl",       "pip", version="1.8.6"),
-                ModuleInstall("ipython",        "exe"),
                 ModuleInstall("pygments",       "pip"),
                 ModuleInstall("pyparsing",      "pip"),
                 ModuleInstall("python-dateutil","pip", "dateutil"),
-                ModuleInstall("lxml",           "exe"),
-                ModuleInstall("pyzmq",          "exe", mname="zmq"),
+                ModuleInstall("html5lib",       "pip"),
+                ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
+                ModuleInstall("six",            "pip"),
+                ModuleInstall("coverage",       "pip"),
+                ModuleInstall("pytz",           "pip"),
+                ModuleInstall("SQLAlchemy",     "exe"),
+                ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
+                ModuleInstall("simplejson",     "exe"),
+                #
+                ModuleInstall("openpyxl",       "pip", version="1.8.6"),
+                ModuleInstall("python-pptx",    "github", "sdpython"),
+                ModuleInstall("XlsxWriter",     "pip"),
+                # 
                 ModuleInstall("tornado",        "exe"),
+                ModuleInstall("flask",          "pip"),
+                ModuleInstall("pyzmq",          "exe", mname="zmq"),
+                #
+                ModuleInstall("pycparser",      "exe"),
+                ModuleInstall("Cython",         "exe"),
+                ModuleInstall("numpy",          "exe"),
+                ModuleInstall("blz",            "exe", mname="blz"),
+                ModuleInstall("scipy",          "exe"),
+                ModuleInstall("matplotlib",     "exe"),
+                ModuleInstall("tables",         "exe", mname="tables"),
+                ModuleInstall("sympy",          "pip"),
+                ModuleInstall("gmpy2",          "exe"),
+                #
+                ModuleInstall("pandas",         "exe"),
+                ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
+                ModuleInstall("scikit-image",   "exe", mname="skimage"),
                 ModuleInstall("patsy",          "pip"),
                 ModuleInstall("statsmodels",    "exe"),
-                ModuleInstall("virtualenv",     "exe"),
-
+                ModuleInstall("ipython",        "exe"),
+                ModuleInstall("cvxopt",         "exe"),
+                ModuleInstall("pymc",           "exe"),
+                ModuleInstall("PyWavelets",     "exe", mname="pywt"),
+                #
                 ModuleInstall("ggplot",         "pip"),
-                ModuleInstall("selenium",       "pip"),
+                ModuleInstall("plotly",         "pip"),
+                ModuleInstall("d3py",           "github", "sdpython"),
+                ModuleInstall("prettyplotlib",  "pip"),
+                ModuleInstall("bokeh",          "pip"),
+                ModuleInstall("shapely",        "pip"),
+                #
+                ModuleInstall("rpy2",           "exe"),
+                ModuleInstall("pythonnet",      "exe", mname="clr"),
+                #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
-                #ModuleInstall("pyrsslocal", "github", "sdpython"),
-                ModuleInstall("python-pptx",    "github", "sdpython"),
-                #ModuleInstall("python-nvd3", "github", "sdpython"),
-                ModuleInstall("d3py",           "github", "sdpython"),
+                #
+                ModuleInstall("selenium",       "pip"),
                 ModuleInstall("Pillow",         "exe", mname = "PIL"),
-                ModuleInstall("sphinx",         "pip"),
-                ModuleInstall("rpy2",           "exe"),
-                #ModuleInstall("pywin32", "exe", mname = "win32api" ),
-                ModuleInstall("six",            "pip"),
-                ModuleInstall("networkx",       "exe"),
-                ModuleInstall("cvxopt",         "exe"),
-                ModuleInstall("coverage",       "pip"),
-                #ModuleInstall("PyQt", "exe", mname="pyqt"),
                 ModuleInstall("pygame",         "exe"),
-                #ModuleInstall("splinter", "github", "cobrateam"),
-                ModuleInstall("pythonnet",      "exe", mname="clr"),
                 ModuleInstall("markupsafe",     "pip"),
-                ModuleInstall("plotly",         "pip"),
-                ModuleInstall("flask",          "pip"),
                 ModuleInstall("requests",       "pip"),
                 ModuleInstall("Kivy",           "exe"),
-                #ModuleInstall("pypdf2", "pip"),
-                #ModuleInstall("pdfminer", "pip"),
+                ModuleInstall("spyder",         "exe", script="spyder.bat"),
                 #
+                ModuleInstall("sphinx",         "pip"),
                 ModuleInstall("sphinxcontrib-fancybox",     "pip", mname="sphinxcontrib.fancybox"),
                 ModuleInstall("sphinx_rtd_theme",           "pip"),
                 ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
                 ModuleInstall("solar_theme",                "pip"),
                 ModuleInstall("cloud_sptheme",              "pip"),
                 ModuleInstall("sphinx_readable_theme",      "pip"),
-                ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),            ]
+                ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),            
+                #
+                #ModuleInstall("pyrsslocal", "github", "sdpython"),
+                #ModuleInstall("python-nvd3", "github", "sdpython"),
+                #ModuleInstall("PyQt", "exe", mname="pyqt"),
+                #ModuleInstall("splinter", "github", "cobrateam"),
+                #ModuleInstall("pypdf2", "pip"),
+                #ModuleInstall("pdfminer", "pip"),
+                #ModuleInstall("liblinear",      "exe"),
+                #ModuleInstall("lsqfit",      "exe"),
+                #ModuleInstall("marisa-trie",      "exe", mname="marisa_trie"),
+                #ModuleInstall("boost_python",   "exe"),
+                ]
     
     if sys.platform.startswith("win"):
         mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
@@ -531,6 +648,7 @@ def complete_installation():
     return mod
 
 if __name__ == "__main__" :
+    import pyreadline
     for _ in complete_installation() :
         _.install(temp_folder="install")
     
