@@ -3,9 +3,9 @@
 @file
 @brief Change ipython configuration
 """
-import sys, os, re
+import sys, os, re, platform
 
-from ..installhelper.link_shortcuts import add_shortcut_to_desktop        
+from ..installhelper.link_shortcuts import add_shortcut_to_desktop, suffix
 
 
 def noLOG(*l, **p) :
@@ -100,7 +100,8 @@ def add_shortcut_to_desktop_for_ipython(folder):
     """
     file = os.path.join(os.path.split(sys.executable)[0], "Scripts", "ipython3")
     arguments = " notebook --notebook-dir=" + folder
-    return add_shortcut_to_desktop(file, "notebook", "IPython Notebook ({0})".format(folder), arguments)
+    ver = suffix()
+    return add_shortcut_to_desktop(file, "notebook." + ver, "IPython Notebook {1} ({0})".format(folder, ver), arguments)
                     
 if __name__ == "__main__" :
     setup_ipython(r"C:\temp", [], apply_modification = False)

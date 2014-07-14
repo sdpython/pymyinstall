@@ -6,7 +6,7 @@
 import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
 
 from .install_cmd import run_cmd, ModuleInstall, unzip_files
-from .link_shortcuts import add_shortcut_to_desktop    
+from .link_shortcuts import add_shortcut_to_desktop, suffix
 
 def download_page(url):
     """
@@ -213,7 +213,8 @@ def add_shortcut_to_desktop_for_scite(scite):
     @param      scite      scite location (SciTE.exe
     @return                filename
     """
-    return add_shortcut_to_desktop(scite, "SciTE", "SciTE")
+    ver = suffix()
+    return add_shortcut_to_desktop(scite, "SciTE." + ver, "SciTE." + ver)
     
     
     

@@ -3,7 +3,7 @@
 @brief Various helper about shortcuts and links
 """
 
-import os, sys
+import os, sys, platform
 
 def add_shortcut_to_desktop(file, name, description = "", arguments = ""):
     """
@@ -36,3 +36,15 @@ def add_shortcut_to_desktop(file, name, description = "", arguments = ""):
         link.description = description
         link.arguments = arguments 
     return link_filepath
+
+def suffix():
+    """
+    add a suffix to a shorcut name = python version + architecture
+    
+    @return     string
+    """
+    ver = ".".join( str(_) for _ in sys.version_info[:2] )
+    arc = platform.architecture()[0]
+    return "{0}.{1}".format(arc, ver)
+
+    

@@ -529,11 +529,11 @@ def add_shortcut_to_desktop_for_module(name):
     @return                 shortcut was added or not
     """
     if name == "spyder":
-        from .link_shortcuts import add_shortcut_to_desktop
+        from .link_shortcuts import add_shortcut_to_desktop, suffix
         md = ModuleInstall("spyder", "exe", script="spyder.bat")
         sc = md.Script
         if os.path.exists(sc):
-            ver = ".".join( str(_) for _ in sys.version_info[:2] )
+            ver = suffix()
             r = add_shortcut_to_desktop(sc, name + "." + ver,name + "." + ver)
             return os.path.exists(r)
         else :
