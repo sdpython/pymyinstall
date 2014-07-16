@@ -628,6 +628,7 @@ def complete_installation():
                 ModuleInstall("cloud_sptheme",              "pip"),
                 ModuleInstall("sphinx_readable_theme",      "pip"),
                 ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),            
+                ModuleInstall("wild_sphinx_theme",          "pip"),
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
