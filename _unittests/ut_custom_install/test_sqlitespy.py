@@ -19,28 +19,27 @@ except ImportError :
     import pyquickhelper
     
 
-from src.pymyinstall.installhelper import install_scite
+from src.pymyinstall import install_sqlitespy
 from pyquickhelper import fLOG
 
-class TestScite (unittest.TestCase):
+class TestSqliteSpy (unittest.TestCase):
     
     def test_install(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold,"temp_scite")
+        temp = os.path.join(fold,"temp_sqllitespy")
         if not os.path.exists(temp) : os.mkdir(temp)
         for _ in os.listdir(temp):
             if os.path.isfile(os.path.join(temp,_)) :
                 os.remove(os.path.join(temp,_))
         
-        exe = install_scite(temp, fLOG = fLOG)
+        fLOG("http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip")
+        exe = install_sqlitespy(temp, fLOG = fLOG)
+        fLOG("exe",exe)
         assert os.path.exists(exe)
-        conf = exe.replace("SciTE.exe", "python.properties")
-        assert os.path.exists(conf)
-        with open(conf,"r") as f : content = f.read()
-        assert sys.executable in content
         
-
-
+#http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481;media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip        
+#http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip
+        
 if __name__ == "__main__"  :
     unittest.main ()    

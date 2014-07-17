@@ -620,6 +620,11 @@ def complete_installation():
                 ModuleInstall("Kivy",           "exe"),
                 ModuleInstall("spyder",         "exe", script="spyder.bat"),
                 #
+                ModuleInstall("py4j",           "pip"),
+                #
+                ModuleInstall("mechanize",      "pip"),
+                ModuleInstall("luigi",          "pip"),
+                #
                 ModuleInstall("sphinx",         "pip"),
                 ModuleInstall("sphinxcontrib-fancybox",     "pip", mname="sphinxcontrib.fancybox"),
                 ModuleInstall("sphinx_rtd_theme",           "pip"),
