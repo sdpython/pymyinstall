@@ -46,7 +46,8 @@ Versions
 --------
 
 * **v0.4 - 2014/??/??**
-    * **new:** add a function to install SciTE, see :func:`install_scite <installhelper.install_custom.install_scite>`
+    * **new:** add a function to install SQLiteSpy, see :func:`install_sqlitespy <installhelper.install_custom_sqlitespy.install_sqlitespy>`
+    * **new:** add a function to install SciTE, see :func:`install_scite <installhelper.install_custom_scite.install_scite>`
     * **new:** add a function to setup ipython, see :func:`setup_ipython <setuphelper.setup_ipython>`
     * **new:** add a function to setup an environment for a `Data Scientist <http://en.wikipedia.org/wiki/Data_science>`_
     * **new:** add shortcuts on Windows desktop
