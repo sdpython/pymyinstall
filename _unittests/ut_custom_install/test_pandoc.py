@@ -19,7 +19,7 @@ except ImportError :
     import pyquickhelper
     
 
-from src.pymyinstall.installhelper.install_custom import install_pandoc
+from src.pymyinstall import install_pandoc
 from pyquickhelper import fLOG
 
 class TestPandoc (unittest.TestCase):
