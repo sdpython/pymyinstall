@@ -557,6 +557,7 @@ def complete_installation():
                 ModuleInstall("virtualenv",     "exe"),
                 ModuleInstall("setuptools",     "exe"),
                 #
+                ModuleInstall("six",            "pip"),
                 ModuleInstall("lxml",           "exe"),
                 ModuleInstall("jinja2",         "pip"),
                 ModuleInstall("pygments",       "pip"),
@@ -564,7 +565,6 @@ def complete_installation():
                 ModuleInstall("python-dateutil","pip", "dateutil"),
                 ModuleInstall("html5lib",       "pip"),
                 ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
-                ModuleInstall("six",            "pip"),
                 ModuleInstall("coverage",       "pip"),
                 ModuleInstall("pytz",           "pip"),
                 ModuleInstall("SQLAlchemy",     "exe"),
