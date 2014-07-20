@@ -42,6 +42,7 @@ def datascientist(  folder          = "install",
                     ipython_folder  = ".",
                     shortcuts       = True,
                     fLOG            = print,
+                    browser         = None,
                     additional_path = []):
     """
     
@@ -57,6 +58,7 @@ def datascientist(  folder          = "install",
     @param      sqlitespy           install SQLiteSpy
     @param      pandoc              install pandoc
     @param      shortcuts           add shortcuts on the desktop (scite, ipython, spyder)
+    @param      browser             browser to use for the notebooks if not the default one (ie, firefox, chrome)
     
     @example(Install manything for a Data Scientist)
     @code
@@ -80,7 +82,7 @@ def datascientist(  folder          = "install",
         install_pandoc(folder, fLOG = fLOG)
         
     if ipython :
-        setup_ipython(ipython_folder, additional_path=additional_path)
+        setup_ipython(ipython_folder, additional_path=additional_path, browser = browser)
         
     if sqlitespy:
         install_sqlitespy(folder, fLOG = fLOG)
