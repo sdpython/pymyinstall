@@ -33,12 +33,14 @@ class TestScite (unittest.TestCase):
             if os.path.isfile(os.path.join(temp,_)) :
                 os.remove(os.path.join(temp,_))
         
-        exe = install_scite(temp, fLOG = fLOG)
+        exe = os.path.abspath(install_scite(temp, fLOG = fLOG))
         assert os.path.exists(exe)
         conf = exe.replace("SciTE.exe", "python.properties")
         assert os.path.exists(conf)
-        with open(conf,"r") as f : content = f.read()
-        assert sys.executable in content
+        with open(conf,"r") as f : content = f.read().lower()
+        if sys.executable.lower() not in content and \
+           sys.executable.lower().replace(".exe", "w.exe") not in content:
+            raise Exception("{0} or {1} not in \n{2}".format(sys.executable, sys.executable.replace(".exe", "w.exe"), content))
         
 
 
