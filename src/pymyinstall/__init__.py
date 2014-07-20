@@ -67,6 +67,16 @@ def datascientist(  folder          = "install",
     @endcode
     @endexample
     
+    If you run this command from the python interpreter::
+    
+        >>> from pymyinstall import datascientist
+        >>> datascientist ("install")
+        
+    The module installed with pip do not appear in the list of available modules
+    unless the python interpreter is started again. The best way is to run those two commands
+    from the Python IDLE and to restart the interpreter before a second run.
+    The second time, the function does not install again what was already installed.
+    
     """
     if modules :
         for _ in complete_installation() :
