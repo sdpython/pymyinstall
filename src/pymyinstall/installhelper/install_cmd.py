@@ -185,9 +185,10 @@ class ModuleInstall :
     """
     
     allowedKind = ["pip", "github", "exe"]
-    expKPage = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
+    expKPage    = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
+    expKPageQt  = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(PyQt4[-0-9.]+-gpl-Py3.3-Qt[-0-9.]+x32.exe)</a>"
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
-    gitexe = r"C:\Program Files (x86)\Git"
+    gitexe      = r"C:\Program Files (x86)\Git"
     
     def __init__(self,  name, 
                         kind    = "pip", 
@@ -210,9 +211,6 @@ class ModuleInstall :
         
         exe is only for Windows.
         """
-        if name.startswith("PyQt") and kind == "exe":
-            raise NotImplementedError("not yet implemented for PyQt in exe mode")
-            
         if kind != "pip" and version != None :
             raise NotImplementedError("version can be only specified if kind=='pip'")
         
@@ -278,16 +276,24 @@ class ModuleInstall :
         else:
             return os.path.exists(self.Script)
                 
-    def get_exe_url_link(self) :
+    def get_exe_url_link(self, file_save = None) :
         """
         for windows, get the url of the setup using a webpage
         
-        @return     url, exe name
+        @param      file_save   for debug purposes
+        @return                 url, exe name
         """
         version = python_version()
         plat    = version[0] if version[0] == "win32" else version[1]
         if version[1] == '64bit' and version[0] == 'win32' : plat = "amd64"
-        pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe","{0}-py{1}.{2}.exe".format(plat,sys.version_info.major,sys.version_info.minor))
+        if self.name.lower() == "pyqt":
+            pattern = ModuleInstall.expKPageQt.replace("Py3.3",
+                                                       "Py{0}.{1}".format(sys.version_info.major,sys.version_info.minor))
+            if plat == "amd64":
+                pattern = pattern.replace("x32","x64")
+        else :
+            pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
+                                                     "{0}-py{1}.{2}.exe".format(plat,sys.version_info.major,sys.version_info.minor))
         expre   = re.compile(pattern)
         
         if "cached_page" not in self.__dict__ :
@@ -307,10 +313,19 @@ class ModuleInstall :
         page = self.cached_page.replace("&#8209;","-")
         all  = expre.findall(page)
         if len(all) == 0 :
+            if file_save != None :
+                with open(file_save, "w", encoding="utf8") as f:
+                    f.write(page)
             raise Exception("unable to find regex with pattern: " + pattern)
 
-        all = [ _ for _ in all if _[-1].startswith(self.name + "-") ]
+        if self.name == "PyQt":
+            all = [ _ for _ in all if _[-1].startswith(self.name + "4") ]
+        else :
+            all = [ _ for _ in all if _[-1].startswith(self.name + "-") ]
         if len(all) == 0 :
+            if file_save != None :
+                with open(file_save, "w", encoding="utf8") as f:
+                    f.write(page)
             raise Exception("unable to find a single link for " + self.name)
         link = all[-1]
         
@@ -343,13 +358,14 @@ class ModuleInstall :
         """
         return unzip_files(zipf, whereTo, self.fLOG)
         
-    def download(self, temp_folder = ".", force = False, unzipFile = True):
+    def download(self, temp_folder = ".", force = False, unzipFile = True, file_save = None):
         """
         download the module without installation
         
         @param      temp_folder     destination
         @param      force           force the installation even if already installed
         @param      unzipFile       if it can be unzipped, it will be (for github, mostly)
+        @param      file_save       for debug purposes, do not change it unless you know what you are doing
         @return                     downloaded files
         """
         kind = self.kind
@@ -390,7 +406,7 @@ class ModuleInstall :
                 raise Exception("this option is not available on others system than Windows")
                 return self.install("pip")
             else :
-                url,exe = self.get_exe_url_link()
+                url,exe = self.get_exe_url_link(file_save = file_save)
 
                 self.fLOG("downloading", exe)
                 req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
@@ -618,6 +634,7 @@ def complete_installation():
                 ModuleInstall("markupsafe",     "pip"),
                 ModuleInstall("requests",       "pip"),
                 ModuleInstall("Kivy",           "exe"),
+                ModuleInstall("PyQt",           "exe", mname="pyqt"),
                 ModuleInstall("spyder",         "exe", script="spyder.bat"),
                 #
                 ModuleInstall("py4j",           "pip"),
@@ -637,7 +654,6 @@ def complete_installation():
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
-                #ModuleInstall("PyQt", "exe", mname="pyqt"),
                 #ModuleInstall("splinter", "github", "cobrateam"),
                 #ModuleInstall("pypdf2", "pip"),
                 #ModuleInstall("pdfminer", "pip"),
