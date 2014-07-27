@@ -45,7 +45,7 @@ This project contains various helper about logging functions, unit tests and hel
 Versions
 --------
 
-* **v0.4 - 2014/??/??**
+* **v0.4 - 2014/07/27**
     * **new:** add a function to install SQLiteSpy, see :func:`install_sqlitespy <installhelper.install_custom_sqlitespy.install_sqlitespy>`
     * **new:** add a function to install SciTE, see :func:`install_scite <installhelper.install_custom_scite.install_scite>`
     * **new:** add a function to setup ipython, see :func:`setup_ipython <setuphelper.setup_ipython>`
