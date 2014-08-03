@@ -597,6 +597,7 @@ def complete_installation():
                 #
                 ModuleInstall("pycparser",      "exe"),
                 ModuleInstall("Cython",         "exe"),
+                ModuleInstall("cffi",           "exe"),
                 ModuleInstall("numpy",          "exe"),
                 ModuleInstall("blz",            "exe", mname="blz"),
                 ModuleInstall("scipy",          "exe"),
@@ -604,6 +605,8 @@ def complete_installation():
                 ModuleInstall("tables",         "exe", mname="tables"),
                 ModuleInstall("sympy",          "pip"),
                 ModuleInstall("gmpy2",          "exe"),
+                ModuleInstall("llvmh",          "exe", mname="llvm"),
+                ModuleInstall("numba",          "exe"),
                 #
                 ModuleInstall("pandas",         "exe"),
                 ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
