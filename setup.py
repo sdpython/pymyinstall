@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #  Copyright (C) 2014 ---------------
 #  All rights reserved.
 # 
@@ -55,10 +56,10 @@ readme              = 'README.rst'
 
 
 KEYWORDS = \
-project_var_name + ', synchronization, files, Xavier, Dupré'
+project_var_name + ', installation, Xavier Dupré'
 
 DESCRIPTION = \
-"""Three functionalities: folder synchronization, a logging function, helpers to generate documentatino with sphinx"""
+"""Easy installation of modules for data scientists"""
 
 CLASSIFIERS = \
 [

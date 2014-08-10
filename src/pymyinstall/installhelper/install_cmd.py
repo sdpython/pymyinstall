@@ -654,6 +654,10 @@ def complete_installation():
                 ModuleInstall("sphinx_readable_theme",      "pip"),
                 ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),            
                 ModuleInstall("wild_sphinx_theme",          "pip"),
+                ModuleInstall("sphinx_bootstrap_theme",     "pip"),
+                #
+                ModuleInstall("dbfreader",                  "pip"),   # to read dbase format
+                
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
