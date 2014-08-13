@@ -18,7 +18,7 @@ Description
 This module contains functions which install a module from pipy, using pip or from a setup::
 
     from pymyinstall import datascientist
-    datascientist ("install")
+    datascientist("install", full = True)
         
 Or::
 
@@ -45,6 +45,10 @@ This project contains various helper about logging functions, unit tests and hel
 Versions
 --------
 
+* **v0.5 - 2014/08/13**
+    * **new:** a couple of new modules in the full set of modules
+    * **new:** a subset of modules to work with ipython
+    * **add:** add parameter ``skip`` to function ``datascientist``
 * **v0.4 - 2014/07/27**
     * **new:** add a function to install SQLiteSpy, see :func:`install_sqlitespy <installhelper.install_custom_sqlitespy.install_sqlitespy>`
     * **new:** add a function to install SciTE, see :func:`install_scite <installhelper.install_custom_scite.install_scite>`

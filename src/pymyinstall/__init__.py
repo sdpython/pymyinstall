@@ -13,7 +13,7 @@ open_tool_on_browser()
 @endcode
 """
 
-__version__ = "0.4"
+__version__ = "0.5"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pymyinstall"
 __url__ = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html"
@@ -43,6 +43,8 @@ def datascientist(  folder          = "install",
                     shortcuts       = True,
                     fLOG            = print,
                     browser         = None,
+                    skip            = [],
+                    full            = False,
                     additional_path = []):
     """
     
@@ -59,11 +61,13 @@ def datascientist(  folder          = "install",
     @param      pandoc              install pandoc
     @param      shortcuts           add shortcuts on the desktop (scite, ipython, spyder)
     @param      browser             browser to use for the notebooks if not the default one (ie, firefox, chrome)
+    @param      skip                to skip some modules if they fail
+    @param      full                if True, install many modules including the ones used to generate the documentation
     
     @example(Install manything for a Data Scientist)
     @code
     from pymyinstall import datascientist
-    datascientist ("install")
+    datascientist ("install", full=True)
     @endcode
     @endexample
     
@@ -79,8 +83,12 @@ def datascientist(  folder          = "install",
     
     """
     if modules :
-        for _ in complete_installation() :
-            _.install(temp_folder=folder)    
+        modules = complete_installation() if full else small_installation() 
+        for _ in modules :
+            if _.name in skip or _.mname in skip :
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else :
+                _.install(temp_folder=folder)    
 
     if website :
         get_install_list()
@@ -98,13 +106,13 @@ def datascientist(  folder          = "install",
         install_sqlitespy(folder, fLOG = fLOG)
         
     if shortcuts :
-        if ipython : add_shortcut_to_desktop_for_ipython(ipython_folder)
-        if scite : add_shortcut_to_desktop_for_scite(scite)
-        if ipython : add_shortcut_to_desktop_for_module("spyder")
+        if ipython  : add_shortcut_to_desktop_for_ipython(ipython_folder)
+        if scite    : add_shortcut_to_desktop_for_scite(scite)
+        if ipython  : add_shortcut_to_desktop_for_module("spyder")
         if sqlitespy: add_shortcut_to_desktop_for_sqlitespy(sqlitespy)
     
     
-from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files, add_shortcut_to_desktop_for_module
+from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files, add_shortcut_to_desktop_for_module, small_installation
 from .installhelper.install_custom import download_from_sourceforge, download_file, download_page
 from .installhelper.install_manual import get_install_list, open_tool_on_browser
 from .setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
