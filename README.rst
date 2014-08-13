@@ -19,17 +19,25 @@ This module contains functions which install a module from pipy, using pip or fr
 
     from pymyinstall import datascientist
     datascientist("install", full = True)
+        # full = False for a smaller set of modules to install
+        # but needed to make IPython work.
         
 Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
 
+Some modules fail on Windows due to Permission error, in that case, you should go to the
+folder ``install`` and run the installer. Once it is done, you can run the function again 
+to continue. It will skip the modules already installed.
+
 
 Functionalities
 ---------------
 
-    - help installing module from GitHub
+    - help installing module from GitHub, pip and setup
+    - install other common tools or editors
+    - provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
 
 
 Design

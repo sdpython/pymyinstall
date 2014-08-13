@@ -103,13 +103,13 @@ def datascientist(  folder          = "install",
         setup_ipython(ipython_folder, additional_path=additional_path, browser = browser)
         
     if sqlitespy:
-        install_sqlitespy(folder, fLOG = fLOG)
+        sqlitespy_file = install_sqlitespy(folder, fLOG = fLOG)
         
     if shortcuts :
         if ipython  : add_shortcut_to_desktop_for_ipython(ipython_folder)
         if scite    : add_shortcut_to_desktop_for_scite(scite)
         if ipython  : add_shortcut_to_desktop_for_module("spyder")
-        if sqlitespy: add_shortcut_to_desktop_for_sqlitespy(sqlitespy)
+        if sqlitespy: add_shortcut_to_desktop_for_sqlitespy(sqlitespy_file)
     
     
 from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files, add_shortcut_to_desktop_for_module, small_installation

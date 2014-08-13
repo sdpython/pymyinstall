@@ -497,7 +497,7 @@ class ModuleInstall :
             else :
                 exename = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
                 self.fLOG("executing", os.path.split(exename)[-1])
-                out,err = run_cmd(exename, wait=True, do_not_log = not log, fLOG = self.fLOG)
+                out,err = run_cmd(exename + " /s /qn", wait=True, do_not_log = not log, fLOG = self.fLOG)
                 ret = len(err) == 0
         else :
             raise Exception("unknown kind: {0} for module {1}".format(kind, self.name))
@@ -573,6 +573,7 @@ def complete_installation():
     mod = [   
                 ModuleInstall("virtualenv",     "exe"),
                 ModuleInstall("setuptools",     "exe"),
+                ModuleInstall("pip",            "exe"),
                 #
                 ModuleInstall("six",            "pip"),
                 ModuleInstall("lxml",           "exe"),
@@ -613,13 +614,13 @@ def complete_installation():
                 ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
                 ModuleInstall("scikit-image",   "exe", mname="skimage"),
                 ModuleInstall("patsy",          "pip"),
-                ModuleInstall("statsmodels",    "exe"),
+                ModuleInstall("statsmodels",    "exe"),  # needs scipy
                 ModuleInstall("ipython",        "exe"),
                 ModuleInstall("cvxopt",         "exe"),
                 ModuleInstall("pymc",           "exe"),
                 ModuleInstall("PyWavelets",     "exe", mname="pywt"),
                 #
-                ModuleInstall("ggplot",         "pip"),
+                ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("plotly",         "pip"),
                 ModuleInstall("d3py",           "github", "sdpython"),
                 ModuleInstall("prettyplotlib",  "pip"),
@@ -658,7 +659,7 @@ def complete_installation():
                 ModuleInstall("wild_sphinx_theme",          "pip"),
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
                 #
-                ModuleInstall("dbfreader",                  "pip"),   # to read dbase format
+                ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
                 
                 #
@@ -693,6 +694,7 @@ def small_installation():
     """
     mod = [   
                 ModuleInstall("setuptools",     "exe"),
+                ModuleInstall("pip",            "exe"),
                 #
                 ModuleInstall("six",            "pip"),
                 ModuleInstall("lxml",           "exe"),
@@ -715,12 +717,14 @@ def small_installation():
                 ModuleInstall("Cython",         "exe"),
                 ModuleInstall("numpy",          "exe"),
                 ModuleInstall("matplotlib",     "exe"),
+                ModuleInstall("scipy",          "exe"),
+                ModuleInstall("statsmodels",    "exe"),  # needs scipy
                 #
                 ModuleInstall("pandas",         "exe"),
                 ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
                 ModuleInstall("ipython",        "exe"),
                 #
-                ModuleInstall("ggplot",         "pip"),
+                ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("plotly",         "pip"),
                 #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
@@ -731,7 +735,7 @@ def small_installation():
                 ModuleInstall("spyder",         "exe", script="spyder.bat"),
                 #
                 #
-                ModuleInstall("dbfreader",                  "pip"),   # to read dbase format
+                ModuleInstall("dbfread",        "pip"),   # to read dbase format
                 ]
     
     if sys.platform.startswith("win"):

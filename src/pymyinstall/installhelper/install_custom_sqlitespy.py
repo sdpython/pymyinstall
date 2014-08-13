@@ -11,13 +11,13 @@ from .install_custom import download_page, download_file, download_from_sourcefo
 
 def IsSQLiteSpyInstalled(dest_folder):
     """
-    check if Scite was already installed
+    check if SQLiteSpy was already installed
     
     @param      dest_folder     where it was installed
     @return                     boolean
     """
     if sys.platform.startswith("win"):
-        file = os.path.join(dest_folder, "wscite", "SciTE.exe")
+        file = os.path.join(dest_folder, "SQLiteSpy.exe")
         return os.path.exists(file)
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
@@ -33,7 +33,7 @@ def install_sqlitespy(temp_folder=".", fLOG = print, install = True):
     @return                     temporary file
     """
     if IsSQLiteSpyInstalled(temp_folder):
-        return True
+        return os.path.join(temp_folder,"SQLiteSpy.exe")
         
     link  = "http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index"
     page = download_page(link)
@@ -63,7 +63,7 @@ def add_shortcut_to_desktop_for_sqlitespy(exe):
     @param      exe        exe location (SQLiteSpy.exe)
     @return                filename
     """
-    return add_shortcut_to_desktop(scite, "SQLiteSpy", "SQLiteSpy")
+    return add_shortcut_to_desktop(exe, "SQLiteSpy", "SQLiteSpy")
     
     
             

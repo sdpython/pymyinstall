@@ -40,7 +40,6 @@
 
 import sys,os
 from distutils.core import setup
-from setuptools import find_packages
 
 if os.path.exists("version.txt") :
     with open("version.txt", "r") as f : lines = f.readlines()
@@ -80,6 +79,21 @@ if "bdist_wininst" not in sys.argv :
 else :
     EXT_MODULES = [ ]
 
+try :
+    from setuptools import find_packages
+except ImportError:
+    from pkgutil import walk_packages
+    def find_packages(path, exclude = ""):
+        res = []
+        for _, name, ispkg in walk_packages([os.path.abspath(path)]):
+            if isinstance (exclude,str):
+                if name == exclude : continue
+            else :
+                if name in exclude : continue
+            if ispkg:
+                res.append(name)
+        return res
+            
 packages     = find_packages('src', exclude='src')
 package_dir  = { k: "src/" + k.replace(".","/") for k in packages }
 package_data = { project_var_name + ".subproject": ["*.tohelp"] }

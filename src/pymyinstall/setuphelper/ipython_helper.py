@@ -37,7 +37,7 @@ def setup_ipython(  current_path        = None,
     @endcode
     
     """
-    if sys.platform.startswith("win32"):
+    if sys.platform.startswith("win"):
         user_profile = os.environ['USERPROFILE']
         profile = os.path.join(user_profile, ".ipython", "profile_default")
         ipython_config = os.path.join(profile, "ipython_config.py")
@@ -71,11 +71,11 @@ def setup_ipython(  current_path        = None,
                 if "pylab" in var :
                     text = text.replace(all[0], "c.{0} = 'inline'".format(var))
                 elif "checkpoint_dir" in var :
-                    text = text.replace(all[0], "c.{0} = {1}".format(var,checkpath))
+                    text = text.replace(all[0], "c.{0} = r'{1}'".format(var,checkpath))
                 elif "file_to_run" not in var :
                     text = text.replace(all[0], "c.{1} = r'{0}'".format(current_path, var))
                 else :
-                    text = text.replace(all[0], "c.{1} = r'{0}\\ipython_startup.py'".format(current_path, var))
+                    text = text.replace(all[0], "c.{1} = r'{0}\ipython_startup.py'".format(current_path, var))
                     
         # browser
         if browser != None :
