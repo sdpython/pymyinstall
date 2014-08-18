@@ -557,6 +557,70 @@ def add_shortcut_to_desktop_for_module(name):
     else :
         raise NotImplementedError("nothing implemented for module: {0}".format(name))
                 
+def small_installation():
+    """
+    returns a list of modules to work with pandas and ipython.
+    
+    @return             a list of modules to install
+    
+    To install them:
+    @code
+    for _ in complete_installation() :
+        _.install(temp_folder="install")
+    @endcode
+    """
+    mod = [   
+                ModuleInstall("setuptools",     "exe"),
+                ModuleInstall("pip",            "exe"),
+                #
+                ModuleInstall("six",            "pip"),
+                ModuleInstall("lxml",           "exe"),
+                ModuleInstall("jinja2",         "pip"),
+                ModuleInstall("pygments",       "pip"),
+                ModuleInstall("pyparsing",      "pip"),
+                ModuleInstall("python-dateutil","pip", "dateutil"),
+                ModuleInstall("html5lib",       "pip"),
+                ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
+                ModuleInstall("coverage",       "pip"),
+                ModuleInstall("pytz",           "pip"),
+                ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
+                #
+                ModuleInstall("openpyxl",       "pip", version="1.8.6"),
+                # 
+                ModuleInstall("tornado",        "exe"),
+                ModuleInstall("pyzmq",          "exe", mname="zmq"),
+                #
+                ModuleInstall("pycparser",      "exe"),
+                ModuleInstall("Cython",         "exe"),
+                ModuleInstall("numpy",          "exe"),
+                ModuleInstall("matplotlib",     "exe"),
+                ModuleInstall("scipy",          "exe"),
+                ModuleInstall("statsmodels",    "exe"),  # needs scipy
+                #
+                ModuleInstall("pandas",         "exe"),
+                ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
+                ModuleInstall("ipython",        "exe"),
+                #
+                ModuleInstall("ggplot",         "pip"),  # needs statsmodels
+                ModuleInstall("plotly",         "pip"),
+                #
+                ModuleInstall("pyquickhelper",  "github", "sdpython"),
+                ModuleInstall("pyensae",        "github", "sdpython"),
+                #
+                ModuleInstall("requests",       "pip"),
+                ModuleInstall("PyQt",           "exe", mname="PyQt4"),
+                ModuleInstall("spyder",         "exe", script="spyder.bat"),
+                #
+                #
+                ModuleInstall("dbfread",        "pip"),   # to read dbase format
+                ]
+    
+    if sys.platform.startswith("win"):
+        mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
+        mod.append ( ModuleInstall("winshell",  "pip") )
+    
+    return mod
+
 def complete_installation():
     """
     returns a list of modules to install, an rich set 
@@ -658,9 +722,11 @@ def complete_installation():
                 ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),            
                 ModuleInstall("wild_sphinx_theme",          "pip"),
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
+                ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
                 #
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
+                ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
                 
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
@@ -680,68 +746,5 @@ def complete_installation():
     
     return mod
 
-def small_installation():
-    """
-    returns a list of modules to work with pandas and ipython.
-    
-    @return             a list of modules to install
-    
-    To install them:
-    @code
-    for _ in complete_installation() :
-        _.install(temp_folder="install")
-    @endcode
-    """
-    mod = [   
-                ModuleInstall("setuptools",     "exe"),
-                ModuleInstall("pip",            "exe"),
-                #
-                ModuleInstall("six",            "pip"),
-                ModuleInstall("lxml",           "exe"),
-                ModuleInstall("jinja2",         "pip"),
-                ModuleInstall("pygments",       "pip"),
-                ModuleInstall("pyparsing",      "pip"),
-                ModuleInstall("python-dateutil","pip", "dateutil"),
-                ModuleInstall("html5lib",       "pip"),
-                ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
-                ModuleInstall("coverage",       "pip"),
-                ModuleInstall("pytz",           "pip"),
-                ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
-                #
-                ModuleInstall("openpyxl",       "pip", version="1.8.6"),
-                # 
-                ModuleInstall("tornado",        "exe"),
-                ModuleInstall("pyzmq",          "exe", mname="zmq"),
-                #
-                ModuleInstall("pycparser",      "exe"),
-                ModuleInstall("Cython",         "exe"),
-                ModuleInstall("numpy",          "exe"),
-                ModuleInstall("matplotlib",     "exe"),
-                ModuleInstall("scipy",          "exe"),
-                ModuleInstall("statsmodels",    "exe"),  # needs scipy
-                #
-                ModuleInstall("pandas",         "exe"),
-                ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
-                ModuleInstall("ipython",        "exe"),
-                #
-                ModuleInstall("ggplot",         "pip"),  # needs statsmodels
-                ModuleInstall("plotly",         "pip"),
-                #
-                ModuleInstall("pyquickhelper",  "github", "sdpython"),
-                ModuleInstall("pyensae",        "github", "sdpython"),
-                #
-                ModuleInstall("requests",       "pip"),
-                ModuleInstall("PyQt",           "exe", mname="PyQt4"),
-                ModuleInstall("spyder",         "exe", script="spyder.bat"),
-                #
-                #
-                ModuleInstall("dbfread",        "pip"),   # to read dbase format
-                ]
-    
-    if sys.platform.startswith("win"):
-        mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
-        mod.append ( ModuleInstall("winshell",  "pip") )
-    
-    return mod
 
     
