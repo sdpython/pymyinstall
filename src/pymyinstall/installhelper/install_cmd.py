@@ -608,6 +608,7 @@ def small_installation():
                 #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
+                ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
                 ModuleInstall("requests",       "pip"),
                 ModuleInstall("PyQt",           "exe", mname="PyQt4"),
@@ -640,6 +641,7 @@ def complete_installation():
                 ModuleInstall("virtualenv",     "exe"),
                 ModuleInstall("setuptools",     "exe"),
                 ModuleInstall("pip",            "exe"),
+                ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
                 #
                 ModuleInstall("six",            "pip"),
                 ModuleInstall("lxml",           "exe"),
@@ -701,6 +703,7 @@ def complete_installation():
                 #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
+                ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
                 ModuleInstall("selenium",       "pip"),
                 ModuleInstall("Pillow",         "exe", mname = "PIL"),
@@ -736,6 +739,7 @@ def complete_installation():
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
                 ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
+                ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
                 
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
