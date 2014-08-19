@@ -596,6 +596,8 @@ def small_installation():
                 ModuleInstall("matplotlib",     "exe"),
                 ModuleInstall("scipy",          "exe"),
                 ModuleInstall("statsmodels",    "exe"),  # needs scipy
+                ModuleInstall("networkx",       "exe"),
+                ModuleInstall("graphviz",       "pip"),
                 #
                 ModuleInstall("pandas",         "exe"),
                 ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
@@ -673,6 +675,8 @@ def complete_installation():
                 ModuleInstall("gmpy2",          "exe"),
                 ModuleInstall("llvmh",          "exe", mname="llvm"),
                 ModuleInstall("numba",          "exe"),
+                ModuleInstall("networkx",       "exe"),
+                ModuleInstall("graphviz",       "pip"),
                 #
                 ModuleInstall("pandas",         "exe"),
                 ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
@@ -723,6 +727,11 @@ def complete_installation():
                 ModuleInstall("wild_sphinx_theme",          "pip"),
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
                 ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
+                #
+                ModuleInstall("mdn-sphinx-them",            "pip", mname="mdn_theme"),  # https://pypi.python.org/pypi/mdn-sphinx-theme/0.5
+                ModuleInstall("klink",                      "pip"), # http://pmorissette.github.io/klink/install.html
+                
+                
                 #
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
