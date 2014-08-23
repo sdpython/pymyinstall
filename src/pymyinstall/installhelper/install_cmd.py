@@ -611,7 +611,8 @@ def small_installation():
                 ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
                 ModuleInstall("requests",       "pip"),
-                ModuleInstall("PyQt",           "exe", mname="PyQt4"),
+                #ModuleInstall("PyQt",           "exe", mname="PyQt4"),
+                ModuleInstall("PySide",         "exe"),
                 ModuleInstall("spyder",         "exe", script="spyder.bat"),
                 #
                 #
@@ -711,13 +712,17 @@ def complete_installation():
                 ModuleInstall("markupsafe",     "pip"),
                 ModuleInstall("requests",       "pip"),
                 ModuleInstall("Kivy",           "exe"),
-                ModuleInstall("PyQt",           "exe", mname="PyQt4"),
+                #ModuleInstall("PyQt",           "exe", mname="PyQt4"),
+                ModuleInstall("PySide",         "exe"),
                 ModuleInstall("spyder",         "exe", script="spyder.bat"),
                 #
                 ModuleInstall("py4j",           "pip"),
                 #
                 ModuleInstall("mechanize",      "pip"),
                 ModuleInstall("luigi",          "pip"),
+                #
+                ModuleInstall("basemap",        "exe"),
+                ModuleInstall("Cartopy",        "exe", mname="cartopy"),
                 #
                 ModuleInstall("sphinx",         "pip"),
                 ModuleInstall("sphinxcontrib-fancybox",     "pip", mname="sphinxcontrib.fancybox"),
