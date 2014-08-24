@@ -721,8 +721,10 @@ def complete_installation():
                 ModuleInstall("mechanize",      "pip"),
                 ModuleInstall("luigi",          "pip"),
                 #
-                ModuleInstall("basemap",        "exe"),
+                #ModuleInstall("basemap",        "exe"),
                 ModuleInstall("Cartopy",        "exe", mname="cartopy"),
+                ModuleInstall("smopy",          "pip"),
+                ModuleInstall("folium",         "pip"),
                 #
                 ModuleInstall("sphinx",         "pip"),
                 ModuleInstall("sphinxcontrib-fancybox",     "pip", mname="sphinxcontrib.fancybox"),
@@ -735,15 +737,12 @@ def complete_installation():
                 ModuleInstall("wild_sphinx_theme",          "pip"),
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
                 ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
-                #
-                ModuleInstall("mdn-sphinx-them",            "pip", mname="mdn_theme"),  # https://pypi.python.org/pypi/mdn-sphinx-theme/0.5
-                ModuleInstall("klink",                      "pip"), # http://pmorissette.github.io/klink/install.html
                 
                 
                 #
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
-                ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
+                #ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
                 ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
                 
                 #

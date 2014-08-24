@@ -2,6 +2,7 @@
 """
 Helpers to install many modules for a specific usage.
 """
+from ..installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files, add_shortcut_to_desktop_for_module, small_installation
 
     
 def datascientist(  folder          = "install", 
