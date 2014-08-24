@@ -53,7 +53,7 @@ This project contains various helper about logging functions, unit tests and hel
 Versions
 --------
 
-* **v0.5 - 2014/08/24**
+* **0.5 - 2014/08/24**
     * **new:** a couple of new modules in the full set of modules
     * **new:** a subset of modules to work with ipython
     * **add:** add parameter ``skip`` to function ``datascientist``
