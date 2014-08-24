@@ -32,7 +32,7 @@ def check( log = False):
     """
     return True
     
-from .installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files, add_shortcut_to_desktop_for_module, small_installation
+from .installhelper.install_cmd import run_cmd, ModuleInstall, unzip_files, add_shortcut_to_desktop_for_module
 from .installhelper.install_custom import download_from_sourceforge, download_file, download_page
 from .installhelper.install_manual import get_install_list, open_tool_on_browser
 from .setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
@@ -41,3 +41,4 @@ from .installhelper.install_custom_pandoc import install_pandoc
 from .installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
 from .packaged.packaged_functions import datascientist
+from .packaged.packaged_config import complete_installation, small_installation

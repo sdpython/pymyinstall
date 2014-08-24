@@ -2,8 +2,8 @@
 """
 Helpers to install many modules for a specific usage.
 """
-from ..installhelper.install_cmd import run_cmd, ModuleInstall, complete_installation, unzip_files, add_shortcut_to_desktop_for_module, small_installation
-
+from ..installhelper.install_cmd import run_cmd, ModuleInstall, unzip_files, add_shortcut_to_desktop_for_module
+from .packaged_config import complete_installation, small_installation
     
 def datascientist(  folder          = "install", 
                     modules         = True, 
