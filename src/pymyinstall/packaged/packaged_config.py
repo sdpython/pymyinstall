@@ -56,6 +56,8 @@ def small_installation():
                 #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
+                ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
+                #
                 ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
                 ModuleInstall("requests",       "pip"),
@@ -118,13 +120,13 @@ def complete_installation():
                 ModuleInstall("Cython",         "exe"),
                 ModuleInstall("cffi",           "exe"),
                 ModuleInstall("numpy",          "exe"),
-                ModuleInstall("blz",            "exe", mname="blz"),
+                ModuleInstall("blaze",          "exe"),
                 ModuleInstall("scipy",          "exe"),
                 ModuleInstall("matplotlib",     "exe"),
                 ModuleInstall("tables",         "exe", mname="tables"),
                 ModuleInstall("sympy",          "pip"),
                 ModuleInstall("gmpy2",          "exe"),
-                ModuleInstall("llvmh",          "exe", mname="llvm"),
+                ModuleInstall("llvmpy",         "exe", mname="llvm"),
                 ModuleInstall("numba",          "exe"),
                 ModuleInstall("networkx",       "exe"),
                 ModuleInstall("graphviz",       "pip"),
@@ -149,10 +151,12 @@ def complete_installation():
                 ModuleInstall("vispy",          "pip"),
                 #
                 ModuleInstall("rpy2",           "exe"),
-                ModuleInstall("pythonnet",      "exe", mname="clr"),
+                #ModuleInstall("pythonnet",      "exe", mname="clr"),  # included in ensae_teaching_cs
                 #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
+                ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
+                #
                 ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
                 ModuleInstall("selenium",       "pip"),

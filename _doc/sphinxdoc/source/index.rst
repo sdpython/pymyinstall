@@ -29,10 +29,12 @@ Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
-    
-Some modules fail on Windows due to Permission error, in that case, you should go to the
+
+If it fails for any reason - lost connexion -, run again the function with the same
+parameter. If it fails again, you can skip the modules by filling the parameter ``skip``.
+Some modules might fail on Windows due to Permission error, in that case, you should go to the
 folder ``install`` and run the installer. Once it is done, you can run the function again 
-to continue. It will skip the modules already installed.
+to continue. 
 
 
 Functionalities
