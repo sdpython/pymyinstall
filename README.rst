@@ -40,19 +40,11 @@ Functionalities
     - provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
 
 
-Design
-------
-
-This project contains various helper about logging functions, unit tests and help generation.
-   * a source folder: ``src``
-   * a unit test folder: ``_unittests``, go to this folder and run ``run_unittests.py``
-   * a _doc folder: ``_doc``, it will contains the documentation
-   * a file ``setup.py`` to build and to install the module
-   * a file ``make_help.py`` to build the sphinx documentation
-
 Versions
 --------
 
+* **0.6 - 2014/08/26**
+    * **fix:** fix an import issue
 * **0.5 - 2014/08/24**
     * **new:** a couple of new modules in the full set of modules
     * **new:** a subset of modules to work with ipython

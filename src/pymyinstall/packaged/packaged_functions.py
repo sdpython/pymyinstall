@@ -3,16 +3,22 @@
 Helpers to install many modules for a specific usage.
 """
 from ..installhelper.install_cmd import run_cmd, ModuleInstall, unzip_files, add_shortcut_to_desktop_for_module
+from ..installhelper.install_manual import get_install_list
 from .packaged_config import complete_installation, small_installation
+from ..installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
+from ..installhelper.install_custom_pandoc import install_pandoc
+from ..setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
+from ..installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
+
     
 def datascientist(  folder          = "install", 
                     modules         = True, 
-                    website         = True, 
-                    scite           = True,
-                    pandoc          = True,
-                    ipython         = True,
-                    sqlitespy       = True,
-                    shortcuts       = True,
+                    website         = False, 
+                    scite           = False,
+                    pandoc          = False,
+                    ipython         = False,
+                    sqlitespy       = False,
+                    shortcuts       = False,
                     ipython_folder  = ".",
                     fLOG            = print,
                     browser         = None,
@@ -62,7 +68,7 @@ def datascientist(  folder          = "install",
                 fLOG("skip module", _.name, " import name:", _.mname)
             else :
                 _.install(temp_folder=folder)    
-
+                
     if website :
         get_install_list()
         
