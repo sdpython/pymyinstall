@@ -4,7 +4,7 @@ Helpers to install many modules for a specific usage.
 """
 from ..installhelper.install_cmd import run_cmd, ModuleInstall, unzip_files, add_shortcut_to_desktop_for_module
 from ..installhelper.install_manual import get_install_list
-from .packaged_config import complete_installation, small_installation
+from .packaged_config import complete_installation, small_installation, installation_cubes
 from ..installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from ..installhelper.install_custom_pandoc import install_pandoc
 from ..setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
@@ -42,6 +42,7 @@ def datascientist(  folder          = "install",
     @param      browser             browser to use for the notebooks if not the default one (ie, firefox, chrome)
     @param      skip                to skip some modules if they fail
     @param      full                if True, install many modules including the ones used to generate the documentation
+    @param      fLOG                logging function
     
     @example(Install manything for a Data Scientist)
     @code
@@ -63,6 +64,7 @@ def datascientist(  folder          = "install",
     """
     if modules :
         modules = complete_installation() if full else small_installation() 
+        
         for _ in modules :
             if _.name in skip or _.mname in skip :
                 fLOG("skip module", _.name, " import name:", _.mname)
@@ -90,3 +92,39 @@ def datascientist(  folder          = "install",
         if ipython  : add_shortcut_to_desktop_for_module("spyder")
         if sqlitespy: add_shortcut_to_desktop_for_sqlitespy(sqlitespy_file)
     
+def ds_complete(**params):
+    """
+    calls @see fn datascientist with ``full=True``
+    """
+    params = params.copy()
+    params["full"] = True
+    datascientist(**params)
+    
+def ds_small(**params):
+    """
+    calls @see fn datascientist with ``full=False``
+    """
+    params = params.copy()
+    params["full"] = False
+    datascientist(**params)
+    
+def ds_cubes(   folder          = "install", 
+                modules         = True, 
+                skip            = [],
+                fLOG            = print) :
+    """
+    Install all the necessary modules to manipulate `data cubes <http://en.wikipedia.org/wiki/Data_cube>`_ (= multidimensional arrays).
+    
+    @param      folder              where to install everything
+    @param      modules             go through the list of necessary modules
+    @param      skip                to skip some modules if they fail
+    @param      fLOG                logging function
+    """
+    if modules :
+        modules = installation_cubes()
+        
+        for _ in modules :
+            if _.name in skip or _.mname in skip :
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else :
+                _.install(temp_folder=folder)     

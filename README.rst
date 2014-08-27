@@ -43,6 +43,8 @@ Functionalities
 Versions
 --------
 
+* **0.7 - 2014/??/??**
+    * **new:** list of modules to manipulate and view data cubes
 * **0.6 - 2014/08/26**
     * **fix:** fix an import issue
 * **0.5 - 2014/08/24**

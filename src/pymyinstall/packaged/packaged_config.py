@@ -217,4 +217,20 @@ def complete_installation():
     return mod
 
 
+def installation_cubes():
+    """
+    A cube is a multidimensional array.
+    This functions gathers the dependencies for module `cubes <https://github.com/Stiivi/cubes>`_
+    (`documentation <http://cubes.databrewery.org/dev/doc/>`_)
+    and `cubesviewer <https://github.com/jjmontesl/cubesviewer>`_.
+    
+    """
+    mod = [   
+                ModuleInstall("python-dateutil","pip", "dateutil"),
+                ModuleInstall("pytz",           "pip"),
+                ModuleInstall("jsonschema",     "pip"),
+                ModuleInstall("cubes",           "pip"),
+            ]
+            
+    return mod
     
