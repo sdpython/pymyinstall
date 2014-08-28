@@ -32,6 +32,7 @@ def small_installation():
                 ModuleInstall("coverage",       "pip"),
                 ModuleInstall("pytz",           "pip"),
                 ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
+                ModuleInstall("husl",           "pip"),
                 #
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
                 # 
@@ -107,6 +108,7 @@ def complete_installation():
                 ModuleInstall("SQLAlchemy",     "exe"),
                 ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
                 ModuleInstall("simplejson",     "exe"),
+                ModuleInstall("husl",           "pip"),
                 #
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
                 ModuleInstall("python-pptx",    "github", "sdpython"),
@@ -171,7 +173,6 @@ def complete_installation():
                 #
                 ModuleInstall("py4j",           "pip"),
                 #
-                ModuleInstall("mechanize",      "pip"),
                 ModuleInstall("luigi",          "pip"),
                 #
                 ModuleInstall("basemap",        "exe", mname="mpl_toolkits.basemap"),
