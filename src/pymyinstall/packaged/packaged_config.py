@@ -228,9 +228,10 @@ def installation_cubes():
     """
     mod = [   
                 ModuleInstall("python-dateutil","pip", "dateutil"),
+                ModuleInstall("django",         "pip"),
                 ModuleInstall("pytz",           "pip"),
                 ModuleInstall("jsonschema",     "pip"),
-                ModuleInstall("cubes",           "pip"),
+                ModuleInstall("cubes",          "pip"),
             ]
             
     return mod
