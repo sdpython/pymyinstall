@@ -403,7 +403,7 @@ class ModuleInstall :
         elif kind == "exe":
             ver = python_version()
             if ver[0] != "win32":
-                raise Exception("this option is not available on others system than Windows")
+                raise Exception("this option is not available on other systems than Windows")
                 return self.install("pip")
             else :
                 url,exe = self.get_exe_url_link(file_save = file_save)
@@ -434,7 +434,7 @@ class ModuleInstall :
         @param      force           force the installation even if already installed
         @param      temp_folder     folder where to download the setup
         @param      log             display logs or not
-        @param      options         others options to add to the command line (see below)
+        @param      options         other options to add to the command line (see below)
         @return                     boolean
         
         The options mentioned in parameter ``options``
