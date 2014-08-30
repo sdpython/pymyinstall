@@ -471,8 +471,16 @@ class ModuleInstall :
             
             files = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
             setu = [ _ for _ in files if _.endswith("setup.py") ]
-            if len(setu) != 1 :
+            if len(setu) == 0 :
                 raise Exception("unable to find setup.py for module " + self.name)
+            elif len(setu) > 1 :
+                setu = [ (len(_),_) for _ in setu ]
+                setu.sort()
+                if setu[0][0] == setu[1][0]:
+                    raise Exception("more than one setup.py for module " + self.name + "\n" + "\n".join(setu))
+                else :
+                    self.fLOG("warning: more than one setup: " + "; ".join(setu))
+                    setu = [setu[0][1]]
             setu = os.path.abspath(setu[0])
             
             self.fLOG("install ", setu[0])
