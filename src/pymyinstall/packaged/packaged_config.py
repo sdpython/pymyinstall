@@ -231,7 +231,7 @@ def installation_cubes():
                 ModuleInstall("django",         "pip"),
                 ModuleInstall("pytz",           "pip"),
                 ModuleInstall("jsonschema",     "pip"),
-                ModuleInstall("cubes",          "pip"),
+                ModuleInstall("cubes",          "github", "Stiivi"),  # the PyPI version does not work with Python 3
             ]
             
     return mod
