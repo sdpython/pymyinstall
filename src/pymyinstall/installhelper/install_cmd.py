@@ -483,11 +483,11 @@ class ModuleInstall :
                 cmd += " " + " ".join(*options)
             out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)
             os.chdir(cwd)
-            if "Successfully installed" not in out :
+            if "Successfully installed" not in out and "install  C" not in out :
                 if "Finished processing dependencies" not in out :
                     raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
                 else :
-                    self.fLOG("warning: Successfully installed not found")
+                    self.fLOG("warning: ``Successfully installed`` or ``install  C`` not found")
             ret = True
             
         elif kind == "exe":
