@@ -106,6 +106,7 @@ def complete_installation():
                 ModuleInstall("coverage",       "pip"),
                 ModuleInstall("pytz",           "pip"),
                 ModuleInstall("SQLAlchemy",     "exe"),
+                ModuleInstall("flask-sqlalchemy","pip",mname="flask.ext.sqlalchemy"),
                 ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
                 ModuleInstall("simplejson",     "exe"),
                 ModuleInstall("husl",           "pip"),
@@ -152,6 +153,9 @@ def complete_installation():
                 ModuleInstall("Shapely",        "exe", mname="shapely"),  # exe on Windows to get geos.dll
                 ModuleInstall("vispy",          "pip"),
                 #
+                #ModuleInstall("tessera-client", "github", "sdpython", mname="tessera_client"),  
+                #ModuleInstall("tessera",        "github", "sdpython"),   # does not really work yet
+                #
                 ModuleInstall("rpy2",           "exe"),
                 #ModuleInstall("pythonnet",      "exe", mname="clr"),  # included in ensae_teaching_cs
                 #
@@ -172,6 +176,7 @@ def complete_installation():
                 ModuleInstall("spyder",         "exe", script="spyder.bat"),
                 #
                 ModuleInstall("py4j",           "pip"),
+                ModuleInstall("python-igraph",  "exe", mname="igraph"),
                 #
                 ModuleInstall("luigi",          "pip"),
                 #
