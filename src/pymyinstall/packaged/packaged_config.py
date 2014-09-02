@@ -222,7 +222,6 @@ def complete_installation():
     
     return mod
 
-
 def installation_cubes():
     """
     A cube is a multidimensional array.
@@ -240,4 +239,19 @@ def installation_cubes():
             ]
             
     return mod
+    
+def installation_huge_datasets():
+    """
+    Modules to handle huge datasets on disk, hierarchical datasets.
+    
+    """
+    mod = [   
+                ModuleInstall("h5py",           "exe"),
+                ModuleInstall("blosc",          "exe"),
+                ModuleInstall("numexpr",        "exe"),
+                ModuleInstall("tables",         "exe"),
+            ]
+            
+    return mod
+
     

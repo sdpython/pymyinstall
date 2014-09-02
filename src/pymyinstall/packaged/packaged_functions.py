@@ -4,7 +4,7 @@ Helpers to install many modules for a specific usage.
 """
 from ..installhelper.install_cmd import run_cmd, ModuleInstall, unzip_files, add_shortcut_to_desktop_for_module
 from ..installhelper.install_manual import get_install_list
-from .packaged_config import complete_installation, small_installation, installation_cubes
+from .packaged_config import complete_installation, small_installation, installation_cubes, installation_huge_datasets
 from ..installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from ..installhelper.install_custom_pandoc import install_pandoc
 from ..setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
@@ -128,3 +128,25 @@ def ds_cubes(   folder          = "install",
                 fLOG("skip module", _.name, " import name:", _.mname)
             else :
                 _.install(temp_folder=folder)     
+                
+def ds_huge(    folder          = "install", 
+                modules         = True, 
+                skip            = [],
+                fLOG            = print) :
+    """
+    Install all the necessary modules to manipulate `data cubes <http://en.wikipedia.org/wiki/Data_cube>`_ (= multidimensional arrays).
+    
+    @param      folder              where to install everything
+    @param      modules             go through the list of necessary modules
+    @param      skip                to skip some modules if they fail
+    @param      fLOG                logging function
+    """
+    if modules :
+        modules = installation_huge_datasets()
+        
+        for _ in modules :
+            if _.name in skip or _.mname in skip :
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else :
+                _.install(temp_folder=folder)     
+                
