@@ -35,6 +35,7 @@ def small_installation():
                 ModuleInstall("husl",           "pip"),
                 #
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
+                ModuleInstall("xlrd",           "pip"),
                 # 
                 ModuleInstall("tornado",        "exe"),
                 ModuleInstall("pyzmq",          "exe", mname="zmq"),
