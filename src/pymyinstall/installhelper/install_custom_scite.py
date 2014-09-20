@@ -3,9 +3,9 @@
 @file
 @brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
-import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
+import sys, re, os
 
-from .install_cmd import run_cmd, ModuleInstall, unzip_files
+from .install_cmd import unzip_files
 from .install_custom import download_page, download_from_sourceforge
 from .link_shortcuts import add_shortcut_to_desktop, suffix
 

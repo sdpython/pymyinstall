@@ -1,6 +1,6 @@
 """
 @file
-@brief Defines differents set of modules to install.
+@brief Defines different set of modules to install.
 """
 import sys
 from ..installhelper.install_cmd import ModuleInstall

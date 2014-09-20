@@ -39,7 +39,7 @@ def add_shortcut_to_desktop(file, name, description = "", arguments = ""):
 
 def suffix():
     """
-    add a suffix to a shorcut name = python version + architecture
+    add a suffix to a shortcut name = python version + architecture
     
     @return     string
     """

@@ -3,11 +3,10 @@
 @file
 @brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
-import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
+import sys, re, os
 
-from .install_cmd import run_cmd, ModuleInstall, unzip_files
-from .install_custom import download_page
-from .link_shortcuts import add_shortcut_to_desktop, suffix
+from .install_cmd import run_cmd
+from .install_custom import download_page, download_file
 
 def IsPandocInstalled():
     """
@@ -36,11 +35,11 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
     page = download_page(link)
     if sys.platform.startswith("win"):
         reg = re.compile("href=\\\"(.*?[.]msi)\\\"") 
-        all = reg.findall(page)
-        if len(all) == 0 :
-            raise Exception("unable to find a link on a .msi file on page: " + url)
+        alls = reg.findall(page)
+        if len(alls) == 0 :
+            raise Exception("unable to find a link on a .msi file on page: " + page)
 
-        file = all[0].split("/")[-1]
+        file = alls[0].split("/")[-1]
         filel = "https://github.com/jgm/pandoc/releases/download/{0}/pandoc-{1}-windows.msi"
         version = file.replace("pandoc-","").replace("-windows.msi","")
         fLOG("pandoc, version ", version)

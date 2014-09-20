@@ -3,10 +3,9 @@
 @file
 @brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
-import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
+import os, urllib, urllib.error, urllib.request
 
-from .install_cmd import run_cmd, ModuleInstall, unzip_files
-from .link_shortcuts import add_shortcut_to_desktop, suffix
+from .install_cmd import ModuleInstall
 
 def download_page(url):
     """
@@ -21,7 +20,7 @@ def download_page(url):
         text = u.read()
         u.close()
     except urllib.error.HTTPError as e :
-        raise Exception("unable to get archive from: " + zipurl) from e
+        raise Exception("unable to get archive from: " + url) from e
         
     return str(text, encoding="utf8")
     

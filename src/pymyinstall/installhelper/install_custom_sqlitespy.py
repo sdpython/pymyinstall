@@ -3,11 +3,11 @@
 @file
 @brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
-import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
+import sys, re, os
 
-from .install_cmd import run_cmd, ModuleInstall, unzip_files
-from .link_shortcuts import add_shortcut_to_desktop, suffix
-from .install_custom import download_page, download_file, download_from_sourceforge
+from .install_cmd import unzip_files
+from .link_shortcuts import add_shortcut_to_desktop
+from .install_custom import download_page, download_from_sourceforge
 
 def IsSQLiteSpyInstalled(dest_folder):
     """
@@ -39,17 +39,17 @@ def install_sqlitespy(temp_folder=".", fLOG = print, install = True):
     page = download_page(link)
     if sys.platform.startswith("win"):
         reg = re.compile("href=\\\"(/delphi/lib/exe.*?[.]zip)\\\"") 
-        all = reg.findall(page)
-        if len(all) == 0 :
-            raise Exception("unable to find a link on a .zip file on page: " + url)
+        alls = reg.findall(page)
+        if len(alls) == 0 :
+            raise Exception("unable to find a link on a .zip file on page: " + page)
 
-        file = all[0].replace("&amp;","&")
+        file = alls[0].replace("&amp;","&")
         full = "http://www.yunqa.de{0}".format(file)
         version = file.split("_")[-1].replace(".zip","")
         fLOG("SQLiteSpy, version ", version)
         outfile = os.path.join( temp_folder, "{0}_{1}.zip".format("SQLiteSpy", version))
         fLOG("download ", full)
-        local = download_from_sourceforge(full, outfile, temp_folder = temp_folder, fLOG=fLOG)
+        download_from_sourceforge(full, outfile, temp_folder = temp_folder, fLOG=fLOG)
         files = unzip_files(outfile, temp_folder, fLOG=fLOG)
         local = [ f for f in files if f.endswith(".exe") ][0]
         return local

@@ -3,7 +3,9 @@
 @file
 @brief Various function to install various python module from various location.
 """
-import sys, re, platform, os, urllib, urllib.request, imp, zipfile,time, subprocess
+import sys, re, platform, os, urllib, urllib.request, zipfile,time, subprocess, importlib
+
+
 
 def python_version():
     """
@@ -12,7 +14,7 @@ def python_version():
     @return     tuple, example: ("win32","32bit") or ("win32","64bit")
     """
     return sys.platform, platform.architecture()[0]
-    
+
 def split_cmp_command(cmd, remove_quotes = True) :
     """
     
@@ -53,8 +55,8 @@ def run_cmd (   cmd,
     """
     run a command line and wait for the result
     @param      cmd                 command line
-    @param      sin                 sin: what must be written on the standard input
-    @param      shell               if True: cmd is a shell command (and no command window is opened)
+    @param      sin                 sin, what must be written on the standard input
+    @param      shell               if True, cmd is a shell command (and no command window is opened)
     @param      wait                call proc.wait
     @param      log_error           if log_error, call fLOG (error)
     @param      secure              if secure is a string (a valid filename), the function stores the output in a file
@@ -65,9 +67,12 @@ def run_cmd (   cmd,
     @param      encerror            encoding errors (ignore by default) while converting the output into a string
     @param      encoding            encoding of the output
     @param      fLOG                logging function
-    @return                         content of stdout, stdres  (only if wait is True)  
+    @return                         content of stdout, stderr  (only if wait is True)
     """
-    if secure != None :
+    if sin is not None and sin != "" :
+        raise NotImplementedError("sin is not used")
+
+    if secure is not None :
         if not do_not_log :
             fLOG("secure=",secure)
         with open(secure,"w") as f : f.write("")
@@ -97,7 +102,7 @@ def run_cmd (   cmd,
         out = [ ]
         skip_waiting = False
         
-        if secure == None :
+        if secure is None :
             for line in proc.stdout :
                 if not do_not_log : 
                     fLOG(line.decode(encoding, errors=encerror).strip("\n"))
@@ -107,12 +112,12 @@ def run_cmd (   cmd,
                     raise Exception("issue with cmd:" + str(cmd) + "\n" + str(exu))
                 if proc.stdout.closed: 
                     break
-                if stop_waiting_if != None and stop_waiting_if(line.decode("utf8", errors=encerror)) :
+                if stop_waiting_if is not None and stop_waiting_if(line.decode("utf8", errors=encerror)) :
                     skip_waiting = True
                     break
         else :
             last = []
-            while proc.poll() == None :
+            while proc.poll() is None :
                 if os.path.exists (secure) :
                     with open(secure,"r") as f :
                         lines = f.readlines()
@@ -122,7 +127,7 @@ def run_cmd (   cmd,
                                 fLOG(line.strip("\n"))
                             out.append(line.strip("\n"))
                         last = lines
-                    if stop_waiting_if != None and len(last)>0 and stop_waiting_if(last[-1]) :
+                    if stop_waiting_if is not None and len(last)>0 and stop_waiting_if(last[-1]) :
                         skip_waiting = True
                         break
                 time.sleep(0.1)
@@ -146,7 +151,7 @@ def unzip_files(zipf, whereTo, fLOG = print):
     unzip files from a zip archive
     
     @param      zipf        archive
-    @param      whereTo     destinatation folder
+    @param      whereTo     destination folder
     @param      fLOG        logging function
     @return                 list of unzipped files
     """
@@ -211,7 +216,7 @@ class ModuleInstall :
         
         exe is only for Windows.
         """
-        if kind != "pip" and version != None :
+        if kind != "pip" and version is not None :
             raise NotImplementedError("version can be only specified if kind=='pip'")
         
         self.name       = name
@@ -223,7 +228,7 @@ class ModuleInstall :
         
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception("unable to interpret kind {0}, it should be in {1}".format(kind, ",".join(ModuleInstall.allowedKind)))
-        if self.kind == "github" and self.gitrepo == None :
+        if self.kind == "github" and self.gitrepo is None :
             raise Exception("gitrepo cannot be empty")
             
         self.fLOG = fLOG
@@ -254,7 +259,7 @@ class ModuleInstall :
         """
         return the import name
         """
-        if self.mname != None : return self.mname
+        if self.mname is not None : return self.mname
         if self.name.startswith("python-"): return self.name[len("python-"):]
         else: return self.name
         
@@ -264,7 +269,7 @@ class ModuleInstall :
         """
         if self.script is None :
             try :
-                r = imp.find_module(self.ImportName)
+                importlib.find_loader(self.ImportName)
                 return True
             except ImportError as e :
                 txt = "import {0}".format(self.ImportName)
@@ -294,7 +299,7 @@ class ModuleInstall :
         else :
             pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
                                                      "{0}-py{1}.{2}.exe".format(plat,sys.version_info.major,sys.version_info.minor))
-        expre   = re.compile(pattern)
+        expre = re.compile(pattern)
         
         if "cached_page" not in self.__dict__ :
             page = os.path.join(os.path.split(__file__)[0],"page.html")
@@ -311,23 +316,23 @@ class ModuleInstall :
             self.cached_page = text
             
         page = self.cached_page.replace("&#8209;","-")
-        all  = expre.findall(page)
-        if len(all) == 0 :
-            if file_save != None :
+        alls  = expre.findall(page)
+        if len(alls) == 0 :
+            if file_save is not None :
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
             raise Exception("unable to find regex with pattern: " + pattern)
 
         if self.name == "PyQt":
-            all = [ _ for _ in all if _[-1].startswith(self.name + "4") ]
+            alls = [ _ for _ in alls if _[-1].startswith(self.name + "4") ]
         else :
-            all = [ _ for _ in all if _[-1].startswith(self.name + "-") ]
-        if len(all) == 0 :
-            if file_save != None :
+            alls = [ _ for _ in alls if _[-1].startswith(self.name + "-") ]
+        if len(alls) == 0 :
+            if file_save is not None :
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
             raise Exception("unable to find a single link for " + self.name)
-        link = all[-1]
+        link = alls[-1]
         
         def dc(ml,mi):
                 ot=""
@@ -353,7 +358,7 @@ class ModuleInstall :
         unzip files from a zip archive
         
         @param      zipf        archive
-        @param      whereTo     destinatation folder
+        @param      whereTo     destination folder
         @return                 list of unzipped files
         """
         return unzip_files(zipf, whereTo, self.fLOG)
@@ -404,7 +409,7 @@ class ModuleInstall :
             ver = python_version()
             if ver[0] != "win32":
                 raise Exception("this option is not available on other systems than Windows")
-                return self.install("pip")
+                #return self.install("pip")
             else :
                 url,exe = self.get_exe_url_link(file_save = file_save)
 
@@ -452,7 +457,7 @@ class ModuleInstall :
         if kind == "pip" :
             pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
             cmd = pip + " install {0}".format(self.name)
-            if self.version != None : cmd += "=={0}".format(self.version)
+            if self.version is not None : cmd += "=={0}".format(self.version)
             if len(options) > 0 :
                 cmd += " " + " ".join(*options)
             out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)

@@ -35,7 +35,7 @@ def open_tool_on_browser(tool = None):
     """
     global _tools
     if isinstance(tool, str): tool = [ tool ]
-    elif tool == None : tool = get_install_list()
+    elif tool is None : tool = get_install_list()
     for t in tool :
         webbrowser.open_new_tab(_tools[ t ]) 
         

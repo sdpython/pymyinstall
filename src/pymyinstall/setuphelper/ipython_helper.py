@@ -3,7 +3,7 @@
 @file
 @brief Change ipython configuration
 """
-import sys, os, re, platform
+import sys, os, re
 
 from ..installhelper.link_shortcuts import add_shortcut_to_desktop, suffix
 
@@ -32,8 +32,8 @@ def setup_ipython(  current_path        = None,
     to open IPython notebook on a specific folder:
     
     @code
-    set path=%path%;c:\Python34;c:\Python34\Scripts
-    ipython3 notebook --notebook-dir=_doc\notebooks
+    set path=%path%;c:\Python34;c:\\Python34\\Scripts
+    ipython3 notebook --notebook-dir=_doc\\notebooks
     @endcode
     
     """
@@ -66,32 +66,32 @@ def setup_ipython(  current_path        = None,
                     "NotebookApp.ipython_dir",
                     "IPKernelApp.pylab"] :
             reg = re.compile("(#? *c.{0} =.*)".format(var))
-            all = reg.findall(text)
-            if len(all) == 1 and current_path != None :
+            alls = reg.findall(text)
+            if len(alls) == 1 and current_path is not None :
                 if "pylab" in var :
-                    text = text.replace(all[0], "c.{0} = 'inline'".format(var))
+                    text = text.replace(alls[0], "c.{0} = 'inline'".format(var))
                 elif "checkpoint_dir" in var :
-                    text = text.replace(all[0], "c.{0} = r'{1}'".format(var,checkpath))
+                    text = text.replace(alls[0], "c.{0} = r'{1}'".format(var,checkpath))
                 elif "file_to_run" not in var :
-                    text = text.replace(all[0], "c.{1} = r'{0}'".format(current_path, var))
+                    text = text.replace(alls[0], "c.{1} = r'{0}'".format(current_path, var))
                 else :
-                    text = text.replace(all[0], "c.{1} = r'{0}\ipython_startup.py'".format(current_path, var))
+                    text = text.replace(alls[0], "c.{1} = r'{0}\ipython_startup.py'".format(current_path, var))
                     
         # browser
-        if browser != None :
+        if browser is not None :
             if sys.platform.startswith("win"):
-                pathes = {  "firefox":r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe",
+                paths = {  "firefox":r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe",
                             "ie":r"C:\Program Files\Internet Explorer\iexplore.exe",
                             "chrome":r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
                             }
                 browser = browser.lower()
-                if browser not in pathes :
-                    raise KeyError("unable to find browser {0} in [{1}]".format(browser, ",".join(pathes.keys())))
+                if browser not in paths :
+                    raise KeyError("unable to find browser {0} in [{1}]".format(browser, ",".join(paths.keys())))
                 subtext = """
                     import webbrowser
                     webbrowser.register('{0}', None, webbrowser.GenericBrowser(r'{1}'))
                     c.NotebookApp.browser = '{0}'
-                    """.format(browser, pathes[browser]).replace("                    ","")
+                    """.format(browser, paths[browser]).replace("                    ","")
                 text += subtext
                 
             else:
