@@ -426,11 +426,17 @@ class ModuleInstall :
                 self.fLOG("writing", exe)
                 with open(exename,"wb") as f : f.write(text)
                 return exename
+                
+    def Install(self, *l, **p):
+        """
+        @see me install
+        """
+        self.install (*l,**p)
         
-    def install(self,   force_kind = None, 
-                        force = False, 
+    def install(self,   force_kind  = None, 
+                        force       = False, 
                         temp_folder = ".", 
-                        log = False,
+                        log         = False,
                         *options):
         """
         install the package
@@ -461,9 +467,11 @@ class ModuleInstall :
             if len(options) > 0 :
                 cmd += " " + " ".join(*options)
             out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)
+            if "No distributions matching the version" in out:
+                    raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             if "Successfully installed" not in out :
                 if "Requirement already satisfied" not in out :
-                    raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
+                    raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             ret = True
             
         elif kind == "github" :
@@ -498,9 +506,11 @@ class ModuleInstall :
             os.chdir(cwd)
             if "Successfully installed" not in out and "install  C" not in out :
                 if "Finished processing dependencies" not in out :
-                    raise Exception("unable to install " + str(self) + "\n" + out + "\n" + err)
+                    raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
                 else :
                     self.fLOG("warning: ``Successfully installed`` or ``install  C`` not found")
+                if "Permission denied" in out :
+                    raise PermissionError("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             ret = True
             
         elif kind == "exe":
