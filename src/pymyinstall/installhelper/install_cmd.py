@@ -269,8 +269,10 @@ class ModuleInstall :
         """
         if self.script is None :
             try :
-                importlib.find_loader(self.ImportName)
-                return True
+                if "." in self.ImportName :
+                    raise ImportError(self.ImportName)
+                r = importlib.find_loader(self.ImportName)
+                return r is not None
             except ImportError as e :
                 txt = "import {0}".format(self.ImportName)
                 try :

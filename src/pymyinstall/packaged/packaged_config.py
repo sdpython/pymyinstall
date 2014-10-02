@@ -51,7 +51,7 @@ def small_installation():
                 #
                 ModuleInstall("pandas",         "exe"),
                 ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
-                ModuleInstall("ipython",        "exe"),
+                ModuleInstall("ipython",        "exe", mname="IPython"),
                 #
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("mpld3",          "pip"),
@@ -106,7 +106,7 @@ def complete_installation():
                 ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
                 ModuleInstall("coverage",       "pip"),
                 ModuleInstall("pytz",           "pip"),
-                ModuleInstall("SQLAlchemy",     "exe"),
+                ModuleInstall("SQLAlchemy",     "exe", mname="sqlalchemy"),
                 ModuleInstall("flask-sqlalchemy","pip",mname="flask.ext.sqlalchemy"),
                 ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
                 ModuleInstall("simplejson",     "exe"),
@@ -114,7 +114,7 @@ def complete_installation():
                 #
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
                 ModuleInstall("python-pptx",    "github", "sdpython"),
-                ModuleInstall("XlsxWriter",     "pip"),
+                ModuleInstall("XlsxWriter",     "pip", mname="xlsxwriter"),
                 # 
                 ModuleInstall("tornado",        "exe"),
                 ModuleInstall("flask",          "pip"),
@@ -140,10 +140,11 @@ def complete_installation():
                 ModuleInstall("scikit-image",   "exe", mname="skimage"),
                 ModuleInstall("patsy",          "pip"),
                 ModuleInstall("statsmodels",    "exe"),  # needs scipy
-                ModuleInstall("ipython",        "exe"),
+                ModuleInstall("ipython",        "exe", mname="IPython"),
                 ModuleInstall("cvxopt",         "exe"),
                 ModuleInstall("pymc",           "exe"),
                 ModuleInstall("PyWavelets",     "exe", mname="pywt"),
+                ModuleInstall("fastcluster",    "exe"),
                 #
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("d3py",           "github", "sdpython"),
@@ -171,7 +172,7 @@ def complete_installation():
                 ModuleInstall("pygame",         "exe"),
                 ModuleInstall("markupsafe",     "pip"),
                 ModuleInstall("requests",       "pip"),
-                ModuleInstall("Kivy",           "exe"),
+                ModuleInstall("Kivy",           "exe", mname="kivy"),
                 #ModuleInstall("PyQt",           "exe", mname="PyQt4"),
                 ModuleInstall("PySide",         "exe"),
                 ModuleInstall("spyder",         "exe", script="spyder.bat"),
@@ -181,10 +182,10 @@ def complete_installation():
                 #
                 ModuleInstall("luigi",          "pip"),
                 #
-                ModuleInstall("basemap",        "exe", mname="mpl_toolkits.basemap"),
                 #ModuleInstall("Cartopy",        "exe", mname="cartopy"),
                 ModuleInstall("smopy",          "pip"),
                 ModuleInstall("folium",         "github", "sdpython"),
+                ModuleInstall("basemap",        "exe", mname="mpl_toolkits.basemap"),
                 #
                 ModuleInstall("sphinx",         "pip"),
                 ModuleInstall("sphinxcontrib-fancybox",     "pip", mname="sphinxcontrib.fancybox"),
