@@ -207,6 +207,9 @@ def complete_installation():
                 ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
                 
                 #
+                ModuleInstall("pattern", "pip") if sys.version_info[0] < 3 else None,   # to read dbase format
+                
+                #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
                 #ModuleInstall("splinter", "github", "cobrateam"),
@@ -222,7 +225,7 @@ def complete_installation():
         mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
         mod.append ( ModuleInstall("winshell",  "pip") )
     
-    return mod
+    return [ _ for _ in mod if _ is not None ]
 
 def installation_cubes():
     """
