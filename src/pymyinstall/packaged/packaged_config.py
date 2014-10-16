@@ -69,6 +69,7 @@ def small_installation():
                 #
                 #
                 ModuleInstall("dbfread",        "pip"),   # to read dbase format
+                ModuleInstall("xmltodict",      "pip"),   # XML to JSON
                 ]
     
     if sys.platform.startswith("win"):
@@ -199,9 +200,11 @@ def complete_installation():
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
                 ModuleInstall("sphinxjp.themes.revealjs",   "github", "sdpython"),
                 
-                
                 #
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
+                ModuleInstall("xmltodict",                  "pip"),   # XML to JSON
+                ModuleInstall("python-linkedin",            "pip", mname="linkedin"),   # access to linkedin
+                ModuleInstall("requests_oauthlib",          "pip"), 
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
                 #ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
                 ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
