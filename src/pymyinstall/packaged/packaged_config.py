@@ -203,7 +203,7 @@ def complete_installation():
                 #
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("xmltodict",                  "pip"),   # XML to JSON
-                ModuleInstall("python-linkedin",            "pip", mname="linkedin"),   # access to linkedin
+                ModuleInstall("python-linkedin",            "github", "sdpython", mname="linkedin"),   # access to linkedin
                 ModuleInstall("requests_oauthlib",          "pip"), 
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
                 #ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
