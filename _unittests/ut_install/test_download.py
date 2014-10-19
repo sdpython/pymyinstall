@@ -41,11 +41,12 @@ class TestDownload (unittest.TestCase):
         files = m.download(temp_folder = temp, unzipFile=True)
         assert len(files)>0
         for _ in files: assert os.path.exists(_)
-        
-        m = ModuleInstall("pip", "exe", fLOG = fLOG)
-        exe = m.download(temp_folder = temp)
-        assert os.path.exists(exe)
-        
+
+        if sys.platform.startswith("win"):
+            m = ModuleInstall("pip", "exe", fLOG = fLOG)
+            exe = m.download(temp_folder = temp)
+            assert os.path.exists(exe)
+
         
 
 

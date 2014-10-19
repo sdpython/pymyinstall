@@ -27,14 +27,16 @@ class TestPandoc (unittest.TestCase):
     def test_pandoc(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold,"temp_pandoc")
-        if not os.path.exists(temp) : os.mkdir(temp)
-        for _ in os.listdir(temp):
-            if ".msi" in _ :
-                os.remove(os.path.join(temp,_))
-        r = install_pandoc (temp_folder = temp, fLOG = fLOG, install = False)
-        assert os.path.exists(r)
         
+        if sys.platform.startswith("win"):
+            temp = os.path.join(fold,"temp_pandoc")
+            if not os.path.exists(temp) : os.mkdir(temp)
+            for _ in os.listdir(temp):
+                if ".msi" in _ :
+                    os.remove(os.path.join(temp,_))
+            r = install_pandoc (temp_folder = temp, fLOG = fLOG, install = False)
+            assert os.path.exists(r)
+            
         
 
 

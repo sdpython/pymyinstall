@@ -33,10 +33,11 @@ class TestDownloadPyQt (unittest.TestCase):
             if os.path.isfile(os.path.join(temp,_)) :
                 os.remove(os.path.join(temp,_))
                 
-        fLOG("install", "pyqt")
-        m = ModuleInstall("PyQt", "exe", mname = "pyqt", fLOG = fLOG)
-        exe = m.download(temp_folder = temp, file_save = os.path.join(temp, "out_page.html"))
-        assert os.path.exists(exe)
+        if sys.platform.startswith("win"):
+            fLOG("install", "pyqt")
+            m = ModuleInstall("PyQt", "exe", mname = "pyqt", fLOG = fLOG)
+            exe = m.download(temp_folder = temp, file_save = os.path.join(temp, "out_page.html"))
+            assert os.path.exists(exe)
         
     def test_regex(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")

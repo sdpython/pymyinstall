@@ -33,10 +33,11 @@ class TestSqliteSpy (unittest.TestCase):
             if os.path.isfile(os.path.join(temp,_)) :
                 os.remove(os.path.join(temp,_))
         
-        fLOG("http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip")
-        exe = install_sqlitespy(temp, fLOG = fLOG)
-        fLOG("exe",exe)
-        assert os.path.exists(exe)
+        if sys.platform.startswith("win"):
+            fLOG("http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip")
+            exe = install_sqlitespy(temp, fLOG = fLOG)
+            fLOG("exe",exe)
+            assert os.path.exists(exe)
         
 #http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481;media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip        
 #http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip
