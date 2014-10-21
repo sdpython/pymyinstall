@@ -207,7 +207,14 @@ def complete_installation():
                 ModuleInstall("requests_oauthlib",          "pip"), 
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
                 #ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
-                ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
+                #ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
+                ModuleInstall("pycontracts",                "pip", mname="contracts"),
+                
+                #
+                ModuleInstall("ecdsa",                      "pip"),
+                ModuleInstall("pycrypto",                   "exe_xd", mname="Crypto"),
+                ModuleInstall("paramiko",                   "pip"),
+                
                 
                 #
                 ModuleInstall("pattern", "pip") if sys.version_info[0] < 3 else None,   # to read dbase format

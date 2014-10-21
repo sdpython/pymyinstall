@@ -189,11 +189,12 @@ class ModuleInstall :
     @endexample
     """
     
-    allowedKind = ["pip", "github", "exe"]
-    expKPage    = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
-    expKPageQt  = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(PyQt4[-0-9.]+-gpl-Py3.3-Qt[-0-9.]+x32.exe)</a>"
-    exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
-    gitexe      = r"C:\Program Files (x86)\Git"
+    allowedKind     = ["pip", "github", "exe", "exe_xd"]
+    expKPage        = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
+    expKPageQt      = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(PyQt4[-0-9.]+-gpl-Py3.3-Qt[-0-9.]+x32.exe)</a>"
+    exeLocation     = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
+    exeLocationXd   = "http://www.xavierdupre.fr/enseignement/setup/"
+    gitexe          = r"C:\Program Files (x86)\Git"
     
     def __init__(self,  name, 
                         kind    = "pip", 
@@ -283,6 +284,24 @@ class ModuleInstall :
         else:
             return os.path.exists(self.Script)
                 
+    def get_exe_url_link_xd(self, file_save = None) :
+        """
+        for windows, get the url of the setup using a webpage
+        
+        @param      file_save   for debug purposes
+        @return                 url, exe name
+        """
+        if self.name == "pycrypto":
+            p = platform.architecture()[0]
+            vers = "{0}.{1}".format ( *(sys.version_info[:2]) )
+            if p == "64bit" : p = "win-amd64"
+            else : p = "win32"
+            exe = "pycrypto-2.6.1.{0}-py{1}.exe".format(p, vers)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
+        else:
+            raise ImportError("unable to get this module {0} from this location {1}".format(self.name, "exe_xd"))
+        
     def get_exe_url_link(self, file_save = None) :
         """
         for windows, get the url of the setup using a webpage
@@ -407,13 +426,13 @@ class ModuleInstall :
             else :
                 return outfile
             
-        elif kind == "exe":
+        elif kind in [ "exe", "exe_xd" ] :
             ver = python_version()
             if ver[0] != "win32":
                 raise Exception("this option is not available on other systems than Windows")
                 #return self.install("pip")
             else :
-                url,exe = self.get_exe_url_link(file_save = file_save)
+                url,exe = self.get_exe_url_link(file_save = file_save) if kind == "exe" else self.get_exe_url_link_xd(file_save = file_save)
 
                 self.fLOG("downloading", exe)
                 req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
@@ -429,6 +448,9 @@ class ModuleInstall :
                 with open(exename,"wb") as f : f.write(text)
                 return exename
                 
+        else :
+            raise ImportError("unknown kind: {0} for module {1}".format(kind, self.name))
+                                
     def Install(self, *l, **p):
         """
         @see me install
@@ -472,6 +494,9 @@ class ModuleInstall :
             if "No distributions matching the version" in out:
                     raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             if "Successfully installed" not in out :
+                if "error: Unable to find vcvarsall.bat" in out :
+                    url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
+                    raise Exception("unable to install " + str(self) + "\nread:\n" + url + "OUT:\n" + out + "\nERR:\n" + err)
                 if "Requirement already satisfied" not in out :
                     raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             ret = True
@@ -494,7 +519,7 @@ class ModuleInstall :
                 if setu[0][0] == setu[1][0]:
                     raise Exception("more than one setup.py for module " + self.name + "\n" + "\n".join(setu))
                 else :
-                    self.fLOG("warning: more than one setup: " + "; ".join(setu))
+                    self.fLOG("warning: more than one setup: " + str(setu))
                     setu = [setu[0][1]]
             setu = os.path.abspath(setu[0])
             
@@ -524,8 +549,18 @@ class ModuleInstall :
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out,err = run_cmd(exename + " /s /qn", wait=True, do_not_log = not log, fLOG = self.fLOG)
                 ret = len(err) == 0
+                
+        elif kind == "exe_xd":
+            ver = python_version()
+            if ver[0] != "win32":
+                ret = self.install("pip")
+            else :
+                exename = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
+                self.fLOG("executing", os.path.split(exename)[-1])
+                out,err = run_cmd(exename + " /s /qn", wait=True, do_not_log = not log, fLOG = self.fLOG)
+                ret = len(err) == 0
         else :
-            raise Exception("unknown kind: {0} for module {1}".format(kind, self.name))
+            raise ImportError("unknown kind: {0} for module {1}".format(kind, self.name))
         
         # at this stage, there is a bug, for some executable, the execution
         # takes longer than expected
