@@ -43,8 +43,10 @@ Functionalities
 Versions
 --------
 
-* **0.7 - 2014/??/??**
-    * **new:** list of modules to manipulate and view data cubes
+* **0.7 - 2014/10/22**
+    * **new:** list of modules to manipulate and view data cubes (not included in the main function as their design might evolve in the future)
+    * **new:** a few modules such as `paramiko <http://www.paramiko.org/>`_ to open a SSH connection
+    * **add:** add a new source for Windows setups: ``exe_xd``
 * **0.6 - 2014/08/26**
     * **fix:** fix an import issue
 * **0.5 - 2014/08/24**
