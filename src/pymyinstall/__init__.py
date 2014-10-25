@@ -13,7 +13,11 @@ open_tool_on_browser()
 @endcode
 """
 
-__version__ = "0.7"
+import sys
+if sys.version_info[0] < 3 :
+    raise ImportError("pymyinstall only works with Python 3")
+
+__version__ = "0.8"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pymyinstall"
 __url__ = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html"
