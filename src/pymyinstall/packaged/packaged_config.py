@@ -70,6 +70,8 @@ def small_installation():
                 #
                 ModuleInstall("dbfread",        "pip"),   # to read dbase format
                 ModuleInstall("xmltodict",      "pip"),   # XML to JSON
+                ModuleInstall("ansiconv",       "pip"),   # shell to plain
+                ModuleInstall("ansi2html",      "pip"),   # shell to HTML
                 ]
     
     if sys.platform.startswith("win"):
@@ -209,6 +211,8 @@ def complete_installation():
                 #ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
                 #ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
                 ModuleInstall("pycontracts",                "pip", mname="contracts"),
+                ModuleInstall("ansiconv",                   "pip"),   # shell to plain
+                ModuleInstall("ansi2html",                  "pip"),   # shell to HTML
                 
                 #
                 ModuleInstall("ecdsa",                      "pip"),
