@@ -226,4 +226,5 @@ out_*
 version.txt
 */sphinxdoc/source/pymyinstall/*
 */sphinxdoc/source/all*.rst
+*/sphinxdoc/source/coverage/*
 README
