@@ -273,4 +273,15 @@ def installation_huge_datasets():
             
     return mod
 
+def installation_azure():
+    """
+    Modules to handle huge datasets on disk, hierarchical datasets.
     
+    """
+    mod = [   
+                ModuleInstall("azure",          "pip"),
+            ]
+            
+    return mod
+
+        
