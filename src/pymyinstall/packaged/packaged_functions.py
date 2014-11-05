@@ -13,6 +13,7 @@ from ..installhelper.install_custom_sqlitespy import install_sqlitespy, add_shor
     
 def datascientist(  folder          = "install", 
                     modules         = True, 
+                    azure           = False,
                     website         = False, 
                     scite           = False,
                     pandoc          = False,
@@ -32,6 +33,7 @@ def datascientist(  folder          = "install",
     @param      additional_path     additional paths to add to ipython
     @param      folder              where to install everything
     @param      modules             go through the list of necessary modules
+    @param      azure               add modules for Azure (Blob Storage)
     @param      website             open website when the routine to install a software is not implemented yet
     @param      scite               install Scite (and modify the config file to remove tab, adjust python path)
     @param      ipython             setup ipython
@@ -64,6 +66,15 @@ def datascientist(  folder          = "install",
     """
     if modules :
         modules = complete_installation() if full else small_installation() 
+        
+        for _ in modules :
+            if _.name in skip or _.mname in skip :
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else :
+                _.install(temp_folder=folder)    
+                
+    if azure:
+        modules = installation_azure() 
         
         for _ in modules :
             if _.name in skip or _.mname in skip :
