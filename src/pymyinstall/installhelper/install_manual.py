@@ -19,7 +19,7 @@ _tools = {
     "doxygen":"http://www.stack.nl/~dimitri/doxygen/download.html",
     # "innosetup":"http://www.jrsoftware.org/isdl.php",
     }
-    
+
 def get_install_list():
     """
     returns the list of tools a developper might need
@@ -30,15 +30,14 @@ def get_install_list():
 def open_tool_on_browser(tool = None):
     """
     open a page on browser for a specific tool
-    
+
     @param      tool        tool name
     """
     global _tools
     if isinstance(tool, str): tool = [ tool ]
     elif tool is None : tool = get_install_list()
     for t in tool :
-        webbrowser.open_new_tab(_tools[ t ]) 
-        
+        webbrowser.open_new_tab(_tools[ t ])
+
 if __name__ == "__main__":
     open_tool_on_browser()
-    

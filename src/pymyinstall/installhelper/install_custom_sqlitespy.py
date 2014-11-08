@@ -12,7 +12,7 @@ from .install_custom import download_page, download_from_sourceforge
 def IsSQLiteSpyInstalled(dest_folder):
     """
     check if SQLiteSpy was already installed
-    
+
     @param      dest_folder     where it was installed
     @return                     boolean
     """
@@ -26,7 +26,7 @@ def install_sqlitespy(temp_folder=".", fLOG = print, install = True):
     """
     Install `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_.
     It does not do it a second time if it is already installed.
-    
+
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
@@ -34,11 +34,11 @@ def install_sqlitespy(temp_folder=".", fLOG = print, install = True):
     """
     if IsSQLiteSpyInstalled(temp_folder):
         return os.path.join(temp_folder,"SQLiteSpy.exe")
-        
+
     link  = "http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index"
     page = download_page(link)
     if sys.platform.startswith("win"):
-        reg = re.compile("href=\\\"(/delphi/lib/exe.*?[.]zip)\\\"") 
+        reg = re.compile("href=\\\"(/delphi/lib/exe.*?[.]zip)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0 :
             raise Exception("unable to find a link on a .zip file on page: " + page)
@@ -55,15 +55,12 @@ def install_sqlitespy(temp_folder=".", fLOG = print, install = True):
         return local
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
-        
+
 def add_shortcut_to_desktop_for_sqlitespy(exe):
     """
     create a shortcut on your desktop
-    
+
     @param      exe        exe location (SQLiteSpy.exe)
     @return                filename
     """
     return add_shortcut_to_desktop(exe, "SQLiteSpy", "SQLiteSpy")
-    
-    
-            

@@ -10,20 +10,20 @@ import sys, re, platform, os, urllib, urllib.request, urllib.error, zipfile,time
 def python_version():
     """
     retrieve the platform and version of this python
-    
+
     @return     tuple, example: ("win32","32bit") or ("win32","64bit")
     """
     return sys.platform, platform.architecture()[0]
 
 def split_cmp_command(cmd, remove_quotes = True) :
     """
-    
+
     splits a command line
 
     @param      cmd             command line
     @param      remove_quotes   True by default
     @return                     list
-        
+
     """
     if isinstance (cmd, str) :
         spl = cmd.split()
@@ -33,18 +33,18 @@ def split_cmp_command(cmd, remove_quotes = True) :
                 res.append(s)
             elif res[-1].startswith('"') and not res[-1].endswith('"') :
                 res[-1] += " " + s
-            else : 
+            else :
                 res.append(s)
         if remove_quotes :
             res = [ _.strip('"') for _ in res ]
         return res
-    else : 
+    else :
         return cmd
-    
-def run_cmd (   cmd, 
-                sin             = "", 
-                shell           = False, 
-                wait            = False, 
+
+def run_cmd (   cmd,
+                sin             = "",
+                shell           = False,
+                wait            = False,
                 log_error       = True,
                 secure          = None,
                 stop_waiting_if = None,
@@ -76,41 +76,41 @@ def run_cmd (   cmd,
         if not do_not_log :
             fLOG("secure=",secure)
         with open(secure,"w") as f : f.write("")
-        add = ">%s" % secure 
+        add = ">%s" % secure
         if isinstance (cmd, str) : cmd += " " + add
         else : cmd.append(add)
-    if not do_not_log : 
+    if not do_not_log :
         fLOG ("execute ", cmd)
-    
+
     if sys.platform.startswith("win") :
-        
-        startupinfo = subprocess.STARTUPINFO()    
+
+        startupinfo = subprocess.STARTUPINFO()
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-        
-        proc = subprocess.Popen (cmd, 
-                                 shell = shell, 
-                                 stdout = subprocess.PIPE, 
+
+        proc = subprocess.Popen (cmd,
+                                 shell = shell,
+                                 stdout = subprocess.PIPE,
                                  stderr = subprocess.PIPE,
                                  startupinfo = startupinfo)
     else :
         proc = subprocess.Popen (split_cmp_command(cmd),
-                                 shell = shell, 
-                                 stdout = subprocess.PIPE, 
+                                 shell = shell,
+                                 stdout = subprocess.PIPE,
                                  stderr = subprocess.PIPE)
-    if wait : 
-    
+    if wait :
+
         out = [ ]
         skip_waiting = False
-        
+
         if secure is None :
             for line in proc.stdout :
-                if not do_not_log : 
+                if not do_not_log :
                     fLOG(line.decode(encoding, errors=encerror).strip("\n"))
                 try :
                     out.append(line.decode(encoding, errors=encerror).strip("\n"))
                 except UnicodeDecodeError as exu :
                     raise Exception("issue with cmd:" + str(cmd) + "\n" + str(exu))
-                if proc.stdout.closed: 
+                if proc.stdout.closed:
                     break
                 if stop_waiting_if is not None and stop_waiting_if(line.decode("utf8", errors=encerror)) :
                     skip_waiting = True
@@ -123,7 +123,7 @@ def run_cmd (   cmd,
                         lines = f.readlines()
                     if len(lines) > len(last) :
                         for line in lines[len(last):] :
-                            if not do_not_log : 
+                            if not do_not_log :
                                 fLOG(line.strip("\n"))
                             out.append(line.strip("\n"))
                         last = lines
@@ -131,25 +131,25 @@ def run_cmd (   cmd,
                         skip_waiting = True
                         break
                 time.sleep(0.1)
-         
+
         if not skip_waiting :
             proc.wait ()
-        
+
         out = "\n".join(out)
         err = proc.stderr.read().decode(encoding, errors=encerror)
-        if not do_not_log : 
+        if not do_not_log :
             fLOG ("end of execution ", cmd)
         if len (err) > 0 and log_error and not do_not_log :
             fLOG ("error (log)\n%s" % err)
         #return bytes.decode (out, errors="ignore"), bytes.decode(err, errors="ignore")
         return out, err
     else :
-        return "",""    
-        
+        return "",""
+
 def unzip_files(zipf, whereTo, fLOG = print):
     """
     unzip files from a zip archive
-    
+
     @param      zipf        archive
     @param      whereTo     destination folder
     @param      fLOG        logging function
@@ -176,36 +176,36 @@ def unzip_files(zipf, whereTo, fLOG = print):
                 files.append (tos)
         elif not info.filename.endswith ("/") :
             files.append (info.filename)
-    return files        
+    return files
 
 class ModuleInstall :
     """
     defines the necessary information for a module
-    
+
     @example(Installation from GitHub)
     @code
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
     @endcode
     @endexample
     """
-    
+
     allowedKind     = ["pip", "github", "exe", "exe_xd"]
     expKPage        = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
     expKPageQt      = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(PyQt4[-0-9.]+-gpl-Py3.3-Qt[-0-9.]+x32.exe)</a>"
     exeLocation     = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd   = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe          = r"C:\Program Files (x86)\Git"
-    
-    def __init__(self,  name, 
-                        kind    = "pip", 
-                        gitrepo = None, 
-                        mname   = None, 
-                        fLOG    = print, 
+
+    def __init__(self,  name,
+                        kind    = "pip",
+                        gitrepo = None,
+                        mname   = None,
+                        fLOG    = print,
                         version = None,
                         script  = None):
         """
         constructor
-        
+
         @param      name            name
         @param      kind            kind of installation (pip, github, exe)
         @param      gitrepo         github repository (example: sdpython)
@@ -214,26 +214,26 @@ class ModuleInstall :
         @param      fLOG            logging function
         @param      script          some extensions are not a module but an application (such as ``spyder``),
                                     the class will check this script is available
-        
+
         exe is only for Windows.
         """
         if kind != "pip" and version is not None :
             raise NotImplementedError("version can be only specified if kind=='pip'")
-        
+
         self.name       = name
         self.kind       = kind
         self.gitrepo    = gitrepo
         self.version    = version
         self.mname      = mname
         self.script     = script
-        
+
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception("unable to interpret kind {0}, it should be in {1}".format(kind, ",".join(ModuleInstall.allowedKind)))
         if self.kind == "github" and self.gitrepo is None :
             raise Exception("gitrepo cannot be empty")
-            
+
         self.fLOG = fLOG
-        
+
     @property
     def Script(self):
         """
@@ -245,7 +245,7 @@ class ModuleInstall :
         else:
             sc = os.path.join(exe, "Scripts", os.path.splitext(self.script)[0])
         return sc
-            
+
     def __str__(self):
         """
         usual
@@ -254,7 +254,7 @@ class ModuleInstall :
             return "{0}:{1}:import {2}".format(self.name,self.kind, self.ImportName)
         else :
             return "{0}:{1}:{2}".format(self.name,self.kind, self.Script)
-    
+
     @property
     def ImportName(self):
         """
@@ -263,7 +263,7 @@ class ModuleInstall :
         if self.mname is not None : return self.mname
         if self.name.startswith("python-"): return self.name[len("python-"):]
         else: return self.name
-        
+
     def IsInstalled(self):
         """
         checks if a module is installed
@@ -283,11 +283,11 @@ class ModuleInstall :
                     return False
         else:
             return os.path.exists(self.Script)
-                
+
     def get_exe_url_link_xd(self, file_save = None) :
         """
         for windows, get the url of the setup using a webpage
-        
+
         @param      file_save   for debug purposes
         @return                 url, exe name
         """
@@ -301,11 +301,11 @@ class ModuleInstall :
             return url, exe
         else:
             raise ImportError("unable to get this module {0} from this location {1}".format(self.name, "exe_xd"))
-        
+
     def get_exe_url_link(self, file_save = None) :
         """
         for windows, get the url of the setup using a webpage
-        
+
         @param      file_save   for debug purposes
         @return                 url, exe name
         """
@@ -321,7 +321,7 @@ class ModuleInstall :
             pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
                                                      "{0}-py{1}.{2}.exe".format(plat,sys.version_info.major,sys.version_info.minor))
         expre = re.compile(pattern)
-        
+
         if "cached_page" not in self.__dict__ :
             page = os.path.join(os.path.split(__file__)[0],"page.html")
             if os.path.exists(page) :
@@ -332,10 +332,10 @@ class ModuleInstall :
                 text = u.read()
                 u.close()
                 text = text.decode("utf8")
-                
+
             text = text.replace("&quot;","'")
             self.cached_page = text
-            
+
         page = self.cached_page.replace("&#8209;","-")
         alls  = expre.findall(page)
         if len(alls) == 0 :
@@ -354,7 +354,7 @@ class ModuleInstall :
                     f.write(page)
             raise Exception("unable to find a single link for " + self.name)
         link = alls[-1]
-        
+
         #def dc(ml,mi):
         #        ot=""
         #        for j in range(0,len(mi)) :
@@ -370,24 +370,24 @@ class ModuleInstall :
             mi=mi.replace('&gt;','>')
             mi=mi.replace('&amp;','&')
             return dl1(ml,mi)
-        
+
         url = dl(eval(link[0]),link[1])
         return ModuleInstall.exeLocation + url, link[-1]
-        
+
     def unzipfiles(self, zipf, whereTo):
         """
         unzip files from a zip archive
-        
+
         @param      zipf        archive
         @param      whereTo     destination folder
         @return                 list of unzipped files
         """
         return unzip_files(zipf, whereTo, self.fLOG)
-        
+
     def download(self, temp_folder = ".", force = False, unzipFile = True, file_save = None):
         """
         download the module without installation
-        
+
         @param      temp_folder     destination
         @param      force           force the installation even if already installed
         @param      unzipFile       if it can be unzipped, it will be (for github, mostly)
@@ -395,11 +395,11 @@ class ModuleInstall :
         @return                     downloaded files
         """
         kind = self.kind
-        
+
         if kind == "pip" :
             # see http://www.pip-installer.org/en/latest/usage.html
             raise Exception("this functionality is not available for packages installed using pip")
-            
+
         elif kind == "github" :
             outfile = os.path.join(temp_folder, self.name + ".zip")
             if force or not os.path.exists(outfile) :
@@ -412,20 +412,20 @@ class ModuleInstall :
                     u.close()
                 except urllib.error.HTTPError as e :
                     raise Exception("unable to get archive from: " + zipurl) from e
-            
-                if not os.path.exists(temp_folder) : 
+
+                if not os.path.exists(temp_folder) :
                     os.makedirs(temp_folder)
                 u = open (outfile, "wb")
                 u.write ( text )
-                u.close()            
-            
+                u.close()
+
             if unzipFile :
                 self.fLOG("unzipping ", outfile)
                 files = self.unzipfiles(outfile, temp_folder)
                 return files
             else :
                 return outfile
-            
+
         elif kind in [ "exe", "exe_xd" ] :
             ver = python_version()
             if ver[0] != "win32":
@@ -439,51 +439,51 @@ class ModuleInstall :
                 u = urllib.request.urlopen(req)
                 text = u.read()
                 u.close()
-                
-                if not os.path.exists(temp_folder) : 
+
+                if not os.path.exists(temp_folder) :
                     os.makedirs(temp_folder)
-                
+
                 exename = os.path.join(temp_folder,exe)
                 self.fLOG("writing", exe)
                 with open(exename,"wb") as f : f.write(text)
                 return exename
-                
+
         else :
             raise ImportError("unknown kind: {0} for module {1}".format(kind, self.name))
-                                
+
     def Install(self, *l, **p):
         """
         @see me install
         """
         self.install (*l,**p)
-        
-    def install(self,   force_kind  = None, 
-                        force       = False, 
-                        temp_folder = ".", 
+
+    def install(self,   force_kind  = None,
+                        force       = False,
+                        temp_folder = ".",
                         log         = False,
                         *options):
         """
         install the package
-        
+
         @param      force_kind      overwrite self.kind
         @param      force           force the installation even if already installed
         @param      temp_folder     folder where to download the setup
         @param      log             display logs or not
         @param      options         other options to add to the command line (see below)
         @return                     boolean
-        
+
         The options mentioned in parameter ``options``
         are described here: `pip install <http://www.pip-installer.org/en/latest/usage.html>`_
         or `setup.py options <http://docs.python.org/3.4/install/>`_ if you
         installing a module from github.
         """
-        
+
         if not force and self.IsInstalled() :
             return True
-            
-        self.fLOG("installation of ", self)        
+
+        self.fLOG("installation of ", self)
         kind = force_kind if force_kind is not None else self.kind
-        
+
         if kind == "pip" :
             pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
             cmd = pip + " install {0}".format(self.name)
@@ -500,7 +500,7 @@ class ModuleInstall :
                 if "Requirement already satisfied" not in out :
                     raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             ret = True
-            
+
         elif kind == "github" :
             # the following code requires admin rights
             #if python_version()[0].startswith("win") and kind == "git" and not os.path.exists(ModuleInstall.gitexe) :
@@ -508,7 +508,7 @@ class ModuleInstall :
             #if python_version()[0].startswith("win"):
             #    os.chdir(os.path.join(ModuleInstall.gitexe,"bin"))
             #cmd = pip + " install -e git://github.com/{0}/{1}-python.git#egg={1}".format(self.gitrepo, self.name)
-            
+
             files = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
             setu = [ _ for _ in files if _.endswith("setup.py") ]
             if len(setu) == 0 :
@@ -522,7 +522,7 @@ class ModuleInstall :
                     self.fLOG("warning: more than one setup: " + str(setu))
                     setu = [setu[0][1]]
             setu = os.path.abspath(setu[0])
-            
+
             self.fLOG("install ", setu[0])
             cwd = os.getcwd()
             os.chdir(os.path.split(setu)[0])
@@ -539,7 +539,7 @@ class ModuleInstall :
                 if "Permission denied" in out :
                     raise PermissionError("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             ret = True
-            
+
         elif kind == "exe":
             ver = python_version()
             if ver[0] != "win32":
@@ -549,7 +549,7 @@ class ModuleInstall :
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out,err = run_cmd(exename + " /s /qn", wait=True, do_not_log = not log, fLOG = self.fLOG)
                 ret = len(err) == 0
-                
+
         elif kind == "exe_xd":
             ver = python_version()
             if ver[0] != "win32":
@@ -561,12 +561,12 @@ class ModuleInstall :
                 ret = len(err) == 0
         else :
             raise ImportError("unknown kind: {0} for module {1}".format(kind, self.name))
-        
+
         # at this stage, there is a bug, for some executable, the execution
         # takes longer than expected
         # if not self.IsInstalled() :
         #    raise Exception("unable to install module: {0}, str:{1}".format(self.name, self))
-                
+
         if ret and self.script is not None:
             if sys.platform.startswith("win"):
                 # here, we have to wait until the script is installed
@@ -577,11 +577,11 @@ class ModuleInstall :
                     if ti > 60 :
                         self.fLOG("wait for the end of execution of ", self.name)
                     ti = 0
-                
+
                 # we add set path=%path%;PYTHONPATH
                 with open(self.Script,"r") as f :
                     full = f.read()
-                
+
                 exe = os.path.split(sys.executable)[0]
                 cmd = "set path=%path%;{0}".format(exe)
                 if cmd not in full :
@@ -593,14 +593,14 @@ class ModuleInstall :
                             f.write(cmd)
                             f.write("\n")
                             f.write(full)
-                    
+
         return ret
-            
-            
+
+
 def add_shortcut_to_desktop_for_module(name):
     """
     add a shortcut on a module which includes a script
-    
+
     @param      name        name of the module
     @return                 shortcut was added or not
     """
@@ -616,4 +616,3 @@ def add_shortcut_to_desktop_for_module(name):
             return False
     else :
         raise NotImplementedError("nothing implemented for module: {0}".format(name))
-                

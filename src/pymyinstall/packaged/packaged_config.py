@@ -8,16 +8,16 @@ from ..installhelper.install_cmd import ModuleInstall
 def small_installation():
     """
     returns a list of modules to work with pandas and ipython.
-    
+
     @return             a list of modules to install
-    
+
     To install them:
     @code
     for _ in complete_installation() :
         _.install(temp_folder="install")
     @endcode
     """
-    mod = [   
+    mod = [
                 ModuleInstall("setuptools",     "exe"),
                 ModuleInstall("pip",            "exe"),
                 #
@@ -36,7 +36,7 @@ def small_installation():
                 #
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
                 ModuleInstall("xlrd",           "pip"),
-                # 
+                #
                 ModuleInstall("tornado",        "exe"),
                 ModuleInstall("pyzmq",          "exe", mname="zmq"),
                 #
@@ -73,27 +73,27 @@ def small_installation():
                 ModuleInstall("ansiconv",       "pip"),   # shell to plain
                 ModuleInstall("ansi2html",      "pip"),   # shell to HTML
                 ]
-    
+
     if sys.platform.startswith("win"):
         mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
         mod.append ( ModuleInstall("winshell",  "pip") )
-    
+
     return mod
 
 def complete_installation():
     """
-    returns a list of modules to install, an rich set 
+    returns a list of modules to install, an rich set
     to work with data and more
-    
+
     @return             a list of modules to install
-    
+
     To install them:
     @code
     for _ in complete_installation() :
         _.install(temp_folder="install")
     @endcode
     """
-    mod = [   
+    mod = [
                 ModuleInstall("virtualenv",     "exe"),
                 ModuleInstall("setuptools",     "exe"),
                 ModuleInstall("pip",            "exe"),
@@ -118,7 +118,7 @@ def complete_installation():
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
                 ModuleInstall("python-pptx",    "github", "sdpython"),
                 ModuleInstall("XlsxWriter",     "pip", mname="xlsxwriter"),
-                # 
+                #
                 ModuleInstall("tornado",        "exe"),
                 ModuleInstall("flask",          "pip"),
                 ModuleInstall("pyzmq",          "exe", mname="zmq"),
@@ -158,7 +158,7 @@ def complete_installation():
                 ModuleInstall("Shapely",        "exe", mname="shapely"),  # exe on Windows to get geos.dll
                 ModuleInstall("vispy",          "pip"),
                 #
-                #ModuleInstall("tessera-client", "github", "sdpython", mname="tessera_client"),  
+                #ModuleInstall("tessera-client", "github", "sdpython", mname="tessera_client"),
                 #ModuleInstall("tessera",        "github", "sdpython"),   # does not really work yet
                 #
                 ModuleInstall("rpy2",           "exe"),
@@ -197,32 +197,32 @@ def complete_installation():
                 ModuleInstall("solar_theme",                "pip"),
                 ModuleInstall("cloud_sptheme",              "pip"),
                 ModuleInstall("sphinx_readable_theme",      "pip"),
-                ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),            
+                ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),
                 ModuleInstall("wild_sphinx_theme",          "pip"),
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
                 ModuleInstall("sphinxjp.themes.revealjs",   "github", "sdpython"),
-                
+
                 #
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("xmltodict",                  "pip"),   # XML to JSON
                 ModuleInstall("python-linkedin",            "github", "sdpython", mname="linkedin"),   # access to linkedin
-                ModuleInstall("requests_oauthlib",          "pip"), 
+                ModuleInstall("requests_oauthlib",          "pip"),
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
                 #ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
                 #ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
                 ModuleInstall("pycontracts",                "pip", mname="contracts"),
                 ModuleInstall("ansiconv",                   "pip"),   # shell to plain
                 ModuleInstall("ansi2html",                  "pip"),   # shell to HTML
-                
+
                 #
                 ModuleInstall("ecdsa",                      "pip"),
                 ModuleInstall("pycrypto",                   "exe_xd", mname="Crypto"),
                 ModuleInstall("paramiko",                   "pip"),
-                
-                
+
+
                 #
                 ModuleInstall("pattern", "pip") if sys.version_info[0] < 3 else None,   # to read dbase format
-                
+
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
@@ -234,11 +234,11 @@ def complete_installation():
                 #ModuleInstall("marisa-trie",      "exe", mname="marisa_trie"),
                 #ModuleInstall("boost_python",   "exe"),
                 ]
-    
+
     if sys.platform.startswith("win"):
         mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
         mod.append ( ModuleInstall("winshell",  "pip") )
-    
+
     return [ _ for _ in mod if _ is not None ]
 
 def installation_cubes():
@@ -247,41 +247,39 @@ def installation_cubes():
     This functions gathers the dependencies for module `cubes <https://github.com/Stiivi/cubes>`_
     (`documentation <http://cubes.databrewery.org/dev/doc/>`_)
     and `cubesviewer <https://github.com/jjmontesl/cubesviewer>`_.
-    
+
     """
-    mod = [   
+    mod = [
                 ModuleInstall("python-dateutil","pip", "dateutil"),
                 ModuleInstall("django",         "pip"),
                 ModuleInstall("pytz",           "pip"),
                 ModuleInstall("jsonschema",     "pip"),
                 ModuleInstall("cubes",          "github", "Stiivi"),  # the PyPI version does not work with Python 3
             ]
-            
+
     return mod
-    
+
 def installation_huge_datasets():
     """
     Modules to handle huge datasets on disk, hierarchical datasets.
-    
+
     """
-    mod = [   
+    mod = [
                 ModuleInstall("h5py",           "exe"),
                 ModuleInstall("blosc",          "exe"),
                 ModuleInstall("numexpr",        "exe"),
                 ModuleInstall("tables",         "exe"),
             ]
-            
+
     return mod
 
 def installation_azure():
     """
     Modules to handle huge datasets on disk, hierarchical datasets.
-    
+
     """
-    mod = [   
+    mod = [
                 ModuleInstall("azure",          "pip"),
             ]
-            
-    return mod
 
-        
+    return mod

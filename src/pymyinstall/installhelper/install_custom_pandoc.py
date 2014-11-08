@@ -22,7 +22,7 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
     """
     Install `pandoc <http://johnmacfarlane.net/pandoc/>`_.
     It does not do it a second time if it is already installed.
-    
+
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
@@ -30,11 +30,11 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
     """
     if IsPandocInstalled():
         return True
-        
+
     link  = "https://github.com/jgm/pandoc/releases/latest"
     page = download_page(link)
     if sys.platform.startswith("win"):
-        reg = re.compile("href=\\\"(.*?[.]msi)\\\"") 
+        reg = re.compile("href=\\\"(.*?[.]msi)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0 :
             raise Exception("unable to find a link on a .msi file on page: " + page)
@@ -53,6 +53,3 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
         return local
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
-        
-    
-            
