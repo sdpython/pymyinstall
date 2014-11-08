@@ -3,7 +3,7 @@
 @file
 @brief Various function to install various python module from various location.
 """
-import sys, re, platform, os, urllib, urllib.request, zipfile,time, subprocess, importlib
+import sys, re, platform, os, urllib, urllib.request, urllib.error, zipfile,time, subprocess, importlib, importlib.util
 
 
 
@@ -272,14 +272,14 @@ class ModuleInstall :
             try :
                 if "." in self.ImportName :
                     raise ImportError(self.ImportName)
-                r = importlib.find_loader(self.ImportName)
+                r = importlib.util.find_spec(self.ImportName)
                 return r is not None
-            except ImportError as e :
+            except ImportError :
                 txt = "import {0}".format(self.ImportName)
                 try :
                     exec(txt)
                     return True
-                except Exception as ee :
+                except Exception :
                     return False
         else:
             return os.path.exists(self.Script)
@@ -355,11 +355,11 @@ class ModuleInstall :
             raise Exception("unable to find a single link for " + self.name)
         link = alls[-1]
         
-        def dc(ml,mi):
-                ot=""
-                for j in range(0,len(mi)) :
-                    ot+= chr(ml[ord(mi[j])-48])
-                return ot
+        #def dc(ml,mi):
+        #        ot=""
+        #        for j in range(0,len(mi)) :
+        #            ot+= chr(ml[ord(mi[j])-48])
+        #        return ot
         def dl1(ml,mi):
             ot=""
             for j in range(0,len(mi)):
@@ -482,7 +482,7 @@ class ModuleInstall :
             return True
             
         self.fLOG("installation of ", self)        
-        kind = force_kind if force_kind != None else self.kind
+        kind = force_kind if force_kind is not None else self.kind
         
         if kind == "pip" :
             pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
@@ -517,7 +517,7 @@ class ModuleInstall :
                 setu = [ (len(_),_) for _ in setu ]
                 setu.sort()
                 if setu[0][0] == setu[1][0]:
-                    raise Exception("more than one setup.py for module " + self.name + "\n" + "\n".join(setu))
+                    raise Exception("more than one setup.py for module " + self.name + "\n" + "\n".join(str(_) for _ in setu))
                 else :
                     self.fLOG("warning: more than one setup: " + str(setu))
                     setu = [setu[0][1]]

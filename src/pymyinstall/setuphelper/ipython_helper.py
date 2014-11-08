@@ -12,7 +12,7 @@ def noLOG(*l, **p) :
     pass
 
 def setup_ipython(  current_path        = None,
-                    additional_path     = [ ],
+                    additional_path     = None,
                     apply_modification  = True,
                     shortcut            = True,
                     browser             = None
@@ -21,7 +21,7 @@ def setup_ipython(  current_path        = None,
     The function applies the modification suggested in this blog post:
     `Travailler avec IPython notebook <http://www.xavierdupre.fr/blog/2014-02-24_nojs.html>`_ (written in French).
     
-    @param      additional_path     additional paths to add to ipython
+    @param      additional_path     additional paths to add to ipython (a list)
     @param      current_path        change the current path when running a notebook
     @param      apply_modification  apply the modification, otherwise, just create the profile
     @param      shortcut            add short cut the desktop
@@ -104,9 +104,10 @@ def setup_ipython(  current_path        = None,
         
         # write ipython_startup.py
         rows= ["import sys"]
-        for p in additional_path :
-            if not os.path.exists(p): raise FileNotFoundError(p)
-            rows.append ( "sys.path.append(r'{0}')".format(p) )
+        if additional_path is not None :
+            for p in additional_path :
+                if not os.path.exists(p): raise FileNotFoundError(p)
+                rows.append ( "sys.path.append(r'{0}')".format(p) )
         s = "\n".join(rows)
         
         if apply_modification :
