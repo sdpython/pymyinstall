@@ -493,13 +493,16 @@ class ModuleInstall :
             out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)
             if "No distributions matching the version" in out:
                     raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
-            if "Successfully installed" not in out :
+            elif "Testing of typecheck-decorator passed without failure." in out:
+                ret = True
+            elif "Successfully installed" not in out :
                 if "error: Unable to find vcvarsall.bat" in out :
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
                     raise Exception("unable to install " + str(self) + "\nread:\n" + url + "OUT:\n" + out + "\nERR:\n" + err)
                 if "Requirement already satisfied" not in out :
                     raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
-            ret = True
+            else:
+                ret = True
 
         elif kind == "github" :
             # the following code requires admin rights
