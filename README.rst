@@ -47,6 +47,7 @@ Versions
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** module `ansiconv <http://pythonhosted.org/ansiconv/>`, `ansi2html <https://pypi.python.org/pypi/ansi2html/>`_
     * **add:** function `installation_azure <pymyinstall.packaged.packaged_config.installation_azure>`_
+    * **fix:** the setup does not need the file ``README.rst`` anymore
 * **0.7 - 2014/10/22**
     * **new:** list of modules to manipulate and view data cubes (not included in the main function as their design might evolve in the future)
     * **new:** a few modules such as `paramiko <http://www.paramiko.org/>`_ to open a SSH connection
