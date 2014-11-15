@@ -38,7 +38,7 @@
 #  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-import sys,os
+import sys,os,io
 from distutils.core import setup
 
 if os.path.exists("version.txt") :
@@ -99,7 +99,7 @@ package_dir  = { k: "src/" + k.replace(".","/") for k in packages }
 package_data = { project_var_name + ".subproject": ["*.tohelp"] }
 
 if os.path.exists(readme):
-    with open(readme) as f : long_description = f.read()
+    with io.open(readme, encoding='utf-8') as f : long_description = f.read()
 else:
     long_description = ""
 
