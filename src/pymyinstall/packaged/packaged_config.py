@@ -202,6 +202,7 @@ def complete_installation():
                 ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),
                 ModuleInstall("wild_sphinx_theme",          "pip"),
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
+                ModuleInstall("sphinxjp.themes.sphinxjp",   "pip"),
                 ModuleInstall("sphinxjp.themes.revealjs",   "github", "sdpython"),
 
                 #
@@ -215,6 +216,7 @@ def complete_installation():
                 ModuleInstall("pycontracts",                "pip", mname="contracts"),
                 ModuleInstall("ansiconv",                   "pip"),   # shell to plain
                 ModuleInstall("ansi2html",                  "pip"),   # shell to HTML
+                ModuleInstall("feedparser",                 "pip"),   # to parse RSS streams
 
                 #
                 ModuleInstall("ecdsa",                      "pip"),
