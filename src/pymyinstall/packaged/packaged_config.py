@@ -72,6 +72,8 @@ def small_installation():
                 ModuleInstall("xmltodict",      "pip"),   # XML to JSON
                 ModuleInstall("ansiconv",       "pip"),   # shell to plain
                 ModuleInstall("ansi2html",      "pip"),   # shell to HTML
+                #
+                ModuleInstall("nodeenv",        "pip"),   # node.js
                 ]
 
     if sys.platform.startswith("win"):
@@ -218,11 +220,10 @@ def complete_installation():
                 ModuleInstall("ecdsa",                      "pip"),
                 ModuleInstall("pycrypto",                   "exe_xd", mname="Crypto"),
                 ModuleInstall("paramiko",                   "pip"),
-
-
                 #
                 ModuleInstall("pattern", "pip") if sys.version_info[0] < 3 else None,   # to read dbase format
-
+                #
+                ModuleInstall("nodeenv",                    "pip"),   # node.js
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),

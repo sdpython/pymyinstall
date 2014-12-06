@@ -17,6 +17,7 @@ _tools = {
     "firefox":"http://www.mozilla.org/firefox/new/",
     "graphviz":"http://www.graphviz.org/",
     "doxygen":"http://www.stack.nl/~dimitri/doxygen/download.html",
+    "nodejs":"http://nodejs.org/download/",
     # "innosetup":"http://www.jrsoftware.org/isdl.php",
     }
 
