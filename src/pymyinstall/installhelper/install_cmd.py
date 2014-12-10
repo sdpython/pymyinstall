@@ -483,6 +483,7 @@ class ModuleInstall :
 
         self.fLOG("installation of ", self)
         kind = force_kind if force_kind is not None else self.kind
+        ret = None
 
         if kind == "pip" :
             pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
@@ -570,7 +571,7 @@ class ModuleInstall :
         # if not self.IsInstalled() :
         #    raise Exception("unable to install module: {0}, str:{1}".format(self.name, self))
 
-        if ret and self.script is not None:
+        if ret is not None and ret and self.script is not None:
             if sys.platform.startswith("win"):
                 # here, we have to wait until the script is installed
                 ti = 0
@@ -598,7 +599,6 @@ class ModuleInstall :
                             f.write(full)
 
         return ret
-
 
 def add_shortcut_to_desktop_for_module(name):
     """
