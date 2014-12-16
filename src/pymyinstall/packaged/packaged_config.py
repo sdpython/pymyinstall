@@ -226,6 +226,7 @@ def complete_installation():
                 ModuleInstall("pattern", "pip") if sys.version_info[0] < 3 else None,   # to read dbase format
                 #
                 ModuleInstall("nodeenv",                    "pip"),   # node.js
+                ModuleInstall("python-jenkins",             "pip", mname="jenkins"),  # for Jenkins
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
