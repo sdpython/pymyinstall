@@ -43,7 +43,7 @@ class TestDownload (unittest.TestCase):
         for _ in files: assert os.path.exists(_)
 
         if sys.platform.startswith("win"):
-            m = ModuleInstall("pip", "exe", fLOG = fLOG)
+            m = ModuleInstall("mlpy", "exe", fLOG = fLOG)
             exe = m.download(temp_folder = temp)
             assert os.path.exists(exe)
 

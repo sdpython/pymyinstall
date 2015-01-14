@@ -18,8 +18,8 @@ def small_installation():
     @endcode
     """
     mod = [
-                ModuleInstall("setuptools",     "exe"),
-                ModuleInstall("pip",            "exe"),
+                #ModuleInstall("setuptools",     "exe"),        # removed with 3.4
+                #ModuleInstall("pip",            "exe"),            # removed with 3.4
                 #
                 ModuleInstall("six",            "pip"),
                 ModuleInstall("lxml",           "exe"),
@@ -97,8 +97,8 @@ def complete_installation():
     """
     mod = [
                 ModuleInstall("virtualenv",     "exe"),
-                ModuleInstall("setuptools",     "exe"),
-                ModuleInstall("pip",            "exe"),
+                #ModuleInstall("setuptools",     "exe"),                # removed with 3.4
+                #ModuleInstall("pip",            "exe"),                    # removed with 3.4
                 ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
                 #
                 ModuleInstall("six",            "pip"),
