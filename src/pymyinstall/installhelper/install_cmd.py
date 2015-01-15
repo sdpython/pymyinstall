@@ -551,7 +551,7 @@ class ModuleInstall :
             else :
                 exename = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
                 self.fLOG("executing", os.path.split(exename)[-1])
-                out,err = run_cmd(exename + " /s /qn", wait=True, do_not_log = not log, fLOG = self.fLOG)
+                out,err = run_cmd(exename + " /s /qn /SILENT", wait=True, do_not_log = not log, fLOG = self.fLOG)
                 ret = len(err) == 0
 
         elif kind == "exe_xd":
