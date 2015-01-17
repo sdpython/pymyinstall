@@ -1,7 +1,8 @@
-﻿.. _l-README:
+﻿
+.. _l-README:
 
-README
-======
+README / Changes
+================
 
    
    
@@ -52,11 +53,4 @@ Versions
     * **new:** list of modules to manipulate and view data cubes (not included in the main function as their design might evolve in the future)
     * **new:** a few modules such as `paramiko <http://www.paramiko.org/>`_ to open a SSH connection
     * **add:** add a new source for Windows setups: ``exe_xd``
-* **0.6 - 2014/08/26**
-    * **fix:** fix an import issue
-* **0.5 - 2014/08/24**
-    * **new:** a couple of new modules in the full set of modules
-    * **new:** a subset of modules to work with ipython
-    * **add:** add parameter ``skip`` to function :func:`datascientist <pymyinstall.packaged.packaged_functions.datascientist>`
-
 
