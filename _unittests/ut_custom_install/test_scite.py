@@ -35,10 +35,11 @@ class TestScite (unittest.TestCase):
                 os.remove(f)
 
         tt = os.path.join(temp, "wscite")
-        for _ in os.listdir(tt):
-            f = os.path.join(tt,_)
-            if os.path.isfile(f) :
-                os.remove(f)
+        if os.path.exists(tt):
+            for _ in os.listdir(tt):
+                f = os.path.join(tt,_)
+                if os.path.isfile(f) :
+                    os.remove(f)
 
         if sys.platform.startswith("win"):
             r = install_scite(temp, fLOG = fLOG)
