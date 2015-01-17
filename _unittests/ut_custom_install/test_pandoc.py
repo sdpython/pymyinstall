@@ -34,7 +34,7 @@ class TestPandoc (unittest.TestCase):
             for _ in os.listdir(temp):
                 if ".msi" in _ :
                     os.remove(os.path.join(temp,_))
-            r = install_pandoc (temp_folder = temp, fLOG = fLOG, install = False)
+            r = install_pandoc (temp_folder = temp, fLOG = fLOG, install = False, force_download=True)
             assert os.path.exists(r)
 
 

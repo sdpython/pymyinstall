@@ -18,7 +18,7 @@ def IsPandocInstalled():
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
 
-def install_pandoc(temp_folder=".", fLOG = print, install = True):
+def install_pandoc(temp_folder=".", fLOG = print, install = True, force_download=False):
     """
     Install `pandoc <http://johnmacfarlane.net/pandoc/>`_.
     It does not do it a second time if it is already installed.
@@ -26,9 +26,11 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
+    @param      force_download  force the downloading of pandoc
     @return                     temporary file
     """
-    if IsPandocInstalled():
+    bb = IsPandocInstalled()
+    if bb and not force_download:
         return True
 
     link  = "https://github.com/jgm/pandoc/releases/latest"
@@ -48,7 +50,7 @@ def install_pandoc(temp_folder=".", fLOG = print, install = True):
         outfile = os.path.join( temp_folder, full.split("/")[-1])
         fLOG("download ", full)
         local = download_file(full, outfile)
-        if install :
+        if install and not bb:
             run_cmd("msiexec /i " + local,fLOG=fLOG,wait=True)
         return local
     else:
