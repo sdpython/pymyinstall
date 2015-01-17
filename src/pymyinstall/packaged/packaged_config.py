@@ -44,6 +44,7 @@ def small_installation():
                 ModuleInstall("Cython",         "exe"),
                 ModuleInstall("numpy",          "exe"),
                 ModuleInstall("matplotlib",     "exe"),
+                ModuleInstall("seaborn",        "pip"),
                 ModuleInstall("scipy",          "exe"),
                 ModuleInstall("statsmodels",    "exe"),  # needs scipy
                 ModuleInstall("networkx",       "exe"),
@@ -132,6 +133,7 @@ def complete_installation():
                 ModuleInstall("blaze",          "exe"),
                 ModuleInstall("scipy",          "exe"),
                 ModuleInstall("matplotlib",     "exe"),
+                ModuleInstall("seaborn",        "pip"),
                 ModuleInstall("tables",         "exe", mname="tables"),
                 ModuleInstall("sympy",          "pip"),
                 ModuleInstall("gmpy2",          "exe"),
