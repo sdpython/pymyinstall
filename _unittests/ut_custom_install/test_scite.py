@@ -30,13 +30,22 @@ class TestScite (unittest.TestCase):
         temp = os.path.join(fold,"temp_scite")
         if not os.path.exists(temp) : os.mkdir(temp)
         for _ in os.listdir(temp):
-            if os.path.isfile(os.path.join(temp,_)) :
-                os.remove(os.path.join(temp,_))
+            f = os.path.join(temp,_)
+            if os.path.isfile(f) :
+                os.remove(f)
+
+        tt = os.path.join(temp, "wscite")
+        for _ in os.listdir(tt):
+            f = os.path.join(tt,_)
+            if os.path.isfile(f) :
+                os.remove(f)
 
         if sys.platform.startswith("win"):
-            exe = os.path.abspath(install_scite(temp, fLOG = fLOG))
+            r = install_scite(temp, fLOG = fLOG)
+            exe = os.path.abspath(r)
             assert os.path.exists(exe)
             conf = exe.replace("SciTE.exe", "python.properties")
+            fLOG(conf)
             assert os.path.exists(conf)
             with open(conf,"r") as f : content = f.read().lower()
             if sys.executable.lower() not in content and \
