@@ -20,7 +20,8 @@ except ImportError :
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.install_cmd import run_cmd, ModuleInstall
+from src.pymyinstall.installhelper.module_install import ModuleInstall
+from src.pymyinstall.installhelper.install_cmd_helper import run_cmd
 from pyquickhelper import fLOG
 
 class TestInstall (unittest.TestCase):

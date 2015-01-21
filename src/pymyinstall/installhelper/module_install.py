@@ -5,178 +5,7 @@
 """
 import sys, re, platform, os, urllib, urllib.request, urllib.error, zipfile,time, subprocess, importlib, importlib.util
 
-
-
-def python_version():
-    """
-    retrieve the platform and version of this python
-
-    @return     tuple, example: ("win32","32bit") or ("win32","64bit")
-    """
-    return sys.platform, platform.architecture()[0]
-
-def split_cmp_command(cmd, remove_quotes = True) :
-    """
-
-    splits a command line
-
-    @param      cmd             command line
-    @param      remove_quotes   True by default
-    @return                     list
-
-    """
-    if isinstance (cmd, str) :
-        spl = cmd.split()
-        res = []
-        for s in spl :
-            if len(res) == 0 :
-                res.append(s)
-            elif res[-1].startswith('"') and not res[-1].endswith('"') :
-                res[-1] += " " + s
-            else :
-                res.append(s)
-        if remove_quotes :
-            res = [ _.strip('"') for _ in res ]
-        return res
-    else :
-        return cmd
-
-def run_cmd (   cmd,
-                sin             = "",
-                shell           = False,
-                wait            = False,
-                log_error       = True,
-                secure          = None,
-                stop_waiting_if = None,
-                do_not_log      = False,
-                encerror        = "ignore",
-                encoding        = "utf8",
-                fLOG            = print) :
-    """
-    run a command line and wait for the result
-    @param      cmd                 command line
-    @param      sin                 sin, what must be written on the standard input
-    @param      shell               if True, cmd is a shell command (and no command window is opened)
-    @param      wait                call proc.wait
-    @param      log_error           if log_error, call fLOG (error)
-    @param      secure              if secure is a string (a valid filename), the function stores the output in a file
-                                    and reads it continuously
-    @param      stop_waiting_if     the function stops waiting if some condition is fulfilled.
-                                    The function received the last line from the logs.
-    @param      do_not_log          do not log the output
-    @param      encerror            encoding errors (ignore by default) while converting the output into a string
-    @param      encoding            encoding of the output
-    @param      fLOG                logging function
-    @return                         content of stdout, stderr  (only if wait is True)
-    """
-    if sin is not None and sin != "" :
-        raise NotImplementedError("sin is not used")
-
-    if secure is not None :
-        if not do_not_log :
-            fLOG("secure=",secure)
-        with open(secure,"w") as f : f.write("")
-        add = ">%s" % secure
-        if isinstance (cmd, str) : cmd += " " + add
-        else : cmd.append(add)
-    if not do_not_log :
-        fLOG ("execute ", cmd)
-
-    if sys.platform.startswith("win") :
-
-        startupinfo = subprocess.STARTUPINFO()
-        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-
-        proc = subprocess.Popen (cmd,
-                                 shell = shell,
-                                 stdout = subprocess.PIPE,
-                                 stderr = subprocess.PIPE,
-                                 startupinfo = startupinfo)
-    else :
-        proc = subprocess.Popen (split_cmp_command(cmd),
-                                 shell = shell,
-                                 stdout = subprocess.PIPE,
-                                 stderr = subprocess.PIPE)
-    if wait :
-
-        out = [ ]
-        skip_waiting = False
-
-        if secure is None :
-            for line in proc.stdout :
-                if not do_not_log :
-                    fLOG(line.decode(encoding, errors=encerror).strip("\n"))
-                try :
-                    out.append(line.decode(encoding, errors=encerror).strip("\n"))
-                except UnicodeDecodeError as exu :
-                    raise Exception("issue with cmd:" + str(cmd) + "\n" + str(exu))
-                if proc.stdout.closed:
-                    break
-                if stop_waiting_if is not None and stop_waiting_if(line.decode("utf8", errors=encerror)) :
-                    skip_waiting = True
-                    break
-        else :
-            last = []
-            while proc.poll() is None :
-                if os.path.exists (secure) :
-                    with open(secure,"r") as f :
-                        lines = f.readlines()
-                    if len(lines) > len(last) :
-                        for line in lines[len(last):] :
-                            if not do_not_log :
-                                fLOG(line.strip("\n"))
-                            out.append(line.strip("\n"))
-                        last = lines
-                    if stop_waiting_if is not None and len(last)>0 and stop_waiting_if(last[-1]) :
-                        skip_waiting = True
-                        break
-                time.sleep(0.1)
-
-        if not skip_waiting :
-            proc.wait ()
-
-        out = "\n".join(out)
-        err = proc.stderr.read().decode(encoding, errors=encerror)
-        if not do_not_log :
-            fLOG ("end of execution ", cmd)
-        if len (err) > 0 and log_error and not do_not_log :
-            fLOG ("error (log)\n%s" % err)
-        #return bytes.decode (out, errors="ignore"), bytes.decode(err, errors="ignore")
-        return out, err
-    else :
-        return "",""
-
-def unzip_files(zipf, whereTo, fLOG = print):
-    """
-    unzip files from a zip archive
-
-    @param      zipf        archive
-    @param      whereTo     destination folder
-    @param      fLOG        logging function
-    @return                 list of unzipped files
-    """
-    file = zipfile.ZipFile (zipf, "r")
-    files = []
-    for info in file.infolist () :
-        if not os.path.exists (info.filename) :
-            data = file.read (info.filename)
-            tos = os.path.join (whereTo, info.filename)
-            if not os.path.exists (tos) :
-                finalfolder = os.path.split(tos)[0]
-                if not os.path.exists (finalfolder) :
-                    fLOG ("    creating folder ", finalfolder)
-                    os.makedirs (finalfolder)
-                if not info.filename.endswith ("/") :
-                    u = open (tos, "wb")
-                    u.write ( data )
-                    u.close()
-                    files.append (tos)
-                    fLOG ("    unzipped ", info.filename, " to ", tos)
-            elif not tos.endswith("/") :
-                files.append (tos)
-        elif not info.filename.endswith ("/") :
-            files.append (info.filename)
-    return files
+from .install_cmd_helper import python_version, split_cmp_command, run_cmd, unzip_files, add_shortcut_to_desktop_for_module
 
 class ModuleInstall :
     """
@@ -189,9 +18,9 @@ class ModuleInstall :
     @endexample
     """
 
-    allowedKind     = ["pip", "github", "exe", "exe_xd"]
+    allowedKind     = ["pip", "github", "exe", "exe_xd", "wheel"]
     expKPage        = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
-    expKPageQt      = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(PyQt4[-0-9.]+-gpl-Py3.3-Qt[-0-9.]+x32.exe)</a>"
+    expKPageWhl     = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?-cp33-none-win32.whl)</a>"
     exeLocation     = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd   = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe          = r"C:\Program Files (x86)\Git"
@@ -207,7 +36,7 @@ class ModuleInstall :
         constructor
 
         @param      name            name
-        @param      kind            kind of installation (pip, github, exe)
+        @param      kind            kind of installation (*pip*, *github*, *exe*, *wheel*)
         @param      gitrepo         github repository (example: sdpython)
         @param      mname           sometimes, the module name is different from its official name
         @param      version         to install a specific version (None for the latest)
@@ -284,39 +113,42 @@ class ModuleInstall :
         else:
             return os.path.exists(self.Script)
 
-    def get_exe_url_link_xd(self, file_save = None) :
+    def get_exewheel_url_link_xd(self, file_save = None, wheel = False) :
         """
         for windows, get the url of the setup using a webpage
 
         @param      file_save   for debug purposes
+        @param      wheel       returns the wheel file or the exe file
         @return                 url, exe name
         """
+        ext = "exe" if not wheel else "whl"
         if self.name == "pycrypto":
             p = platform.architecture()[0]
             vers = "{0}.{1}".format ( *(sys.version_info[:2]) )
             if p == "64bit" : p = "win-amd64"
             else : p = "win32"
-            exe = "pycrypto-2.6.1.{0}-py{1}.exe".format(p, vers)
+            exe = "pycrypto-2.6.1.{0}-py{1}.{2}".format(p, vers, ext)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
         else:
-            raise ImportError("unable to get this module {0} from this location {1}".format(self.name, "exe_xd"))
+            raise ImportError("unable to get this module {0} from this location {1}".format(self.name, "exe_xd or wheel_xd"))
 
-    def get_exe_url_link(self, file_save = None) :
+    def get_exewheel_url_link(self, file_save = None, wheel = False) :
         """
         for windows, get the url of the setup using a webpage
 
         @param      file_save   for debug purposes
+        @param      wheel       returns the wheel file or the exe file
         @return                 url, exe name
         """
         version = python_version()
         plat    = version[0] if version[0] == "win32" else version[1]
         if version[1] == '64bit' and version[0] == 'win32' : plat = "amd64"
-        if self.name.lower() == "pyqt":
-            pattern = ModuleInstall.expKPageQt.replace("Py3.3",
-                                                       "Py{0}.{1}".format(sys.version_info.major,sys.version_info.minor))
-            if plat == "amd64":
-                pattern = pattern.replace("x32","x64")
+
+        if wheel:
+            plat = "32" if plat=="win32" else "_amd64"
+            pattern = ModuleInstall.expKPageWhl.replace("-cp33-none-win32.whl",
+                                                        "-cp{1}{2}-none-win{0}.whl".format(plat,sys.version_info.major,sys.version_info.minor))
         else :
             pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
                                                      "{0}-py{1}.{2}.exe".format(plat,sys.version_info.major,sys.version_info.minor))
@@ -348,6 +180,7 @@ class ModuleInstall :
             alls = [ _ for _ in alls if _[-1].startswith(self.name + "4") ]
         else :
             alls = [ _ for _ in alls if _[-1].startswith(self.name + "-") ]
+            
         if len(alls) == 0 :
             if file_save is not None :
                 with open(file_save, "w", encoding="utf8") as f:
@@ -399,6 +232,28 @@ class ModuleInstall :
         if kind == "pip" :
             # see http://www.pip-installer.org/en/latest/usage.html
             raise Exception("this functionality is not available for packages installed using pip")
+            
+        elif kind == "wheel":
+            ver = python_version()
+            if ver[0] != "win32":
+                # nothing to download, you should use pip
+                return None
+            else :
+                url,whl = self.get_exewheel_url_link(file_save = file_save, wheel=True)
+
+                self.fLOG("downloading", whl)
+                req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
+                u = urllib.request.urlopen(req)
+                text = u.read()
+                u.close()
+
+                if not os.path.exists(temp_folder) :
+                    os.makedirs(temp_folder)
+
+                whlname = os.path.join(temp_folder,whl)
+                self.fLOG("writing", whl)
+                with open(whlname,"wb") as f : f.write(text)
+                return whlname
 
         elif kind == "github" :
             outfile = os.path.join(temp_folder, self.name + ".zip")
@@ -430,9 +285,8 @@ class ModuleInstall :
             ver = python_version()
             if ver[0] != "win32":
                 raise Exception("this option is not available on other systems than Windows")
-                #return self.install("pip")
             else :
-                url,exe = self.get_exe_url_link(file_save = file_save) if kind == "exe" else self.get_exe_url_link_xd(file_save = file_save)
+                url,exe = self.get_exewheel_url_link(file_save = file_save) if kind == "exe" else self.get_exewheel_url_link_xd(file_save = file_save)
 
                 self.fLOG("downloading", exe)
                 req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
@@ -488,6 +342,33 @@ class ModuleInstall :
         if kind == "pip" :
             pip = os.path.join(os.path.split(sys.executable)[0],"Scripts","pip.exe")
             cmd = pip + " install {0}".format(self.name)
+            if self.version is not None : cmd += "=={0}".format(self.version)
+            if len(options) > 0 :
+                cmd += " " + " ".join(*options)
+            out, err = run_cmd(cmd, wait = True, do_not_log = not log, fLOG = self.fLOG)
+            if "No distributions matching the version" in out:
+                    raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
+            elif "Testing of typecheck-decorator passed without failure." in out:
+                ret = True
+            elif "Successfully installed" not in out :
+                if "error: Unable to find vcvarsall.bat" in out :
+                    url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
+                    raise Exception("unable to install " + str(self) + "\nread:\n" + url + "OUT:\n" + out + "\nERR:\n" + err)
+                if "Requirement already satisfied" not in out :
+                    raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
+            else:
+                ret = True
+                
+        elif kind == "wheel":
+            ver = python_version()
+            if ver[0] != "win32":
+                ret = self.install("wheel")
+                whlname = self.name
+            else :
+                whlname = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
+                self.fLOG("installing", os.path.split(whlname)[-1])
+                
+            cmd = pip + " install {0}".format(whlname)
             if self.version is not None : cmd += "=={0}".format(self.version)
             if len(options) > 0 :
                 cmd += " " + " ".join(*options)
@@ -599,23 +480,3 @@ class ModuleInstall :
                             f.write(full)
 
         return ret
-
-def add_shortcut_to_desktop_for_module(name):
-    """
-    add a shortcut on a module which includes a script
-
-    @param      name        name of the module
-    @return                 shortcut was added or not
-    """
-    if name == "spyder":
-        from .link_shortcuts import add_shortcut_to_desktop, suffix
-        md = ModuleInstall("spyder", "exe", script="spyder.bat")
-        sc = md.Script
-        if os.path.exists(sc):
-            ver = suffix()
-            r = add_shortcut_to_desktop(sc, name + "." + ver,name + "." + ver)
-            return os.path.exists(r)
-        else :
-            return False
-    else :
-        raise NotImplementedError("nothing implemented for module: {0}".format(name))

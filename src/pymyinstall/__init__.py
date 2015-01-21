@@ -36,7 +36,8 @@ def check( log = False):
     """
     return True
 
-from .installhelper.install_cmd import run_cmd, ModuleInstall, unzip_files, add_shortcut_to_desktop_for_module
+from .installhelper.install_cmd_helper import run_cmd, unzip_files, add_shortcut_to_desktop_for_module
+from .installhelper.module_install import ModuleInstall
 from .installhelper.install_custom import download_from_sourceforge, download_file, download_page
 from .installhelper.install_manual import get_install_list, open_tool_on_browser
 from .setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython

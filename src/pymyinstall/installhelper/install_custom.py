@@ -5,7 +5,7 @@
 """
 import os, urllib, urllib.error, urllib.request
 
-from .install_cmd import ModuleInstall
+from .module_install import ModuleInstall
 
 def download_page(url):
     """

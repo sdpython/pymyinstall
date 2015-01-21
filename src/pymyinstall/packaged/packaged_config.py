@@ -3,7 +3,7 @@
 @brief Defines different set of modules to install.
 """
 import sys
-from ..installhelper.install_cmd import ModuleInstall
+from ..installhelper.module_install import ModuleInstall
 
 def small_installation():
     """

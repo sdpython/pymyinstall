@@ -5,7 +5,7 @@
 """
 import sys, re, os
 
-from .install_cmd import run_cmd
+from .install_cmd_helper import run_cmd
 from .install_custom import download_page, download_file
 
 def IsPandocInstalled():

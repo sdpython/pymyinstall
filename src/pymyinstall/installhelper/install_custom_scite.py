@@ -5,7 +5,7 @@
 """
 import sys, re, os
 
-from .install_cmd import unzip_files
+from .install_cmd_helper import unzip_files
 from .install_custom import download_page, download_from_sourceforge
 from .link_shortcuts import add_shortcut_to_desktop, suffix
 
