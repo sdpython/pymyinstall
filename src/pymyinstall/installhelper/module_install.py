@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 @brief Various function to install various python module from various location.
@@ -148,10 +147,12 @@ class ModuleInstall :
         if wheel:
             plat = "32" if plat=="win32" else "_amd64"
             pattern = ModuleInstall.expKPageWhl.replace("-cp33-none-win32.whl",
-                                                        "-cp{1}{2}-none-win{0}.whl".format(plat,sys.version_info.major,sys.version_info.minor))
+                                                        "-((cp{1}{2})|(py2[.]py3))-none-((win{0})|(any)).whl".format(plat,sys.version_info.major,sys.version_info.minor))
+            ind = 3
         else :
             pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
                                                      "{0}-py{1}.{2}.exe".format(plat,sys.version_info.major,sys.version_info.minor))
+            ind = -1
         expre = re.compile(pattern)
 
         if "cached_page" not in self.__dict__ :
@@ -174,18 +175,23 @@ class ModuleInstall :
             if file_save is not None :
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
-            raise Exception("unable to find regex with pattern: " + pattern)
+            raise Exception("module " + self.name + ", unable to find regex with pattern: " + pattern)
+            
+        if ind==-1:
+            ind = len(alls[0])-1
+        end = ind+1
+        memoalls = alls
 
         if self.name == "PyQt":
-            alls = [ _ for _ in alls if _[-1].startswith(self.name + "4") ]
+            alls = [ _[:end] for _ in alls if _[ind].startswith(self.name + "4") ]
         else :
-            alls = [ _ for _ in alls if _[-1].startswith(self.name + "-") ]
+            alls = [ _[:end] for _ in alls if _[ind].startswith(self.name + "-") ]
             
         if len(alls) == 0 :
             if file_save is not None :
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
-            raise Exception("unable to find a single link for " + self.name)
+            raise Exception("unable to find a single link for " + self.name + "\npattern:" + pattern + "\nEX:\n" + str(memoalls[0]))
         link = alls[-1]
 
         #def dc(ml,mi):
@@ -240,19 +246,21 @@ class ModuleInstall :
                 return None
             else :
                 url,whl = self.get_exewheel_url_link(file_save = file_save, wheel=True)
-
-                self.fLOG("downloading", whl)
-                req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
-                u = urllib.request.urlopen(req)
-                text = u.read()
-                u.close()
-
-                if not os.path.exists(temp_folder) :
-                    os.makedirs(temp_folder)
-
                 whlname = os.path.join(temp_folder,whl)
-                self.fLOG("writing", whl)
-                with open(whlname,"wb") as f : f.write(text)
+
+                if force or not os.path.exists(whlname):
+
+                    self.fLOG("downloading", whl)
+                    req = urllib.request.Request(url, headers= { 'User-agent': 'Mozilla/5.0' })
+                    u = urllib.request.urlopen(req)
+                    text = u.read()
+                    u.close()
+
+                    if not os.path.exists(temp_folder) :
+                        os.makedirs(temp_folder)
+
+                    self.fLOG("writing", whl)
+                    with open(whlname,"wb") as f : f.write(text)
                 return whlname
 
         elif kind == "github" :

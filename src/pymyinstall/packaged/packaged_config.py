@@ -18,11 +18,11 @@ def small_installation():
     @endcode
     """
     mod = [
-                #ModuleInstall("setuptools",     "exe"),        # removed with 3.4
-                #ModuleInstall("pip",            "exe"),            # removed with 3.4
+                #ModuleInstall("setuptools",     "wheel"),        # removed with 3.4
+                #ModuleInstall("pip",            "wheel"),            # removed with 3.4
                 #
                 ModuleInstall("six",            "pip"),
-                ModuleInstall("lxml",           "exe"),
+                ModuleInstall("lxml",           "wheel"),
                 ModuleInstall("jinja2",         "pip"),
                 ModuleInstall("pygments",       "pip"),
                 ModuleInstall("pyparsing",      "pip"),
@@ -37,22 +37,22 @@ def small_installation():
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
                 ModuleInstall("xlrd",           "pip"),
                 #
-                ModuleInstall("tornado",        "exe"),
-                ModuleInstall("pyzmq",          "exe", mname="zmq"),
+                ModuleInstall("tornado",        "wheel"),
+                ModuleInstall("pyzmq",          "wheel", mname="zmq"),
                 #
-                ModuleInstall("pycparser",      "exe"),
-                ModuleInstall("Cython",         "exe"),
-                ModuleInstall("numpy",          "exe"),
-                ModuleInstall("matplotlib",     "exe"),
+                ModuleInstall("pycparser",      "wheel"),
+                ModuleInstall("Cython",         "wheel"),
+                ModuleInstall("numpy",          "wheel"),
+                ModuleInstall("matplotlib",     "wheel"),
                 ModuleInstall("seaborn",        "pip"),
-                ModuleInstall("scipy",          "exe"),
-                ModuleInstall("statsmodels",    "exe"),  # needs scipy
-                ModuleInstall("networkx",       "exe"),
+                ModuleInstall("scipy",          "wheel"),
+                ModuleInstall("statsmodels",    "wheel"),  # needs scipy
+                ModuleInstall("networkx",       "wheel"),
                 ModuleInstall("graphviz",       "pip"),
                 #
-                ModuleInstall("pandas",         "exe"),
-                ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
-                ModuleInstall("ipython",        "exe", mname="IPython"),
+                ModuleInstall("pandas",         "wheel"),
+                ModuleInstall("scikit-learn",   "wheel", mname="sklearn"),
+                ModuleInstall("ipython",        "wheel", mname="IPython"),
                 #
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("mpld3",          "pip"),
@@ -64,9 +64,9 @@ def small_installation():
                 ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
                 ModuleInstall("requests",       "pip"),
-                #ModuleInstall("PyQt",           "exe", mname="PyQt4"),
-                ModuleInstall("PySide",         "exe"),
-                ModuleInstall("spyder",         "exe", script="spyder.bat"),
+                #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
+                ModuleInstall("PySide",         "wheel"),
+                ModuleInstall("spyder",         "wheel", script="spyder.bat"),
                 #
                 #
                 ModuleInstall("dbfread",        "pip"),   # to read dbase format
@@ -78,7 +78,7 @@ def small_installation():
                 ]
 
     if sys.platform.startswith("win"):
-        mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
+        mod.append ( ModuleInstall("pywin32",   "wheel", mname = "win32com") )
         mod.append ( ModuleInstall("winshell",  "pip") )
 
     return mod
@@ -97,13 +97,13 @@ def complete_installation():
     @endcode
     """
     mod = [
-                ModuleInstall("virtualenv",     "exe"),
-                #ModuleInstall("setuptools",     "exe"),                # removed with 3.4
-                #ModuleInstall("pip",            "exe"),                    # removed with 3.4
+                ModuleInstall("virtualenv",     "wheel"),
+                #ModuleInstall("setuptools",     "wheel"),                # removed with 3.4
+                #ModuleInstall("pip",            "wheel"),                    # removed with 3.4
                 ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
                 #
                 ModuleInstall("six",            "pip"),
-                ModuleInstall("lxml",           "exe"),
+                ModuleInstall("lxml",           "wheel"),
                 ModuleInstall("jinja2",         "pip"),
                 ModuleInstall("pygments",       "pip"),
                 ModuleInstall("pyparsing",      "pip"),
@@ -112,46 +112,46 @@ def complete_installation():
                 ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
                 ModuleInstall("coverage",       "pip"),
                 ModuleInstall("pytz",           "pip"),
-                ModuleInstall("SQLAlchemy",     "exe", mname="sqlalchemy"),
+                ModuleInstall("SQLAlchemy",     "wheel", mname="sqlalchemy"),
                 ModuleInstall("flask-sqlalchemy","pip",mname="flask.ext.sqlalchemy"),
                 ModuleInstall("pyreadline",     "pip",mname="pyreadline"),
-                ModuleInstall("simplejson",     "exe"),
+                ModuleInstall("simplejson",     "wheel"),
                 ModuleInstall("husl",           "pip"),
                 #
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
                 ModuleInstall("python-pptx",    "github", "sdpython"),
                 ModuleInstall("XlsxWriter",     "pip", mname="xlsxwriter"),
                 #
-                ModuleInstall("tornado",        "exe"),
+                ModuleInstall("tornado",        "wheel"),
                 ModuleInstall("flask",          "pip"),
-                ModuleInstall("pyzmq",          "exe", mname="zmq"),
+                ModuleInstall("pyzmq",          "wheel", mname="zmq"),
                 #
-                ModuleInstall("pycparser",      "exe"),
-                ModuleInstall("Cython",         "exe"),
-                ModuleInstall("cffi",           "exe"),
-                ModuleInstall("numpy",          "exe"),
-                ModuleInstall("blaze",          "exe"),
-                ModuleInstall("scipy",          "exe"),
-                ModuleInstall("matplotlib",     "exe"),
+                ModuleInstall("pycparser",      "wheel"),
+                ModuleInstall("Cython",         "wheel"),
+                ModuleInstall("cffi",           "wheel"),
+                ModuleInstall("numpy",          "wheel"),
+                ModuleInstall("blaze",          "wheel"),
+                ModuleInstall("scipy",          "wheel"),
+                ModuleInstall("matplotlib",     "wheel"),
                 ModuleInstall("seaborn",        "pip"),
-                ModuleInstall("tables",         "exe", mname="tables"),
+                ModuleInstall("tables",         "wheel", mname="tables"),
                 ModuleInstall("sympy",          "pip"),
-                ModuleInstall("gmpy2",          "exe"),
-                ModuleInstall("llvmpy",         "exe", mname="llvm"),
-                ModuleInstall("numba",          "exe"),
-                ModuleInstall("networkx",       "exe"),
+                ModuleInstall("gmpy2",          "wheel"),
+                ModuleInstall("llvmpy",         "wheel", mname="llvm"),
+                ModuleInstall("numba",          "wheel"),
+                ModuleInstall("networkx",       "wheel"),
                 ModuleInstall("graphviz",       "pip"),
                 #
-                ModuleInstall("pandas",         "exe"),
-                ModuleInstall("scikit-learn",   "exe", mname="sklearn"),
-                ModuleInstall("scikit-image",   "exe", mname="skimage"),
+                ModuleInstall("pandas",         "wheel"),
+                ModuleInstall("scikit-learn",   "wheel", mname="sklearn"),
+                ModuleInstall("scikit-image",   "wheel", mname="skimage"),
                 ModuleInstall("patsy",          "pip"),
-                ModuleInstall("statsmodels",    "exe"),  # needs scipy
-                ModuleInstall("ipython",        "exe", mname="IPython"),
-                ModuleInstall("cvxopt",         "exe"),
-                ModuleInstall("pymc",           "exe"),
-                ModuleInstall("PyWavelets",     "exe", mname="pywt"),
-                ModuleInstall("fastcluster",    "exe"),
+                ModuleInstall("statsmodels",    "wheel"),  # needs scipy
+                ModuleInstall("ipython",        "wheel", mname="IPython"),
+                ModuleInstall("cvxopt",         "wheel"),
+                ModuleInstall("pymc",           "wheel"),
+                ModuleInstall("PyWavelets",     "wheel", mname="pywt"),
+                ModuleInstall("fastcluster",    "wheel"),
                 #
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("d3py",           "github", "sdpython"),
@@ -159,14 +159,14 @@ def complete_installation():
                 ModuleInstall("prettyplotlib",  "pip"),
                 ModuleInstall("bokeh",          "pip"),
                 ModuleInstall("pyshp",          "pip", mname="shapefile"), # needed by shapely
-                ModuleInstall("Shapely",        "exe", mname="shapely"),  # exe on Windows to get geos.dll
+                ModuleInstall("Shapely",        "wheel", mname="shapely"),  # exe on Windows to get geos.dll
                 ModuleInstall("vispy",          "pip"),
                 #
                 #ModuleInstall("tessera-client", "github", "sdpython", mname="tessera_client"),
                 #ModuleInstall("tessera",        "github", "sdpython"),   # does not really work yet
                 #
-                ModuleInstall("rpy2",           "exe"),
-                #ModuleInstall("pythonnet",      "exe", mname="clr"),  # included in ensae_teaching_cs
+                ModuleInstall("rpy2",           "wheel"),
+                #ModuleInstall("pythonnet",      "wheel", mname="clr"),  # included in ensae_teaching_cs
                 #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
@@ -175,24 +175,24 @@ def complete_installation():
                 ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
                 ModuleInstall("selenium",       "pip"),
-                ModuleInstall("Pillow",         "exe", mname = "PIL"),
-                ModuleInstall("pygame",         "exe"),
+                ModuleInstall("Pillow",         "wheel", mname = "PIL"),
+                ModuleInstall("pygame",         "wheel"),
                 ModuleInstall("markupsafe",     "pip"),
                 ModuleInstall("requests",       "pip"),
-                ModuleInstall("Kivy",           "exe", mname="kivy"),
-                #ModuleInstall("PyQt",           "exe", mname="PyQt4"),
-                ModuleInstall("PySide",         "exe"),
-                ModuleInstall("spyder",         "exe", script="spyder.bat"),
+                ModuleInstall("Kivy",           "wheel", mname="kivy"),
+                #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
+                ModuleInstall("PySide",         "wheel"),
+                ModuleInstall("spyder",         "wheel", script="spyder.bat"),
                 #
                 ModuleInstall("py4j",           "pip"),
-                ModuleInstall("python-igraph",  "exe", mname="igraph"),
+                ModuleInstall("python-igraph",  "wheel", mname="igraph"),
                 #
                 ModuleInstall("luigi",          "pip"),
                 #
-                #ModuleInstall("Cartopy",        "exe", mname="cartopy"),
+                #ModuleInstall("Cartopy",        "wheel", mname="cartopy"),
                 ModuleInstall("smopy",          "pip"),
                 ModuleInstall("folium",         "github", "sdpython"),
-                ModuleInstall("basemap",        "exe", mname="mpl_toolkits.basemap"),
+                ModuleInstall("basemap",        "wheel", mname="mpl_toolkits.basemap"),
                 #
                 ModuleInstall("sphinx",         "pip"),
                 ModuleInstall("sphinxcontrib-fancybox",     "pip", mname="sphinxcontrib.fancybox"),
@@ -235,14 +235,14 @@ def complete_installation():
                 #ModuleInstall("splinter", "github", "cobrateam"),
                 #ModuleInstall("pypdf2", "pip"),
                 #ModuleInstall("pdfminer", "pip"),
-                #ModuleInstall("liblinear",      "exe"),
-                #ModuleInstall("lsqfit",      "exe"),
-                #ModuleInstall("marisa-trie",      "exe", mname="marisa_trie"),
-                #ModuleInstall("boost_python",   "exe"),
+                #ModuleInstall("liblinear",      "wheel"),
+                #ModuleInstall("lsqfit",      "wheel"),
+                #ModuleInstall("marisa-trie",      "wheel", mname="marisa_trie"),
+                #ModuleInstall("boost_python",   "wheel"),
                 ]
 
     if sys.platform.startswith("win"):
-        mod.append ( ModuleInstall("pywin32",   "exe", mname = "win32com") )
+        mod.append ( ModuleInstall("pywin32",   "wheel", mname = "win32com") )
         mod.append ( ModuleInstall("winshell",  "pip") )
 
     return [ _ for _ in mod if _ is not None ]
@@ -271,10 +271,10 @@ def installation_huge_datasets():
 
     """
     mod = [
-                ModuleInstall("h5py",           "exe"),
-                ModuleInstall("blosc",          "exe"),
-                ModuleInstall("numexpr",        "exe"),
-                ModuleInstall("tables",         "exe"),
+                ModuleInstall("h5py",           "wheel"),
+                ModuleInstall("blosc",          "wheel"),
+                ModuleInstall("numexpr",        "wheel"),
+                ModuleInstall("tables",         "wheel"),
             ]
 
     return mod
