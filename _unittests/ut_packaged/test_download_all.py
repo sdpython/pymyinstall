@@ -42,17 +42,17 @@ class TestDownloadAll (unittest.TestCase):
             if os.path.isfile(os.path.join(temp,_)) :
                 #os.remove(os.path.join(temp,_))
                 pass
-                
+
         pack = complete_installation()
         assert len(pack) > 0
-        
+
         for m in pack[1:]:
             if m.kind != "pip":
                 fLOG(m.name)
                 m.fLOG=fLOG
                 m.download(temp_folder=temp)
-        
-        
+
+
 
 
 

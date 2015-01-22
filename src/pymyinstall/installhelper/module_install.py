@@ -176,7 +176,7 @@ class ModuleInstall :
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
             raise Exception("module " + self.name + ", unable to find regex with pattern: " + pattern)
-            
+
         if ind==-1:
             ind = len(alls[0])-1
         end = ind+1
@@ -185,8 +185,9 @@ class ModuleInstall :
         if self.name == "PyQt":
             alls = [ _[:end] for _ in alls if _[ind].startswith(self.name + "4") ]
         else :
-            alls = [ _[:end] for _ in alls if _[ind].startswith(self.name + "-") ]
-            
+            white = self.name.replace("-","_")
+            alls = [ _[:end] for _ in alls if _[ind].startswith(self.name + "-") or _[ind].startswith(white + "-") ]
+
         if len(alls) == 0 :
             if file_save is not None :
                 with open(file_save, "w", encoding="utf8") as f:
@@ -238,7 +239,7 @@ class ModuleInstall :
         if kind == "pip" :
             # see http://www.pip-installer.org/en/latest/usage.html
             raise Exception("this functionality is not available for packages installed using pip")
-            
+
         elif kind == "wheel":
             ver = python_version()
             if ver[0] != "win32":
@@ -366,7 +367,7 @@ class ModuleInstall :
                     raise Exception("unable to install " + str(self) + "\nOUT:\n" + out + "\nERR:\n" + err)
             else:
                 ret = True
-                
+
         elif kind == "wheel":
             ver = python_version()
             if ver[0] != "win32":
@@ -375,7 +376,7 @@ class ModuleInstall :
             else :
                 whlname = self.download(temp_folder=temp_folder, force = force, unzipFile = True)
                 self.fLOG("installing", os.path.split(whlname)[-1])
-                
+
             cmd = pip + " install {0}".format(whlname)
             if self.version is not None : cmd += "=={0}".format(self.version)
             if len(options) > 0 :
