@@ -147,7 +147,7 @@ class ModuleInstall :
         if wheel:
             plat = "32" if plat=="win32" else "_amd64"
             pattern = ModuleInstall.expKPageWhl.replace("-cp33-none-win32.whl",
-                                                        "-((cp{1}{2})|(py2[.]py3))-none-((win{0})|(any)).whl".format(plat,sys.version_info.major,sys.version_info.minor))
+                                                        "-((cp{1}{2})|(py2[.]py3)|(py33[.]py34))-none-((win{0})|(any)).whl".format(plat,sys.version_info.major,sys.version_info.minor))
             ind = 3
         else :
             pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
