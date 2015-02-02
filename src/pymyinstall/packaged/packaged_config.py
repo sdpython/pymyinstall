@@ -229,6 +229,7 @@ def complete_installation():
                 #
                 ModuleInstall("nodeenv",                    "pip"),   # node.js
                 ModuleInstall("python-jenkins",             "pip", mname="jenkins"),  # for Jenkins
+                ModuleInstall("psutil",                     "wheel"),  # 
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
