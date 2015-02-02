@@ -60,6 +60,7 @@ def small_installation():
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
                 ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
+                ModuleInstall("runipy",         "pip"),
                 #
                 ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
@@ -171,6 +172,7 @@ def complete_installation():
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
                 ModuleInstall("pyensae",        "github", "sdpython"),
                 ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
+                ModuleInstall("runipy",         "pip"),
                 #
                 ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
                 #
