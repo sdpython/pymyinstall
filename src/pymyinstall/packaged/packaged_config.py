@@ -7,7 +7,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def small_installation():
     """
-    returns a list of modules to work with pandas and ipython.
+    returns a list of modules to work with pandas, numpy, ipython, ...
 
     @return             a list of modules to install
 
@@ -52,7 +52,7 @@ def small_installation():
                 #
                 ModuleInstall("pandas",         "wheel"),
                 ModuleInstall("scikit-learn",   "wheel", mname="sklearn"),
-                ModuleInstall("ipython",        "wheel", mname="IPython"),
+                ModuleInstall("ipython",        "pip", mname="IPython"),
                 #
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("mpld3",          "pip"),
@@ -134,7 +134,7 @@ def complete_installation():
                 ModuleInstall("scipy",          "wheel"),
                 ModuleInstall("matplotlib",     "wheel"),
                 ModuleInstall("seaborn",        "pip"),
-                ModuleInstall("tables",         "wheel", mname="tables"),
+                ModuleInstall("tables",         "wheel"),
                 ModuleInstall("sympy",          "pip"),
                 ModuleInstall("gmpy2",          "wheel"),
                 ModuleInstall("llvmpy",         "wheel", mname="llvm"),
@@ -229,7 +229,7 @@ def complete_installation():
                 #
                 ModuleInstall("nodeenv",                    "pip"),   # node.js
                 ModuleInstall("python-jenkins",             "pip", mname="jenkins"),  # for Jenkins
-                ModuleInstall("psutil",                     "wheel"),  # 
+                ModuleInstall("psutil",                     "wheel"),  #
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
