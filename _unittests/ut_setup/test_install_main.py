@@ -3,7 +3,6 @@
 """
 
 import sys, os, unittest
-import dynd
 
 try :
     import src
