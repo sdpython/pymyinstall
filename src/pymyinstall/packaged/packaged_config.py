@@ -79,7 +79,6 @@ def small_installation():
                 #
                 # 2015-02-05
                 #
-                ModuleInstall("conda",                      "wheel"),  # to install packages with conda
                 ]
 
     if sys.platform.startswith("win"):
@@ -164,6 +163,8 @@ def complete_installation():
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("d3py",           "github", "sdpython"),
                 ModuleInstall("mpld3",          "pip"),
+                ModuleInstall("pycosat",        "wheel"),
+                ModuleInstall("PyYAML",         "wheel", mname="yaml"),
                 ModuleInstall("bokeh",          "pip"),
                 ModuleInstall("pyshp",          "pip", mname="shapefile"), # needed by shapely
                 ModuleInstall("Shapely",        "wheel", mname="shapely"),  # exe on Windows to get geos.dll
