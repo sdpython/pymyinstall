@@ -125,6 +125,7 @@ def complete_installation():
                 ModuleInstall("husl",           "pip"),
                 #
                 ModuleInstall("openpyxl",       "pip", version="1.8.6"),
+                ModuleInstall("xlrd",           "pip"),
                 ModuleInstall("python-pptx",    "github", "sdpython"),
                 ModuleInstall("XlsxWriter",     "pip", mname="xlsxwriter"),
                 #
