@@ -75,6 +75,10 @@ def small_installation():
                 ModuleInstall("ansi2html",      "pip"),   # shell to HTML
                 #
                 ModuleInstall("nodeenv",        "pip"),   # node.js
+                #
+                # 2015-02-05
+                #
+                ModuleInstall("conda",                      "wheel"),  # to install packages with conda
                 ]
 
     if sys.platform.startswith("win"):
@@ -130,7 +134,8 @@ def complete_installation():
                 ModuleInstall("Cython",         "wheel"),
                 ModuleInstall("cffi",           "wheel"),
                 ModuleInstall("numpy",          "wheel"),
-                ModuleInstall("blaze",          "wheel"),
+                ModuleInstall("dynd",           "wheel"),  # see https://binstar.org/blaze/blaze
+                ModuleInstall("blaze",          "wheel"),  # see https://binstar.org/blaze/blaze
                 ModuleInstall("scipy",          "wheel"),
                 ModuleInstall("matplotlib",     "wheel"),
                 ModuleInstall("seaborn",        "pip"),
@@ -156,7 +161,7 @@ def complete_installation():
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("d3py",           "github", "sdpython"),
                 ModuleInstall("mpld3",          "pip"),
-                ModuleInstall("prettyplotlib",  "pip"),
+                ModuleInstall("prettyplotlib",  "wheel"),
                 ModuleInstall("bokeh",          "pip"),
                 ModuleInstall("pyshp",          "pip", mname="shapefile"), # needed by shapely
                 ModuleInstall("Shapely",        "wheel", mname="shapely"),  # exe on Windows to get geos.dll
@@ -231,14 +236,32 @@ def complete_installation():
                 ModuleInstall("python-jenkins",             "pip", mname="jenkins"),  # for Jenkins
                 ModuleInstall("psutil",                     "wheel"),  #
                 #
+                # 2015-02-05
+                #
+                ModuleInstall("autopy3",                    "wheel", mname="autopy3"),  # simulate events
+                ModuleInstall("bigfloat",                   "wheel"),  # large double
+                ModuleInstall("cvxpy",                      "wheel"),  # convex optimization, depends on CVXOPT
+                ModuleInstall("blist",                      "wheel"),  # better large list
+                ModuleInstall("conda",                      "wheel"),  # to install packages with conda
+                ModuleInstall("kabuki",                     "pip"),    # Bayesian
+                ModuleInstall("HDDM",                       "wheel", mname="hddm"),  # Bayesian
+                ModuleInstall("libLAS",                     "wheel", mname="liblas"),
+                ModuleInstall("liblinear",                  "wheel"),
+                ModuleInstall("libsvm",                     "wheel"),
+                ModuleInstall("marisa_trie",                "wheel"),
+                ModuleInstall("mlpy",                       "wheel"),
+                ModuleInstall("pygit2",                     "wheel"),
+                ModuleInstall("pymongo",                    "wheel"),
+                ModuleInstall("PyOpenGL",                   "wheel", mname="OpenGL"),
+                ModuleInstall("Theano",                     "wheel", mname="theano"),
+                ModuleInstall("pyqtgraph",                  "pip"),
+                #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
                 #ModuleInstall("splinter", "github", "cobrateam"),
                 #ModuleInstall("pypdf2", "pip"),
                 #ModuleInstall("pdfminer", "pip"),
-                #ModuleInstall("liblinear",      "wheel"),
                 #ModuleInstall("lsqfit",      "wheel"),
-                #ModuleInstall("marisa-trie",      "wheel", mname="marisa_trie"),
                 #ModuleInstall("boost_python",   "wheel"),
                 ]
 

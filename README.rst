@@ -46,6 +46,7 @@ Versions
 
 * **0.9 - 2015/??/??**
     * **add:** install wheel packages
+    * **add:** add new packages to the list of a datascientist
 * **0.8 - 2014/11/09**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** module `ansiconv <http://pythonhosted.org/ansiconv/>`, `ansi2html <https://pypi.python.org/pypi/ansi2html/>`_
