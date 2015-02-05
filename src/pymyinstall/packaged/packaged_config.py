@@ -161,7 +161,6 @@ def complete_installation():
                 ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("d3py",           "github", "sdpython"),
                 ModuleInstall("mpld3",          "pip"),
-                ModuleInstall("prettyplotlib",  "wheel"),
                 ModuleInstall("bokeh",          "pip"),
                 ModuleInstall("pyshp",          "pip", mname="shapefile"), # needed by shapely
                 ModuleInstall("Shapely",        "wheel", mname="shapely"),  # exe on Windows to get geos.dll
