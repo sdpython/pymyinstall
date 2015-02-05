@@ -61,7 +61,8 @@ def small_installation():
                 ModuleInstall("pyensae",        "github", "sdpython"),
                 ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
                 #
-                ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
+                ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
+                ModuleInstall("decorator", "pip"),
                 #
                 ModuleInstall("requests",       "pip"),
                 #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
@@ -105,6 +106,7 @@ def complete_installation():
                 #ModuleInstall("setuptools",     "wheel"),                # removed with 3.4
                 #ModuleInstall("pip",            "wheel"),                    # removed with 3.4
                 ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
+                ModuleInstall("decorator",      "pip"),
                 #
                 ModuleInstall("six",            "pip"),
                 ModuleInstall("lxml",           "wheel"),
@@ -176,8 +178,6 @@ def complete_installation():
                 ModuleInstall("pyensae",        "github", "sdpython"),
                 ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
                 #
-                ModuleInstall("typecheck-decorator", "github", "prechelt", mname="typecheck"),
-                #
                 ModuleInstall("selenium",       "pip"),
                 ModuleInstall("Pillow",         "wheel", mname = "PIL"),
                 ModuleInstall("pygame",         "wheel"),
@@ -218,7 +218,6 @@ def complete_installation():
                 ModuleInstall("requests_oauthlib",          "pip"),
                 ModuleInstall("antlr4-python3-runtime",     "pip", mname="antlr4"),
                 #ModuleInstall("unqlite",                    "pip"),   # key/value store (NoSQL)
-                #ModuleInstall("typecheck-decorator",        "pip", mname="typecheck"),
                 ModuleInstall("pycontracts",                "pip", mname="contracts"),
                 ModuleInstall("ansiconv",                   "pip"),   # shell to plain
                 ModuleInstall("ansi2html",                  "pip"),   # shell to HTML
