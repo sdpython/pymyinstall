@@ -201,7 +201,7 @@ def complete_installation():
                 ModuleInstall("basemap",        "wheel", mname="mpl_toolkits.basemap"),
                 #
                 ModuleInstall("sphinx",         "pip"),
-                ModuleInstall("sphinxcontrib-fancybox",     "pip", mname="sphinxcontrib.fancybox"),
+                ModuleInstall("sphinxcontrib-images",     "pip", mname="sphinxcontrib.images"),
                 ModuleInstall("sphinx_rtd_theme",           "pip"),
                 ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
                 ModuleInstall("solar_theme",                "pip"),
