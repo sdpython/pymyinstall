@@ -312,20 +312,20 @@ def installation_azure():
             ]
 
     return mod
-
-def extend_anacondata():
+    
+def extend_anaconda():
     """
     list of modules to complete anaconda
     """
-
-    mod = [
+    
+    mod = [ 
         ModuleInstall("cvxopt",                     "wheel"),
         ModuleInstall("goslate",                    "pip"),
         ModuleInstall("dbfread",                    "pip"),
         ModuleInstall("rpy2",                       "wheel"),
         ModuleInstall("mpld3",                      "pip"),
         #
-        ModuleInstall("coverage",                   "pip"),
+        ModuleInstall("coverage",                   "pip"),        
         ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme",           "pip"),
         ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
@@ -338,22 +338,22 @@ def extend_anacondata():
         ModuleInstall("sphinxjp.themes.sphinxjp",   "pip"),
         ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
     ]
-
+    
     return mod
-
+    
 def extend_winpython():
     """
     list of modules to complete anaconda
     """
-
-    mod = [
+    
+    mod = [ 
         ModuleInstall("cvxopt",                     "wheel"),
         ModuleInstall("goslate",                    "pip"),
         ModuleInstall("dbfread",                    "pip"),
         ModuleInstall("bokeh",                      "pip"),
         ModuleInstall("pywin32",                    "wheel", mname = "win32com"),
         #
-        ModuleInstall("coverage",                   "pip"),
+        ModuleInstall("coverage",                   "pip"),        
         ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme",           "pip"),
         ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
@@ -366,5 +366,6 @@ def extend_winpython():
         ModuleInstall("sphinxjp.themes.sphinxjp",   "pip"),
         ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
     ]
-
+    
     return mod
+    

@@ -18,7 +18,7 @@ pymyinstall documentation
 Description
 -----------
 
-This module contains functions which install a module from pipy, using pip or from a setup::
+This module contains functions which install a module from pipy, using pip or from a wheel package::
 
     from pymyinstall import datascientist
     datascientist("install", full = True)
@@ -29,7 +29,19 @@ Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+    
+This module also contains functions to extend distributions 
+`Anaconda <http://continuum.io/downloads#py34>`_, `WinPython <https://winpython.github.io/>`_
+for the notebooks proposed at `ENSAE - Programmation <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_ (French)::
 
+    from pymyinstall import extend_anaconda, process_installation
+    process_installation(extend_anaconda())
+    
+Or::
+
+    from pymyinstall import extend_winpython, process_installation
+    process_installation(extend_winpython())
+    
 If it fails for any reason - lost connexion -, run again the function with the same
 parameter. If it fails again, you can skip the modules by filling the parameter ``skip``.
 Some modules might fail on Windows due to Permission error, in that case, you should go to the

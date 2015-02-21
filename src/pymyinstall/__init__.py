@@ -47,4 +47,4 @@ from .installhelper.install_custom_scite import install_scite, add_shortcut_to_d
 from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
 from .packaged.packaged_functions import datascientist, ds_small, ds_complete, ds_cubes, ds_huge, process_installation
 from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_cubes
-from .packaged.packaged_config import installation_azure, extend_winpython, extend_anacondata
+from .packaged.packaged_config import installation_azure, extend_winpython, extend_anaconda
