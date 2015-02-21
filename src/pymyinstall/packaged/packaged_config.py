@@ -69,6 +69,7 @@ def small_installation():
                 ModuleInstall("spyder",         "wheel", script="spyder.bat"),
                 #
                 #
+                ModuleInstall("ggplot",         "pip"),
                 ModuleInstall("goslate",        "pip"),
                 ModuleInstall("dbfread",        "pip"),   # to read dbase format
                 ModuleInstall("xmltodict",      "pip"),   # XML to JSON
@@ -213,6 +214,7 @@ def complete_installation():
                 ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
 
                 #
+                ModuleInstall("ggplot",                     "pip"),
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
                 ModuleInstall("xmltodict",                  "pip"),   # XML to JSON
                 ModuleInstall("python-linkedin",            "github", "sdpython", mname="linkedin"),   # access to linkedin
