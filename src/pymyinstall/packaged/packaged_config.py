@@ -326,7 +326,11 @@ def extend_anaconda():
         ModuleInstall("dbfread",                    "pip"),
         ModuleInstall("rpy2",                       "wheel"),
         ModuleInstall("mpld3",                      "pip"),
+        ModuleInstall("folium",                     "pip"),
+        ModuleInstall("graphviz",                   "pip"),
+        ModuleInstall("numexpr",                    "wheel"),
         #
+        ModuleInstall("wheel",                      "pip"),
         ModuleInstall("coverage",                   "pip"),
         ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme",           "pip"),
@@ -354,6 +358,8 @@ def extend_winpython():
         ModuleInstall("dbfread",                    "pip"),
         ModuleInstall("bokeh",                      "pip"),
         ModuleInstall("pywin32",                    "wheel", mname = "win32com"),
+        ModuleInstall("folium",                     "pip"),
+        ModuleInstall("graphviz",                   "pip"),
         #
         ModuleInstall("coverage",                   "pip"),
         ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
