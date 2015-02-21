@@ -165,6 +165,22 @@ elif "unittests" in sys.argv:
     if not os.path.exists(run_unit):
         raise FileNotFoundError("the folder should contain run_unittests.py")
 
+    def skip_function(name,code):
+        if "skip this test for regular run" in code: return True
+        return False
+
+    pyquickhelper = import_pyquickhelper()
+    pyquickhelper.main_wrapper_tests(run_unit, add_coverage=True, skip_function = skip_function)
+
+elif "unittests_all" in sys.argv:
+
+    if not os.path.exists("_unittests"):
+        raise FileNotFoundError("you must get the source from GitHub to run the unittests")
+
+    run_unit = os.path.join("_unittests", "run_unittests.py")
+    if not os.path.exists(run_unit):
+        raise FileNotFoundError("the folder should contain run_unittests.py")
+
     pyquickhelper = import_pyquickhelper()
     pyquickhelper.main_wrapper_tests(run_unit, add_coverage=True)
 

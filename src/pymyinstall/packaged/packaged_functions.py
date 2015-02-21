@@ -160,8 +160,8 @@ def ds_huge(    folder          = "install",
                 fLOG("skip module", _.name, " import name:", _.mname)
             else :
                 _.install(temp_folder=folder)
-                
-def process_installation(  
+
+def process_installation(
                     modules_list,
                     folder          = "install",
                     fLOG            = print,

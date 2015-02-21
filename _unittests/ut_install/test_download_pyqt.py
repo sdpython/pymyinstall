@@ -1,5 +1,7 @@
 """
 @brief      test log(time=20s)
+
+skip this test for regular run
 """
 
 import sys, os, unittest, re
