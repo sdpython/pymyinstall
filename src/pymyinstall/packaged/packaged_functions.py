@@ -160,3 +160,78 @@ def ds_huge(    folder          = "install",
                 fLOG("skip module", _.name, " import name:", _.mname)
             else :
                 _.install(temp_folder=folder)
+
+def process_installation(
+                    module_list,
+                    folder          = "install",
+                    fLOG            = print,
+                    skip            = None,
+                    full            = False,
+                    additional_path = None):
+    """
+
+    install all modules within a list
+
+    @param      module_list         install a list of modules
+    @param      additional_path     additional paths to add to ipython (a list)
+    @param      folder              where to install everything
+    @param      skip                to skip some modules if they fail (a list)
+    @param      full                if True, install many modules including the ones used to generate the documentation
+    @param      fLOG                logging function
+
+    @example(Extend Anaconda)
+    @code
+    from pymyinstall import process_installation, extend_anaconda
+    datascientist ("install", full=True)
+    @endcode
+    @endexample
+
+    If you run this command from the python interpreter::
+
+        >>> from pymyinstall import datascientist
+        >>> datascientist ("install")
+
+    The module installed with pip do not appear in the list of available modules
+    unless the python interpreter is started again. The best way is to run those two commands
+    from the Python IDLE and to restart the interpreter before a second run.
+    The second time, the function does not install again what was already installed.
+
+    """
+    if modules :
+        modules = complete_installation() if full else small_installation()
+
+        for _ in modules :
+            if skip is not None and (_.name in skip or _.mname in skip) :
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else :
+                _.install(temp_folder=folder)
+
+    if azure:
+        modules = installation_azure()
+
+        for _ in modules :
+            if skip is not None and (_.name in skip or _.mname in skip) :
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else :
+                _.install(temp_folder=folder)
+
+    if website :
+        get_install_list()
+
+    if scite :
+        scite = install_scite(folder, fLOG = fLOG)
+
+    if pandoc :
+        install_pandoc(folder, fLOG = fLOG)
+
+    if ipython :
+        setup_ipython(ipython_folder, additional_path=additional_path, browser = browser)
+
+    if sqlitespy:
+        sqlitespy_file = install_sqlitespy(folder, fLOG = fLOG)
+
+    if shortcuts :
+        if ipython  : add_shortcut_to_desktop_for_ipython(ipython_folder)
+        if scite    : add_shortcut_to_desktop_for_scite(scite)
+        if ipython  : add_shortcut_to_desktop_for_module("spyder")
+        if sqlitespy: add_shortcut_to_desktop_for_sqlitespy(sqlitespy_file)

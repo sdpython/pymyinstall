@@ -54,7 +54,6 @@ def small_installation():
                 ModuleInstall("scikit-learn",   "wheel", mname="sklearn"),
                 ModuleInstall("ipython",        "pip", mname="IPython"),
                 #
-                ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("mpld3",          "pip"),
                 #
                 ModuleInstall("pyquickhelper",  "github", "sdpython"),
@@ -70,6 +69,7 @@ def small_installation():
                 ModuleInstall("spyder",         "wheel", script="spyder.bat"),
                 #
                 #
+                ModuleInstall("goslate",        "pip"),
                 ModuleInstall("dbfread",        "pip"),   # to read dbase format
                 ModuleInstall("xmltodict",      "pip"),   # XML to JSON
                 ModuleInstall("ansiconv",       "pip"),   # shell to plain
@@ -160,7 +160,6 @@ def complete_installation():
                 ModuleInstall("PyWavelets",     "wheel", mname="pywt"),
                 ModuleInstall("fastcluster",    "wheel"),
                 #
-                ModuleInstall("ggplot",         "pip"),  # needs statsmodels
                 ModuleInstall("d3py",           "github", "sdpython"),
                 ModuleInstall("mpld3",          "pip"),
                 ModuleInstall("pycosat",        "wheel"),
@@ -211,7 +210,7 @@ def complete_installation():
                 ModuleInstall("wild_sphinx_theme",          "pip"),
                 ModuleInstall("sphinx_bootstrap_theme",     "pip"),
                 ModuleInstall("sphinxjp.themes.sphinxjp",   "pip"),
-                ModuleInstall("sphinxjp.themes.revealjs",   "github", "sdpython"),
+                ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
 
                 #
                 ModuleInstall("dbfread",                    "pip"),   # to read dbase format
@@ -311,5 +310,61 @@ def installation_azure():
     mod = [
                 ModuleInstall("azure",          "pip"),
             ]
+
+    return mod
+
+def extend_anacondata():
+    """
+    list of modules to complete anaconda
+    """
+
+    mod = [
+        ModuleInstall("cvxopt",                     "wheel"),
+        ModuleInstall("goslate",                    "pip"),
+        ModuleInstall("dbfread",                    "pip"),
+        ModuleInstall("rpy2",                       "wheel"),
+        ModuleInstall("mpld3",                      "pip"),
+        #
+        ModuleInstall("coverage",                   "pip"),
+        ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
+        ModuleInstall("sphinx_rtd_theme",           "pip"),
+        ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
+        ModuleInstall("solar_theme",                "pip"),
+        ModuleInstall("cloud_sptheme",              "pip"),
+        ModuleInstall("sphinx_readable_theme",      "pip"),
+        ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),
+        ModuleInstall("wild_sphinx_theme",          "pip"),
+        ModuleInstall("sphinx_bootstrap_theme",     "pip"),
+        ModuleInstall("sphinxjp.themes.sphinxjp",   "pip"),
+        ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
+    ]
+
+    return mod
+
+def extend_winpython():
+    """
+    list of modules to complete anaconda
+    """
+
+    mod = [
+        ModuleInstall("cvxopt",                     "wheel"),
+        ModuleInstall("goslate",                    "pip"),
+        ModuleInstall("dbfread",                    "pip"),
+        ModuleInstall("bokeh",                      "pip"),
+        ModuleInstall("pywin32",                    "wheel", mname = "win32com"),
+        #
+        ModuleInstall("coverage",                   "pip"),
+        ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
+        ModuleInstall("sphinx_rtd_theme",           "pip"),
+        ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
+        ModuleInstall("solar_theme",                "pip"),
+        ModuleInstall("cloud_sptheme",              "pip"),
+        ModuleInstall("sphinx_readable_theme",      "pip"),
+        ModuleInstall("hachibee-sphinx-theme",      "pip", mname="hachibee_sphinx_theme"),
+        ModuleInstall("wild_sphinx_theme",          "pip"),
+        ModuleInstall("sphinx_bootstrap_theme",     "pip"),
+        ModuleInstall("sphinxjp.themes.sphinxjp",   "pip"),
+        ModuleInstall("sphinxjp.themes.revealjs",   "pip"),
+    ]
 
     return mod

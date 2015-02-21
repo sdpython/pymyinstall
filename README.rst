@@ -16,7 +16,7 @@ README / Changes
 Description
 -----------
 
-This module contains functions which install a module from pipy, using pip or from a setup::
+This module contains functions which install a module from pipy, using pip or from a wheel package::
 
     from pymyinstall import datascientist
     datascientist("install", full = True)
@@ -27,7 +27,19 @@ Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+    
+This module also contains functions to extend distributions 
+`Anaconda <http://continuum.io/downloads#py34>`_, `WinPython <https://winpython.github.io/>`_
+for the notebooks proposed at `ENSAE - Programmation <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_ (French)::
 
+    from pymyinstall import extend_anaconda
+    extend_anaconda()
+    
+Or::
+
+    from pymyinstall import extend_winpython
+    extend_winpython()
+    
 Some modules fail on Windows due to Permission error, in that case, you should go to the
 folder ``install`` and run the installer. Once it is done, you can run the function again 
 to continue. It will skip the modules already installed.
@@ -47,6 +59,8 @@ Versions
 * **0.9 - 2015/??/??**
     * **add:** install wheel packages
     * **add:** add new packages to the list of a datascientist
+    * **add:** functions :func:`extend_anaconda <pymyinstall.packaged.packaged_config.extend_anaconda>`, :func:`extend_winpython <pymyinstall.packaged.packaged_config.extend_winpython>`
+    * **add:** function :func:`process_installation <pymyinstall.packaged.packaged_functions.process_installations>`
 * **0.8 - 2014/11/09**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** module `ansiconv <http://pythonhosted.org/ansiconv/>`, `ansi2html <https://pypi.python.org/pypi/ansi2html/>`_
