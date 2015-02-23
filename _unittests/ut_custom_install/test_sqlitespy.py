@@ -24,7 +24,7 @@ from pyquickhelper import fLOG
 
 class TestSqliteSpy (unittest.TestCase):
 
-    def test_install(self) :
+    def test_install_sqllitespy(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
         temp = os.path.join(fold,"temp_sqllitespy")

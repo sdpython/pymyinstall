@@ -26,7 +26,7 @@ from pyquickhelper import fLOG
 
 class TestPandoc (unittest.TestCase):
 
-    def test_pandoc(self) :
+    def test_install_pandoc(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
 

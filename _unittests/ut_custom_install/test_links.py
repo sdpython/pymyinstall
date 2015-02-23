@@ -24,7 +24,7 @@ from pyquickhelper import fLOG
 
 class Testinks (unittest.TestCase):
 
-    def test_install(self) :
+    def test_links(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         suf = suffix()
         fLOG("*",suf)
