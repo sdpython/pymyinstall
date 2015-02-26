@@ -256,6 +256,7 @@ def complete_installation():
                 ModuleInstall("PyOpenGL",                   "wheel", mname="OpenGL"),
                 ModuleInstall("Theano",                     "wheel", mname="theano"),
                 ModuleInstall("pyqtgraph",                  "pip"),
+                ModuleInstall("deap",                       "pip"),
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
@@ -329,6 +330,7 @@ def extend_anaconda():
         ModuleInstall("folium",                     "pip"),
         ModuleInstall("graphviz",                   "pip"),
         ModuleInstall("numexpr",                    "wheel"),
+        ModuleInstall("deap",                       "pip"),
         #
         ModuleInstall("wheel",                      "pip"),
         ModuleInstall("coverage",                   "pip"),
@@ -360,6 +362,7 @@ def extend_winpython():
         ModuleInstall("pywin32",                    "wheel", mname = "win32com"),
         ModuleInstall("folium",                     "pip"),
         ModuleInstall("graphviz",                   "pip"),
+        ModuleInstall("deap",                       "pip"),
         #
         ModuleInstall("coverage",                   "pip"),
         ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
