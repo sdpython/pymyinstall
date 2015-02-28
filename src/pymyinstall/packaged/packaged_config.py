@@ -257,6 +257,7 @@ def complete_installation():
                 ModuleInstall("Theano",                     "wheel", mname="theano"),
                 ModuleInstall("pyqtgraph",                  "pip"),
                 ModuleInstall("deap",                       "pip"),
+                ModuleInstall("gensim",                     "wheel"),
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
