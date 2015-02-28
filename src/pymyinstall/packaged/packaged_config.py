@@ -258,6 +258,7 @@ def complete_installation():
                 ModuleInstall("pyqtgraph",                  "pip"),
                 ModuleInstall("deap",                       "pip"),
                 ModuleInstall("gensim",                     "wheel"),
+                ModuleInstall("autopep8",                   "pip"),
                 #
                 #ModuleInstall("pyrsslocal", "github", "sdpython"),
                 #ModuleInstall("python-nvd3", "github", "sdpython"),
@@ -333,6 +334,7 @@ def extend_anaconda():
         ModuleInstall("numexpr",                    "wheel"),
         ModuleInstall("deap",                       "pip"),
         #
+        ModuleInstall("autopep8",                   "pip"),
         ModuleInstall("wheel",                      "pip"),
         ModuleInstall("coverage",                   "pip"),
         ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
@@ -365,6 +367,7 @@ def extend_winpython():
         ModuleInstall("graphviz",                   "pip"),
         ModuleInstall("deap",                       "pip"),
         #
+        ModuleInstall("autopep8",                   "pip"),
         ModuleInstall("coverage",                   "pip"),
         ModuleInstall("sphinxcontrib-images",       "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme",           "pip"),
