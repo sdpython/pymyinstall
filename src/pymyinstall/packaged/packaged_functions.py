@@ -11,21 +11,21 @@ from ..setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_
 from ..installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
 
 
-def datascientist(  folder          = "install",
-                    modules         = True,
-                    azure           = False,
-                    website         = False,
-                    scite           = False,
-                    pandoc          = False,
-                    ipython         = False,
-                    sqlitespy       = False,
-                    shortcuts       = False,
-                    ipython_folder  = ".",
-                    fLOG            = print,
-                    browser         = None,
-                    skip            = None,
-                    full            = False,
-                    additional_path = None):
+def datascientist(folder="install",
+                  modules=True,
+                  azure=False,
+                  website=False,
+                  scite=False,
+                  pandoc=False,
+                  ipython=False,
+                  sqlitespy=False,
+                  shortcuts=False,
+                  ipython_folder=".",
+                  fLOG=print,
+                  browser=None,
+                  skip=None,
+                  full=False,
+                  additional_path=None):
     """
 
     install all necessary modules for a data scientist
@@ -64,44 +64,52 @@ def datascientist(  folder          = "install",
     The second time, the function does not install again what was already installed.
 
     """
-    if modules :
+    if modules:
         modules = complete_installation() if full else small_installation()
 
-        for _ in modules :
-            if skip is not None and (_.name in skip or _.mname in skip) :
+        for _ in modules:
+            if skip is not None and (_.name in skip or _.mname in skip):
                 fLOG("skip module", _.name, " import name:", _.mname)
-            else :
+            else:
                 _.install(temp_folder=folder)
 
     if azure:
         modules = installation_azure()
 
-        for _ in modules :
-            if skip is not None and (_.name in skip or _.mname in skip) :
+        for _ in modules:
+            if skip is not None and (_.name in skip or _.mname in skip):
                 fLOG("skip module", _.name, " import name:", _.mname)
-            else :
+            else:
                 _.install(temp_folder=folder)
 
-    if website :
+    if website:
         get_install_list()
 
-    if scite :
-        scite = install_scite(folder, fLOG = fLOG)
+    if scite:
+        scite = install_scite(folder, fLOG=fLOG)
 
-    if pandoc :
-        install_pandoc(folder, fLOG = fLOG)
+    if pandoc:
+        install_pandoc(folder, fLOG=fLOG)
 
-    if ipython :
-        setup_ipython(ipython_folder, additional_path=additional_path, browser = browser)
+    if ipython:
+        setup_ipython(
+            ipython_folder,
+            additional_path=additional_path,
+            browser=browser)
 
     if sqlitespy:
-        sqlitespy_file = install_sqlitespy(folder, fLOG = fLOG)
+        sqlitespy_file = install_sqlitespy(folder, fLOG=fLOG)
 
-    if shortcuts :
-        if ipython  : add_shortcut_to_desktop_for_ipython(ipython_folder)
-        if scite    : add_shortcut_to_desktop_for_scite(scite)
-        if ipython  : add_shortcut_to_desktop_for_module("spyder")
-        if sqlitespy: add_shortcut_to_desktop_for_sqlitespy(sqlitespy_file)
+    if shortcuts:
+        if ipython:
+            add_shortcut_to_desktop_for_ipython(ipython_folder)
+        if scite:
+            add_shortcut_to_desktop_for_scite(scite)
+        if ipython:
+            add_shortcut_to_desktop_for_module("spyder")
+        if sqlitespy:
+            add_shortcut_to_desktop_for_sqlitespy(sqlitespy_file)
+
 
 def ds_complete(**params):
     """
@@ -111,6 +119,7 @@ def ds_complete(**params):
     params["full"] = True
     datascientist(**params)
 
+
 def ds_small(**params):
     """
     calls @see fn datascientist with ``full=False``
@@ -119,10 +128,11 @@ def ds_small(**params):
     params["full"] = False
     datascientist(**params)
 
-def ds_cubes(   folder          = "install",
-                modules         = True,
-                skip            = None,
-                fLOG            = print) :
+
+def ds_cubes(folder="install",
+             modules=True,
+             skip=None,
+             fLOG=print):
     """
     Install all the necessary modules to manipulate `data cubes <http://en.wikipedia.org/wiki/Data_cube>`_ (= multidimensional arrays).
 
@@ -131,19 +141,20 @@ def ds_cubes(   folder          = "install",
     @param      skip                to skip some modules if they fail (a list)
     @param      fLOG                logging function
     """
-    if modules :
+    if modules:
         modules = installation_cubes()
 
-        for _ in modules :
-            if skip is not None and (_.name in skip or _.mname in skip) :
+        for _ in modules:
+            if skip is not None and (_.name in skip or _.mname in skip):
                 fLOG("skip module", _.name, " import name:", _.mname)
-            else :
+            else:
                 _.install(temp_folder=folder)
 
-def ds_huge(    folder          = "install",
-                modules         = True,
-                skip            = None,
-                fLOG            = print) :
+
+def ds_huge(folder="install",
+            modules=True,
+            skip=None,
+            fLOG=print):
     """
     Install all the necessary modules to manipulate `data cubes <http://en.wikipedia.org/wiki/Data_cube>`_ (= multidimensional arrays).
 
@@ -152,22 +163,23 @@ def ds_huge(    folder          = "install",
     @param      skip                to skip some modules if they fail (a list)
     @param      fLOG                logging function
     """
-    if modules :
+    if modules:
         modules = installation_huge_datasets()
 
-        for _ in modules :
-            if skip is not None and (_.name in skip or _.mname in skip) :
+        for _ in modules:
+            if skip is not None and (_.name in skip or _.mname in skip):
                 fLOG("skip module", _.name, " import name:", _.mname)
-            else :
+            else:
                 _.install(temp_folder=folder)
 
+
 def process_installation(
-                    modules_list,
-                    folder          = "install",
-                    fLOG            = print,
-                    skip            = None,
-                    full            = False,
-                    additional_path = None):
+        modules_list,
+        folder="install",
+        fLOG=print,
+        skip=None,
+        full=False,
+        additional_path=None):
     """
 
     install all modules within a list
@@ -197,8 +209,8 @@ def process_installation(
     The second time, the function does not install again what was already installed.
 
     """
-    for _ in modules_list :
-        if skip is not None and (_.name in skip or _.mname in skip) :
+    for _ in modules_list:
+        if skip is not None and (_.name in skip or _.mname in skip):
             fLOG("skip module", _.name, " import name:", _.mname)
-        else :
+        else:
             _.install(temp_folder=folder)

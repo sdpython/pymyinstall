@@ -3,11 +3,14 @@
 @file
 @brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
-import sys, re, os
+import sys
+import re
+import os
 
 from .install_cmd_helper import unzip_files
 from .link_shortcuts import add_shortcut_to_desktop
 from .install_custom import download_page, download_from_sourceforge
+
 
 def IsSQLiteSpyInstalled(dest_folder):
     """
@@ -22,7 +25,8 @@ def IsSQLiteSpyInstalled(dest_folder):
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
 
-def install_sqlitespy(temp_folder=".", fLOG = print, install = True):
+
+def install_sqlitespy(temp_folder=".", fLOG=print, install=True):
     """
     Install `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_.
     It does not do it a second time if it is already installed.
@@ -33,28 +37,39 @@ def install_sqlitespy(temp_folder=".", fLOG = print, install = True):
     @return                     temporary file
     """
     if IsSQLiteSpyInstalled(temp_folder):
-        return os.path.join(temp_folder,"SQLiteSpy.exe")
+        return os.path.join(temp_folder, "SQLiteSpy.exe")
 
-    link  = "http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index"
+    link = "http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index"
     page = download_page(link)
     if sys.platform.startswith("win"):
         reg = re.compile("href=\\\"(/delphi/lib/exe.*?[.]zip)\\\"")
         alls = reg.findall(page)
-        if len(alls) == 0 :
-            raise Exception("unable to find a link on a .zip file on page: " + page)
+        if len(alls) == 0:
+            raise Exception(
+                "unable to find a link on a .zip file on page: " +
+                page)
 
-        file = alls[0].replace("&amp;","&")
+        file = alls[0].replace("&amp;", "&")
         full = "http://www.yunqa.de{0}".format(file)
-        version = file.split("_")[-1].replace(".zip","")
+        version = file.split("_")[-1].replace(".zip", "")
         fLOG("SQLiteSpy, version ", version)
-        outfile = os.path.join( temp_folder, "{0}_{1}.zip".format("SQLiteSpy", version))
+        outfile = os.path.join(
+            temp_folder,
+            "{0}_{1}.zip".format(
+                "SQLiteSpy",
+                version))
         fLOG("download ", full)
-        download_from_sourceforge(full, outfile, temp_folder = temp_folder, fLOG=fLOG)
+        download_from_sourceforge(
+            full,
+            outfile,
+            temp_folder=temp_folder,
+            fLOG=fLOG)
         files = unzip_files(outfile, temp_folder, fLOG=fLOG)
-        local = [ f for f in files if f.endswith(".exe") ][0]
+        local = [f for f in files if f.endswith(".exe")][0]
         return local
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
+
 
 def add_shortcut_to_desktop_for_sqlitespy(exe):
     """

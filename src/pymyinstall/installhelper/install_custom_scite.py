@@ -3,11 +3,14 @@
 @file
 @brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
-import sys, re, os
+import sys
+import re
+import os
 
 from .install_cmd_helper import unzip_files
 from .install_custom import download_page, download_from_sourceforge
 from .link_shortcuts import add_shortcut_to_desktop, suffix
+
 
 def IsSciteInstalled(dest_folder):
     """
@@ -22,7 +25,8 @@ def IsSciteInstalled(dest_folder):
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
 
-def install_scite(dest_folder=".", fLOG = print, install = True):
+
+def install_scite(dest_folder=".", fLOG=print, install=True):
     """
     install `SciTE <http://www.scintilla.org/SciTE.html>`_ (only on Windows)
 
@@ -40,47 +44,63 @@ def install_scite(dest_folder=".", fLOG = print, install = True):
     @endexample
     """
     if IsSciteInstalled(dest_folder):
-        return os.path.join(os.path.abspath(dest_folder), "wscite", "SciTE.exe")
+        return os.path.join(
+            os.path.abspath(dest_folder), "wscite", "SciTE.exe")
 
     if not sys.platform.startswith("win"):
-        raise NotImplementedError("SciTE can only be installed on Windows at the moment")
+        raise NotImplementedError(
+            "SciTE can only be installed on Windows at the moment")
 
     url = "http://www.scintilla.org/SciTEDownload.html"
     page = download_page(url)
 
-    rel = re.compile ("Release ([0-9.]+)")
+    rel = re.compile("Release ([0-9.]+)")
     rel = rel.findall(page)
-    if len(rel) == 0 : raise Exception("unable to find the release version")
+    if len(rel) == 0:
+        raise Exception("unable to find the release version")
     rel = rel[0]
     fLOG("SciTE, release version ", rel)
 
     #reg = re.compile("<a href=\\\"(.*zip.*)\\\">full download</a>")
     #find = reg.findall(page)
-    #if len(find) != 1 :
+    # if len(find) != 1 :
     #    raise Exception("unable to find the file to download at " + url + "\nfound: " + str(len(find)) + "\n" + "\n".join(find))
 
-    newurl = "http://sourceforge.net/projects/scintilla/files/SciTE/{0}/wscite{1}.zip/download?use_mirror=autoselect".format(rel, rel.replace(".",""))
+    newurl = "http://sourceforge.net/projects/scintilla/files/SciTE/{0}/wscite{1}.zip/download?use_mirror=autoselect".format(
+        rel,
+        rel.replace(
+            ".",
+            ""))
     outfile = os.path.join(dest_folder, "scite.zip")
     fLOG("SciTE, download from ", newurl)
-    file = download_from_sourceforge(newurl, outfile, fLOG = fLOG, temp_folder = dest_folder)
-    unzip_files(file, whereTo = dest_folder, fLOG = fLOG)
+    file = download_from_sourceforge(
+        newurl,
+        outfile,
+        fLOG=fLOG,
+        temp_folder=dest_folder)
+    unzip_files(file, whereTo=dest_folder, fLOG=fLOG)
 
     # we change the path
     config = os.path.join(dest_folder, "wscite", "python.properties")
-    with open(config,"r") as f : content = f.read()
+    with open(config, "r") as f:
+        content = f.read()
     content = content.replace("=pythonw", "=" + sys.executable)
-    with open(config,"w") as f : f.write(content)
+    with open(config, "w") as f:
+        f.write(content)
 
     # we change the options
     config = os.path.join(dest_folder, "wscite", "SciTEGlobal.properties")
-    with open(config,"r") as f : content = f.read()
+    with open(config, "r") as f:
+        content = f.read()
     content = content.replace("tabsize=8", "tabsize=4")
     content = content.replace("indent.size=8", "indent.size=4")
     content = content.replace("use.tabs=1", "use.tabs=0")
-    content = content.replace("font:Verdana,","font:Courier New,")
-    with open(config,"w") as f : f.write(content)
+    content = content.replace("font:Verdana,", "font:Courier New,")
+    with open(config, "w") as f:
+        f.write(content)
 
     return os.path.join(os.path.abspath(dest_folder), "wscite", "SciTE.exe")
+
 
 def add_shortcut_to_desktop_for_scite(scite):
     """

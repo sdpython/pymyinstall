@@ -3,9 +3,12 @@
 @brief Various helper about shortcuts and links
 """
 
-import os, sys, platform
+import os
+import sys
+import platform
 
-def add_shortcut_to_desktop(file, name, description = "", arguments = ""):
+
+def add_shortcut_to_desktop(file, name, description="", arguments=""):
     """
     Add a shortcut to the desktop.
 
@@ -16,18 +19,25 @@ def add_shortcut_to_desktop(file, name, description = "", arguments = ""):
     @return                 path to the shortcut
     """
     if not sys.platform.startswith("win"):
-        raise NotImplementedError("not implemented on this platform: " + sys.platform)
+        raise NotImplementedError(
+            "not implemented on this platform: " +
+            sys.platform)
 
     try:
         import winshell
-    except ImportError as e :
+    except ImportError as e:
         if "DLL load failed" in str(e):
-            os.environ["PATH"] = os.environ["PATH"] + ";" + os.path.split(sys.executable)[0] + r"\lib\site-packages\pywin32_system32"
+            os.environ["PATH"] = os.environ[
+                "PATH"] + ";" + os.path.split(sys.executable)[0] + r"\lib\site-packages\pywin32_system32"
             try:
                 import winshell
-            except ImportError as ee :
-                raise ImportError(r"you should run the following in your current folder:\ncopy C:\%s\lib\site-packages\pywin32_system32\py*.dll %s" % (os.path.split(sys.executable), os.getcwd())) from e
-        else :
+            except ImportError as ee:
+                raise ImportError(
+                    r"you should run the following in your current folder:\ncopy C:\%s\lib\site-packages\pywin32_system32\py*.dll %s" %
+                    (os.path.split(
+                        sys.executable),
+                        os.getcwd())) from e
+        else:
             raise e
 
     link_filepath = os.path.join(winshell.desktop(), name + ".lnk")
@@ -37,12 +47,13 @@ def add_shortcut_to_desktop(file, name, description = "", arguments = ""):
         link.arguments = arguments
     return link_filepath
 
+
 def suffix():
     """
     add a suffix to a shortcut name = python version + architecture
 
     @return     string
     """
-    ver = ".".join( str(_) for _ in sys.version_info[:2] )
+    ver = ".".join(str(_) for _ in sys.version_info[:2])
     arc = platform.architecture()[0]
     return "{0}.{1}".format(arc, ver)

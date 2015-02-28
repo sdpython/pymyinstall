@@ -14,7 +14,7 @@ open_tool_on_browser()
 """
 
 import sys
-if sys.version_info[0] < 3 :
+if sys.version_info[0] < 3:
     raise ImportError("pymyinstall only works with Python 3")
 
 __version__ = "0.9"
@@ -25,7 +25,7 @@ __downloadUrl__ = "http://www.xavierdupre.fr/site2013/index_code.html#pymyinstal
 __license__ = "BSD License"
 
 
-def check( log = False):
+def check(log=False):
     """
     Checks the library is working.
     It raises an exception.
