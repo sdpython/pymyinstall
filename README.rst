@@ -7,7 +7,6 @@ README / Changes
 .. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
     :target: https://travis-ci.org/sdpython/pymyinstall
     :alt: Build status
-
    
    
 **Links:**
