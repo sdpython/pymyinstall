@@ -4,6 +4,10 @@
 README / Changes
 ================
 
+.. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
+    :target: https://travis-ci.org/sdpython/pymyinstall
+    :alt: Build status
+
    
    
 **Links:**
@@ -11,6 +15,7 @@ README / Changes
     * `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_
     * `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
     * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_
+    * `Travis/pymyinstall <https://travis-ci.org/sdpython/pymyinstall>`_
 
 
 Description

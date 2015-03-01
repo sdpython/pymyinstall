@@ -6,13 +6,17 @@
 pymyinstall documentation
 =========================
 
+.. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
+    :target: https://travis-ci.org/sdpython/pymyinstall
+    :alt: Build status
+
    
-   
-**Links:**
-    * `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_
-    * `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall/>`_
-    * `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
-    * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_
+**Links:** `pypi <https://pypi.python.org/pypi/pymyinstall/>`_,
+`github <https://github.com/sdpython/pymyinstall/>`_,
+`documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_,
+`wheel <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_,
+`travis <https://travis-ci.org/sdpython/pymyinstalls>`_
+
 
 
 Description
