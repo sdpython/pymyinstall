@@ -233,14 +233,13 @@ def complete_installation():
         ModuleInstall("solar_theme", "pip"),
         ModuleInstall("cloud_sptheme", "pip"),
         ModuleInstall("sphinx_readable_theme", "pip"),
-        ModuleInstall(
-            "hachibee-sphinx-theme",
-            "pip",
-            mname="hachibee_sphinx_theme"),
+        ModuleInstall("hachibee-sphinx-theme","pip",mname="hachibee_sphinx_theme"),
         ModuleInstall("wild_sphinx_theme", "pip"),
         ModuleInstall("sphinx_bootstrap_theme", "pip"),
         ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
+        ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
+        ModuleInstall("epfl-sphinx-theme","pip",mname="epfl_theme"),
 
         #
         ModuleInstall("ggplot", "pip"),
