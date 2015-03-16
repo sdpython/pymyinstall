@@ -10,6 +10,9 @@ pymyinstall documentation
     :target: https://travis-ci.org/sdpython/pymyinstall
     :alt: Build status
 
+.. image:: https://badge.fury.io/py/pymyinstall.svg
+    :target: http://badge.fury.io/py/pymyinstall    
+   
    
 **Links:** `pypi <https://pypi.python.org/pypi/pymyinstall/>`_,
 `github <https://github.com/sdpython/pymyinstall/>`_,
