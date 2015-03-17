@@ -140,8 +140,8 @@ def complete_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("cffi", "wheel"),
         ModuleInstall("numpy", "wheel"),
-        ModuleInstall("dynd", "wheel"), # see https://binstar.org/blaze/blaze
-        ModuleInstall("blaze", "wheel"), # see https://binstar.org/blaze/blaze
+        ModuleInstall("dynd", "wheel"),  # see https://binstar.org/blaze/blaze
+        ModuleInstall("blaze", "wheel"),  # see https://binstar.org/blaze/blaze
         ModuleInstall("scipy", "wheel"),
         ModuleInstall("matplotlib", "wheel"),
         ModuleInstall("seaborn", "pip"),
@@ -206,25 +206,28 @@ def complete_installation():
         ModuleInstall("basemap", "wheel", mname="mpl_toolkits.basemap"),
         #
         ModuleInstall("sphinx", "pip"),
-        ModuleInstall("sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
+        ModuleInstall(
+            "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
         ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
         ModuleInstall("solar_theme", "pip"),
         ModuleInstall("cloud_sptheme", "pip"),
         ModuleInstall("sphinx_readable_theme", "pip"),
-        ModuleInstall("hachibee-sphinx-theme","pip",mname="hachibee_sphinx_theme"),
+        ModuleInstall(
+            "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
         ModuleInstall("wild_sphinx_theme", "pip"),
         ModuleInstall("sphinx_bootstrap_theme", "pip"),
         ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
-        ModuleInstall("epfl-sphinx-theme","pip",mname="epfl_theme"),
+        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
 
         #
         ModuleInstall("ggplot", "pip"),
         ModuleInstall("dbfread", "pip"),   # to read dbase format
         ModuleInstall("xmltodict", "pip"),   # XML to JSON
-        ModuleInstall("python-linkedin", "github", "sdpython", mname="linkedin"),
+        ModuleInstall(
+            "python-linkedin", "github", "sdpython", mname="linkedin"),
         # access to linkedin
         ModuleInstall("requests_oauthlib", "pip"),
         ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
@@ -240,21 +243,23 @@ def complete_installation():
         ModuleInstall("pycrypto", "exe_xd", mname="Crypto"),
         ModuleInstall("paramiko", "pip"),
         #
-        ModuleInstall("pattern", "pip") if sys.version_info[0] < 3 else None, # to read dbase format
+        ModuleInstall("pattern", "pip") if sys.version_info[
+            0] < 3 else None,  # to read dbase format
         #
         ModuleInstall("nodeenv", "pip"),   # node.js
-        ModuleInstall("python-jenkins", "pip", mname="jenkins"), # for Jenkins
+        ModuleInstall("python-jenkins", "pip", mname="jenkins"),  # for Jenkins
         ModuleInstall("psutil", "wheel"),  #
         #
         # 2015-02-05
         #
-        ModuleInstall("autopy3", "wheel", mname="autopy3"), # simulate events
+        ModuleInstall("autopy3", "wheel", mname="autopy3"),  # simulate events
         ModuleInstall("bigfloat", "wheel"),  # large double
-        ModuleInstall("cvxpy", "wheel"), # convex optimization, depends on CVXOPT
+        # convex optimization, depends on CVXOPT
+        ModuleInstall("cvxpy", "wheel"),
         ModuleInstall("blist", "wheel"),  # better large list
-        ModuleInstall("conda", "wheel"), # to install packages with conda
-        ModuleInstall("kabuki", "pip"), # Bayesian
-        ModuleInstall("bayespy", "pip"), # Bayesian
+        ModuleInstall("conda", "wheel"),  # to install packages with conda
+        ModuleInstall("kabuki", "pip"),  # Bayesian
+        ModuleInstall("bayespy", "pip"),  # Bayesian
         ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian
         ModuleInstall("libLAS", "wheel", mname="liblas"),
         ModuleInstall("liblinear", "wheel"),
@@ -299,7 +304,8 @@ def installation_cubes():
         ModuleInstall("django", "pip"),
         ModuleInstall("pytz", "pip"),
         ModuleInstall("jsonschema", "pip"),
-        ModuleInstall("cubes", "github", "Stiivi"), # the PyPI version does not work with Python 3
+        # the PyPI version does not work with Python 3
+        ModuleInstall("cubes", "github", "Stiivi"),
     ]
 
     return mod
@@ -351,19 +357,21 @@ def extend_anaconda():
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("wheel", "pip"),
         ModuleInstall("coverage", "pip"),
-        ModuleInstall("sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
+        ModuleInstall(
+            "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
         ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
         ModuleInstall("solar_theme", "pip"),
         ModuleInstall("cloud_sptheme", "pip"),
         ModuleInstall("sphinx_readable_theme", "pip"),
-        ModuleInstall("hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
+        ModuleInstall(
+            "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
         ModuleInstall("wild_sphinx_theme", "pip"),
         ModuleInstall("sphinx_bootstrap_theme", "pip"),
         ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
-        ModuleInstall("epfl-sphinx-theme","pip",mname="epfl_theme"),
+        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
     ]
 
     return mod
@@ -386,19 +394,21 @@ def extend_winpython():
         #
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("coverage", "pip"),
-        ModuleInstall("sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
+        ModuleInstall(
+            "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
         ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
         ModuleInstall("solar_theme", "pip"),
         ModuleInstall("cloud_sptheme", "pip"),
         ModuleInstall("sphinx_readable_theme", "pip"),
-        ModuleInstall("hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
+        ModuleInstall(
+            "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
         ModuleInstall("wild_sphinx_theme", "pip"),
         ModuleInstall("sphinx_bootstrap_theme", "pip"),
         ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
-        ModuleInstall("epfl-sphinx-theme","pip",mname="epfl_theme"),
+        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
     ]
 
     return mod
