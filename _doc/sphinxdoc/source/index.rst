@@ -13,6 +13,11 @@ pymyinstall documentation
 .. image:: https://badge.fury.io/py/pymyinstall.svg
     :target: http://badge.fury.io/py/pymyinstall    
    
+.. image:: http://img.shields.io/pypi/dm/pymyinstall.png
+    :alt: PYPI Package
+    :target: https://pypi.python.org/pypi/pymyinstall
+
+                   
    
 **Links:** `pypi <https://pypi.python.org/pypi/pymyinstall/>`_,
 `github <https://github.com/sdpython/pymyinstall/>`_,
