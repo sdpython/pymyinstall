@@ -4,17 +4,11 @@
 @brief Various function to install various python module from various location.
 """
 import sys
-import re
 import platform
 import os
-import urllib
-import urllib.request
-import urllib.error
 import zipfile
 import time
 import subprocess
-import importlib
-import importlib.util
 
 
 def python_version():
@@ -214,6 +208,7 @@ def add_shortcut_to_desktop_for_module(name):
     """
     if name == "spyder":
         from .link_shortcuts import add_shortcut_to_desktop, suffix
+        from .module_install import ModuleInstall
         md = ModuleInstall("spyder", "exe", script="spyder.bat")
         sc = md.Script
         if os.path.exists(sc):

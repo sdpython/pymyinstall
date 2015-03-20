@@ -9,13 +9,11 @@ import os
 import urllib
 import urllib.request
 import urllib.error
-import zipfile
 import time
-import subprocess
 import importlib
 import importlib.util
 
-from .install_cmd_helper import python_version, split_cmp_command, run_cmd, unzip_files, add_shortcut_to_desktop_for_module
+from .install_cmd_helper import python_version, run_cmd, unzip_files
 
 
 class ModuleInstall:

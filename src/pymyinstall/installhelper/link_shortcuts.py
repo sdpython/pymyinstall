@@ -31,7 +31,7 @@ def add_shortcut_to_desktop(file, name, description="", arguments=""):
                 "PATH"] + ";" + os.path.split(sys.executable)[0] + r"\lib\site-packages\pywin32_system32"
             try:
                 import winshell
-            except ImportError as ee:
+            except ImportError:
                 raise ImportError(
                     r"you should run the following in your current folder:\ncopy C:\%s\lib\site-packages\pywin32_system32\py*.dll %s" %
                     (os.path.split(
