@@ -56,6 +56,7 @@ def small_installation():
         ModuleInstall("jsonschema", "pip"),
         ModuleInstall("mistune", "pip"),
         ModuleInstall("wheel", "pip"),
+        ModuleInstall("sphinx", "pip"),
         #
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
