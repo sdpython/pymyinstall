@@ -57,6 +57,7 @@ def small_installation():
         ModuleInstall("mistune", "pip"),
         ModuleInstall("wheel", "pip"),
         ModuleInstall("sphinx", "pip"),
+        ModuleInstall("autopep8", "pip"),
         #
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
