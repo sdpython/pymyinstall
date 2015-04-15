@@ -63,10 +63,6 @@ def small_installation():
         #
         ModuleInstall("mpld3", "pip"),
         #
-        # ModuleInstall("pyquickhelper", "github", "sdpython"),
-        # ModuleInstall("pyensae", "github", "sdpython"),
-        # ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
-        #
         ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
         ModuleInstall("decorator", "pip"),
         #
@@ -189,9 +185,9 @@ def complete_installation():
         ModuleInstall("rpy2", "wheel"),
         # ModuleInstall("pythonnet",      "wheel", mname="clr"),  # included in ensae_teaching_cs
         #
-        ModuleInstall("pyquickhelper", "github", "sdpython"),
-        ModuleInstall("pyensae", "github", "sdpython"),
-        ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
+        ModuleInstall("pyquickhelper", "pip"),
+        ModuleInstall("pyensae", "pip"),
+        ModuleInstall("ensae_teaching_cs", "pip"),
         #
         ModuleInstall("selenium", "pip"),
         ModuleInstall("Pillow", "wheel", mname="PIL"),
