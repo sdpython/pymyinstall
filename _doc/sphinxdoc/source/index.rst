@@ -60,6 +60,12 @@ Some modules might fail on Windows due to Permission error, in that case, you sh
 folder ``install`` and run the installer. Once it is done, you can run the function again 
 to continue. 
 
+To use modules related to the manipulation of big datasets::
+
+    from pymyinstall import ds_complete, ds_huge
+    ds_complete()
+    ds_huge()
+
 
 Functionalities
 ---------------

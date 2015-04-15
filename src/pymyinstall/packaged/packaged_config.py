@@ -22,6 +22,7 @@ def small_installation():
         # ModuleInstall("setuptools",     "wheel"),        # removed with 3.4
         # ModuleInstall("pip",            "wheel"),            # removed with 3.4
         #
+        ModuleInstall("virtualenv", "wheel"),
         ModuleInstall("six", "pip"),
         ModuleInstall("lxml", "wheel"),
         ModuleInstall("jinja2", "pip"),
@@ -45,11 +46,13 @@ def small_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("numpy", "wheel"),
         ModuleInstall("matplotlib", "wheel"),
-        ModuleInstall("seaborn", "pip"),
+        # ModuleInstall("seaborn", "pip"),   # it seems problematic for this small config
         ModuleInstall("scipy", "wheel"),
         ModuleInstall("statsmodels", "wheel"),  # needs scipy
-        ModuleInstall("networkx", "wheel"),
+        # ModuleInstall("networkx", "wheel"), # it seems problematic for this small config
         ModuleInstall("graphviz", "pip"),
+        ModuleInstall("jsonschema", "pip"),
+        ModuleInstall("mistune", "pip"),
         #
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
@@ -57,9 +60,9 @@ def small_installation():
         #
         ModuleInstall("mpld3", "pip"),
         #
-        ModuleInstall("pyquickhelper", "github", "sdpython"),
-        ModuleInstall("pyensae", "github", "sdpython"),
-        ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
+        # ModuleInstall("pyquickhelper", "github", "sdpython"),
+        # ModuleInstall("pyensae", "github", "sdpython"),
+        # ModuleInstall("ensae_teaching_cs", "github", "sdpython"),
         #
         ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
         ModuleInstall("decorator", "pip"),
@@ -145,13 +148,14 @@ def complete_installation():
         ModuleInstall("scipy", "wheel"),
         ModuleInstall("matplotlib", "wheel"),
         ModuleInstall("seaborn", "pip"),
-        ModuleInstall("tables", "wheel"),
         ModuleInstall("sympy", "pip"),
         ModuleInstall("gmpy2", "wheel"),
         ModuleInstall("llvmpy", "wheel", mname="llvm"),
         ModuleInstall("numba", "wheel"),
         ModuleInstall("networkx", "wheel"),
         ModuleInstall("graphviz", "pip"),
+        ModuleInstall("jsonschema", "pip"),
+        ModuleInstall("mistune", "pip"),
         #
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
@@ -206,6 +210,9 @@ def complete_installation():
         ModuleInstall("basemap", "wheel", mname="mpl_toolkits.basemap"),
         #
         ModuleInstall("sphinx", "pip"),
+        ModuleInstall("docutils", "pip"),
+        ModuleInstall("flake8", "pip"),
+        
         ModuleInstall(
             "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
@@ -255,15 +262,12 @@ def complete_installation():
         ModuleInstall("autopy3", "wheel", mname="autopy3"),  # simulate events
         ModuleInstall("bigfloat", "wheel"),  # large double
         # convex optimization, depends on CVXOPT
+        ModuleInstall("scs", "wheel"),
         ModuleInstall("cvxpy", "wheel"),
         ModuleInstall("blist", "wheel"),  # better large list
         ModuleInstall("conda", "wheel"),  # to install packages with conda
-        ModuleInstall("kabuki", "pip"),  # Bayesian
-        ModuleInstall("bayespy", "pip"),  # Bayesian
-        ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian
         ModuleInstall("libLAS", "wheel", mname="liblas"),
         ModuleInstall("liblinear", "wheel"),
-        ModuleInstall("libsvm", "wheel"),
         ModuleInstall("marisa_trie", "wheel"),
         ModuleInstall("mlpy", "wheel"),
         ModuleInstall("pygit2", "wheel"),
@@ -273,7 +277,14 @@ def complete_installation():
         ModuleInstall("pyqtgraph", "pip"),
         ModuleInstall("deap", "pip"),
         ModuleInstall("gensim", "wheel"),
+        ModuleInstall("pep8", "pip"),
         ModuleInstall("autopep8", "pip"),
+        ModuleInstall("pybrain", "pip"),
+        ModuleInstall("pymc", "wheel"),
+        # ModuleInstall("libsvm", "wheel"),   # does not work on Windows
+        #ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not work, it expects to have pymc with some optimization
+        ModuleInstall("bayespy", "pip"),  # Bayesian
+        #ModuleInstall("kabuki", "pip"),  # Bayesian, does not work, it expects to have pymc with some optimization
         #
         #ModuleInstall("pyrsslocal", "github", "sdpython"),
         #ModuleInstall("python-nvd3", "github", "sdpython"),
