@@ -46,13 +46,16 @@ def small_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("numpy", "wheel"),
         ModuleInstall("matplotlib", "wheel"),
-        # ModuleInstall("seaborn", "pip"),   # it seems problematic for this small config
+        # ModuleInstall("seaborn", "pip"),   # it seems problematic for this
+        # small config
         ModuleInstall("scipy", "wheel"),
         ModuleInstall("statsmodels", "wheel"),  # needs scipy
-        # ModuleInstall("networkx", "wheel"), # it seems problematic for this small config
+        # ModuleInstall("networkx", "wheel"), # it seems problematic for this
+        # small config
         ModuleInstall("graphviz", "pip"),
         ModuleInstall("jsonschema", "pip"),
         ModuleInstall("mistune", "pip"),
+        ModuleInstall("wheel", "pip"),
         #
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
@@ -156,6 +159,7 @@ def complete_installation():
         ModuleInstall("graphviz", "pip"),
         ModuleInstall("jsonschema", "pip"),
         ModuleInstall("mistune", "pip"),
+        ModuleInstall("wheel", "pip"),
         #
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
@@ -212,7 +216,7 @@ def complete_installation():
         ModuleInstall("sphinx", "pip"),
         ModuleInstall("docutils", "pip"),
         ModuleInstall("flake8", "pip"),
-        
+
         ModuleInstall(
             "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
@@ -282,9 +286,10 @@ def complete_installation():
         ModuleInstall("pybrain", "pip"),
         ModuleInstall("pymc", "wheel"),
         # ModuleInstall("libsvm", "wheel"),   # does not work on Windows
-        #ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not work, it expects to have pymc with some optimization
+        # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
+        # work, it expects to have pymc with some optimization
         ModuleInstall("bayespy", "pip"),  # Bayesian
-        #ModuleInstall("kabuki", "pip"),  # Bayesian, does not work, it expects to have pymc with some optimization
+        # ModuleInstall("kabuki", "pip"),  # Bayesian, does not work, it expects to have pymc with some optimization
         #
         #ModuleInstall("pyrsslocal", "github", "sdpython"),
         #ModuleInstall("python-nvd3", "github", "sdpython"),

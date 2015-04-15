@@ -23,7 +23,8 @@ pymyinstall documentation
 `github <https://github.com/sdpython/pymyinstall/>`_,
 `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_,
 `wheel <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_,
-`travis <https://travis-ci.org/sdpython/pymyinstalls>`_
+`travis <https://travis-ci.org/sdpython/pymyinstalls>`_,
+:ref:`l-README`
 
 
 
@@ -65,6 +66,11 @@ To use modules related to the manipulation of big datasets::
     from pymyinstall import ds_complete, ds_huge
     ds_complete()
     ds_huge()
+    
+Installation
+------------
+
+``pip install pymyinstall``
 
 
 Functionalities

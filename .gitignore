@@ -221,7 +221,7 @@ out_*
 */sphinxdoc/source/index_*
 */sphinxdoc/source/readme.*
 */sphinxdoc/source/notebooks/*
-*/sphinxdoc/source/LICENSE.*
+*/sphinxdoc/source/LICENSE.txt
 */sphinxdoc/source/filechanges.*
 version.txt
 */sphinxdoc/source/pymyinstall/*
