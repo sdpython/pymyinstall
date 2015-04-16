@@ -367,10 +367,12 @@ def extend_anaconda():
         ModuleInstall("graphviz", "pip"),
         ModuleInstall("numexpr", "wheel"),
         ModuleInstall("deap", "pip"),
+        ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
         #
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("wheel", "pip"),
         ModuleInstall("coverage", "pip"),
+        ModuleInstall("flake8", "pip"),
         ModuleInstall(
             "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
@@ -405,6 +407,7 @@ def extend_winpython():
         ModuleInstall("folium", "pip"),
         ModuleInstall("graphviz", "pip"),
         ModuleInstall("deap", "pip"),
+        ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
         #
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("coverage", "pip"),
