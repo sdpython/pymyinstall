@@ -53,7 +53,7 @@ def setup_ipython(current_path=None,
             os.mkdir(checkpath)
 
         if not os.path.exists(ipython_config):
-            from ..installhelper.install_cmd import run_cmd
+            from ..installhelper.install_cmd_helper import run_cmd
             exe = os.path.join(
                 os.path.split(
                     sys.executable)[0],
