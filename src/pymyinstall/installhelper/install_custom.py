@@ -3,10 +3,16 @@
 @file
 @brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
+from __future__ import print_function
+
 import os
-import urllib
-import urllib.error
-import urllib.request
+import sys
+if sys.version_info[0] == 2:
+    import urllib2 as urllib_request
+    import urllib2 as urllib_error
+else:
+    import urllib.request as urllib_request
+    import urllib.error as urllib_error
 
 from .module_install import ModuleInstall
 
@@ -19,16 +25,17 @@ def download_page(url):
     @return             content
     """
     try:
-        req = urllib.request.Request(
+        req = urllib_request.Request(
             url, headers={
                 'User-agent': 'Mozilla/5.0'})
-        u = urllib.request.urlopen(req)
+        u = urllib_request.urlopen(req)
         text = u.read()
         u.close()
-    except urllib.error.HTTPError as e:
+    except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
 
-    return str(text, encoding="utf8")
+    typstr = str  # unicode#
+    return typstr(text, encoding="utf8")
 
 
 def download_file(url, outfile):
@@ -44,15 +51,15 @@ def download_file(url, outfile):
         return outfile
 
     try:
-        req = urllib.request.Request(
+        req = urllib_request.Request(
             url,
             headers={
                 'User-agent': 'Mozilla/5.0'},
         )
-        u = urllib.request.urlopen(req)
+        u = urllib_request.urlopen(req)
         text = u.read()
         u.close()
-    except urllib.error.HTTPError as e:
+    except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
 
     with open(outfile, "wb") as f:
@@ -90,7 +97,7 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
         req = requests.get(url, allow_redirects=True, stream=True)
         text = req.raw.read()
         fLOG("len ", len(text))
-    except urllib.error.HTTPError as e:
+    except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
 
     if len(text) < 20 and text.decode(

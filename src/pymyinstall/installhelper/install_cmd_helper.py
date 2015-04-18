@@ -1,8 +1,9 @@
-# coding: latin-1
 """
 @file
 @brief Various function to install various python module from various location.
 """
+from __future__ import print_function
+
 import sys
 import platform
 import os

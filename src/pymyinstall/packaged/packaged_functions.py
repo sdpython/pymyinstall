@@ -2,6 +2,7 @@
 """
 Helpers to install many modules for a specific usage.
 """
+from __future__ import print_function
 from ..installhelper.install_cmd_helper import add_shortcut_to_desktop_for_module
 from ..installhelper.install_manual import get_install_list
 from .packaged_config import complete_installation, small_installation, installation_cubes, installation_huge_datasets, installation_azure

@@ -13,10 +13,6 @@ open_tool_on_browser()
 @endcode
 """
 
-import sys
-if sys.version_info[0] < 3:
-    raise ImportError("pymyinstall only works with Python 3")
-
 __version__ = "0.9"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pymyinstall"

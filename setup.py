@@ -225,6 +225,18 @@ elif "unittests_all" in sys.argv:
     pyquickhelper = import_pyquickhelper()
     pyquickhelper.main_wrapper_tests(run_unit, add_coverage=True)
 
+elif "copy27" in sys.argv:
+
+    if sys.version_info[0] < 3:
+        raise Exception("Python needs to be Python3")
+
+    pyquickhelper = import_pyquickhelper()
+    root = os.path.abspath(os.path.dirname(__file__))
+    root = os.path.normpath(root)
+    dest = os.path.join(root, "dist_module27")
+    pyquickhelper.py3to2_convert_tree(
+        root, dest, unittest_modules=["pyquickhelper"])
+
 else:
     setup(
         name=project_var_name,

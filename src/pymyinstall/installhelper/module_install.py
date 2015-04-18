@@ -2,16 +2,23 @@
 @file
 @brief Various function to install various python module from various location.
 """
+from __future__ import print_function
+
 import sys
 import re
 import platform
 import os
-import urllib
-import urllib.request
-import urllib.error
+if sys.version_info[0] == 2:
+    import urllib2 as urllib_request
+    import urllib2 as urllib_error
+else:
+    import urllib.request as urllib_request
+    import urllib.error as urllib_error
 import time
 import importlib
-import importlib.util
+
+if sys.version_info[0] != 2:
+    import importlib.util
 
 from .install_cmd_helper import python_version, run_cmd, unzip_files
 
@@ -119,7 +126,12 @@ class ModuleInstall:
             try:
                 if "." in self.ImportName:
                     raise ImportError(self.ImportName)
-                r = importlib.util.find_spec(self.ImportName)
+                if sys.version_info[0] == 2:
+                    r = importlib.import_module(self.ImportName)
+                    return r
+                else:
+                    r = importlib.util.find_spec(self.ImportName)
+                    return r is not None
                 return r is not None
             except ImportError:
                 txt = "import {0}".format(self.ImportName)
@@ -186,11 +198,11 @@ class ModuleInstall:
                 with open(page, "r", encoding="utf8") as f:
                     text = f.read()
             else:
-                req = urllib.request.Request(
+                req = urllib_request.Request(
                     ModuleInstall.exeLocation,
                     headers={
                         'User-agent': 'Mozilla/5.0'})
-                u = urllib.request.urlopen(req)
+                u = urllib_request.urlopen(req)
                 text = u.read()
                 u.close()
                 text = text.decode("utf8")
@@ -296,10 +308,10 @@ class ModuleInstall:
                 if force or not os.path.exists(whlname):
 
                     self.fLOG("downloading", whl)
-                    req = urllib.request.Request(
+                    req = urllib_request.Request(
                         url, headers={
                             'User-agent': 'Mozilla/5.0'})
-                    u = urllib.request.urlopen(req)
+                    u = urllib_request.urlopen(req)
                     text = u.read()
                     u.close()
 
@@ -319,13 +331,13 @@ class ModuleInstall:
                     self.gitrepo)
                 self.fLOG("downloading", zipurl)
                 try:
-                    req = urllib.request.Request(
+                    req = urllib_request.Request(
                         zipurl, headers={
                             'User-agent': 'Mozilla/5.0'})
-                    u = urllib.request.urlopen(req)
+                    u = urllib_request.urlopen(req)
                     text = u.read()
                     u.close()
-                except urllib.error.HTTPError as e:
+                except urllib_error.HTTPError as e:
                     raise Exception(
                         "unable to get archive from: " +
                         zipurl) from e
@@ -354,10 +366,10 @@ class ModuleInstall:
                     file_save=file_save)
 
                 self.fLOG("downloading", exe)
-                req = urllib.request.Request(
+                req = urllib_request.Request(
                     url, headers={
                         'User-agent': 'Mozilla/5.0'})
-                u = urllib.request.urlopen(req)
+                u = urllib_request.urlopen(req)
                 text = u.read()
                 u.close()
 
