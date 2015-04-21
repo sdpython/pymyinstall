@@ -359,7 +359,7 @@ class ModuleInstall:
             ver = python_version()
             if ver[0] != "win32":
                 raise Exception(
-                    "this option is not available on other systems than Windows")
+                    "this option is not available on other systems than Windows, version={0}".format(version))
             else:
                 url, exe = self.get_exewheel_url_link(
                     file_save=file_save) if kind == "exe" else self.get_exewheel_url_link_xd(
