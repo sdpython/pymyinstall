@@ -165,7 +165,7 @@ else:
 if "--verbose" in sys.argv:
     verbose()
 
-if is_local():
+if is_local() and "unittests" not in sys.argv:
     pyquickhelper = import_pyquickhelper()
     r = pyquickhelper.process_standard_options_for_setup(
         sys.argv, __file__, project_var_name)
@@ -173,18 +173,57 @@ else:
     r = False
 
 if not r:
-    setup(
-        name=project_var_name,
-        version='%s%s' % (sversion, subversion),
-        author='Xavier Dupré',
-        author_email='xavier.dupre AT gmail.com',
-        url="http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html",
-        download_url="https://github.com/sdpython/pymyinstall/",
-        description=DESCRIPTION,
-        long_description=long_description,
-        keywords=KEYWORDS,
-        classifiers=CLASSIFIERS,
-        packages=packages,
-        package_dir=package_dir,
-        package_data=package_data,
-    )
+
+    if "unittests" in sys.argv:
+
+        if not os.path.exists("_unittests"):
+            raise FileNotFoundError(
+                "you must get the source from GitHub to run the unittests")
+
+        run_unit = os.path.join("_unittests", "run_unittests.py")
+        if not os.path.exists(run_unit):
+            raise FileNotFoundError(
+                "the folder should contain run_unittests.py")
+
+        def skip_function(name, code):
+            if "skip this test for regular run" in code:
+                return True
+            return False
+
+        pyquickhelper = import_pyquickhelper()
+        pyquickhelper.main_wrapper_tests(
+            run_unit,
+            add_coverage=True,
+            skip_function=skip_function)
+
+    elif "unittests_all" in sys.argv:
+
+        if not os.path.exists("_unittests"):
+            raise FileNotFoundError(
+                "you must get the source from GitHub to run the unittests")
+
+        run_unit = os.path.join("_unittests", "run_unittests.py")
+        if not os.path.exists(run_unit):
+            raise FileNotFoundError(
+                "the folder should contain run_unittests.py")
+
+        pyquickhelper = import_pyquickhelper()
+        pyquickhelper.main_wrapper_tests(run_unit, add_coverage=False)
+
+    else:
+
+        setup(
+            name=project_var_name,
+            version='%s%s' % (sversion, subversion),
+            author='Xavier Dupré',
+            author_email='xavier.dupre AT gmail.com',
+            url="http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html",
+            download_url="https://github.com/sdpython/pymyinstall/",
+            description=DESCRIPTION,
+            long_description=long_description,
+            keywords=KEYWORDS,
+            classifiers=CLASSIFIERS,
+            packages=packages,
+            package_dir=package_dir,
+            package_data=package_data,
+        )
