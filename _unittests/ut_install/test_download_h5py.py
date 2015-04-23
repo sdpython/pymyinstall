@@ -43,7 +43,7 @@ from src.pymyinstall.installhelper.module_install import ModuleInstall
 from pyquickhelper import fLOG
 
 
-class TestDownloadPyQt (unittest.TestCase):
+class TestDownloadh5py (unittest.TestCase):
 
     def test_install_pyqt(self):
         fLOG(
@@ -51,7 +51,7 @@ class TestDownloadPyQt (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold, "temp_download_pyqt")
+        temp = os.path.join(fold, "temp_download_h5py")
         if not os.path.exists(temp):
             os.mkdir(temp)
         for _ in os.listdir(temp):
@@ -59,8 +59,8 @@ class TestDownloadPyQt (unittest.TestCase):
                 os.remove(os.path.join(temp, _))
 
         if sys.platform.startswith("win"):
-            fLOG("install", "pyqt")
-            m = ModuleInstall("PyQt", "wheel", mname="pyqt", fLOG=fLOG)
+            fLOG("install", "h5py")
+            m = ModuleInstall("h5py", "wheel", mname="h5py", fLOG=fLOG)
             exe = m.download(
                 temp_folder=temp,
                 file_save=os.path.join(
