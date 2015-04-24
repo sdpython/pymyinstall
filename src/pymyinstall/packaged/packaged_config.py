@@ -298,6 +298,8 @@ def complete_installation():
         #ModuleInstall("pdfminer", "pip"),
         #ModuleInstall("lsqfit",      "wheel"),
         #ModuleInstall("boost_python",   "wheel"),
+        #
+        ModuleInstall("glueviz", "whl"), 
     ]
 
     if sys.platform.startswith("win"):
