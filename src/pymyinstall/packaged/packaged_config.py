@@ -299,7 +299,7 @@ def complete_installation():
         #ModuleInstall("lsqfit",      "wheel"),
         #ModuleInstall("boost_python",   "wheel"),
         #
-        ModuleInstall("glueviz", "whl"),
+        ModuleInstall("glueviz", "wheel"),
     ]
 
     if sys.platform.startswith("win"):
