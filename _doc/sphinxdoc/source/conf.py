@@ -27,3 +27,5 @@ set_sphinx_variables(__file__,
                      sphinx_readable_theme.get_html_theme_path(),
                      locals(),
                      add_extensions=None)
+
+blog_root = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/"
