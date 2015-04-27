@@ -23,6 +23,7 @@ README / Changes
     * `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
     * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_
     * `Travis/pymyinstall <https://travis-ci.org/sdpython/pymyinstall>`_
+    * `Blog <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/blog/main_0000.html#ap-main-0>`_
 
 
 Description
