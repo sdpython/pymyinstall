@@ -300,6 +300,7 @@ def complete_installation():
         #ModuleInstall("boost_python",   "wheel"),
         #
         ModuleInstall("glueviz", "wheel"),
+        ModuleInstall("pypiserver", "pip"),
     ]
 
     if sys.platform.startswith("win"):
@@ -392,6 +393,8 @@ def extend_anaconda():
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
         ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
+        ModuleInstall("pypiserver", "pip"),
+        ModuleInstall("bayespy", "pip"),  # Bayesian
     ]
 
     return mod
@@ -430,6 +433,8 @@ def extend_winpython():
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
         ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
+        ModuleInstall("pypiserver", "pip"),
+        ModuleInstall("bayespy", "pip"),  # Bayesian
     ]
 
     return mod
