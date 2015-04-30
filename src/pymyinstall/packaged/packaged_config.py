@@ -301,6 +301,7 @@ def complete_installation():
         #
         ModuleInstall("glueviz", "wheel"),
         ModuleInstall("pypiserver", "pip"),
+
     ]
 
     if sys.platform.startswith("win"):
