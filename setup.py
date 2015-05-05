@@ -81,20 +81,31 @@ package_data = {}
 
 
 def is_local():
-    if "clean_space" in sys.argv or \
-            "write_version" in sys.argv or \
-            "clean_pyd" in sys.argv or \
-            "build_sphinx" in sys.argv or \
-            "unittests" in sys.argv or \
-            "copy27" in sys.argv or \
-            "sdist" in sys.argv or \
-            "register" in sys.argv or \
-            "bdist_wininst" in sys.argv or \
-            "bdist_msi" in sys.argv or \
-            "bdist_wheel" in sys.argv or \
-            "build_script" in sys.argv or \
-            "copy_dist" in sys.argv or \
-            "upload_docs" in sys.argv:
+    if \
+       "bdist_msi" in sys.argv or \
+       "build27" in sys.argv or \
+       "build_script" in sys.argv or \
+       "build_sphinx" in sys.argv or \
+       "bdist_wheel" in sys.argv or \
+       "bdist_wininst" in sys.argv or \
+       "clean_pyd" in sys.argv or \
+       "clean_space" in sys.argv or \
+       "copy27" in sys.argv or \
+       "copy_dist" in sys.argv or \
+       "local_pypi" in sys.argv or \
+       "notebook" in sys.argv or \
+       "publish" in sys.argv or \
+       "publish_doc" in sys.argv or \
+       "register" in sys.argv or \
+       "unittests" in sys.argv or \
+       "unittests_LONG" in sys.argv or \
+       "unittests_SKIP" in sys.argv or \
+       "run27" in sys.argv or \
+       "sdist" in sys.argv or \
+       "setupdep" in sys.argv or \
+       "test_local_pypi" in sys.argv or \
+       "upload_docs" in sys.argv or \
+       "write_version" in sys.argv:
         return True
     else:
         return False
@@ -169,7 +180,7 @@ else:
 if "--verbose" in sys.argv:
     verbose()
 
-if is_local() and "unittests" not in sys.argv:
+if is_local():
     pyquickhelper = import_pyquickhelper()
     r = pyquickhelper.process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
@@ -181,57 +192,18 @@ if len(sys.argv) == 1 and "--help" in sys.argv:
     pyquickhelper.process_standard_options_for_setup_help()
 
 if not r:
-
-    if "unittests" in sys.argv:
-
-        if not os.path.exists("_unittests"):
-            raise FileNotFoundError(
-                "you must get the source from GitHub to run the unittests")
-
-        run_unit = os.path.join("_unittests", "run_unittests.py")
-        if not os.path.exists(run_unit):
-            raise FileNotFoundError(
-                "the folder should contain run_unittests.py")
-
-        def skip_function(name, code):
-            if "skip this test for regular run" in code:
-                return True
-            return False
-
-        pyquickhelper = import_pyquickhelper()
-        pyquickhelper.main_wrapper_tests(
-            run_unit,
-            add_coverage=True,
-            skip_function=skip_function)
-
-    elif "unittests_all" in sys.argv:
-
-        if not os.path.exists("_unittests"):
-            raise FileNotFoundError(
-                "you must get the source from GitHub to run the unittests")
-
-        run_unit = os.path.join("_unittests", "run_unittests.py")
-        if not os.path.exists(run_unit):
-            raise FileNotFoundError(
-                "the folder should contain run_unittests.py")
-
-        pyquickhelper = import_pyquickhelper()
-        pyquickhelper.main_wrapper_tests(run_unit, add_coverage=False)
-
-    else:
-
-        setup(
-            name=project_var_name,
-            version='%s%s' % (sversion, subversion),
-            author='Xavier Dupré',
-            author_email='xavier.dupre AT gmail.com',
-            url="http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html",
-            download_url="https://github.com/sdpython/pymyinstall/",
-            description=DESCRIPTION,
-            long_description=long_description,
-            keywords=KEYWORDS,
-            classifiers=CLASSIFIERS,
-            packages=packages,
-            package_dir=package_dir,
-            package_data=package_data,
-        )
+    setup(
+        name=project_var_name,
+        version='%s%s' % (sversion, subversion),
+        author='Xavier Dupré',
+        author_email='xavier.dupre AT gmail.com',
+        url="http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html",
+        download_url="https://github.com/sdpython/pymyinstall/",
+        description=DESCRIPTION,
+        long_description=long_description,
+        keywords=KEYWORDS,
+        classifiers=CLASSIFIERS,
+        packages=packages,
+        package_dir=package_dir,
+        package_data=package_data,
+    )
