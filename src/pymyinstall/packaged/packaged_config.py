@@ -420,6 +420,7 @@ def extend_winpython():
         #
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("coverage", "pip"),
+        ModuleInstall("bokeh", "pip"),
         ModuleInstall(
             "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
