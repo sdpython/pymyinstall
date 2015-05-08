@@ -407,6 +407,7 @@ def extend_winpython():
     """
 
     mod = [
+        ModuleInstall("virtualenv", "pip"),
         ModuleInstall("cvxopt", "wheel"),
         ModuleInstall("goslate", "pip"),
         ModuleInstall("dbfread", "pip"),
