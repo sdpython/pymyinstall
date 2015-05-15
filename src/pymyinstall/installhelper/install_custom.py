@@ -1,7 +1,7 @@
 # coding: latin-1
 """
 @file
-@brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
+@brief Various functions to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
 from __future__ import print_function
 

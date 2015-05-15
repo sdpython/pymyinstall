@@ -176,27 +176,27 @@ def unzip_files(zipf, whereTo, fLOG=print):
     @param      fLOG        logging function
     @return                 list of unzipped files
     """
-    file = zipfile.ZipFile(zipf, "r")
     files = []
-    for info in file.infolist():
-        if not os.path.exists(info.filename):
-            data = file.read(info.filename)
-            tos = os.path.join(whereTo, info.filename)
-            if not os.path.exists(tos):
-                finalfolder = os.path.split(tos)[0]
-                if not os.path.exists(finalfolder):
-                    fLOG("    creating folder ", finalfolder)
-                    os.makedirs(finalfolder)
-                if not info.filename.endswith("/"):
-                    u = open(tos, "wb")
-                    u.write(data)
-                    u.close()
+    with zipfile.ZipFile(zipf, "r") as file:
+        for info in file.infolist():
+            if not os.path.exists(info.filename):
+                data = file.read(info.filename)
+                tos = os.path.join(whereTo, info.filename)
+                if not os.path.exists(tos):
+                    finalfolder = os.path.split(tos)[0]
+                    if not os.path.exists(finalfolder):
+                        fLOG("    creating folder ", finalfolder)
+                        os.makedirs(finalfolder)
+                    if not info.filename.endswith("/"):
+                        u = open(tos, "wb")
+                        u.write(data)
+                        u.close()
+                        files.append(tos)
+                        fLOG("    unzipped ", info.filename, " to ", tos)
+                elif not tos.endswith("/"):
                     files.append(tos)
-                    fLOG("    unzipped ", info.filename, " to ", tos)
-            elif not tos.endswith("/"):
-                files.append(tos)
-        elif not info.filename.endswith("/"):
-            files.append(info.filename)
+            elif not info.filename.endswith("/"):
+                files.append(info.filename)
     return files
 
 

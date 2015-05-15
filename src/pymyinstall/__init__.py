@@ -44,3 +44,4 @@ from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_short
 from .packaged.packaged_functions import datascientist, ds_small, ds_complete, ds_cubes, ds_huge, process_installation
 from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_cubes
 from .packaged.packaged_config import installation_azure, extend_winpython, extend_anaconda
+from .installhelper.install_custom_revealjs import download_revealjs
