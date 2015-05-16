@@ -216,11 +216,15 @@ class ModuleInstall:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
+            keep = []
+            for line in page.split("\n"):
+                if "networkx" in line:
+                    keep.append(line)
             raise Exception(
                 "module " +
                 self.name +
                 ", unable to find regex with pattern: " +
-                pattern)
+                pattern + "\nexample:\n" + "\n".join(keep))
 
         if ind == -1:
             ind = len(alls[0]) - 1

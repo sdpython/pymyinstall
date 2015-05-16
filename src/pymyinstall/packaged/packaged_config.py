@@ -269,7 +269,7 @@ def complete_installation():
         ModuleInstall("scs", "wheel"),
         ModuleInstall("cvxpy", "wheel"),
         ModuleInstall("blist", "wheel"),  # better large list
-        ModuleInstall("conda", "wheel"),  # to install packages with conda
+        ModuleInstall("conda", "pip"),  # to install packages with conda
         ModuleInstall("libLAS", "wheel", mname="liblas"),
         ModuleInstall("liblinear", "wheel"),
         ModuleInstall("marisa_trie", "wheel"),
