@@ -15,6 +15,13 @@ README / Changes
     :alt: PYPI Package
     :target: https://pypi.python.org/pypi/pymyinstall
 
+.. image:: http://img.shields.io/github/issues/sdpython/pymyinstall.png
+    :alt: GitHub Issues
+    :target: https://github.com/sdpython/pymyinstall/issues
+    
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+    :alt: MIT License
+    :target: http://opensource.org/licenses/MIT
          
    
 **Links:**
