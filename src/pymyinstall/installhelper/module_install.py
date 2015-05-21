@@ -297,6 +297,9 @@ class ModuleInstall:
             Parameter *deps* was added, the function now downloads a module using pip.
         """
         kind = self.kind
+        
+        if not os.path.exists(temp_folder):
+            raise FileNotFoundError(temp_folder)
 
         if kind == "pip":
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
@@ -319,9 +322,9 @@ class ModuleInstall:
                 raise Exception(
                     "unable to download " +
                     str(self) +
-                    "\nread:\n" +
-                    url +
-                    "OUT:\n" +
+                    "\nCMD:\n" +
+                    cmd +
+                    "\nOUT:\n" +
                     out +
                     "\nERR:\n" +
                     err)
@@ -335,9 +338,9 @@ class ModuleInstall:
                 raise Exception(
                     "unable to find downloaded file " +
                     str(self) +
-                    "\nread:\n" +
-                    url +
-                    "OUT:\n" +
+                    "\nCMD:\n" +
+                    cmd +
+                    "\nOUT:\n" +
                     out +
                     "\nERR:\n" +
                     err)
