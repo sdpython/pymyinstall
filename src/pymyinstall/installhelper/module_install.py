@@ -282,7 +282,7 @@ class ModuleInstall:
         return unzip_files(zipf, whereTo, self.fLOG)
 
     def download(
-            self, temp_folder=".", force=False, unzipFile=True, file_save=None):
+            self, temp_folder=".", force=False, unzipFile=True, file_save=None, deps=False):
         """
         download the module without installation
 
@@ -290,14 +290,57 @@ class ModuleInstall:
         @param      force           force the installation even if already installed
         @param      unzipFile       if it can be unzipped, it will be (for github, mostly)
         @param      file_save       for debug purposes, do not change it unless you know what you are doing
+        @param      deps            download the dependencies too (only available for pip)
         @return                     downloaded files
+
+        .. versionchanged:: 0.9
+            Parameter *deps* was added, the function now downloads a module using pip.
         """
         kind = self.kind
 
         if kind == "pip":
-            # see http://www.pip-installer.org/en/latest/usage.html
-            raise Exception(
-                "this functionality is not available for packages installed using pip")
+            # see https://pip.pypa.io/en/latest/reference/pip_install.html
+            # we use pip install <package> --download=temp_folder
+            pip = os.path.join(
+                os.path.split(
+                    sys.executable)[0],
+                "Scripts",
+                "pip.exe")
+            cmd = pip + ' install {0}'.format(self.name)
+            if self.version is not None:
+                cmd += "=={0}".format(self.version)
+            if deps:
+                cmd += ' --download="{0}"'.format(temp_folder)
+            else:
+                cmd += ' --download="{0}" --no-deps'.format(temp_folder)
+            out, err = run_cmd(
+                cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
+            if "Successfully downloaded" not in out:
+                raise Exception(
+                    "unable to download " +
+                    str(self) +
+                    "\nread:\n" +
+                    url +
+                    "OUT:\n" +
+                    out +
+                    "\nERR:\n" +
+                    err)
+            else:
+                lines = out.split("\n")
+                for line in lines:
+                    if line.strip().startswith("Saved "):
+                        return line.split("Saved")[-1].strip()
+                    elif line.strip().startswith("File was already downloaded"):
+                        return line.split("File was already downloaded")[-1].strip()
+                raise Exception(
+                    "unable to find downloaded file " +
+                    str(self) +
+                    "\nread:\n" +
+                    url +
+                    "OUT:\n" +
+                    out +
+                    "\nERR:\n" +
+                    err)
 
         elif kind == "wheel":
             ver = python_version()
@@ -398,7 +441,8 @@ class ModuleInstall:
         """
         self.install(*l, **p)
 
-    def install(self, force_kind=None,
+    def install(self,
+                force_kind=None,
                 force=False,
                 temp_folder=".",
                 log=False,

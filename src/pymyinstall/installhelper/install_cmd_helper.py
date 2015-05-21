@@ -162,6 +162,9 @@ def run_cmd(cmd,
             fLOG("error (log)\n%s" % err)
         # return bytes.decode (out, errors="ignore"), bytes.decode(err,
         # errors="ignore")
+        proc.stdout.close()
+        proc.stderr.close()
+
         return out, err
     else:
         return "", ""
