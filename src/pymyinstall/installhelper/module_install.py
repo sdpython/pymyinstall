@@ -301,11 +301,17 @@ class ModuleInstall:
         if kind == "pip":
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
             # we use pip install <package> --download=temp_folder
-            pip = os.path.join(
-                os.path.split(
-                    sys.executable)[0],
-                "Scripts",
-                "pip")
+            if sys.platform.startswith("win"):
+                pip = os.path.join(
+                    os.path.split(
+                        sys.executable)[0],
+                    "Scripts",
+                    "pip.exe")
+            else:
+                pip = os.path.join(
+                    os.path.split(
+                        sys.executable)[0],
+                    "pip")
             cmd = pip + ' install {0}'.format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
@@ -471,11 +477,17 @@ class ModuleInstall:
         ret = None
 
         if kind == "pip":
-            pip = os.path.join(
-                os.path.split(
-                    sys.executable)[0],
-                "Scripts",
-                "pip")
+            if sys.platform.startswith("win"):
+                pip = os.path.join(
+                    os.path.split(
+                        sys.executable)[0],
+                    "Scripts",
+                    "pip.exe")
+            else:
+                pip = os.path.join(
+                    os.path.split(
+                        sys.executable)[0],
+                    "pip")
             cmd = pip + " install {0}".format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
@@ -528,11 +540,17 @@ class ModuleInstall:
                     unzipFile=True)
                 self.fLOG("installing", os.path.split(whlname)[-1])
 
-            pip = os.path.join(
-                os.path.split(
-                    sys.executable)[0],
-                "Scripts",
-                "pip")
+            if sys.platform.startswith("win"):
+                pip = os.path.join(
+                    os.path.split(
+                        sys.executable)[0],
+                    "Scripts",
+                    "pip.exe")
+            else:
+                pip = os.path.join(
+                    os.path.split(
+                        sys.executable)[0],
+                    "pip")
             cmd = pip + " install {0}".format(whlname)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
