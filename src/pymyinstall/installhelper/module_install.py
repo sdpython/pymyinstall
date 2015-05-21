@@ -315,10 +315,12 @@ class ModuleInstall:
             cmd = pip + ' install {0}'.format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
+            if " " in temp_folder:
+                raise FileNotFoundError("no space allowed in folders: [" + temp_folder + "]")
             if deps:
-                cmd += ' --download="{0}"'.format(temp_folder)
+                cmd += ' --download={0}'.format(temp_folder)
             else:
-                cmd += ' --download="{0}" --no-deps'.format(temp_folder)
+                cmd += ' --download={0} --no-deps'.format(temp_folder)
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
             if "Successfully downloaded" not in out:
@@ -327,7 +329,7 @@ class ModuleInstall:
                     str(self) +
                     "\nCMD:\n" +
                     cmd +
-                    "OUT:\n" +
+                    "\nOUT:\n" +
                     out +
                     "\nERR:\n" +
                     err)
@@ -343,7 +345,7 @@ class ModuleInstall:
                     str(self) +
                     "\nCMD:\n" +
                     cmd +
-                    "OUT:\n" +
+                    "\nOUT:\n" +
                     out +
                     "\nERR:\n" +
                     err)
