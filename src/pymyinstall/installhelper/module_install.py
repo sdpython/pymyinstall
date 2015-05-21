@@ -292,7 +292,7 @@ class ModuleInstall:
         @param      file_save       for debug purposes, do not change it unless you know what you are doing
         @param      deps            download the dependencies too (only available for pip)
         @return                     downloaded files
-        
+
         .. versionchanged:: 0.9
             Parameter *deps* was added, the function now downloads a module using pip.
         """
