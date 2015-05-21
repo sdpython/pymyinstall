@@ -147,6 +147,11 @@ def complete_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("cffi", "wheel"),
         ModuleInstall("numpy", "wheel"),
+        ModuleInstall('odo', 'pip'),
+        ModuleInstall('cytoolz', 'wheel'),
+        ModuleInstall('toolz', 'wheel'),
+        ModuleInstall('datashape', 'pip'),
+        ModuleInstall('multipledispatch', 'pip'),
         ModuleInstall("dynd", "wheel"),  # see https://binstar.org/blaze/blaze
         ModuleInstall("blaze", "wheel"),  # see https://binstar.org/blaze/blaze
         ModuleInstall("scipy", "wheel"),

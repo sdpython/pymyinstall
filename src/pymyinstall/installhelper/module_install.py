@@ -325,8 +325,8 @@ class ModuleInstall:
                 raise Exception(
                     "unable to download " +
                     str(self) +
-                    "\nread:\n" +
-                    url +
+                    "\nCMD:\n" +
+                    cmd +
                     "OUT:\n" +
                     out +
                     "\nERR:\n" +
@@ -341,8 +341,8 @@ class ModuleInstall:
                 raise Exception(
                     "unable to find downloaded file " +
                     str(self) +
-                    "\nread:\n" +
-                    url +
+                    "\nCMD:\n" +
+                    cmd +
                     "OUT:\n" +
                     out +
                     "\nERR:\n" +
