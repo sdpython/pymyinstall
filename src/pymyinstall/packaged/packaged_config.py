@@ -40,6 +40,7 @@ def small_installation():
         ModuleInstall("openpyxl", "pip", version="1.8.6"),
         ModuleInstall("xlrd", "pip"),
         #
+        ModuleInstall("certifi", "pip"),
         ModuleInstall("tornado", "wheel"),
         ModuleInstall("pyzmq", "wheel", mname="zmq"),
         #
@@ -301,6 +302,8 @@ def complete_installation():
         #
         ModuleInstall("glueviz", "wheel"),
         ModuleInstall("pypiserver", "pip"),
+        #
+        ModuleInstall("charts", "pip"),  # javascript graphs
 
     ]
 
@@ -396,6 +399,8 @@ def extend_anaconda():
         ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
         ModuleInstall("pypiserver", "pip"),
         ModuleInstall("bayespy", "pip"),  # Bayesian
+        #
+        ModuleInstall("charts", "pip"),  # javascript graphs
     ]
 
     return mod
@@ -438,6 +443,8 @@ def extend_winpython():
         ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
         ModuleInstall("pypiserver", "pip"),
         ModuleInstall("bayespy", "pip"),  # Bayesian
+        # may 2015
+        ModuleInstall("charts", "pip"),  # javascript graphs
     ]
 
     return mod
