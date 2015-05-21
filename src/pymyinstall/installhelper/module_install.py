@@ -292,14 +292,11 @@ class ModuleInstall:
         @param      file_save       for debug purposes, do not change it unless you know what you are doing
         @param      deps            download the dependencies too (only available for pip)
         @return                     downloaded files
-
+        
         .. versionchanged:: 0.9
             Parameter *deps* was added, the function now downloads a module using pip.
         """
         kind = self.kind
-        
-        if not os.path.exists(temp_folder):
-            raise FileNotFoundError(temp_folder)
 
         if kind == "pip":
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
@@ -308,7 +305,7 @@ class ModuleInstall:
                 os.path.split(
                     sys.executable)[0],
                 "Scripts",
-                "pip.exe")
+                "pip")
             cmd = pip + ' install {0}'.format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
@@ -322,9 +319,9 @@ class ModuleInstall:
                 raise Exception(
                     "unable to download " +
                     str(self) +
-                    "\nCMD:\n" +
-                    cmd +
-                    "\nOUT:\n" +
+                    "\nread:\n" +
+                    url +
+                    "OUT:\n" +
                     out +
                     "\nERR:\n" +
                     err)
@@ -338,9 +335,9 @@ class ModuleInstall:
                 raise Exception(
                     "unable to find downloaded file " +
                     str(self) +
-                    "\nCMD:\n" +
-                    cmd +
-                    "\nOUT:\n" +
+                    "\nread:\n" +
+                    url +
+                    "OUT:\n" +
                     out +
                     "\nERR:\n" +
                     err)
@@ -478,7 +475,7 @@ class ModuleInstall:
                 os.path.split(
                     sys.executable)[0],
                 "Scripts",
-                "pip.exe")
+                "pip")
             cmd = pip + " install {0}".format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
@@ -535,7 +532,7 @@ class ModuleInstall:
                 os.path.split(
                     sys.executable)[0],
                 "Scripts",
-                "pip.exe")
+                "pip")
             cmd = pip + " install {0}".format(whlname)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
@@ -615,7 +612,7 @@ class ModuleInstall:
             os.chdir(os.path.split(setu)[0])
             cmd = "{0} setup.py install".format(
                 sys.executable.replace(
-                    "pythonw.ewe",
+                    "pythonw.exe",
                     "python.exe"))
             if len(options) > 0:
                 cmd += " " + " ".join(*options)
