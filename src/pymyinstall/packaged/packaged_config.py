@@ -147,11 +147,11 @@ def complete_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("cffi", "wheel"),
         ModuleInstall("numpy", "wheel"),
-        ModuleInstall('odo', 'pip'),
-        ModuleInstall('cytoolz', 'wheel'),
-        ModuleInstall('toolz', 'wheel'),
-        ModuleInstall('datashape', 'pip'),
-        ModuleInstall('multipledispatch', 'pip'),
+        ModuleInstall('odo', 'pip'), # for blaze
+        ModuleInstall('cytoolz', 'wheel'), # for blaze
+        ModuleInstall('toolz', 'wheel'), # for blaze
+        ModuleInstall('datashape', 'pip'), # for blaze
+        ModuleInstall('multipledispatch', 'pip'), # for blaze
         ModuleInstall("dynd", "wheel"),  # see https://binstar.org/blaze/blaze
         ModuleInstall("blaze", "wheel"),  # see https://binstar.org/blaze/blaze
         ModuleInstall("scipy", "wheel"),
@@ -286,6 +286,7 @@ def complete_installation():
         ModuleInstall("Theano", "wheel", mname="theano"),
         ModuleInstall("pyqtgraph", "pip"),
         ModuleInstall("deap", "pip"),
+        ModuleInstall("smartopen", "pip"),  #for gensim
         ModuleInstall("gensim", "wheel"),
         ModuleInstall("pep8", "pip"),
         ModuleInstall("autopep8", "pip"),
