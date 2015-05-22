@@ -136,7 +136,7 @@ def complete_installation():
         #
         ModuleInstall("openpyxl", "pip", version="1.8.6"),
         ModuleInstall("xlrd", "pip"),
-        ModuleInstall("python-pptx", "github", "sdpython"),
+        ModuleInstall("python-pptx", "pip"),
         ModuleInstall("XlsxWriter", "pip", mname="xlsxwriter"),
         #
         ModuleInstall("tornado", "wheel"),
@@ -147,13 +147,13 @@ def complete_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("cffi", "wheel"),
         ModuleInstall("numpy", "wheel"),
-        ModuleInstall('odo', 'pip'), # for blaze
-        ModuleInstall('cytoolz', 'wheel'), # for blaze
-        ModuleInstall('toolz', 'wheel'), # for blaze
-        ModuleInstall('datashape', 'pip'), # for blaze
-        ModuleInstall('multipledispatch', 'pip'), # for blaze
-        ModuleInstall("dynd", "wheel"),  # see https://binstar.org/blaze/blaze
-        ModuleInstall("blaze", "wheel"),  # see https://binstar.org/blaze/blaze
+        ModuleInstall('odo', 'pip'),                # for blaze
+        ModuleInstall('cytoolz', 'wheel'),          # for blaze
+        ModuleInstall('toolz', 'wheel'),            # for blaze
+        ModuleInstall('datashape', 'pip'),          # for blaze
+        ModuleInstall('multipledispatch', 'pip'),   # for blaze
+        ModuleInstall("dynd", "wheel"),             # see https://binstar.org/blaze/blaze
+        ModuleInstall("blaze", "wheel"),            # see https://binstar.org/blaze/blaze
         ModuleInstall("scipy", "wheel"),
         ModuleInstall("matplotlib", "wheel"),
         ModuleInstall("seaborn", "pip"),
@@ -178,7 +178,6 @@ def complete_installation():
         ModuleInstall("PyWavelets", "wheel", mname="pywt"),
         ModuleInstall("fastcluster", "wheel"),
         #
-        ModuleInstall("d3py", "github", "sdpython"),
         ModuleInstall("mpld3", "pip"),
         ModuleInstall("pycosat", "wheel"),
         ModuleInstall("PyYAML", "wheel", mname="yaml"),
@@ -188,9 +187,6 @@ def complete_installation():
         ModuleInstall("Shapely", "wheel", mname="shapely"),
         # exe on Windows to get geos.dll
         ModuleInstall("vispy", "pip"),
-        #
-        #ModuleInstall("tessera-client", "github", "sdpython", mname="tessera_client"),
-        # ModuleInstall("tessera",        "github", "sdpython"),   # does not really work yet
         #
         ModuleInstall("rpy2", "wheel"),
         # ModuleInstall("pythonnet",      "wheel", mname="clr"),  # included in ensae_teaching_cs
@@ -216,7 +212,7 @@ def complete_installation():
         #
         #ModuleInstall("Cartopy",        "wheel", mname="cartopy"),
         ModuleInstall("smopy", "pip"),
-        ModuleInstall("folium", "github", "sdpython"),
+        ModuleInstall("folium", "pip"),
         ModuleInstall("basemap", "wheel", mname="mpl_toolkits.basemap"),
         #
         ModuleInstall("sphinx", "pip"),
@@ -243,8 +239,7 @@ def complete_installation():
         ModuleInstall("ggplot", "pip"),
         ModuleInstall("dbfread", "pip"),   # to read dbase format
         ModuleInstall("xmltodict", "pip"),   # XML to JSON
-        ModuleInstall(
-            "python-linkedin", "github", "sdpython", mname="linkedin"),
+        ModuleInstall("python-linkedin", "pip", mname="linkedin"),
         # access to linkedin
         ModuleInstall("requests_oauthlib", "pip"),
         ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
@@ -274,8 +269,8 @@ def complete_installation():
         # convex optimization, depends on CVXOPT
         ModuleInstall("scs", "wheel"),
         ModuleInstall("cvxpy", "wheel"),
-        ModuleInstall("blist", "wheel"),  # better large list
-        ModuleInstall("conda", "pip"),  # to install packages with conda
+        ModuleInstall("blist", "wheel"),    # better large list
+        ModuleInstall("conda", "pip"),      # to install packages with conda
         ModuleInstall("libLAS", "wheel", mname="liblas"),
         ModuleInstall("liblinear", "wheel"),
         ModuleInstall("marisa_trie", "wheel"),
@@ -286,7 +281,7 @@ def complete_installation():
         ModuleInstall("Theano", "wheel", mname="theano"),
         ModuleInstall("pyqtgraph", "pip"),
         ModuleInstall("deap", "pip"),
-        ModuleInstall("smartopen", "pip"),  #for gensim
+        ModuleInstall("smartopen", "pip"),      # for gensim
         ModuleInstall("gensim", "wheel"),
         ModuleInstall("pep8", "pip"),
         ModuleInstall("autopep8", "pip"),
@@ -298,13 +293,6 @@ def complete_installation():
         ModuleInstall("bayespy", "pip"),  # Bayesian
         # ModuleInstall("kabuki", "pip"),  # Bayesian, does not work, it expects to have pymc with some optimization
         #
-        #ModuleInstall("pyrsslocal", "github", "sdpython"),
-        #ModuleInstall("python-nvd3", "github", "sdpython"),
-        #ModuleInstall("splinter", "github", "cobrateam"),
-        #ModuleInstall("pypdf2", "pip"),
-        #ModuleInstall("pdfminer", "pip"),
-        #ModuleInstall("lsqfit",      "wheel"),
-        #ModuleInstall("boost_python",   "wheel"),
         #
         ModuleInstall("glueviz", "wheel"),
         ModuleInstall("pypiserver", "pip"),
