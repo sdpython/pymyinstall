@@ -8,19 +8,40 @@ import sys
 import re
 import platform
 import os
+import time
+import importlib
+import datetime
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date
+from .install_memoize import install_memoize
+
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
     import urllib2 as urllib_error
 else:
     import urllib.request as urllib_request
     import urllib.error as urllib_error
-import time
-import importlib
-
-if sys.version_info[0] != 2:
     import importlib.util
 
-from .install_cmd_helper import python_version, run_cmd, unzip_files
+
+@install_memoize
+def get_page_wheel(page):
+    """
+    get the page
+
+    @param      page        location
+    @return                 page content
+    """
+    req = urllib_request.Request(
+        page,
+        headers={
+            'User-agent': 'Mozilla/5.0'})
+    u = urllib_request.urlopen(req)
+    text = u.read()
+    u.close()
+    text = text.decode("utf8")
+    text = text.replace("&quot;", "'")
+    text = text.replace("&#8209;", "-")
+    return text
 
 
 class ModuleInstall:
@@ -168,6 +189,9 @@ class ModuleInstall:
                     self.name,
                     "exe_xd or wheel_xd"))
 
+    _page_cache_html = os.path.join(
+        os.path.abspath(os.path.split(__file__)[0]), "page.html")
+
     def get_exewheel_url_link(self, file_save=None, wheel=False):
         """
         for windows, get the url of the setup using a webpage
@@ -193,29 +217,29 @@ class ModuleInstall:
         expre = re.compile(pattern)
 
         if "cached_page" not in self.__dict__:
-            page = os.path.join(os.path.split(__file__)[0], "page.html")
-            if os.path.exists(page):
+            page = ModuleInstall._page_cache_html
+
+            exi = os.path.exists(page)
+            if exi:
+                dt = get_file_modification_date(page)
+                now = datetime.datetime.now()
+                df = now - dt
+                if df > datetime.timedelta(7):
+                    exi = False
+
+            if exi:
                 with open(page, "r", encoding="utf8") as f:
                     text = f.read()
+                self.cached_page = text
             else:
-                req = urllib_request.Request(
-                    ModuleInstall.exeLocation,
-                    headers={
-                        'User-agent': 'Mozilla/5.0'})
-                u = urllib_request.urlopen(req)
-                text = u.read()
-                u.close()
-                text = text.decode("utf8")
+                text = get_page_wheel(ModuleInstall.exeLocation)
+                with open(page, "w", encoding="utf8") as f:
+                    f.write(text)
+                self.cached_page = text
 
-            text = text.replace("&quot;", "'")
-            self.cached_page = text
-
-        page = self.cached_page.replace("&#8209;", "-")
+        page = self.cached_page
         alls = expre.findall(page)
         if len(alls) == 0:
-            if file_save is not None:
-                with open(file_save, "w", encoding="utf8") as f:
-                    f.write(page)
             keep = []
             for line in page.split("\n"):
                 if "networkx" in line:
@@ -301,26 +325,18 @@ class ModuleInstall:
         if kind == "pip":
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
             # we use pip install <package> --download=temp_folder
-            if sys.platform.startswith("win"):
-                pip = os.path.join(
-                    os.path.split(
-                        sys.executable)[0],
-                    "Scripts",
-                    "pip.exe")
-            else:
-                pip = os.path.join(
-                    os.path.split(
-                        sys.executable)[0],
-                    "pip")
+            pip = get_pip_program()
             cmd = pip + ' install {0}'.format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if " " in temp_folder:
-                raise FileNotFoundError("no space allowed in folders: [" + temp_folder + "]")
+                raise FileNotFoundError(
+                    "no space allowed in folders: [" + temp_folder + "]")
             if deps:
                 cmd += ' --download={0}'.format(temp_folder)
             else:
                 cmd += ' --download={0} --no-deps'.format(temp_folder)
+
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
             if "Successfully downloaded" not in out:
@@ -360,7 +376,8 @@ class ModuleInstall:
                     file_save=file_save, wheel=True)
                 whlname = os.path.join(temp_folder, whl)
 
-                if force or not os.path.exists(whlname):
+                exi = os.path.exists(whlname)
+                if force or not exi:
 
                     self.fLOG("downloading", whl)
                     req = urllib_request.Request(
@@ -376,6 +393,7 @@ class ModuleInstall:
                     self.fLOG("writing", whl)
                     with open(whlname, "wb") as f:
                         f.write(text)
+
                 return whlname
 
         elif kind == "github":

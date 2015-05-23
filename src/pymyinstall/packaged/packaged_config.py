@@ -36,6 +36,7 @@ def small_installation():
         ModuleInstall("pytz", "pip"),
         ModuleInstall("pyreadline", "pip", mname="pyreadline"),
         ModuleInstall("husl", "pip"),
+        ModuleInstall("pipdeptree", "pip"),
         #
         ModuleInstall("openpyxl", "pip", version="1.8.6"),
         ModuleInstall("xlrd", "pip"),
@@ -133,6 +134,7 @@ def complete_installation():
         ModuleInstall("pyreadline", "pip", mname="pyreadline"),
         ModuleInstall("simplejson", "wheel"),
         ModuleInstall("husl", "pip"),
+        ModuleInstall("pipdeptree", "pip"),
         #
         ModuleInstall("openpyxl", "pip", version="1.8.6"),
         ModuleInstall("xlrd", "pip"),
@@ -152,8 +154,10 @@ def complete_installation():
         ModuleInstall('toolz', 'wheel'),            # for blaze
         ModuleInstall('datashape', 'pip'),          # for blaze
         ModuleInstall('multipledispatch', 'pip'),   # for blaze
-        ModuleInstall("dynd", "wheel"),             # see https://binstar.org/blaze/blaze
-        ModuleInstall("blaze", "wheel"),            # see https://binstar.org/blaze/blaze
+        # see https://binstar.org/blaze/blaze
+        ModuleInstall("dynd", "wheel"),
+        # see https://binstar.org/blaze/blaze
+        ModuleInstall("blaze", "wheel"),
         ModuleInstall("scipy", "wheel"),
         ModuleInstall("matplotlib", "wheel"),
         ModuleInstall("seaborn", "pip"),
@@ -190,10 +194,6 @@ def complete_installation():
         #
         ModuleInstall("rpy2", "wheel"),
         # ModuleInstall("pythonnet",      "wheel", mname="clr"),  # included in ensae_teaching_cs
-        #
-        ModuleInstall("pyquickhelper", "pip"),
-        ModuleInstall("pyensae", "pip"),
-        ModuleInstall("ensae_teaching_cs", "pip"),
         #
         ModuleInstall("selenium", "pip"),
         ModuleInstall("Pillow", "wheel", mname="PIL"),
@@ -306,6 +306,24 @@ def complete_installation():
         mod.append(ModuleInstall("winshell", "pip"))
 
     return [_ for _ in mod if _ is not None]
+
+
+def installation_teachings():
+    """
+    Modules used for teachings.
+    """
+    mod = [
+        ModuleInstall("pyquickhelper", "pip"),
+        ModuleInstall("pyensae", "pip"),
+        ModuleInstall("ensae_teaching_cs", "pip"),
+        ModuleInstall("actuariat_python", "pip"),
+        ModuleInstall("pymmails", "pip"),
+        ModuleInstall("pymyinstall", "pip"),
+        ModuleInstall("pyrsslocal", "pip"),
+        ModuleInstall("code_beatrix", "pip"),
+    ]
+    #
+    return mod
 
 
 def installation_cubes():

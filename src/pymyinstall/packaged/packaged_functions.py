@@ -195,7 +195,7 @@ def process_installation(
     @example(Extend Anaconda)
     @code
     from pymyinstall import process_installation, extend_anaconda
-    datascientist ("install", full=True)
+    process_installation(extend_anaconda(), full=True)
     @endcode
     @endexample
 

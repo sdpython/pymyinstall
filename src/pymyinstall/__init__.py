@@ -21,6 +21,16 @@ __downloadUrl__ = "http://www.xavierdupre.fr/site2013/index_code.html#pymyinstal
 __license__ = "BSD License"
 
 
+def _setup_hook():
+    """
+    does nothing
+    """
+    # we clean the cache
+    import os
+    if os.path.exists(ModuleInstall._page_cache_html):
+        os.remove(ModuleInstall._page_cache_html)
+
+
 def check(log=False):
     """
     Checks the library is working.
@@ -42,6 +52,6 @@ from .installhelper.install_custom_pandoc import install_pandoc
 from .installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
 from .packaged.packaged_functions import datascientist, ds_small, ds_complete, ds_cubes, ds_huge, process_installation
-from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_cubes
+from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_cubes, installation_teachings
 from .packaged.packaged_config import installation_azure, extend_winpython, extend_anaconda
 from .installhelper.install_custom_revealjs import download_revealjs
