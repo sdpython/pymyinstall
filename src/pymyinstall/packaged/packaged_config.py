@@ -59,6 +59,8 @@ def small_installation():
         ModuleInstall("jsonschema", "pip"),
         ModuleInstall("mistune", "pip"),
         ModuleInstall("wheel", "pip"),
+        ModuleInstall("alabaster", "wheel"),
+        ModuleInstall("Babel", "wheel"),
         ModuleInstall("sphinx", "pip"),
         ModuleInstall("autopep8", "pip"),
         #
@@ -215,6 +217,8 @@ def complete_installation():
         ModuleInstall("folium", "pip"),
         ModuleInstall("basemap", "wheel", mname="mpl_toolkits.basemap"),
         #
+        ModuleInstall("alabaster", "wheel"),
+        ModuleInstall("Babel", "wheel"),
         ModuleInstall("sphinx", "pip"),
         ModuleInstall("docutils", "pip"),
         ModuleInstall("flake8", "pip"),
