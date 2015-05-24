@@ -122,10 +122,10 @@ class ModuleInstall:
         usual
         """
         if self.script is None:
-            return "{0}:{1}:import {2}".format(
-                self.name, self.kind, self.ImportName)
+            return "{0}:{1}:import {2}:v{3}".format(
+                self.name, self.kind, self.ImportName, self.version)
         else:
-            return "{0}:{1}:{2}".format(self.name, self.kind, self.Script)
+            return "{0}:{1}:{2}:v{3}".format(self.name, self.kind, self.Script, self.version)
 
     @property
     def ImportName(self):
