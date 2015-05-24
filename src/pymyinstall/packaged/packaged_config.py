@@ -38,7 +38,7 @@ def small_installation():
         ModuleInstall("husl", "pip"),
         ModuleInstall("pipdeptree", "pip"),
         #
-        ModuleInstall("openpyxl", "pip", version="1.8.6"),
+        ModuleInstall("openpyxl", "pip"),
         ModuleInstall("xlrd", "pip"),
         #
         ModuleInstall("certifi", "pip"),
@@ -62,6 +62,7 @@ def small_installation():
         ModuleInstall("alabaster", "wheel"),
         ModuleInstall("Babel", "wheel"),
         ModuleInstall("sphinx", "pip"),
+        ModuleInstall("pep8", "pip", version="1.5.7"),
         ModuleInstall("autopep8", "pip"),
         #
         ModuleInstall("pandas", "wheel"),
@@ -79,6 +80,7 @@ def small_installation():
         ModuleInstall("spyder", "wheel", script="spyder.bat"),
         #
         #
+        ModuleInstall("brewer2mpl", "pip"),
         ModuleInstall("ggplot", "pip"),
         ModuleInstall("goslate", "pip"),
         ModuleInstall("dbfread", "pip"),   # to read dbase format
@@ -131,6 +133,8 @@ def complete_installation():
         ModuleInstall("coverage", "pip"),
         ModuleInstall("nose", "pip"),
         ModuleInstall("pytz", "pip"),
+        ModuleInstall("werkzeug", "pip"),
+        ModuleInstall("itsdangerous", "pip"),
         ModuleInstall("SQLAlchemy", "wheel", mname="sqlalchemy"),
         ModuleInstall("flask-sqlalchemy", "pip", mname="flask.ext.sqlalchemy"),
         ModuleInstall("pyreadline", "pip", mname="pyreadline"),
@@ -138,7 +142,7 @@ def complete_installation():
         ModuleInstall("husl", "pip"),
         ModuleInstall("pipdeptree", "pip"),
         #
-        ModuleInstall("openpyxl", "pip", version="1.8.6"),
+        ModuleInstall("openpyxl", "pip"),
         ModuleInstall("xlrd", "pip"),
         ModuleInstall("python-pptx", "pip"),
         ModuleInstall("XlsxWriter", "pip", mname="xlsxwriter"),
@@ -151,7 +155,7 @@ def complete_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("cffi", "wheel"),
         ModuleInstall("numpy", "wheel"),
-        ModuleInstall('odo', 'pip'),                # for blaze
+        ModuleInstall('odo', 'wheel'),                # for blaze
         ModuleInstall('cytoolz', 'wheel'),          # for blaze
         ModuleInstall('toolz', 'wheel'),            # for blaze
         ModuleInstall('datashape', 'pip'),          # for blaze
@@ -167,12 +171,14 @@ def complete_installation():
         ModuleInstall("gmpy2", "wheel"),
         ModuleInstall("llvmpy", "wheel", mname="llvm"),
         ModuleInstall("numba", "wheel"),
-        ModuleInstall("networkx", "wheel"),
+        ModuleInstall("networkx", "pip"),
         ModuleInstall("graphviz", "pip"),
         ModuleInstall("jsonschema", "pip"),
         ModuleInstall("mistune", "pip"),
         ModuleInstall("wheel", "pip"),
         #
+        ModuleInstall("snowballstemmer", "pip"),
+        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
         ModuleInstall("scikit-image", "wheel", mname="skimage"),
@@ -203,6 +209,7 @@ def complete_installation():
         ModuleInstall("markupsafe", "pip"),
         ModuleInstall("requests", "pip"),
         ModuleInstall("Kivy", "wheel", mname="kivy"),
+        ModuleInstall("kivy-garden", "pip", mname="kivy.garden", version="0.1.1"),
         #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
         ModuleInstall("PySide", "wheel"),
         ModuleInstall("spyder", "wheel", script="spyder.bat"),
@@ -210,6 +217,8 @@ def complete_installation():
         ModuleInstall("py4j", "pip"),
         ModuleInstall("python-igraph", "wheel", mname="igraph"),
         #
+        ModuleInstall("lockfile", "pip"),
+        ModuleInstall("python-daemon", "pip", mname="daemon"),
         ModuleInstall("luigi", "pip"),
         #
         #ModuleInstall("Cartopy",        "wheel", mname="cartopy"),
@@ -221,8 +230,11 @@ def complete_installation():
         ModuleInstall("Babel", "wheel"),
         ModuleInstall("sphinx", "pip"),
         ModuleInstall("docutils", "pip"),
+        ModuleInstall("mccabe", "pip"),
+        ModuleInstall("pyflakes", "pip"),
         ModuleInstall("flake8", "pip"),
-
+        ModuleInstall("snowballstemmer", "pip"),
+        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
         ModuleInstall(
             "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
@@ -238,13 +250,16 @@ def complete_installation():
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
         ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
+        ModuleInstall("sphinxjp.themes.revealjs", "pip"),
 
         #
+        ModuleInstall("brewer2mpl", "pip"),
         ModuleInstall("ggplot", "pip"),
         ModuleInstall("dbfread", "pip"),   # to read dbase format
         ModuleInstall("xmltodict", "pip"),   # XML to JSON
         ModuleInstall("python-linkedin", "pip", mname="linkedin"),
         # access to linkedin
+        ModuleInstall("oauthlib", "pip"),
         ModuleInstall("requests_oauthlib", "pip"),
         ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
         # ModuleInstall("unqlite",                    "pip"),   #
@@ -252,7 +267,7 @@ def complete_installation():
         ModuleInstall("pycontracts", "pip", mname="contracts"),
         ModuleInstall("ansiconv", "pip"),   # shell to plain
         ModuleInstall("ansi2html", "pip"),   # shell to HTML
-        ModuleInstall("feedparser", "pip"),   # to parse RSS streams
+        ModuleInstall("feedparser", "wheel"),   # to parse RSS streams
 
         #
         ModuleInstall("ecdsa", "pip"),
@@ -263,6 +278,7 @@ def complete_installation():
             0] < 3 else None,  # to read dbase format
         #
         ModuleInstall("nodeenv", "pip"),   # node.js
+        ModuleInstall("pbr", "pip"),
         ModuleInstall("python-jenkins", "pip", mname="jenkins"),  # for Jenkins
         ModuleInstall("psutil", "wheel"),  #
         #
@@ -272,6 +288,7 @@ def complete_installation():
         ModuleInstall("bigfloat", "wheel"),  # large double
         # convex optimization, depends on CVXOPT
         ModuleInstall("scs", "wheel"),
+        ModuleInstall("ecos", "wheel"),
         ModuleInstall("cvxpy", "wheel"),
         ModuleInstall("blist", "wheel"),    # better large list
         ModuleInstall("conda", "pip"),      # to install packages with conda
@@ -285,9 +302,11 @@ def complete_installation():
         ModuleInstall("Theano", "wheel", mname="theano"),
         ModuleInstall("pyqtgraph", "pip"),
         ModuleInstall("deap", "pip"),
-        ModuleInstall("smartopen", "pip"),      # for gensim
+        ModuleInstall("boto", "pip"),      # for gensim
+        ModuleInstall("bz2file", "pip"),      # for gensim
+        ModuleInstall("smart_open", "wheel"),      # for gensim
         ModuleInstall("gensim", "wheel"),
-        ModuleInstall("pep8", "pip"),
+        ModuleInstall("pep8", "pip", version="1.5.7"),
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("pybrain", "pip"),
         ModuleInstall("pymc", "wheel"),
@@ -302,6 +321,11 @@ def complete_installation():
         ModuleInstall("pypiserver", "pip"),
         #
         ModuleInstall("charts", "pip"),  # javascript graphs
+        #
+        ModuleInstall("jedi", "pip"), 
+        ModuleInstall("docopt", "pip"), 
+        ModuleInstall("markdown2", "pip"), 
+        #ModuleInstall("rodeo", "pip"), 
 
     ]
 
@@ -394,9 +418,14 @@ def extend_anaconda():
         ModuleInstall("deap", "pip"),
         ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
         #
+        ModuleInstall("pep8", "pip", version="1.5.7"),
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("wheel", "pip"),
         ModuleInstall("coverage", "pip"),
+        ModuleInstall("mccabe", "pip"),
+        ModuleInstall("snowballstemmer", "pip"),
+        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
+        ModuleInstall("pyflakes", "pip"),
         ModuleInstall("flake8", "pip"),
         ModuleInstall(
             "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
@@ -439,9 +468,12 @@ def extend_winpython():
         ModuleInstall("deap", "pip"),
         ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
         #
+        ModuleInstall("pep8", "pip", version="1.5.7"),
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("coverage", "pip"),
         ModuleInstall("bokeh", "pip"),
+        ModuleInstall("snowballstemmer", "pip"),
+        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
         ModuleInstall(
             "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
         ModuleInstall("sphinx_rtd_theme", "pip"),
