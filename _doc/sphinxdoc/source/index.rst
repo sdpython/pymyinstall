@@ -73,6 +73,10 @@ To use modules related to the manipulation of big datasets::
     ds_complete()
     ds_huge()
     
+It is better to use it outside the interpreter::
+
+    python -c "from pymyinstall import complete_installation, process_installation;process_installation(complete_installation())"
+    
 Installation
 ------------
 

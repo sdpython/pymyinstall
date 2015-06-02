@@ -14,6 +14,14 @@ def noLOG(*l, **p):
     pass
 
 
+def install_mathjax():
+    """
+    install a local copy of mathjax
+    """
+    from IPython.external import mathjax
+    mathjax.install_mathjax()
+
+
 def setup_ipython(current_path=None,
                   additional_path=None,
                   apply_modification=True,

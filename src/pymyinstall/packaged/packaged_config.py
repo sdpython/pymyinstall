@@ -53,18 +53,27 @@ def small_installation():
         # small config
         ModuleInstall("scipy", "wheel"),
         ModuleInstall("statsmodels", "wheel"),  # needs scipy
-        # ModuleInstall("networkx", "wheel"), # it seems problematic for this
+        ModuleInstall("networkx", "wheel"),  # it seems problematic for this
         # small config
         ModuleInstall("graphviz", "pip"),
         ModuleInstall("jsonschema", "pip"),
         ModuleInstall("mistune", "pip"),
         ModuleInstall("wheel", "pip"),
+        # sphinx
         ModuleInstall("alabaster", "wheel"),
         ModuleInstall("Babel", "wheel"),
         ModuleInstall("colorama", "pip"),
+        ModuleInstall("docutils", "pip"),
         ModuleInstall("sphinx", "pip"),
+        ModuleInstall('pypiserver', 'pip'),
+        # flake8, pep8
         ModuleInstall("pep8", "pip", version="1.5.7"),
         ModuleInstall("autopep8", "pip"),
+        ModuleInstall("mccabe", "pip"),
+        ModuleInstall("pyflakes", "pip"),
+        ModuleInstall("flake8", "pip"),
+        ModuleInstall('markupsafe', 'pip'),
+        #
         #
         ModuleInstall("pandas", "wheel"),
         ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
@@ -90,6 +99,7 @@ def small_installation():
         ModuleInstall("ansi2html", "pip"),   # shell to HTML
         #
         ModuleInstall("nodeenv", "pip"),   # node.js
+        ModuleInstall('sphinxjp.themes.revealjs', 'pip'),
         #
         # 2015-02-05
         #
@@ -115,134 +125,66 @@ def complete_installation():
         _.install(temp_folder="install")
     @endcode
     """
-    mod = [
-        ModuleInstall("virtualenv", "wheel"),
-        # ModuleInstall("setuptools",     "wheel"),                # removed with 3.4
-        # ModuleInstall("pip",            "wheel"),
-        # # removed with 3.4
-        ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
-        ModuleInstall("decorator", "pip"),
-        #
-        ModuleInstall("six", "pip"),
-        ModuleInstall("lxml", "wheel"),
-        ModuleInstall("jinja2", "pip"),
-        ModuleInstall("pygments", "pip"),
-        ModuleInstall("pyparsing", "pip"),
-        ModuleInstall("python-dateutil", "pip", "dateutil"),
-        ModuleInstall("html5lib", "pip"),
-        ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
-        ModuleInstall("coverage", "pip"),
-        ModuleInstall("nose", "pip"),
-        ModuleInstall("pytz", "pip"),
-        ModuleInstall("werkzeug", "pip"),
-        ModuleInstall("itsdangerous", "pip"),
-        ModuleInstall("SQLAlchemy", "wheel", mname="sqlalchemy"),
-        ModuleInstall("flask-sqlalchemy", "pip", mname="flask.ext.sqlalchemy"),
-        ModuleInstall("pyreadline", "pip", mname="pyreadline"),
-        ModuleInstall("simplejson", "wheel"),
-        ModuleInstall("husl", "pip"),
-        ModuleInstall("pipdeptree", "pip"),
-        #
-        ModuleInstall("openpyxl", "pip"),
-        ModuleInstall("xlrd", "pip"),
-        ModuleInstall("python-pptx", "pip"),
-        ModuleInstall("XlsxWriter", "pip", mname="xlsxwriter"),
-        #
-        ModuleInstall("tornado", "wheel"),
-        ModuleInstall("flask", "pip"),
-        ModuleInstall("pyzmq", "wheel", mname="zmq"),
-        #
-        ModuleInstall("pycparser", "wheel"),
-        ModuleInstall("Cython", "wheel"),
-        ModuleInstall("cffi", "wheel"),
-        ModuleInstall("numpy", "wheel"),
-        ModuleInstall('odo', 'wheel'),                # for blaze
-        ModuleInstall('cytoolz', 'wheel'),          # for blaze
-        ModuleInstall('toolz', 'wheel'),            # for blaze
-        ModuleInstall('datashape', 'pip'),          # for blaze
-        ModuleInstall('multipledispatch', 'pip'),   # for blaze
-        # see https://binstar.org/blaze/blaze
-        ModuleInstall("dynd", "wheel"),
-        # see https://binstar.org/blaze/blaze
-        ModuleInstall("blaze", "wheel"),
-        ModuleInstall("scipy", "wheel"),
-        ModuleInstall("matplotlib", "wheel"),
-        ModuleInstall("seaborn", "pip"),
-        ModuleInstall("sympy", "pip"),
-        ModuleInstall("gmpy2", "wheel"),
-        ModuleInstall("llvmpy", "wheel", mname="llvm"),
-        ModuleInstall("numba", "wheel"),
-        ModuleInstall("networkx", "pip"),
-        ModuleInstall("graphviz", "pip"),
-        ModuleInstall("jsonschema", "pip"),
-        ModuleInstall("mistune", "pip"),
-        ModuleInstall("wheel", "pip"),
-        #
-        ModuleInstall("snowballstemmer", "pip"),
-        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
-        ModuleInstall("pandas", "wheel"),
-        ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
-        ModuleInstall("scikit-image", "wheel", mname="skimage"),
-        ModuleInstall("patsy", "pip"),
-        ModuleInstall("statsmodels", "wheel"),  # needs scipy
-        ModuleInstall("ipython", "wheel", mname="IPython"),
-        ModuleInstall("cvxopt", "wheel"),
-        ModuleInstall("pymc", "wheel"),
-        ModuleInstall("PyWavelets", "wheel", mname="pywt"),
-        ModuleInstall("fastcluster", "wheel"),
-        #
-        ModuleInstall("mpld3", "pip"),
-        ModuleInstall("pycosat", "wheel"),
-        ModuleInstall("PyYAML", "wheel", mname="yaml"),
-        ModuleInstall("bokeh", "pip"),
-        ModuleInstall("pyshp", "pip", mname="shapefile"),
-        # needed by shapely
-        ModuleInstall("Shapely", "wheel", mname="shapely"),
-        # exe on Windows to get geos.dll
-        ModuleInstall("vispy", "pip"),
-        #
-        ModuleInstall("rpy2", "wheel"),
-        # ModuleInstall("pythonnet",      "wheel", mname="clr"),  # included in ensae_teaching_cs
-        #
-        ModuleInstall("selenium", "pip"),
-        ModuleInstall("Pillow", "wheel", mname="PIL"),
-        ModuleInstall("pygame", "wheel"),
-        ModuleInstall("markupsafe", "pip"),
-        ModuleInstall("requests", "pip"),
-        ModuleInstall("Kivy", "wheel", mname="kivy"),
-        ModuleInstall("kivy-garden", "pip", mname="kivy.garden", version="0.1.1"),
-        #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
-        ModuleInstall("PySide", "wheel"),
-        ModuleInstall("spyder", "wheel", script="spyder.bat"),
-        #
-        ModuleInstall("py4j", "pip"),
-        ModuleInstall("python-igraph", "wheel", mname="igraph"),
-        #
-        ModuleInstall("lockfile", "pip"),
-        ModuleInstall("python-daemon", "pip", mname="daemon"),
-        ModuleInstall("luigi", "pip"),
-        #
-        #ModuleInstall("Cartopy",        "wheel", mname="cartopy"),
-        ModuleInstall("smopy", "pip"),
-        ModuleInstall("folium", "pip"),
-        ModuleInstall("basemap", "wheel", mname="mpl_toolkits.basemap"),
-        #
-        ModuleInstall("alabaster", "wheel"),
-        ModuleInstall("Babel", "wheel"),
-        ModuleInstall("sphinx", "pip"),
-        ModuleInstall("docutils", "pip"),
-        ModuleInstall("mccabe", "pip"),
-        ModuleInstall("pyflakes", "pip"),
-        ModuleInstall("flake8", "pip"),
-        ModuleInstall("snowballstemmer", "pip"),
-        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
+    mod = small_installation() + [
+        ModuleInstall('werkzeug', 'pip'),
+        ModuleInstall('itsdangerous', 'pip'),
+        ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy'),
+        ModuleInstall('flask-sqlalchemy', 'pip', mname='flask.ext.sqlalchemy'),
+        ModuleInstall('simplejson', 'wheel'),
+        ModuleInstall('python-pptx', 'pip'),
+        ModuleInstall('XlsxWriter', 'pip', mname='xlsxwriter'),
+        ModuleInstall('flask', 'pip'),
+        ModuleInstall('cffi', 'wheel'),
+        ModuleInstall('odo', 'wheel'),
+        ModuleInstall('cytoolz', 'wheel'),
+        ModuleInstall('toolz', 'wheel'),
+        ModuleInstall('datashape', 'pip'),
+        ModuleInstall('multipledispatch', 'pip'),
+        ModuleInstall('dynd', 'wheel'),
+        ModuleInstall('blaze', 'wheel'),
+        ModuleInstall('seaborn', 'pip'),
+        ModuleInstall('sympy', 'pip'),
+        ModuleInstall('gmpy2', 'wheel'),
+        ModuleInstall('llvmpy', 'wheel', mname='llvm'),
+        ModuleInstall('numba', 'wheel'),
+        ModuleInstall('networkx', 'pip'),
+        ModuleInstall('snowballstemmer', 'pip'),
+        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme'),
+        ModuleInstall('scikit-image', 'wheel', mname='skimage'),
+        ModuleInstall('patsy', 'pip'),
+        ModuleInstall('cvxopt', 'wheel'),
+        ModuleInstall('pymc', 'wheel'),
+        ModuleInstall('PyWavelets', 'wheel', mname='pywt'),
+        ModuleInstall('fastcluster', 'wheel'),
+        ModuleInstall('pycosat', 'wheel'),
+        ModuleInstall('PyYAML', 'wheel', mname='yaml'),
+        ModuleInstall('bokeh', 'pip'),
+        ModuleInstall('pyshp', 'pip', mname='shapefile'),
+        ModuleInstall('Shapely', 'wheel', mname='shapely'),
+        ModuleInstall('vispy', 'pip'),
+        ModuleInstall('rpy2', 'wheel'),
+        ModuleInstall('selenium', 'pip'),
+        ModuleInstall('Pillow', 'wheel', mname='PIL'),
+        ModuleInstall('pygame', 'wheel'),
+        ModuleInstall('Kivy', 'wheel', mname='kivy'),
+        ModuleInstall('kivy-garden', 'pip', mname='kivy.garden'),
+        ModuleInstall('py4j', 'pip'),
+        ModuleInstall('python-igraph', 'wheel', mname='igraph'),
+        ModuleInstall('lockfile', 'pip'),
+        ModuleInstall('python-daemon', 'pip', mname='daemon'),
+        ModuleInstall('luigi', 'pip'),
+        ModuleInstall('smopy', 'pip'),
+        ModuleInstall('folium', 'pip'),
+        ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap'),
+        ModuleInstall('snowballstemmer', 'pip'),
+        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme'),
         ModuleInstall(
-            "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
-        ModuleInstall("sphinx_rtd_theme", "pip"),
-        ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
-        ModuleInstall("solar_theme", "pip"),
-        ModuleInstall("cloud_sptheme", "pip"),
-        ModuleInstall("sphinx_readable_theme", "pip"),
+            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images'),
+        ModuleInstall('sphinx_rtd_theme', 'pip'),
+        ModuleInstall('sphinxjp.themes.basicstrap', 'pip'),
+        ModuleInstall('solar_theme', 'pip'),
+        ModuleInstall('cloud_sptheme', 'pip'),
+        ModuleInstall('sphinx_readable_theme', 'pip'),
         ModuleInstall(
             "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
         ModuleInstall("wild_sphinx_theme", "pip"),
@@ -330,7 +272,6 @@ def complete_installation():
         ModuleInstall("markdown2", "pip"), 
         ModuleInstall("structures", "pip"), 
         ModuleInstall("rodeo", "pip"), 
-
     ]
 
     if sys.platform.startswith("win"):

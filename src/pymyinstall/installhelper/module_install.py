@@ -105,6 +105,14 @@ class ModuleInstall:
 
         self.fLOG = fLOG
 
+    @staticmethod
+    def clear_cache():
+        """
+        clear the local cache to get wheel link
+        """
+        if os.path.exists(ModuleInstall._page_cache_html):
+            os.remove(ModuleInstall._page_cache_html)
+
     @property
     def Script(self):
         """
@@ -258,6 +266,10 @@ class ModuleInstall:
         if self.name == "PyQt":
             alls = [_[:end]
                     for _ in alls if _[ind].startswith(self.name + "4")]
+        elif self.name == "numpy":
+            white = self.name.replace("-", "_")
+            alls = [_[:end] for _ in alls if "unoptimized" not in _[ind] and
+                    (_[ind].startswith(self.name + "-") or _[ind].startswith(white + "-"))]
         else:
             white = self.name.replace("-", "_")
             alls = [_[:end] for _ in alls if _[ind].startswith(
