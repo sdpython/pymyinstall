@@ -61,6 +61,7 @@ def small_installation():
         ModuleInstall("wheel", "pip"),
         ModuleInstall("alabaster", "wheel"),
         ModuleInstall("Babel", "wheel"),
+        ModuleInstall("colorama", "pip"),
         ModuleInstall("sphinx", "pip"),
         ModuleInstall("pep8", "pip", version="1.5.7"),
         ModuleInstall("autopep8", "pip"),
@@ -313,7 +314,9 @@ def complete_installation():
         # ModuleInstall("libsvm", "wheel"),   # does not work on Windows
         # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
         # work, it expects to have pymc with some optimization
+        ModuleInstall("h5py", "wheel"),  # Bayesian
         ModuleInstall("bayespy", "pip"),  # Bayesian
+        ModuleInstall("numexpr", "wheel"),
         # ModuleInstall("kabuki", "pip"),  # Bayesian, does not work, it expects to have pymc with some optimization
         #
         #
@@ -325,7 +328,8 @@ def complete_installation():
         ModuleInstall("jedi", "pip"), 
         ModuleInstall("docopt", "pip"), 
         ModuleInstall("markdown2", "pip"), 
-        #ModuleInstall("rodeo", "pip"), 
+        ModuleInstall("structures", "pip"), 
+        ModuleInstall("rodeo", "pip"), 
 
     ]
 
