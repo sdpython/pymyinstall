@@ -39,7 +39,7 @@ def install_pandoc(
     if bb and not force_download:
         return True
 
-    link = "https://github.com/jgm/pandoc/releases/latest"
+    link = "https://github.com/jgm/pandoc/releases"
     page = download_page(link)
     if sys.platform.startswith("win"):
         reg = re.compile("href=\\\"(.*?[.]msi)\\\"")

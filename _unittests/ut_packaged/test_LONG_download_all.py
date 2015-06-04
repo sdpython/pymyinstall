@@ -41,7 +41,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall import ModuleInstall, complete_installation
+from src.pymyinstall import ModuleInstall, installation_ensae
 from pyquickhelper import fLOG
 
 
@@ -73,7 +73,7 @@ class TestDownloadAll (unittest.TestCase):
                 # os.remove(os.path.join(temp,_))
                 pass
 
-        pack = complete_installation()
+        pack = installation_ensae()
         assert len(pack) > 0
 
         for m in pack[1:]:

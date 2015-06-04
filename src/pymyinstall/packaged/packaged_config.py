@@ -49,6 +49,7 @@ def small_installation():
         ModuleInstall("Cython", "wheel"),
         ModuleInstall("numpy", "wheel"),
         ModuleInstall("matplotlib", "wheel"),
+        ModuleInstall("gr", "wheel"),
         # ModuleInstall("seaborn", "pip"),   # it seems problematic for this
         # small config
         ModuleInstall("scipy", "wheel"),
@@ -253,25 +254,20 @@ def complete_installation():
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("pybrain", "pip"),
         ModuleInstall("pymc", "wheel"),
-        # ModuleInstall("libsvm", "wheel"),   # does not work on Windows
-        # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
-        # work, it expects to have pymc with some optimization
         ModuleInstall("h5py", "wheel"),  # Bayesian
         ModuleInstall("bayespy", "pip"),  # Bayesian
         ModuleInstall("numexpr", "wheel"),
-        # ModuleInstall("kabuki", "pip"),  # Bayesian, does not work, it expects to have pymc with some optimization
-        #
         #
         ModuleInstall("glueviz", "wheel"),
         ModuleInstall("pypiserver", "pip"),
         #
         ModuleInstall("charts", "pip"),  # javascript graphs
         #
-        ModuleInstall("jedi", "pip"), 
-        ModuleInstall("docopt", "pip"), 
-        ModuleInstall("markdown2", "pip"), 
-        ModuleInstall("structures", "pip"), 
-        ModuleInstall("rodeo", "pip"), 
+        ModuleInstall("jedi", "pip"),
+        ModuleInstall("docopt", "pip"),
+        ModuleInstall("markdown2", "pip"),
+        ModuleInstall("structures", "pip"),
+        ModuleInstall("rodeo", "pip"),
     ]
 
     if sys.platform.startswith("win"):
@@ -441,3 +437,72 @@ def extend_winpython():
     ]
 
     return mod
+
+
+def extension_ensae():
+    """
+    Modules introduced by students
+    """
+    mod = [
+        ModuleInstall("celery", "pip"),
+        ModuleInstall("tweepy", "pip"),
+        ModuleInstall("newspaper3k", "pip", mname="newspaper"),
+        ModuleInstall("django", "pip"),
+        ModuleInstall("django-audiotracks", "pip", mname="django.audiotracks"),
+        ModuleInstall("Quandl", "pip"),
+        ModuleInstall("Lasagne", "pip", mname="lasagne"),
+        ModuleInstall("pymunk", "pip"),
+        ModuleInstall("pyjs", "pip"),
+        ModuleInstall("pyjsdl", "pip"),
+        ModuleInstall("PyYAML", "wheel", mname="pyyaml"),
+        ModuleInstall("nltk", "pip"),
+        ModuleInstall("textblob", "pip"),
+        ModuleInstall("python-dev", "pip", mname="dev"),
+        ModuleInstall("opencv", "wheel"),
+        ModuleInstall("PyAudio", "wheel", mname="pyaudio"),
+        ModuleInstall("BTrees", "wheel"),
+        ModuleInstall("datrie", "wheel"),
+        ModuleInstall("pysparse", "wheel"),
+        ModuleInstall("la", "wheel"),
+        ModuleInstall("mahotas", "wheel"),
+        ModuleInstall("milk", "wheel"),
+        ModuleInstall("minepy", "wheel"),
+        ModuleInstall("mlpy", "wheel"),
+        ModuleInstall("NLopt", "wheel", mname="nlopt"),
+        ModuleInstall("Pmw", "wheel", mname="pmw"),
+        ModuleInstall("py2exe", "wheel"),
+        ModuleInstall("pytools", "pip"),
+        ModuleInstall("pycuda", "wheel"),
+        ModuleInstall("pylzma", "wheel"),
+        ModuleInstall("pymvpa2", "wheel", mname="pymvpa"),
+        ModuleInstall("pyodbc", "wheel"),
+        ModuleInstall("pypmc", "wheel"),
+        ModuleInstall("pyserial", "wheel"),
+        ModuleInstall("PyX", "wheel", mname="pyx"),
+        ModuleInstall("scandir", "wheel"),
+        ModuleInstall("VideoCapture", "wheel"),
+        ModuleInstall("zs", "wheel"),
+        #
+        ModuleInstall("libsvm", "wheel"),   # does not work on Windows
+        ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
+        # work, it expects to have pymc with some optimization
+        # Bayesian, does not work, it expects to have pymc with some
+        # optimization
+        ModuleInstall("kabuki", "pip"),
+
+    ]
+    return mod
+
+
+def installation_ensae():
+    """
+    Full installation
+
+    """
+    base = complete_installation() +  \
+        installation_cubes() + \
+        installation_huge_datasets() + \
+        installation_azure() + \
+        extension_ensae()
+
+    return base
