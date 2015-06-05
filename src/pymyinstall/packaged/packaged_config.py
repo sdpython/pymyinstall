@@ -233,7 +233,7 @@ def complete_installation():
         # convex optimization, depends on CVXOPT
         ModuleInstall("scs", "wheel"),
         ModuleInstall("ecos", "wheel"),
-        ModuleInstall("cvxpy", "wheel"),
+        ModuleInstall("cvxpy", "pip"),
         ModuleInstall("blist", "wheel"),    # better large list
         ModuleInstall("conda", "pip"),      # to install packages with conda
         ModuleInstall("libLAS", "wheel", mname="liblas"),
