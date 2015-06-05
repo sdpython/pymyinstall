@@ -174,6 +174,7 @@ def complete_installation():
         ModuleInstall('lockfile', 'pip'),
         ModuleInstall('python-daemon', 'pip', mname='daemon'),
         ModuleInstall('luigi', 'pip'),
+        ModuleInstall('airflow', 'pip'),
         ModuleInstall('smopy', 'pip'),
         ModuleInstall('folium', 'pip'),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap'),
