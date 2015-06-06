@@ -30,7 +30,8 @@ pymyinstall documentation
 `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_,
 `wheel <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_,
 `travis <https://travis-ci.org/sdpython/pymyinstalls>`_,
-:ref:`l-README`
+:ref:`l-README`,
+:ref:`blog <ap-main-0>`
 
 
 
