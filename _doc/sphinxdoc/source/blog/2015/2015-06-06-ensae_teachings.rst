@@ -2,7 +2,7 @@
 
 .. blogpost::
     :title: New modules after a year of teachings
-    :keywords: 
+    :keywords: ENSAE, javascript
     :date: 2015-06-06
     :categories: teachings, modules
     
