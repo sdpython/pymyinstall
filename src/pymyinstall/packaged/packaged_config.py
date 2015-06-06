@@ -280,7 +280,9 @@ def complete_installation():
 
 def installation_teachings():
     """
-    Modules used for teachings.
+    .. index:: ENSAE, teachings
+    
+    Modules implemented for my teachings.
     """
     mod = [
         ModuleInstall("pyquickhelper", "pip"),
@@ -442,7 +444,9 @@ def extend_winpython():
 
 def extension_ensae():
     """
-    Modules introduced by students
+    .. index:: ENSAE
+    
+    Modules introduced by students and some others added after some reading.
     """
     mod = [
         ModuleInstall("celery", "pip"),
@@ -497,8 +501,9 @@ def extension_ensae():
 
 def installation_ensae():
     """
-    Full installation
-
+    .. index:: ENSAE
+    
+    Installation of all possible modules for my teachings at the ENSAE.
     """
     base = complete_installation() +  \
         installation_cubes() + \

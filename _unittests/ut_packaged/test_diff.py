@@ -62,10 +62,10 @@ class TestDifference(unittest.TestCase):
 
         for mod in keep:
             if mod.mname is None:
-                print(
+                fLOG(
                     "ModuleInstall('{0}', '{1}'),".format(mod.name, mod.kind))
             else:
-                print("ModuleInstall('{0}', '{1}', mname='{2}'),".format(
+                fLOG("ModuleInstall('{0}', '{1}', mname='{2}'),".format(
                     mod.name, mod.kind, mod.mname))
 
 
