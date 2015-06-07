@@ -7,4 +7,4 @@ from pymyinstall import installation_ensae
 skip = ["pyquickhelper", "pyensae", "pyrsslocal",
         "pymmails", "ensae_teaching_cs"]
 for mod in installation_ensae():
-    mod.install(log =True)
+    mod.install(log=True)

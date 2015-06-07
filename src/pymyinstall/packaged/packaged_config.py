@@ -174,7 +174,8 @@ def complete_installation():
         ModuleInstall('lockfile', 'pip'),
         ModuleInstall('python-daemon', 'pip', mname='daemon'),
         ModuleInstall('luigi', 'pip'),
-        ModuleInstall('setproctitle', 'wheel', mname='setproctitle'), # for airflow
+        # for airflow
+        ModuleInstall('setproctitle', 'wheel', mname='setproctitle'),
         ModuleInstall('airflow', 'pip'),
         ModuleInstall('smopy', 'pip'),
         ModuleInstall('folium', 'pip'),
@@ -281,7 +282,7 @@ def complete_installation():
 def installation_teachings():
     """
     .. index:: ENSAE, teachings
-    
+
     Modules implemented for my teachings.
     """
     mod = [
@@ -445,7 +446,7 @@ def extend_winpython():
 def extension_ensae():
     """
     .. index:: ENSAE
-    
+
     Modules introduced by students and some others added after some reading.
     """
     mod = [
@@ -456,7 +457,7 @@ def extension_ensae():
         ModuleInstall("django-audiotracks", "pip", mname="audiotracks"),
         ModuleInstall("Quandl", "pip"),
         #ModuleInstall("Lasagne", "pip", mname="lasagne"),
-        ModuleInstall("pymunk", "pip"),        
+        ModuleInstall("pymunk", "pip"),
         ModuleInstall("nltk", "wheel"),
         ModuleInstall("textblob", "pip"),
         ModuleInstall("dev", "pip"),
@@ -485,7 +486,8 @@ def extension_ensae():
         ModuleInstall("VideoCapture", "wheel"),
         ModuleInstall("zs", "wheel"),
         #
-        ModuleInstall("libsvm", "wheel", mname="svm"),   # does not work on Windows
+        # does not work on Windows
+        ModuleInstall("libsvm", "wheel", mname="svm"),
         #
         # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
         # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
@@ -493,7 +495,8 @@ def extension_ensae():
         # Bayesian, does not work, it expects to have pymc with some
         # optimization
         #
-        ModuleInstall("pyjs", "github", "pyjs"), # ModuleInstall("pyjs", "pip"), # needs manual installation
+        # ModuleInstall("pyjs", "pip"), # needs manual installation
+        ModuleInstall("pyjs", "github", "pyjs"),
         # ModuleInstall("pyjsdl", "github", "jggatc"), # no setup.py
         #
         # twisted, scrapy, not ready yet on Python 3
@@ -505,7 +508,7 @@ def extension_ensae():
 def installation_ensae():
     """
     .. index:: ENSAE
-    
+
     Installation of all possible modules for my teachings at the ENSAE.
     """
     base = complete_installation() +  \
