@@ -509,17 +509,7 @@ class ModuleInstall:
         ret = None
 
         if kind == "pip":
-            if sys.platform.startswith("win"):
-                pip = os.path.join(
-                    os.path.split(
-                        sys.executable)[0],
-                    "Scripts",
-                    "pip.exe")
-            else:
-                pip = os.path.join(
-                    os.path.split(
-                        sys.executable)[0],
-                    "pip")
+            pip = get_pip_program()
             cmd = pip + " install {0}".format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
@@ -572,17 +562,7 @@ class ModuleInstall:
                     unzipFile=True)
                 self.fLOG("installing", os.path.split(whlname)[-1])
 
-            if sys.platform.startswith("win"):
-                pip = os.path.join(
-                    os.path.split(
-                        sys.executable)[0],
-                    "Scripts",
-                    "pip.exe")
-            else:
-                pip = os.path.join(
-                    os.path.split(
-                        sys.executable)[0],
-                    "pip")
+            pip = get_pip_program()
             cmd = pip + " install {0}".format(whlname)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)

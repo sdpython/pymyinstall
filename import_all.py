@@ -3,8 +3,8 @@ print(sys.executable)
 import platform
 print(platform.architecture())
 sys.path.append("src")
-from pymyinstall import ds_complete, ds_huge
+from pymyinstall import installation_ensae
 skip = ["pyquickhelper", "pyensae", "pyrsslocal",
         "pymmails", "ensae_teaching_cs"]
-ds_complete(fLOG=print, azure=True, skip=skip)
-ds_huge(fLOG=print, skip=skip)
+for mod in installation_ensae():
+    mod.install(log =True)

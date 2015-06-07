@@ -22,7 +22,7 @@ def small_installation():
         # ModuleInstall("setuptools",     "wheel"),        # removed with 3.4
         # ModuleInstall("pip",            "wheel"),            # removed with 3.4
         #
-        ModuleInstall("virtualenv", "wheel"),
+        ModuleInstall("virtualenv", "pip"),
         ModuleInstall("six", "pip"),
         ModuleInstall("lxml", "wheel"),
         ModuleInstall("jinja2", "pip"),
@@ -62,7 +62,7 @@ def small_installation():
         ModuleInstall("wheel", "pip"),
         # sphinx
         ModuleInstall("alabaster", "wheel"),
-        ModuleInstall("Babel", "wheel"),
+        ModuleInstall("Babel", "wheel", mname="babel"),
         ModuleInstall("colorama", "pip"),
         ModuleInstall("docutils", "pip"),
         ModuleInstall("sphinx", "pip"),
@@ -88,8 +88,7 @@ def small_installation():
         ModuleInstall("requests", "pip"),
         #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
         ModuleInstall("PySide", "wheel"),
-        ModuleInstall("spyder", "wheel", script="spyder.bat"),
-        #
+        ModuleInstall("spyder", "wheel", mname="spyderlib"),
         #
         ModuleInstall("brewer2mpl", "pip"),
         ModuleInstall("ggplot", "pip"),
@@ -147,6 +146,7 @@ def complete_installation():
         ModuleInstall('sympy', 'pip'),
         ModuleInstall('gmpy2', 'wheel'),
         ModuleInstall('llvmpy', 'wheel', mname='llvm'),
+        ModuleInstall('llvmlite', 'wheel'),
         ModuleInstall('numba', 'wheel'),
         ModuleInstall('networkx', 'pip'),
         ModuleInstall('snowballstemmer', 'pip'),
@@ -174,6 +174,7 @@ def complete_installation():
         ModuleInstall('lockfile', 'pip'),
         ModuleInstall('python-daemon', 'pip', mname='daemon'),
         ModuleInstall('luigi', 'pip'),
+        ModuleInstall('setproctitle', 'wheel', mname='setproctitle'), # for airflow
         ModuleInstall('airflow', 'pip'),
         ModuleInstall('smopy', 'pip'),
         ModuleInstall('folium', 'pip'),
@@ -254,12 +255,11 @@ def complete_installation():
         ModuleInstall("pep8", "pip", version="1.5.7"),
         ModuleInstall("autopep8", "pip"),
         ModuleInstall("pybrain", "pip"),
-        ModuleInstall("pymc", "wheel"),
         ModuleInstall("h5py", "wheel"),  # Bayesian
         ModuleInstall("bayespy", "pip"),  # Bayesian
         ModuleInstall("numexpr", "wheel"),
         #
-        ModuleInstall("glueviz", "wheel"),
+        ModuleInstall("glueviz", "wheel", mname="glue"),
         ModuleInstall("pypiserver", "pip"),
         #
         ModuleInstall("charts", "pip"),  # javascript graphs
@@ -451,49 +451,52 @@ def extension_ensae():
     mod = [
         ModuleInstall("celery", "pip"),
         ModuleInstall("tweepy", "pip"),
-        ModuleInstall("newspaper3k", "pip", mname="newspaper"),
+        #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
         ModuleInstall("django", "pip"),
-        ModuleInstall("django-audiotracks", "pip", mname="django.audiotracks"),
+        ModuleInstall("django-audiotracks", "pip", mname="audiotracks"),
         ModuleInstall("Quandl", "pip"),
-        ModuleInstall("Lasagne", "pip", mname="lasagne"),
-        ModuleInstall("pymunk", "pip"),
-        ModuleInstall("pyjs", "pip"),
-        ModuleInstall("pyjsdl", "pip"),
-        ModuleInstall("PyYAML", "wheel", mname="pyyaml"),
-        ModuleInstall("nltk", "pip"),
+        #ModuleInstall("Lasagne", "pip", mname="lasagne"),
+        ModuleInstall("pymunk", "pip"),        
+        ModuleInstall("nltk", "wheel"),
         ModuleInstall("textblob", "pip"),
-        ModuleInstall("python-dev", "pip", mname="dev"),
-        ModuleInstall("opencv", "wheel"),
+        ModuleInstall("dev", "pip"),
+        ModuleInstall("opencv_python", "wheel", mname="cv"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio"),
         ModuleInstall("BTrees", "wheel"),
         ModuleInstall("datrie", "wheel"),
-        ModuleInstall("pysparse", "wheel"),
+        # ModuleInstall("pysparse", "pip"), #does not work
         ModuleInstall("la", "wheel"),
         ModuleInstall("mahotas", "wheel"),
         ModuleInstall("milk", "wheel"),
         ModuleInstall("minepy", "wheel"),
         ModuleInstall("mlpy", "wheel"),
         ModuleInstall("NLopt", "wheel", mname="nlopt"),
-        ModuleInstall("Pmw", "wheel", mname="pmw"),
+        ModuleInstall("Pmw", "wheel", mname="Pmw"),
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("pytools", "pip"),
         ModuleInstall("pycuda", "wheel"),
         ModuleInstall("pylzma", "wheel"),
-        ModuleInstall("pymvpa2", "wheel", mname="pymvpa"),
+        ModuleInstall("pymvpa2", "wheel", mname="mvpa2"),
         ModuleInstall("pyodbc", "wheel"),
         ModuleInstall("pypmc", "wheel"),
-        ModuleInstall("pyserial", "wheel"),
+        ModuleInstall("pyserial", "wheel", mname="serial"),
         ModuleInstall("PyX", "wheel", mname="pyx"),
         ModuleInstall("scandir", "wheel"),
         ModuleInstall("VideoCapture", "wheel"),
         ModuleInstall("zs", "wheel"),
         #
-        ModuleInstall("libsvm", "wheel"),   # does not work on Windows
-        ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
+        ModuleInstall("libsvm", "wheel", mname="svm"),   # does not work on Windows
+        #
+        # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
+        # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
         # work, it expects to have pymc with some optimization
         # Bayesian, does not work, it expects to have pymc with some
         # optimization
-        ModuleInstall("kabuki", "pip"),
+        #
+        ModuleInstall("pyjs", "github", "pyjs"), # ModuleInstall("pyjs", "pip"), # needs manual installation
+        # ModuleInstall("pyjsdl", "github", "jggatc"), # no setup.py
+        #
+        # twisted, scrapy, not ready yet on Python 3
 
     ]
     return mod

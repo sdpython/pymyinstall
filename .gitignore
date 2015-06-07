@@ -192,6 +192,10 @@ $RECYCLE.BIN/
 # Packages
 *.egg
 *.egg-info
+*.whl
+*.zip
+*.exe
+*master/*
 dist/
 build/
 eggs/
