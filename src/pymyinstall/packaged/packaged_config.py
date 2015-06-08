@@ -463,7 +463,7 @@ def extension_ensae():
         ModuleInstall("dev", "pip"),
         ModuleInstall("opencv_python", "wheel", mname="cv"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio"),
-        ModuleInstall("persistent", "wheel"), 
+        ModuleInstall("persistent", "wheel"),
         ModuleInstall("zope.interface", "wheel"),  # requires persistent
         ModuleInstall("BTrees", "wheel"),  # requires zope.interface
         ModuleInstall("datrie", "wheel"),
