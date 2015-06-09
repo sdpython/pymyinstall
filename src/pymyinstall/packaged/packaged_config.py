@@ -219,7 +219,7 @@ def complete_installation():
 
         #
         ModuleInstall("ecdsa", "pip"),
-        ModuleInstall("pycrypto", "exe_xd", mname="Crypto"),
+        ModuleInstall("pycrypto", "wheel_xd", mname="Crypto"),
         ModuleInstall("paramiko", "pip"),
         #
         ModuleInstall("pattern", "pip") if sys.version_info[
@@ -497,7 +497,7 @@ def extension_ensae():
         # optimization
         #
         # ModuleInstall("pyjs", "pip"), # needs manual installation
-        ModuleInstall("pyjs", "github", "pyjs"),
+        # ModuleInstall("pyjs", "github", "pyjs"), #does not work really
         # ModuleInstall("pyjsdl", "github", "jggatc"), # no setup.py
         #
         # twisted, scrapy, not ready yet on Python 3

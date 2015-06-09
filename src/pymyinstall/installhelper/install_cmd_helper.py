@@ -852,17 +852,23 @@ def get_pip_program(exe=None):
         if not exe.endswith("Scripts"):
             pi = os.path.join(exe, "Scripts", "pip.exe")
             if not os.path.exists(pi):
-                # Anaconda is different
-                pi = os.path.join(exe, "Scripts", "pip.exe")
+                pi = os.path.join(exe, "Scripts", "pip3.exe")
                 if not os.path.exists(pi):
-                    raise FileNotFoundError(pi)
+                    # Anaconda is different
+                    pi = os.path.join(exe, "Scripts", "pip.exe")
+                    if not os.path.exists(pi):
+                        pi = os.path.join(exe, "Scripts", "pip3.exe")
+                        if not os.path.exists(pi):
+                            raise FileNotFoundError(pi)
         else:
             pi = os.path.join(exe, "pip.exe")
             if not os.path.exists(pi):
                 # Anaconda is different
                 pi = os.path.join(exe, "pip.exe")
                 if not os.path.exists(pi):
-                    raise FileNotFoundError(pi)
+                    pi = os.path.join(exe, "pip3.exe")
+                    if not os.path.exists(pi):
+                        raise FileNotFoundError(pi)
     else:
         if exe is None:
             return "pip"

@@ -56,7 +56,7 @@ class ModuleInstall:
     @endexample
     """
 
-    allowedKind = ["pip", "github", "exe", "exe_xd", "wheel"]
+    allowedKind = ["pip", "github", "exe", "exe_xd", "wheel", "wheel_xd"]
     expKPage = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
     expKPageWhl = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?-cp33-none-win32.whl)</a>"
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
@@ -188,7 +188,12 @@ class ModuleInstall:
                 p = "win-amd64"
             else:
                 p = "win32"
-            exe = "pycrypto-2.6.1.{0}-py{1}.{2}".format(p, vers, ext)
+            if ext == "exe":
+                exe = "pycrypto-2.6.1.{0}-py{1}.{2}".format(p, vers, ext)
+            elif ext == "whl":
+                exe = "pycrypto-2.6.1-cp34-none-win_amd64.whl"
+            else:
+                raise Exception("unexpected exception: " + ext)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
         else:
@@ -378,14 +383,18 @@ class ModuleInstall:
                     "\nERR:\n" +
                     err)
 
-        elif kind == "wheel":
+        elif kind in ("wheel", "wheel_xd"):
             ver = python_version()
             if ver[0] != "win32":
                 # nothing to download, you should use pip
                 return None
             else:
-                url, whl = self.get_exewheel_url_link(
-                    file_save=file_save, wheel=True)
+                if kind == "wheel":
+                    url, whl = self.get_exewheel_url_link(
+                        file_save=file_save, wheel=True)
+                else:
+                    url, whl = self.get_exewheel_url_link_xd(
+                        file_save=file_save, wheel=True)
                 whlname = os.path.join(temp_folder, whl)
 
                 exi = os.path.exists(whlname)
@@ -440,7 +449,7 @@ class ModuleInstall:
             else:
                 return outfile
 
-        elif kind in ["exe", "exe_xd"]:
+        elif kind in ("exe", "exe_xd"):
             ver = python_version()
             if ver[0] != "win32":
                 raise Exception(
@@ -500,7 +509,6 @@ class ModuleInstall:
         or `setup.py options <http://docs.python.org/3.4/install/>`_ if you
         installing a module from github.
         """
-
         if not force and self.IsInstalled():
             return True
 
@@ -550,7 +558,7 @@ class ModuleInstall:
             else:
                 ret = True
 
-        elif kind == "wheel":
+        elif kind in ("wheel", "wheel_xd"):
             ver = python_version()
             if ver[0] != "win32":
                 ret = self.install("wheel")

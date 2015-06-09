@@ -1,1 +1,0 @@
-c:\python34\python.exe import_all_32.py
