@@ -85,6 +85,7 @@ Versions
     * **add:** functions :func:`extend_anaconda <pymyinstall.packaged.packaged_config.extend_anaconda>`, :func:`extend_winpython <pymyinstall.packaged.packaged_config.extend_winpython>`
     * **add:** function :func:`process_installation <pymyinstall.packaged.packaged_functions.process_installations>`
     * **fix:** method :meth:`download <pymyinstall.installhelper.module_install.ModuleInstall.download>` now works for modules using pip
+    * **add:** functions :func:`ds_teach <pymyinstall.packaged.packaged_functions.ds_teach>`, :func:`ds_ensae <pymyinstall.packaged.packaged_functions.ds_ensae>`
 * **0.8 - 2014/11/09**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** module `ansiconv <http://pythonhosted.org/ansiconv/>`, `ansi2html <https://pypi.python.org/pypi/ansi2html/>`_

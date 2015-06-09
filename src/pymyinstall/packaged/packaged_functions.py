@@ -6,6 +6,7 @@ from __future__ import print_function
 from ..installhelper.install_cmd_helper import add_shortcut_to_desktop_for_module
 from ..installhelper.install_manual import get_install_list
 from .packaged_config import complete_installation, small_installation, installation_cubes, installation_huge_datasets, installation_azure
+from .packaged_config import installation_ensae, installation_teachings
 from ..installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from ..installhelper.install_custom_pandoc import install_pandoc
 from ..setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
@@ -15,6 +16,7 @@ from ..installhelper.install_custom_sqlitespy import install_sqlitespy, add_shor
 def datascientist(folder="install",
                   modules=True,
                   azure=False,
+                  teachings=False,
                   website=False,
                   scite=False,
                   pandoc=False,
@@ -35,6 +37,8 @@ def datascientist(folder="install",
     @param      folder              where to install everything
     @param      modules             go through the list of necessary modules
     @param      azure               add modules for Azure (Blob Storage)
+    @param      teachings           add modules for teachings
+    @param      ensae               add modules for ENSAE
     @param      website             open website when the routine to install a software is not implemented yet
     @param      scite               install Scite (and modify the config file to remove tab, adjust python path)
     @param      ipython             setup ipython
@@ -76,6 +80,24 @@ def datascientist(folder="install",
 
     if azure:
         modules = installation_azure()
+
+        for _ in modules:
+            if skip is not None and (_.name in skip or _.mname in skip):
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else:
+                _.install(temp_folder=folder)
+
+    if ensae:
+        modules = installation_ensae()
+
+        for _ in modules:
+            if skip is not None and (_.name in skip or _.mname in skip):
+                fLOG("skip module", _.name, " import name:", _.mname)
+            else:
+                _.install(temp_folder=folder)
+
+    if teachings:
+        modules = installation_teachings()
 
         for _ in modules:
             if skip is not None and (_.name in skip or _.mname in skip):
@@ -127,6 +149,27 @@ def ds_small(**params):
     """
     params = params.copy()
     params["full"] = False
+    datascientist(**params)
+
+
+def ds_teach(**params):
+    """
+    calls @see fn datascientist with ``full=False, teachings=True``
+    """
+    params = params.copy()
+    params["full"] = True
+    params["teachings"] = True
+    datascientist(**params)
+
+
+def ds_ensae(**params):
+    """
+    calls @see fn datascientist with ``full=False, teachings=True, ensae=True``,
+    """
+    params = params.copy()
+    params["full"] = True
+    params["ensae"] = True
+    params["teachings"] = True
     datascientist(**params)
 
 
