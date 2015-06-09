@@ -101,8 +101,14 @@ def small_installation():
         ModuleInstall("nodeenv", "pip"),   # node.js
         ModuleInstall('sphinxjp.themes.revealjs', 'pip'),
         #
-        # 2015-02-05
+        # 2015-06-05
         #
+        ModuleInstall('bokeh', 'pip'),
+        ModuleInstall('rpy2', 'wheel'),
+        ModuleInstall('seaborn', 'pip'),
+        ModuleInstall("sphinxjp.themes.revealjs", "pip"),
+        ModuleInstall("feedparser", "wheel"),   # to parse RSS streams
+        ModuleInstall("python-jenkins", "pip", mname="jenkins"),  # for Jenkins
     ]
 
     if sys.platform.startswith("win"):
@@ -142,7 +148,6 @@ def complete_installation():
         ModuleInstall('multipledispatch', 'pip'),
         ModuleInstall('dynd', 'wheel'),
         ModuleInstall('blaze', 'wheel'),
-        ModuleInstall('seaborn', 'pip'),
         ModuleInstall('sympy', 'pip'),
         ModuleInstall('gmpy2', 'wheel'),
         ModuleInstall('llvmpy', 'wheel', mname='llvm'),
@@ -159,11 +164,9 @@ def complete_installation():
         ModuleInstall('fastcluster', 'wheel'),
         ModuleInstall('pycosat', 'wheel'),
         ModuleInstall('PyYAML', 'wheel', mname='yaml'),
-        ModuleInstall('bokeh', 'pip'),
         ModuleInstall('pyshp', 'pip', mname='shapefile'),
         ModuleInstall('Shapely', 'wheel', mname='shapely'),
         ModuleInstall('vispy', 'pip'),
-        ModuleInstall('rpy2', 'wheel'),
         ModuleInstall('selenium', 'pip'),
         ModuleInstall('Pillow', 'wheel', mname='PIL'),
         ModuleInstall('pygame', 'wheel'),
@@ -194,7 +197,6 @@ def complete_installation():
         ModuleInstall("wild_sphinx_theme", "pip"),
         ModuleInstall("sphinx_bootstrap_theme", "pip"),
         ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
-        ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
         ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
@@ -214,7 +216,6 @@ def complete_installation():
         ModuleInstall("pycontracts", "pip", mname="contracts"),
         ModuleInstall("ansiconv", "pip"),   # shell to plain
         ModuleInstall("ansi2html", "pip"),   # shell to HTML
-        ModuleInstall("feedparser", "wheel"),   # to parse RSS streams
 
         #
         ModuleInstall("ecdsa", "pip"),
@@ -226,7 +227,6 @@ def complete_installation():
         #
         ModuleInstall("nodeenv", "pip"),   # node.js
         ModuleInstall("pbr", "pip"),
-        ModuleInstall("python-jenkins", "pip", mname="jenkins"),  # for Jenkins
         ModuleInstall("psutil", "wheel"),  #
         #
         # 2015-02-05
@@ -253,8 +253,6 @@ def complete_installation():
         ModuleInstall("bz2file", "pip"),      # for gensim
         ModuleInstall("smart_open", "wheel"),      # for gensim
         ModuleInstall("gensim", "wheel"),
-        ModuleInstall("pep8", "pip", version="1.5.7"),
-        ModuleInstall("autopep8", "pip"),
         ModuleInstall("pybrain", "pip"),
         ModuleInstall("h5py", "wheel"),  # Bayesian
         ModuleInstall("bayespy", "pip"),  # Bayesian
@@ -478,6 +476,7 @@ def extension_ensae():
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("pytools", "pip"),
         ModuleInstall("pycuda", "wheel"),
+        ModuleInstall("scikit.cuda", "pip", mname="skcuda"),
         ModuleInstall("pylzma", "wheel"),
         ModuleInstall("pymvpa2", "wheel", mname="mvpa2"),
         ModuleInstall("pyodbc", "wheel"),
