@@ -28,6 +28,7 @@ def datascientist(folder="install",
                   browser=None,
                   skip=None,
                   full=False,
+                  ensae=False,
                   additional_path=None):
     """
 
