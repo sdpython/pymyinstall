@@ -267,6 +267,7 @@ def complete_installation():
         ModuleInstall("docopt", "pip"),
         ModuleInstall("markdown2", "pip"),
         ModuleInstall("structures", "pip"),
+        ModuleInstall("py2exe", "wheel"),
         ModuleInstall("rodeo", "pip"),
     ]
 
