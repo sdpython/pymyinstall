@@ -41,13 +41,13 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall import ModuleInstall, complete_installation, small_installation
+from src.pymyinstall import ModuleInstall, complete_installation, small_installation, datascientist
 from pyquickhelper import fLOG
 
 
 class TestDifference(unittest.TestCase):
 
-    def test_dif(self):
+    def test_diff(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -67,6 +67,21 @@ class TestDifference(unittest.TestCase):
             else:
                 fLOG("ModuleInstall('{0}', '{1}', mname='{2}'),".format(
                     mod.name, mod.kind, mod.mname))
+
+    def test_diff(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        res = datascientist(
+            ensae=True, teachings=True, full=True, list_only=True)
+        count = {}
+        for mod in res:
+            count[mod.name] = 1
+
+        assert "pyquickhelper" in count
+        assert "rodeo" in count
+        assert "code_beatrix" in count
 
 
 if __name__ == "__main__":

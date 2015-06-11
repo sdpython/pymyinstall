@@ -29,7 +29,9 @@ def datascientist(folder="install",
                   skip=None,
                   full=False,
                   ensae=False,
-                  additional_path=None):
+                  additional_path=None,
+                  download_only=False,
+                  list_only=False):
     """
 
     install all necessary modules for a data scientist
@@ -51,6 +53,9 @@ def datascientist(folder="install",
     @param      skip                to skip some modules if they fail (a list)
     @param      full                if True, install many modules including the ones used to generate the documentation
     @param      fLOG                logging function
+    @param      download_only       only download the module, do not install
+    @param      list_only           return the list of modules, no download, no install
+    @return                         the list of installed modules
 
     @example(Install many things for a Data Scientist)
     @code
@@ -68,43 +73,75 @@ def datascientist(folder="install",
     unless the python interpreter is started again. The best way is to run those two commands
     from the Python IDLE and to restart the interpreter before a second run.
     The second time, the function does not install again what was already installed.
-
     """
+    res = []
+
     if modules:
         modules = complete_installation() if full else small_installation()
 
-        for _ in modules:
-            if skip is not None and (_.name in skip or _.mname in skip):
-                fLOG("skip module", _.name, " import name:", _.mname)
-            else:
-                _.install(temp_folder=folder)
+        if list_only:
+            res.extend(modules)
+        else:
+            for _ in modules:
+                if skip is not None and (_.name in skip or _.mname in skip):
+                    fLOG("skip module", _.name, " import name:", _.mname)
+                else:
+                    if download_only:
+                        _.download(temp_folder=folder)
+                    else:
+                        _.install(temp_folder=folder)
+                    res.append(_)
 
     if azure:
         modules = installation_azure()
 
-        for _ in modules:
-            if skip is not None and (_.name in skip or _.mname in skip):
-                fLOG("skip module", _.name, " import name:", _.mname)
-            else:
-                _.install(temp_folder=folder)
+        if list_only:
+            res.extend(modules)
+        else:
+            for _ in modules:
+                if skip is not None and (_.name in skip or _.mname in skip):
+                    fLOG("skip module", _.name, " import name:", _.mname)
+                else:
+                    if download_only:
+                        _.download(temp_folder=folder)
+                    else:
+                        _.install(temp_folder=folder)
+                    res.append(_)
 
     if ensae:
         modules = installation_ensae()
 
-        for _ in modules:
-            if skip is not None and (_.name in skip or _.mname in skip):
-                fLOG("skip module", _.name, " import name:", _.mname)
-            else:
-                _.install(temp_folder=folder)
+        if list_only:
+            res.extend(modules)
+        else:
+            for _ in modules:
+                if skip is not None and (_.name in skip or _.mname in skip):
+                    fLOG("skip module", _.name, " import name:", _.mname)
+                else:
+                    if download_only:
+                        _.download(temp_folder=folder)
+                    else:
+                        _.install(temp_folder=folder)
+                    res.append(_)
 
     if teachings:
         modules = installation_teachings()
 
-        for _ in modules:
-            if skip is not None and (_.name in skip or _.mname in skip):
-                fLOG("skip module", _.name, " import name:", _.mname)
-            else:
-                _.install(temp_folder=folder)
+        if list_only:
+            res.extend(modules)
+        else:
+            for _ in modules:
+                if skip is not None and (_.name in skip or _.mname in skip):
+                    fLOG("skip module", _.name, " import name:", _.mname)
+                else:
+                    if download_only:
+                        _.download(temp_folder=folder)
+                    else:
+                        _.install(temp_folder=folder)
+                    res.append(_)
+
+    if list_only:
+        return res
 
     if website:
         get_install_list()
@@ -133,6 +170,8 @@ def datascientist(folder="install",
             add_shortcut_to_desktop_for_module("spyder")
         if sqlitespy:
             add_shortcut_to_desktop_for_sqlitespy(sqlitespy_file)
+
+    return res
 
 
 def ds_complete(**params):
