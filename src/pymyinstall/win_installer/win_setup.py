@@ -6,8 +6,9 @@ import os
 import fnmatch
 
 from ..installhelper import install_pandoc, install_sqlitespy, install_R, install_scite, install_julia, install_python, install_mingw, install_7z
+from ..installhelper.install_custom_scite import modify_scite_properties
 from ..packaged.packaged_config import small_installation
-from .win_extract import extract_msi, extract_exe, extract_archive
+from .win_extract import extract_msi, extract_exe, extract_archive, clean_msi
 from .win_packages import _is_package_in_list, win_install_packages_other_python
 
 
@@ -110,6 +111,15 @@ def win_python_setup(folder="dist/win_python_setup",
         if verbose:
             for k, v in installed.items():
                 fLOG(k, "-->", v)
+                
+        # clean msi
+        op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
+        operations.extend(op)
+        
+        # modifies scite properties
+        fLOG("--- modifies Scite properties")
+        modify_scite_properties(os.path.join("..", "..", "..", "pythonw"), 
+                                os.path.join(folders["tools"], "Scite", "wscite"))
 
         # installation of packages
         fLOG("--- installation of python packages")

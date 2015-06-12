@@ -93,29 +93,40 @@ def install_scite(dest_folder=".", fLOG=print, install=True):
 
     if install:
         unzip_files(file, whereTo=dest_folder, fLOG=fLOG)
-
-        # we change the path
-        config = os.path.join(dest_folder, "wscite", "python.properties")
-        with open(config, "r") as f:
-            content = f.read()
-        content = content.replace("=pythonw", "=" + sys.executable)
-        with open(config, "w") as f:
-            f.write(content)
-
-        # we change the options
-        config = os.path.join(dest_folder, "wscite", "SciTEGlobal.properties")
-        with open(config, "r", encoding="utf8", errors="ignore") as f:
-            content = f.read()
-        content = content.replace("tabsize=8", "tabsize=4")
-        content = content.replace("indent.size=8", "indent.size=4")
-        content = content.replace("use.tabs=1", "use.tabs=0")
-        content = content.replace("font:Verdana,", "font:Consolas,")
-        with open(config, "w", encoding="utf8") as f:
-            f.write(content)
-
+        modify_scite_properties(os.path.join(dest_folder, "wscite"), sys.executable)
         return os.path.join(os.path.abspath(dest_folder), "wscite", "SciTE.exe")
     else:
         return outfile
+        
+        
+def modify_scite_properties(python_path, scite_path):
+    """
+    modifies the scite properties
+    
+    @param      python_path     python path
+    @param      scite_path      scrite path
+    
+    Avoid tabulations, change the path to the interpreter
+    """
+    # we change the path
+    config = os.path.join(scite_path, "python.properties")
+    with open(config, "r") as f:
+        content = f.read()
+    content = content.replace("=pythonw", "=" + python_path)
+    with open(config, "w") as f:
+        f.write(content)
+
+    # we change the options
+    config = os.path.join(scite_path, "SciTEGlobal.properties")
+    with open(config, "r", encoding="utf8", errors="ignore") as f:
+        content = f.read()
+    content = content.replace("tabsize=8", "tabsize=4")
+    content = content.replace("indent.size=8", "indent.size=4")
+    content = content.replace("use.tabs=1", "use.tabs=0")
+    content = content.replace("font:Verdana,", "font:Consolas,")
+    with open(config, "w", encoding="utf8") as f:
+        f.write(content)
+    
 
 
 def add_shortcut_to_desktop_for_scite(scite):

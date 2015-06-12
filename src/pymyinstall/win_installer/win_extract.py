@@ -10,6 +10,7 @@ import os.path as osp
 import subprocess
 import tarfile
 import zipfile
+import fnmatch
 #import winreg
 import glob
 
@@ -119,3 +120,31 @@ def extract_archive(fname, targetdir=None, verbose=False, fLOG=print):
         raise RuntimeError("Unsupported archive filename %s" % fname)
     obj.extractall(path=targetdir)
     return targetdir
+
+
+def clean_msi(folder, pattern, verbose=False, fLOG=print):
+    """
+    clean all files follwing a specific pattern
+    
+    @param      folder      folder
+    @param      pattern     files to remove
+    @param      verbose     display more information
+    @param      fLOG        logging function
+    @return                 removed files (as operation)
+    """
+    def find(loc, pattern):
+        exes = []
+        for root, dirnames, filenames in os.walk(loc):
+            for filename in fnmatch.filter(filenames, pattern):
+                exes.append(os.path.join(root, filename))
+        return exes
+    remove = find(folder, pattern)
+    operations = []
+    for r in remove:
+        if verbose:
+            fLOG("remove", r)
+            os.remove(r)
+            operations.append(("remove", r))
+    return operations
+            
+    

@@ -144,7 +144,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     """
     files = os.listdir(package_folder)
     files = [_ for _ in files if os.path.splitext(_)[-1] in {".gz", ".zip", ".whl"}
-             and _ not in {"Scite.zip"}
+             and _ not in {"Scite.zip", "scite.zip"}
              and not _.startswith("SQLiteSpy_")]
 
     # we need to order the package to install them in the right order
