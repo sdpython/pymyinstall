@@ -10,7 +10,6 @@ import subprocess
 import re
 import sys
 import locale
-import winreg
 
 
 # =============================================================================
@@ -63,6 +62,7 @@ def get_env(name, current=True):
 
     For example, get_user_env('PATH') may returns:
     ('Path', u'C:\\Program Files\\Intel\\WiFi\\bin\\')"""
+    import winreg
     root = winreg.HKEY_CURRENT_USER if current else winreg.HKEY_LOCAL_MACHINE
     key = winreg.OpenKey(root, "Environment")
     for index in range(0, winreg.QueryInfoKey(key)[1]):
@@ -78,6 +78,7 @@ def get_env(name, current=True):
 
 def set_env(name, value, current=True):
     """Set HKCU/HKLM environment variables"""
+    import winreg
     root = winreg.HKEY_CURRENT_USER if current else winreg.HKEY_LOCAL_MACHINE
     key = winreg.OpenKey(root, "Environment")
     try:
@@ -366,6 +367,7 @@ KEY_S1 = KEY_S0 + r"\%s"
 
 def register(target, current=True):
     """Register a Python distribution in Windows registry"""
+    import winreg
     root = winreg.HKEY_CURRENT_USER if current else winreg.HKEY_LOCAL_MACHINE
 
     # Extensions
