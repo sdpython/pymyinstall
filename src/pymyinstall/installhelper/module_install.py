@@ -373,7 +373,7 @@ class ModuleInstall:
                         return line.split("Saved")[-1].strip()
                     elif line.strip().startswith("File was already downloaded"):
                         return line.split("File was already downloaded")[-1].strip()
-                raise Exception(
+                raise FileNotFoundError(
                     "unable to find downloaded file " +
                     str(self) +
                     "\nCMD:\n" +
@@ -487,6 +487,17 @@ class ModuleInstall:
         @see me install
         """
         self.install(*l, **p)
+
+    def update(self,
+               force_kind=None,
+               force=False,
+               temp_folder=".",
+               log=False,
+               *options):
+        """
+        update a package
+        """
+        raise NotImplementedError()
 
     def install(self,
                 force_kind=None,
@@ -748,5 +759,4 @@ class ModuleInstall:
                             f.write(cmd)
                             f.write("\n")
                             f.write(full)
-
         return ret

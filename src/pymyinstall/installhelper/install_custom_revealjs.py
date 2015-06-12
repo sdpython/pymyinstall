@@ -1,6 +1,6 @@
 """
 @file
-@brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
+@brief Various functions to install `reveal.js <https://github.com/hakimel/reveal.js/releases>`_.
 """
 from __future__ import print_function
 import re

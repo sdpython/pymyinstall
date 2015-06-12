@@ -1,6 +1,6 @@
 """
 @file
-@brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
+@brief Various functions to install `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_.
 """
 from __future__ import print_function
 import sys
@@ -64,9 +64,12 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True):
             outfile,
             temp_folder=temp_folder,
             fLOG=fLOG)
-        files = unzip_files(outfile, temp_folder, fLOG=fLOG)
-        local = [f for f in files if f.endswith(".exe")][0]
-        return local
+        if install:
+            files = unzip_files(outfile, temp_folder, fLOG=fLOG)
+            local = [f for f in files if f.endswith(".exe")][0]
+            return local
+        else:
+            return outfile
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
 

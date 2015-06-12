@@ -1,6 +1,6 @@
 """
 @file
-@brief Various function to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
+@brief Various functions to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
 from __future__ import print_function
 import sys
@@ -16,8 +16,8 @@ def IsPandocInstalled():
     @return     True of False whether or not it was installed
     """
     if sys.platform.startswith("win"):
-        path = "C:\\Users\\{0}\\AppData\\Local\\Pandoc\\pandoc.exe".format(
-            os.environ["USERNAME"])
+        path = "{0}\\AppData\\Local\\Pandoc\\pandoc.exe".format(
+            os.environ["USERPROFILE"])
         return os.path.exists(path)
     else:
         raise NotImplementedError("not available on platform " + sys.platform)

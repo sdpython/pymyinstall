@@ -278,61 +278,6 @@ def complete_installation():
     return [_ for _ in mod if _ is not None]
 
 
-def installation_teachings():
-    """
-    .. index:: ENSAE, teachings
-
-    Modules implemented for my teachings.
-    """
-    mod = [
-        ModuleInstall("pyquickhelper", "pip"),
-        ModuleInstall("pyensae", "pip"),
-        ModuleInstall("ensae_teaching_cs", "pip"),
-        ModuleInstall("actuariat_python", "pip"),
-        ModuleInstall("pymmails", "pip"),
-        ModuleInstall("pymyinstall", "pip"),
-        ModuleInstall("pyrsslocal", "pip"),
-        ModuleInstall("code_beatrix", "pip"),
-    ]
-    #
-    return mod
-
-
-def installation_cubes():
-    """
-    A cube is a multidimensional array.
-    This functions gathers the dependencies for module `cubes <https://github.com/Stiivi/cubes>`_
-    (`documentation <http://cubes.databrewery.org/dev/doc/>`_)
-    and `cubesviewer <https://github.com/jjmontesl/cubesviewer>`_.
-
-    """
-    mod = [
-        ModuleInstall("python-dateutil", "pip", "dateutil"),
-        ModuleInstall("django", "pip"),
-        ModuleInstall("pytz", "pip"),
-        ModuleInstall("jsonschema", "pip"),
-        # the PyPI version does not work with Python 3
-        ModuleInstall("cubes", "github", "Stiivi"),
-    ]
-
-    return mod
-
-
-def installation_huge_datasets():
-    """
-    Modules to handle huge datasets on disk, hierarchical datasets.
-
-    """
-    mod = [
-        ModuleInstall("h5py", "wheel"),
-        ModuleInstall("blosc", "wheel"),
-        ModuleInstall("numexpr", "wheel"),
-        ModuleInstall("tables", "wheel"),
-    ]
-
-    return mod
-
-
 def installation_azure():
     """
     Modules to handle huge datasets on disk, hierarchical datasets.
@@ -477,7 +422,7 @@ def extension_ensae():
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("pytools", "pip"),
         ModuleInstall("pycuda", "wheel"),
-        ModuleInstall("scikit.cuda", "pip", mname="skcuda"),
+        ModuleInstall("scikits.cuda", "pip", mname="skcuda"),
         ModuleInstall("pylzma", "wheel"),
         ModuleInstall("pymvpa2", "wheel", mname="mvpa2"),
         ModuleInstall("pyodbc", "wheel"),
@@ -507,6 +452,41 @@ def extension_ensae():
     return mod
 
 
+def installation_teachings():
+    """
+    .. index:: ENSAE, teachings
+
+    Modules implemented for my teachings.
+    """
+    mod = [
+        ModuleInstall("pyquickhelper", "pip"),
+        ModuleInstall("pyensae", "pip"),
+        ModuleInstall("ensae_teaching_cs", "pip"),
+        ModuleInstall("actuariat_python", "pip"),
+        ModuleInstall("pymmails", "pip"),
+        ModuleInstall("pymyinstall", "pip"),
+        ModuleInstall("pyrsslocal", "pip"),
+        ModuleInstall("code_beatrix", "pip"),
+    ]
+    #
+    return mod
+
+
+def installation_huge_datasets():
+    """
+    Modules to handle huge datasets on disk, hierarchical datasets.
+
+    """
+    mod = [
+        ModuleInstall("h5py", "wheel"),
+        ModuleInstall("blosc", "wheel"),
+        ModuleInstall("numexpr", "wheel"),
+        ModuleInstall("tables", "wheel"),
+    ]
+
+    return mod
+
+
 def installation_ensae():
     """
     .. index:: ENSAE
@@ -514,7 +494,6 @@ def installation_ensae():
     Installation of all possible modules for my teachings at the ENSAE.
     """
     base = complete_installation() +  \
-        installation_cubes() + \
         installation_huge_datasets() + \
         installation_azure() + \
         extension_ensae()

@@ -15,8 +15,10 @@ else:
     import urllib.error as urllib_error
 
 from .module_install import ModuleInstall
+from .install_memoize import install_memoize
 
 
+@install_memoize
 def download_page(url):
     """
     download a page from a url
@@ -99,6 +101,8 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
         fLOG("len ", len(text))
     except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
+    except requests.exceptions.ConnectionError as ee:
+        raise Exception("unable to get archive from: " + url) from ee
 
     if len(text) < 20 and text.decode(
             "ascii").lower().startswith("bad request"):

@@ -51,7 +51,8 @@ from .installhelper.link_shortcuts import add_shortcut_to_desktop
 from .installhelper.install_custom_pandoc import install_pandoc
 from .installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
-from .packaged.packaged_functions import datascientist, ds_small, ds_complete, ds_cubes, ds_huge, process_installation, ds_teach, ds_ensae
-from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_cubes, installation_teachings
+from .packaged.packaged_functions import datascientist, ds_small, ds_complete, ds_huge, process_installation, ds_teach, ds_ensae
+from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_teachings
 from .packaged.packaged_config import installation_azure, extend_winpython, extend_anaconda, extension_ensae, installation_ensae
 from .installhelper.install_custom_revealjs import download_revealjs
+from .win_installer import win_python_setup
