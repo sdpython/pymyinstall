@@ -39,6 +39,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Source: "{#MyAbsPath}\python\*"; DestDir: "{app}\python"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#MyAbsPath}\tools\*"; DestDir: "{app}\tools"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#MyAbsPath}\workspace\*"; DestDir: "{app}\workspace"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyAbsPath}\config\*"; DestDir: "{app}\config"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{app}\actuariat_python sur Internet"; IconFilename: "{app}\tools\icons\actuariat_python.ico"; Filename: "{#MyAppURLAct}"

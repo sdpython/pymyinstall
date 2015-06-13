@@ -21,6 +21,7 @@ from .win_setup_r import r_run_script, _script as _script_r
 from .win_setup_julia import julia_run_script, _script as _script_julia
 from .win_innosetup import run_innosetup
 from ..installhelper import download_page
+from .win_batch import create_win_batches
 
 license = """
 Copyright (c) 2013-2015, Xavier Dupré
@@ -196,6 +197,37 @@ def win_python_setup(folder="dist/win_python_setup",
             for k, v in installed.items():
                 fLOG("  INSTALLED:", k, "-->", v)
 
+        # clean msi
+        op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
+        operations.extend(op)
+        operations.append(("time", now()))
+
+        # create links tools
+        fLOG("--- create links")
+        op = create_links_tools(folder, installed, verbose=verbose, fLOG=fLOG)
+        operations.extend(op)
+        operations.append(("time", now()))
+
+        # create batch command files
+        fLOG("--- create batch command file")
+        op = create_win_batches(folders, verbose=verbose, fLOG=fLOG)
+        operations.extend(op)
+
+        # modifies scite properties
+        fLOG("--- modifies Scite properties")
+        modify_scite_properties(os.path.join("..", "..", "..", "pythonw"),
+                                os.path.join(folders["tools"], "Scite", "wscite"))
+
+        # update pip
+        fLOG("--- update pip")
+        op = update_pip(folders["python"])
+        operations.extend(op)
+        operations.append(("time", now()))
+        
+        ##
+        ## packages for R, Julia, Python
+        ##
+
         # install Julia packages
         jl = os.path.join(folders["tools"], "Julia")
         output = os.path.join(folders["logs"], "out.install.julia.txt")
@@ -210,28 +242,6 @@ def win_python_setup(folder="dist/win_python_setup",
         output = os.path.join(folders["logs"], "out.install.r.txt")
         out = r_run_script(r, _script_r, output)
         operations.append(("R", _script_r))
-        operations.append(("time", now()))
-
-        # create links tools
-        fLOG("--- create links")
-        op = create_links_tools(folder, installed, verbose=verbose, fLOG=fLOG)
-        operations.extend(op)
-        operations.append(("time", now()))
-
-        # clean msi
-        op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
-        operations.extend(op)
-        operations.append(("time", now()))
-
-        # modifies scite properties
-        fLOG("--- modifies Scite properties")
-        modify_scite_properties(os.path.join("..", "..", "..", "pythonw"),
-                                os.path.join(folders["tools"], "Scite", "wscite"))
-
-        # update pip
-        fLOG("--- update pip")
-        op = update_pip(folders["python"])
-        operations.extend(op)
         operations.append(("time", now()))
 
         # installation of packages
@@ -516,7 +526,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
             dest = os.path.join(folder, link_name)
             if not os.path.exists(dest):
                 add_shortcut(target="tools\\R\\bin\\x64\\Rgui.exe",
-                             name=name, arguments="", icon="tools\\icons\\r.ico",
+                             name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
                              folder=folder)
                 if verbose:
                     fLOG("create link", dest)
@@ -527,7 +537,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
             dest = os.path.join(folder, link_name)
             if not os.path.exists(dest):
                 add_shortcut(target="tools\\R\\bin\\x64\\R.exe",
-                             name=name, arguments="", icon="tools\\icons\\r.ico",
+                             name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
                              folder=folder)
                 if verbose:
                     fLOG("create link", dest)
@@ -539,7 +549,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
             dest = os.path.join(folder, link_name)
             if not os.path.exists(dest):
                 add_shortcut(target="tools\\julia\\bin\\julia.exe",
-                             name=name, arguments="", icon="tools\\icons\\julia.ico",
+                             name=name, arguments="", icon="~dp0\\tools\\icons\\julia.ico",
                              folder=folder)
                 if verbose:
                     fLOG("create link", dest)
@@ -551,7 +561,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
             dest = os.path.join(folder, link_name)
             if not os.path.exists(dest):
                 add_shortcut(target="python\\python.exe",
-                             name=name, arguments="", icon="tools\\icons\\python.ico",
+                             name=name, arguments="", icon="~dp0\\tools\\icons\\python.ico",
                              folder=folder)
                 if verbose:
                     fLOG("create link", dest)

@@ -33,7 +33,7 @@ def julia_run_script(julia_path, script):
     cmd = " ".join(cmd)
     out, err = run_cmd(cmd, wait=True)
     if err is not None and len(err) > 0 and \
-            err.strip(" \n\r\t") != "INFO: Nothing to be done":
+            "err" in err.lower() or "warn" in err.lower():
         raise JuliaBatchException(
             "CMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
     return out
