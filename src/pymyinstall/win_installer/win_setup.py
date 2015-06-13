@@ -410,7 +410,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python"],
+                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy"],
                 **options):
     """
     Install setups
