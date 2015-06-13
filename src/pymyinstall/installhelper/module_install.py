@@ -237,7 +237,7 @@ class ModuleInstall:
                 dt = get_file_modification_date(page)
                 now = datetime.datetime.now()
                 df = now - dt
-                if df > datetime.timedelta(7):
+                if df > datetime.timedelta(1):
                     exi = False
 
             if exi:

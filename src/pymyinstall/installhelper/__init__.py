@@ -11,3 +11,5 @@ from .install_custom_sqlitespy import install_sqlitespy
 from .install_custom_python import install_python
 from .install_custom_mingw import install_mingw
 from .install_custom_7z import install_7z
+from .install_cmd_helper import run_cmd, update_pip
+from .install_custom import download_page

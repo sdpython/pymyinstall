@@ -3,6 +3,7 @@
 @grief Functions to help using pywin32.
 """
 
+
 def import_pywin32():
     """
     For the module ``pywin32``,

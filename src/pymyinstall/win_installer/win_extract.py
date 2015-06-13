@@ -125,7 +125,7 @@ def extract_archive(fname, targetdir=None, verbose=False, fLOG=print):
 def clean_msi(folder, pattern, verbose=False, fLOG=print):
     """
     clean all files follwing a specific pattern
-    
+
     @param      folder      folder
     @param      pattern     files to remove
     @param      verbose     display more information
@@ -146,5 +146,3 @@ def clean_msi(folder, pattern, verbose=False, fLOG=print):
             os.remove(r)
             operations.append(("remove", r))
     return operations
-            
-    

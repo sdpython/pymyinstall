@@ -13,7 +13,7 @@ open_tool_on_browser()
 @endcode
 """
 
-__version__ = "0.9"
+__version__ = "1.0"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pymyinstall"
 __url__ = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html"
@@ -55,4 +55,4 @@ from .packaged.packaged_functions import datascientist, ds_small, ds_complete, d
 from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_teachings
 from .packaged.packaged_config import installation_azure, extend_winpython, extend_anaconda, extension_ensae, installation_ensae
 from .installhelper.install_custom_revealjs import download_revealjs
-from .win_installer import win_python_setup
+from .win_installer import win_python_setup, r_run_script

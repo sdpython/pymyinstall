@@ -79,7 +79,10 @@ Functionalities
 Versions
 --------
 
-* **0.9 - 2015/??/??**
+* **1.0 - 2015/??/??**
+    * **new:** function :func:`win_python_setup <pymyinstall.win_installer.win_setup.win_python_setup>`
+      to create a setup similar to WinPython but with InnoSetup (avoid limit size)
+* **0.9 - 2015/06/10**
     * **add:** install wheel packages
     * **add:** add new packages to the list of a datascientist
     * **add:** functions :func:`extend_anaconda <pymyinstall.packaged.packaged_config.extend_anaconda>`, :func:`extend_winpython <pymyinstall.packaged.packaged_config.extend_winpython>`

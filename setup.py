@@ -10,7 +10,7 @@ from setuptools import find_packages
 
 
 project_var_name = "pymyinstall"
-sversion = "0.9"
+sversion = "1.0"
 versionPython = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path = "Lib/site-packages/" + project_var_name
 readme = 'README.rst'
@@ -34,7 +34,8 @@ CLASSIFIERS = [
 
 packages = find_packages('src', exclude='src')
 package_dir = {k: "src/" + k.replace(".", "/") for k in packages}
-package_data = {}
+package_data = {
+    project_var_name + ".win_installer": ["*.r", "*.jl", "*.iss"], }
 
 ############
 # functions

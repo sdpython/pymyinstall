@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 """
 @file
 @brief Functions to prepare a setup on Windows
@@ -5,6 +6,7 @@
 import os
 import fnmatch
 import shutil
+import datetime
 
 from ..installhelper import install_pandoc, install_sqlitespy, install_R, install_scite, install_julia, install_python, install_mingw, install_7z
 from ..installhelper.install_custom_scite import modify_scite_properties
@@ -15,6 +17,42 @@ from .win_packages import _is_package_in_list, win_install_packages_other_python
 from ..installhelper.link_shortcuts import add_shortcut
 from ..installhelper.install_cmd_helper import update_pip
 from .import_pywin32 import import_pywin32
+from .win_setup_r import r_run_script, _script as _script_r
+from .win_setup_julia import julia_run_script, _script as _script_julia
+from .win_innosetup import run_innosetup
+from ..installhelper import download_page
+
+license = """
+Copyright (c) 2013-2015, Xavier Dupré
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+"""
+
+_default_notebooks = [
+    ("docs/ensae", ["http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td1a_cenonce_session_12.ipynb",
+                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td2a_cenonce_session_2A.ipynb",
+                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td2a_cenonce_session_2B.ipynb",
+                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td2a_cenonce_session_2C.ipynb",
+                    ]),
+    ("docs/actuariat", ["http://www.xavierdupre.fr/app/actuariat_python/helpsphinx/_downloads/population_recuperation_donnees.ipynb",
+                        ]),
+]
 
 
 def win_python_setup(folder="dist/win_python_setup",
@@ -23,6 +61,8 @@ def win_python_setup(folder="dist/win_python_setup",
                      verbose=False,
                      fLOG=print,
                      download_only=False,
+                     no_setup=False,
+                     notebooks=None,
                      **options
                      ):
     """
@@ -33,13 +73,16 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      module_list     list of module to install (see @see fn small_installation = default options)
     @param      fLOG            logging function
     @param      download_only   only downloads
+    @param      no_setup        skip the building of the setup
     @param      verbose         print more information
     @param      options         list of available options (will expand later)
+    @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
     @return                     list of completed operations
 
     The function first downloads everything.
     It does not do it twice, so you can run the function again and directly go
-    to where it was interrupted.
+    to where it was interrupted. If there is no notebooks,
+    the setup will add some anyway.
 
     It uses `InnoSetup <http://www.jrsoftware.org/isinfo.php>`_ to build the setup.
 
@@ -77,7 +120,14 @@ def win_python_setup(folder="dist/win_python_setup",
     This works only for Windows.
     @endexample
     """
+    if notebooks is None:
+        notebooks = _default_notebooks
+
+    def now():
+        return datetime.datetime.now()
+
     operations = []
+    operations.append(("time", now()))
 
     folder = os.path.abspath(folder)
     download_folder = os.path.abspath(download_folder)
@@ -91,72 +141,145 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("mkdir", download_folder))
 
     # definition of folders
+    operations.append(("time", now()))
     folders = dict(tools=os.path.join(folder, "tools"),
                    workspace=os.path.join(folder, "workspace"),
-                   python=os.path.join(folder, "python"))
+                   python=os.path.join(folder, "python"),
+                   config=os.path.join(folder, "config"),
+                   logs=os.path.join(folder, "logs"),
+                   )
 
     for k, v in folders.items():
         if not os.path.exists(v):
             os.mkdir(v)
 
+    # download the documentation
+    op = win_download_notebooks(
+        notebooks, folders["workspace"], verbose=verbose, fLOG=fLOG)
+    operations.extend(op)
+    operations.append(("time", now()))
+
     # download of everything
+    operations.append(("time", now()))
     op = win_download(folder=download_folder,
                       module_list=module_list,
                       verbose=verbose,
                       fLOG=fLOG,
                       **options)
     operations.extend(op)
+    operations.append(("time", now()))
+
+    # license
+    fLOG("--- license")
+    with open(os.path.join(folder, "license.txt"), "w") as f:
+        f.write(license)
+    operations.append(("license", "license.txt"))
 
     if not download_only:
         # copy icons in tools/icons
         fLOG("--- copy icons")
         op = copy_icons(os.path.join(os.path.dirname(__file__), "icons"),
-                   os.path.join(folders["tools"], "icons"))
+                        os.path.join(folders["tools"], "icons"))
         operations.extend(op)
-        
+        operations.append(("time", now()))
+
         # install setups
         fLOG("--- installation of python and tools")
         op, installed = win_install(folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG,
                                     **options)
         operations.extend(op)
+        operations.append(("time", now()))
         if "pandoc" not in installed:
             raise FileNotFoundError("pandoc was not installed")
 
         if verbose:
             for k, v in installed.items():
                 fLOG("  INSTALLED:", k, "-->", v)
-                
+
+        # install Julia packages
+        jl = os.path.join(folders["tools"], "Julia")
+        output = os.path.join(folders["logs"], "out.install.julia.txt")
+        out = julia_run_script(jl, _script_julia)
+        with open(os.path.join(folders["logs"], "out.install.julia.txt"), "w", encoding="utf8") as f:
+            f.write(out)
+        operations.append(("Julia", _script_julia))
+        operations.append(("time", now()))
+
+        # install R packages
+        r = os.path.join(folders["tools"], "R")
+        output = os.path.join(folders["logs"], "out.install.r.txt")
+        out = r_run_script(r, _script_r, output)
+        operations.append(("R", _script_r))
+        operations.append(("time", now()))
+
         # create links tools
+        fLOG("--- create links")
         op = create_links_tools(folder, installed, verbose=verbose, fLOG=fLOG)
         operations.extend(op)
-                
+        operations.append(("time", now()))
+
         # clean msi
         op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
         operations.extend(op)
-        
+        operations.append(("time", now()))
+
         # modifies scite properties
         fLOG("--- modifies Scite properties")
-        modify_scite_properties(os.path.join("..", "..", "..", "pythonw"), 
+        modify_scite_properties(os.path.join("..", "..", "..", "pythonw"),
                                 os.path.join(folders["tools"], "Scite", "wscite"))
 
         # update pip
         fLOG("--- update pip")
-        update_pip(folder["python"])
-        
+        op = update_pip(folders["python"])
+        operations.extend(op)
+        operations.append(("time", now()))
+
         # installation of packages
         fLOG("--- installation of python packages")
         python_path = folders["python"]
         win_install_packages_other_python(
             python_path, download_folder, verbose=verbose, fLOG=fLOG)
         fLOG("done")
+        operations.append(("time", now()))
 
-        # setup
+    if not no_setup:
+        # build setup with InnoSetup
+        fLOG("--- building setup with InnoSetup")
+        replacements = dict(__DISTPATH__=folder)
+        out = run_innosetup(replacements=replacements, fLOG=fLOG,
+                            temp_folder=os.path.join(folders["logs"]))
+        fLOG("done")
+        with open(os.path.join(folders["logs"], "out.install.innosetup.txt"), "w", encoding="utf8") as f:
+            f.write(out)
+        operations.append(("InnoSetup", "done"))
+        operations.append(("time", now()))
+
+    # store logs
+    with open(os.path.join(folders["logs"], "log.setup.txt"), "a", encoding="utf8") as f:
+        f.write("\n")
+        f.write("-------------------------------------------\n")
+        f.write("NEW RUN\n")
+        f.write("-------------------------------------------\n")
+        for ab in operations:
+            if isinstance(ab, tuple):
+                if len(ab) == 2:
+                    a, b = ab
+                elif len(ab) == 1:
+                    a, b = a, None
+                else:
+                    a, b = ab[0], str(ab[1:])
+
+            if isinstance(b, str  # unicode#
+                          ):
+                b = b.replace(folder, "")
+                b = b.replace(os.environ["USERNAME"], "---")
+            f.write("{0}\t{1}\n".format(a, b))
 
 
 def copy_icons(src, dest):
     """
     copy all files from src to dest
-    
+
     @param      src     source
     @param      dest    destination
     @return             operations
@@ -172,7 +295,7 @@ def copy_icons(src, dest):
             shutil.copy(os.path.join(src, file), dest)
             operations.append(("copy", file))
     return operations
-    
+
 
 def win_download(folder="build/win_python_setup",
                  module_list=None,
@@ -276,7 +399,8 @@ def win_install(folders,
                 download_folder,
                 verbose=False,
                 fLOG=print,
-                names=["Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python"],
+                names=[
+                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python"],
                 **options):
     """
     Install setups
@@ -375,7 +499,7 @@ def win_install(folders,
 def create_links_tools(folder, installed, verbose=False, fLOG=print):
     """
     create links for the tools
-    
+
     @param      folder      where links will be stored
     @param      installed   dictionary *{ tool: exe file }*
     @param      verbose     display more information
@@ -384,21 +508,84 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
     """
     import_pywin32()
     operations = []
-    icon_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "icon")
-    
-    for k,v in installed.items():
-        print(k,v)
+
+    for k, v in installed.items():
         if k == "R":
-            link_name = "R Gui.lnk"
+            name = "test R Gui"
+            link_name = name + ".lnk"
             dest = os.path.join(folder, link_name)
             if not os.path.exists(dest):
-                add_shortcut(file="tools\\R\\bin\\Rgui.exe", 
-                    name="R Gui", description=None,
-                    arguments="", workdir="workspace", 
-                    icon=os.path.join(icon_path, "r.ico"),
-                    folder=folder)
+                add_shortcut(target="tools\\R\\bin\\x64\\Rgui.exe",
+                             name=name, arguments="", icon="tools\\icons\\r.ico",
+                             folder=folder)
                 if verbose:
                     fLOG("create link", dest)
                 operations.append(("link", link_name))
+
+            name = "test R Console"
+            link_name = name + ".lnk"
+            dest = os.path.join(folder, link_name)
+            if not os.path.exists(dest):
+                add_shortcut(target="tools\\R\\bin\\x64\\R.exe",
+                             name=name, arguments="", icon="tools\\icons\\r.ico",
+                             folder=folder)
+                if verbose:
+                    fLOG("create link", dest)
+                operations.append(("link", link_name))
+
+        elif k == "julia":
+            name = "test Julia Console"
+            link_name = name + ".lnk"
+            dest = os.path.join(folder, link_name)
+            if not os.path.exists(dest):
+                add_shortcut(target="tools\\julia\\bin\\julia.exe",
+                             name=name, arguments="", icon="tools\\icons\\julia.ico",
+                             folder=folder)
+                if verbose:
+                    fLOG("create link", dest)
+                operations.append(("link", link_name))
+
+        elif k == "python":
+            name = "test Python Console"
+            link_name = name + ".lnk"
+            dest = os.path.join(folder, link_name)
+            if not os.path.exists(dest):
+                add_shortcut(target="python\\python.exe",
+                             name=name, arguments="", icon="tools\\icons\\python.ico",
+                             folder=folder)
+                if verbose:
+                    fLOG("create link", dest)
+                operations.append(("link", link_name))
+
     return operations
-                        
+
+
+def win_download_notebooks(notebooks, folder, verbose=False, fLOG=print):
+    """
+    download notebooks and store them as documentation
+
+    @param      notebooks       list of tuple (place, url)
+    @param      folder          where to put them
+    @param      verbose         verbose
+    @param      fLOG            logging function
+    @return                     list of operations
+    """
+    operations = []
+    for path, urls in notebooks:
+        if not isinstance(urls, list):
+            urls = [urls]
+        for url in urls:
+            name = url.split("/")[-1]
+            dest = os.path.join(folder, path)
+            if not os.path.exists(dest):
+                os.makedirs(dest)
+                operations.append(("mkdir", dest))
+            dfile = os.path.join(dest, name)
+            if not os.path.exists(dfile):
+                if verbose:
+                    fLOG("download notebooks", name, "from", url)
+                content = download_page(url)
+                with open(dfile, "w", encoding="utf8") as f:
+                    f.write(content)
+                operations.append(("docs", dfile))
+    return operations

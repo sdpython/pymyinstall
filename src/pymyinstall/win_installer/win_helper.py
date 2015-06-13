@@ -47,18 +47,18 @@ def patch_shebang_line(fname, pad=b' ', fLOG=print):
     except Exception:
         fLOG("failed to patch", fname)
         return False
-        
-        
+
+
 def get_env(name, current=True):
     """
     Return HKCU/HKLM environment variable name and value
-    
+
     @param      name        name to look for
     @param      current     switch between *HKEY_CURRENT_USER* (True) and *HKEY_LOCAL_MACHINE* (False)
     @return                 tuple (see below)
 
     For example, get_user_env('PATH') may returns::
-    
+
         ('Path', u'C:\\Program Files\\Intel\\WiFi\\bin\\')
     """
     import winreg
@@ -78,8 +78,8 @@ def get_env(name, current=True):
 def set_env(name, value, current=True):
     """
     Set HKCU/HKLM environment variables
-    
-    
+
+
     @param      name        name to look for
     @param      current     switch between *HKEY_CURRENT_USER* (True) and *HKEY_LOCAL_MACHINE* (False)
     """
@@ -103,7 +103,7 @@ def create_shortcut(path, description, filename,
                     arguments="", workdir="", iconpath="", iconindex=0):
     """
     Create Windows shortcut (.lnk file)
-    
+
     @param      path            where to store the link
     @param      description     description
     @param      filename        link name

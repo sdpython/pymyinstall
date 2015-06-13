@@ -93,19 +93,20 @@ def install_scite(dest_folder=".", fLOG=print, install=True):
 
     if install:
         unzip_files(file, whereTo=dest_folder, fLOG=fLOG)
-        modify_scite_properties(os.path.join(dest_folder, "wscite"), sys.executable)
+        modify_scite_properties(
+            os.path.join(dest_folder, "wscite"), sys.executable)
         return os.path.join(os.path.abspath(dest_folder), "wscite", "SciTE.exe")
     else:
         return outfile
-        
-        
+
+
 def modify_scite_properties(python_path, scite_path):
     """
     modifies the scite properties
-    
+
     @param      python_path     python path
     @param      scite_path      scrite path
-    
+
     Avoid tabulations, change the path to the interpreter
     """
     # we change the path
@@ -126,7 +127,6 @@ def modify_scite_properties(python_path, scite_path):
     content = content.replace("font:Verdana,", "font:Consolas,")
     with open(config, "w", encoding="utf8") as f:
         f.write(content)
-    
 
 
 def add_shortcut_to_desktop_for_scite(scite):

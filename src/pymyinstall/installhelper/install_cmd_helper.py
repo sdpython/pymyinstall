@@ -59,6 +59,7 @@ def run_cmd(cmd,
             do_not_log=False,
             encerror="ignore",
             encoding="utf8",
+            cwd=None,
             fLOG=print):
     """
     run a command line and wait for the result
@@ -74,6 +75,7 @@ def run_cmd(cmd,
     @param      do_not_log          do not log the output
     @param      encerror            encoding errors (ignore by default) while converting the output into a string
     @param      encoding            encoding of the output
+    @param      cwd                 current folder
     @param      fLOG                logging function
     @return                         content of stdout, stderr  (only if wait is True)
 
@@ -176,12 +178,14 @@ def run_cmd(cmd,
                                 shell=shell,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
-                                startupinfo=startupinfo)
+                                startupinfo=startupinfo,
+                                cwd=cwd)
     else:
         proc = subprocess.Popen(split_cmp_command(cmd),
                                 shell=shell,
                                 stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+                                stderr=subprocess.PIPE,
+                                cwd=cwd)
     if wait:
 
         out = []
@@ -887,3 +891,20 @@ def get_file_modification_date(filename):
     """
     t = os.path.getmtime(filename)
     return datetime.datetime.fromtimestamp(t)
+
+
+def update_pip(python_path=None):
+    """
+    update pip for a specific distribution
+
+    @param      python_path     python path (or sys.executable if None)
+    @return                     output
+    """
+    if python_path is None:
+        python_path = os.path.executable(sys.executable)
+    cmd = "python -m pip install -U pip"
+    out, err = run_cmd(cmd, wait=True)
+    if err and len(err) > 0:
+        raise Exception(
+            "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+    return out
