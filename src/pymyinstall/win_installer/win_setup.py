@@ -524,48 +524,44 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
             name = "test R Gui"
             link_name = name + ".lnk"
             dest = os.path.join(folder, link_name)
-            if not os.path.exists(dest):
-                add_shortcut(target="tools\\R\\bin\\x64\\Rgui.exe",
-                             name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
-                             folder=folder)
-                if verbose:
-                    fLOG("create link", dest)
-                operations.append(("link", link_name))
+            add_shortcut(target="tools\\R\\bin\\x64\\Rgui.exe",
+                         name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
+                         folder=folder)
+            if verbose:
+                fLOG("create link", dest)
+            operations.append(("link", link_name))
 
             name = "test R Console"
             link_name = name + ".lnk"
             dest = os.path.join(folder, link_name)
-            if not os.path.exists(dest):
-                add_shortcut(target="tools\\R\\bin\\x64\\R.exe",
-                             name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
-                             folder=folder)
-                if verbose:
-                    fLOG("create link", dest)
-                operations.append(("link", link_name))
+            add_shortcut(target="tools\\R\\bin\\x64\\R.exe",
+                         name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
+                         folder=folder)
+            if verbose:
+                fLOG("create link", dest)
+            operations.append(("link", link_name))
 
         elif k == "julia":
             name = "test Julia Console"
             link_name = name + ".lnk"
             dest = os.path.join(folder, link_name)
-            if not os.path.exists(dest):
-                add_shortcut(target="tools\\julia\\bin\\julia.exe",
-                             name=name, arguments="", icon="~dp0\\tools\\icons\\julia.ico",
-                             folder=folder)
-                if verbose:
-                    fLOG("create link", dest)
-                operations.append(("link", link_name))
+            add_shortcut(target="tools\\julia\\bin\\julia.exe",
+                         name=name, arguments="", icon="~dp0\\tools\\icons\\julia.ico",
+                         folder=folder)
+            if verbose:
+                fLOG("create link", dest)
+            operations.append(("link", link_name))
 
         elif k == "python":
             name = "test Python Console"
             link_name = name + ".lnk"
             dest = os.path.join(folder, link_name)
-            if not os.path.exists(dest):
-                add_shortcut(target="python\\python.exe",
-                             name=name, arguments="", icon="~dp0\\tools\\icons\\python.ico",
-                             folder=folder)
-                if verbose:
-                    fLOG("create link", dest)
-                operations.append(("link", link_name))
+            add_shortcut(target="python\\python.exe",
+                         name=name, arguments="", icon="~dp0\\tools\\icons\\python.ico",
+                         folder=folder)
+            if verbose:
+                fLOG("create link", dest)
+            operations.append(("link", link_name))
 
     return operations
 
