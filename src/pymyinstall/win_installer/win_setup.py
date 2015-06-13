@@ -4,12 +4,17 @@
 """
 import os
 import fnmatch
+import shutil
 
 from ..installhelper import install_pandoc, install_sqlitespy, install_R, install_scite, install_julia, install_python, install_mingw, install_7z
 from ..installhelper.install_custom_scite import modify_scite_properties
 from ..packaged.packaged_config import small_installation
 from .win_extract import extract_msi, extract_exe, extract_archive, clean_msi
 from .win_packages import _is_package_in_list, win_install_packages_other_python
+#from .win_helper import create_shortcut
+from ..installhelper.link_shortcuts import add_shortcut
+from ..installhelper.install_cmd_helper import update_pip
+from .import_pywin32 import import_pywin32
 
 
 def win_python_setup(folder="dist/win_python_setup",
@@ -43,8 +48,9 @@ def win_python_setup(folder="dist/win_python_setup",
         * *python*: subfolder for python interpreter
         * *workspace*: current folder for the notebooks
 
-    Comments and remark:
+    Comments and remarks:
         * 7z setup needs a last click to complete
+        * pandoc needs a last click to complete
         * R must be manually installed in the right folder
         * Julia produces a file exe, for the time being it must be done manually
         * MinGW is also installed manually, the command line is different from others tools,
@@ -102,15 +108,27 @@ def win_python_setup(folder="dist/win_python_setup",
     operations.extend(op)
 
     if not download_only:
+        # copy icons in tools/icons
+        fLOG("--- copy icons")
+        op = copy_icons(os.path.join(os.path.dirname(__file__), "icons"),
+                   os.path.join(folders["tools"], "icons"))
+        operations.extend(op)
+        
         # install setups
         fLOG("--- installation of python and tools")
         op, installed = win_install(folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG,
                                     **options)
         operations.extend(op)
+        if "pandoc" not in installed:
+            raise FileNotFoundError("pandoc was not installed")
 
         if verbose:
             for k, v in installed.items():
-                fLOG(k, "-->", v)
+                fLOG("  INSTALLED:", k, "-->", v)
+                
+        # create links tools
+        op = create_links_tools(folder, installed, verbose=verbose, fLOG=fLOG)
+        operations.extend(op)
                 
         # clean msi
         op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
@@ -121,6 +139,10 @@ def win_python_setup(folder="dist/win_python_setup",
         modify_scite_properties(os.path.join("..", "..", "..", "pythonw"), 
                                 os.path.join(folders["tools"], "Scite", "wscite"))
 
+        # update pip
+        fLOG("--- update pip")
+        update_pip(folder["python"])
+        
         # installation of packages
         fLOG("--- installation of python packages")
         python_path = folders["python"]
@@ -130,6 +152,27 @@ def win_python_setup(folder="dist/win_python_setup",
 
         # setup
 
+
+def copy_icons(src, dest):
+    """
+    copy all files from src to dest
+    
+    @param      src     source
+    @param      dest    destination
+    @return             operations
+    """
+    operations = []
+    if not os.path.exists(dest):
+        os.makedirs(dest)
+        operations.append(("mkdir", dest))
+    files = os.listdir(src)
+    for file in files:
+        d = os.path.join(dest, file)
+        if not os.path.exists(d):
+            shutil.copy(os.path.join(src, file), dest)
+            operations.append(("copy", file))
+    return operations
+    
 
 def win_download(folder="build/win_python_setup",
                  module_list=None,
@@ -229,14 +272,12 @@ def win_download(folder="build/win_python_setup",
     return operations
 
 
-def win_install(
-    folders,
-    download_folder,
-    verbose=False,
-    fLOG=print,
-    names=["Julia", "Scite", "7z", "MinGW", "R", "Python"],
-    **options
-):
+def win_install(folders,
+                download_folder,
+                verbose=False,
+                fLOG=print,
+                names=["Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python"],
+                **options):
     """
     Install setups
 
@@ -329,3 +370,35 @@ def win_install(
         installed[name] = found
 
     return operations, installed
+
+
+def create_links_tools(folder, installed, verbose=False, fLOG=print):
+    """
+    create links for the tools
+    
+    @param      folder      where links will be stored
+    @param      installed   dictionary *{ tool: exe file }*
+    @param      verbose     display more information
+    @param      fLOG        logging function
+    @return                 operations, list of tuple *("link", link file)*
+    """
+    import_pywin32()
+    operations = []
+    icon_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "icon")
+    
+    for k,v in installed.items():
+        print(k,v)
+        if k == "R":
+            link_name = "R Gui.lnk"
+            dest = os.path.join(folder, link_name)
+            if not os.path.exists(dest):
+                add_shortcut(file="tools\\R\\bin\\Rgui.exe", 
+                    name="R Gui", description=None,
+                    arguments="", workdir="workspace", 
+                    icon=os.path.join(icon_path, "r.ico"),
+                    folder=folder)
+                if verbose:
+                    fLOG("create link", dest)
+                operations.append(("link", link_name))
+    return operations
+                        
