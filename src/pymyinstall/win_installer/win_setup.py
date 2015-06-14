@@ -3,6 +3,8 @@
 @file
 @brief Functions to prepare a setup on Windows
 """
+from __future__ import print_function
+
 import os
 import fnmatch
 import shutil
@@ -223,9 +225,9 @@ def win_python_setup(folder="dist/win_python_setup",
         op = update_pip(folders["python"])
         operations.extend(op)
         operations.append(("time", now()))
-        
+
         ##
-        ## packages for R, Julia, Python
+        # packages for R, Julia, Python
         ##
 
         # install Julia packages

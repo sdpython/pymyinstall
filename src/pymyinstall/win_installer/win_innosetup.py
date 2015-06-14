@@ -2,6 +2,8 @@
 @file
 @brief Functions to prepare a setup on Windows, use InnoSetup
 """
+from __future__ import print_function
+
 import os
 from ..installhelper import run_cmd
 

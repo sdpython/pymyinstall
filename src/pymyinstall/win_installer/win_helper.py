@@ -3,6 +3,7 @@
 @file
 @brief Helpers, inspired from `utils.py <https://github.com/winpython/winpython/blob/master/winpython/utils.py>`_
 """
+from __future__ import print_function
 
 import os
 import os.path as osp

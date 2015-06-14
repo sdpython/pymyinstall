@@ -16,7 +16,5 @@ if False:
 
 
 if True:
-    win_python_setup(module_list=list_modules, verbose=True, download_only=False, 
-            no_setup=True)
-
-
+    win_python_setup(module_list=list_modules, verbose=True, download_only=False,
+                     no_setup=True)
