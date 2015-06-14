@@ -55,4 +55,4 @@ from .packaged.packaged_functions import datascientist, ds_small, ds_complete, d
 from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_teachings
 from .packaged.packaged_config import installation_azure, extend_winpython, extend_anaconda, extension_ensae, installation_ensae
 from .installhelper.install_custom_revealjs import download_revealjs
-from .win_installer import win_python_setup, r_run_script
+from .win_installer.win_setup import win_python_setup
