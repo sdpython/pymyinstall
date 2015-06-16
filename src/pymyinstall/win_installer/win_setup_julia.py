@@ -3,7 +3,7 @@
 @brief Functions to prepare a setup on Windows, R functions
 """
 import os
-from ..installhelper import run_cmd
+from ..installhelper.install_cmd_helper import run_cmd
 
 _script = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "Julia_install.jl")

@@ -10,20 +10,25 @@ import fnmatch
 import shutil
 import datetime
 
-from ..installhelper import install_pandoc, install_sqlitespy, install_R, install_scite, install_julia, install_python, install_mingw, install_7z
+from ..installhelper.install_custom_pandoc import install_pandoc
+from ..installhelper.install_custom_R import install_R
+from ..installhelper.install_custom_julia import install_julia
+from ..installhelper.install_custom_scite import install_scite
+from ..installhelper.install_custom_sqlitespy import install_sqlitespy
+from ..installhelper.install_custom_python import install_python
+from ..installhelper.install_custom_mingw import install_mingw
+from ..installhelper.install_custom_7z import install_7z
+from ..installhelper.install_custom import download_page
 from ..installhelper.install_custom_scite import modify_scite_properties
 from ..packaged.packaged_config import small_installation
+from .import_pywin32 import import_pywin32
 from .win_extract import extract_msi, extract_exe, extract_archive, clean_msi
 from .win_packages import _is_package_in_list, win_install_packages_other_python
-#from .win_helper import create_shortcut
-from ..installhelper.link_shortcuts import add_shortcut
-from ..installhelper.install_cmd_helper import update_pip
-from .import_pywin32 import import_pywin32
+from .win_batch import create_win_batches
 from .win_setup_r import r_run_script, _script as _script_r
 from .win_setup_julia import julia_run_script, _script as _script_julia
-from .win_innosetup import run_innosetup
-from ..installhelper import download_page
-from .win_batch import create_win_batches
+
+from .win_innosetup_helper import run_innosetup
 
 license = """
 Copyright (c) 2013-2015, Xavier Dupré

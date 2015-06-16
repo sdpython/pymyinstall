@@ -11,7 +11,7 @@ import subprocess
 import tarfile
 import zipfile
 import fnmatch
-#import winreg
+# import winreg
 import glob
 
 from .win_helper import patch_shebang_line

@@ -5,7 +5,7 @@
 from __future__ import print_function
 
 import os
-from ..installhelper import run_cmd
+from ..installhelper.install_cmd_helper import run_cmd
 
 
 class InnoSetupException(Exception):

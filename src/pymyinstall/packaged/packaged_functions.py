@@ -9,8 +9,8 @@ from .packaged_config import complete_installation, small_installation, installa
 from .packaged_config import installation_ensae, installation_teachings
 from ..installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from ..installhelper.install_custom_pandoc import install_pandoc
-from ..setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
 from ..installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
+from ..setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
 
 
 def datascientist(folder="install",
