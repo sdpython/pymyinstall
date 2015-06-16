@@ -335,6 +335,8 @@ def extend_anaconda():
         ModuleInstall("bayespy", "pip"),  # Bayesian
         #
         ModuleInstall("charts", "pip"),  # javascript graphs
+        ModuleInstall("invoke", "pip"),  # dependency for ablog
+        ModuleInstall("ablog", "pip"),  # blogging
     ]
 
     return mod
@@ -432,6 +434,8 @@ def extension_ensae():
         ModuleInstall("scandir", "wheel"),
         ModuleInstall("VideoCapture", "wheel"),
         ModuleInstall("zs", "wheel"),
+        # machine learning
+        ModuleInstall("joblib", "pip"),
         #
         # does not work on Windows
         ModuleInstall("libsvm", "wheel", mname="svm"),
