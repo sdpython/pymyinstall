@@ -269,6 +269,8 @@ def complete_installation():
         ModuleInstall("structures", "pip"),
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("rodeo", "pip"),
+        ModuleInstall("minecart", "pip"),  # PDF extraction
+        ModuleInstall("pygauss", "pip"),  # molecule, bio-informatic
     ]
 
     if sys.platform.startswith("win"):
