@@ -4,7 +4,7 @@ import platform
 print(platform.architecture())
 sys.path.append("src")
 print("----")
-from pymyinstall import win_python_setup, installation_ensae, installation_teachings, r_run_script
+from pymyinstall import win_python_setup, installation_ensae, installation_teachings
 
 list_modules = installation_ensae() + installation_teachings()
 

@@ -17,11 +17,14 @@ from ..installhelper.install_custom_scite import install_scite
 from ..installhelper.install_custom_sqlitespy import install_sqlitespy
 from ..installhelper.install_custom_python import install_python
 from ..installhelper.install_custom_mingw import install_mingw
+from ..installhelper.install_cmd_helper import update_pip
 from ..installhelper.install_custom_7z import install_7z
 from ..installhelper.install_custom import download_page
 from ..installhelper.install_custom_scite import modify_scite_properties
+from ..installhelper.link_shortcuts import add_shortcut
 from ..packaged.packaged_config import small_installation
 from .import_pywin32 import import_pywin32
+from .win_exception import WinInstallException
 from .win_extract import extract_msi, extract_exe, extract_archive, clean_msi
 from .win_packages import _is_package_in_list, win_install_packages_other_python
 from .win_batch import create_win_batches
@@ -502,9 +505,22 @@ def win_install(folders,
 
             operations.append(("install", cand))
             fLOG("done")
-
+    
         # add main executable
         found = find_exe(loc, name)
+
+        # for MinGW, we check that the executable mingw-get.exe was installed
+        if found is None and name == "MinGW" and cand == "mingw-get-setup.exe":
+            exe = os.path.join(loc, "bin", "mingw-get.exe")
+            if os.path.exists(exe):
+                cmd = exe + " install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77"
+                if verbose:
+                    fLOG("install MinGW", cmd)
+                retcode = subprocess.call(cmd, shell=True, stdout=sys.stderr)
+                if retcode < 0:
+                    raise WinInstallException("unable to execute:\nCMD:\n{0}".format(cmd))
+                found = find_exe(loc, name)
+
         if found is None:
             raise FileNotFoundError("unable to find executable for name={0} in {1}, found: {2}".format(
                 name, loc, found))
