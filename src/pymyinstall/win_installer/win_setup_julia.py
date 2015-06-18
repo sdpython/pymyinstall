@@ -7,9 +7,9 @@ from ..installhelper.install_cmd_helper import run_cmd
 
 _script = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "Julia_install.jl")
-    
+
 _script_build = os.path.join(
-    os.path.abspath(os.path.dirname(__file__)), "Julia_build.jl")    
+    os.path.abspath(os.path.dirname(__file__)), "Julia_build.jl")
 
 
 class JuliaBatchException(Exception):
@@ -20,15 +20,22 @@ class JuliaBatchException(Exception):
     pass
 
 
-def julia_run_script(julia_path, python_path, script):
+def julia_run_script(julia_path, python_path, script, verbose=False, fLOG=print):
     """
     run a script on Julia
 
-    @param      julia_path  julia location
-    @param      script      script to run
-    @return                 output
+    @param      julia_path      julia location
+    @param      script          script to run
+    @param      python_path     path to python
+    @param      verbose         more information
+    @param      fLOG            logging function
+    @return                     output
     """
-    add path
+    memo_path = os.environ["PATH"]
+    epath = memo_path + ";" + \
+        ";".join(python_path, os.path.join(python_path, "Scripts"))
+    os.environ["PATH"] = epath
+
     exe = os.path.join(julia_path, "bin", "julia.exe")
     if not os.path.exists(exe):
         raise FileNotFoundError(exe)
@@ -44,15 +51,31 @@ def julia_run_script(julia_path, python_path, script):
             "err" in err.lower() or "warn" in err.lower():
         raise JuliaBatchException(
             "CMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
-            
-    patch_julia03(julia_path)
+
+    os.environ["PATH"] = memo_path
+    patch_julia03(julia_path, verbose=verbose, fLOG=fLOG)
     return out
 
 
-def patch_julia03(julia_path):
+def patch_julia03(julia_path, verbose=False, fLOG=print):
     """
     patch absolute path in packages such as Julia/ZMQ or Julia/Nettle.
-    
+
     @param      julia_path      julia_path
+    @param      verbose         more information
+    @param      fLOG            logging function
     """
-    pass
+    pkg = os.path.join(julia_path, "pkg")
+    pkg_d = pkd.replace("\\", "\\\\")
+    for root, dirs, files in os.walk(pkg):
+        for name in files:
+            if name.endswith("deps.jl"):
+                full = os.path.join(root, name)
+                with open(full, "r", encoding="utf8") as f:
+                    content = f.read()
+                if pkg_d in content:
+                    content = content.replace(pkd_d, "%JULIA_PKGDIR%")
+                    if verbose:
+                        fLOG("  patch ", name)
+                    with open(full, "w", enconding="utf8") as f:
+                        f.write(content)

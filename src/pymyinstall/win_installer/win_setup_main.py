@@ -273,7 +273,7 @@ def win_python_setup(folder="dist/win_python_setup",
         fLOG("--- build julia packages")
         jl = os.path.join(folders["tools"], "Julia")
         output = os.path.join(folders["logs"], "out.build.julia.txt")
-        out = julia_run_script(jl, _script_julia_build)
+        out = julia_run_script(jl, folders["python"], _script_julia_build)
         with open(os.path.join(folders["logs"], "out.build.julia.txt"), "w", encoding="utf8") as f:
             f.write(out)
         operations.append(("Julia", _script_julia_build))
