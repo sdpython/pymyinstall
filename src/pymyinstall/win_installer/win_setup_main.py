@@ -29,7 +29,7 @@ from .win_extract import extract_msi, extract_exe, extract_archive, clean_msi
 from .win_packages import _is_package_in_list, win_install_packages_other_python
 from .win_batch import create_win_batches
 from .win_setup_r import r_run_script, _script as _script_r
-from .win_setup_julia import julia_run_script, _script as _script_julia
+from .win_setup_julia import julia_run_script, _script as _script_julia, _script_build as _script_julia_build
 from .win_ipy_kernels import install_kernels
 
 from .win_innosetup_helper import run_innosetup
@@ -220,6 +220,7 @@ def win_python_setup(folder="dist/win_python_setup",
         ##########
         # clean msi
         ##########
+        fLOG("--- clean msi")
         op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
         operations.extend(op)
         operations.append(("time", now()))
@@ -254,9 +255,10 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.extend(op)
         operations.append(("time", now()))
 
-        ####################
+        ##########################
         # install Julia packages
-        ####################
+        #########################
+        fLOG("--- install julia packages")
         jl = os.path.join(folders["tools"], "Julia")
         output = os.path.join(folders["logs"], "out.install.julia.txt")
         out = julia_run_script(jl, _script_julia)
@@ -265,9 +267,22 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("Julia", _script_julia))
         operations.append(("time", now()))
 
-        #################
+        #########################
+        # build Julia packages
+        #########################
+        fLOG("--- build julia packages")
+        jl = os.path.join(folders["tools"], "Julia")
+        output = os.path.join(folders["logs"], "out.build.julia.txt")
+        out = julia_run_script(jl, _script_julia_build)
+        with open(os.path.join(folders["logs"], "out.build.julia.txt"), "w", encoding="utf8") as f:
+            f.write(out)
+        operations.append(("Julia", _script_julia_build))
+        operations.append(("time", now()))
+
+        ######################
         # install R packages
-        #################
+        ######################
+        fLOG("--- install R packages")
         r = os.path.join(folders["tools"], "R")
         output = os.path.join(folders["logs"], "out.install.r.txt")
         out = r_run_script(r, _script_r, output)

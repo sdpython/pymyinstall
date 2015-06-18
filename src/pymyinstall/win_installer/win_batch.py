@@ -53,6 +53,7 @@ def create_win_env(folders):
             "set PATH=%PYTHON_WINHOME%;%PATH%"]
     if os.path.exists(os.path.join(tools, "R")):
         text.append("set R_HOME=%CURRENT%\\..\\tools\\R")
+        text.append("set R_LIBS=%CURRENT%\\..\\tools\\R\\library")
     if os.path.exists(os.path.join(tools, "Julia")):
         text.append("set JULIA_HOME=%CURRENT%\\..\\tools\\Julia")
         text.append("set JULIA_PKGDIR=%CURRENT%\\..\\tools\\Julia\\pkg")

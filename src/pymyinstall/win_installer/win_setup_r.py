@@ -30,6 +30,7 @@ def r_run_script(r_path, script, output=None):
     if not os.path.exists(exe):
         raise FileNotFoundError(exe)
 
+    os.environ["R_LIBS"] = os.path.join(r_path, "library")
     cmd = [exe, "CMD", "BATCH", script]
     if output is not None:
         cmd.append(output)
