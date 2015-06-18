@@ -30,6 +30,7 @@ def create_win_batches(folders, verbose=False, fLOG=print):
                  create_win_spyder,
                  create_win_r_console,
                  create_win_r_gui,
+                 win_install_kernels,
                  ]:
         op = func(folders)
         if verbose:
@@ -54,6 +55,7 @@ def create_win_env(folders):
         text.append("set R_HOME=%CURRENT%\\..\\tools\\R")
     if os.path.exists(os.path.join(tools, "Julia")):
         text.append("set JULIA_HOME=%CURRENT%\\..\\tools\\Julia")
+        text.append("set JULIA_PKGDIR=%CURRENT%\\..\\tools\\Julia\\pkg")
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "env.bat")
@@ -75,7 +77,7 @@ def create_win_ipython_console(folders):
             "call %CURRENT2%\\env.bat",
             "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
             "cd %WORKSPACE%",
-            "%IPYTHON%"]
+            "%IPYTHON% --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "ipython_console.bat")
@@ -96,7 +98,7 @@ def create_win_ipython_qtconsole(folders):
             "call %CURRENT2%\\env.bat",
             "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
             "cd %WORKSPACE%",
-            "start %IPYTHON% qtconsole"]
+            "start %IPYTHON% qtconsole --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "ipython_qtconsole.bat")
@@ -117,7 +119,7 @@ def create_win_ipython_notebook(folders):
             "call %CURRENT2%\\env.bat",
             "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
             "cd %WORKSPACE%",
-            "%IPYTHON% notebook --notebook-dir=%CURRENT2%\\..\\workspace"]
+            "%IPYTHON% notebook --notebook-dir=%CURRENT2%\\..\\workspace --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "ipython_notebook.bat")
@@ -289,6 +291,25 @@ def create_win_r_gui(folders):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "r_gui.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [("batch", name)]
+
+
+def win_install_kernels(folders):
+    """
+    create a batch file to start ipython
+
+    @param      folders     see @see fn create_win_batches
+    @return                 operations (list of what was done)
+    """
+    tools = folders["tools"]
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            '%PYTHON_WINHOME%\\python -c "from pymyinstall.win_install import install_kernels;install_kernels()"']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "add_kernels.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]

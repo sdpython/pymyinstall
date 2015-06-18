@@ -28,7 +28,11 @@ def julia_run_script(julia_path, script):
     exe = os.path.join(julia_path, "bin", "julia.exe")
     if not os.path.exists(exe):
         raise FileNotFoundError(exe)
+    pkg = os.path.join(julia_path, "pkg")
+    if not os.path.exists(pkg):
+        os.mkdir(pkg)
 
+    os.environ["JULIA_PKGDIR"] = pkg
     cmd = [exe, script, "--no_history-file"]
     cmd = " ".join(cmd)
     out, err = run_cmd(cmd, wait=True)

@@ -17,7 +17,7 @@ from ..installhelper.install_custom_scite import install_scite
 from ..installhelper.install_custom_sqlitespy import install_sqlitespy
 from ..installhelper.install_custom_python import install_python
 from ..installhelper.install_custom_mingw import install_mingw
-from ..installhelper.install_cmd_helper import update_pip
+from ..installhelper.install_cmd_helper import update_pip, run_cmd
 from ..installhelper.install_custom_7z import install_7z
 from ..installhelper.install_custom import download_page
 from ..installhelper.install_custom_scite import modify_scite_properties
@@ -30,6 +30,7 @@ from .win_packages import _is_package_in_list, win_install_packages_other_python
 from .win_batch import create_win_batches
 from .win_setup_r import r_run_script, _script as _script_r
 from .win_setup_julia import julia_run_script, _script as _script_julia
+from .win_ipy_kernels import install_kernels
 
 from .win_innosetup_helper import run_innosetup
 
@@ -73,8 +74,7 @@ def win_python_setup(folder="dist/win_python_setup",
                      fLOG=print,
                      download_only=False,
                      no_setup=False,
-                     notebooks=None,
-                     **options
+                     notebooks=None
                      ):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
@@ -86,7 +86,6 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      download_only   only downloads
     @param      no_setup        skip the building of the setup
     @param      verbose         print more information
-    @param      options         list of available options (will expand later)
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
     @return                     list of completed operations
 
@@ -151,7 +150,9 @@ def win_python_setup(folder="dist/win_python_setup",
         os.makedirs(download_folder)
         operations.append(("mkdir", download_folder))
 
+    ###################
     # definition of folders
+    ###################
     operations.append(("time", now()))
     folders = dict(tools=os.path.join(folder, "tools"),
                    workspace=os.path.join(folder, "workspace"),
@@ -164,40 +165,49 @@ def win_python_setup(folder="dist/win_python_setup",
         if not os.path.exists(v):
             os.mkdir(v)
 
+    ###########################
     # download the documentation
+    ###########################
     op = win_download_notebooks(
         notebooks, folders["workspace"], verbose=verbose, fLOG=fLOG)
     operations.extend(op)
     operations.append(("time", now()))
 
+    ######################
     # download of everything
+    ######################
     operations.append(("time", now()))
     op = win_download(folder=download_folder,
                       module_list=module_list,
                       verbose=verbose,
-                      fLOG=fLOG,
-                      **options)
+                      fLOG=fLOG)
     operations.extend(op)
     operations.append(("time", now()))
 
+    ########
     # license
+    ########
     fLOG("--- license")
     with open(os.path.join(folder, "license.txt"), "w") as f:
         f.write(license)
     operations.append(("license", "license.txt"))
 
     if not download_only:
+        ########################
         # copy icons in tools/icons
+        #######################
         fLOG("--- copy icons")
         op = copy_icons(os.path.join(os.path.dirname(__file__), "icons"),
                         os.path.join(folders["tools"], "icons"))
         operations.extend(op)
         operations.append(("time", now()))
 
+        #############
         # install setups
+        #############
         fLOG("--- installation of python and tools")
-        op, installed = win_install(folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG,
-                                    **options)
+        op, installed = win_install(
+            folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG)
         operations.extend(op)
         operations.append(("time", now()))
         if "pandoc" not in installed:
@@ -207,38 +217,46 @@ def win_python_setup(folder="dist/win_python_setup",
             for k, v in installed.items():
                 fLOG("  INSTALLED:", k, "-->", v)
 
+        ##########
         # clean msi
+        ##########
         op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
         operations.extend(op)
         operations.append(("time", now()))
 
+        ################
         # create links tools
+        ################
         fLOG("--- create links")
         op = create_links_tools(folder, installed, verbose=verbose, fLOG=fLOG)
         operations.extend(op)
         operations.append(("time", now()))
 
+        #########################
         # create batch command files
+        #########################
         fLOG("--- create batch command file")
         op = create_win_batches(folders, verbose=verbose, fLOG=fLOG)
         operations.extend(op)
 
+        #######################
         # modifies scite properties
+        #######################
         fLOG("--- modifies Scite properties")
         modify_scite_properties(os.path.join("..", "..", "..", "pythonw"),
                                 os.path.join(folders["tools"], "Scite", "wscite"))
 
+        ###########
         # update pip
+        ###########
         fLOG("--- update pip")
         op = update_pip(folders["python"])
         operations.extend(op)
         operations.append(("time", now()))
 
-        ##
-        # packages for R, Julia, Python
-        ##
-
+        ####################
         # install Julia packages
+        ####################
         jl = os.path.join(folders["tools"], "Julia")
         output = os.path.join(folders["logs"], "out.install.julia.txt")
         out = julia_run_script(jl, _script_julia)
@@ -247,14 +265,18 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("Julia", _script_julia))
         operations.append(("time", now()))
 
+        #################
         # install R packages
+        #################
         r = os.path.join(folders["tools"], "R")
         output = os.path.join(folders["logs"], "out.install.r.txt")
         out = r_run_script(r, _script_r, output)
         operations.append(("R", _script_r))
         operations.append(("time", now()))
 
+        ######################
         # installation of packages
+        ######################
         fLOG("--- installation of python packages")
         python_path = folders["python"]
         win_install_packages_other_python(
@@ -262,8 +284,33 @@ def win_python_setup(folder="dist/win_python_setup",
         fLOG("done")
         operations.append(("time", now()))
 
+        ######################
+        # create ipython profile
+        ######################
+        config_path = folders["config"]
+        ipython_path = os.path.join(
+            folders["python"], "Scripts", "ipython.exe")
+        cmd = " profile create win_profile --ipython-dir={0}".format(
+            folders["config"])
+        cmd = ipython_path + cmd
+        out, err = run_cmd(cmd, wait=True)
+        profile = os.path.join(
+            config_path, "profile_win_profile", "ipython_notebook_config.py")
+        if not os.path.exists(profile):
+            raise WinInstallException(
+                "missing file, unable to execute:\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+
+        ########
+        # kernels
+        ########
+        res = install_kernels(folders["tools"], folders["python"])
+        for r in res:
+            fLOG("ADD: kernal", r)
+
     if not no_setup:
+        #########################
         # build setup with InnoSetup
+        #########################
         fLOG("--- building setup with InnoSetup")
         replacements = dict(__DISTPATH__=folder)
         out = run_innosetup(replacements=replacements, fLOG=fLOG,
@@ -274,7 +321,9 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("InnoSetup", "done"))
         operations.append(("time", now()))
 
+    ##########
     # store logs
+    ##########
     with open(os.path.join(folders["logs"], "log.setup.txt"), "a", encoding="utf8") as f:
         f.write("\n")
         f.write("-------------------------------------------\n")
@@ -321,9 +370,7 @@ def win_download(folder="build/win_python_setup",
                  module_list=None,
                  verbose=False,
                  fLOG=print,
-                 download_only=False,
-                 **options
-                 ):
+                 download_only=False):
     """
     The function downloads everything needed to prepare a setup.
 
@@ -331,7 +378,6 @@ def win_download(folder="build/win_python_setup",
     @param      module_list     list of module to install (see @see fn small_installation = default options)
     @param      fLOG            logging function
     @param      download_only   only downloads
-    @param      options         list of available options (will expand later)
     @param      verbose         print more information
     @return                     list of completed operations
     """
@@ -420,8 +466,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy"],
-                **options):
+                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy"]):
     """
     Install setups
 
@@ -430,7 +475,6 @@ def win_install(folders,
     @param      fLOG            logging function
     @param      verbose         print more information
     @param      names           name of subfolders to be created
-    @param      options         list of available options (will expand later)
     @return                     list of completed operations, executable (to make shortcuts)
 
     The function installs every setup which starts by one of the string in *names*
@@ -505,7 +549,7 @@ def win_install(folders,
 
             operations.append(("install", cand))
             fLOG("done")
-    
+
         # add main executable
         found = find_exe(loc, name)
 
@@ -513,12 +557,14 @@ def win_install(folders,
         if found is None and name == "MinGW" and cand == "mingw-get-setup.exe":
             exe = os.path.join(loc, "bin", "mingw-get.exe")
             if os.path.exists(exe):
-                cmd = exe + " install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77"
+                cmd = exe + \
+                    " install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77"
                 if verbose:
                     fLOG("install MinGW", cmd)
                 retcode = subprocess.call(cmd, shell=True, stdout=sys.stderr)
                 if retcode < 0:
-                    raise WinInstallException("unable to execute:\nCMD:\n{0}".format(cmd))
+                    raise WinInstallException(
+                        "unable to execute:\nCMD:\n{0}".format(cmd))
                 found = find_exe(loc, name)
 
         if found is None:

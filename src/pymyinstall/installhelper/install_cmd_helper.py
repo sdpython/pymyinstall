@@ -901,8 +901,10 @@ def update_pip(python_path=None):
     @return                     output
     """
     if python_path is None:
-        python_path = os.path.executable(sys.executable)
-    cmd = "python -m pip install -U pip"
+        python_path = sys.executable
+    else:
+        python_path = os.path.join(python_path, "python")
+    cmd = python_path + " -m pip install -U pip"
     out, err = run_cmd(cmd, wait=True)
     if err and len(err) > 0:
         raise Exception(

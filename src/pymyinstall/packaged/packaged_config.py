@@ -269,8 +269,12 @@ def complete_installation():
         ModuleInstall("structures", "pip"),
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("rodeo", "pip"),
-        ModuleInstall("minecart", "pip"),  # PDF extraction
-        ModuleInstall("pygauss", "pip"),  # molecule, bio-informatic
+        #
+        # ModuleInstall("pdfminer", "pip"),  # PDF extraction (no python 3 version)
+        # ModuleInstall("minecart", "pip"),  # PDF extraction (no python 3 version)
+        #
+        # ModuleInstall("pygauss", "pip"),  # molecule, bio-informatic,
+        # requires PIL which is deprecated
     ]
 
     if sys.platform.startswith("win"):
