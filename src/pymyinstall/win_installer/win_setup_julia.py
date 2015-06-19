@@ -2,6 +2,8 @@
 @file
 @brief Functions to prepare a setup on Windows, R functions
 """
+from __future__ import print_function
+
 import os
 from ..installhelper.install_cmd_helper import run_cmd
 
@@ -33,7 +35,7 @@ def julia_run_script(julia_path, python_path, script, verbose=False, fLOG=print)
     """
     memo_path = os.environ["PATH"]
     epath = memo_path + ";" + \
-        ";".join(python_path, os.path.join(python_path, "Scripts"))
+        ";".join([python_path, os.path.join(python_path, "Scripts")])
     os.environ["PATH"] = epath
 
     exe = os.path.join(julia_path, "bin", "julia.exe")
@@ -46,6 +48,8 @@ def julia_run_script(julia_path, python_path, script, verbose=False, fLOG=print)
     os.environ["JULIA_PKGDIR"] = pkg
     cmd = [exe, script, "--no_history-file"]
     cmd = " ".join(cmd)
+    if verbose: 
+        fLOG("set JULIA_PKGDIR=" + pkg)
     out, err = run_cmd(cmd, wait=True)
     if err is not None and len(err) > 0 and \
             "err" in err.lower() or "warn" in err.lower():
@@ -66,7 +70,9 @@ def patch_julia03(julia_path, verbose=False, fLOG=print):
     @param      fLOG            logging function
     """
     pkg = os.path.join(julia_path, "pkg")
-    pkg_d = pkd.replace("\\", "\\\\")
+    pkg_d = pkg.replace("\\", "\\\\")
+    if verbose:
+        fLOG("  string to replace", pkg_d)
     for root, dirs, files in os.walk(pkg):
         for name in files:
             if name.endswith("deps.jl"):
@@ -74,8 +80,8 @@ def patch_julia03(julia_path, verbose=False, fLOG=print):
                 with open(full, "r", encoding="utf8") as f:
                     content = f.read()
                 if pkg_d in content:
-                    content = content.replace(pkd_d, "%JULIA_PKGDIR%")
+                    content = content.replace(pkg_d, "%JULIA_PKGDIR%")
                     if verbose:
-                        fLOG("  patch ", name)
-                    with open(full, "w", enconding="utf8") as f:
+                        fLOG("  patch ", full)
+                    with open(full, "w", encoding="utf8") as f:
                         f.write(content)

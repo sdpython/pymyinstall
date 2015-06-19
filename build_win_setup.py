@@ -16,6 +16,7 @@ if False:
 
 
 if True:
-    win_python_setup(module_list=list_modules, verbose=True,
+    win_python_setup(module_list=list_modules, verbose=True, 
                      download_only=False,
-                     no_setup=True)
+                     no_setup=True,
+                     step_skip=None) #["julia_install", "julia_build", "r_install"])

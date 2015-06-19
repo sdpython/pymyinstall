@@ -74,7 +74,8 @@ def win_python_setup(folder="dist/win_python_setup",
                      fLOG=print,
                      download_only=False,
                      no_setup=False,
-                     notebooks=None
+                     notebooks=None,
+                     step_skip=None
                      ):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
@@ -87,6 +88,9 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      no_setup        skip the building of the setup
     @param      verbose         print more information
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
+    @param      step_skip       to skip step if they already succeeded or if they were done anothr way,
+                                if a step does not belong to the list, the function will raise an exception 
+                                and give the available list of steps
     @return                     list of completed operations
 
     The function first downloads everything.
@@ -129,12 +133,28 @@ def win_python_setup(folder="dist/win_python_setup",
 
     This works only for Windows.
     @endexample
+    
+    @warning The Julia installation might be stuck after the installation or the build.
+             In that case, the script python should be stopped by stopping the Julia
+             process from the Task Manager
+             and started again. If it has completed, it will go to the 
+             next step.
     """
     if notebooks is None:
         notebooks = _default_notebooks
 
     def now():
         return datetime.datetime.now()
+        
+    if step_skip is None:
+        step_skip = []
+        
+    # steps
+    available_steps = {"julia_install", "julia_build", "r_install"}
+    for a in step_skip:
+        if a not in available_steps:
+            raise ValueError("skipped step {0} not in list {1}".format(a, ", ".join(sorted(available_steps))))
+    # next
 
     operations = []
     operations.append(("time", now()))
@@ -255,39 +275,42 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.extend(op)
         operations.append(("time", now()))
 
-        ##########################
-        # install Julia packages
-        #########################
-        fLOG("--- install julia packages")
-        jl = os.path.join(folders["tools"], "Julia")
-        output = os.path.join(folders["logs"], "out.install.julia.txt")
-        out = julia_run_script(jl, _script_julia)
-        with open(os.path.join(folders["logs"], "out.install.julia.txt"), "w", encoding="utf8") as f:
-            f.write(out)
-        operations.append(("Julia", _script_julia))
-        operations.append(("time", now()))
+        if "julia_install" not in step_skip:
+            ##########################
+            # install Julia packages
+            #########################
+            fLOG("--- install julia packages")
+            jl = os.path.join(folders["tools"], "Julia")
+            output = os.path.join(folders["logs"], "out.install.julia.txt")
+            out = julia_run_script(jl, folders["python"], _script_julia, verbose=verbose, fLOG=fLOG)
+            with open(os.path.join(folders["logs"], "out.install.julia.txt"), "w", encoding="utf8") as f:
+                f.write(out)
+            operations.append(("Julia", _script_julia))
+            operations.append(("time", now()))
 
-        #########################
-        # build Julia packages
-        #########################
-        fLOG("--- build julia packages")
-        jl = os.path.join(folders["tools"], "Julia")
-        output = os.path.join(folders["logs"], "out.build.julia.txt")
-        out = julia_run_script(jl, folders["python"], _script_julia_build)
-        with open(os.path.join(folders["logs"], "out.build.julia.txt"), "w", encoding="utf8") as f:
-            f.write(out)
-        operations.append(("Julia", _script_julia_build))
-        operations.append(("time", now()))
+        if "julia_build" not in step_skip:
+            #########################
+            # build Julia packages
+            #########################
+            fLOG("--- build julia packages")
+            jl = os.path.join(folders["tools"], "Julia")
+            output = os.path.join(folders["logs"], "out.build.julia.txt")
+            out = julia_run_script(jl, folders["python"], _script_julia_build, verbose=verbose, fLOG=fLOG)
+            with open(os.path.join(folders["logs"], "out.build.julia.txt"), "w", encoding="utf8") as f:
+                f.write(out)
+            operations.append(("Julia", _script_julia_build))
+            operations.append(("time", now()))
 
-        ######################
-        # install R packages
-        ######################
-        fLOG("--- install R packages")
-        r = os.path.join(folders["tools"], "R")
-        output = os.path.join(folders["logs"], "out.install.r.txt")
-        out = r_run_script(r, _script_r, output)
-        operations.append(("R", _script_r))
-        operations.append(("time", now()))
+        if "r_install" not in step_skip:
+            ######################
+            # install R packages
+            ######################
+            fLOG("--- install R packages")
+            r = os.path.join(folders["tools"], "R")
+            output = os.path.join(folders["logs"], "out.install.r.txt")
+            out = r_run_script(r, _script_r, output)
+            operations.append(("R", _script_r))
+            operations.append(("time", now()))
 
         ######################
         # installation of packages

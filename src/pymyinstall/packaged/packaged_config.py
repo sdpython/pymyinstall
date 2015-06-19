@@ -109,6 +109,11 @@ def small_installation():
         ModuleInstall("sphinxjp.themes.revealjs", "pip"),
         ModuleInstall("feedparser", "wheel"),   # to parse RSS streams
         ModuleInstall("python-jenkins", "pip", mname="jenkins"),  # for Jenkins
+        #
+        # 2015-06-15
+        #
+        ModuleInstall('envoy', 'pip'),
+        ModuleInstall('Logbook', 'wheel', mname='logbook'),
     ]
 
     if sys.platform.startswith("win"):
@@ -457,6 +462,13 @@ def extension_ensae():
         # ModuleInstall("pyjsdl", "github", "jggatc"), # no setup.py
         #
         # twisted, scrapy, not ready yet on Python 3
+        
+        #
+        #
+        #
+        ModuleInstall("zipline", "pip"), # finance
+        ModuleInstall("vincent", "pip"), # graph
+        ModuleInstall("pygal", "pip"), # graph
 
     ]
     return mod
