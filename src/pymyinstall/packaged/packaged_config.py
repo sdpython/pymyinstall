@@ -448,8 +448,16 @@ def extension_ensae():
         # machine learning
         ModuleInstall("joblib", "pip"),
         #
-        # does not work on Windows
+        # teachings
+        #
+        ModuleInstall("tutormagic", "pip"),  # tutor magic in a notebook
+        ModuleInstall("ipycache", "pip"),  # cache resuls from a long computation
+        ModuleInstall("nbupload", "pip"), # to upload a file in a notebook
+        #see https://github.com/PetterS/numpy_display/blob/master/numpy_display.py
+        # https://github.com/damiendr/callipy
+        #
         ModuleInstall("libsvm", "wheel", mname="svm"),
+        ModuleInstall("abcpmc", "wheel"), # Bayesian ABC 
         #
         # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
         # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
