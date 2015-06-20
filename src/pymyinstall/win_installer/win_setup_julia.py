@@ -51,7 +51,7 @@ def julia_run_script(julia_path, python_path, script, verbose=False, fLOG=print)
     os.environ["JULIA_PKGDIR"] = pkg
     cmd = [exe, script, "--no_history-file"]
     cmd = " ".join(cmd)
-    if verbose: 
+    if verbose:
         fLOG("set JULIA_PKGDIR=" + pkg)
     out, err = run_cmd(cmd, wait=True)
     if err is not None and len(err) > 0 and \

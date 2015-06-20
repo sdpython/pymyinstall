@@ -74,14 +74,17 @@ Functionalities
     - help installing module from GitHub, pip and setup
     - install other common tools or editors
     - provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
+    - function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
 
 
 Versions
 --------
 
 * **1.0 - 2015/??/??**
-    * **new:** function :func:`win_python_setup <pymyinstall.win_installer.win_setup.win_python_setup>`
+    * **new:** function :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
       to create a setup similar to WinPython but with InnoSetup (avoid limit size)
+    * **add:** function to check for update and update an existing module, see 
+      :class:`ModuleInstall <pymyinstall.installhelper.module_install.ModuleInstall>`
 * **0.9 - 2015/06/10**
     * **add:** install wheel packages
     * **add:** add new packages to the list of a datascientist

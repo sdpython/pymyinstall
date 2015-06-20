@@ -103,6 +103,7 @@ def small_installation():
         #
         # 2015-06-05
         #
+        ModuleInstall('PyYAML', 'wheel', mname='yaml'),
         ModuleInstall('bokeh', 'pip'),
         ModuleInstall('rpy2', 'wheel'),
         ModuleInstall('seaborn', 'pip'),
@@ -142,7 +143,8 @@ def complete_installation():
         ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy'),
         ModuleInstall('flask-sqlalchemy', 'pip', mname='flask.ext.sqlalchemy'),
         ModuleInstall('simplejson', 'wheel'),
-        ModuleInstall('python-pptx', 'pip'),
+        ModuleInstall('python-pptx', 'pip', mname="pptx"),
+        ModuleInstall('python-docx', 'pip', mname="docx"),
         ModuleInstall('XlsxWriter', 'pip', mname='xlsxwriter'),
         ModuleInstall('flask', 'pip'),
         ModuleInstall('cffi', 'wheel'),
@@ -168,7 +170,6 @@ def complete_installation():
         ModuleInstall('PyWavelets', 'wheel', mname='pywt'),
         ModuleInstall('fastcluster', 'wheel'),
         ModuleInstall('pycosat', 'wheel'),
-        ModuleInstall('PyYAML', 'wheel', mname='yaml'),
         ModuleInstall('pyshp', 'pip', mname='shapefile'),
         ModuleInstall('Shapely', 'wheel', mname='shapely'),
         ModuleInstall('vispy', 'pip'),
@@ -182,9 +183,11 @@ def complete_installation():
         ModuleInstall('lockfile', 'pip'),
         ModuleInstall('python-daemon', 'pip', mname='daemon'),
         ModuleInstall('luigi', 'pip'),
-        # for airflow
+        #
         ModuleInstall('setproctitle', 'wheel', mname='setproctitle'),
-        ModuleInstall('airflow', 'pip'),
+        # thrift only works only for Python 2.7
+        ModuleInstall('thriftpy', 'pip'),
+        # ModuleInstall('airflow', 'pip'),  # does not work on Python 3
         ModuleInstall('smopy', 'pip'),
         ModuleInstall('folium', 'pip'),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap'),
@@ -420,9 +423,10 @@ def extension_ensae():
         ModuleInstall("dev", "pip"),
         ModuleInstall("opencv_python", "wheel", mname="cv"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio"),
+        ModuleInstall("zope.interface", "wheel"),
         ModuleInstall("persistent", "wheel"),
-        ModuleInstall("zope.interface", "wheel"),  # requires persistent
-        ModuleInstall("BTrees", "wheel"),  # requires zope.interface
+        # requires zope.interface, persistents
+        ModuleInstall("BTrees", "wheel"),
         ModuleInstall("datrie", "wheel"),
         # ModuleInstall("pysparse", "pip"), #does not work
         ModuleInstall("la", "wheel"),
@@ -451,13 +455,14 @@ def extension_ensae():
         # teachings
         #
         ModuleInstall("tutormagic", "pip"),  # tutor magic in a notebook
-        ModuleInstall("ipycache", "pip"),  # cache resuls from a long computation
-        ModuleInstall("nbupload", "pip"), # to upload a file in a notebook
-        #see https://github.com/PetterS/numpy_display/blob/master/numpy_display.py
+        # cache resuls from a long computation
+        ModuleInstall("ipycache", "pip"),
+        ModuleInstall("nbupload", "pip"),  # to upload a file in a notebook
+        # see https://github.com/PetterS/numpy_display/blob/master/numpy_display.py
         # https://github.com/damiendr/callipy
         #
         ModuleInstall("libsvm", "wheel", mname="svm"),
-        ModuleInstall("abcpmc", "pip"), # Bayesian ABC 
+        ModuleInstall("abcpmc", "pip"),  # Bayesian ABC
         # ModuleInstall("cosmoabc", "pip"), # Bayesian ABC, only python 2.7
         #
         # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
@@ -471,13 +476,13 @@ def extension_ensae():
         # ModuleInstall("pyjsdl", "github", "jggatc"), # no setup.py
         #
         # twisted, scrapy, not ready yet on Python 3
-        
+
         #
         #
         #
-        ModuleInstall("zipline", "pip"), # finance
-        ModuleInstall("vincent", "pip"), # graph
-        ModuleInstall("pygal", "pip"), # graph
+        ModuleInstall("zipline", "pip"),  # finance
+        ModuleInstall("vincent", "pip"),  # graph
+        ModuleInstall("pygal", "pip"),  # graph
 
     ]
     return mod
@@ -491,13 +496,13 @@ def installation_teachings():
     """
     mod = [
         ModuleInstall("pyquickhelper", "pip"),
-        ModuleInstall("pyensae", "pip"),
-        ModuleInstall("ensae_teaching_cs", "pip"),
-        ModuleInstall("actuariat_python", "pip"),
-        ModuleInstall("pymmails", "pip"),
         ModuleInstall("pymyinstall", "pip"),
+        ModuleInstall("pymmails", "pip"),
+        ModuleInstall("pyensae", "pip"),
         ModuleInstall("pyrsslocal", "pip"),
         ModuleInstall("code_beatrix", "pip"),
+        ModuleInstall("actuariat_python", "pip"),
+        ModuleInstall("ensae_teaching_cs", "pip"),
     ]
     #
     return mod

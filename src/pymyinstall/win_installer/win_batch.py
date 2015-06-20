@@ -7,7 +7,7 @@ from __future__ import print_function
 import os
 
 
-def create_win_batches(folders, verbose=False, fLOG=print):
+def create_win_batches(folders, verbose=False, selection=None, fLOG=print):
     """
     create batchs for the setup, they will be placed in
     *folders["config"]*
@@ -15,8 +15,12 @@ def create_win_batches(folders, verbose=False, fLOG=print):
     @param      folders     dictionary with the keys *tools*, *config*, *python*, *workspace*
     @param      verbose     verbose
     @param      fLOG        logging function
+    @param      selection   list of batchs to create
     @return                 operations (list of what was done)
     """
+    if selection is None:
+        raise ValueError("selection cannot be None")
+
     operations = []
     for func in [create_win_env,
                  create_win_ipython_console,
@@ -26,17 +30,23 @@ def create_win_batches(folders, verbose=False, fLOG=print):
                  create_win_scite,
                  create_win_sqllitespy,
                  create_win_python_console,
-                 create_win_julia_console,
+                 (create_win_julia_console, "julia"),
                  create_win_spyder,
-                 create_win_r_console,
-                 create_win_r_gui,
+                 (create_win_r_console, "r"),
+                 (create_win_r_gui, "r"),
                  win_install_kernels,
                  ]:
-        op = func(folders)
-        if verbose:
-            for o in op:
-                fLOG(" ".join(o))
-        operations.extend(op)
+        if isinstance(func, tuple):
+            func, name = func
+        else:
+            name = None
+
+        if name is None or name in selection:
+            op = func(folders)
+            if verbose:
+                for o in op:
+                    fLOG(" ".join(o))
+            operations.extend(op)
     return operations
 
 
@@ -72,7 +82,6 @@ def create_win_ipython_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off",
             "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
@@ -94,7 +103,6 @@ def create_win_ipython_qtconsole(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
@@ -115,7 +123,6 @@ def create_win_ipython_notebook(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
@@ -136,7 +143,6 @@ def create_win_rodeo(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set RODEO=%CURRENT2%\\..\\python\\Scripts\\rodeo.exe",
@@ -157,7 +163,6 @@ def create_win_scite(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set SCITE=%CURRENT2%\\..\\tools\\Scite\\wscite\\scite.exe",
@@ -178,7 +183,6 @@ def create_win_sqllitespy(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set SQLITESPY=%CURRENT2%\\..\\tools\\SQLiteSpy\\SQLiteSpy.exe",
@@ -199,7 +203,6 @@ def create_win_python_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set PYTHON=%CURRENT2%\\..\\python\\python.exe",
@@ -220,7 +223,6 @@ def create_win_julia_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "rem call %CURRENT2%\\env.bat",
             "set JULIA=%CURRENT2%\\..\\tools\\Julia\\bin\\julia.exe",
@@ -241,7 +243,6 @@ def create_win_spyder(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set SPYDER=%CURRENT2%\\..\\python\\Scripts\\spyder.bat",
@@ -262,7 +263,6 @@ def create_win_r_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set REXE=%CURRENT2%\\..\\tools\\R\\bin\\x64\\R.exe",
@@ -283,7 +283,6 @@ def create_win_r_gui(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set RGUI=%CURRENT2%\\..\\tools\\R\\bin\\x64\\Rgui.exe",
@@ -304,7 +303,6 @@ def win_install_kernels(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    tools = folders["tools"]
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             '%PYTHON_WINHOME%\\python -c "from pymyinstall.win_install import install_kernels;install_kernels()"']

@@ -6,9 +6,11 @@
 from __future__ import print_function
 
 import os
+import sys
 import fnmatch
 import shutil
 import datetime
+import subprocess
 
 from ..installhelper.install_custom_pandoc import install_pandoc
 from ..installhelper.install_custom_R import install_R
@@ -69,6 +71,13 @@ _default_notebooks = [
 ]
 
 
+def dtnow():
+    """
+    shortcut, return ``datetime.datetime.now()``
+    """
+    return datetime.datetime.now()
+
+
 def win_python_setup(folder="dist/win_python_setup",
                      download_folder="build/win_python_setup",
                      module_list=None,
@@ -77,7 +86,7 @@ def win_python_setup(folder="dist/win_python_setup",
                      download_only=False,
                      no_setup=False,
                      notebooks=None,
-                     step_skip=None
+                     selection={"R"},
                      ):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
@@ -90,10 +99,23 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      no_setup        skip the building of the setup
     @param      verbose         print more information
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
-    @param      step_skip       to skip step if they already succeeded or if they were done anothr way,
-                                if a step does not belong to the list, the function will raise an exception 
-                                and give the available list of steps
+    @param      selection       selection of tools to install
     @return                     list of completed operations
+
+    The available tools to install must be chose among:
+        * `R <http://www.r-project.org/>`_
+        * `Julia <http://julialang.org/>`_
+
+    By default, only R is included. Julia requires too much work.
+    The command line does not always end. The building of the package
+    is sometimes reluctant to work. And the Julia kernel is exclusive:
+    it cannot be setup with others kernel. Maybe the version 0.5 will fix those issues.
+
+    The setup will also contains `pandoc <http://pandoc.org/>`_,
+    `7z <http://www.7-zip.org/>`_,
+    `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_,
+    `Scite<http://www.scintilla.org/SciTE.html>`_,
+    `MinGW <http://www.mingw.org/>`_.
 
     The function first downloads everything.
     It does not do it twice, so you can run the function again and directly go
@@ -119,21 +141,19 @@ def win_python_setup(folder="dist/win_python_setup",
 
         * Python setups needs a last click to complete
         * Julia command line sometimes gets stuck, the setup needs to be stopped
-          and restarted. It happens while installing the packages and 
+          and restarted. It happens while installing the packages and
           also while building IJulia (the package to use Julia in a notebook).
           The Julia should be stopped instead of stopping the python script.
           That trick shows the standard output of Julia.
-        * Juilia kernel cannot be used with the others: it requires a different 
+        * Juilia kernel cannot be used with the others: it requires a different
           configuration which prevents others kernel to be available at the same time.
-          
-            ...
-                    
+          We will skip for the time being.
+
+
     With Julia, initialisation, installation or building takes time.
     The function writes a file ``log.step.<julia_step>.txt``
     to tell the step has completed once. You can remove this file
     to do it again.
-
-    @todo Use chocolatey to process installation.
 
     @example(Prepare a standalone distribution)
     The function downloads everything. The installation of tools
@@ -149,31 +169,35 @@ def win_python_setup(folder="dist/win_python_setup",
 
     This works only for Windows.
     @endexample
-    
+
     @warning The Julia installation might be stuck after the installation or the build.
              In that case, the script python should be stopped by *stopping the Julia
              process* from the Task Manager
-             and started again. If it has completed, it will go to the 
+             and started again. If it has completed, it will go to the
              next step.
+
+    @todo Use chocolatey to process installation.
+
+    @todo Fix Julia installation.
     """
     if notebooks is None:
         notebooks = _default_notebooks
 
-    def now():
-        return datetime.datetime.now()
-        
-    if step_skip is None:
-        step_skip = []
-        
-    # steps
-    available_steps = {"julia_install", "julia_build", "r_install"}
-    for a in step_skip:
-        if a not in available_steps:
-            raise ValueError("skipped step {0} not in list {1}".format(a, ", ".join(sorted(available_steps))))
+    if not isinstance(selection, set):
+        selection = set(selection)
+    selection.add("pandoc")
+    selection.add("7z")
+    selection.add("scite")
+    selection.add("sqlitespy")
+    selection.add("mingw")
+    selection = set(_.lower() for _ in selection)
+
+    ######
     # next
+    ######
 
     operations = []
-    operations.append(("time", now()))
+    operations.append(("time", dtnow()))
 
     folder = os.path.abspath(folder)
     download_folder = os.path.abspath(download_folder)
@@ -189,7 +213,7 @@ def win_python_setup(folder="dist/win_python_setup",
     ###################
     # definition of folders
     ###################
-    operations.append(("time", now()))
+    operations.append(("time", dtnow()))
     folders = dict(tools=os.path.join(folder, "tools"),
                    workspace=os.path.join(folder, "workspace"),
                    python=os.path.join(folder, "python"),
@@ -207,18 +231,19 @@ def win_python_setup(folder="dist/win_python_setup",
     op = win_download_notebooks(
         notebooks, folders["workspace"], verbose=verbose, fLOG=fLOG)
     operations.extend(op)
-    operations.append(("time", now()))
+    operations.append(("time", dtnow()))
 
     ######################
     # download of everything
     ######################
-    operations.append(("time", now()))
+    operations.append(("time", dtnow()))
     op = win_download(folder=download_folder,
                       module_list=module_list,
                       verbose=verbose,
-                      fLOG=fLOG)
+                      fLOG=fLOG,
+                      selection=selection)
     operations.extend(op)
-    operations.append(("time", now()))
+    operations.append(("time", dtnow()))
 
     ########
     # license
@@ -236,16 +261,17 @@ def win_python_setup(folder="dist/win_python_setup",
         op = copy_icons(os.path.join(os.path.dirname(__file__), "icons"),
                         os.path.join(folders["tools"], "icons"))
         operations.extend(op)
-        operations.append(("time", now()))
+        operations.append(("time", dtnow()))
 
         #############
         # install setups
         #############
         fLOG("--- installation of python and tools")
         op, installed = win_install(
-            folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG)
+            folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG,
+            selection=selection)
         operations.extend(op)
-        operations.append(("time", now()))
+        operations.append(("time", dtnow()))
         if "pandoc" not in installed:
             raise FileNotFoundError("pandoc was not installed")
 
@@ -259,7 +285,7 @@ def win_python_setup(folder="dist/win_python_setup",
         fLOG("--- clean msi")
         op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
         operations.extend(op)
-        operations.append(("time", now()))
+        operations.append(("time", dtnow()))
 
         ################
         # create links tools
@@ -267,13 +293,14 @@ def win_python_setup(folder="dist/win_python_setup",
         fLOG("--- create links")
         op = create_links_tools(folder, installed, verbose=verbose, fLOG=fLOG)
         operations.extend(op)
-        operations.append(("time", now()))
+        operations.append(("time", dtnow()))
 
         #########################
         # create batch command files
         #########################
         fLOG("--- create batch command file")
-        op = create_win_batches(folders, verbose=verbose, fLOG=fLOG)
+        op = create_win_batches(
+            folders, verbose=verbose, fLOG=fLOG, selection=selection)
         operations.extend(op)
 
         #######################
@@ -289,61 +316,15 @@ def win_python_setup(folder="dist/win_python_setup",
         fLOG("--- update pip")
         op = update_pip(folders["python"])
         operations.extend(op)
-        operations.append(("time", now()))
+        operations.append(("time", dtnow()))
 
-        if "julia_init" not in step_skip and not is_step_done(folders["logs"], "julia_init"):
-            ##########################
-            # init Julia packages
-            #########################
-            fLOG("--- init julia packages")
-            jl = os.path.join(folders["tools"], "Julia")
-            output = os.path.join(folders["logs"], "out.init.julia.txt")
-            out = julia_run_script(jl, folders["python"], _script_julia_init, verbose=verbose, fLOG=fLOG)
-            with open(os.path.join(folders["logs"], "out.init.julia.txt"), "w", encoding="utf8") as f:
-                f.write(out)
-            operations.append(("Julia", _script_julia_init))
-            operations.append(("time", now()))
-            mark_step(folders["logs"], "julia_init")
+        if "julia" in selection:
+            ops = win_install_julia_step(folders, verbose=verbose, fLOG=fLOG)
+            operations.extend(ops)
 
-        if "julia_install" not in step_skip and not is_step_done(folders["logs"], "julia_install"):
-            ##########################
-            # install Julia packages
-            #########################
-            fLOG("--- install julia packages")
-            jl = os.path.join(folders["tools"], "Julia")
-            output = os.path.join(folders["logs"], "out.install.julia.txt")
-            out = julia_run_script(jl, folders["python"], _script_julia_install, verbose=verbose, fLOG=fLOG)
-            with open(os.path.join(folders["logs"], "out.install.julia.txt"), "w", encoding="utf8") as f:
-                f.write(out)
-            operations.append(("Julia", _script_julia_install))
-            operations.append(("time", now()))
-            mark_step(folders["logs"], "julia_install")
-
-        if "julia_build" not in step_skip and not is_step_done(folders["logs"], "julia_build"):
-            #########################
-            # build Julia packages
-            #########################
-            fLOG("--- build julia packages")
-            jl = os.path.join(folders["tools"], "Julia")
-            output = os.path.join(folders["logs"], "out.build.julia.txt")
-            out = julia_run_script(jl, folders["python"], _script_julia_build, verbose=verbose, fLOG=fLOG)
-            with open(os.path.join(folders["logs"], "out.build.julia.txt"), "w", encoding="utf8") as f:
-                f.write(out)
-            operations.append(("Julia", _script_julia_build))
-            operations.append(("time", now()))
-            mark_step(folders["logs"], "julia_build")
-
-        if "r_install" not in step_skip and not is_step_done(folders["logs"], "r_install"):
-            ######################
-            # install R packages
-            ######################
-            fLOG("--- install R packages")
-            r = os.path.join(folders["tools"], "R")
-            output = os.path.join(folders["logs"], "out.install.r.txt")
-            out = r_run_script(r, _script_r, output)
-            operations.append(("R", _script_r))
-            operations.append(("time", now()))
-            mark_step(folders["logs"], "r_install")
+        if "R" in selection:
+            ops = win_install_r_step(folders, verbose=verbose, fLOG=fLOG)
+            operations.extend(ops)
 
         ######################
         # installation of packages
@@ -353,7 +334,7 @@ def win_python_setup(folder="dist/win_python_setup",
         win_install_packages_other_python(
             python_path, download_folder, verbose=verbose, fLOG=fLOG)
         fLOG("done")
-        operations.append(("time", now()))
+        operations.append(("time", dtnow()))
 
         ######################
         # create ipython profile
@@ -390,7 +371,7 @@ def win_python_setup(folder="dist/win_python_setup",
         with open(os.path.join(folders["logs"], "out.install.innosetup.txt"), "w", encoding="utf8") as f:
             f.write(out)
         operations.append(("InnoSetup", "done"))
-        operations.append(("time", now()))
+        operations.append(("time", dtnow()))
 
     ##########
     # store logs
@@ -441,7 +422,8 @@ def win_download(folder="build/win_python_setup",
                  module_list=None,
                  verbose=False,
                  fLOG=print,
-                 download_only=False):
+                 download_only=False,
+                 selection=None):
     """
     The function downloads everything needed to prepare a setup.
 
@@ -450,8 +432,12 @@ def win_download(folder="build/win_python_setup",
     @param      fLOG            logging function
     @param      download_only   only downloads
     @param      verbose         print more information
+    @param      selection       selection of tools to install
     @return                     list of completed operations
     """
+    if selection is None:
+        raise ValueError("selection must be specified")
+
     available = os.listdir(folder)
 
     def is_here(program):
@@ -459,19 +445,19 @@ def win_download(folder="build/win_python_setup",
 
     operations = []
 
-    if not is_here("scite"):
+    if not is_here("scite") and "scite" in selection:
         fLOG("--- download", "scite")
         r = install_scite(dest_folder=folder, fLOG=fLOG, install=False)
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("mingw"):
+    if not is_here("mingw") and "mingw" in selection:
         fLOG("--- download", "mingw")
         r = install_mingw(dest_folder=folder, fLOG=fLOG, install=False)
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("SQLiteSpy"):
+    if not is_here("SQLiteSpy") and "sqlitespy" in selection:
         fLOG("--- download", "sqllitespy")
         r = install_sqlitespy(temp_folder=folder, fLOG=fLOG, install=False)
         operations.append(("download", r))
@@ -484,21 +470,21 @@ def win_download(folder="build/win_python_setup",
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("R-"):
+    if not is_here("R-") and "r" in selection:
         fLOG("--- download", "R")
         r = install_R(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("julia"):
+    if not is_here("julia") and "julia" in selection:
         fLOG("--- download", "julia")
         r = install_julia(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("pandoc"):
+    if not is_here("pandoc") and "pandoc" in selection:
         if verbose:
             fLOG("download", "pandoc")
         r = install_pandoc(
@@ -506,7 +492,7 @@ def win_download(folder="build/win_python_setup",
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("7z"):
+    if not is_here("7z") and "7z" in selection:
         if verbose:
             fLOG("download", "7z")
         r = install_7z(
@@ -537,7 +523,8 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy"]):
+                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy"],
+                selection=None):
     """
     Install setups
 
@@ -546,6 +533,7 @@ def win_install(folders,
     @param      fLOG            logging function
     @param      verbose         print more information
     @param      names           name of subfolders to be created
+    @param      selection       selection of tools to install
     @return                     list of completed operations, executable (to make shortcuts)
 
     The function installs every setup which starts by one of the string in *names*
@@ -560,7 +548,7 @@ def win_install(folders,
             return None
         lf = file.lower()
         for name in names:
-            if lf.startswith(name.lower()):
+            if name.lower() in selection and lf.startswith(name.lower()):
                 if name == "Python":
                     return folders["python"]
                 else:
@@ -734,4 +722,89 @@ def win_download_notebooks(notebooks, folder, verbose=False, fLOG=print):
                 with open(dfile, "w", encoding="utf8") as f:
                     f.write(content)
                 operations.append(("docs", dfile))
+    return operations
+
+
+def win_install_julia_step(folders, verbose=False, fLOG=print):
+    """
+    does necessary steps to setup Julia
+
+    @param      folders     installation folders
+    @param      verbose     verbose
+    @param      fLOG        logging function
+    @return                 list of processed operations
+    """
+    operations = []
+    if not is_step_done(folders["logs"], "julia_init"):
+        ##########################
+        # init Julia packages
+        #########################
+        fLOG("--- init julia packages")
+        jl = os.path.join(folders["tools"], "Julia")
+        output = os.path.join(folders["logs"], "out.init.julia.txt")
+        out = julia_run_script(
+            jl, folders["python"], _script_julia_init, verbose=verbose, fLOG=fLOG)
+        with open(output, "w", encoding="utf8") as f:
+            f.write(out)
+        operations.append(("Julia", _script_julia_init))
+        operations.append(("time", dtnow()))
+        mark_step(folders["logs"], "julia_init")
+
+    if not is_step_done(folders["logs"], "julia_install"):
+        ##########################
+        # install Julia packages
+        #########################
+        fLOG("--- install julia packages")
+        jl = os.path.join(folders["tools"], "Julia")
+        output = os.path.join(folders["logs"], "out.install.julia.txt")
+        out = julia_run_script(
+            jl, folders["python"], _script_julia_install, verbose=verbose, fLOG=fLOG)
+        with open(output, "w", encoding="utf8") as f:
+            f.write(out)
+        operations.append(("Julia", _script_julia_install))
+        operations.append(("time", dtnow()))
+        mark_step(folders["logs"], "julia_install")
+
+    if not is_step_done(folders["logs"], "julia_build"):
+        #########################
+        # build Julia packages
+        #########################
+        fLOG("--- build julia packages")
+        jl = os.path.join(folders["tools"], "Julia")
+        output = os.path.join(folders["logs"], "out.build.julia.txt")
+        out = julia_run_script(
+            jl, folders["python"], _script_julia_build, verbose=verbose, fLOG=fLOG)
+        with open(output, "w", encoding="utf8") as f:
+            f.write(out)
+        operations.append(("Julia", _script_julia_build))
+        operations.append(("time", dtnow()))
+        mark_step(folders["logs"], "julia_build")
+
+    return operations
+
+
+def win_install_r_step(folders, verbose=False, fLOG=print):
+    """
+    does necessary steps to setup R
+
+    @param      folders     installation folders
+    @param      verbose     verbose
+    @param      fLOG        logging function
+    @return                 list of processed operations
+    """
+    operations = []
+    if not is_step_done(folders["logs"], "r_install"):
+        ######################
+        # install R packages
+        ######################
+        fLOG("--- install R packages")
+        r = os.path.join(folders["tools"], "R")
+        output = os.path.join(folders["logs"], "out.install.r.txt")
+        out = r_run_script(r, _script_r, output)
+        with open(output, "w", encoding="utf8") as f:
+            f.write(out)
+        operations.append(("R", _script_r))
+        operations.append(("time", dtnow()))
+        mark_step(folders["logs"], "r_install")
+
     return operations

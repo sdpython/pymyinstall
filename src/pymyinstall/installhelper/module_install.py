@@ -11,7 +11,6 @@ import os
 import time
 import importlib
 import datetime
-import pip
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date
 from .install_memoize import install_memoize
 
@@ -24,7 +23,7 @@ else:
     import urllib.error as urllib_error
     import importlib.util
     import xmlrpc.client as xmlrpc_client
-    
+
 
 @install_memoize
 def get_page_wheel(page):
@@ -45,9 +44,35 @@ def get_page_wheel(page):
     text = text.replace("&quot;", "'")
     text = text.replace("&#8209;", "-")
     return text
-    
-    
+
+
+@install_memoize
+def get_module_version(module):
+    """
+    return a dictionary { module:version }
+
+    @param      module      module name of None for all
+    @return                 dictionary
+    """
+    prog = get_pip_program()
+    cmd = prog + " freeze"
+    out, err = run_cmd(cmd, wait=True, do_not_log=True)
+    if err is not None and len(err) > 0:
+        raise Exception("unable to run\n" + err)
+    lines = out.split("\n")
+    res = {}
+    for line in lines:
+        if "==" in line:
+            spl = line.split("==")
+            if len(spl) == 2:
+                a = spl[0]
+                b = spl[1].strip(" \n\r")
+                res[a] = b
+    return res
+
+
 class MissingPackageOnPyPiException(Exception):
+
     """
     raised when a packahe is not found on pipy
     """
@@ -352,8 +377,8 @@ class ModuleInstall:
         if kind == "pip":
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
             # we use pip install <package> --download=temp_folder
-            pip = get_pip_program()
-            cmd = pip + ' install {0}'.format(self.name)
+            pp = get_pip_program()
+            cmd = pp + ' install {0}'.format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if " " in temp_folder:
@@ -497,14 +522,14 @@ class ModuleInstall:
         @see me install
         """
         self.install(*l, **p)
-        
+
     def get_pypi_version(self, url='http://pypi.python.org/pypi'):
         """
         returns the version of a package on pypi
-        
+
         @param      url     pipy server
         @return             version
-        
+
         See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
         `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
         """
@@ -514,23 +539,73 @@ class ModuleInstall:
             available = pypi.package_releases(self.name.capitalize())
         if (available is None or len(available) == 0) and self.mnane is not None:
             available = pypi.package_releases(self.mname)
-            
+
         if available is None:
-            raise MissingPackageOnPyPiException("; ".join([self.name, self.name.capitalize(), self.mname]))
-            
+            raise MissingPackageOnPyPiException(
+                "; ".join([self.name, self.name.capitalize(), self.mname]))
+
         return available[0]
-        
-    def get_installed_version():
+
+    def get_pypi_numeric_version(self):
+        """
+        returns the version of a package in pypi
+
+        @return     tuple
+        """
+        vers = self.get_pypi_version()
+        spl = vers.split(".")
+        r = []
+        for _ in spl:
+            try:
+                i = int(_)
+                r.append(i)
+            except:
+                r.append(_)
+        return tuple(r)
+
+    def get_installed_version(self):
         """
         return the version of the installed package
+
+        @return         version
         """
-        raise NotImplementedError()
-        
-    def has_update():
+        vers = get_module_version(None)
+        if self.name in vers:
+            return vers[self.name]
+        if self.mname is not None and self.mname in vers:
+            return vers[self.mname]
+
+        mes = "\n".join("{0}={1}".format(a, b)
+                        for a, b in sorted(vers.items()))
+        raise NameError(
+            "unable to find module {0} in \n{1}".format(self.name, mes))
+
+    def get_installated_numeric_version(self):
+        """
+        returns the version as number (not string)
+
+        @return     tuple
+        """
+        vers = self.get_installed_version()
+        spl = vers.split(".")
+        r = []
+        for _ in spl:
+            try:
+                i = int(_)
+                r.append(i)
+            except:
+                r.append(_)
+        return tuple(r)
+
+    def has_update(self):
         """
         tells if the package has a newer version on pipy
+
+        @return boolean
         """
-        raise NotImplementedError()
+        vers = self.get_installated_numeric_version()
+        pypi = self.get_pypi_numeric_version()
+        return pypi > vers
 
     def update(self,
                force_kind=None,
@@ -572,8 +647,8 @@ class ModuleInstall:
         ret = None
 
         if kind == "pip":
-            pip = get_pip_program()
-            cmd = pip + " install {0}".format(self.name)
+            pp = get_pip_program()
+            cmd = pp + " install {0}".format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if len(options) > 0:

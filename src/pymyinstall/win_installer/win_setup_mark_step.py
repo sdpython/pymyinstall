@@ -6,10 +6,10 @@ import os
 import datetime
 
 
-def mark_step(folder, step_name, content = ""):
+def mark_step(folder, step_name, content=""):
     """
     create a file to remember was done (running it again takes times)
-    
+
     @param      folder      folder where to write
     @param      step_name   step_name
     @param      content     what to write in the file
@@ -23,12 +23,12 @@ def mark_step(folder, step_name, content = ""):
             f.write(content)
         f.write("\n# -- {0}".format(datetime.datetime.now()))
     return name
-    
-    
+
+
 def is_step_done(folder, step_name):
     """
     checks a file was written with function @see fn mark_step
-    
+
     @param      folder      folder where to write
     @param      step_name   step_name
     @return                 boolean

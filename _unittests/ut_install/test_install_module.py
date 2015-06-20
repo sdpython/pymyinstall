@@ -50,23 +50,27 @@ class TestInstallModule (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        
-        mod = ModuleInstall("sphinx","pip")
+
+        mod = ModuleInstall("sphinx", "pip")
         vers = mod.get_pypi_version()
         assert vers >= "1.3.1"
-        
-        mod = ModuleInstall("scikit-learn","wheel",mname="sklearn")
+
+        mod = ModuleInstall("scikit-learn", "wheel", mname="sklearn")
         fLOG(mod)
         vers = mod.get_pypi_version()
         assert vers >= "0.16.1"
 
-        mod = ModuleInstall("pandas","wheel")
+        mod = ModuleInstall("pandas", "wheel")
         fLOG(mod)
         vers = mod.get_pypi_version()
         assert vers >= "0.16.1"
 
-    
-    
+        update = mod.has_update()
+        if update:
+            vers = mod.get_pypi_numeric_version()
+            fLOG(vers)
+        fLOG(update)
+
 
 if __name__ == "__main__":
     unittest.main()

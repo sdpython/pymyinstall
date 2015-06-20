@@ -162,8 +162,12 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
             mname = mod.mname if mod.mname is not None else mod.name
             if not is_package_installed(python_path, mname):
                 full = os.path.join(package_folder, a)
-                op = win_install_package_other_python(
-                    python_path, full, verbose=False, fLOG=fLOG)
+                try:
+                    op = win_install_package_other_python(
+                        python_path, full, verbose=False, fLOG=fLOG)
+                except Exception as e:
+                    mes = "failed to install {0}: {1}".format(mod.name, full)
+                    raise Exception(mes) from e
                 if len(op) > 0:
                     fLOG("installed", mod.name, " with ", a)
                 operations.extend(op)
