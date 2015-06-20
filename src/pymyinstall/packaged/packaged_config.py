@@ -457,7 +457,8 @@ def extension_ensae():
         # https://github.com/damiendr/callipy
         #
         ModuleInstall("libsvm", "wheel", mname="svm"),
-        ModuleInstall("abcpmc", "wheel"), # Bayesian ABC 
+        ModuleInstall("abcpmc", "pip"), # Bayesian ABC 
+        # ModuleInstall("cosmoabc", "pip"), # Bayesian ABC, only python 2.7
         #
         # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
         # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not

@@ -11,17 +11,20 @@ import os
 import time
 import importlib
 import datetime
+import pip
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date
 from .install_memoize import install_memoize
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
     import urllib2 as urllib_error
+    import xmlrpclib as xmlrpc_client
 else:
     import urllib.request as urllib_request
     import urllib.error as urllib_error
     import importlib.util
-
+    import xmlrpc.client as xmlrpc_client
+    
 
 @install_memoize
 def get_page_wheel(page):
@@ -42,6 +45,13 @@ def get_page_wheel(page):
     text = text.replace("&quot;", "'")
     text = text.replace("&#8209;", "-")
     return text
+    
+    
+class MissingPackageOnPyPiException(Exception):
+    """
+    raised when a packahe is not found on pipy
+    """
+    pass
 
 
 class ModuleInstall:
@@ -487,6 +497,40 @@ class ModuleInstall:
         @see me install
         """
         self.install(*l, **p)
+        
+    def get_pypi_version(self, url='http://pypi.python.org/pypi'):
+        """
+        returns the version of a package on pypi
+        
+        @param      url     pipy server
+        @return             version
+        
+        See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
+        `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
+        """
+        pypi = xmlrpc_client.ServerProxy(url)
+        available = pypi.package_releases(self.name)
+        if available is None or len(available) == 0:
+            available = pypi.package_releases(self.name.capitalize())
+        if (available is None or len(available) == 0) and self.mnane is not None:
+            available = pypi.package_releases(self.mname)
+            
+        if available is None:
+            raise MissingPackageOnPyPiException("; ".join([self.name, self.name.capitalize(), self.mname]))
+            
+        return available[0]
+        
+    def get_installed_version():
+        """
+        return the version of the installed package
+        """
+        raise NotImplementedError()
+        
+    def has_update():
+        """
+        tells if the package has a newer version on pipy
+        """
+        raise NotImplementedError()
 
     def update(self,
                force_kind=None,

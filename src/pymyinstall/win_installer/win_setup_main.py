@@ -28,9 +28,11 @@ from .win_exception import WinInstallException
 from .win_extract import extract_msi, extract_exe, extract_archive, clean_msi
 from .win_packages import _is_package_in_list, win_install_packages_other_python
 from .win_batch import create_win_batches
-from .win_setup_r import r_run_script, _script as _script_r
-from .win_setup_julia import julia_run_script, _script as _script_julia, _script_build as _script_julia_build
 from .win_ipy_kernels import install_kernels
+from .win_setup_mark_step import mark_step, is_step_done
+
+from .win_setup_r import r_run_script, _script as _script_r
+from .win_setup_julia import julia_run_script, _script_install as _script_julia_install, _script_build as _script_julia_build, _script_init as _script_julia_init
 
 from .win_innosetup_helper import run_innosetup
 
@@ -116,6 +118,20 @@ def win_python_setup(folder="dist/win_python_setup",
             mingw-get install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77
 
         * Python setups needs a last click to complete
+        * Julia command line sometimes gets stuck, the setup needs to be stopped
+          and restarted. It happens while installing the packages and 
+          also while building IJulia (the package to use Julia in a notebook).
+          The Julia should be stopped instead of stopping the python script.
+          That trick shows the standard output of Julia.
+        * Juilia kernel cannot be used with the others: it requires a different 
+          configuration which prevents others kernel to be available at the same time.
+          
+            ...
+                    
+    With Julia, initialisation, installation or building takes time.
+    The function writes a file ``log.step.<julia_step>.txt``
+    to tell the step has completed once. You can remove this file
+    to do it again.
 
     @todo Use chocolatey to process installation.
 
@@ -135,8 +151,8 @@ def win_python_setup(folder="dist/win_python_setup",
     @endexample
     
     @warning The Julia installation might be stuck after the installation or the build.
-             In that case, the script python should be stopped by stopping the Julia
-             process from the Task Manager
+             In that case, the script python should be stopped by *stopping the Julia
+             process* from the Task Manager
              and started again. If it has completed, it will go to the 
              next step.
     """
@@ -275,20 +291,35 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.extend(op)
         operations.append(("time", now()))
 
-        if "julia_install" not in step_skip:
+        if "julia_init" not in step_skip and not is_step_done(folders["logs"], "julia_init"):
+            ##########################
+            # init Julia packages
+            #########################
+            fLOG("--- init julia packages")
+            jl = os.path.join(folders["tools"], "Julia")
+            output = os.path.join(folders["logs"], "out.init.julia.txt")
+            out = julia_run_script(jl, folders["python"], _script_julia_init, verbose=verbose, fLOG=fLOG)
+            with open(os.path.join(folders["logs"], "out.init.julia.txt"), "w", encoding="utf8") as f:
+                f.write(out)
+            operations.append(("Julia", _script_julia_init))
+            operations.append(("time", now()))
+            mark_step(folders["logs"], "julia_init")
+
+        if "julia_install" not in step_skip and not is_step_done(folders["logs"], "julia_install"):
             ##########################
             # install Julia packages
             #########################
             fLOG("--- install julia packages")
             jl = os.path.join(folders["tools"], "Julia")
             output = os.path.join(folders["logs"], "out.install.julia.txt")
-            out = julia_run_script(jl, folders["python"], _script_julia, verbose=verbose, fLOG=fLOG)
+            out = julia_run_script(jl, folders["python"], _script_julia_install, verbose=verbose, fLOG=fLOG)
             with open(os.path.join(folders["logs"], "out.install.julia.txt"), "w", encoding="utf8") as f:
                 f.write(out)
-            operations.append(("Julia", _script_julia))
+            operations.append(("Julia", _script_julia_install))
             operations.append(("time", now()))
+            mark_step(folders["logs"], "julia_install")
 
-        if "julia_build" not in step_skip:
+        if "julia_build" not in step_skip and not is_step_done(folders["logs"], "julia_build"):
             #########################
             # build Julia packages
             #########################
@@ -300,8 +331,9 @@ def win_python_setup(folder="dist/win_python_setup",
                 f.write(out)
             operations.append(("Julia", _script_julia_build))
             operations.append(("time", now()))
+            mark_step(folders["logs"], "julia_build")
 
-        if "r_install" not in step_skip:
+        if "r_install" not in step_skip and not is_step_done(folders["logs"], "r_install"):
             ######################
             # install R packages
             ######################
@@ -311,6 +343,7 @@ def win_python_setup(folder="dist/win_python_setup",
             out = r_run_script(r, _script_r, output)
             operations.append(("R", _script_r))
             operations.append(("time", now()))
+            mark_step(folders["logs"], "r_install")
 
         ######################
         # installation of packages

@@ -7,11 +7,14 @@ from __future__ import print_function
 import os
 from ..installhelper.install_cmd_helper import run_cmd
 
-_script = os.path.join(
+_script_install = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "Julia_install.jl")
 
 _script_build = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "Julia_build.jl")
+
+_script_init = os.path.join(
+    os.path.abspath(os.path.dirname(__file__)), "Julia_init.jl")
 
 
 class JuliaBatchException(Exception):
