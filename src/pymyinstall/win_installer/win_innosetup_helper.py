@@ -86,12 +86,12 @@ def inno_install_kernels(root, suffix):
     """
     if root in os.environ:
         path = os.environ[root]
-        tools = os.path.join(root, "tools")
+        tools = os.path.join(path, "tools")
         if not os.path.exists(tools):
-            tools = os.path.normpath(os.path.join(root, "..", "tools"))
-            python = os.path.normpath(os.path.join(root, "..", "python"))
+            tools = os.path.normpath(os.path.join(path, "..", "tools"))
+            python = os.path.normpath(os.path.join(path, "..", "python"))
         else:
-            python = os.path.join(root, "python")
+            python = os.path.join(path, "python")
 
     else:
         tools = os.path.join(root, "tools")

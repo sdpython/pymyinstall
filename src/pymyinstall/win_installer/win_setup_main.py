@@ -353,7 +353,7 @@ def win_python_setup(folder="dist/win_python_setup",
             raise WinInstallException(
                 "missing file, unable to execute:\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
         operations.append(("time", dtnow()))
-                
+
         ######################
         # update ipython profile
         ######################

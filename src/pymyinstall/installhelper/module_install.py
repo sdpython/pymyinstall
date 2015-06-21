@@ -1086,8 +1086,6 @@ class ModuleInstall:
             return True
 
         self.fLOG("update of ", self)
-        kind = force_kind if force_kind is not None else self.kind
-        ret = None
 
         options = [] if options is None else list(options)
         for opt in ["--upgrade", "--no-deps"]:

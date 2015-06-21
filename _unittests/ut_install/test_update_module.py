@@ -53,8 +53,7 @@ class TestUpdateModule (unittest.TestCase):
 
         temp = get_temp_folder(__file__, "temp_update_module")
 
-        mod = ModuleInstall(
-            "scikit-learn", "wheel", mname="sklearn", fLOG=fLOG)
+        mod = ModuleInstall("pandas", "wheel", fLOG=fLOG)
         mod.update(temp_folder=temp)
 
         mod = ModuleInstall("xlrd", "pip", fLOG=fLOG)
