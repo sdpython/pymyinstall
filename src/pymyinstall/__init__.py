@@ -58,4 +58,3 @@ from .packaged.packaged_config import installation_azure, extend_winpython, exte
 from .installhelper.install_custom_revealjs import download_revealjs
 # adding this line breaks the documentation generation
 from .win_installer.win_setup_main import win_python_setup
-

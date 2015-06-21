@@ -19,9 +19,9 @@ from .module_install import ModuleInstall, get_module_version
 
 def update_all(temp_folder=".", fLOG=print, verbose=True):
     """
-    update all installed modules assuming they are described in 
+    update all installed modules assuming they are described in
     @see fn installation_ensae
-    
+
     @param  temp_folder     temporary folder
     @param  fLOG            logging function
     """
@@ -31,13 +31,9 @@ def update_all(temp_folder=".", fLOG=print, verbose=True):
         os.makedirs(temp_folder)
     modules = installation_ensae()
     for mod in modules:
-        print("++",mod.name,mod.is_installed(),mod.has_update())
         if mod.is_installed() and mod.has_update():
             ver = mod.get_pypi_version()
             inst = mod.get_installed_version()
-            fLOG("updating module  {0} --- {1} --> {2} (kind={3})".format(mod.name, inst, ver, mod.kind))
+            fLOG(
+                "updating module  {0} --- {1} --> {2} (kind={3})".format(mod.name, inst, ver, mod.kind))
             mod.update(temp_folder=temp_folder, log=verbose)
-        
-    
-    
-    

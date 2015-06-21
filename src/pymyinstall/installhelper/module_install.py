@@ -23,7 +23,39 @@ else:
     import urllib.error as urllib_error
     import importlib.util
     import xmlrpc.client as xmlrpc_client
-    
+
+
+class MissingPackageOnPyPiException(Exception):
+
+    """
+    raised when a package is not found on pipy
+    """
+    pass
+
+
+class MissingInstalledPackageException(Exception):
+
+    """
+    raised when a package is not installed
+    """
+    pass
+
+
+class AnnoyingPackageException(Exception):
+
+    """
+    raised when a package is not on pypi
+    """
+    pass
+
+
+class MissingVersionOnPyPiException(Exception):
+
+    """
+    raised when a version is missing on pipy
+    """
+    pass
+
 
 @install_memoize
 def get_page_wheel(page):
@@ -71,9 +103,13 @@ def get_module_version(module):
                 a = spl[0]
                 b = spl[1].strip(" \n\r")
                 res[a] = b.strip("()")
+                al = a.lower()
+                if al != a:
+                    res[al] = res[a]
     return res
-    
-@install_memoize    
+
+
+@install_memoize
 def get_pypi_version(module_name):
     """
     returns the version of a package on pypi,
@@ -85,44 +121,61 @@ def get_pypi_version(module_name):
     See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
     `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
     """
-    url='http://pypi.python.org/pypi'
+    url = 'http://pypi.python.org/pypi'
     pypi = xmlrpc_client.ServerProxy(url)
+    tried = [module_name]
     available = pypi.package_releases(module_name)
+
     if available is None or len(available) == 0:
-        available = pypi.package_releases(module_name.capitalize())
+        tried.append(module_name.capitalize())
+        available = pypi.package_releases(tried[-1])
+
     if available is None or len(available) == 0:
-        available = pypi.package_releases(module_name.replace("-", "_"))
+        tried.append(module_name.replace("-", "_"))
+        available = pypi.package_releases(tried[-1])
+
     if available is None or len(available) == 0:
-        raise MissingPackageOnPyPiException(
-            "; ".join([module_name, 
-                       module_name.capitalize(), 
-                       module_name.replace("-", "_")]))
+        tried.append(module_name.replace("_", "-"))
+        available = pypi.package_releases(tried[-1])
+
+    if available is None or len(available) == 0:
+        tried.append(module_name.lower())
+        available = pypi.package_releases(tried[-1])
+
+    if available is None or len(available) == 0:
+        ml = module_name.lower()
+        if ml == "markupsafe":
+            tried.append("MarkupSafe")
+            available = pypi.package_releases(tried[-1])
+        elif ml == "flask-sqlalchemy":
+            tried.append("Flask-SQLAlchemy")
+            available = pypi.package_releases(tried[-1])
+        elif ml == "datashape":
+            tried.append("DataShape")
+            available = pypi.package_releases(tried[-1])
+        elif ml == "pycontracts":
+            tried.append("PyContracts")
+            available = pypi.package_releases(tried[-1])
+        elif ml == "pybrain":
+            tried.append("PyBrain")
+            available = pypi.package_releases(tried[-1])
+        elif module_name in ModuleInstall.annoying_modules:
+            raise AnnoyingPackageException(module_name)
+
+    if available is None or len(available) == 0:
+        raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
+
     for a in available:
         spl = a.split(".")
-        if len(spl) in (2,3):
+        if len(spl) in (2, 3):
             last = spl[-1]
             if "a" not in last and "b" not in last and "dev" not in last:
                 return a
         else:
             return a
-    
-    raise MissingVersionException("{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
 
-
-class MissingPackageOnPyPiException(Exception):
-
-    """
-    raised when a package is not found on pipy
-    """
-    pass
-
-
-class MissingInstalledPackageException(Exception):
-
-    """
-    raised when a package is not installed
-    """
-    pass
+    raise MissingVersionOnPyPiException(
+        "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
 
 
 class ModuleInstall:
@@ -143,9 +196,11 @@ class ModuleInstall:
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
-    
-    annoying_modules = { "pygame", "liblinear", "mlpy" }
-    
+
+    annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",
+                        "libsvm", "opencv_python", "scikits.cuda",
+                        "NLopt"}
+
     @staticmethod
     def is_annoying(module_name):
         """
@@ -604,12 +659,12 @@ class ModuleInstall:
                     "; ".join([self.name, self.name.capitalize(), self.mname]))
 
             return available[0]
-            
+
     @staticmethod
     def numeric_version(vers):
         """
         convert a string into a tuple with numbers whever possible
-        
+
         @param      vers    string
         @return             tuple
         """
@@ -623,7 +678,7 @@ class ModuleInstall:
                 r.append(i)
             except:
                 r.append(_)
-        return tuple(r)        
+        return tuple(r)
 
     def get_pypi_numeric_version(self):
         """
@@ -687,12 +742,12 @@ class ModuleInstall:
         else:
             num = ModuleInstall.numeric_version(self.version)
             return ModuleInstall.compare_version(num, vers) > 0
-            
+
     @staticmethod
     def compare_version(num, vers):
         """
         compare two versions
-        
+
         @param      num     first version
         @param      vers    second version
         @return             -1, 0, 1
@@ -704,30 +759,32 @@ class ModuleInstall:
                 return 1
         if vers is None:
             return -1
-            
+
+        if not isinstance(vers, tuple):
+            vers = ModuleInstall.numeric_version(vers)
+        if not isinstance(num, tuple):
+            num = ModuleInstall.numeric_version(num)
+
         if len(num) == len(vers):
-            for a,b in zip(num, vers):
+            for a, b in zip(num, vers):
                 if isinstance(a, int) and isinstance(b, int):
-                    if a == b:
-                        return 0
-                    elif a < b:
+                    if a < b:
                         return -1
-                    else:
+                    elif a > b:
                         return 1
                 else:
                     a = str(a)
                     b = str(b)
-                    if a == b:
-                        return 0
-                    elif a < b:
+                    if a < b:
                         return -1
-                    else:
+                    elif a > b:
                         return 1
+            return 0
         else:
             if len(num) < len(vers):
                 num = num + (0,) * (len(vers) - len(num))
                 return ModuleInstall.compare_version(num, vers)
-            else :
+            else:
                 vers = vers + (0,) * (len(num) - len(vers))
                 return ModuleInstall.compare_version(num, vers)
 
@@ -768,7 +825,7 @@ class ModuleInstall:
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if len(options) > 0:
-                cmd += " " + " ".join(*options)
+                cmd += " " + " ".join(options)
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
             if "No distributions matching the version" in out:
@@ -821,7 +878,9 @@ class ModuleInstall:
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if len(options) > 0:
-                cmd += " " + " ".join(*options)
+                opts = [_ for _ in options if _ not in ("--upgrade",)]
+                if len(opts):
+                    cmd += " " + " ".join(opts)
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
             if "No distributions matching the version" in out:
@@ -1004,7 +1063,6 @@ class ModuleInstall:
                options=None):
         """
         update the package if necessary, we use ``pip install <module_name> --upgrade --no-deps``,
-        if *self.version* is None, we replace this field by the required version
 
         @param      force_kind      overwrite self.kind
         @param      force           force the installation even if not need to update
@@ -1020,11 +1078,11 @@ class ModuleInstall:
         """
         if ModuleInstall.is_annoying(self.name):
             return False
-            
+
         if not self.is_installed():
             raise MissingInstalledPackageException(self.name)
 
-        if not force or not self.has_update():
+        if not force and not self.has_update():
             return True
 
         self.fLOG("update of ", self)
@@ -1036,7 +1094,6 @@ class ModuleInstall:
             if opt not in options:
                 options.append(opt)
 
-        if self.version is None:
-            self.version = self.get_pipy_version()
-        res = self.install(force_kind=force_kind, force=True, temp_folder=temp_folder, log=log, options=options)
+        res = self.install(force_kind=force_kind, force=True,
+                           temp_folder=temp_folder, log=log, options=options)
         return res

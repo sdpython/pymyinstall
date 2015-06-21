@@ -434,13 +434,13 @@ def extension_ensae():
         ModuleInstall("mahotas", "wheel"),
         ModuleInstall("milk", "wheel"),
         ModuleInstall("minepy", "wheel"),
-        ModuleInstall("mlpy", "wheel"),
         ModuleInstall("NLopt", "wheel", mname="nlopt"),
         ModuleInstall("Pmw", "wheel", mname="Pmw"),
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("pytools", "pip"),
         ModuleInstall("pycuda", "wheel"),
-        ModuleInstall("scikits.cuda", "pip", mname="skcuda"),
+        # ModuleInstall("scikits.cuda", "pip", mname="skcuda"), # no stable
+        # version
         ModuleInstall("pylzma", "wheel"),
         ModuleInstall("pymvpa2", "wheel", mname="mvpa2"),
         ModuleInstall("pyodbc", "wheel"),

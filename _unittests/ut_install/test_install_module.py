@@ -77,7 +77,7 @@ class TestInstallModule (unittest.TestCase):
             vers = mod.get_pypi_numeric_version()
             fLOG(vers)
         fLOG(update)
-        
+
     def test_module_version(self):
         fLOG(
             __file__,
@@ -85,10 +85,17 @@ class TestInstallModule (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         d = get_module_version(None)
         if len(d) < 10:
-            for k,v in sorted(d.items()):
-                fLOG(k,v)
+            for k, v in sorted(d.items()):
+                fLOG(k, v)
             assert False
-        
+
+    def test_compare_version(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        assert ModuleInstall.compare_version("0.16.0", "0.16.2") == -1
+
     def test_installed_version(self):
         fLOG(
             __file__,
@@ -100,18 +107,17 @@ class TestInstallModule (unittest.TestCase):
         if not res:
             fLOG(mod)
             fLOG(mod.get_installed_version())
-            for k,v in get_module_version(None).items():
-                if k[0] in ("j","J"):
-                    fLOG("+++",k,v)
+            for k, v in get_module_version(None).items():
+                if k[0] in ("j", "J"):
+                    fLOG("+++", k, v)
             assert False
-        
+
         mod = ModuleInstall("pandas", "wheel")
         res = mod.is_installed()
         assert res
-        fLOG("****",mod.get_installed_version(), mod.get_pypi_version())
+        fLOG("****", mod.get_installed_version(), mod.get_pypi_version())
         if mod.get_installed_version() != mod.get_pypi_version():
             assert mod.has_update()
-        
 
 
 if __name__ == "__main__":
