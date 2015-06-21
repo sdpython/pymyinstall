@@ -307,7 +307,7 @@ def win_python_setup(folder="dist/win_python_setup",
         # modifies scite properties
         #######################
         fLOG("--- modifies Scite properties")
-        modify_scite_properties(os.path.join("..", "..", "..", "pythonw"),
+        modify_scite_properties(os.path.join("%PYTHON_WINHOME%", "pythonw"),
                                 os.path.join(folders["tools"], "Scite", "wscite"))
 
         ###########
@@ -339,6 +339,7 @@ def win_python_setup(folder="dist/win_python_setup",
         ######################
         # create ipython profile
         ######################
+        operations.append(("ipython", "create profile"))
         config_path = folders["config"]
         ipython_path = os.path.join(
             folders["python"], "Scripts", "ipython.exe")
@@ -351,6 +352,19 @@ def win_python_setup(folder="dist/win_python_setup",
         if not os.path.exists(profile):
             raise WinInstallException(
                 "missing file, unable to execute:\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+        operations.append(("time", dtnow()))
+                
+        ######################
+        # update ipython profile
+        ######################
+        operations.append(("ipython", "update profile"))
+        with open(profile, "r") as f:
+            content = f.read()
+        content += """\nc.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".checkpoints"]
+                      c.FileContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".checkpoints"]
+                    """.replace("                      ", "")
+        with open(profile, "w") as f:
+            f.write(content)
 
         ########
         # kernels
