@@ -23,7 +23,7 @@ else:
     import urllib.error as urllib_error
     import importlib.util
     import xmlrpc.client as xmlrpc_client
-
+    
 
 @install_memoize
 def get_page_wheel(page):
@@ -55,28 +55,72 @@ def get_module_version(module):
     @return                 dictionary
     """
     prog = get_pip_program()
-    cmd = prog + " freeze"
+    cmd = prog + " list"
     out, err = run_cmd(cmd, wait=True, do_not_log=True)
     if err is not None and len(err) > 0:
         if len(err.split("\n")) > 3 or \
            "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
-            raise Exception("unable to run, #lines {0}\nERR:\n{1}\nOUT:\n{2}".format(len(err.split("\n")),err,out))
+            raise Exception("unable to run, #lines {0}\nERR:\n{1}\nOUT:\n{2}".format(
+                len(err.split("\n")), err, out))
     lines = out.split("\n")
     res = {}
     for line in lines:
-        if "==" in line:
-            spl = line.split("==")
+        if "(" in line:
+            spl = line.split()
             if len(spl) == 2:
                 a = spl[0]
                 b = spl[1].strip(" \n\r")
-                res[a] = b
+                res[a] = b.strip("()")
     return res
+    
+@install_memoize    
+def get_pypi_version(module_name):
+    """
+    returns the version of a package on pypi,
+    we skip alpha, beta or dev version
+
+    @param      url     pipy server
+    @return             version
+
+    See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
+    `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
+    """
+    url='http://pypi.python.org/pypi'
+    pypi = xmlrpc_client.ServerProxy(url)
+    available = pypi.package_releases(module_name)
+    if available is None or len(available) == 0:
+        available = pypi.package_releases(module_name.capitalize())
+    if available is None or len(available) == 0:
+        available = pypi.package_releases(module_name.replace("-", "_"))
+    if available is None or len(available) == 0:
+        raise MissingPackageOnPyPiException(
+            "; ".join([module_name, 
+                       module_name.capitalize(), 
+                       module_name.replace("-", "_")]))
+    for a in available:
+        spl = a.split(".")
+        if len(spl) in (2,3):
+            last = spl[-1]
+            if "a" not in last and "b" not in last and "dev" not in last:
+                return a
+        else:
+            return a
+    
+    raise MissingVersionException("{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
 
 
 class MissingPackageOnPyPiException(Exception):
 
     """
-    raised when a packahe is not found on pipy
+    raised when a package is not found on pipy
+    """
+    pass
+
+
+class MissingInstalledPackageException(Exception):
+
+    """
+    raised when a package is not installed
     """
     pass
 
@@ -99,6 +143,15 @@ class ModuleInstall:
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
+    
+    annoying_modules = { "pygame", "liblinear", "mlpy" }
+    
+    @staticmethod
+    def is_annoying(module_name):
+        """
+        some modules are not available on pipy
+        """
+        return module_name in ModuleInstall.annoying_modules
 
     def __init__(self, name,
                  kind="pip",
@@ -535,26 +588,33 @@ class ModuleInstall:
         See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
         `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
         """
-        pypi = xmlrpc_client.ServerProxy(url)
-        available = pypi.package_releases(self.name)
-        if available is None or len(available) == 0:
-            available = pypi.package_releases(self.name.capitalize())
-        if (available is None or len(available) == 0) and self.mnane is not None:
-            available = pypi.package_releases(self.mname)
+        if url == 'http://pypi.python.org/pypi':
+            # we use a function which caches the result
+            return get_pypi_version(self.name)
+        else:
+            pypi = xmlrpc_client.ServerProxy(url)
+            available = pypi.package_releases(self.name)
+            if available is None or len(available) == 0:
+                available = pypi.package_releases(self.name.capitalize())
+            if (available is None or len(available) == 0) and self.mnane is not None:
+                available = pypi.package_releases(self.mname)
 
-        if available is None:
-            raise MissingPackageOnPyPiException(
-                "; ".join([self.name, self.name.capitalize(), self.mname]))
+            if available is None:
+                raise MissingPackageOnPyPiException(
+                    "; ".join([self.name, self.name.capitalize(), self.mname]))
 
-        return available[0]
-
-    def get_pypi_numeric_version(self):
+            return available[0]
+            
+    @staticmethod
+    def numeric_version(vers):
         """
-        returns the version of a package in pypi
-
-        @return     tuple
+        convert a string into a tuple with numbers whever possible
+        
+        @param      vers    string
+        @return             tuple
         """
-        vers = self.get_pypi_version()
+        if isinstance(vers, tuple):
+            return vers
         spl = vers.split(".")
         r = []
         for _ in spl:
@@ -563,7 +623,18 @@ class ModuleInstall:
                 r.append(i)
             except:
                 r.append(_)
-        return tuple(r)
+        return tuple(r)        
+
+    def get_pypi_numeric_version(self):
+        """
+        returns the version of a package in pypi
+
+        @return     tuple
+        """
+        vers = self.get_pypi_version()
+        if vers is None:
+            return None
+        return ModuleInstall.numeric_version(vers)
 
     def get_installed_version(self):
         """
@@ -574,13 +645,21 @@ class ModuleInstall:
         vers = get_module_version(None)
         if self.name in vers:
             return vers[self.name]
+        cap = self.name.capitalize()
+        if cap in vers:
+            return vers[cap]
+        cap = self.name.replace("-", "_")
+        if cap in vers:
+            return vers[cap]
         if self.mname is not None and self.mname in vers:
             return vers[self.mname]
+        return None
 
-        mes = "\n".join("{0}={1}".format(a, b)
-                        for a, b in sorted(vers.items()))
-        raise NameError(
-            "unable to find module {0} in \n{1}".format(self.name, mes))
+    def is_installed(self):
+        """
+        tells if a module is installed
+        """
+        return self.get_installed_version() is not None
 
     def get_installated_numeric_version(self):
         """
@@ -589,15 +668,9 @@ class ModuleInstall:
         @return     tuple
         """
         vers = self.get_installed_version()
-        spl = vers.split(".")
-        r = []
-        for _ in spl:
-            try:
-                i = int(_)
-                r.append(i)
-            except:
-                r.append(_)
-        return tuple(r)
+        if vers is None:
+            return None
+        return ModuleInstall.numeric_version(vers)
 
     def has_update(self):
         """
@@ -605,27 +678,65 @@ class ModuleInstall:
 
         @return boolean
         """
+        if ModuleInstall.is_annoying(self.name):
+            return False
         vers = self.get_installated_numeric_version()
-        pypi = self.get_pypi_numeric_version()
-        return pypi > vers
-
-    def update(self,
-               force_kind=None,
-               force=False,
-               temp_folder=".",
-               log=False,
-               *options):
+        if self.version is None:
+            pypi = self.get_pypi_numeric_version()
+            return ModuleInstall.compare_version(pypi, vers) > 0
+        else:
+            num = ModuleInstall.numeric_version(self.version)
+            return ModuleInstall.compare_version(num, vers) > 0
+            
+    @staticmethod
+    def compare_version(num, vers):
         """
-        update a package
+        compare two versions
+        
+        @param      num     first version
+        @param      vers    second version
+        @return             -1, 0, 1
         """
-        raise NotImplementedError()
+        if num is None:
+            if vers is None:
+                return 0
+            else:
+                return 1
+        if vers is None:
+            return -1
+            
+        if len(num) == len(vers):
+            for a,b in zip(num, vers):
+                if isinstance(a, int) and isinstance(b, int):
+                    if a == b:
+                        return 0
+                    elif a < b:
+                        return -1
+                    else:
+                        return 1
+                else:
+                    a = str(a)
+                    b = str(b)
+                    if a == b:
+                        return 0
+                    elif a < b:
+                        return -1
+                    else:
+                        return 1
+        else:
+            if len(num) < len(vers):
+                num = num + (0,) * (len(vers) - len(num))
+                return ModuleInstall.compare_version(num, vers)
+            else :
+                vers = vers + (0,) * (len(num) - len(vers))
+                return ModuleInstall.compare_version(num, vers)
 
     def install(self,
                 force_kind=None,
                 force=False,
                 temp_folder=".",
                 log=False,
-                *options):
+                options=None):
         """
         install the package
 
@@ -633,7 +744,7 @@ class ModuleInstall:
         @param      force           force the installation even if already installed
         @param      temp_folder     folder where to download the setup
         @param      log             display logs or not
-        @param      options         other options to add to the command line (see below)
+        @param      options         other options to add to the command line (see below) in a list
         @return                     boolean
 
         The options mentioned in parameter ``options``
@@ -643,6 +754,9 @@ class ModuleInstall:
         """
         if not force and self.IsInstalled():
             return True
+
+        if options is None:
+            options = None
 
         self.fLOG("installation of ", self)
         kind = force_kind if force_kind is not None else self.kind
@@ -881,3 +995,48 @@ class ModuleInstall:
                             f.write("\n")
                             f.write(full)
         return ret
+
+    def update(self,
+               force_kind=None,
+               force=False,
+               temp_folder=".",
+               log=False,
+               options=None):
+        """
+        update the package if necessary, we use ``pip install <module_name> --upgrade --no-deps``,
+        if *self.version* is None, we replace this field by the required version
+
+        @param      force_kind      overwrite self.kind
+        @param      force           force the installation even if not need to update
+        @param      temp_folder     folder where to download the setup
+        @param      log             display logs or not
+        @param      options         others options to add to the command line (see below) an a list
+        @return                     boolean
+
+        The options mentioned in parameter ``options``
+        are described here: `pip install <http://www.pip-installer.org/en/latest/usage.html>`_
+        or `setup.py options <http://docs.python.org/3.4/install/>`_ if you
+        installing a module from github.
+        """
+        if ModuleInstall.is_annoying(self.name):
+            return False
+            
+        if not self.is_installed():
+            raise MissingInstalledPackageException(self.name)
+
+        if not force or not self.has_update():
+            return True
+
+        self.fLOG("update of ", self)
+        kind = force_kind if force_kind is not None else self.kind
+        ret = None
+
+        options = [] if options is None else list(options)
+        for opt in ["--upgrade", "--no-deps"]:
+            if opt not in options:
+                options.append(opt)
+
+        if self.version is None:
+            self.version = self.get_pipy_version()
+        res = self.install(force_kind=force_kind, force=True, temp_folder=temp_folder, log=log, options=options)
+        return res

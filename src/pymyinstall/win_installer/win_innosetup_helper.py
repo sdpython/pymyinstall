@@ -6,6 +6,7 @@ from __future__ import print_function
 
 import os
 from ..installhelper.install_cmd_helper import run_cmd
+from .win_ipy_kernels import install_kernels
 
 
 class InnoSetupException(Exception):
@@ -74,3 +75,31 @@ def run_innosetup(script=None, innosetup=None, replacements=None, log_script=Non
         raise InnoSetupException(
             "CMD:\n{0}\nOUT:\n{1}\nERR:\{2}".format(cmd, out, err))
     return out
+
+
+def inno_install_kernels(root, suffix):
+    """
+    install kernels for IPython notebooks
+
+    @param      root        root folder
+    @param      suffix      suffix
+    """
+    if root in os.environ:
+        path = os.environ[root]
+        tools = os.path.join(root, "tools")
+        if not os.path.exists(tools):
+            tools = os.path.normpath(os.path.join(root, "..", "tools"))
+            python = os.path.normpath(os.path.join(root, "..", "python"))
+        else:
+            python = os.path.join(root, "python")
+
+    else:
+        tools = os.path.join(root, "tools")
+        python = os.path.join(root, "python")
+
+    if not os.path.exists(tools):
+        raise FileNotFoundError(tools)
+    if not os.path.exists(python):
+        raise FileNotFoundError(python)
+
+    install_kernels(tools, python, suffix)

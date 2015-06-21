@@ -9,7 +9,7 @@ import os
 
 
 r_kernel = {
-    "display_name": "R (WP)",
+    "display_name": "R%s",
     "language": "R",
     "argv": [
         "%R_HOME%\\bin\\x64\\R.exe",
@@ -23,7 +23,7 @@ r_kernel = {
 
 python_kernel = {
     "language": "python",
-    "display_name": "Python 3 (WP)",
+    "display_name": "Python 3%s",
     "argv": [
         "%PYTHON_WINHOME%\\python.exe",
         "-m",
@@ -34,7 +34,7 @@ python_kernel = {
 }
 
 julia_kernel = {
-    "display_name": "Julia (WP)",
+    "display_name": "Julia%s",
     "language": "julia",
     "argv": [
         "%JULIA_HOME%\\bin\\julia.exe",
@@ -47,16 +47,20 @@ julia_kernel = {
 }
 
 
-def add_kernel_ipython(kernel, path, tools_path, python_path):
+def add_kernel_ipython(kernel, path, tools_path, python_path, suffix="WP"):
     """
     add a kernel to jupyter
 
-    @param      kernel          dictionary
+    @param      kernel          dictionary (see global variable in this module)
     @param      path            where to add it
     @param      tools_path      tools paths
     @param      python_path     python path
+    @param      suffix          added in bracket at the end of the display name
     @return                     created file
     """
+    kernel = kernel.copy()
+    suffix = " (%s)" % suffix
+    kernel["display_name"] = kernel["display_name"] % suffix
     name = kernel["display_name"]
     name = name.replace(" ", "_").replace("(", "").replace(")", "")
     fold = os.path.join(path, name)
@@ -81,12 +85,13 @@ def add_kernel_ipython(kernel, path, tools_path, python_path):
     return ker
 
 
-def install_kernels(tools_path, python_path):
+def install_kernels(tools_path, python_path, suffix="WP"):
     """
     install available kernels on Windows
 
     @param      tools_path      tools paths
     @param      python_path     python path
+    @param      suffix          suffix
     @return                     list of creating files
     """
     dest = os.environ["ProgramData"]
@@ -96,11 +101,11 @@ def install_kernels(tools_path, python_path):
     res = []
     if os.path.exists(python_path):
         res.append(
-            add_kernel_ipython(python_kernel, jupyter, tools_path, python_path))
+            add_kernel_ipython(python_kernel, jupyter, tools_path, python_path, suffix))
     if os.path.exists(os.path.join(tools_path, "R")):
         res.append(
-            add_kernel_ipython(r_kernel, jupyter, tools_path, python_path))
+            add_kernel_ipython(r_kernel, jupyter, tools_path, python_path, suffix))
     if os.path.exists(os.path.join(tools_path, "Julia")):
         res.append(
-            add_kernel_ipython(julia_kernel, jupyter, tools_path, python_path))
+            add_kernel_ipython(julia_kernel, jupyter, tools_path, python_path, suffix))
     return res

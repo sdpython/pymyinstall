@@ -38,8 +38,9 @@ def small_installation():
         ModuleInstall("husl", "pip"),
         ModuleInstall("pipdeptree", "pip"),
         #
-        ModuleInstall("openpyxl", "pip"),
+        ModuleInstall("openpyxl", "pip", version="1.8.6"),
         ModuleInstall("xlrd", "pip"),
+        ModuleInstall("xlwt", "pip"),
         #
         ModuleInstall("certifi", "pip"),
         ModuleInstall("tornado", "wheel"),
