@@ -58,7 +58,7 @@ def get_module_version(module):
     cmd = prog + " freeze"
     out, err = run_cmd(cmd, wait=True, do_not_log=True)
     if err is not None and len(err) > 0:
-        if len(err.split("\n") > 2 or \
+        if len(err.split("\n")) > 2 or \
            "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
             raise Exception("unable to run\n" + err)
     lines = out.split("\n")
