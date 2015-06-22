@@ -83,7 +83,7 @@ def get_module_version(module):
     """
     return a dictionary { module:version }
 
-    @param      module      module name of None for all
+    @param      module      unused, None
     @return                 dictionary
     """
     prog = get_pip_program()

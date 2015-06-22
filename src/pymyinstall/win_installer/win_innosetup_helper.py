@@ -29,8 +29,35 @@ def find_innosetup():
     return exe
 
 
-def run_innosetup(script=None, innosetup=None, replacements=None, log_script=None, temp_folder=".",
-                  fLOG=print):
+def run_innosetup(new_script, innosetup=None, log_script=None, temp_folder=".", fLOG=print):
+    """
+    run InnotSetup for a script
+
+    @param  new_script      script to run
+    @param  innosetup       location of InnoSetup (if None, use default location)
+    @param  log_script      output logs to this file
+    @param  temp_folder     where to copy the modified script
+    @param  fLOG            logging function
+    @return                 output
+    """
+    if innosetup is None:
+        innosetup = find_innosetup()
+
+    cmd = [innosetup, "/cc", new_script]
+    if log_script is not None:
+        raise NotImplementedError()
+        # cmd.append('/LOG="{0}"'.format(log_script))
+
+    fLOG("ISS script", new_script)
+    fLOG("CMD", cmd)
+    out, err = run_cmd(" ".join(cmd), wait=True, fLOG=fLOG)
+    if err is not None and len(err) > 0:
+        raise InnoSetupException(
+            "CMD:\n{0}\nOUT:\n{1}\nERR:\{2}".format(cmd, out, err))
+    return out
+
+
+def innosetup_replacements(script=None, innosetup=None, replacements=None, log_script=None, temp_folder=".", fLOG=print):
     """
     run InnotSetup for a script
 
@@ -40,14 +67,11 @@ def run_innosetup(script=None, innosetup=None, replacements=None, log_script=Non
     @param  log_script      output logs to this file
     @param  temp_folder     where to copy the modified script
     @param  fLOG            logging function
-    @return                 output
+    @return                 new script
     """
     if script is None:
         script = os.path.abspath(
-            os.path.join(os.path.dirname(__file__), "PythonENSAE.iss"))
-
-    if innosetup is None:
-        innosetup = find_innosetup()
+            os.path.join(os.path.dirname(__file__), "innosetup_script.iss"))
 
     if replacements is None:
         replacements = dict()
@@ -62,19 +86,8 @@ def run_innosetup(script=None, innosetup=None, replacements=None, log_script=Non
                               os.path.split(script)[-1].replace(".iss", ".temp.iss"))
     with open(new_script, "w", encoding="utf8") as f:
         f.write(content)
-
-    cmd = [innosetup, "/cc", new_script]
-    if log_script is not None:
-        raise NotImplementedError()
-        # cmd.append('/LOG="{0}"'.format(log_script))
-
-    fLOG("ISS script", script)
-    fLOG("CMD", cmd)
-    out, err = run_cmd(" ".join(cmd), wait=True, fLOG=fLOG)
-    if err is not None and len(err) > 0:
-        raise InnoSetupException(
-            "CMD:\n{0}\nOUT:\n{1}\nERR:\{2}".format(cmd, out, err))
-    return out
+        
+    return new_script
 
 
 def inno_install_kernels(root, suffix):

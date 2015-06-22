@@ -36,7 +36,7 @@ from .win_setup_mark_step import mark_step, is_step_done
 from .win_setup_r import r_run_script, _script as _script_r
 from .win_setup_julia import julia_run_script, _script_install as _script_julia_install, _script_build as _script_julia_build, _script_init as _script_julia_init
 
-from .win_innosetup_helper import run_innosetup
+from .win_innosetup_helper import run_innosetup, innosetup_replacements
 
 license = """
 Copyright (c) 2013-2015, Xavier Dupré
@@ -87,6 +87,7 @@ def win_python_setup(folder="dist/win_python_setup",
                      no_setup=False,
                      notebooks=None,
                      selection={"R"},
+                     last_function=None
                      ):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
@@ -100,6 +101,7 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      verbose         print more information
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
     @param      selection       selection of tools to install
+    @param      last_function   function to execute just before running InnoSetup
     @return                     list of completed operations
 
     The available tools to install must be chose among:
@@ -110,6 +112,18 @@ def win_python_setup(folder="dist/win_python_setup",
     The command line does not always end. The building of the package
     is sometimes reluctant to work. And the Julia kernel is exclusive:
     it cannot be setup with others kernel. Maybe the version 0.5 will fix those issues.
+    
+    The signature of function ``last_function`` should be the following::
+    
+        def last_function(inno_script, folders, verbose=False, fLOG=print):
+            # something specific to do
+            # before compiling the setup
+            # such adding new tools
+            # or replacing icons
+            # the inno setup script is located in folders["logs"]
+            
+    The parameters *folders* is a dictionary which gives access to the main folders
+    of the distribution.
 
     The setup will also contains `pandoc <http://pandoc.org/>`_,
     `7z <http://www.7-zip.org/>`_,
@@ -125,30 +139,31 @@ def win_python_setup(folder="dist/win_python_setup",
     It uses `InnoSetup <http://www.jrsoftware.org/isinfo.php>`_ to build the setup.
 
     The distribution will contain the following subfolders:
-        * *tools*: subfolders for R, Julia, MinGW, Scite, pandoc, 7z...
-        * *python*: subfolder for python interpreter
-        * *workspace*: current folder for the notebooks
+    
+    * *tools*: subfolders for R, Julia, MinGW, Scite, pandoc, 7z...
+    * *python*: subfolder for python interpreter
+    * *workspace*: current folder for the notebooks
 
     Comments and remarks:
-        * 7z setup needs a last click to complete
-        * pandoc needs a last click to complete
-        * R must be manually installed in the right folder
-        * Julia produces a file exe, for the time being it must be done manually
-        * MinGW is also installed manually, the command line is different from others tools,
-          once it is installed, you should run the command line::
+    
+    * 7z setup needs a last click to complete
+    * pandoc needs a last click to complete
+    * R must be manually installed in the right folder
+    * Julia produces a file exe, for the time being it must be done manually
+    * MinGW is also installed manually, the command line is different from others tools,
+      once it is installed, you should run the command line::
 
-            mingw-get install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77
+        mingw-get install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77
 
-        * Python setups needs a last click to complete
-        * Julia command line sometimes gets stuck, the setup needs to be stopped
-          and restarted. It happens while installing the packages and
-          also while building IJulia (the package to use Julia in a notebook).
-          The Julia should be stopped instead of stopping the python script.
-          That trick shows the standard output of Julia.
-        * Juilia kernel cannot be used with the others: it requires a different
-          configuration which prevents others kernel to be available at the same time.
-          We will skip for the time being.
-
+    * Python setups needs a last click to complete
+    * Julia command line sometimes gets stuck, the setup needs to be stopped
+      and restarted. It happens while installing the packages and
+      also while building IJulia (the package to use Julia in a notebook).
+      The Julia should be stopped instead of stopping the python script.
+      That trick shows the standard output of Julia.
+    * Juilia kernel cannot be used with the others: it requires a different
+      configuration which prevents others kernel to be available at the same time.
+      We will skip for the time being.
 
     With Julia, initialisation, installation or building takes time.
     The function writes a file ``log.step.<julia_step>.txt``
@@ -371,19 +386,37 @@ def win_python_setup(folder="dist/win_python_setup",
         ########
         res = install_kernels(folders["tools"], folders["python"])
         for r in res:
-            fLOG("ADD: kernal", r)
+            fLOG("ADD: kernel", r)
+            
+    ################################
+    # prepare setup script for InnoSetup
+    ###############################
+    fLOG("--- prepare setup script for InnoSetup")
+    replacements = dict(__DISTPATH__=folder)
+    new_script = innosetup_replacements(replacements=replacements, fLOG=fLOG,
+                        temp_folder=os.path.join(folders["logs"]))
+    fLOG("done")
+    operations.append(("InnoSetup", "replacement"))
+    operations.append(("time", dtnow()))
+
+    if last_function is not None:
+        #################
+        # run last_function
+        #################
+        operations.append(("start", "last_function"))
+        last_function(new_script, folders, verbose=verbose, fLOG=fLOG)
+        operations.append(("time", dtnow()))
 
     if not no_setup:
-        #########################
-        # build setup with InnoSetup
-        #########################
+        ################################
+        # prepare setup script for InnoSetup
+        ###############################
         fLOG("--- building setup with InnoSetup")
-        replacements = dict(__DISTPATH__=folder)
-        out = run_innosetup(replacements=replacements, fLOG=fLOG,
-                            temp_folder=os.path.join(folders["logs"]))
-        fLOG("done")
+        out = run_innosetup(new_script, fLOG=fLOG,
+                        temp_folder=os.path.join(folders["logs"]))        
         with open(os.path.join(folders["logs"], "out.install.innosetup.txt"), "w", encoding="utf8") as f:
             f.write(out)
+        fLOG("done")
         operations.append(("InnoSetup", "done"))
         operations.append(("time", dtnow()))
 
