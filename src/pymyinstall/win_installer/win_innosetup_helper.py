@@ -86,7 +86,7 @@ def innosetup_replacements(script=None, innosetup=None, replacements=None, log_s
                               os.path.split(script)[-1].replace(".iss", ".temp.iss"))
     with open(new_script, "w", encoding="utf8") as f:
         f.write(content)
-        
+
     return new_script
 
 

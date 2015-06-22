@@ -112,16 +112,16 @@ def win_python_setup(folder="dist/win_python_setup",
     The command line does not always end. The building of the package
     is sometimes reluctant to work. And the Julia kernel is exclusive:
     it cannot be setup with others kernel. Maybe the version 0.5 will fix those issues.
-    
+
     The signature of function ``last_function`` should be the following::
-    
+
         def last_function(inno_script, folders, verbose=False, fLOG=print):
             # something specific to do
             # before compiling the setup
             # such adding new tools
             # or replacing icons
             # the inno setup script is located in folders["logs"]
-            
+
     The parameters *folders* is a dictionary which gives access to the main folders
     of the distribution.
 
@@ -139,13 +139,13 @@ def win_python_setup(folder="dist/win_python_setup",
     It uses `InnoSetup <http://www.jrsoftware.org/isinfo.php>`_ to build the setup.
 
     The distribution will contain the following subfolders:
-    
+
     * *tools*: subfolders for R, Julia, MinGW, Scite, pandoc, 7z...
     * *python*: subfolder for python interpreter
     * *workspace*: current folder for the notebooks
 
     Comments and remarks:
-    
+
     * 7z setup needs a last click to complete
     * pandoc needs a last click to complete
     * R must be manually installed in the right folder
@@ -387,14 +387,14 @@ def win_python_setup(folder="dist/win_python_setup",
         res = install_kernels(folders["tools"], folders["python"])
         for r in res:
             fLOG("ADD: kernel", r)
-            
+
     ################################
     # prepare setup script for InnoSetup
     ###############################
     fLOG("--- prepare setup script for InnoSetup")
     replacements = dict(__DISTPATH__=folder)
     new_script = innosetup_replacements(replacements=replacements, fLOG=fLOG,
-                        temp_folder=os.path.join(folders["logs"]))
+                                        temp_folder=os.path.join(folders["logs"]))
     fLOG("done")
     operations.append(("InnoSetup", "replacement"))
     operations.append(("time", dtnow()))
@@ -413,7 +413,7 @@ def win_python_setup(folder="dist/win_python_setup",
         ###############################
         fLOG("--- building setup with InnoSetup")
         out = run_innosetup(new_script, fLOG=fLOG,
-                        temp_folder=os.path.join(folders["logs"]))        
+                            temp_folder=os.path.join(folders["logs"]))
         with open(os.path.join(folders["logs"], "out.install.innosetup.txt"), "w", encoding="utf8") as f:
             f.write(out)
         fLOG("done")

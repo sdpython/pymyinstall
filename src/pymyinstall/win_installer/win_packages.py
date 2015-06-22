@@ -37,7 +37,7 @@ def win_install_package_other_python(python_path, package, verbose=False, fLOG=p
         pip = os.path.join(python_path, "Scripts", "pip.exe")
     else:
         pip = os.path.join(python_path, "Scripts", "pip3.exe")
-        
+
     if not os.path.exists(pip):
         raise FileNotFoundError(pip)
 
@@ -56,7 +56,7 @@ def win_install_package_other_python(python_path, package, verbose=False, fLOG=p
 
     if verbose:
         fLOG(out)
-        
+
     if err is not None and len(err) > 0:
         raise WinInstallPackageException(
             "unable to install {0}, due to:\nOUT:\n{0}\nERR:\n{1}".format(package, out, err))
@@ -141,9 +141,9 @@ def is_package_installed(python_path, module_name):
     @param      module_name     module name (import name)
     @return                     boolean
     """
-    if isinstance(module_name, str  #unicode#
-        ):
-        module_name = [ module_name ]
+    if isinstance(module_name, str  # unicode#
+                  ):
+        module_name = [module_name]
     modules = get_modules_version()
     for name in module_name:
         if name in modules:

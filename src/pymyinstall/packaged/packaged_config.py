@@ -262,7 +262,8 @@ def complete_installation():
         ModuleInstall("bz2file", "pip"),      # for gensim
         ModuleInstall("smart_open", "wheel"),      # for gensim
         ModuleInstall("gensim", "wheel"),
-        # ModuleInstall("pybrain", "pip"),   # some issues with the code (relative import are not well handled in version 0.3.3
+        # ModuleInstall("pybrain", "pip"),   # some issues with the code
+        # (relative import are not well handled in version 0.3.3
         ModuleInstall("h5py", "wheel"),  # Bayesian
         ModuleInstall("bayespy", "pip"),  # Bayesian
         ModuleInstall("numexpr", "wheel"),
