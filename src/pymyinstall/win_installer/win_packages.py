@@ -12,11 +12,34 @@ from ..installhelper.module_install import get_module_version
 from ..packaged.packaged_config import installation_ensae, installation_teachings
 
 
-def get_modules_version():
+def get_modules_version(python_path):
     """
-    calls @see fn get_module_version
+    return a dictionary { module:version }
+
+    @param      python_path     path to python
+    @return                     dictionary
     """
-    return get_module_version(None)
+    prog = os.path.join(python_path, "Scripts", "pip.exe")
+    cmd = prog + " list"
+    out, err = run_cmd(cmd, wait=True, do_not_log=True)
+    if err is not None and len(err) > 0:
+        if len(err.split("\n")) > 3 or \
+           "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
+            raise Exception("unable to run, #lines {0}\nERR:\n{1}\nOUT:\n{2}".format(
+                len(err.split("\n")), err, out))
+    lines = out.split("\n")
+    res = {}
+    for line in lines:
+        if "(" in line:
+            spl = line.split()
+            if len(spl) == 2:
+                a = spl[0]
+                b = spl[1].strip(" \n\r")
+                res[a] = b.strip("()")
+                al = a.lower()
+                if al != a:
+                    res[al] = res[a]
+    return res
 
 
 def win_install_package_other_python(python_path, package, verbose=False, fLOG=print):
@@ -144,7 +167,7 @@ def is_package_installed(python_path, module_name):
     if isinstance(module_name, str  # unicode#
                   ):
         module_name = [module_name]
-    modules = get_modules_version()
+    modules = get_modules_version(python_path)
     for name in module_name:
         if name in modules:
             return True

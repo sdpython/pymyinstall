@@ -205,6 +205,7 @@ def win_python_setup(folder="dist/win_python_setup",
     selection.add("scite")
     selection.add("sqlitespy")
     selection.add("mingw")
+    selection.add("python")
     selection = set(_.lower() for _ in selection)
 
     ######

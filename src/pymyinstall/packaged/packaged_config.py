@@ -89,7 +89,7 @@ def small_installation():
         ModuleInstall("requests", "pip"),
         #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
         ModuleInstall("PySide", "wheel"),
-        ModuleInstall("spyder", "wheel", mname="spyderlib"),
+        ModuleInstall("spyder", "pip", mname="spyderlib"),
         #
         ModuleInstall("brewer2mpl", "pip"),
         ModuleInstall("ggplot", "pip"),
@@ -272,6 +272,9 @@ def complete_installation():
         ModuleInstall("pypiserver", "pip"),
         #
         ModuleInstall("charts", "pip"),  # javascript graphs
+        #
+        ModuleInstall("dill", "pip"),  # for dask
+        ModuleInstall("dask", "pip"),  # parallel computation
         #
         ModuleInstall("jedi", "pip"),
         ModuleInstall("docopt", "pip"),
