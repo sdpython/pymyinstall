@@ -143,6 +143,7 @@ def win_python_setup(folder="dist/win_python_setup",
     * *tools*: subfolders for R, Julia, MinGW, Scite, pandoc, 7z...
     * *python*: subfolder for python interpreter
     * *workspace*: current folder for the notebooks
+    * *build*: location of downloaded modules and tools
 
     Comments and remarks:
 
@@ -235,6 +236,7 @@ def win_python_setup(folder="dist/win_python_setup",
                    python=os.path.join(folder, "python"),
                    config=os.path.join(folder, "config"),
                    logs=os.path.join(folder, "logs"),
+                   build=download_folder,
                    )
 
     for k, v in folders.items():

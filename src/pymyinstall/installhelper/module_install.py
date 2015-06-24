@@ -214,7 +214,8 @@ class ModuleInstall:
                  mname=None,
                  fLOG=print,
                  version=None,
-                 script=None):
+                 script=None,
+                 index_url=None):
         """
         constructor
 
@@ -226,6 +227,7 @@ class ModuleInstall:
         @param      fLOG            logging function
         @param      script          some extensions are not a module but an application (such as ``spyder``),
                                     the class will check this script is available
+        @param      index_url       to get the package from a custom pypi server
 
         exe is only for Windows.
         """
@@ -239,6 +241,7 @@ class ModuleInstall:
         self.version = version
         self.mname = mname
         self.script = script
+        self.index_url = index_url
 
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception(
@@ -498,6 +501,10 @@ class ModuleInstall:
                 cmd += ' --download={0}'.format(temp_folder)
             else:
                 cmd += ' --download={0} --no-deps'.format(temp_folder)
+            if self.index_url is not None:
+                slash = '' if self.index_url.endswith('/') else '/'
+                cmd += ' --no-cache-dir --index={0}{1}simple/'.format(
+                    self.index_url, slash)
 
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
@@ -826,6 +833,16 @@ class ModuleInstall:
                 cmd += "=={0}".format(self.version)
             if len(options) > 0:
                 cmd += " " + " ".join(options)
+
+            if deps:
+                cmd += ' --download={0}'.format(temp_folder)
+            else:
+                cmd += ' --download={0} --no-deps'.format(temp_folder)
+            if self.index_url is not None:
+                slash = '' if self.index_url.endswith('/') else '/'
+                cmd += ' --no-cache-dir --index={0}{1}simple/'.format(
+                    self.index_url, slash)
+
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
             if "No distributions matching the version" in out:

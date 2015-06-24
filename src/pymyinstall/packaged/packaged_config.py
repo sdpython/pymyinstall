@@ -89,7 +89,10 @@ def small_installation():
         ModuleInstall("requests", "pip"),
         #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
         ModuleInstall("PySide", "wheel"),
-        ModuleInstall("spyder", "pip", mname="spyderlib"),
+        ModuleInstall("psutil", "wheel"),  #
+        ModuleInstall("rope_py3k", "pip", mname="rope"),  #
+        ModuleInstall("pylint", "pip"),  #
+        ModuleInstall("spyder", "wheel", mname="spyderlib"),
         #
         ModuleInstall("brewer2mpl", "pip"),
         ModuleInstall("ggplot", "pip"),
@@ -236,7 +239,6 @@ def complete_installation():
         #
         ModuleInstall("nodeenv", "pip"),   # node.js
         ModuleInstall("pbr", "pip"),
-        ModuleInstall("psutil", "wheel"),  #
         #
         # 2015-02-05
         #
