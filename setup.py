@@ -155,6 +155,16 @@ if is_local():
     r = pyquickhelper.process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
         unittest_modules=["pyquickhelper"])
+
+    if "build_script" in sys.argv and sys.platform.startswith("win"):
+        this = os.path.dirname(__file__)
+        with open(os.path.join(this, "auto_setup_build_sphinx.bat"), "r") as f:
+            content = f.read()
+        code = "%pythonexe% -u -c 'import sys;sys.path.append('src');from pymyinstall import update_all;update_all(temp_folder='build/update_modules', verbose=True)"
+        content = content.replace("%pythonexe% -u setup.py build_sphinx", code)
+        with open(os.path.join(this, "auto_update_modules.bat"), "w") as f:
+            f.write(content)
+
 else:
     r = False
 
