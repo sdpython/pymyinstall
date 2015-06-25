@@ -378,8 +378,8 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("ipython", "update profile"))
         with open(profile, "r") as f:
             content = f.read()
-        content += """\nc.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel*]
-                      c.FileContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel*]
+        content += """\nc.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel", ".RData", ".RHistory"]
+                      c.FileContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel", ".RData", ".RHistory"]
                     """.replace("                      ", "")
         with open(profile, "w") as f:
             f.write(content)
