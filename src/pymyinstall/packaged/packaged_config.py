@@ -490,6 +490,7 @@ def extension_ensae():
         ModuleInstall("zipline", "pip"),  # finance
         ModuleInstall("vincent", "pip"),  # graph
         ModuleInstall("pygal", "pip"),  # graph
+        ModuleInstall("pygal_maps_world", "pip"),  # graph
 
     ]
     return mod
