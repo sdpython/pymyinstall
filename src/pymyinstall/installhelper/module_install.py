@@ -18,6 +18,7 @@ if sys.version_info[0] == 2:
     import urllib2 as urllib_request
     import urllib2 as urllib_error
     import xmlrpclib as xmlrpc_client
+    from codecs import open
 else:
     import urllib.request as urllib_request
     import urllib.error as urllib_error
