@@ -357,6 +357,7 @@ def win_python_setup(folder="dist/win_python_setup",
         ######################
         # create ipython profile
         ######################
+        fLOG("--- create ipython profile")
         operations.append(("ipython", "create profile"))
         config_path = folders["config"]
         ipython_path = os.path.join(
@@ -375,6 +376,7 @@ def win_python_setup(folder="dist/win_python_setup",
         ######################
         # update ipython profile
         ######################
+        fLOG("--- update ipython profile")
         operations.append(("ipython", "update profile"))
         with open(profile, "r") as f:
             content = f.read()
@@ -383,13 +385,30 @@ def win_python_setup(folder="dist/win_python_setup",
                     """.replace("                      ", "")
         with open(profile, "w") as f:
             f.write(content)
+        operations.append(("time", dtnow()))
+
+        ######################
+        # copy pywin32 dll to main folders
+        ######################
+        fLOG("--- pywin32 dll to main folders")
+        fdll = os.path.join(
+            python_path, "Lib", "site-packages", "pywin32_system32")
+        for dll in os.listdir(fdll):
+            full = os.path.join(fdll, dll)
+            if os.path.isdir(full):
+                continue
+            shutil.copy(full, python_path)
+            operations.append(("pywin32", "copy " + dll))
+        operations.append(("time", dtnow()))
 
         ########
         # kernels
         ########
+        fLOG("--- add kernels")
         res = install_kernels(folders["tools"], folders["python"])
         for r in res:
             fLOG("ADD: kernel", r)
+        operations.append(("time", dtnow()))
 
     ################################
     # prepare setup script for InnoSetup
@@ -406,6 +425,7 @@ def win_python_setup(folder="dist/win_python_setup",
         #################
         # run last_function
         #################
+        fLOG("--- run last_function")
         operations.append(("start", "last_function"))
         last_function(new_script, folders, verbose=verbose, fLOG=fLOG)
         operations.append(("time", dtnow()))
@@ -461,6 +481,8 @@ def copy_icons(src, dest):
         operations.append(("mkdir", dest))
     files = os.listdir(src)
     for file in files:
+        if os.path.isdir(os.path.join(src, file)):
+            continue
         d = os.path.join(dest, file)
         if not os.path.exists(d):
             shutil.copy(os.path.join(src, file), dest)
