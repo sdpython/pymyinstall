@@ -893,11 +893,12 @@ def get_file_modification_date(filename):
     return datetime.datetime.fromtimestamp(t)
 
 
-def update_pip(python_path=None):
+def update_pip(python_path=None, fLOG=print):
     """
     update pip for a specific distribution
 
     @param      python_path     python path (or sys.executable if None)
+    @param      fLOG            logging function
     @return                     output
     """
     if python_path is None:
@@ -905,7 +906,7 @@ def update_pip(python_path=None):
     else:
         python_path = os.path.join(python_path, "python")
     cmd = python_path + " -m pip install -U pip"
-    out, err = run_cmd(cmd, wait=True)
+    out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
     if err and len(err) > 0:
         raise Exception(
             "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))

@@ -254,6 +254,8 @@ def win_python_setup(folder="dist/win_python_setup",
     ######################
     # download of everything
     ######################
+    for mod in module_list:
+        mod.fLOG = fLOG
     operations.append(("time", dtnow()))
     op = win_download(folder=download_folder,
                       module_list=module_list,
@@ -397,7 +399,11 @@ def win_python_setup(folder="dist/win_python_setup",
             full = os.path.join(fdll, dll)
             if os.path.isdir(full):
                 continue
-            shutil.copy(full, python_path)
+            try:
+                shutil.copy(full, python_path)
+            except KeyError as a:
+                # it means it already exists
+                continue
             operations.append(("pywin32", "copy " + dll))
         operations.append(("time", dtnow()))
 

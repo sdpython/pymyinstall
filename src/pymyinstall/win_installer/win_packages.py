@@ -21,7 +21,10 @@ def get_modules_version(python_path):
     """
     prog = os.path.join(python_path, "Scripts", "pip.exe")
     cmd = prog + " list"
-    out, err = run_cmd(cmd, wait=True, do_not_log=True)
+    try:
+        out, err = run_cmd(cmd, wait=True, do_not_log=True)
+    except Exception as e:
+        raise Exception("unable to run: {0}".format(cmd)) from e
     if err is not None and len(err) > 0:
         if len(err.split("\n")) > 3 or \
            "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
