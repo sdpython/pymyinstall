@@ -86,7 +86,7 @@ def win_python_setup(folder="dist/win_python_setup",
                      download_only=False,
                      no_setup=False,
                      notebooks=None,
-                     selection={"R"},
+                     selection={"R", "mingw"},
                      last_function=None
                      ):
     """
@@ -165,6 +165,8 @@ def win_python_setup(folder="dist/win_python_setup",
     * Juilia kernel cannot be used with the others: it requires a different
       configuration which prevents others kernel to be available at the same time.
       We will skip for the time being.
+    * If the R kernel fails to start, you should manually run the script 
+      `R_install.r <https://github.com/sdpython/pymyinstall/blob/master/src/pymyinstall/win_installer/R_install.r>`_.
 
     With Julia, initialisation, installation or building takes time.
     The function writes a file ``log.step.<julia_step>.txt``
@@ -205,7 +207,6 @@ def win_python_setup(folder="dist/win_python_setup",
     selection.add("7z")
     selection.add("scite")
     selection.add("sqlitespy")
-    selection.add("mingw")
     selection.add("python")
     selection = set(_.lower() for _ in selection)
 

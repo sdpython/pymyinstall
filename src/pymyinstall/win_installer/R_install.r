@@ -57,5 +57,5 @@ install.packages(c('actuar',
                     'twitteR',
                     'xml2',
                     'wordcloud',
-                    'zoo')
+                    'zoo'))
 

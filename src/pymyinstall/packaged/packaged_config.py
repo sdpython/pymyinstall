@@ -41,6 +41,7 @@ def small_installation():
         ModuleInstall("openpyxl", "pip", version="1.8.6"),
         ModuleInstall("xlrd", "pip"),
         ModuleInstall("xlwt", "pip"),
+        ModuleInstall("xlwings", "pip"),
         #
         ModuleInstall("certifi", "pip"),
         ModuleInstall("tornado", "wheel"),
@@ -475,8 +476,6 @@ def extension_ensae():
         # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
         # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
         # work, it expects to have pymc with some optimization
-        # Bayesian, does not work, it expects to have pymc with some
-        # optimization
         #
         # ModuleInstall("pyjs", "pip"), # needs manual installation
         # ModuleInstall("pyjs", "github", "pyjs"), #does not work really
@@ -491,6 +490,11 @@ def extension_ensae():
         ModuleInstall("vincent", "pip"),  # graph
         ModuleInstall("pygal", "pip"),  # graph
         ModuleInstall("pygal_maps_world", "pip"),  # graph
+        #
+        # 2015-06-30
+        #
+        ModuleInstall("sas7bdat", "pip"),  # SAS
+        
 
     ]
     return mod
