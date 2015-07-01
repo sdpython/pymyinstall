@@ -28,9 +28,8 @@ def install_vs(dest_folder=".", fLOG=print, install=True):
     newurl = "https://go.microsoft.com/?linkid=9863608"
     outfile = os.path.join(dest_folder, name)
     fLOG("Visual Studio, download from ", newurl)
-    file = download_file(newurl, outfile)
+    local = download_file(newurl, outfile)
 
-    if install:
-        raise NotImplementedError()
-    else:
-        return file
+    if install and not bb:
+        run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)
+    return local
