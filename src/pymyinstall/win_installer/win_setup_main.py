@@ -21,6 +21,7 @@ from ..installhelper.install_custom_python import install_python
 from ..installhelper.install_custom_mingw import install_mingw
 from ..installhelper.install_cmd_helper import update_pip, run_cmd
 from ..installhelper.install_custom_7z import install_7z
+from ..installhelper.install_custom_vs import install_vs
 from ..installhelper.install_custom import download_page
 from ..installhelper.install_custom_scite import modify_scite_properties
 from ..installhelper.link_shortcuts import add_shortcut
@@ -107,6 +108,8 @@ def win_python_setup(folder="dist/win_python_setup",
     The available tools to install must be chose among:
         * `R <http://www.r-project.org/>`_
         * `Julia <http://julialang.org/>`_
+        * `MinGW <http://www.mingw.org/>`_
+        * `VS <https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx>`_
 
     By default, only R is included. Julia requires too much work.
     The command line does not always end. The building of the package
@@ -209,6 +212,7 @@ def win_python_setup(folder="dist/win_python_setup",
     selection.add("sqlitespy")
     selection.add("python")
     selection = set(_.lower() for _ in selection)
+    fLOG("--- selection", selection)
 
     ######
     # next
@@ -357,6 +361,22 @@ def win_python_setup(folder="dist/win_python_setup",
         fLOG("done")
         operations.append(("time", dtnow()))
 
+        ##########################
+        # mingw, add file distutils.cfg
+        ##########################
+        if "mingw" in selection:
+            import distutils
+            dirname = os.path.dirname(distutils.__file__)
+            cfg = os.path.join(dirname, "distutils.cfg")
+            with open(cfg, "w") as f:
+                f.write("""[build]
+                            compiler = mingw32
+
+                            [build_ext]
+                            compiler = mingw32
+                            """.replace("                            ", ""))
+        
+        
         ######################
         # create ipython profile
         ######################
@@ -553,6 +573,12 @@ def win_download(folder="build/win_python_setup",
         fLOG("--- download", "R")
         r = install_R(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
+        operations.append(("download", r))
+        fLOG("done")
+
+    if not is_here("vs") and "vs" in selection:
+        fLOG("--- download", "Visual Studio Express")
+        r = install_vs(folder, fLOG=fLOG, install=False)
         operations.append(("download", r))
         fLOG("done")
 

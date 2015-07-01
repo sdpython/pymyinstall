@@ -67,6 +67,8 @@ def create_win_env(folders):
     if os.path.exists(os.path.join(tools, "Julia")):
         text.append("set JULIA_HOME=%CURRENT%\\..\\tools\\Julia")
         text.append("set JULIA_PKGDIR=%CURRENT%\\..\\tools\\Julia\\pkg")
+    if os.path.exists(os.path.join(tools, "MinGW")):
+        text.append("set PATH=%PATH%;%CURRENT%\\..\\tools\\MinGW\\bin")
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "env.bat")
