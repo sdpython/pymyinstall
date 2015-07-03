@@ -38,6 +38,7 @@ from .win_setup_r import r_run_script, _script as _script_r
 from .win_setup_julia import julia_run_script, _script_install as _script_julia_install, _script_build as _script_julia_build, _script_init as _script_julia_init
 
 from .win_innosetup_helper import run_innosetup, innosetup_replacements
+from .win_fix_compiler_c import switch_to_VS_compiler, switch_to_mingw_compiler
 
 license = """
 Copyright (c) 2013-2015, Xavier Dupré
@@ -365,18 +366,20 @@ def win_python_setup(folder="dist/win_python_setup",
         # mingw, add file distutils.cfg
         ##########################
         if "mingw" in selection:
-            import distutils
-            dirname = os.path.dirname(distutils.__file__)
-            cfg = os.path.join(dirname, "distutils.cfg")
-            with open(cfg, "w") as f:
-                f.write("""[build]
-                            compiler = mingw32
-
-                            [build_ext]
-                            compiler = mingw32
-                            """.replace("                            ", ""))
+            fLOG("--- switch_to_mingw_compiler")
+            op = switch_to_mingw_compiler(folders["python"])
+            for o in op:
+                operations.append(("modify", o))
         
-        
+        ##########################
+        # Visual Studio, switch on 2013
+        ##########################
+        if "vs" in selection:
+            fLOG("--- switch_to_VS_compiler")
+            op = switch_to_VS_compiler(folders["python"])
+            for o in op:
+                operations.append(("modify", o))
+                
         ######################
         # create ipython profile
         ######################
