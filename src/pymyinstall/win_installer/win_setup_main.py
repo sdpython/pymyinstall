@@ -631,7 +631,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy"],
+                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS"],
                 selection=None):
     """
     Install setups
@@ -721,18 +721,24 @@ def win_install(folders,
         found = find_exe(loc, name)
 
         # for MinGW, we check that the executable mingw-get.exe was installed
-        if found is None and name == "MinGW" and cand == "mingw-get-setup.exe":
-            exe = os.path.join(loc, "bin", "mingw-get.exe")
-            if os.path.exists(exe):
-                cmd = exe + \
-                    " install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77"
-                if verbose:
-                    fLOG("install MinGW", cmd)
-                retcode = subprocess.call(cmd, shell=True, stdout=sys.stderr)
-                if retcode < 0:
-                    raise WinInstallException(
-                        "unable to execute:\nCMD:\n{0}".format(cmd))
-                found = find_exe(loc, name)
+        if found is None:
+            if name == "MinGW" and cand == "mingw-get-setup.exe":
+                exe = os.path.join(loc, "bin", "mingw-get.exe")
+                if os.path.exists(exe):
+                    cmd = exe + \
+                        " install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77"
+                    if verbose:
+                        fLOG("install MinGW", cmd)
+                    retcode = subprocess.call(cmd, shell=True, stdout=sys.stderr)
+                    if retcode < 0:
+                        raise WinInstallException(
+                            "unable to execute:\nCMD:\n{0}".format(cmd))
+                    found = find_exe(loc, name)
+            elif name == "VS" and cand == "vs_community.exe":
+                # Visual Studio needs to be manually installed
+                # we copy the setup to VS
+                shutil.copy(os.path.join(download_folder, cand), loc)
+                found = os.path.join(loc, cand)
 
         if found is None:
             raise FileNotFoundError("unable to find executable for name={0} in {1}, found: {2}".format(
