@@ -801,7 +801,8 @@ class ModuleInstall:
                 force=False,
                 temp_folder=".",
                 log=False,
-                options=None):
+                options=None,
+                deps=False):
         """
         install the package
 
@@ -810,6 +811,7 @@ class ModuleInstall:
         @param      temp_folder     folder where to download the setup
         @param      log             display logs or not
         @param      options         other options to add to the command line (see below) in a list
+        @param      deps            download the dependencies too (only available for pip)
         @return                     boolean
 
         The options mentioned in parameter ``options``
@@ -1078,7 +1080,8 @@ class ModuleInstall:
                force=False,
                temp_folder=".",
                log=False,
-               options=None):
+               options=None,
+               deps=False):
         """
         update the package if necessary, we use ``pip install <module_name> --upgrade --no-deps``,
 
@@ -1087,6 +1090,7 @@ class ModuleInstall:
         @param      temp_folder     folder where to download the setup
         @param      log             display logs or not
         @param      options         others options to add to the command line (see below) an a list
+        @param      deps            download the dependencies too (only available for pip)
         @return                     boolean
 
         The options mentioned in parameter ``options``
@@ -1108,7 +1112,10 @@ class ModuleInstall:
         options = [] if options is None else list(options)
         for opt in ["--upgrade", "--no-deps"]:
             if opt not in options:
-                options.append(opt)
+                if deps and opt == "--no-deps":
+                    pass
+                else:
+                    options.append(opt)
 
         res = self.install(force_kind=force_kind, force=True,
                            temp_folder=temp_folder, log=log, options=options)
