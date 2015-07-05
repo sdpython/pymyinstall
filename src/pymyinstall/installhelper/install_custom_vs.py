@@ -6,8 +6,8 @@ from __future__ import print_function
 import sys
 import os
 
-from .install_custom import download_from_sourceforge
 from .install_custom import download_file
+from .install_cmd_helper import run_cmd
 
 
 def install_vs(dest_folder=".", fLOG=print, install=True):
@@ -19,6 +19,7 @@ def install_vs(dest_folder=".", fLOG=print, install=True):
     @param      install         install (otherwise only download)
     @return                     temporary file
 
+    @todo check it is installed
     """
     if not sys.platform.startswith("win"):
         raise NotImplementedError(
@@ -30,6 +31,6 @@ def install_vs(dest_folder=".", fLOG=print, install=True):
     fLOG("Visual Studio, download from ", newurl)
     local = download_file(newurl, outfile)
 
-    if install and not bb:
+    if install:
         run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)
     return local

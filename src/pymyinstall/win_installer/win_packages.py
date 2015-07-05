@@ -8,7 +8,6 @@ import os
 import sys
 from .win_exception import WinInstallPackageException
 from ..installhelper.install_cmd_helper import run_cmd
-from ..installhelper.module_install import get_module_version
 from ..packaged.packaged_config import installation_ensae, installation_teachings
 
 

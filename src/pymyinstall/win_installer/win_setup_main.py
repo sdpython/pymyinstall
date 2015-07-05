@@ -169,7 +169,7 @@ def win_python_setup(folder="dist/win_python_setup",
     * Juilia kernel cannot be used with the others: it requires a different
       configuration which prevents others kernel to be available at the same time.
       We will skip for the time being.
-    * If the R kernel fails to start, you should manually run the script 
+    * If the R kernel fails to start, you should manually run the script
       `R_install.r <https://github.com/sdpython/pymyinstall/blob/master/src/pymyinstall/win_installer/R_install.r>`_.
 
     With Julia, initialisation, installation or building takes time.
@@ -370,7 +370,7 @@ def win_python_setup(folder="dist/win_python_setup",
             op = switch_to_mingw_compiler(folders["python"])
             for o in op:
                 operations.append(("modify", o))
-        
+
         ##########################
         # Visual Studio, switch on 2013
         ##########################
@@ -379,7 +379,7 @@ def win_python_setup(folder="dist/win_python_setup",
             op = switch_to_VS_compiler(folders["python"])
             for o in op:
                 operations.append(("modify", o))
-                
+
         ######################
         # create ipython profile
         ######################
@@ -729,7 +729,8 @@ def win_install(folders,
                         " install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77"
                     if verbose:
                         fLOG("install MinGW", cmd)
-                    retcode = subprocess.call(cmd, shell=True, stdout=sys.stderr)
+                    retcode = subprocess.call(
+                        cmd, shell=True, stdout=sys.stderr)
                     if retcode < 0:
                         raise WinInstallException(
                             "unable to execute:\nCMD:\n{0}".format(cmd))
