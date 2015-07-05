@@ -308,7 +308,7 @@ def win_install_kernels(folders, suffix=""):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            '%PYTHON_WINHOME%\\python -c "from pymyinstall.win_install import inno_install_kernels;inno_install_kernels(\'CURRENT2\', \'%1\')"']
+            '%PYTHON_WINHOME%\\python -c "from pymyinstall.win_installer import inno_install_kernels;inno_install_kernels(\'CURRENT2\', \'%1\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "add_kernels.bat")
