@@ -89,6 +89,7 @@ def win_python_setup(folder="dist/win_python_setup",
                      no_setup=False,
                      notebooks=None,
                      selection={"R", "mingw"},
+                     documentation=True,
                      last_function=None
                      ):
     """
@@ -104,6 +105,7 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
     @param      selection       selection of tools to install
     @param      last_function   function to execute just before running InnoSetup
+    @param      documentation   add documentation
     @return                     list of completed operations
 
     The available tools to install must be chose among:
@@ -252,10 +254,11 @@ def win_python_setup(folder="dist/win_python_setup",
     ###########################
     # download the documentation
     ###########################
-    op = win_download_notebooks(
-        notebooks, folders["workspace"], verbose=verbose, fLOG=fLOG)
-    operations.extend(op)
-    operations.append(("time", dtnow()))
+    if documentation:
+        op = win_download_notebooks(
+            notebooks, folders["workspace"], verbose=verbose, fLOG=fLOG)
+        operations.extend(op)
+        operations.append(("time", dtnow()))
 
     ######################
     # download of everything
@@ -348,7 +351,7 @@ def win_python_setup(folder="dist/win_python_setup",
             ops = win_install_julia_step(folders, verbose=verbose, fLOG=fLOG)
             operations.extend(ops)
 
-        if "R" in selection:
+        if "r" in selection:
             ops = win_install_r_step(folders, verbose=verbose, fLOG=fLOG)
             operations.extend(ops)
 
