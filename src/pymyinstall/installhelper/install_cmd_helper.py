@@ -911,3 +911,16 @@ def update_pip(python_path=None, fLOG=print):
         raise Exception(
             "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
     return out
+
+
+def has_pip():
+    """
+    tells if pip is installed
+
+    @return     boolean
+    """
+    try:
+        import pip
+        return True
+    except ImportError:
+        return False

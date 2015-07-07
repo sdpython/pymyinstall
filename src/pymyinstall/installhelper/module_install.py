@@ -837,14 +837,15 @@ class ModuleInstall:
             if len(options) > 0:
                 cmd += " " + " ".join(options)
 
-            if deps:
-                cmd += ' --download={0}'.format(temp_folder)
-            else:
-                cmd += ' --download={0} --no-deps'.format(temp_folder)
+            if not deps:
+                cmd += ' --no-deps'
+
             if self.index_url is not None:
                 slash = '' if self.index_url.endswith('/') else '/'
                 cmd += ' --no-cache-dir --index={0}{1}simple/'.format(
                     self.index_url, slash)
+            else:
+                cmd += " --cache-dir={0}".format(temp_folder)
 
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)

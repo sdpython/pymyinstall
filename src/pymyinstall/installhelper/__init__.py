@@ -12,7 +12,7 @@ from .install_custom_sqlitespy import install_sqlitespy
 from .install_custom_python import install_python
 from .install_custom_mingw import install_mingw
 from .install_custom_7z import install_7z
-from .install_cmd_helper import run_cmd, update_pip
+from .install_cmd_helper import run_cmd, update_pip, has_pip
 from .install_custom import download_page
 from .module_install import ModuleInstall, get_module_version
 
@@ -29,6 +29,11 @@ def update_all(temp_folder=".", fLOG=print, verbose=True):
     import os
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
+    if not has_pip():
+        from .get_pip import main
+        main()
+
+    update_pip()
     modules = installation_ensae()
     for mod in modules:
         if mod.is_installed() and mod.has_update():
