@@ -53,8 +53,8 @@ Name: "{app}\IPython Qt Console"; IconFilename: "{app}\tools\icons\ipython.ico";
 Name: "{app}\IPython Notebook"; IconFilename: "{app}\tools\icons\jupyter.ico"; Filename: "{app}\config\ipython_notebook.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "notebook --notebook-dir={app}\workspace --pylab=inline"
 ; python
 Name: "{app}\Python Console"; IconFilename: "{app}\tools\icons\python.ico"; Filename: "{app}\config\python_console.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
-Name: "{app}\Rodeo"; IconFilename: "{app}\tools\icons\yhat.ico"; Filename: "{app}\python\config\rodeo.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
-Name: "{app}\Spyder"; IconFilename: "{app}\tools\icons\spyder.ico"; Filename: "{app}\python\config\spyder.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
+Name: "{app}\Rodeo"; IconFilename: "{app}\tools\icons\yhat.ico"; Filename: "{app}\config\rodeo.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
+Name: "{app}\Spyder"; IconFilename: "{app}\tools\icons\spyder.ico"; Filename: "{app}\config\spyder.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
 
 [Run]
-Filename: "{app}\config\add_kernels.bat"; Parameters:"(WP2015)"; Description: "Configure Kernels"; 
+Filename: "{app}\config\add_kernels.bat"; Parameters:"ENSAE"; Description: "Configure Kernels"; 

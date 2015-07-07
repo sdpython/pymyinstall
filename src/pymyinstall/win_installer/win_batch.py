@@ -247,9 +247,8 @@ def create_win_spyder(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set SPYDER=%CURRENT2%\\..\\python\\Scripts\\spyder.exe",
-            "cd %WORKSPACE%",
-            "%SPYDER%"]
+            "cd %CURRENT2%\\..\\python\\Scripts",
+            "spyder.exe --workdir=%WORKSPACE%"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "spyder.bat")
