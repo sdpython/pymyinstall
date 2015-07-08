@@ -58,3 +58,4 @@ Name: "{app}\Spyder"; IconFilename: "{app}\tools\icons\spyder.ico"; Filename: "{
 
 [Run]
 Filename: "{app}\config\add_kernels.bat"; Parameters:"ENSAE"; Description: "Configure Kernels"; 
+Filename: "{app}\config\replace_shebang.bat"; Description: "Fix distribution shebangs (not portable anymore)"; 

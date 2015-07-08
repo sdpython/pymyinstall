@@ -39,6 +39,7 @@ from .win_setup_julia import julia_run_script, _script_install as _script_julia_
 
 from .win_innosetup_helper import run_innosetup, innosetup_replacements
 from .win_fix_compiler_c import switch_to_VS_compiler, switch_to_mingw_compiler
+from .win_patch import win_patch_paths
 
 license = """
 Copyright (c) 2013-2015, Xavier Dupré
@@ -255,6 +256,7 @@ def win_python_setup(folder="dist/win_python_setup",
     # download the documentation
     ###########################
     if documentation:
+        operations.append(("documentation", "-"))
         op = win_download_notebooks(
             notebooks, folders["workspace"], verbose=verbose, fLOG=fLOG)
         operations.extend(op)
@@ -265,7 +267,7 @@ def win_python_setup(folder="dist/win_python_setup",
     ######################
     for mod in module_list:
         mod.fLOG = fLOG
-    operations.append(("time", dtnow()))
+    operations.append(("download", "-"))
     op = win_download(folder=download_folder,
                       module_list=module_list,
                       verbose=verbose,
@@ -343,22 +345,28 @@ def win_python_setup(folder="dist/win_python_setup",
         # update pip
         ###########
         fLOG("--- update pip")
+        operations.append(("python pip", "update"))
         op = update_pip(folders["python"])
         operations.extend(op)
         operations.append(("time", dtnow()))
 
         if "julia" in selection:
+            operations.append(("julia", "-"))
             ops = win_install_julia_step(folders, verbose=verbose, fLOG=fLOG)
             operations.extend(ops)
+            operations.append(("time", dtnow()))
 
         if "r" in selection:
+            operations.append(("r", "-"))
             ops = win_install_r_step(folders, verbose=verbose, fLOG=fLOG)
             operations.extend(ops)
+            operations.append(("time", dtnow()))
 
         ######################
         # installation of packages
         ######################
         fLOG("--- installation of python packages")
+        operations.append(("python packaes", "start"))
         python_path = folders["python"]
         win_install_packages_other_python(
             python_path, download_folder, verbose=verbose, fLOG=fLOG)
@@ -420,6 +428,7 @@ def win_python_setup(folder="dist/win_python_setup",
         # copy pywin32 dll to main folders
         ######################
         fLOG("--- pywin32 dll to main folders")
+        operations.append(("pywin32", "dll"))
         fdll = os.path.join(
             python_path, "Lib", "site-packages", "pywin32_system32")
         for dll in os.listdir(fdll):
@@ -438,6 +447,7 @@ def win_python_setup(folder="dist/win_python_setup",
         # kernels
         ########
         fLOG("--- add kernels")
+        operations.append(("kernel", "add"))
         res = install_kernels(folders["tools"], folders["python"])
         for r in res:
             fLOG("ADD: kernel", r)
@@ -462,6 +472,16 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("start", "last_function"))
         last_function(new_script, folders, verbose=verbose, fLOG=fLOG)
         operations.append(("time", dtnow()))
+
+    ##################
+    # patch exe in scripts
+    ##################
+    fLOG(
+        "--- patch paths, see http://www.clemens-sielaff.com/create-a-portable-python-with-pip-on-windows/")
+    op = win_patch_paths(
+        os.path.join(folders["python"], "Scripts"), folders["python"], fLOG=fLOG)
+    operations.extend(op)
+    operations.append(("time", dtnow()))
 
     if not no_setup:
         ################################

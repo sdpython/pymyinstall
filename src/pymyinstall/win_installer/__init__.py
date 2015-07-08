@@ -9,3 +9,4 @@ from .win_setup_r import r_run_script
 from .win_setup_main import win_python_setup
 from .win_innosetup_helper import inno_install_kernels
 from .win_packages import win_install_package_other_python, is_package_installed
+from .win_patch import win_patch_paths

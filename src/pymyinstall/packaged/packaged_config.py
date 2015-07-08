@@ -120,6 +120,8 @@ def small_installation():
         #
         ModuleInstall('envoy', 'pip'),
         ModuleInstall('Logbook', 'wheel', mname='logbook'),
+        ModuleInstall('pkginfo', 'pip'),
+        ModuleInstall("multipledispatch ", "pip"),
     ]
 
     if sys.platform.startswith("win"):
@@ -259,6 +261,7 @@ def complete_installation():
         ModuleInstall("pymongo", "wheel"),
         ModuleInstall("PyOpenGL", "wheel", mname="OpenGL"),
         ModuleInstall("Theano", "wheel", mname="theano"),
+        ModuleInstall("keras", "pip"),  # deep learning
         ModuleInstall("pyqtgraph", "pip"),
         ModuleInstall("deap", "pip"),
         ModuleInstall("boto", "pip"),      # for gensim

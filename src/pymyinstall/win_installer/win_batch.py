@@ -35,6 +35,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print):
                  (create_win_r_console, "r"),
                  (create_win_r_gui, "r"),
                  win_install_kernels,
+                 win_replace_shebang,
                  ]:
         if isinstance(func, tuple):
             func, name = func
@@ -58,7 +59,9 @@ def create_win_env(folders):
     @return                 operations (list of what was done)
     """
     tools = folders["tools"]
-    text = ["@echo off", "set CURRENT=%~dp0", "set PYTHON_WINHOME=%CURRENT%\\..\\python",
+    text = ["@echo off", "set CURRENT=%~dp0",
+            "set PYTHON_WINHOME=%CURRENT%\\..\\python",
+            "set PYTHON_WINSCRIPTS=%CURRENT%\\..\\python\\Scripts",
             "set WORKSPACE=%CURRENT%\\..\\workspace",
             "set PATH=%PYTHON_WINHOME%;%PATH%"]
     if os.path.exists(os.path.join(tools, "R")):
@@ -311,6 +314,25 @@ def win_install_kernels(folders, suffix=""):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "add_kernels.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [("batch", name)]
+
+
+def win_replace_shebang(folders, suffix=""):
+    """
+    create a batch file to start ipython
+
+    @param      folders     see @see fn create_win_batches
+    @param      suffix      add a suffix
+    @return                 operations (list of what was done)
+    """
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            '%PYTHON_WINHOME%\\python -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', \'..\\python\', \'PYTHON_WINSCRIPTS\')"']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "replace_shebang.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]
