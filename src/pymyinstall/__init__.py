@@ -53,7 +53,7 @@ from .installhelper.install_custom_scite import install_scite, add_shortcut_to_d
 from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
 from .installhelper import update_all
 from .packaged.packaged_functions import datascientist, ds_small, ds_complete, ds_huge, process_installation, ds_teach, ds_ensae
-from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_teachings
+from .packaged.packaged_config import complete_installation, small_installation, installation_huge_datasets, installation_teachings, minimal_installation
 from .packaged.packaged_config import installation_azure, extend_winpython, extend_anaconda, extension_ensae, installation_ensae
 from .installhelper.install_custom_revealjs import download_revealjs
 # adding this line breaks the documentation generation

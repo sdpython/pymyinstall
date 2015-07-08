@@ -4,9 +4,8 @@ import platform
 print(platform.architecture())
 sys.path.append("src")
 print("----")
-from pymyinstall import win_python_setup, installation_ensae, installation_teachings
+from pymyinstall import win_python_setup, installation_ensae, installation_teachings, minimal_installation
 
-list_modules = installation_ensae() + installation_teachings()
 
 if False:
     from pymyinstall.win_installer.win_setup_r import _script
@@ -16,7 +15,14 @@ if False:
 
 
 if True:
+    list_modules = installation_ensae() + installation_teachings()
     win_python_setup(module_list=list_modules, verbose=True,
                      download_only=False,
                      no_setup=True,
                      selection={"R", "VS"})
+
+if False:
+    win_python_setup(module_list=minimal_installation(), verbose=True,
+                     download_only=False,
+                     no_setup=True,
+                     selection={})

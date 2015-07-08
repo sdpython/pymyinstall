@@ -6,6 +6,39 @@ import sys
 from ..installhelper.module_install import ModuleInstall
 
 
+def minimal_installation():
+    """
+    returns a list of modules to add to python to get a minimal python
+
+    @return             a list of modules to install
+
+    To install them:
+    @code
+    for _ in minimal_installation() :
+        _.install(temp_folder="install")
+    @endcode
+    """
+    mod = [
+        ModuleInstall("virtualenv", "pip"),
+        ModuleInstall("six", "pip"),
+        ModuleInstall("wheel", "pip"),
+        ModuleInstall("pep8", "pip", version="1.5.7"),
+        ModuleInstall("autopep8", "pip"),
+        ModuleInstall("mccabe", "pip"),
+        ModuleInstall("pyflakes", "pip"),
+        ModuleInstall("flake8", "pip"),
+        ModuleInstall('markupsafe', 'pip'),
+        ModuleInstall("psutil", "wheel"),  #
+        ModuleInstall("pylint", "pip"),  #
+    ]
+
+    if sys.platform.startswith("win"):
+        mod.append(ModuleInstall("pywin32", "wheel", mname="win32com"))
+        mod.append(ModuleInstall("winshell", "pip"))
+
+    return mod
+
+
 def small_installation():
     """
     returns a list of modules to work with pandas, numpy, ipython, ...
@@ -14,7 +47,7 @@ def small_installation():
 
     To install them:
     @code
-    for _ in complete_installation() :
+    for _ in small_installation() :
         _.install(temp_folder="install")
     @endcode
     """
