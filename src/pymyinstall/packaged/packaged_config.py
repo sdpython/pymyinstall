@@ -35,6 +35,7 @@ def minimal_installation():
     if sys.platform.startswith("win"):
         mod.append(ModuleInstall("pywin32", "wheel", mname="win32com"))
         mod.append(ModuleInstall("winshell", "pip"))
+        mod.append(ModuleInstall("pythonnet", "wheel"))
 
     return mod
 
