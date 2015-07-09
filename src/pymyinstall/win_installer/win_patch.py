@@ -7,15 +7,19 @@ from __future__ import print_function
 import os
 
 
-def win_patch_paths(folder, python_path, path_to_python="..\\python", fLOG=print):
+def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
     """
     path are absolute when they are installed,
     see `Create a portable Python with Pip on Windows <http://www.clemens-sielaff.com/create-a-portable-python-with-pip-on-windows/>`_
 
     @param      folder          folder when to find the executable
-    @param      python_path     python path
+    @param      python_path     python path (string to replace)
+    @param      path_to_python  new python path (replace by)
     @param      fLOG            logging function
     @return                     list of tuple ('exe or py', 'modified file')
+
+    The first three parameter can be environment variables.
+    They will be replaced by their values.
     """
     if folder in os.environ:
         folder = os.environ[folder]
@@ -26,9 +30,14 @@ def win_patch_paths(folder, python_path, path_to_python="..\\python", fLOG=print
 
     files = os.listdir(folder)
 
-    shebang = "#!" + python_path + "\\python.exe"
+    if len(python_path) > 0 and not python_path.endswith("\\"):
+        python_path += "\\"
+    if len(path_to_python) > 0 and not path_to_python.endswith("\\"):
+        path_to_python += "\\"
+
+    shebang = "#!" + python_path + "python.exe"
     bshebang = bytes(shebang, encoding="ascii")
-    into = "#!" + path_to_python + "\\python.exe"
+    into = "#!" + path_to_python + "python.exe"
     binto = bytes(into, encoding="ascii")
 
     operations = []

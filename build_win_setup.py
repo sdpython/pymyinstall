@@ -14,15 +14,16 @@ if False:
     print(out)
 
 
-if True:
+if False:
     list_modules = installation_ensae() + installation_teachings()
     win_python_setup(module_list=list_modules, verbose=True,
                      download_only=False,
                      no_setup=True,
                      selection={"R", "VS"})
 
-if False:
+if True:
     win_python_setup(module_list=minimal_installation(), verbose=True,
                      download_only=False,
                      no_setup=True,
-                     selection={})
+                     selection={},
+                     notebooks=[])

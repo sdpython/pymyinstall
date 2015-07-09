@@ -7,7 +7,7 @@ from __future__ import print_function
 import os
 
 
-def create_win_batches(folders, verbose=False, selection=None, fLOG=print):
+def create_win_batches(folders, verbose=False, selection=None, fLOG=print, module_list=None):
     """
     create batchs for the setup, they will be placed in
     *folders["config"]*
@@ -16,27 +16,54 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print):
     @param      verbose     verbose
     @param      fLOG        logging function
     @param      selection   list of batchs to create
+    @param      module_list list of python modules to install, to know which script to install or not
     @return                 operations (list of what was done)
     """
     if selection is None:
         raise ValueError("selection cannot be None")
+    if module_list is None:
+        raise ValueError("module_list cannot be None")
+
+    has_ipython = False
+    has_rodeo = False
+    has_spyder = False
+    for mod in module_list:
+        if mod.name == "IPython":
+            has_ipython = True
+        if mod.name == "rodeo":
+            has_ipython = True
+        if mod.name == "spyder":
+            has_spyder = True
+
+    list_functions = [create_win_env,
+                      create_win_scite,
+                      create_win_sqllitespy,
+                      create_win_python_console,
+                      win_replace_shebang,
+                      ]
+
+    if has_ipython:
+        list_functions.extend([create_win_ipython_console,
+                               create_win_ipython_qtconsole,
+                               create_win_ipython_notebook,
+                               win_install_kernels,
+                               ])
+
+    if has_rodeo:
+        list_functions.append(create_win_rodeo)
+
+    if has_spyder:
+        list_functions.append(create_win_spyder)
+
+    if "r" in selection:
+        list_functions.append((create_win_r_console, "r"))
+        list_functions.append((create_win_r_gui, "r"))
+
+    if "julia" in selection:
+        list_functions.append((create_win_julia_console, "julia"))
 
     operations = []
-    for func in [create_win_env,
-                 create_win_ipython_console,
-                 create_win_ipython_qtconsole,
-                 create_win_ipython_notebook,
-                 create_win_rodeo,
-                 create_win_scite,
-                 create_win_sqllitespy,
-                 create_win_python_console,
-                 (create_win_julia_console, "julia"),
-                 create_win_spyder,
-                 (create_win_r_console, "r"),
-                 (create_win_r_gui, "r"),
-                 win_install_kernels,
-                 win_replace_shebang,
-                 ]:
+    for func in list_functions:
         if isinstance(func, tuple):
             func, name = func
         else:
@@ -329,7 +356,9 @@ def win_replace_shebang(folders, suffix=""):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            '%PYTHON_WINHOME%\\python -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', \'..\\python\', \'PYTHON_WINSCRIPTS\')"']
+            'if "%1"="" set P1=..\\python ELSE set P1=%1',
+            'if "%2"="" set P2=PYTHON_WINSCRIPTS ELSE set P2=%2',
+            '%PYTHON_WINHOME%\\python -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', \'P1\', \'P2\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "replace_shebang.bat")

@@ -59,7 +59,7 @@ class TestPatch(unittest.TestCase):
 
         pp = r"C:\github\pymyinstall\dist\win_python_setup\python"
         op = win_patch_paths(dest, pp, fLOG=fLOG)
-        into = "#!..\\python\\python.exe"
+        into = "#!python.exe"
         binto = bytes(into, encoding="ascii")
         assert len(op) > 0
         i = 0

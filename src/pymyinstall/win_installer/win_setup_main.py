@@ -331,7 +331,7 @@ def win_python_setup(folder="dist/win_python_setup",
         #########################
         fLOG("--- create batch command file")
         op = create_win_batches(
-            folders, verbose=verbose, fLOG=fLOG, selection=selection)
+            folders, verbose=verbose, fLOG=fLOG, selection=selection, module_list=module_list)
         operations.extend(op)
 
         #######################
@@ -394,35 +394,41 @@ def win_python_setup(folder="dist/win_python_setup",
         ######################
         # create ipython profile
         ######################
-        fLOG("--- create ipython profile")
-        operations.append(("ipython", "create profile"))
-        config_path = folders["config"]
-        ipython_path = os.path.join(
-            folders["python"], "Scripts", "ipython.exe")
-        cmd = " profile create win_profile --ipython-dir={0}".format(
-            folders["config"])
-        cmd = ipython_path + cmd
-        out, err = run_cmd(cmd, wait=True)
-        profile = os.path.join(
-            config_path, "profile_win_profile", "ipython_notebook_config.py")
-        if not os.path.exists(profile):
-            raise WinInstallException(
-                "missing file, unable to execute:\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
-        operations.append(("time", dtnow()))
+        has_ipython = False
+        for mod in module_list:
+            if mod.name == "ipython":
+                has_ipython = True
+        if has_ipython:
+            fLOG("--- create ipython profile")
+            operations.append(("ipython", "create profile"))
+            config_path = folders["config"]
+            ipython_path = os.path.join(
+                folders["python"], "Scripts", "ipython.exe")
+            cmd = " profile create win_profile --ipython-dir={0}".format(
+                folders["config"])
+            cmd = ipython_path + cmd
+            out, err = run_cmd(cmd, wait=True)
+            profile = os.path.join(
+                config_path, "profile_win_profile", "ipython_notebook_config.py")
+            if not os.path.exists(profile):
+                raise WinInstallException(
+                    "missing file, unable to execute:\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+            operations.append(("time", dtnow()))
 
         ######################
         # update ipython profile
         ######################
-        fLOG("--- update ipython profile")
-        operations.append(("ipython", "update profile"))
-        with open(profile, "r") as f:
-            content = f.read()
-        content += """\nc.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
-                      c.FileContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
-                    """.replace("                      ", "")
-        with open(profile, "w") as f:
-            f.write(content)
-        operations.append(("time", dtnow()))
+        if has_ipython:
+            fLOG("--- update ipython profile")
+            operations.append(("ipython", "update profile"))
+            with open(profile, "r") as f:
+                content = f.read()
+            content += """\nc.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
+                          c.FileContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
+                        """.replace("                      ", "")
+            with open(profile, "w") as f:
+                f.write(content)
+            operations.append(("time", dtnow()))
 
         ######################
         # copy pywin32 dll to main folders
@@ -446,12 +452,13 @@ def win_python_setup(folder="dist/win_python_setup",
         ########
         # kernels
         ########
-        fLOG("--- add kernels")
-        operations.append(("kernel", "add"))
-        res = install_kernels(folders["tools"], folders["python"])
-        for r in res:
-            fLOG("ADD: kernel", r)
-        operations.append(("time", dtnow()))
+        if has_ipython:
+            fLOG("--- add kernels")
+            operations.append(("kernel", "add"))
+            res = install_kernels(folders["tools"], folders["python"])
+            for r in res:
+                fLOG("ADD: kernel", r)
+            operations.append(("time", dtnow()))
 
     ################################
     # prepare setup script for InnoSetup
