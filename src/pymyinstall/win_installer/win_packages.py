@@ -44,13 +44,14 @@ def get_modules_version(python_path):
     return res
 
 
-def win_install_package_other_python(python_path, package, verbose=False, fLOG=print):
+def win_install_package_other_python(python_path, package, verbose=False, deps=True, fLOG=print):
     """
     Install a package for another Python distribution than the current one.
 
     @param      python_path     location of python
     @param      package         location of the package (.tar.gz or .whl)
     @param      verbose         display more information
+    @param      deps            take dependencies into account or not
     @param      fLOG            logging function
     @return                     operations ("pip", module) if installed, empty if already installed
     """
@@ -73,6 +74,8 @@ def win_install_package_other_python(python_path, package, verbose=False, fLOG=p
     cur = os.getcwd()
     if cur != python_path:
         os.chdir(python_path)
+    if deps is not None and not deps:
+        cmd += " --no-deps"
 
     out, err = run_cmd(cmd, wait=True, fLOG=fLOG, do_not_log=True)
 
@@ -180,7 +183,7 @@ def is_package_installed(python_path, module_name):
     return False
 
 
-def win_install_packages_other_python(python_path, package_folder, verbose=False, fLOG=print):
+def win_install_packages_other_python(python_path, package_folder, verbose=False, module_list=None, fLOG=print):
     """
     Install all packages for another Python distribution
     where package could be found in a folder
@@ -188,6 +191,8 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     @param      python_path     location of python
     @param      package_folder  location of the package (.tar.gz or .whl)
     @param      verbose         display more information
+    @param      module_list     list of modules to install, if None, it tries to guess a good
+                                order to install downloaded packages 
     @param      fLOG            logging function
     @return                     operations ("pip", module) if installed, empty if already installed
     """
@@ -200,7 +205,10 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     # it speeds up the process and avoid using C++ compiler
     operations = []
     done = set()
-    full_list = installation_ensae() + installation_teachings()
+    if module_list is None:
+        full_list = installation_ensae() + installation_teachings()
+    else:
+        full_list = module_list
     for mod in full_list:
         a = _is_package_in_list(mod.name + "-", files)
         if a is None:
@@ -211,7 +219,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
                 full = os.path.join(package_folder, a)
                 try:
                     op = win_install_package_other_python(
-                        python_path, full, verbose=verbose, fLOG=fLOG)
+                        python_path, full, verbose=verbose, deps=mod.deps, fLOG=fLOG)
                 except Exception as e:
                     mes = "failed to install {0}: {1}".format(mod.name, full)
                     raise Exception(mes) from e

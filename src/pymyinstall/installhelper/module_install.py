@@ -11,6 +11,7 @@ import os
 import time
 import importlib
 import datetime
+from urllib.parse import urlsplit
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date
 from .install_memoize import install_memoize
 
@@ -216,21 +217,21 @@ class ModuleInstall:
                  fLOG=print,
                  version=None,
                  script=None,
-                 index_url=None):
+                 index_url=None,
+                 deps=None):
         """
         constructor
 
         @param      name            name
-        @param      kind            kind of installation (*pip*, *github*, *exe*, *wheel*)
+        @param      kind            kind of installation (*pip*, *github*, *wheel*)
         @param      gitrepo         github repository (example: sdpython)
         @param      mname           sometimes, the module name is different from its official name
         @param      version         to install a specific version (None for the latest)
         @param      fLOG            logging function
         @param      script          some extensions are not a module but an application (such as ``spyder``),
                                     the class will check this script is available
+        @param      deps            overwrite deps parameters when installing the module
         @param      index_url       to get the package from a custom pypi server
-
-        exe is only for Windows.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -243,6 +244,7 @@ class ModuleInstall:
         self.mname = mname
         self.script = script
         self.index_url = index_url
+        self.deps = deps
 
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception(
@@ -485,8 +487,13 @@ class ModuleInstall:
 
         .. versionchanged:: 0.9
             Parameter *deps* was added, the function now downloads a module using pip.
+        
+        .. versionchanged:: 1.0
+            *deps* is overwritten by *self.deps* if not None
         """
         kind = self.kind
+        
+        deps = deps if self.deps is None else self.deps
 
         if kind == "pip":
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
@@ -506,6 +513,8 @@ class ModuleInstall:
                 slash = '' if self.index_url.endswith('/') else '/'
                 cmd += ' --no-cache-dir --index={0}{1}simple/'.format(
                     self.index_url, slash)
+                parsed_uri = urlsplit(self.index_url)
+                cmd += " --trusted-host " + parsed_uri.hostname
 
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
@@ -811,16 +820,21 @@ class ModuleInstall:
         @param      temp_folder     folder where to download the setup
         @param      log             display logs or not
         @param      options         other options to add to the command line (see below) in a list
-        @param      deps            download the dependencies too (only available for pip)
+        @param      deps            install the dependencies too (only available for pip)
         @return                     boolean
 
         The options mentioned in parameter ``options``
         are described here: `pip install <http://www.pip-installer.org/en/latest/usage.html>`_
         or `setup.py options <http://docs.python.org/3.4/install/>`_ if you
         installing a module from github.
+        
+        .. versionchanged:: 1.0
+            *deps* is overwritten by *self.deps* if not None
         """
         if not force and self.IsInstalled():
             return True
+            
+        deps = deps if self.deps is None else self.deps
 
         if options is None:
             options = None

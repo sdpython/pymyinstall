@@ -369,7 +369,8 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("python packaes", "start"))
         python_path = folders["python"]
         win_install_packages_other_python(
-            python_path, download_folder, verbose=verbose, fLOG=fLOG)
+            python_path, download_folder, verbose=verbose, fLOG=fLOG,
+            module_list=module_list)
         fLOG("done")
         operations.append(("time", dtnow()))
 
