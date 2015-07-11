@@ -27,6 +27,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     has_ipython = False
     has_rodeo = False
     has_spyder = False
+    has_rss = False
     for mod in module_list:
         if mod.name == "IPython":
             has_ipython = True
@@ -34,6 +35,8 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
             has_ipython = True
         if mod.name == "spyder":
             has_spyder = True
+        if mod.name == "pyrsslocal":
+            has_rss = True
 
     list_functions = [create_win_env,
                       create_win_scite,
@@ -54,6 +57,9 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
 
     if has_spyder:
         list_functions.append(create_win_spyder)
+
+    if has_rss:
+        list_functions.append(create_win_rss)
 
     if "r" in selection:
         list_functions.append((create_win_r_console, "r"))
@@ -373,3 +379,41 @@ def win_replace_shebang(folders, suffix=""):
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]
+
+
+def create_win_rss(folders, suffix=""):
+    """
+    create a batch file to start ipython
+
+    @param      folders     see @see fn create_win_batches
+    @param      suffix      add a suffix
+    @return                 operations (list of what was done)
+    """
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            '%PYTHON_WINHOME%\\python -c "from pyquickhelper.pycode.blog_helper import rss_update_run_server;rss_update_run_server(\'%CURRENT2%/rss_database.db3\', \'%CURRENT2%/rss_list.xml\')"']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "run_fetch_rss.bat")
+    with open(name, "w") as f:
+        f.write(text)
+
+    text = """
+                <?xml version="1.0" encoding="UTF-8"?>
+                <opml version="1.0">
+                    <head>
+                        <title>teachings subscriptions</title>
+                    </head>
+                    <body>
+                        <outline text="XD blog" title="XD blog" type="rss"
+                            xmlUrl="http://www.xavierdupre.fr/blog/xdbrss.xml"
+                            htmlUrl="http://www.xavierdupre.fr/blog/xd_blog.html" />
+                    </body>
+                </opml>
+                """.replace("                ", "")
+
+    rss_name = os.path.join(folders["config"], "rss_list.xml")
+    with open(rss_name, "w", encoding="utf8") as f:
+        f.write(text)
+
+    return [("batch", name), ("rss", rss_name)]

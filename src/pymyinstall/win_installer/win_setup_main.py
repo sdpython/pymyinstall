@@ -19,7 +19,7 @@ from .win_fix_compiler_c import switch_to_VS_compiler, switch_to_mingw_compiler
 from .win_patch import win_patch_paths
 from .win_setup_main_helper import dtnow, copy_icons, win_download, win_install, create_links_tools
 from .win_setup_main_helper import win_download_notebooks, win_install_julia_step, win_install_r_step
-from .win_packages import win_install_packages_other_python
+from .win_packages import win_install_packages_other_python, get_modules_version
 from .win_extract import clean_msi
 
 
@@ -465,6 +465,16 @@ def win_python_setup(folder="dist/win_python_setup",
         os.path.join(folders["python"], "Scripts"), folders["python"], fLOG=fLOG)
     operations.extend(op)
     operations.append(("time", dtnow()))
+
+    #################
+    # print the list of modules
+    #################
+    fLOG("--- pip freeze")
+    mods = get_modules_version(folders["python"])
+    fLOG("nb modules: {0}".format(len(mods)))
+    with open(os.path.join(folders["config"], "installed_modules.txt"), "w") as f:
+        for a, b in sorted(mods):
+            f.write("{0}\t{1}\n".format(a, b))
 
     if not no_setup:
         ################################
