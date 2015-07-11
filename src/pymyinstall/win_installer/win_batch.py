@@ -356,8 +356,16 @@ def win_replace_shebang(folders, suffix=""):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            'if "%1"="" set P1=..\\python ELSE set P1=%1',
-            'if "%2"="" set P2=PYTHON_WINSCRIPTS ELSE set P2=%2',
+            'if "%1"=="" (',
+            '    set P1=EMPTY_STRING',
+            ') ELSE (',
+            '    set P1=%1',
+            ')',
+            'if "%2"=="" (',
+            '    set P2=%PYTHON_WINSCRIPTS%',
+            ') ELSE (',
+            '    set P2=%2',
+            ')',
             '%PYTHON_WINHOME%\\python -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', [\'\', \'P1\'], \'P2\')"']
 
     text = "\n".join(text)

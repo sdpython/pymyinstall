@@ -32,6 +32,8 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
             folder = os.environ[folder]
         if python_path in os.environ:
             python_path = os.environ[python_path]
+            if python_path == "EMPTY_STRING":
+                python_path = ""
         if path_to_python in os.environ:
             path_to_python = os.environ[path_to_python]
 
@@ -46,6 +48,7 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
         bshebang = bytes(shebang, encoding="ascii")
         into = "#!" + path_to_python + "python.exe"
         binto = bytes(into, encoding="ascii")
+        into = os.path.normpath(into)
 
         fLOG("replace {0} by {1}".format(shebang, into))
 
