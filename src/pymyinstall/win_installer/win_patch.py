@@ -21,50 +21,59 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
     The first three parameter can be environment variables.
     They will be replaced by their values.
     """
-    if folder in os.environ:
-        folder = os.environ[folder]
-    if python_path in os.environ:
-        python_path = os.environ[python_path]
-    if path_to_python in os.environ:
-        path_to_python = os.environ[path_to_python]
+    if isinstance(python_path, list):
+        operations = []
+        for pyt in python_path:
+            op = win_patch_paths(folder, pyt, path_to_python, fLOG)
+            operations.extend(op)
+        return operations
+    else:
+        if folder in os.environ:
+            folder = os.environ[folder]
+        if python_path in os.environ:
+            python_path = os.environ[python_path]
+        if path_to_python in os.environ:
+            path_to_python = os.environ[path_to_python]
 
-    files = os.listdir(folder)
+        files = os.listdir(folder)
 
-    if len(python_path) > 0 and not python_path.endswith("\\"):
-        python_path += "\\"
-    if len(path_to_python) > 0 and not path_to_python.endswith("\\"):
-        path_to_python += "\\"
+        if len(python_path) > 0 and not python_path.endswith("\\"):
+            python_path += "\\"
+        if len(path_to_python) > 0 and not path_to_python.endswith("\\"):
+            path_to_python += "\\"
 
-    shebang = "#!" + python_path + "python.exe"
-    bshebang = bytes(shebang, encoding="ascii")
-    into = "#!" + path_to_python + "python.exe"
-    binto = bytes(into, encoding="ascii")
+        shebang = "#!" + python_path + "python.exe"
+        bshebang = bytes(shebang, encoding="ascii")
+        into = "#!" + path_to_python + "python.exe"
+        binto = bytes(into, encoding="ascii")
 
-    operations = []
-    for file in files:
-        full = os.path.join(folder, file)
-        if os.path.isfile(full):
-            ext = os.path.splitext(full)[-1]
+        fLOG("replace {0} by {1}".format(shebang, into))
 
-            if ext in {".py", ""}:
-                with open(full, "r") as f:
-                    content = f.read()
-                if shebang in content:
-                    content = content.replace(shebang, into)
-                    fLOG("update ", full)
-                    operations.append(("update", full))
-                    with open(full, "w") as f:
-                        f.write(content)
-            elif ext == ".exe":
-                with open(full, "rb") as f:
-                    content = f.read()
-                if bshebang in content:
-                    content = content.replace(bshebang, binto)
-                    fLOG("update ", full)
-                    operations.append(("update", full))
-                    with open(full, "wb") as f:
-                        f.write(content)
-            else:
-                pass
+        operations = []
+        for file in files:
+            full = os.path.join(folder, file)
+            if os.path.isfile(full):
+                ext = os.path.splitext(full)[-1]
 
-    return operations
+                if ext in {".py", ""}:
+                    with open(full, "r") as f:
+                        content = f.read()
+                    if shebang in content:
+                        content = content.replace(shebang, into)
+                        fLOG("update ", full)
+                        operations.append(("update", full))
+                        with open(full, "w") as f:
+                            f.write(content)
+                elif ext == ".exe":
+                    with open(full, "rb") as f:
+                        content = f.read()
+                    if bshebang in content:
+                        content = content.replace(bshebang, binto)
+                        fLOG("update ", full)
+                        operations.append(("update", full))
+                        with open(full, "wb") as f:
+                            f.write(content)
+                else:
+                    pass
+
+        return operations

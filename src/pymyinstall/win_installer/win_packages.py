@@ -192,7 +192,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     @param      package_folder  location of the package (.tar.gz or .whl)
     @param      verbose         display more information
     @param      module_list     list of modules to install, if None, it tries to guess a good
-                                order to install downloaded packages 
+                                order to install downloaded packages
     @param      fLOG            logging function
     @return                     operations ("pip", module) if installed, empty if already installed
     """

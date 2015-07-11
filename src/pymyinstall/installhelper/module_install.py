@@ -487,12 +487,12 @@ class ModuleInstall:
 
         .. versionchanged:: 0.9
             Parameter *deps* was added, the function now downloads a module using pip.
-        
+
         .. versionchanged:: 1.0
             *deps* is overwritten by *self.deps* if not None
         """
         kind = self.kind
-        
+
         deps = deps if self.deps is None else self.deps
 
         if kind == "pip":
@@ -827,13 +827,13 @@ class ModuleInstall:
         are described here: `pip install <http://www.pip-installer.org/en/latest/usage.html>`_
         or `setup.py options <http://docs.python.org/3.4/install/>`_ if you
         installing a module from github.
-        
+
         .. versionchanged:: 1.0
             *deps* is overwritten by *self.deps* if not None
         """
         if not force and self.IsInstalled():
             return True
-            
+
         deps = deps if self.deps is None else self.deps
 
         if options is None:

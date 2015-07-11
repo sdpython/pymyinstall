@@ -172,14 +172,6 @@ def get_rodeo_version(path):
     return python_query('import rodeo;print(rodeo.__version__)', path)
 
 
-def get_thg_version(path):
-    """Return version of TortoiseHg installed in *path*"""
-    txt = exec_shell_cmd('thg version', path).splitlines()[0]
-    match = re.match('TortoiseHg Dialogs \(version ([0-9\.]*)\)', txt)
-    if match is not None:
-        return match.groups()[0]
-
-
 def python_query(cmd, path):
     """Execute Python command using the Python interpreter located in *path*"""
     res = exec_shell_cmd('python -c "%s"' % cmd, path).splitlines()
