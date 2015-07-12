@@ -45,7 +45,7 @@ from pyquickhelper import fLOG, get_temp_folder
 
 class TestPyPiModule (unittest.TestCase):
 
-    def test_pipy_bug(self):
+    def test_pipy_bug_flask(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -53,6 +53,17 @@ class TestPyPiModule (unittest.TestCase):
 
         mod = ModuleInstall(
             'flask-sqlalchemy', 'pip', mname='flask.ext.sqlalchemy')
+        vers = mod.get_pypi_version()
+        assert vers is not None
+
+    def test_pipy_bug_ipython(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        mod = ModuleInstall(
+            'ipython', 'wheel', mname='IPython')
         vers = mod.get_pypi_version()
         assert vers is not None
 
