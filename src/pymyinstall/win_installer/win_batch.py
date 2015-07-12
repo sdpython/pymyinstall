@@ -391,7 +391,7 @@ def create_win_rss(folders, suffix=""):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            '%PYTHON_WINHOME%\\python -c "from pyquickhelper.pycode.blog_helper import rss_update_run_server;rss_update_run_server(\'%CURRENT2%rss_database.db3\', \'%CURRENT2%rss_list.xml\')"']
+            '%PYTHON_WINHOME%\\python -c "from pyquickhelper import fLOG;from pyquickhelper.pycode.blog_helper import rss_update_run_server;fLOG(OutputPrint=True);rss_update_run_server(r\'%CURRENT2%rss_database.db3\', r\'%CURRENT2%rss_list.xml\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_fetch_rss.bat")
