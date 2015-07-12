@@ -476,7 +476,7 @@ def win_python_setup(folder="dist/win_python_setup",
         raise ValueError(
             "unable to get module list from folder " + folders["python"])
     with open(os.path.join(folders["config"], "installed_modules.txt"), "w") as f:
-        for a, b in sorted(mods):
+        for a, b in sorted(mods.items()):
             f.write("{0}\t{1}\n".format(a, b))
 
     if not no_setup:

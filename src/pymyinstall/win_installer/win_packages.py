@@ -7,7 +7,7 @@ from __future__ import print_function
 import os
 import sys
 from .win_exception import WinInstallPackageException
-from ..installhelper.install_cmd_helper import run_cmd
+from ..installhelper.install_cmd_helper import run_cmd, get_pip_program
 from ..packaged.packaged_config import installation_ensae, installation_teachings
 
 
@@ -18,7 +18,12 @@ def get_modules_version(python_path):
     @param      python_path     path to python
     @return                     dictionary
     """
-    prog = os.path.join(python_path, "Scripts", "pip.exe")
+    if sys.platform.startswith("win"):
+        prog = os.path.join(python_path, "Scripts", "pip.exe")
+        if not os.path.exists(prog):
+            prog = get_pip_program(exe=python_path)
+    else:
+        prog = get_pip_program(exe=python_path)
     cmd = prog + " list"
 
     try:
