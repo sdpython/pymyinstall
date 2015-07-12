@@ -5,6 +5,7 @@
 import sys
 import os
 import unittest
+import warnings
 
 try:
     import src
@@ -67,14 +68,17 @@ class TestAllPyPiModule (unittest.TestCase):
             except AnnoyingPackageException:
                 annoying.append(mod.name)
 
-        if len(error) > 2:
-            # we accept an error
+        if len(error) > 3:
+            # we accept some errors
             # joblib seems to give errors from time to time
+            # multipledispatch
+            # ipython --> jupyter (transitionning)
             raise MissingPackageOnPyPiException(
                 "\n".join("{0}:{1}".format(a, b) for a, b in sorted(error)))
 
         if len(annoying) > 0:
             fLOG("Annoying\n", "\n".join(annoying))
+            warnings.warn("ANNOYING PACKAGES\n" + "\n".join(annoying))
 
 if __name__ == "__main__":
     unittest.main()
