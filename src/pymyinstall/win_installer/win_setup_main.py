@@ -472,6 +472,9 @@ def win_python_setup(folder="dist/win_python_setup",
     fLOG("--- pip freeze")
     mods = get_modules_version(folders["python"])
     fLOG("nb modules: {0}".format(len(mods)))
+    if len(mods) == 0:
+        raise ValueError(
+            "unable to get module list from folder " + folders["python"])
     with open(os.path.join(folders["config"], "installed_modules.txt"), "w") as f:
         for a, b in sorted(mods):
             f.write("{0}\t{1}\n".format(a, b))
