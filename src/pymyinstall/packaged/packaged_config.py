@@ -525,7 +525,7 @@ def extension_ensae():
         #
         ModuleInstall("zipline", "pip"),  # finance
         ModuleInstall("vincent", "pip"),  # graph
-        ModuleInstall("pygal", "pip"),  # graph
+        ModuleInstall("pygal", "github", "Kozea"),  # graph, pygal_maps_wolrd only accepts the latest version
         ModuleInstall("pygal_maps_world", "pip"),  # graph
         #
         # 2015-06-30
