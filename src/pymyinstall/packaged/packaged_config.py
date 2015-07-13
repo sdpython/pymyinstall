@@ -322,6 +322,7 @@ def complete_installation():
         ModuleInstall("structures", "pip"),
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("rodeo", "pip"),
+        ModuleInstall("tzlocal", "pip"),
         ModuleInstall("apscheduler", "pip"),
         #
         # ModuleInstall("pdfminer", "pip"),  # PDF extraction (no python 3 version)

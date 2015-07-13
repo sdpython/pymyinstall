@@ -32,10 +32,10 @@ def ipython_create_profile(config_path, python_path, name="win_profile", fLOG=pr
     cmd = ipython_path + cmd
     out, err = run_cmd(cmd, wait=True, fLOG=fLOG, cwd=python_path)
     profile = os.path.join(
-        config_path, "profile_" + name, "ipython_notebook_config.py")
+        config_path, "profile_" + name, "ipython_config.py")
     if not os.path.exists(profile):
         raise WinInstallException(
-            "missing file, unable to execute:\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+            "missing file, unable to execute:\nFILE:\n{3}\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err, profile))
     return os.path.dirname(profile)
 
 
