@@ -22,8 +22,12 @@ def ipython_create_profile(config_path, python_path, name="win_profile", fLOG=pr
     @return                     profile path
     """
     if sys.platform.startswith("win"):
-        ipython_path = os.path.join(
-            python_path, "Scripts", "ipython.exe")
+        ipython_path = os.path.join(python_path, "ipython.exe")
+        if not os.path.exists(ipython_path):
+            ipython_path = os.path.join(
+                python_path, "Scripts", "ipython.exe")
+            if not os.path.exists(ipython_path):
+                raise FileNotFoundError(ipython_path)
     else:
         ipython_path = os.path.join(
             python_path, "ipython")
