@@ -49,13 +49,14 @@ class TestIPython(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-
+            
+        python_path = os.path.dirname(sys.executable)
         temp = get_temp_folder(__file__, "temp_ipython")
         path = ipython_create_profile(
-            temp, os.path.dirname(sys.executable), name="ZZZ", fLOG=fLOG)
+            temp, python_path, name="ZZZ", fLOG=fLOG)
         fLOG(path)
         assert os.path.exists(path)
-
+        
         ipython_update_profile(path)
 
         profile = os.path.join(path, "ipython_notebook_config.py")

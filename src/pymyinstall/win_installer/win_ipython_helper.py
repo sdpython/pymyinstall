@@ -26,7 +26,7 @@ def ipython_create_profile(config_path, python_path, name="win_profile", fLOG=pr
             python_path, "Scripts", "ipython.exe")
     else:
         ipython_path = os.path.join(
-            python_path, "Scripts", "ipython")
+            python_path, "ipython")
 
     cmd = " profile create {1} --ipython-dir={0}".format(config_path, name)
     cmd = ipython_path + cmd
