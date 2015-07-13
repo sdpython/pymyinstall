@@ -42,9 +42,9 @@ from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
 from src.pymyinstall.win_installer.win_ipython_helper import ipython_create_profile, ipython_update_profile
 
 
-class TestIPython(unittest.TestCase):
+class TestIPythonProfile(unittest.TestCase):
 
-    def test_ipython(self):
+    def test_ipython_profile(self):
         fLOG(
             __file__,
             self._testMethodName,
