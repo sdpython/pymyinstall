@@ -80,7 +80,9 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      verbose         print more information
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
     @param      selection       selection of tools to install
-    @param      last_function   function to execute just before running InnoSetup
+    @param      last_function   function to execute just before running InnoSetup,
+                                see `win_setup_helper.py <https://github.com/sdpython/ensae_teaching_cs/blob/master/src/ensae_teaching_cs/automation/win_setup_helper.py>`_
+                                for an example
     @param      documentation   add documentation
     @return                     list of completed operations
 
@@ -399,11 +401,13 @@ def win_python_setup(folder="dist/win_python_setup",
             operations.append(("ipython", "update profile"))
             with open(profile, "r") as f:
                 content = f.read()
-            content += """\nc.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
+            content += """
+                        c.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
                         c.FileContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
-                        """.replace("                        ", "")
+                        """.split("\n")
+            content = "\n".join(_.strip() for _ in content)
             with open(profile, "w") as f:
-                f.write(content)
+                f.write("\n" + content + "\n")
             operations.append(("time", dtnow()))
 
         ######################
