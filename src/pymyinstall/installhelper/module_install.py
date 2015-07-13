@@ -837,7 +837,7 @@ class ModuleInstall:
         deps = deps if self.deps is None else self.deps
 
         if options is None:
-            options = None
+            options = []
 
         self.fLOG("installation of ", self)
         kind = force_kind if force_kind is not None else self.kind

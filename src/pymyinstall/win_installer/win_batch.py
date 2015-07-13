@@ -32,7 +32,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
         if mod.name == "IPython":
             has_ipython = True
         if mod.name == "rodeo":
-            has_ipython = True
+            has_rodeo = True
         if mod.name == "spyder":
             has_spyder = True
         if mod.name == "pyrsslocal":
