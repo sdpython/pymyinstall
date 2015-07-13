@@ -8,10 +8,9 @@ from __future__ import print_function
 import os
 import shutil
 
-from ..installhelper.install_cmd_helper import update_pip, run_cmd
+from ..installhelper.install_cmd_helper import update_pip
 from ..installhelper.install_custom_scite import modify_scite_properties
 
-from .win_exception import WinInstallException
 from .win_batch import create_win_batches
 from .win_ipy_kernels import install_kernels
 from .win_innosetup_helper import run_innosetup, innosetup_replacements
@@ -21,6 +20,7 @@ from .win_setup_main_helper import dtnow, copy_icons, win_download, win_install,
 from .win_setup_main_helper import win_download_notebooks, win_install_julia_step, win_install_r_step
 from .win_packages import win_install_packages_other_python, get_modules_version
 from .win_extract import clean_msi
+from .win_ipython_helper import ipython_create_profile, ipython_update_profile
 
 
 license = """
@@ -379,18 +379,9 @@ def win_python_setup(folder="dist/win_python_setup",
         if has_ipython:
             fLOG("--- create ipython profile")
             operations.append(("ipython", "create profile"))
-            config_path = folders["config"]
-            ipython_path = os.path.join(
-                folders["python"], "Scripts", "ipython.exe")
-            cmd = " profile create win_profile --ipython-dir={0}".format(
-                folders["config"])
-            cmd = ipython_path + cmd
-            out, err = run_cmd(cmd, wait=True)
-            profile = os.path.join(
-                config_path, "profile_win_profile", "ipython_notebook_config.py")
-            if not os.path.exists(profile):
-                raise WinInstallException(
-                    "missing file, unable to execute:\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+            ipath = ipython_create_profile(
+                folders["config"], folders["python"], fLOG=fLOG)
+            operations.append(("profile", ipath))
             operations.append(("time", dtnow()))
 
         ######################
@@ -399,15 +390,7 @@ def win_python_setup(folder="dist/win_python_setup",
         if has_ipython:
             fLOG("--- update ipython profile")
             operations.append(("ipython", "update profile"))
-            with open(profile, "r") as f:
-                content = f.read()
-            content += """
-                        c.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
-                        c.FileContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~', ".ipynb_checkpoints", ".kernel-*.json", ".kernel", ".RData", ".RHistory"]
-                        """.split("\n")
-            content = "\n".join(_.strip() for _ in content)
-            with open(profile, "w") as f:
-                f.write("\n" + content + "\n")
+            ipython_update_profile(ipath)
             operations.append(("time", dtnow()))
 
         ######################
