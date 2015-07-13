@@ -59,17 +59,20 @@ class TestIPythonProfile(unittest.TestCase):
         
         ipython_update_profile(path)
 
-        profile = os.path.join(path, "ipython_notebook_config.py")
-        with open(profile, "r", encoding="utf8") as f:
-            lines = f.readlines()
+        if sys.platform.startswtih("win"):
+            profile = os.path.join(path, "ipython_notebook_config.py")
+            with open(profile, "r", encoding="utf8") as f:
+                lines = f.readlines()
 
-        exp = "c.ContentsManager.hide_globs = ['__pycache__',"
-        nb = 0
-        for line in lines:
-            if line.startswith(exp):
-                nb += 1
-        assert nb > 0
-
+            exp = "c.ContentsManager.hide_globs = ['__pycache__',"
+            nb = 0
+            for line in lines:
+                if line.startswith(exp):
+                    nb += 1
+            assert nb > 0
+        else:
+            profile = os.path.join(path, "ipython_config.py")
+            assert os.path.exists(profile)
 
 if __name__ == "__main__":
     unittest.main()
