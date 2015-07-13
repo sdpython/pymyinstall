@@ -57,9 +57,8 @@ class TestIPythonProfile(unittest.TestCase):
         fLOG(path)
         assert os.path.exists(path)
         
-        ipython_update_profile(path)
-
         if sys.platform.startswith("win"):
+            ipython_update_profile(path)
             profile = os.path.join(path, "ipython_notebook_config.py")
             with open(profile, "r", encoding="utf8") as f:
                 lines = f.readlines()
