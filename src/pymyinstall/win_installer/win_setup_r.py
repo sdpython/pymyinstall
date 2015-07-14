@@ -57,7 +57,7 @@ def get_package_description(r_path, pack):
     if not os.path.exists(version):
         raise FileNotFoundError(version)
     with open(version, "r") as f:
-        lines = r.readlines()
+        lines = f.readlines()
     res = {}
     for line in lines:
         spl = line.split(":")

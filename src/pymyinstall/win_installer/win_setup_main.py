@@ -21,6 +21,7 @@ from .win_setup_main_helper import win_download_notebooks, win_install_julia_ste
 from .win_packages import win_install_packages_other_python, get_modules_version
 from .win_extract import clean_msi
 from .win_ipython_helper import ipython_create_profile, ipython_update_profile
+from .win_setup_r import get_package_description
 
 
 license = """
@@ -66,7 +67,9 @@ def win_python_setup(folder="dist/win_python_setup",
                      notebooks=None,
                      selection={"R", "mingw"},
                      documentation=True,
-                     last_function=None
+                     last_function=None,
+                     r_packages=True,
+                     julia_packages=True
                      ):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
@@ -83,6 +86,8 @@ def win_python_setup(folder="dist/win_python_setup",
     @param      last_function   function to execute just before running InnoSetup,
                                 see `win_setup_helper.py <https://github.com/sdpython/ensae_teaching_cs/blob/master/src/ensae_teaching_cs/automation/win_setup_helper.py>`_
                                 for an example
+    @param      r_packages      install R packages
+    @param      julia_packages  install Julia packages
     @param      documentation   add documentation
     @return                     list of completed operations
 
@@ -327,13 +332,13 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.extend(op)
         operations.append(("time", dtnow()))
 
-        if "julia" in selection:
+        if "julia" in selection and julia_packages:
             operations.append(("julia", "-"))
             ops = win_install_julia_step(folders, verbose=verbose, fLOG=fLOG)
             operations.extend(ops)
             operations.append(("time", dtnow()))
 
-        if "r" in selection:
+        if "r" in selection and r_packages:
             operations.append(("r", "-"))
             ops = win_install_r_step(folders, verbose=verbose, fLOG=fLOG)
             operations.extend(ops)
