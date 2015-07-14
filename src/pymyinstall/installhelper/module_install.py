@@ -11,16 +11,17 @@ import os
 import time
 import importlib
 import datetime
-from urllib.parse import urlsplit
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date
 from .install_memoize import install_memoize
 
 if sys.version_info[0] == 2:
+    from urlparse import urlsplit
     import urllib2 as urllib_request
     import urllib2 as urllib_error
     import xmlrpclib as xmlrpc_client
     from codecs import open
 else:
+    from urllib.parse import urlsplit
     import urllib.request as urllib_request
     import urllib.error as urllib_error
     import importlib.util
