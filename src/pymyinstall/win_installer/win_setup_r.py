@@ -64,5 +64,5 @@ def get_package_description(r_path, pack):
         if len(spl) > 1:
             key = spl[0]
             val = ":".join(spl[1:])
-            res[key] = val
+            res[key] = val.strip("\r\n\t ")
     return res
