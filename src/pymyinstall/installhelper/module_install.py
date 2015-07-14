@@ -152,6 +152,9 @@ def get_pypi_version(module_name):
         elif ml == "flask-sqlalchemy":
             tried.append("Flask-SQLAlchemy")
             available = pypi.package_releases(tried[-1])
+        elif ml == "apscheduler":
+            tried.append("APScheduler")
+            available = pypi.package_releases(tried[-1])
         elif ml == "datashape":
             tried.append("DataShape")
             available = pypi.package_releases(tried[-1])
