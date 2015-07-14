@@ -42,6 +42,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
                       create_win_scite,
                       create_win_sqllitespy,
                       create_win_python_console,
+                      update_all_packages,
                       win_replace_shebang,
                       ]
 
@@ -417,3 +418,22 @@ def create_win_rss(folders, suffix=""):
         f.write(text)
 
     return [("batch", name), ("rss", rss_name)]
+
+
+def update_all_packages(folders, suffix=""):
+    """
+    create a batch file to start ipython
+
+    @param      folders     see @see fn create_win_batches
+    @param      suffix      add a suffix
+    @return                 operations (list of what was done)
+    """
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            '%PYTHON_WINHOME%\\python -c "from pymyinstall import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "run_update_all_packages.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [("batch", name)]
