@@ -40,3 +40,29 @@ def r_run_script(r_path, script, output=None):
         raise RBatchException(
             "CMD:\n{0}\nOUT:\n{1}\nERR:\{2}".format(cmd, out, err))
     return out
+
+
+def get_package_description(r_path, pack):
+    """
+    returns the description of an R package as a dictionary
+
+    @param      r_path      path to R
+    @param      pack        package name
+    @return                 dictionary
+    """
+    path = os.path.join(r_path, "library", pack)
+    if not os.path.exists(path):
+        raise FileNotFoundError(path)
+    version = os.path.join(path, "DESCRIPTION")
+    if not os.path.exists(version):
+        raise FileNotFoundError(version)
+    with open(version, "r") as f:
+        lines = r.readlines()
+    res = {}
+    for line in lines:
+        spl = line.split(":")
+        if len(spl) > 1:
+            key = spl[0]
+            val = ":".join(spl[1:])
+            res[key] = val
+    return res

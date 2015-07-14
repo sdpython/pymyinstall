@@ -454,7 +454,7 @@ def win_python_setup(folder="dist/win_python_setup",
     operations.append(("time", dtnow()))
 
     #################
-    # print the list of modules
+    # print the list of modules (python)
     #################
     fLOG("--- pip freeze")
     mods = get_modules_version(folders["python"])
@@ -462,9 +462,23 @@ def win_python_setup(folder="dist/win_python_setup",
     if len(mods) == 0:
         raise ValueError(
             "unable to get module list from folder " + folders["python"])
-    with open(os.path.join(folders["config"], "installed_modules.txt"), "w") as f:
+    with open(os.path.join(folders["config"], "installed.python.packages.txt"), "w") as f:
         for a, b in sorted(mods.items()):
             f.write("{0}\t{1}\n".format(a, b))
+
+    #################
+    # print the list of modules (R)
+    #################
+    r_path = os.path.join(folders["tools"], "R")
+    r_lib = os.path.join(r_path, "library")
+    if os.path.exists(r_lib):
+        fLOG("--- list R packages")
+        packs = os.listdir(r_lib)
+        with open(os.path.join(folders["config"], "installed.R.packages.txt"), "w") as f:
+            for pack in sorted(packs):
+                desc = get_package_description(r_path, pack)
+                vers = desc.get("Version", "unknown")
+                f.write("{0}\t{1}\n".format(pack, vers))
 
     if not no_setup:
         ################################
