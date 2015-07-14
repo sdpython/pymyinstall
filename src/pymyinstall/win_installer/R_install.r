@@ -115,9 +115,10 @@ install.packages(c('actuar',
 #
 # big memory
 # http://www.thecoatlessprofessor.com/programming/installing-the-bigmemory-package-and-biglm-on-windows-os-x-or-linux/
+# https://r-forge.r-project.org/R/?group_id=556
 #
-
 # Install Bigmemory packages from r-forge page
+#
 install.packages("bigmemory", repos="http://R-Forge.R-project.org")
 install.packages("bigmemory.sri", repos="http://R-Forge.R-project.org")
 install.packages("biganalytics", repos="http://R-Forge.R-project.org")
@@ -125,5 +126,6 @@ install.packages("bigalgebra", repos="http://R-Forge.R-project.org")
 install.packages("bigkmeans", repos="http://R-Forge.R-project.org")
 install.packages("bigrf", repos="http://R-Forge.R-project.org")
 install.packages("bigtabulate", repos="http://R-Forge.R-project.org")
+
 # Install Boost Header and biglm package from CRAN
 install.packages(c("BH","biglm"))
