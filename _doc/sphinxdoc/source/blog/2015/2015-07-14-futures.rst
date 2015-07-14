@@ -1,0 +1,22 @@
+
+
+.. index:: futures
+
+.. blogpost::
+    :title: Modules futures, concurrent
+    :keywords: futures, concurrent
+    :date: 2015-07-14
+    :categories: modules
+
+    On the way to build a setup for my student,
+    I went through an issue with the packages 
+    `futures <https://pypi.python.org/pypi/futures>`_,
+    version 3.0.3 which contains the following line::
+
+        raise type(self._exception), self._exception, self._traceback
+
+    It raises an exception *SyntaxError* from file
+    `_base.py <https://github.com/agronholm/pythonfutures/blob/master/concurrent/futures/_base.py>`_.
+    I checked with an older version (2.2.0) and this line
+    does not appear. Let's follow
+    `Issue 41 <https://github.com/agronholm/pythonfutures/issues/41>`_.
