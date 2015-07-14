@@ -56,6 +56,7 @@ def small_installation():
         # ModuleInstall("setuptools",     "wheel"),        # removed with 3.4
         # ModuleInstall("pip",            "wheel"),            # removed with 3.4
         #
+        ModuleInstall("futures", "2.2.0", version="2.2.0"),  # issue with 3.0.3 because of line: raise type(self._exception), self._exception, self._traceback, weird because the same exists in folder lib
         ModuleInstall("virtualenv", "pip"),
         ModuleInstall("six", "pip"),
         ModuleInstall("lxml", "wheel"),
