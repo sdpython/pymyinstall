@@ -35,7 +35,8 @@ CLASSIFIERS = [
 packages = find_packages('src', exclude='src')
 package_dir = {k: "src/" + k.replace(".", "/") for k in packages}
 package_data = {
-    project_var_name + ".win_installer": ["*.r", "*.jl", "*.iss"], }
+    project_var_name + ".win_installer": ["*.r", "*.jl", "*.iss"], 
+    project_var_name + ".win_installer.icons": ["*.ico"] }
 
 ############
 # functions
