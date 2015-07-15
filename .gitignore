@@ -195,10 +195,12 @@ $RECYCLE.BIN/
 *.whl
 *.zip
 *.exe
+*.whl
 *master/*
 dist/
 build/
 eggs/
+http/
 parts/
 var/
 sdist/
