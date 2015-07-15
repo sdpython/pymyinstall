@@ -541,7 +541,7 @@ def extension_ensae():
         #
         # 2015-07-15
         #
-        ModuleInstall("pulp", "wheel"),  # linear optimisation, see http://blog.yhathq.com/posts/decision-making-under-uncertainty.html
+        ModuleInstall("PuLP", "wheel", mname="pulp"),  # linear optimisation, see http://blog.yhathq.com/posts/decision-making-under-uncertainty.html
 
     ]
     return mod
