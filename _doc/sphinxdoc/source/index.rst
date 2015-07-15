@@ -84,14 +84,24 @@ Installation
 ``pip install pymyinstall``
 
 
+Tutorial
+--------
+
+.. toctree::
+    :max_depth: 1
+    
+    all_example
+    all_notebooks
+        
+
 Functionalities
 ---------------
 
-    - help installing module from GitHub, pip and setup
-    - install other common tools or editors
-    - provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
-    - function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
-      see :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
+- help installing module from GitHub, pip and setup
+- install other common tools or editors
+- provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
+- function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
+  see :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
     
 
 

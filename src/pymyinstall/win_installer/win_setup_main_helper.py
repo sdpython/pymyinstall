@@ -463,6 +463,7 @@ def win_install_r_step(folders, verbose=False, fLOG=print):
         operations.append(("time", dtnow()))
         mark_step(folders["logs"], "r_install")
     else:
-        fLOG("--- skip installation of R packages or remove file log.step.r_install.txt")
+        fLOG(
+            "--- skip installation of R packages or remove file log.step.r_install.txt")
 
     return operations
