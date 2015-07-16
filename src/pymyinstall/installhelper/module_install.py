@@ -917,7 +917,7 @@ class ModuleInstall:
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if len(options) > 0:
-                opts = [_ for _ in options if _ not in ("--upgrade",)]
+                opts = [_ for _ in options]
                 if len(opts):
                     cmd += " " + " ".join(opts)
             out, err = run_cmd(
@@ -1131,9 +1131,7 @@ class ModuleInstall:
         options = [] if options is None else list(options)
         for opt in ["--upgrade", "--no-deps"]:
             if opt not in options:
-                if deps and opt == "--no-deps":
-                    pass
-                else:
+                if not deps or opt == "--no-deps":
                     options.append(opt)
 
         res = self.install(force_kind=force_kind, force=True,

@@ -542,6 +542,7 @@ def extension_ensae():
         # 2015-07-15
         #
         ModuleInstall("PuLP", "wheel", mname="pulp"),  # linear optimisation, see http://blog.yhathq.com/posts/decision-making-under-uncertainty.html
+        ModuleInstall("JSAnimation", "github", "jakevdp"), # for pyensae unit test
 
     ]
     return mod
