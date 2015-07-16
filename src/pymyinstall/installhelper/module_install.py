@@ -165,6 +165,9 @@ def get_pypi_version(module_name):
         elif ml == "pybrain":
             tried.append("PyBrain")
             available = pypi.package_releases(tried[-1])
+        elif ml == "jsanimation":  #github
+            tried.append("JSAnimation")
+            available = ["-"]
         elif module_name in ModuleInstall.annoying_modules:
             raise AnnoyingPackageException(module_name)
 
