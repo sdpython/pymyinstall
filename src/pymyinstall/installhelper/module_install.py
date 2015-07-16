@@ -11,7 +11,7 @@ import os
 import time
 import importlib
 import datetime
-from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version
 from .install_memoize import install_memoize
 
 if sys.version_info[0] == 2:
@@ -908,46 +908,35 @@ class ModuleInstall:
             if ver[0] != "win32":
                 ret = self.install("wheel")
                 whlname = self.name
+                ret = True
             else:
                 whlname = self.download(
                     temp_folder=temp_folder,
                     force=force,
                     unzipFile=True)
+                vers = self.get_installated_numeric_version()
+                ret = True
+                if vers is not None:
+                    whlvers = ModuleInstall.numeric_version(
+                        get_wheel_version(whlname))
+                    if ModuleInstall.compare_version(vers, whlvers) >= 0:
+                        self.fLOG("skipping, no newer version {0} <= {1}: whl= {2}".format(
+                            whlvers, vers, whlname))
+                        ret = False
+            if ret:
                 self.fLOG("installing", os.path.split(whlname)[-1])
 
-            pip = get_pip_program()
-            cmd = pip + " install {0}".format(whlname)
-            if self.version is not None:
-                cmd += "=={0}".format(self.version)
-            if len(options) > 0:
-                opts = [_ for _ in options]
-                if len(opts):
-                    cmd += " " + " ".join(opts)
-            out, err = run_cmd(
-                cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
-            if "No distributions matching the version" in out:
-                raise Exception(
-                    "unable to install " +
-                    str(self) +
-                    "\nOUT:\n" +
-                    out +
-                    "\nERR:\n" +
-                    err)
-            elif "Testing of typecheck-decorator passed without failure." in out:
-                ret = True
-            elif "Successfully installed" not in out:
-                if "error: Unable to find vcvarsall.bat" in out:
-                    url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                    raise Exception(
-                        "unable to install " +
-                        str(self) +
-                        "\nread:\n" +
-                        url +
-                        "OUT:\n" +
-                        out +
-                        "\nERR:\n" +
-                        err)
-                if "Requirement already satisfied" not in out:
+                pip = get_pip_program()
+                cmd = pip + " install {0}".format(whlname)
+                if self.version is not None:
+                    cmd += "=={0}".format(self.version)
+                if len(options) > 0:
+                    opts = [_ for _ in options]
+                    if len(opts):
+                        cmd += " " + " ".join(opts)
+                out, err = run_cmd(
+                    cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+                if "No distributions matching the version" in out:
                     raise Exception(
                         "unable to install " +
                         str(self) +
@@ -955,8 +944,30 @@ class ModuleInstall:
                         out +
                         "\nERR:\n" +
                         err)
-            else:
-                ret = True
+                elif "Testing of typecheck-decorator passed without failure." in out:
+                    ret = True
+                elif "Successfully installed" not in out:
+                    if "error: Unable to find vcvarsall.bat" in out:
+                        url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
+                        raise Exception(
+                            "unable to install " +
+                            str(self) +
+                            "\nread:\n" +
+                            url +
+                            "OUT:\n" +
+                            out +
+                            "\nERR:\n" +
+                            err)
+                    if "Requirement already satisfied" not in out:
+                        raise Exception(
+                            "unable to install " +
+                            str(self) +
+                            "\nOUT:\n" +
+                            out +
+                            "\nERR:\n" +
+                            err)
+                else:
+                    ret = True
 
         elif kind == "github":
             # the following code requires admin rights

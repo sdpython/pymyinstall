@@ -11,6 +11,7 @@ import zipfile
 import time
 import subprocess
 import datetime
+import re
 
 
 def python_version():
@@ -925,3 +926,21 @@ def has_pip():
         return f is not None
     except ImportError:
         return False
+
+
+def get_wheel_version(whlname):
+    """
+    extract the version from a wheel file,
+    return ``2.6.0`` for ``rpy2-2.6.0-cp34-none-win_amd64.whl``
+
+    @param      whlname     file name
+    @return                 string
+    """
+    exp = re.compile("[-]([0-9]+[.][0-9]+[.][0-9abdevcr]+)[-]")
+    find = exp.findall(whlname)
+    if len(find) == 0:
+        raise Exception("unable to extract version of {0}".format(whlname))
+    if len(find) > 1:
+        raise Exception(
+            "unable to extract version of {0} (multiple version)".format(whlname))
+    return find[0]
