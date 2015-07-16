@@ -53,11 +53,12 @@ class TestUpdateModule (unittest.TestCase):
 
         temp = get_temp_folder(__file__, "temp_update_module")
 
-        mod = ModuleInstall("pandas", "wheel", fLOG=fLOG)
-        mod.update(temp_folder=temp)
+        if sys.version_info[0] >= 3:
+            mod = ModuleInstall("pandas", "wheel", fLOG=fLOG)
+            mod.update(temp_folder=temp)
 
-        mod = ModuleInstall("xlrd", "pip", fLOG=fLOG)
-        mod.update(temp_folder=temp)
+            mod = ModuleInstall("xlrd", "pip", fLOG=fLOG)
+            mod.update(temp_folder=temp)
 
 
 if __name__ == "__main__":

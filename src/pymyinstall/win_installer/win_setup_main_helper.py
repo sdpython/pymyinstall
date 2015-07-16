@@ -2,6 +2,7 @@
 @file
 @brief Helpers for function @see fn win_python_setup
 """
+from __future__ import print_function
 import datetime
 import os
 import shutil
