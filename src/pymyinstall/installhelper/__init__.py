@@ -14,7 +14,7 @@ from .install_custom_mingw import install_mingw
 from .install_custom_7z import install_7z
 from .install_cmd_helper import run_cmd, update_pip, has_pip
 from .install_custom import download_page
-from .module_install import ModuleInstall, get_module_version
+from .module_install import ModuleInstall, get_module_version, get_pypi_version
 
 
 def update_all(temp_folder=".", fLOG=print, verbose=True,

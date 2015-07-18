@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @brief      test log(time=1s)
 """
@@ -39,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.module_install import ModuleInstall
+from src.pymyinstall.installhelper.module_install import ModuleInstall, get_pypi_version
 from pyquickhelper import fLOG, get_temp_folder
 
 
@@ -54,6 +53,13 @@ class TestUpdateModule (unittest.TestCase):
         temp = get_temp_folder(__file__, "temp_update_module")
 
         if sys.version_info[0] >= 3:
+            vers = get_pypi_version("pymyinstall", True)
+            fLOG(vers)
+            assert len(vers) > 0
+
+            mod = ModuleInstall("joblib", "pip", fLOG=fLOG)
+            mod.update(temp_folder=temp)
+
             mod = ModuleInstall("pandas", "wheel", fLOG=fLOG)
             mod.update(temp_folder=temp)
 

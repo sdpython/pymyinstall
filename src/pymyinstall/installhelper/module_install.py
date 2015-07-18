@@ -112,59 +112,71 @@ def get_module_version(module):
     return res
 
 
-@install_memoize
-def get_pypi_version(module_name):
+def _get_pypi_version_memoize(f):
+    memo = {}
+
+    def helper(module_name, full_list=False, url="http://pypi.python.org/pypi"):
+        key = module_name, full_list, url
+        if key not in memo:
+            memo[key] = f(module_name, full_list, url)
+        return memo[key]
+    return helper
+
+
+@_get_pypi_version_memoize
+def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/pypi"):
     """
     returns the version of a package on pypi,
     we skip alpha, beta or dev version
 
-    @param      url     pipy server
-    @return             version
+    @param      module_name     module name
+    @param      url             pipy server
+    @param      full_list       results as a list or return the last stable version
+    @return                     version (str or list)
 
     See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
     `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
     """
-    url = 'http://pypi.python.org/pypi'
     pypi = xmlrpc_client.ServerProxy(url)
     tried = [module_name]
-    available = pypi.package_releases(module_name)
+    available = pypi.package_releases(module_name, True)
 
     if available is None or len(available) == 0:
         tried.append(module_name.capitalize())
-        available = pypi.package_releases(tried[-1])
+        available = pypi.package_releases(tried[-1], True)
 
     if available is None or len(available) == 0:
         tried.append(module_name.replace("-", "_"))
-        available = pypi.package_releases(tried[-1])
+        available = pypi.package_releases(tried[-1], True)
 
     if available is None or len(available) == 0:
         tried.append(module_name.replace("_", "-"))
-        available = pypi.package_releases(tried[-1])
+        available = pypi.package_releases(tried[-1], True)
 
     if available is None or len(available) == 0:
         tried.append(module_name.lower())
-        available = pypi.package_releases(tried[-1])
+        available = pypi.package_releases(tried[-1], True)
 
     if available is None or len(available) == 0:
         ml = module_name.lower()
         if ml == "markupsafe":
             tried.append("MarkupSafe")
-            available = pypi.package_releases(tried[-1])
+            available = pypi.package_releases(tried[-1], True)
         elif ml == "flask-sqlalchemy":
             tried.append("Flask-SQLAlchemy")
-            available = pypi.package_releases(tried[-1])
+            available = pypi.package_releases(tried[-1], True)
         elif ml == "apscheduler":
             tried.append("APScheduler")
-            available = pypi.package_releases(tried[-1])
+            available = pypi.package_releases(tried[-1], True)
         elif ml == "datashape":
             tried.append("DataShape")
-            available = pypi.package_releases(tried[-1])
+            available = pypi.package_releases(tried[-1], True)
         elif ml == "pycontracts":
             tried.append("PyContracts")
-            available = pypi.package_releases(tried[-1])
+            available = pypi.package_releases(tried[-1], True)
         elif ml == "pybrain":
             tried.append("PyBrain")
-            available = pypi.package_releases(tried[-1])
+            available = pypi.package_releases(tried[-1], True)
         elif ml == "jsanimation":  # github
             tried.append("JSAnimation")
             available = ["-"]
@@ -173,6 +185,9 @@ def get_pypi_version(module_name):
 
     if available is None or len(available) == 0:
         raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
+
+    if full_list:
+        return available
 
     for a in available:
         spl = a.split(".")
