@@ -23,6 +23,9 @@ from .win_extract import clean_msi
 from .win_ipython_helper import ipython_create_profile, ipython_update_profile
 from .win_setup_r import get_package_description
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
 
 license = """
 Copyright (c) 2013-2015, Xavier Dupré

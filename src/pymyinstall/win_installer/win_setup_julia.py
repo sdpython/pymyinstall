@@ -7,6 +7,10 @@ from __future__ import print_function
 import os
 from ..installhelper.install_cmd_helper import run_cmd
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
+
 _script_install = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "Julia_install.jl")
 

@@ -32,6 +32,10 @@ from .win_setup_r import r_run_script, _script as _script_r
 from .win_setup_julia import julia_run_script, _script_install as _script_julia_install, _script_build as _script_julia_build, _script_init as _script_julia_init
 
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
+
 def dtnow():
     """
     shortcut, return ``datetime.datetime.now()``

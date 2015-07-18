@@ -5,6 +5,9 @@
 import os
 import datetime
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
 
 def mark_step(folder, step_name, content=""):
     """

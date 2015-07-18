@@ -7,6 +7,9 @@ import io
 import json
 import os
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
 
 r_kernel = {
     "display_name": "R%s",

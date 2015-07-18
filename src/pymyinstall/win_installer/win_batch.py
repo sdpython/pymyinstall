@@ -6,6 +6,9 @@ from __future__ import print_function
 
 import os
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
 
 def create_win_batches(folders, verbose=False, selection=None, fLOG=print, module_list=None):
     """

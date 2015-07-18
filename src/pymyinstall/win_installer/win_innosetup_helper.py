@@ -8,6 +8,9 @@ import os
 from ..installhelper.install_cmd_helper import run_cmd
 from .win_ipy_kernels import install_kernels
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
 
 class InnoSetupException(Exception):
 
