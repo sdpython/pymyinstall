@@ -17,15 +17,18 @@ from .install_custom import download_page
 from .module_install import ModuleInstall, get_module_version
 
 
-def update_all(temp_folder=".", fLOG=print, verbose=True):
+def update_all(temp_folder=".", fLOG=print, verbose=True,
+               list_module=None):
     """
-    update all installed modules assuming they are described in
-    @see fn installation_ensae
+    update modules in *list_module* (in that order)
+    if None, this list will be returned by @see fn installation_ensae,
+    the function starts by updating pip.
 
     @param  temp_folder     temporary folder
+    @param  verbose         more display
+    @param  list_module     None or of list of @see cl ModuleInstall
     @param  fLOG            logging function
     """
-    from ..packaged.packaged_config import installation_ensae
     import os
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -33,12 +36,31 @@ def update_all(temp_folder=".", fLOG=print, verbose=True):
         from .get_pip import main
         main()
 
+    if list_module is None:
+        from ..packaged.packaged_config import installation_ensae
+        list_module = installation_ensae()
+
+    if verbose:
+        fLOG("update pip if needed")
     update_pip()
-    modules = installation_ensae()
+    if verbose:
+        fLOG("get module order")
+    modules = list_module
+    again = []
     for mod in modules:
+        if verbose:
+            fLOG("check module: ", mod.name)
         if mod.is_installed() and mod.has_update():
             ver = mod.get_pypi_version()
             inst = mod.get_installed_version()
-            fLOG(
-                "updating module  {0} --- {1} --> {2} (kind={3})".format(mod.name, inst, ver, mod.kind))
+            m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
+                .format(mod.name, inst, ver, mod.kind)
+            fLOG(m)
             mod.update(temp_folder=temp_folder, log=verbose)
+            again.append(m)
+
+    if verbose:
+        fLOG("")
+        fLOG("updated modules")
+        for m in again:
+            fLOG(m)

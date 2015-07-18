@@ -939,8 +939,9 @@ def get_wheel_version(whlname):
     exp = re.compile("[-]([0-9]+[.][0-9]+([.][0-9abdevcr]+))?[-]")
     find = exp.findall(whlname)
     if len(find) == 0:
-        raise Exception("unable to extract version of {0}".format(whlname))
+        raise Exception(
+            "unable to extract version of {0} (pattern: {1})".format(whlname, exp.pattern))
     if len(find) > 1:
         raise Exception(
-            "unable to extract version of {0} (multiple version)".format(whlname))
+            "unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))
     return find[0]
