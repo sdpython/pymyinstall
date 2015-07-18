@@ -56,8 +56,9 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
             m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
                 .format(mod.name, inst, ver, mod.kind)
             fLOG(m)
-            mod.update(temp_folder=temp_folder, log=verbose)
-            again.append(m)
+            b = mod.update(temp_folder=temp_folder, log=verbose)
+            if b:
+                again.append(m)
 
     if verbose:
         fLOG("")
