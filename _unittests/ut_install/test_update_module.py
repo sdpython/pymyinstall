@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.module_install import ModuleInstall, get_pypi_version
+from src.pymyinstall.installhelper.module_install import ModuleInstall, get_pypi_version, MissingInstalledPackageException
 from pyquickhelper import fLOG, get_temp_folder
 
 
@@ -56,9 +56,13 @@ class TestUpdateModule (unittest.TestCase):
             vers = get_pypi_version("pymyinstall", True)
             fLOG(vers)
             assert len(vers) > 0
-
-            mod = ModuleInstall("joblib", "pip", fLOG=fLOG)
-            mod.update(temp_folder=temp)
+        
+            try:
+                mod = ModuleInstall("joblib", "pip", fLOG=fLOG)
+                mod.update(temp_folder=temp)
+            except MissingInstalledPackageException:
+                # not installed
+                pass
 
             mod = ModuleInstall("pandas", "wheel", fLOG=fLOG)
             mod.update(temp_folder=temp)

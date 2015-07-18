@@ -114,7 +114,6 @@ def get_module_version(module):
 
 def _get_pypi_version_memoize(f):
     memo = {}
-
     def helper(module_name, full_list=False, url="http://pypi.python.org/pypi"):
         key = module_name, full_list, url
         if key not in memo:
