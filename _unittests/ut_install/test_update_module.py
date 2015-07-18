@@ -56,7 +56,7 @@ class TestUpdateModule (unittest.TestCase):
             vers = get_pypi_version("pymyinstall", True)
             fLOG(vers)
             assert len(vers) > 0
-        
+
             try:
                 mod = ModuleInstall("joblib", "pip", fLOG=fLOG)
                 mod.update(temp_folder=temp)
