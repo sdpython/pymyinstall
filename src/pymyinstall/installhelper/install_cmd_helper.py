@@ -936,7 +936,7 @@ def get_wheel_version(whlname):
     @param      whlname     file name
     @return                 string
     """
-    exp = re.compile("[-]([0-9]+[.][0-9]+[.][0-9abdevcr]+)[-]")
+    exp = re.compile("[-]([0-9]+[.][0-9]+([.][0-9abdevcr]+))?[-]")
     find = exp.findall(whlname)
     if len(find) == 0:
         raise Exception("unable to extract version of {0}".format(whlname))
