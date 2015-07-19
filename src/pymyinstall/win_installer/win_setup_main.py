@@ -121,7 +121,7 @@ def win_python_setup(folder="dist/win_python_setup",
     The setup will also contains `pandoc <http://pandoc.org/>`_,
     `7z <http://www.7-zip.org/>`_,
     `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_,
-    `Scite<http://www.scintilla.org/SciTE.html>`_,
+    `Scite <http://www.scintilla.org/SciTE.html>`_,
     `MinGW <http://www.mingw.org/>`_.
 
     The function first downloads everything.
