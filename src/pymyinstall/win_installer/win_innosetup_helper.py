@@ -5,6 +5,7 @@
 from __future__ import print_function
 
 import os
+import sys
 from ..installhelper.install_cmd_helper import run_cmd
 from .win_ipy_kernels import install_kernels
 

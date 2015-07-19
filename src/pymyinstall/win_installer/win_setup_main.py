@@ -7,6 +7,7 @@ from __future__ import print_function
 
 import os
 import shutil
+import sys
 
 from ..installhelper.install_cmd_helper import update_pip
 from ..installhelper.install_custom_scite import modify_scite_properties
