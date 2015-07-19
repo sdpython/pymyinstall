@@ -346,6 +346,10 @@ def extended_set():
         #
         # ModuleInstall("pygauss", "pip"),  # molecule, bio-informatic,
         # requires PIL which is deprecated
+        #
+        # July 2015
+        #
+        ModuleInstall("ete", "github", "jhcepas", mname="ete3"),  #graph visualization
     ]
 
     if sys.platform.startswith("win"):
