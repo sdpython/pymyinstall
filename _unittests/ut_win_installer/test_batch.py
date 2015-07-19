@@ -39,7 +39,7 @@ except ImportError:
 
 
 from pyquickhelper import fLOG, get_temp_folder
-from src.pymyinstall import installation_ensae, installation_teachings
+from src.pymyinstall.packaged import ensae_fullset
 from src.pymyinstall.win_installer.win_batch import create_win_batches
 
 
@@ -52,7 +52,7 @@ class TestBatch(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         temp = get_temp_folder(__file__, "temp_batch")
-        list_modules = installation_ensae() + installation_teachings()
+        list_modules = ensae_fullset()
         folders = dict(tools=temp, config=temp)
         op = create_win_batches(
             folders, selection={"r", "julia"}, fLOG=fLOG, module_list=list_modules)

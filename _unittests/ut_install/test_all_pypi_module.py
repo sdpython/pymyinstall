@@ -40,7 +40,7 @@ except ImportError:
 
 
 from src.pymyinstall.installhelper.module_install import ModuleInstall, MissingPackageOnPyPiException, MissingVersionOnPyPiException, AnnoyingPackageException
-from src.pymyinstall.packaged.packaged_config import installation_ensae
+from src.pymyinstall.packaged import ensae_fullset
 from pyquickhelper import fLOG, get_temp_folder
 
 
@@ -52,7 +52,7 @@ class TestAllPyPiModule (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mods = installation_ensae()
+        mods = ensae_fullset()
         error = []
         annoying = []
         for mod in mods:

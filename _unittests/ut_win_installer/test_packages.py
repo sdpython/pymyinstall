@@ -39,7 +39,6 @@ except ImportError:
 
 
 from pyquickhelper import fLOG, get_temp_folder
-from src.pymyinstall import installation_ensae, installation_teachings
 from src.pymyinstall.win_installer.win_packages import get_modules_version
 
 

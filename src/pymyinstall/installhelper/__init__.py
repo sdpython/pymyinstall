@@ -21,7 +21,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
                list_module=None):
     """
     update modules in *list_module* (in that order)
-    if None, this list will be returned by @see fn installation_ensae,
+    if None, this list will be returned by @see fn ensae_fullset,
     the function starts by updating pip.
 
     @param  temp_folder     temporary folder
@@ -37,8 +37,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         main()
 
     if list_module is None:
-        from ..packaged.packaged_config import installation_ensae
-        list_module = installation_ensae()
+        from ..packaged import ensae_fullset
+        list_module = ensae_fullset()
 
     if verbose:
         fLOG("update pip if needed")

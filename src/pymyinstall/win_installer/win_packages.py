@@ -8,7 +8,7 @@ import os
 import sys
 from .win_exception import WinInstallPackageException
 from ..installhelper.install_cmd_helper import run_cmd, get_pip_program
-from ..packaged.packaged_config import installation_ensae, installation_teachings
+from ..packaged import ensae_fullset
 
 
 def get_modules_version(python_path):
@@ -214,7 +214,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     operations = []
     done = set()
     if module_list is None:
-        full_list = installation_ensae() + installation_teachings()
+        full_list = ensae_fullset()
     else:
         full_list = module_list
     for mod in full_list:

@@ -6,7 +6,7 @@ import sys
 from ..installhelper.module_install import ModuleInstall
 
 
-def minimal_installation():
+def minimal_set():
     """
     returns a list of modules to add to python to get a minimal python
 
@@ -14,7 +14,7 @@ def minimal_installation():
 
     To install them:
     @code
-    for _ in minimal_installation() :
+    for _ in minimal_set() :
         _.install(temp_folder="install")
     @endcode
     """
@@ -40,7 +40,7 @@ def minimal_installation():
     return mod
 
 
-def small_installation():
+def small_set():
     """
     returns a list of modules to work with pandas, numpy, ipython, ...
 
@@ -48,7 +48,7 @@ def small_installation():
 
     To install them:
     @code
-    for _ in small_installation() :
+    for _ in small_set() :
         _.install(temp_folder="install")
     @endcode
     """
@@ -142,7 +142,6 @@ def small_installation():
         ModuleInstall("ansi2html", "pip"),   # shell to HTML
         #
         ModuleInstall("nodeenv", "pip"),   # node.js
-        ModuleInstall('sphinxjp.themes.revealjs', 'pip'),
         #
         # 2015-06-05
         #
@@ -169,7 +168,35 @@ def small_installation():
     return mod
 
 
-def complete_installation():
+def sphinx_theme_set():
+    """
+    list of sphinx themes
+    """
+    res = [ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme'),
+           ModuleInstall('sphinxjp.themes.basicstrap', 'pip'),
+           ModuleInstall('solar_theme', 'pip'),
+           ModuleInstall('cloud_sptheme', 'pip'),
+           ModuleInstall('sphinx_readable_theme', 'pip'),
+           ModuleInstall(
+        "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
+        ModuleInstall("wild_sphinx_theme", "pip"),
+        ModuleInstall("sphinx_bootstrap_theme", "pip"),
+        ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
+        ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
+        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
+        #
+        ModuleInstall("sphinx-better-theme", "pip", mname="better"),
+        ModuleInstall("guzzle_sphinx_theme", "pip"),
+        ModuleInstall("flyingsphinx", "pip"),
+        ModuleInstall("itcase_sphinx_theme", "pip"),
+        ModuleInstall("sphinxtrap", "pip"),
+        ModuleInstall("guzzle_sphinx_theme", "pip"),
+
+    ]
+    return res
+
+
+def extended_set():
     """
     returns a list of modules to install, an rich set
     to work with data and more
@@ -178,11 +205,11 @@ def complete_installation():
 
     To install them:
     @code
-    for _ in complete_installation() :
+    for _ in small_set() + extended_set() :
         _.install(temp_folder="install")
     @endcode
     """
-    mod = small_installation() + [
+    mod = [
         ModuleInstall('werkzeug', 'pip'),
         ModuleInstall('itsdangerous', 'pip'),
         ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy'),
@@ -192,6 +219,7 @@ def complete_installation():
         ModuleInstall('python-docx', 'pip', mname="docx"),
         ModuleInstall('XlsxWriter', 'pip', mname='xlsxwriter'),
         ModuleInstall('flask', 'pip'),
+        ModuleInstall(' flasksphinx', 'pip'),
         ModuleInstall('cffi', 'wheel'),
         ModuleInstall('odo', 'wheel'),
         ModuleInstall('cytoolz', 'wheel'),
@@ -207,7 +235,6 @@ def complete_installation():
         ModuleInstall('numba', 'wheel'),
         ModuleInstall('networkx', 'pip'),
         ModuleInstall('snowballstemmer', 'pip'),
-        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme'),
         ModuleInstall('scikit-image', 'wheel', mname='skimage'),
         ModuleInstall('patsy', 'pip'),
         ModuleInstall('cvxopt', 'wheel'),
@@ -237,23 +264,8 @@ def complete_installation():
         ModuleInstall('folium', 'pip'),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap'),
         ModuleInstall('snowballstemmer', 'pip'),
-        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme'),
         ModuleInstall(
             'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images'),
-        ModuleInstall('sphinx_rtd_theme', 'pip'),
-        ModuleInstall('sphinxjp.themes.basicstrap', 'pip'),
-        ModuleInstall('solar_theme', 'pip'),
-        ModuleInstall('cloud_sptheme', 'pip'),
-        ModuleInstall('sphinx_readable_theme', 'pip'),
-        ModuleInstall(
-            "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
-        ModuleInstall("wild_sphinx_theme", "pip"),
-        ModuleInstall("sphinx_bootstrap_theme", "pip"),
-        ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
-        ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
-        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
-        ModuleInstall("sphinxjp.themes.revealjs", "pip"),
-
         #
         ModuleInstall("brewer2mpl", "pip"),
         ModuleInstall("ggplot", "pip"),
@@ -343,7 +355,7 @@ def complete_installation():
     return [_ for _ in mod if _ is not None]
 
 
-def installation_azure():
+def azure_set():
     """
     Modules to handle huge datasets on disk, hierarchical datasets.
 
@@ -355,106 +367,7 @@ def installation_azure():
     return mod
 
 
-def extend_anaconda():
-    """
-    list of modules to complete anaconda
-    """
-
-    mod = [
-        ModuleInstall("cvxopt", "wheel"),
-        ModuleInstall("goslate", "pip"),
-        ModuleInstall("dbfread", "pip"),
-        ModuleInstall("rpy2", "wheel"),
-        ModuleInstall("mpld3", "pip"),
-        ModuleInstall("folium", "pip"),
-        ModuleInstall("graphviz", "pip"),
-        ModuleInstall("numexpr", "wheel"),
-        ModuleInstall("deap", "pip"),
-        ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
-        #
-        ModuleInstall("pep8", "pip", version="1.5.7"),
-        ModuleInstall("autopep8", "pip"),
-        ModuleInstall("wheel", "pip"),
-        ModuleInstall("coverage", "pip"),
-        ModuleInstall("mccabe", "pip"),
-        ModuleInstall("snowballstemmer", "pip"),
-        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
-        ModuleInstall("pyflakes", "pip"),
-        ModuleInstall("flake8", "pip"),
-        ModuleInstall(
-            "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
-        ModuleInstall("sphinx_rtd_theme", "pip"),
-        ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
-        ModuleInstall("solar_theme", "pip"),
-        ModuleInstall("cloud_sptheme", "pip"),
-        ModuleInstall("sphinx_readable_theme", "pip"),
-        ModuleInstall(
-            "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
-        ModuleInstall("wild_sphinx_theme", "pip"),
-        ModuleInstall("sphinx_bootstrap_theme", "pip"),
-        ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
-        ModuleInstall("sphinxjp.themes.revealjs", "pip"),
-        ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
-        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
-        ModuleInstall("pypiserver", "pip"),
-        ModuleInstall("bayespy", "pip"),  # Bayesian
-        #
-        ModuleInstall("charts", "pip"),  # javascript graphs
-        ModuleInstall("invoke", "pip"),  # dependency for ablog
-        ModuleInstall("ablog", "pip"),  # blogging
-    ]
-
-    return mod
-
-
-def extend_winpython():
-    """
-    list of modules to complete anaconda
-    """
-
-    mod = [
-        ModuleInstall("virtualenv", "pip"),
-        ModuleInstall("cvxopt", "wheel"),
-        ModuleInstall("goslate", "pip"),
-        ModuleInstall("dbfread", "pip"),
-        ModuleInstall("bokeh", "pip"),
-        ModuleInstall("pywin32", "wheel", mname="win32com"),
-        ModuleInstall("folium", "pip"),
-        ModuleInstall("graphviz", "pip"),
-        ModuleInstall("deap", "pip"),
-        ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
-        #
-        ModuleInstall("pep8", "pip", version="1.5.7"),
-        ModuleInstall("autopep8", "pip"),
-        ModuleInstall("coverage", "pip"),
-        ModuleInstall("bokeh", "pip"),
-        ModuleInstall("snowballstemmer", "pip"),
-        ModuleInstall("sphinx-rtd-theme", "pip", mname="sphinx_rtd_theme"),
-        ModuleInstall(
-            "sphinxcontrib-images", "pip", mname="sphinxcontrib.images"),
-        ModuleInstall("sphinx_rtd_theme", "pip"),
-        ModuleInstall("sphinxjp.themes.basicstrap", "pip"),
-        ModuleInstall("solar_theme", "pip"),
-        ModuleInstall("cloud_sptheme", "pip"),
-        ModuleInstall("sphinx_readable_theme", "pip"),
-        ModuleInstall(
-            "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
-        ModuleInstall("wild_sphinx_theme", "pip"),
-        ModuleInstall("sphinx_bootstrap_theme", "pip"),
-        ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
-        ModuleInstall("sphinxjp.themes.revealjs", "pip"),
-        ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
-        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
-        ModuleInstall("pypiserver", "pip"),
-        ModuleInstall("bayespy", "pip"),  # Bayesian
-        # may 2015
-        ModuleInstall("charts", "pip"),  # javascript graphs
-    ]
-
-    return mod
-
-
-def extension_ensae():
+def ensae_set():
     """
     .. index:: ENSAE
 
@@ -551,7 +464,7 @@ def extension_ensae():
     return mod
 
 
-def installation_teachings():
+def teachings_set():
     """
     .. index:: ENSAE, teachings
 
@@ -571,7 +484,7 @@ def installation_teachings():
     return mod
 
 
-def installation_huge_datasets():
+def bigdata_set():
     """
     Modules to handle huge datasets on disk, hierarchical datasets.
 
@@ -584,17 +497,3 @@ def installation_huge_datasets():
     ]
 
     return mod
-
-
-def installation_ensae():
-    """
-    .. index:: ENSAE
-
-    Installation of all possible modules for my teachings at the ENSAE.
-    """
-    base = complete_installation() +  \
-        installation_huge_datasets() + \
-        installation_azure() + \
-        extension_ensae()
-
-    return base

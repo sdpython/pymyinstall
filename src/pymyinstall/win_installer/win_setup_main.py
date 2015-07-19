@@ -172,8 +172,9 @@ def win_python_setup(folder="dist/win_python_setup",
 
     ::
 
-        from pymyinstall import win_python_setup, installation_ensae, installation_teachings
-        list_modules = installation_ensae() + installation_teachings()
+        from pymyinstall import win_python_setup
+        from pymyinstall.packaged import ensae_fullset
+        list_modules = ensae_fullset()
         win_python_setup(module_list=list_modules,
                          verbose=False,
                          download_only=False)

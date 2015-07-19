@@ -41,7 +41,8 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall import ModuleInstall, installation_ensae
+from src.pymyinstall import ModuleInstall
+from src.pymyinstall.packaged import ensae_fullset
 from pyquickhelper import fLOG
 
 
@@ -73,7 +74,7 @@ class TestDownloadAll (unittest.TestCase):
                 # os.remove(os.path.join(temp,_))
                 pass
 
-        pack = installation_ensae()
+        pack = ensae_fullset()
         assert len(pack) > 0
 
         for m in pack[1:]:

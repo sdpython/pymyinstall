@@ -41,7 +41,8 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall import ModuleInstall, complete_installation, small_installation, datascientist
+from src.pymyinstall import ModuleInstall
+from src.pymyinstall.packaged import small_set, extended_set, ensae_set, ensae_fullset
 from pyquickhelper import fLOG
 
 
@@ -53,9 +54,9 @@ class TestDifference(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        name = set(_.name for _ in small_installation())
+        name = set(_.name for _ in small_set())
         keep = []
-        for mod in complete_installation():
+        for mod in extended_set():
             if mod.name not in name:
                 keep.append(mod)
         assert len(keep) > 0
@@ -73,8 +74,7 @@ class TestDifference(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        res = datascientist(
-            ensae=True, teachings=True, full=True, list_only=True)
+        res = ensae_fullset()
         count = {}
         for mod in res:
             count[mod.name] = 1

@@ -40,27 +40,14 @@ Description
 
 This module contains functions which install a module from pipy, using pip or from a wheel package::
 
-    from pymyinstall import datascientist
-    datascientist("install", full = True)
-        # full = False for a smaller set of modules to install
-        # but needed to make IPython work.
+    from pymyinstall.packaged import ensae_fullset
+    for mod in ensae_fullset():
+        mod.install()
         
 Or::
 
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
-    
-This module also contains functions to extend distributions 
-`Anaconda <http://continuum.io/downloads#py34>`_, `WinPython <https://winpython.github.io/>`_
-for the notebooks proposed at `ENSAE - Programmation <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_ (French)::
-
-    from pymyinstall import extend_anaconda, process_installation
-    process_installation(extend_anaconda())
-    
-Or::
-
-    from pymyinstall import extend_winpython, process_installation
-    process_installation(extend_winpython())
     
 If it fails for any reason - lost connexion -, run again the function with the same
 parameter. If it fails again, you can skip the modules by filling the parameter ``skip``.
@@ -68,15 +55,9 @@ Some modules might fail on Windows due to Permission error, in that case, you sh
 folder ``install`` and run the installer. Once it is done, you can run the function again 
 to continue. 
 
-To use modules related to the manipulation of big datasets::
-
-    from pymyinstall import ds_complete, ds_huge
-    ds_complete()
-    ds_huge()
-    
 It is better to use it outside the interpreter::
 
-    python -c "from pymyinstall import complete_installation, process_installation;process_installation(complete_installation())"
+    python -c "from pymyinstall.packaged import ensae_fullset;list(mod.install() for mod in ensae_fullset())"
     
 Installation
 ------------

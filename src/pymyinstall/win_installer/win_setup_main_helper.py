@@ -21,7 +21,7 @@ from ..installhelper.install_custom_7z import install_7z
 from ..installhelper.install_custom_vs import install_vs
 from ..installhelper.install_custom import download_page
 from ..installhelper.link_shortcuts import add_shortcut
-from ..packaged.packaged_config import small_installation
+from ..packaged import minimal_set
 
 from .win_packages import _is_package_in_list
 from .import_pywin32 import import_pywin32
@@ -76,7 +76,7 @@ def win_download(folder="build/win_python_setup",
     The function downloads everything needed to prepare a setup.
 
     @param      folder          where to prepare the python version
-    @param      module_list     list of module to install (see @see fn small_installation = default options)
+    @param      module_list     list of module to install (see @see fn minimal_set = default options)
     @param      fLOG            logging function
     @param      download_only   only downloads
     @param      verbose         print more information
@@ -155,7 +155,7 @@ def win_download(folder="build/win_python_setup",
         fLOG("done")
 
     if module_list is None:
-        module_list = small_installation()
+        module_list = minimal_set()
 
     for mod in module_list:
         if is_here(mod.name + "-"):
