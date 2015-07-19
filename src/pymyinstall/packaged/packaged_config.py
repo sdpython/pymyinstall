@@ -350,6 +350,7 @@ def extended_set():
         # July 2015
         #
         ModuleInstall("ete", "github", "jhcepas", mname="ete3"),  #graph visualization
+        ModuleInstall("pyxley", "pip"),  # visualisation
     ]
 
     if sys.platform.startswith("win"):
