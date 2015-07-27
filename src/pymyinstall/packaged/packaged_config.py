@@ -19,23 +19,33 @@ def minimal_set():
     @endcode
     """
     mod = [
-        ModuleInstall("virtualenv", "pip"),
-        ModuleInstall("six", "pip"),
-        ModuleInstall("wheel", "pip"),
-        ModuleInstall("pep8", "pip", version="1.5.7"),
-        ModuleInstall("autopep8", "pip"),
-        ModuleInstall("mccabe", "pip"),
-        ModuleInstall("pyflakes", "pip"),
-        ModuleInstall("flake8", "pip"),
-        ModuleInstall('markupsafe', 'pip'),
-        ModuleInstall("psutil", "wheel"),  #
-        ModuleInstall("pylint", "pip"),  #
+        ModuleInstall(
+            "virtualenv", "pip", purpose="creatre virtual environments"),
+        ModuleInstall(
+            "six", "pip", purpose="helpers for python 2/3 conversion"),
+        ModuleInstall("wheel", "pip", purpose="to play with wheel"),
+        ModuleInstall("pep8", "pip", version="1.5.7",
+                      purpose="official guidelines for Python syntax"),
+        ModuleInstall(
+            "autopep8", "pip", purpose="to make a script follow pep8"),
+        ModuleInstall(
+            "mccabe", "pip", purpose="This module provides a plugin for flake8, the Python code checker."),
+        ModuleInstall(
+            "pyflakes", "pip", purpose="to make a script follow pep8"),
+        ModuleInstall("flake8", "pip", purpose="to make a script follow pep8"),
+        ModuleInstall('markupsafe', 'pip', purpose="interpret markdown"),
+        ModuleInstall(
+            "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),
+        ModuleInstall("pylint", "pip", purpose="script syntax analysis"),
     ]
 
     if sys.platform.startswith("win"):
-        mod.append(ModuleInstall("pywin32", "wheel", mname="win32com"))
-        mod.append(ModuleInstall("winshell", "pip"))
-        mod.append(ModuleInstall("pythonnet", "wheel"))
+        mod.append(ModuleInstall(
+            "pywin32", "wheel", mname="win32com", purpose="Python extensions for Windows"))
+        mod.append(ModuleInstall(
+            "winshell", "pip", purpose="light wrapper around the Windows shell functionality"))
+        mod.append(
+            ModuleInstall("pythonnet", "wheel", purpose="call .net DLL from python"))
 
     return mod
 
@@ -60,110 +70,178 @@ def small_set():
         # self._exception, self._traceback, weird because the same exists in
         # folder lib
         ModuleInstall("futures", "pip", version="2.2.0"),
-        ModuleInstall("virtualenv", "pip"),
-        ModuleInstall("six", "pip"),
-        ModuleInstall("lxml", "wheel"),
-        ModuleInstall("jinja2", "pip"),
-        ModuleInstall("pygments", "pip"),
-        ModuleInstall("pyparsing", "pip"),
-        ModuleInstall("python-dateutil", "pip", "dateutil"),
-        ModuleInstall("html5lib", "pip"),
-        ModuleInstall("beautifulsoup4", "pip", mname="bs4"),
-        ModuleInstall("coverage", "pip"),
-        ModuleInstall("nose", "pip"),
-        ModuleInstall("pytz", "pip"),
-        ModuleInstall("pyreadline", "pip", mname="pyreadline"),
-        ModuleInstall("husl", "pip"),
-        ModuleInstall("pipdeptree", "pip"),
+        ModuleInstall(
+            "virtualenv", "pip", purpose="creatre virtual environments"),
+        ModuleInstall(
+            "six", "pip", purpose="helpers for python 2/3 conversion"),
+        ModuleInstall("lxml", "wheel", purpose="xml parsers (C++)"),
+        ModuleInstall("jinja2", "pip", purpose="templating"),
+        ModuleInstall(
+            "pygments", "pip", purpose="syntax highlighting package written in Python"),
+        ModuleInstall(
+            "pyparsing", "pip", purpose="alternative approach to creating and executing simple grammars"),
+        ModuleInstall(
+            "python-dateutil", "pip", "dateutil", purpose="helpers to manipulate dates"),
+        ModuleInstall(
+            "html5lib", "pip", purpose="pure-python library for parsing HTML"),
+        ModuleInstall("beautifulsoup4", "pip", mname="bs4",
+                      purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree."),
+        ModuleInstall(
+            "coverage", "pip", purpose="measure the coverage of unit tests"),
+        ModuleInstall("nose", "pip", purpose="run unit tests"),
+        ModuleInstall(
+            "pytz", "pip", purpose="World timezone definitions, modern and historical"),
+        ModuleInstall("pyreadline", "pip", mname="pyreadline",
+                      purpose="python implementation of GNU readline functionality"),
+        ModuleInstall("husl", "pip", purpose="Python implementation of HUSL"),
+        ModuleInstall(
+            "pipdeptree", "pip", purpose="displays module dependencies as a tree"),
         #
-        ModuleInstall("openpyxl", "pip", version="1.8.6"),
-        ModuleInstall("xlrd", "pip"),
-        ModuleInstall("xlwt", "pip"),
-        ModuleInstall("xlwings", "pip"),
+        ModuleInstall("openpyxl", "pip", version="1.8.6",
+                      purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
+        ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
+        ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
+        ModuleInstall("xlwings", "pip", purpose="reads/writes Excel files"),
+        ModuleInstall(
+            'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
         #
-        ModuleInstall("certifi", "pip"),
-        ModuleInstall("tornado", "wheel"),
-        ModuleInstall("pyzmq", "wheel", mname="zmq"),
+        ModuleInstall(
+            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts."),
+        ModuleInstall(
+            "tornado", "wheel", purpose="python server, IPython relies on it"),
+        ModuleInstall(
+            "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz"),
         #
-        ModuleInstall("pycparser", "wheel"),
-        ModuleInstall("Cython", "wheel"),
-        ModuleInstall("numpy", "wheel"),
-        ModuleInstall("matplotlib", "wheel"),
-        ModuleInstall("gr", "wheel"),
+        ModuleInstall(
+            "pycparser", "wheel", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
+        ModuleInstall("Cython", "wheel", purpose="pseudo C++ in python"),
+        ModuleInstall("numpy", "wheel", purpose="matrix computation"),
+        ModuleInstall("matplotlib", "wheel", purpose="plots"),
+        ModuleInstall(
+            "gr", "wheel", purpose="GR is a universal framework for cross-platform visualization applications."),
         # ModuleInstall("seaborn", "pip"),   # it seems problematic for this
         # small config
-        ModuleInstall("scipy", "wheel"),
-        ModuleInstall("statsmodels", "wheel"),  # needs scipy
-        ModuleInstall("networkx", "wheel"),  # it seems problematic for this
+        ModuleInstall(
+            "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra"),
+        ModuleInstall(
+            "statsmodels", "wheel", purpose="statistical modelling, depends on scipy"),
+        ModuleInstall(
+            "networkx", "wheel", purpose="graph libraries, basic drawing"),
         # small config
-        ModuleInstall("graphviz", "pip"),
-        ModuleInstall("jsonschema", "pip"),
-        ModuleInstall("mistune", "pip"),
-        ModuleInstall("wheel", "pip"),
+        ModuleInstall(
+            "graphviz", "pip", purpos="wrapper for graphviz (most famous tool to draw graphs"),
+        ModuleInstall(
+            "jsonschema", "pip", purpose="An implementation of JSON Schema validation for Python"),
+        ModuleInstall(
+            "mistune", "pip", purpose="The fastest markdown parser in pure Python with renderer features, inspired by marked."),
+        ModuleInstall("wheel", "pip", purpose="handle wheels"),
         # sphinx
-        ModuleInstall("alabaster", "wheel"),
-        ModuleInstall("Babel", "wheel", mname="babel"),
-        ModuleInstall("colorama", "pip"),
-        ModuleInstall("docutils", "pip"),
-        ModuleInstall("sphinx", "pip"),
-        ModuleInstall('pypiserver', 'pip'),
+        ModuleInstall(
+            "alabaster", "wheel", purpose="A configurable sidebar-enabled Sphinx theme"),
+        ModuleInstall(
+            "Babel", "wheel", mname="babel", purpose="Internationalization utilities"),
+        ModuleInstall(
+            "colorama", "pip", purpose="Cross-platform colored terminal text."),
+        ModuleInstall("docutils", "pip", purpose="interpret RST format"),
+        ModuleInstall(
+            "sphinx", "pip", purpose="documentation generation based on RST"),
+        ModuleInstall(
+            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images'),
+        ModuleInstall('pypiserver', 'pip', purpose="run a local pipy server"),
         # flake8, pep8
-        ModuleInstall("pep8", "pip", version="1.5.7"),
-        ModuleInstall("autopep8", "pip"),
-        ModuleInstall("mccabe", "pip"),
-        ModuleInstall("pyflakes", "pip"),
-        ModuleInstall("flake8", "pip"),
-        ModuleInstall('markupsafe', 'pip'),
+        ModuleInstall(
+            "pep8", "pip", version="1.5.7", purpose="official guidelines on Python style"),
+        ModuleInstall("autopep8", "pip", purpose="apply pep8 on a script"),
+        ModuleInstall(
+            "mccabe", "pip", purpose="This module provides a plugin for flake8, the Python code checker."),
+        ModuleInstall("pyflakes", "pip", purpose="verify pep8 on a script"),
+        ModuleInstall("flake8", "pip", purpose="verify pep8 on a script"),
+        ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
         #
         #
-        ModuleInstall("pandas", "wheel"),
-        ModuleInstall("scikit-learn", "wheel", mname="sklearn"),
-        ModuleInstall("ipython", "pip", mname="IPython"),
+        ModuleInstall(
+            "pandas", "wheel", purpose="manipulate table as SQL in memory"),
+        ModuleInstall(
+            "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)"),
+        ModuleInstall(
+            "bcolz", "wheel", puropose="compressed dataframe, in memory or on disk")
+        ModuleInstall(
+            "scikit-learn", "wheel", mname="sklearn", purpose="machine learning"),
+        ModuleInstall(
+            "ipython", "pip", mname="IPython", purpose="IPython, notebooks, Jupyter"),
         #
-        ModuleInstall("mpld3", "pip"),
+        ModuleInstall(
+            "mpld3", "pip", purpose="mpld3 project brings together Matplotlib and D3js."),
         #
-        ModuleInstall("typecheck-decorator", "pip", mname="typecheck"),
-        ModuleInstall("decorator", "pip"),
+        ModuleInstall("typecheck-decorator", "pip", mname="typecheck",
+                      purpose="verifies decorators at running time"),
+        ModuleInstall(
+            "decorator", "pip", purpose="Better living through Python with decorators"),
         #
-        ModuleInstall("requests", "pip"),
+        ModuleInstall("requests", "pip", purpose="human interface for http"),
         #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
-        ModuleInstall("PySide", "wheel"),
-        ModuleInstall("psutil", "wheel"),  #
-        ModuleInstall("rope_py3k", "pip", mname="rope"),  #
-        ModuleInstall("pylint", "pip"),  #
-        ModuleInstall("spyder", "wheel", mname="spyderlib"),
+        ModuleInstall(
+            "PySide", "wheel", purpose="open source version of PyQt"),
+        ModuleInstall(
+            "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
+        ModuleInstall(
+            "rope_py3k", "pip", mname="rope", purpose="refactoring library"),  #
+        ModuleInstall(
+            "pylint", "pip", purpose="statistics on Python script style"),  #
+        ModuleInstall(
+            "spyder", "wheel", mname="spyderlib", purpose="scientific IDE"),
         #
-        ModuleInstall("brewer2mpl", "pip"),
-        ModuleInstall("ggplot", "pip"),
-        ModuleInstall("goslate", "pip"),
-        ModuleInstall("dbfread", "pip"),   # to read dbase format
-        ModuleInstall("xmltodict", "pip"),   # XML to JSON
-        ModuleInstall("ansiconv", "pip"),   # shell to plain
-        ModuleInstall("ansi2html", "pip"),   # shell to HTML
+        ModuleInstall(
+            "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
+        ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
+        ModuleInstall("goslate", "pip", purpose="calls google translate"),
+        ModuleInstall("dbfread", "pip", purpose="access DBase format"),
+        # XML to JSON
+        ModuleInstall(
+            "xmltodict", "pip", purpose="Makes working with XML feel like you are working with JSON"),
+        # shell to plain
+        ModuleInstall(
+            "ansiconv", "pip", purpose="A Python module for converting ANSI coded text and converts it to either plain text or HTML."),
+        # shell to HTML
+        ModuleInstall(
+            "ansi2html", "pip", purpose="Convert text with ANSI color codes to HTML"),
         #
-        ModuleInstall("nodeenv", "pip"),   # node.js
+        # node.js
+        ModuleInstall(
+            "nodeenv", "pip", purpose="Node.js virtual environment builder"),
         #
         # 2015-06-05
         #
-        ModuleInstall('PyYAML', 'wheel', mname='yaml'),
-        ModuleInstall('bokeh', 'pip'),
-        ModuleInstall('rpy2', 'wheel'),
-        ModuleInstall('seaborn', 'pip'),
-        ModuleInstall("sphinxjp.themes.revealjs", "pip"),
-        ModuleInstall("feedparser", "wheel"),   # to parse RSS streams
-        ModuleInstall("python-jenkins", "pip", mname="jenkins"),  # for Jenkins
+        ModuleInstall('PyYAML', 'wheel', mname='yaml',
+                      purpose=" YAML parser and emitter for Python"),
+        ModuleInstall(
+            'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript"),
+        ModuleInstall('rpy2', 'wheel', purpose="interact with R"),
+        ModuleInstall(
+            'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes"),
+        ModuleInstall("sphinxjp.themes.revealjs", "pip",
+                      purpose="slides based on revealjs, needed to convert notebook into slides"),
+        ModuleInstall("feedparser", "wheel", purpose="parse RSS streams"),
+        ModuleInstall(
+            "python-jenkins", "pip", mname="jenkins", purpose="interact with Jenkins"),
         #
         # 2015-06-15
         #
-        ModuleInstall('envoy', 'pip'),
-        ModuleInstall('Logbook', 'wheel', mname='logbook'),
-        ModuleInstall('pkginfo', 'pip'),
-        ModuleInstall("multipledispatch ", "pip"),
+        ModuleInstall(
+            'envoy', 'pip', purpose="Simple API for running external processes."),
+        ModuleInstall('Logbook', 'wheel', mname='logbook',
+                      purpose="A logging replacement for Python"),
+        ModuleInstall(
+            'pkginfo', 'pip', purpose="Query metadatdata from sdists / bdists / installed packages."),
+        ModuleInstall("multipledispatch ", "pip",
+                      purpose="A relatively sane approach to multiple dispatch in Python."),
     ]
 
     if sys.platform.startswith("win"):
-        mod.append(ModuleInstall("pywin32", "wheel", mname="win32com"))
-        mod.append(ModuleInstall("winshell", "pip"))
+        mod.append(
+            ModuleInstall("pywin32", "wheel", mname="win32com", purpose="call Windows DLL"))
+        mod.append(
+            ModuleInstall("winshell", "pip", purpose="Windows shell functions"))
 
     return mod
 
@@ -172,26 +250,30 @@ def sphinx_theme_set():
     """
     list of sphinx themes
     """
-    res = [ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme'),
-           ModuleInstall('sphinxjp.themes.basicstrap', 'pip'),
-           ModuleInstall('solar_theme', 'pip'),
-           ModuleInstall('cloud_sptheme', 'pip'),
-           ModuleInstall('sphinx_readable_theme', 'pip'),
+    res = [ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme', purpose="sphinx theme"),
            ModuleInstall(
-        "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme"),
-        ModuleInstall("wild_sphinx_theme", "pip"),
-        ModuleInstall("sphinx_bootstrap_theme", "pip"),
-        ModuleInstall("sphinxjp.themes.sphinxjp", "pip"),
-        ModuleInstall("sphinx_py3doc_enhanced_theme", "pip"),
-        ModuleInstall("epfl-sphinx-theme", "pip", mname="epfl_theme"),
-        #
-        ModuleInstall("sphinx-better-theme", "pip", mname="better"),
-        ModuleInstall("guzzle_sphinx_theme", "pip"),
-        ModuleInstall("flyingsphinx", "pip"),
-        ModuleInstall("itcase_sphinx_theme", "pip"),
-        ModuleInstall("sphinxtrap", "pip"),
-        ModuleInstall("guzzle_sphinx_theme", "pip"),
-
+               'sphinxjp.themes.basicstrap', 'pip', purpose="sphinx theme"),
+           ModuleInstall('solar_theme', 'pip', purpose="sphinx theme"),
+           ModuleInstall('cloud_sptheme', 'pip', purpose="sphinx theme"),
+           ModuleInstall(
+               'sphinx_readable_theme', 'pip', purpose="sphinx theme"),
+           ModuleInstall(
+        "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme", purpose="sphinx theme"),
+        ModuleInstall("wild_sphinx_theme", "pip", purpose="sphinx theme"),
+        ModuleInstall("sphinx_bootstrap_theme", "pip", purpose="sphinx theme"),
+        ModuleInstall(
+            "sphinxjp.themes.sphinxjp", "pip", purpose="sphinx theme"),
+        ModuleInstall(
+            "sphinx_py3doc_enhanced_theme", "pip", purpose="sphinx theme"),
+        ModuleInstall(
+            "epfl-sphinx-theme", "pip", mname="epfl_theme", purpose="sphinx theme"),
+        ModuleInstall(
+            "sphinx-better-theme", "pip", mname="better", purpose="sphinx theme"),
+        ModuleInstall("guzzle_sphinx_theme", "pip", purpose="sphinx theme"),
+        ModuleInstall("flyingsphinx", "pip", purpose="sphinx theme"),
+        ModuleInstall("itcase_sphinx_theme", "pip", purpose="sphinx theme"),
+        ModuleInstall("sphinxtrap", "pip", purpose="sphinx theme"),
+        ModuleInstall("guzzle_sphinx_theme", "pip", purpose="sphinx theme"),
     ]
     return res
 
@@ -210,88 +292,124 @@ def extended_set():
     @endcode
     """
     mod = [
-        ModuleInstall('werkzeug', 'pip'),
-        ModuleInstall('itsdangerous', 'pip'),
-        ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy'),
-        ModuleInstall('flask-sqlalchemy', 'pip', mname='flask.ext.sqlalchemy'),
-        ModuleInstall('simplejson', 'wheel'),
-        ModuleInstall('python-pptx', 'pip', mname="pptx"),
-        ModuleInstall('python-docx', 'pip', mname="docx"),
-        ModuleInstall('XlsxWriter', 'pip', mname='xlsxwriter'),
-        ModuleInstall('flask', 'pip'),
-        ModuleInstall(' flasksphinx', 'pip'),
-        ModuleInstall('cffi', 'wheel'),
-        ModuleInstall('odo', 'wheel'),
-        ModuleInstall('cytoolz', 'wheel'),
-        ModuleInstall('toolz', 'wheel'),
-        ModuleInstall('datashape', 'pip'),
-        ModuleInstall('multipledispatch', 'pip'),
-        ModuleInstall('dynd', 'wheel'),
-        ModuleInstall('blaze', 'wheel'),
-        ModuleInstall('sympy', 'pip'),
-        ModuleInstall('gmpy2', 'wheel'),
-        ModuleInstall('llvmpy', 'wheel', mname='llvm'),
-        ModuleInstall('llvmlite', 'wheel'),
-        ModuleInstall('numba', 'wheel'),
-        ModuleInstall('networkx', 'pip'),
-        ModuleInstall('snowballstemmer', 'pip'),
-        ModuleInstall('scikit-image', 'wheel', mname='skimage'),
-        ModuleInstall('patsy', 'pip'),
-        ModuleInstall('cvxopt', 'wheel'),
-        ModuleInstall('pymc', 'wheel'),
-        ModuleInstall('PyWavelets', 'wheel', mname='pywt'),
-        ModuleInstall('fastcluster', 'wheel'),
-        ModuleInstall('pycosat', 'wheel'),
-        ModuleInstall('pyshp', 'pip', mname='shapefile'),
-        ModuleInstall('Shapely', 'wheel', mname='shapely'),
-        ModuleInstall('vispy', 'pip'),
-        ModuleInstall('selenium', 'pip'),
-        ModuleInstall('Pillow', 'wheel', mname='PIL'),
-        ModuleInstall('pygame', 'wheel'),
-        ModuleInstall('Kivy', 'wheel', mname='kivy'),
-        ModuleInstall('kivy-garden', 'pip', mname='kivy.garden'),
-        ModuleInstall('py4j', 'pip'),
-        ModuleInstall('python-igraph', 'wheel', mname='igraph'),
-        ModuleInstall('lockfile', 'pip'),
-        ModuleInstall('python-daemon', 'pip', mname='daemon'),
-        ModuleInstall('luigi', 'pip'),
-        #
-        ModuleInstall('setproctitle', 'wheel', mname='setproctitle'),
-        # thrift only works only for Python 2.7
-        ModuleInstall('thriftpy', 'pip'),
-        # ModuleInstall('airflow', 'pip'),  # does not work on Python 3
-        ModuleInstall('smopy', 'pip'),
-        ModuleInstall('folium', 'pip'),
-        ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap'),
-        ModuleInstall('snowballstemmer', 'pip'),
         ModuleInstall(
-            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images'),
+            'werkzeug', 'pip', purpose="The Swiss Army knife of Python web development"),
+        ModuleInstall('itsdangerous', 'pip',
+                      purpose="Various helpers to pass trusted data to untrusted environments and back."),
+        ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy',
+                      purpose="model SQL queries as objects"),
+        ModuleInstall('flask-sqlalchemy', 'pip', mname='flask.ext.sqlalchemy'),
+        ModuleInstall('simplejson', 'wheel', purpose="json parser"),
+        ModuleInstall('python-pptx', 'pip', mname="pptx",
+                      purpose="read/write PowerPoint presentation"),
+        ModuleInstall(
+            'python-docx', 'pip', mname="docx", purpose="read/write Word document"),
+        ModuleInstall('flask', 'pip', purpose="python server"),
+        ModuleInstall(
+            'flasksphinx', 'pip', purpose="serves Sphinx documentation through a Flask server"),
+        ModuleInstall(
+            'cffi', 'wheel', purpose="Foreign Function Interface for Python calling C code."),
+        ModuleInstall(
+            'odo', 'wheel', purpose="usually used with blaze, handles dataframe in various type of containers"),
+        ModuleInstall(
+            'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities"),
+        ModuleInstall(
+            'toolz', 'wheel', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries."),
+        ModuleInstall(
+            'datashape', 'pip', purpose="A data description language."),
+        ModuleInstall(
+            'dynd', 'wheel', purpose="DyND-Python, a component of the Blaze project, is the Python exposure of the DyND dynamic multi-dimensional array library."),
+        ModuleInstall(
+            'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets"),
+        ModuleInstall(
+            'sympy', 'pip', purpose="SymPy is a Python library for symbolic mathematics."),
+        ModuleInstall('gmpy2', 'wheel', purpose="big real numbers"),
+        ModuleInstall('llvmpy', 'wheel', mname='llvm',
+                      purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools."),
+        ModuleInstall(
+            'llvmlite', 'wheel', purpose="lightweight wrapper around basic LLVM functionality"),
+        ModuleInstall(
+            'numba', 'wheel', purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
+        ModuleInstall(
+            'networkx', 'pip', purpose="model graphs, basic drawings"),
+        ModuleInstall('snowballstemmer', 'pip',
+                      purpose="This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms."),
+        ModuleInstall('scikit-image', 'wheel', mname='skimage',
+                      purpose="scikit-image is a collection of algorithms for image processing."),
+        ModuleInstall(
+            'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
+        ModuleInstall(
+            'cvxopt', 'wheel', purpose="linear, quadratique optimization"),
+        ModuleInstall('pymc', 'wheel', purpose="Monte Carlo computation"),
+        ModuleInstall(
+            'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation"),
+        ModuleInstall('fastcluster', 'wheel', purpose="clustering, AHC, ..."),
+        ModuleInstall(
+            'pycosat', 'wheel', purpose="PicoSAT is a popular SAT solver written by Armin Biere in pure C."),
+        ModuleInstall('pyshp', 'pip', mname='shapefile',
+                      purpose="Pure Python read/write support for ESRI Shapefile format"),
+        ModuleInstall('Shapely', 'wheel', mname='shapely',
+                      purpose="Manipulation and analysis of geometric objects in the Cartesian plane."),
+        ModuleInstall(
+            'vispy', 'pip', purpose="Vispy is a high-performance interactive 2D/3D data visualization library."),
+        ModuleInstall(
+            'selenium', 'pip', purpose="Python wrapper for Selenium"),
+        ModuleInstall(
+            'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
+        ModuleInstall('pygame', 'wheel', purpose="GUI, interface for games"),
+        ModuleInstall(
+            'Kivy', 'wheel', mname='kivy', purpose="GUI, interface for games, mobile"),
+        ModuleInstall('kivy-garden', 'pip', mname='kivy.garden',
+                      purpose="Garden tool for kivy flowers."),
+        ModuleInstall(
+            'py4j', 'pip', purpose="Enables Python programs to dynamically access arbitrary Java objects"),
+        ModuleInstall('python-igraph', 'wheel', mname='igraph',
+                      purpose="High performance graph data structures and algorithms"),
+        ModuleInstall(
+            'lockfile', 'pip', purpose="Platform-independent file locking module"),
+        ModuleInstall('python-daemon', 'pip', mname='daemon',
+                      purpose="Library to implement a well-behaved Unix daemon process."),
+        ModuleInstall('luigi', 'pip', purpose="workflows, data workflows"),
         #
-        ModuleInstall("brewer2mpl", "pip"),
-        ModuleInstall("ggplot", "pip"),
-        ModuleInstall("dbfread", "pip"),   # to read dbase format
-        ModuleInstall("xmltodict", "pip"),   # XML to JSON
-        ModuleInstall("python-linkedin", "pip", mname="linkedin"),
+        ModuleInstall('setproctitle', 'wheel', mname='setproctitle',
+                      purpose="A Python module to customize the process title"),
+        # thrift only works only for Python 2.7
+        ModuleInstall(
+            'thriftpy', 'pip', purpose="ure python implemention of Apache Thrift."),
+        # ModuleInstall('airflow', 'pip'),  # does not work on Python 3
+        ModuleInstall(
+            'smopy', 'pip', purpose="OpenStreetMap image tiles in Python "),
+        ModuleInstall(
+            'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python"),
+        ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
+                      purpose="maps extension for matplotlib"),
+        #
+        ModuleInstall("python-linkedin", "pip", mname="linkedin",
+                      purpose="python wrapper for linkedin interface"),
         # access to linkedin
-        ModuleInstall("oauthlib", "pip"),
-        ModuleInstall("requests_oauthlib", "pip"),
-        ModuleInstall("antlr4-python3-runtime", "pip", mname="antlr4"),
+        ModuleInstall(
+            "oauthlib", "pip", purpose="A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"),
+        ModuleInstall("requests_oauthlib", "pip",
+                      purpose="OAuthlib authentication support for Requests."),
+        ModuleInstall("antlr4-python3-runtime", "pip",
+                      mname="antlr4", purpose="antlr4 runtime, grammar parser"),
         # ModuleInstall("unqlite",                    "pip"),   #
         # key/value store (NoSQL)
-        ModuleInstall("pycontracts", "pip", mname="contracts"),
-        ModuleInstall("ansiconv", "pip"),   # shell to plain
-        ModuleInstall("ansi2html", "pip"),   # shell to HTML
-
+        ModuleInstall("pycontracts", "pip", mname="contracts",
+                      purpose="PyContracts is a Python package that allows to declare constraints on function parameters and return values"),
         #
-        ModuleInstall("ecdsa", "pip"),
-        ModuleInstall("pycrypto", "wheel_xd", mname="Crypto"),
-        ModuleInstall("paramiko", "pip"),
+        ModuleInstall(
+            "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
+        ModuleInstall("pycrypto", "wheel_xd", mname="Crypto",
+                      purpose="Cryptographic modules for Python."),
+        ModuleInstall("paramiko", "pip", purpose="SSH2 protocol library"),
         #
-        ModuleInstall("pattern", "pip") if sys.version_info[
-            0] < 3 else None,  # to read dbase format
+        ModuleInstall(
+            "pattern", "pip", purpose="Web mining module for Python, with tools for scraping, natural language processing, machine learning, network analysis and visualization.")
+        if sys.version_info[0] < 3 else None,  # to read dbase format
         #
-        ModuleInstall("nodeenv", "pip"),   # node.js
-        ModuleInstall("pbr", "pip"),
+        ModuleInstall(
+            "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
         #
         # 2015-02-05
         #
@@ -300,7 +418,8 @@ def extended_set():
         # convex optimization, depends on CVXOPT
         ModuleInstall("scs", "wheel"),
         ModuleInstall("ecos", "wheel"),
-        ModuleInstall("cvxpy", "pip"),
+        ModuleInstall(
+            "cvxpy", "pip", purpose="linear, quadratique optimization, depends in cvxopt"),
         ModuleInstall("blist", "wheel"),    # better large list
         ModuleInstall("conda", "pip"),      # to install packages with conda
         ModuleInstall("libLAS", "wheel", mname="liblas"),
@@ -308,36 +427,42 @@ def extended_set():
         ModuleInstall("marisa_trie", "wheel"),
         ModuleInstall("mlpy", "wheel"),
         ModuleInstall("pygit2", "wheel"),
-        ModuleInstall("pymongo", "wheel"),
+        ModuleInstall(
+            "pymongo", "wheel", purpose="Python wrapper for MongoDB"),
         ModuleInstall("PyOpenGL", "wheel", mname="OpenGL"),
-        ModuleInstall("Theano", "wheel", mname="theano"),
-        ModuleInstall("keras", "pip"),  # deep learning
+        ModuleInstall(
+            "Theano", "wheel", mname="theano", purpose="deep learning"),
+        ModuleInstall("keras", "pip", purpose="deep learning"),
         ModuleInstall("pyqtgraph", "pip"),
-        ModuleInstall("deap", "pip"),
+        ModuleInstall("deap", "pip", purpose="deep learning"),
         ModuleInstall("boto", "pip"),      # for gensim
         ModuleInstall("bz2file", "pip"),      # for gensim
         ModuleInstall("smart_open", "wheel"),      # for gensim
-        ModuleInstall("gensim", "wheel"),
+        ModuleInstall("gensim", "wheel", purpose="genetic algorithm"),
         # ModuleInstall("pybrain", "pip"),   # some issues with the code
         # (relative import are not well handled in version 0.3.3
-        ModuleInstall("h5py", "wheel"),  # Bayesian
-        ModuleInstall("bayespy", "pip"),  # Bayesian
+        ModuleInstall("h5py", "wheel"),
+        # Bayesian
+        ModuleInstall(
+            "bayespy", "pip", purpose="bayesian modelling and computation"),
         ModuleInstall("numexpr", "wheel"),
         #
         ModuleInstall("glueviz", "wheel", mname="glue"),
-        ModuleInstall("pypiserver", "pip"),
         #
         ModuleInstall("charts", "pip"),  # javascript graphs
         #
         ModuleInstall("dill", "pip"),  # for dask
-        ModuleInstall("dask", "pip"),  # parallel computation
+        # parallel computation
+        ModuleInstall(
+            "dask", "pip", purpose="parallization of operations with dataframe"),
         #
         ModuleInstall("jedi", "pip"),
         ModuleInstall("docopt", "pip"),
-        ModuleInstall("markdown2", "pip"),
+        ModuleInstall("markdown2", "pip", purpose="markdown parser"),
         ModuleInstall("structures", "pip"),
         ModuleInstall("py2exe", "wheel"),
-        ModuleInstall("rodeo", "pip"),
+        ModuleInstall(
+            "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython"),
         ModuleInstall("tzlocal", "pip"),
         ModuleInstall("apscheduler", "pip"),
         #
@@ -349,12 +474,14 @@ def extended_set():
         #
         # July 2015
         #
-        ModuleInstall("ete", "github", "jhcepas", mname="ete3"),  #graph visualization
+        ModuleInstall("ete", "github", "jhcepas", mname="ete3",
+                      purpose="tree visualisation"),  # graph visualization
         ModuleInstall("pyxley", "pip"),  # visualisation
     ]
 
     if sys.platform.startswith("win"):
-        mod.append(ModuleInstall("pywin32", "wheel", mname="win32com"))
+        mod.append(
+            ModuleInstall("pywin32", "wheel", mname="win32com", purpose="call Windows DLL"))
         mod.append(ModuleInstall("winshell", "pip"))
 
     return [_ for _ in mod if _ is not None]
@@ -366,7 +493,7 @@ def azure_set():
 
     """
     mod = [
-        ModuleInstall("azure", "pip"),
+        ModuleInstall("azure", "pip", purpose="Python wrapper for Azure API"),
     ]
 
     return mod
@@ -380,14 +507,16 @@ def ensae_set():
     """
     mod = [
         ModuleInstall("celery", "pip"),
-        ModuleInstall("tweepy", "pip"),
+        ModuleInstall(
+            "tweepy", "pip", purpose="Python wrapper for the twitter API"),
         #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
         ModuleInstall("django", "pip"),
         ModuleInstall("django-audiotracks", "pip", mname="audiotracks"),
         ModuleInstall("Quandl", "pip"),
         #ModuleInstall("Lasagne", "pip", mname="lasagne"),
         ModuleInstall("pymunk", "pip"),
-        ModuleInstall("nltk", "wheel"),
+        ModuleInstall(
+            "nltk", "wheel", purpose="NLP, natural language processing"),
         ModuleInstall("textblob", "pip"),
         ModuleInstall("dev", "pip"),
         ModuleInstall("opencv_python", "wheel", mname="cv"),
@@ -402,7 +531,8 @@ def ensae_set():
         ModuleInstall("mahotas", "wheel"),
         ModuleInstall("milk", "wheel"),
         ModuleInstall("minepy", "wheel"),
-        ModuleInstall("NLopt", "wheel", mname="nlopt"),
+        ModuleInstall(
+            "NLopt", "wheel", mname="nlopt", purpose="linear, quadratic optimization"),
         ModuleInstall("Pmw", "wheel", mname="Pmw"),
         ModuleInstall("py2exe", "wheel"),
         ModuleInstall("pytools", "pip"),
@@ -419,11 +549,13 @@ def ensae_set():
         ModuleInstall("VideoCapture", "wheel"),
         ModuleInstall("zs", "wheel"),
         # machine learning
-        ModuleInstall("joblib", "pip"),
+        ModuleInstall(
+            "joblib", "pip", purpose="distribute jobs, parallelization"),
         #
         # teachings
         #
-        ModuleInstall("tutormagic", "pip"),  # tutor magic in a notebook
+        ModuleInstall(
+            "tutormagic", "pip", purpose="brings PythonTutor in a notebok"),
         # cache resuls from a long computation
         ModuleInstall("ipycache", "pip"),
         ModuleInstall("nbupload", "pip"),  # to upload a file in a notebook
@@ -448,22 +580,40 @@ def ensae_set():
         #
         #
         ModuleInstall("zipline", "pip"),  # finance
-        ModuleInstall("vincent", "pip"),  # graph
+        ModuleInstall("vincent", "pip", purpose="plotting"),  # graph
         # graph, pygal_maps_world only accepts the latest version
-        ModuleInstall("pygal", "github", "Kozea"),
+        ModuleInstall("pygal", "github", "Kozea", purpose="plotting"),
         ModuleInstall("pygal_maps_world", "pip"),  # graph
         #
         # 2015-06-30
         #
-        ModuleInstall("sas7bdat", "pip"),  # SAS
+        ModuleInstall(
+            "sas7bdat", "pip", purpose="read/write SAS format"),  # SAS
         #
         # 2015-07-15
         #
         # linear optimisation, see
         # http://blog.yhathq.com/posts/decision-making-under-uncertainty.html
-        ModuleInstall("PuLP", "wheel", mname="pulp"),
+        ModuleInstall("PuLP", "wheel", mname="pulp",
+                      purpose="linear, quadratique optimization with constraints"),
         # for pyensae unit test
         ModuleInstall("JSAnimation", "github", "jakevdp"),
+        #
+        # pydata
+        #
+        ModuleInstall("CherryPy", "wheel", mname="cherrypy",
+                      purpose="create web application, needed by Spyre"),
+        ModuleInstall("Spyre", "pip", mname="spyre",
+                      purpose="create simple web application to visualize data"),
+        ModuleInstall(
+            "python-recsys", "pip", mname="recsys", purpose="recommendation system"),
+        ModuleInstall(
+            "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
+        ModuleInstall("cubehelix", "github", "jradavenport",
+                      purpose="a full implementation of Dave Green's cubehelix colormap for Python"),
+        ModuleInstall("lifelines", "pip", purpose="survival analysis"),
+        ModuleInstall(
+            "pysnptools", "pip", purpose="operation on DNA sequences"),
 
     ]
     return mod
@@ -476,14 +626,18 @@ def teachings_set():
     Modules implemented for my teachings.
     """
     mod = [
-        ModuleInstall("pyquickhelper", "pip"),
-        ModuleInstall("pymyinstall", "pip"),
-        ModuleInstall("pymmails", "pip"),
-        ModuleInstall("pyensae", "pip"),
-        ModuleInstall("pyrsslocal", "pip"),
-        ModuleInstall("code_beatrix", "pip"),
-        ModuleInstall("actuariat_python", "pip"),
-        ModuleInstall("ensae_teaching_cs", "pip"),
+        ModuleInstall(
+            "pyquickhelper", "pip", purpose="helpers to generation documentation"),
+        ModuleInstall(
+            "pymyinstall", "pip", purpose="easy installation of modules including Windows"),
+        ModuleInstall("pymmails", "pip", purpose="read/send emails"),
+        ModuleInstall(
+            "pyensae", "pip", purpose="helpers, Hadoop, SQL, financial times series, ..."),
+        ModuleInstall("pyrsslocal", "pip", purpose="RSS readers"),
+        ModuleInstall(
+            "code_beatrix", "pip", purpose="teaching programming to kids, lesenfantscodaient.fr"),
+        ModuleInstall("actuariat_python", "pip", purpose="teachings"),
+        ModuleInstall("ensae_teaching_cs", "pip", purpose="teachings"),
     ]
     #
     return mod

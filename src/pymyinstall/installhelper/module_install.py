@@ -240,7 +240,8 @@ class ModuleInstall:
                  version=None,
                  script=None,
                  index_url=None,
-                 deps=None):
+                 deps=None,
+                 purpose=None):
         """
         constructor
 
@@ -254,6 +255,7 @@ class ModuleInstall:
                                     the class will check this script is available
         @param      deps            overwrite deps parameters when installing the module
         @param      index_url       to get the package from a custom pypi server
+        @param      purpose         purpose of the module
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -267,6 +269,7 @@ class ModuleInstall:
         self.script = script
         self.index_url = index_url
         self.deps = deps
+        self.purpose = purpose
 
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception(
@@ -285,6 +288,13 @@ class ModuleInstall:
         """
         if os.path.exists(ModuleInstall._page_cache_html):
             os.remove(ModuleInstall._page_cache_html)
+
+    @property
+    def Purpose(self):
+        """
+        returns the comment
+        """
+        return "-" if self.purpose is None else self.purpose
 
     @property
     def Script(self):
