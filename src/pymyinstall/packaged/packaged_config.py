@@ -164,7 +164,7 @@ def small_set():
         ModuleInstall(
             "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)"),
         ModuleInstall(
-            "bcolz", "wheel", puropose="compressed dataframe, in memory or on disk")
+            "bcolz", "wheel", puropose="compressed dataframe, in memory or on disk"),
         ModuleInstall(
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning"),
         ModuleInstall(
@@ -413,30 +413,47 @@ def extended_set():
         #
         # 2015-02-05
         #
-        ModuleInstall("autopy3", "wheel", mname="autopy3"),  # simulate events
-        ModuleInstall("bigfloat", "wheel"),  # large double
+        ModuleInstall("autopy3", "wheel", mname="autopy3",
+                      purpose="A simple, cross-platform GUI automation toolkit for Python 3"),  # simulate events
+        # large double
+        ModuleInstall("bigfloat", "wheel", purpose="big float"),
         # convex optimization, depends on CVXOPT
-        ModuleInstall("scs", "wheel"),
-        ModuleInstall("ecos", "wheel"),
         ModuleInstall(
-            "cvxpy", "pip", purpose="linear, quadratique optimization, depends in cvxopt"),
-        ModuleInstall("blist", "wheel"),    # better large list
-        ModuleInstall("conda", "pip"),      # to install packages with conda
-        ModuleInstall("libLAS", "wheel", mname="liblas"),
-        ModuleInstall("liblinear", "wheel"),
-        ModuleInstall("marisa_trie", "wheel"),
-        ModuleInstall("mlpy", "wheel"),
-        ModuleInstall("pygit2", "wheel"),
+            "scs", "wheel", purpose="Solves convex cone programs via operator splitting."),
+        ModuleInstall(
+            "ecos", "wheel", purpose="ECOS is a numerical software for solving convex second-order cone programs (SOCPs)"),
+        ModuleInstall(
+            "cvxpy", "pip", purpose="linear, quadratic optimization, depends on cvxopt"),
+        # better large list
+        ModuleInstall(
+            "blist", "wheel", purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
+        # to install packages with conda
+        ModuleInstall("conda", "pip", purpose="package management tool"),
+        ModuleInstall("libLAS", "wheel", mname="liblas",
+                      purpose="libLAS is a C/C++ library for reading and writing the very common LAS LiDAR format."),
+        ModuleInstall(
+            "liblinear", "wheel", purpose="A Library for Large Linear Classification"),
+        ModuleInstall("marisa_trie", "wheel",
+                      purpose="Static memory-efficient & fast Trie-like structures for Python (based on marisa-trie C++ library)"),
+        ModuleInstall(
+            "mlpy", "wheel", purpose="mlpy is a Python module for Machine Learning built on top of NumPy/SciPy, has wavelets"),
+        ModuleInstall(
+            "pygit2", "wheel", purpose="Pygit2 is a set of Python bindings to the libgit2 shared library, libgit2 implements the core of Git."),
         ModuleInstall(
             "pymongo", "wheel", purpose="Python wrapper for MongoDB"),
-        ModuleInstall("PyOpenGL", "wheel", mname="OpenGL"),
         ModuleInstall(
-            "Theano", "wheel", mname="theano", purpose="deep learning"),
+            "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
+        ModuleInstall(
+            "Theano", "wheel", mname="theano", purpose="deep learning, GPU"),
         ModuleInstall("keras", "pip", purpose="deep learning"),
-        ModuleInstall("pyqtgraph", "pip"),
+        ModuleInstall(
+            "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
-        ModuleInstall("boto", "pip"),      # for gensim
-        ModuleInstall("bz2file", "pip"),      # for gensim
+        # for gensim
+        ModuleInstall(
+            "boto", "pip", purpose="A Python interface to Amazon Web Services"),
+        # for gensim
+        ModuleInstall("bz2file", "pip", purpose="process bz2 files"),
         ModuleInstall("smart_open", "wheel"),      # for gensim
         ModuleInstall("gensim", "wheel", purpose="genetic algorithm"),
         # ModuleInstall("pybrain", "pip"),   # some issues with the code
