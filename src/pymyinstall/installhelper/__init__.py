@@ -65,3 +65,20 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         fLOG("updated modules")
         for m in again:
             fLOG(m)
+
+
+def module_as_table(list_module, as_df=False):
+    """
+    returns a list of dictionaries or a dataframe
+    for a list of modules
+
+    @param      list_module     list of @see cl ModuleInstall
+    @param      as_df           as a dataframe or not
+    @return                     list of dictionaries or dataframe
+    """
+    res = [_.as_dict() for _ in list_module]
+    if as_df:
+        import pandas
+        return pandas.DataFrame(res)
+    else:
+        return res

@@ -129,7 +129,7 @@ def small_set():
             "networkx", "wheel", purpose="graph libraries, basic drawing"),
         # small config
         ModuleInstall(
-            "graphviz", "pip", purpos="wrapper for graphviz (most famous tool to draw graphs"),
+            "graphviz", "pip", purpose="wrapper for graphviz (most famous tool to draw graphs"),
         ModuleInstall(
             "jsonschema", "pip", purpose="An implementation of JSON Schema validation for Python"),
         ModuleInstall(
@@ -446,6 +446,7 @@ def extended_set():
         ModuleInstall(
             "Theano", "wheel", mname="theano", purpose="deep learning, GPU"),
         ModuleInstall("keras", "pip", purpose="deep learning"),
+        ModuleInstall("neon", "pip", purpose="deep learning"),
         ModuleInstall(
             "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
@@ -454,34 +455,47 @@ def extended_set():
             "boto", "pip", purpose="A Python interface to Amazon Web Services"),
         # for gensim
         ModuleInstall("bz2file", "pip", purpose="process bz2 files"),
-        ModuleInstall("smart_open", "wheel"),      # for gensim
+        # for gensim
+        ModuleInstall("smart_open", "wheel",
+                      purpose="Utils for streaming large files (S3, HDFS, gzip, bz2...), provides the same API for many format"),
         ModuleInstall("gensim", "wheel", purpose="genetic algorithm"),
         # ModuleInstall("pybrain", "pip"),   # some issues with the code
         # (relative import are not well handled in version 0.3.3
-        ModuleInstall("h5py", "wheel"),
+        ModuleInstall(
+            "h5py", "wheel", purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. Trillion-Particle Simulation."),
         # Bayesian
         ModuleInstall(
             "bayespy", "pip", purpose="bayesian modelling and computation"),
-        ModuleInstall("numexpr", "wheel"),
+        ModuleInstall(
+            "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas, bcolz and more."),
         #
-        ModuleInstall("glueviz", "wheel", mname="glue"),
+        ModuleInstall("glueviz", "wheel", mname="glue",
+                      purpose="ploting, Multidimensional data visualzation across files"),
         #
-        ModuleInstall("charts", "pip"),  # javascript graphs
+        # javascript graphs
+        ModuleInstall("charts", "pip", purpose="plotting in javascript"),
         #
-        ModuleInstall("dill", "pip"),  # for dask
+        ModuleInstall(
+            "dill", "pip", purpose="serialize all of python (almost), Dill extends python’s ‘pickle’ module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
         # parallel computation
         ModuleInstall(
             "dask", "pip", purpose="parallization of operations with dataframe"),
         #
-        ModuleInstall("jedi", "pip"),
-        ModuleInstall("docopt", "pip"),
+        ModuleInstall(
+            "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
+        ModuleInstall(
+            "docopt", "pip", purpose="Pythonic argument parser, that will make you smile"),
         ModuleInstall("markdown2", "pip", purpose="markdown parser"),
-        ModuleInstall("structures", "pip"),
-        ModuleInstall("py2exe", "wheel"),
+        ModuleInstall(
+            "structures", "pip", purpose="User-friendly library for creating data structures."),
+        ModuleInstall(
+            "py2exe", "wheel", purpose="convert a python program into an exe program"),
         ModuleInstall(
             "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython"),
-        ModuleInstall("tzlocal", "pip"),
-        ModuleInstall("apscheduler", "pip"),
+        ModuleInstall(
+            "tzlocal", "pip", purpose="tzinfo object for the local timezone"),
+        ModuleInstall(
+            "apscheduler", "pip", purpose="to schedule the execution of jobs, tasks"),
         #
         # ModuleInstall("pdfminer", "pip"),  # PDF extraction (no python 3 version)
         # ModuleInstall("minecart", "pip"),  # PDF extraction (no python 3 version)
@@ -493,7 +507,9 @@ def extended_set():
         #
         ModuleInstall("ete", "github", "jhcepas", mname="ete3",
                       purpose="tree visualisation"),  # graph visualization
-        ModuleInstall("pyxley", "pip"),  # visualisation
+        # visualisation
+        ModuleInstall(
+            "pyxley", "pip", purpose="plotting, visualization, javascript"),
     ]
 
     if sys.platform.startswith("win"):
@@ -523,48 +539,70 @@ def ensae_set():
     Modules introduced by students and some others added after some reading.
     """
     mod = [
-        ModuleInstall("celery", "pip"),
+        ModuleInstall(
+            "celery", "pip", purpose="Celery is an asynchronous task queue/job queue based on distributed message passing."),
         ModuleInstall(
             "tweepy", "pip", purpose="Python wrapper for the twitter API"),
         #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
-        ModuleInstall("django", "pip"),
-        ModuleInstall("django-audiotracks", "pip", mname="audiotracks"),
-        ModuleInstall("Quandl", "pip"),
+        ModuleInstall(
+            "django", "pip", purpose="web application, most famous module about it, the only when to build a scalable website"),
+        ModuleInstall("django-audiotracks", "pip",
+                      mname="audiotracks", purpose="read audio with django"),
+        ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
         #ModuleInstall("Lasagne", "pip", mname="lasagne"),
-        ModuleInstall("pymunk", "pip"),
+        ModuleInstall(
+            "pymunk", "pip", purpose="pymunk is a easy-to-use pythonic 2d physics library that can be used whenever you need 2d rigid body physics from Python. Perfect when you need 2d physics in your game, demo or other application! It is built on top of the very nice 2d physics library Chipmunk."),
         ModuleInstall(
             "nltk", "wheel", purpose="NLP, natural language processing"),
-        ModuleInstall("textblob", "pip"),
-        ModuleInstall("dev", "pip"),
-        ModuleInstall("opencv_python", "wheel", mname="cv"),
-        ModuleInstall("PyAudio", "wheel", mname="pyaudio"),
-        ModuleInstall("zope.interface", "wheel"),
-        ModuleInstall("persistent", "wheel"),
+        ModuleInstall(
+            "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, classification, translation, and more."),
+        ModuleInstall(
+            "dev", "pip", purpose="Header files, a static library and development tools for building Python modules, extending the Python interpreter or embedding Python in applications."),
+        ModuleInstall(
+            "opencv_python", "wheel", mname="cv", purpose="OpenVC wrapper"),
+        ModuleInstall("PyAudio", "wheel", mname="pyaudio",
+                      purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. With PyAudio, you can easily use Python to play and record audio streams on a variety of platforms (e.g., GNU/Linux, Microsoft Windows, and Mac OS X)."),
+        ModuleInstall(
+            "zope.interface", "wheel", purpose="interfaces for python"),
+        ModuleInstall(
+            "persistent", "wheel", purpose="Objets persistants translucides"),
         # requires zope.interface, persistents
-        ModuleInstall("BTrees", "wheel"),
-        ModuleInstall("datrie", "wheel"),
+        ModuleInstall(
+            "BTrees", "wheel", purpose="This package contains a set of persistent object containers built around a modified BTree data structure."),
+        ModuleInstall(
+            "datrie", "wheel", purpose="Fast, efficiently stored Trie for Python."),
         # ModuleInstall("pysparse", "pip"), #does not work
-        ModuleInstall("la", "wheel"),
-        ModuleInstall("mahotas", "wheel"),
-        ModuleInstall("milk", "wheel"),
-        ModuleInstall("minepy", "wheel"),
+        ModuleInstall(
+            "la", "wheel", purpose="Label the rows, columns, any dimension, of your NumPy arrays."),
+        ModuleInstall(
+            "mahotas", "wheel", purpose="Mahotas: Computer Vision Library"),
+        ModuleInstall("milk", "wheel", purpose="machine learning toolkit"),
+        ModuleInstall("minepy", "wheel", purpose="interface to MineCraft"),
         ModuleInstall(
             "NLopt", "wheel", mname="nlopt", purpose="linear, quadratic optimization"),
-        ModuleInstall("Pmw", "wheel", mname="Pmw"),
-        ModuleInstall("py2exe", "wheel"),
-        ModuleInstall("pytools", "pip"),
-        ModuleInstall("pycuda", "wheel"),
+        ModuleInstall("Pmw", "wheel", mname="Pmw",
+                      purpose="Pmw is a toolkit for building high-level compound widgets in Python using the Tkinter module."),
+        ModuleInstall(
+            "pytools", "pip", purpose="A collection of tools for Python"),
+        ModuleInstall(
+            "pycuda", "wheel", purpose="PyCUDA lets you access Nvidia‘s CUDA parallel computation API from Python."),
         # ModuleInstall("scikits.cuda", "pip", mname="skcuda"), # no stable
         # version
-        ModuleInstall("pylzma", "wheel"),
-        ModuleInstall("pymvpa2", "wheel", mname="mvpa2"),
-        ModuleInstall("pyodbc", "wheel"),
-        ModuleInstall("pypmc", "wheel"),
-        ModuleInstall("pyserial", "wheel", mname="serial"),
-        ModuleInstall("PyX", "wheel", mname="pyx"),
-        ModuleInstall("scandir", "wheel"),
-        ModuleInstall("VideoCapture", "wheel"),
-        ModuleInstall("zs", "wheel"),
+        ModuleInstall(
+            "pylzma", "wheel", purpose="Python bindings for the LZMA library by Igor Pavlov."),
+        ModuleInstall("pymvpa2", "wheel", mname="mvpa2",
+                      purpose="PyMVPA is a Python module intended to ease pattern classification analyses of large datasets."),
+        ModuleInstall(
+            "pyodbc", "wheel", purpose="access to protocal ODBC (SQL databases)"),
+        ModuleInstall(
+            "pypmc", "wheel", purpose="pypmc is a python package focusing on adaptive importance sampling."),
+        ModuleInstall(
+            "pyserial", "wheel", mname="serial", purpose="access to serial port"),
+        ModuleInstall("PyX", "wheel", mname="pyx", purpose="plotting"),
+        ModuleInstall(
+            "scandir", "wheel", purpose="Better directory iterator and faster os.walk(), now in the Python 3.5 stdlib"),
+        ModuleInstall(
+            "zs", "wheel", purpose="S is a compressed, read-only file format for efficiently distributing, querying, and archiving arbitrarily large record-oriented datasets."),
         # machine learning
         ModuleInstall(
             "joblib", "pip", purpose="distribute jobs, parallelization"),
@@ -574,13 +612,17 @@ def ensae_set():
         ModuleInstall(
             "tutormagic", "pip", purpose="brings PythonTutor in a notebok"),
         # cache resuls from a long computation
-        ModuleInstall("ipycache", "pip"),
-        ModuleInstall("nbupload", "pip"),  # to upload a file in a notebook
+        ModuleInstall(
+            "ipycache", "pip", purpose="Defines a %%cache cell magic in the IPython notebook to cache results of long-lasting computations in a persistent pickle file "),
+        # to upload a file in a notebook
+        ModuleInstall(
+            "nbupload", "pip", purpose="widget to upload a file in a notebook"),
         # see https://github.com/PetterS/numpy_display/blob/master/numpy_display.py
         # https://github.com/damiendr/callipy
         #
-        ModuleInstall("libsvm", "wheel", mname="svm"),
-        ModuleInstall("abcpmc", "pip"),  # Bayesian ABC
+        ModuleInstall("libsvm", "wheel", mname="svm", purpose="SVM library"),
+        # Bayesian ABC
+        ModuleInstall("abcpmc", "pip", purpose="Monte Carlo and ABC methods"),
         # ModuleInstall("cosmoabc", "pip"), # Bayesian ABC, only python 2.7
         #
         # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
@@ -596,11 +638,13 @@ def ensae_set():
         #
         #
         #
-        ModuleInstall("zipline", "pip"),  # finance
+        ModuleInstall(
+            "zipline", "pip", purpose="Zipline is a Pythonic algorithmic trading library. The system is fundamentally event-driven and a close approximation of how live-trading systems operate."),  # finance
         ModuleInstall("vincent", "pip", purpose="plotting"),  # graph
         # graph, pygal_maps_world only accepts the latest version
         ModuleInstall("pygal", "github", "Kozea", purpose="plotting"),
-        ModuleInstall("pygal_maps_world", "pip"),  # graph
+        ModuleInstall(
+            "pygal_maps_world", "pip", purpose="extension to pygal (maps)"),  # graph
         #
         # 2015-06-30
         #
@@ -614,7 +658,8 @@ def ensae_set():
         ModuleInstall("PuLP", "wheel", mname="pulp",
                       purpose="linear, quadratique optimization with constraints"),
         # for pyensae unit test
-        ModuleInstall("JSAnimation", "github", "jakevdp"),
+        ModuleInstall("JSAnimation", "github", "jakevdp",
+                      purpose="provides javascript script to display differences between two files"),
         #
         # pydata
         #
@@ -633,6 +678,10 @@ def ensae_set():
             "pysnptools", "pip", purpose="operation on DNA sequences"),
 
     ]
+    if sys.platform.startswith("win"):
+        mod.append(ModuleInstall("VideoCapture", "wheel",
+                                 purpose="A Win32 Python Extension for Accessing Video Devices"))
+
     return mod
 
 
@@ -653,8 +702,10 @@ def teachings_set():
         ModuleInstall("pyrsslocal", "pip", purpose="RSS readers"),
         ModuleInstall(
             "code_beatrix", "pip", purpose="teaching programming to kids, lesenfantscodaient.fr"),
-        ModuleInstall("actuariat_python", "pip", purpose="teachings"),
-        ModuleInstall("ensae_teaching_cs", "pip", purpose="teachings"),
+        ModuleInstall(
+            "actuariat_python", "pip", purpose="teachings, insurance examples"),
+        ModuleInstall("ensae_teaching_cs", "pip",
+                      purpose="teachings, introduction to programmaing, machine learning, map/reduce"),
     ]
     #
     return mod
@@ -666,10 +717,10 @@ def bigdata_set():
 
     """
     mod = [
-        ModuleInstall("h5py", "wheel"),
-        ModuleInstall("blosc", "wheel"),
-        ModuleInstall("numexpr", "wheel"),
-        ModuleInstall("tables", "wheel"),
+        ModuleInstall(
+            "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
+        ModuleInstall(
+            "tables", "wheel", purpos="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
     ]
 
     return mod

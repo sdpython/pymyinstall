@@ -281,6 +281,17 @@ class ModuleInstall:
 
         self.fLOG = fLOG
 
+    def as_dict(self):
+        """
+        returns the members in a dictionary
+
+        @return         dictionary
+        """
+        return dict(name=self.name, kind=self.kind, gitrepo=self.gitrepo,
+                    version=self.version, mname=self.mname,
+                    script=self.script, deps=self.deps,
+                    index_url=self.index_url, purpose=self.purpose)
+
     @staticmethod
     def clear_cache():
         """
