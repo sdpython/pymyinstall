@@ -235,6 +235,10 @@ def small_set():
             'pkginfo', 'pip', purpose="Query metadatdata from sdists / bdists / installed packages."),
         ModuleInstall("multipledispatch ", "pip",
                       purpose="A relatively sane approach to multiple dispatch in Python."),
+        #
+        # 2015-07
+        #
+        ModuleInstall("pyprofiler", "pip", purpose="profiler"),
     ]
 
     if sys.platform.startswith("win"):
@@ -676,6 +680,13 @@ def ensae_set():
         ModuleInstall("lifelines", "pip", purpose="survival analysis"),
         ModuleInstall(
             "pysnptools", "pip", purpose="operation on DNA sequences"),
+        #
+        # 2015-07
+        #
+        ModuleInstall(
+            "nuitka", "pip", purpose="C++ compilation, code optimization"),
+        ModuleInstall(
+            "tri", "pip", purpose="Delaunay triangulation"),
 
     ]
     if sys.platform.startswith("win"):
