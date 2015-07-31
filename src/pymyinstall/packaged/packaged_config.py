@@ -239,6 +239,7 @@ def small_set():
         # 2015-07
         #
         ModuleInstall("pyprofiler", "pip", purpose="profiler"),
+
     ]
 
     if sys.platform.startswith("win"):
