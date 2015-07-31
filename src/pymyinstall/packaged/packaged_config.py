@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 """
 @file
 @brief Defines different set of modules to install.
@@ -481,7 +482,7 @@ def extended_set():
         ModuleInstall("charts", "pip", purpose="plotting in javascript"),
         #
         ModuleInstall(
-            "dill", "pip", purpose="serialize all of python (almost), Dill extends python’s ‘pickle’ module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
+            "dill", "pip", purpose="serialize all of python (almost), Dill extends python's \"pickle\" module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
         # parallel computation
         ModuleInstall(
             "dask", "pip", purpose="parallization of operations with dataframe"),
@@ -590,7 +591,7 @@ def ensae_set():
         ModuleInstall(
             "pytools", "pip", purpose="A collection of tools for Python"),
         ModuleInstall(
-            "pycuda", "wheel", purpose="PyCUDA lets you access Nvidia‘s CUDA parallel computation API from Python."),
+            "pycuda", "wheel", purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python."),
         # ModuleInstall("scikits.cuda", "pip", mname="skcuda"), # no stable
         # version
         ModuleInstall(
