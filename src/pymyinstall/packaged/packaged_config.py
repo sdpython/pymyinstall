@@ -165,7 +165,7 @@ def small_set():
         ModuleInstall(
             "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)"),
         ModuleInstall(
-            "bcolz", "wheel", puropose="compressed dataframe, in memory or on disk"),
+            "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk"),
         ModuleInstall(
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning"),
         ModuleInstall(
@@ -733,7 +733,7 @@ def bigdata_set():
         ModuleInstall(
             "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
         ModuleInstall(
-            "tables", "wheel", purpos="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
+            "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
     ]
 
     return mod
