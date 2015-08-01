@@ -1,4 +1,5 @@
 
+
 .. _l-README:
 
 README / Changes
@@ -71,30 +72,26 @@ to continue.
 Functionalities
 ---------------
 
-    - help installing module from GitHub, pip and setup
-    - install other common tools or editors
-    - provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
-    - function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
+* help installing module from GitHub, pip and setup
+* install other common tools or editors
+* provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
+* function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
 
 
 Versions
 --------
 
 * **1.0 - 2015/??/??**
-    * **new:** function :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
+    * **new:** function win_python_setup
       to create a setup similar to WinPython but with InnoSetup (avoid limit size)
     * **add:** function to check for update and update an existing module, see 
-      :class:`ModuleInstall <pymyinstall.installhelper.module_install.ModuleInstall>`
+    class ModuleInstall
 * **0.9 - 2015/06/10**
     * **add:** install wheel packages
     * **add:** add new packages to the list of a datascientist
-    * **add:** functions :func:`extend_anaconda <pymyinstall.packaged.packaged_config.extend_anaconda>`, :func:`extend_winpython <pymyinstall.packaged.packaged_config.extend_winpython>`
-    * **add:** function :func:`process_installation <pymyinstall.packaged.packaged_functions.process_installations>`
-    * **fix:** method :meth:`download <pymyinstall.installhelper.module_install.ModuleInstall.download>` now works for modules using pip
-    * **add:** functions :func:`ds_teach <pymyinstall.packaged.packaged_functions.ds_teach>`, :func:`ds_ensae <pymyinstall.packaged.packaged_functions.ds_ensae>`
 * **0.8 - 2014/11/09**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
-    * **add:** module `ansiconv <http://pythonhosted.org/ansiconv/>`, `ansi2html <https://pypi.python.org/pypi/ansi2html/>`_
+    * **add:** module `ansiconv <http://pythonhosted.org/ansiconv/>`_, `ansi2html <https://pypi.python.org/pypi/ansi2html/>`_
     * **add:** function `installation_azure <pymyinstall.packaged.packaged_config.installation_azure>`_
     * **fix:** the setup does not need the file ``README.rst`` anymore
 * **0.7 - 2014/10/22**

@@ -35,7 +35,7 @@ pymyinstall documentation
 
 
 
-Description
+What is it?
 -----------
 
 This module contains functions which install a module from pipy, using pip or from a wheel package::
@@ -58,22 +58,14 @@ to continue.
 It is better to use it outside the interpreter::
 
     python -c "from pymyinstall.packaged import ensae_fullset;list(mod.install() for mod in ensae_fullset())"
-    
+
+
 Installation
 ------------
 
 ``pip install pymyinstall``
 
 
-Tutorial
---------
-
-.. toctree::
-    :maxdepth: 1
-    
-    all_example
-    all_notebooks
-        
 
 Functionalities
 ---------------
@@ -85,7 +77,15 @@ Functionalities
   see :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
     
 
+Quick start
+-----------
 
+.. toctree::
+    :maxdepth: 1
+    
+    all_example
+    all_notebooks
+        
     
 Indices and tables
 ------------------
