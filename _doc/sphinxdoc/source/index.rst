@@ -58,6 +58,11 @@ to continue.
 It is better to use it outside the interpreter::
 
     python -c "from pymyinstall.packaged import ensae_fullset;list(mod.install() for mod in ensae_fullset())"
+    
+Or on Linux, you can also run::
+
+    python -c "from pymyinstall import build_requirements;from pymyinstall.packaged import ensae_fullset;print(build_requirements(ensae_fullset()))" > requirements_teachings.txt
+    pip install -r requirements_teachings.txt
 
 
 Installation

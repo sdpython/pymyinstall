@@ -648,7 +648,9 @@ def ensae_set():
             "zipline", "pip", purpose="Zipline is a Pythonic algorithmic trading library. The system is fundamentally event-driven and a close approximation of how live-trading systems operate."),  # finance
         ModuleInstall("vincent", "pip", purpose="plotting"),  # graph
         # graph, pygal_maps_world only accepts the latest version
-        ModuleInstall("pygal", "github", "Kozea", purpose="plotting"),
+        #ModuleInstall("pygal", "github", "Kozea", purpose="plotting"),
+        ModuleInstall(
+            "pygal", "pip", "Kozea", purpose="plotting (javascript)"),
         ModuleInstall(
             "pygal_maps_world", "pip", purpose="extension to pygal (maps)"),  # graph
         #
