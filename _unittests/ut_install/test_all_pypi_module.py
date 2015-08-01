@@ -68,7 +68,7 @@ class TestAllPyPiModule (unittest.TestCase):
             except AnnoyingPackageException:
                 annoying.append(mod.name)
 
-        if len(error) > 3:
+        if len(error) > 4:
             # we accept some errors
             # joblib seems to give errors from time to time
             # multipledispatch
