@@ -140,7 +140,7 @@ def small_set():
         ModuleInstall(
             "alabaster", "wheel", purpose="A configurable sidebar-enabled Sphinx theme"),
         ModuleInstall(
-            "Babel", "wheel", version="1.3", mname="babel", purpose="Internationalization utilities, version 2.0 has bugs"),
+            "babel", "pip", version="1.3", mname="babel", purpose="Internationalization utilities, version 2.0 has bugs"),
         ModuleInstall(
             "colorama", "pip", purpose="Cross-platform colored terminal text."),
         ModuleInstall("docutils", "pip", purpose="interpret RST format"),
