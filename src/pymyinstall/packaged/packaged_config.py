@@ -149,7 +149,7 @@ def small_set():
         ModuleInstall(
             "sphinx", "pip", purpose="documentation generation based on RST", usage="SPHINX"),
         ModuleInstall(
-            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX"),
+            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pipy server", usage="SPHINX"),
         # flake8, pep8
@@ -323,8 +323,7 @@ def extended_set():
         ModuleInstall(
             'python-docx', 'pip', mname="docx", purpose="read/write Word document"),
         ModuleInstall('flask', 'pip', purpose="python server"),
-        ModuleInstall(
-            'flasksphinx', 'pip', purpose="serves Sphinx documentation through a Flask server"),
+        #ModuleInstall('flasksphinx', 'pip', purpose="serves Sphinx documentation through a Flask server"), # issue with Python 3
         ModuleInstall(
             'cffi', 'wheel', purpose="Foreign Function Interface for Python calling C code."),
         ModuleInstall(
@@ -423,9 +422,7 @@ def extended_set():
                       purpose="Cryptographic modules for Python."),
         ModuleInstall("paramiko", "pip", purpose="SSH2 protocol library"),
         #
-        ModuleInstall(
-            "pattern", "pip", purpose="Web mining module for Python, with tools for scraping, natural language processing, machine learning, network analysis and visualization.")
-        if sys.version_info[0] < 3 else None,  # to read dbase format
+        # ModuleInstall("pattern", "pip", purpose="Web mining module for Python, with tools for scraping, natural language processing, machine learning, network analysis and visualization.") #only works on Python 2.7
         #
         ModuleInstall(
             "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
@@ -688,22 +685,19 @@ def ensae_set():
                       purpose="create web application, needed by Spyre"),
         ModuleInstall("dataspyre", "pip", mname="spyre",
                       purpose="create simple web application to visualize data", usage="VIZ"),
-        ModuleInstall(
-            "python-recsys", "github", "ocelma", mname="recsys", purpose="recommendation system", usage="DATA/ML"),
+        # ModuleInstall("python-recsys", "github", "ocelma", mname="recsys", purpose="recommendation system", usage="DATA/ML"), #only works on Python 2.7
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
         ModuleInstall("cubehelix", "github", "jradavenport",
                       purpose="a full implementation of Dave Green's cubehelix colormap for Python"),
         ModuleInstall("lifelines", "pip", purpose="survival analysis"),
-        ModuleInstall(
-            "pysnptools", "pip", purpose="operation on DNA sequences"),
+        # ModuleInstall("pysnptools", "pip", purpose="operation on DNA sequences"), # only available on Python 2.7
         #
         # 2015-07
         #
         ModuleInstall(
             "nuitka", "pip", purpose="C++ compilation, code optimization"),
-        ModuleInstall(
-            "tri", "pip", purpose="Delaunay triangulation"),
+        # ModuleInstall("tri", "pip", purpose="Delaunay triangulation"), # only works on Python 2.7
         ModuleInstall(
             "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
         ModuleInstall(
