@@ -244,6 +244,7 @@ def small_set():
         # 2015-07
         #
         ModuleInstall("pyprofiler", "pip", purpose="profiler"),
+        ModuleInstall("whoosh", "pip", purpose="search engine in Python"),
 
     ]
 
@@ -530,6 +531,8 @@ def extended_set():
         # visualisation
         ModuleInstall(
             "pyxley", "pip", purpose="plotting, visualization, javascript"),
+        ModuleInstall(
+            "pattern", "pip", purpose="web mining"),
     ]
 
     return [_ for _ in mod if _ is not None]
