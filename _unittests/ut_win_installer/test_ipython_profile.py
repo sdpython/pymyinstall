@@ -41,6 +41,9 @@ except ImportError:
 from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
 from src.pymyinstall.win_installer.win_ipython_helper import ipython_create_profile, ipython_update_profile
 
+if sys.version_info[0] < 3:
+    from codecs import open
+
 
 class TestIPythonProfile(unittest.TestCase):
 
