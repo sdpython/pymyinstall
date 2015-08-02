@@ -241,7 +241,8 @@ class ModuleInstall:
                  script=None,
                  index_url=None,
                  deps=None,
-                 purpose=None):
+                 purpose=None,
+                 usage=None):
         """
         constructor
 
@@ -256,6 +257,7 @@ class ModuleInstall:
         @param      deps            overwrite deps parameters when installing the module
         @param      index_url       to get the package from a custom pypi server
         @param      purpose         purpose of the module
+        @param      usage           main usage for the module
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -270,6 +272,7 @@ class ModuleInstall:
         self.index_url = index_url
         self.deps = deps
         self.purpose = purpose
+        self.usage = usage
 
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception(
@@ -290,7 +293,47 @@ class ModuleInstall:
         return dict(name=self.name, kind=self.kind, gitrepo=self.gitrepo,
                     version=self.version, mname=self.mname,
                     script=self.script, deps=self.deps,
-                    index_url=self.index_url, purpose=self.purpose)
+                    index_url=self.index_url, purpose=self.purpose,
+                    usage=self.usage)
+
+    def __cmp__(self, o):
+        """
+        to sort modules
+
+        @param      o       other module
+        @return             -1, 0, 1
+        """
+        def compare(v1, v2):
+            if v1 is None:
+                if v2 is None:
+                    return 0
+                else:
+                    return 1
+            else:
+                if v2 is None:
+                    return -1
+                else:
+                    if v1 < v2:
+                        return -1
+                    elif v1 > v2:
+                        return 1
+                    else:
+                        return 0
+
+        r = compare(self.usage, o.usage)
+        if r != 0:
+            return r
+        r = compare(self.name.lower(), o.name.lower())
+        return r
+
+    def __lt__(self, o):
+        """
+        overload operator ``<``
+
+        @param      o       other module
+        @return             boolean
+        """
+        return self.__cmp__(o) < 0
 
     @staticmethod
     def clear_cache():

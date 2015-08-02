@@ -116,21 +116,22 @@ def small_set():
         ModuleInstall(
             "pycparser", "wheel", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
         ModuleInstall("Cython", "wheel", purpose="pseudo C++ in python"),
-        ModuleInstall("numpy", "wheel", purpose="matrix computation"),
-        ModuleInstall("matplotlib", "wheel", purpose="plots"),
+        ModuleInstall("numpy", "wheel",
+                      purpose="matrix computation", usage="DATA/ML"),
+        ModuleInstall("matplotlib", "wheel", purpose="plots", usage="VIZ"),
         ModuleInstall(
             "gr", "wheel", purpose="GR is a universal framework for cross-platform visualization applications."),
         # ModuleInstall("seaborn", "pip"),   # it seems problematic for this
         # small config
         ModuleInstall(
-            "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra"),
+            "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra", usage="DATA/ML"),
         ModuleInstall(
-            "statsmodels", "wheel", purpose="statistical modelling, depends on scipy"),
+            "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
-            "networkx", "wheel", purpose="graph libraries, basic drawing"),
+            "networkx", "wheel", purpose="graph libraries, basic drawing", usage="VIZ"),
         # small config
         ModuleInstall(
-            "graphviz", "pip", purpose="wrapper for graphviz (most famous tool to draw graphs"),
+            "graphviz", "pip", purpose="wrapper for graphviz (most famous tool to draw graphs", usage="VIZ"),
         ModuleInstall(
             "jsonschema", "pip", purpose="An implementation of JSON Schema validation for Python"),
         ModuleInstall(
@@ -138,17 +139,19 @@ def small_set():
         ModuleInstall("wheel", "pip", purpose="handle wheels"),
         # sphinx
         ModuleInstall(
-            "alabaster", "wheel", purpose="A configurable sidebar-enabled Sphinx theme"),
+            "alabaster", "wheel", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
         ModuleInstall(
-            "babel", "pip", version="1.3", mname="babel", purpose="Internationalization utilities, version 2.0 has bugs"),
+            "babel", "pip", version="1.3", mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
         ModuleInstall(
-            "colorama", "pip", purpose="Cross-platform colored terminal text."),
-        ModuleInstall("docutils", "pip", purpose="interpret RST format"),
+            "colorama", "pip", purpose="Cross-platform colored terminal text.", usage="SPHINX"),
+        ModuleInstall("docutils", "pip",
+                      purpose="interpret RST format", usage="SPHINX"),
         ModuleInstall(
-            "sphinx", "pip", purpose="documentation generation based on RST"),
+            "sphinx", "pip", purpose="documentation generation based on RST", usage="SPHINX"),
         ModuleInstall(
-            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images'),
-        ModuleInstall('pypiserver', 'pip', purpose="run a local pipy server"),
+            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX"),
+        ModuleInstall('pypiserver', 'pip',
+                      purpose="run a local pipy server", usage="SPHINX"),
         # flake8, pep8
         ModuleInstall(
             "pep8", "pip", version="1.5.7", purpose="official guidelines on Python style"),
@@ -161,15 +164,15 @@ def small_set():
         #
         #
         ModuleInstall(
-            "pandas", "wheel", purpose="manipulate table as SQL in memory"),
+            "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
-            "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)"),
+            "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
         ModuleInstall(
-            "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk"),
+            "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
         ModuleInstall(
-            "scikit-learn", "wheel", mname="sklearn", purpose="machine learning"),
+            "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
         ModuleInstall(
-            "ipython", "pip", mname="IPython", purpose="IPython, notebooks, Jupyter"),
+            "ipython", "pip", mname="IPython", purpose="IPython, notebooks, Jupyter", usage="VIZ"),
         #
         ModuleInstall(
             "mpld3", "pip", purpose="mpld3 project brings together Matplotlib and D3js."),
@@ -216,10 +219,11 @@ def small_set():
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
         ModuleInstall(
-            'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript"),
-        ModuleInstall('rpy2', 'wheel', purpose="interact with R"),
+            'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
+        ModuleInstall('rpy2', 'wheel', purpose="interact with R",
+                      usage="DATA/ML"),
         ModuleInstall(
-            'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes"),
+            'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip",
                       purpose="slides based on revealjs, needed to convert notebook into slides"),
         ModuleInstall("feedparser", "wheel", purpose="parse RSS streams"),
@@ -256,30 +260,37 @@ def sphinx_theme_set():
     """
     list of sphinx themes
     """
-    res = [ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme', purpose="sphinx theme"),
+    res = [ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme', purpose="sphinx theme", usage="SPHINX"),
            ModuleInstall(
-               'sphinxjp.themes.basicstrap', 'pip', purpose="sphinx theme"),
-           ModuleInstall('solar_theme', 'pip', purpose="sphinx theme"),
-           ModuleInstall('cloud_sptheme', 'pip', purpose="sphinx theme"),
+               'sphinxjp.themes.basicstrap', 'pip', purpose="sphinx theme", usage="SPHINX"),
+           ModuleInstall('solar_theme', 'pip',
+                         purpose="sphinx theme", usage="SPHINX"),
+           ModuleInstall('cloud_sptheme', 'pip',
+                         purpose="sphinx theme", usage="SPHINX"),
            ModuleInstall(
-               'sphinx_readable_theme', 'pip', purpose="sphinx theme"),
+               'sphinx_readable_theme', 'pip', purpose="sphinx theme", usage="SPHINX"),
            ModuleInstall(
-        "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme", purpose="sphinx theme"),
-        ModuleInstall("wild_sphinx_theme", "pip", purpose="sphinx theme"),
-        ModuleInstall("sphinx_bootstrap_theme", "pip", purpose="sphinx theme"),
+        "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme", purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("wild_sphinx_theme", "pip",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("sphinx_bootstrap_theme", "pip",
+                      purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
-            "sphinxjp.themes.sphinxjp", "pip", purpose="sphinx theme"),
+            "sphinxjp.themes.sphinxjp", "pip", purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
-            "sphinx_py3doc_enhanced_theme", "pip", purpose="sphinx theme"),
+            "sphinx_py3doc_enhanced_theme", "pip", purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
-            "epfl-sphinx-theme", "pip", mname="epfl_theme", purpose="sphinx theme"),
+            "epfl-sphinx-theme", "pip", mname="epfl_theme", purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
-            "sphinx-better-theme", "pip", mname="better", purpose="sphinx theme"),
-        ModuleInstall("guzzle_sphinx_theme", "pip", purpose="sphinx theme"),
-        ModuleInstall("flyingsphinx", "pip", purpose="sphinx theme"),
-        ModuleInstall("itcase_sphinx_theme", "pip", purpose="sphinx theme"),
-        ModuleInstall("sphinxtrap", "pip", purpose="sphinx theme"),
-        ModuleInstall("guzzle_sphinx_theme", "pip", purpose="sphinx theme"),
+            "sphinx-better-theme", "pip", mname="better", purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("guzzle_sphinx_theme", "pip",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("flyingsphinx", "pip",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("itcase_sphinx_theme", "pip",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("sphinxtrap", "pip",
+                      purpose="sphinx theme", usage="SPHINX"),
     ]
     return res
 
@@ -316,17 +327,18 @@ def extended_set():
         ModuleInstall(
             'cffi', 'wheel', purpose="Foreign Function Interface for Python calling C code."),
         ModuleInstall(
-            'odo', 'wheel', purpose="usually used with blaze, handles dataframe in various type of containers"),
+            'odo', 'wheel', purpose="usually used with blaze, handles dataframe in various type of containers", usage="DATA/ML"),
         ModuleInstall(
-            'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities"),
+            'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
         ModuleInstall(
-            'toolz', 'wheel', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries."),
+            'toolz', 'wheel', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries.", usage="DATA/ML"),
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
         ModuleInstall(
             'dynd', 'wheel', purpose="DyND-Python, a component of the Blaze project, is the Python exposure of the DyND dynamic multi-dimensional array library."),
         ModuleInstall(
-            'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets"),
+            'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets",
+            usage="DATA/ML"),
         ModuleInstall(
             'sympy', 'pip', purpose="SymPy is a Python library for symbolic mathematics."),
         ModuleInstall('gmpy2', 'wheel', purpose="big real numbers"),
@@ -336,8 +348,6 @@ def extended_set():
             'llvmlite', 'wheel', purpose="lightweight wrapper around basic LLVM functionality"),
         ModuleInstall(
             'numba', 'wheel', purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
-        ModuleInstall(
-            'networkx', 'pip', purpose="model graphs, basic drawings"),
         ModuleInstall('snowballstemmer', 'pip',
                       purpose="This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms."),
         ModuleInstall('scikit-image', 'wheel', mname='skimage',
@@ -345,10 +355,11 @@ def extended_set():
         ModuleInstall(
             'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
         ModuleInstall(
-            'cvxopt', 'wheel', purpose="linear, quadratique optimization"),
-        ModuleInstall('pymc', 'wheel', purpose="Monte Carlo computation"),
+            'cvxopt', 'wheel', purpose="linear, quadratique optimization", usage="DATA/ML"),
+        ModuleInstall('pymc', 'wheel',
+                      purpose="Monte Carlo computation", usage="DATA/ML"),
         ModuleInstall(
-            'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation"),
+            'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation", usage="DATA/ML"),
         ModuleInstall('fastcluster', 'wheel', purpose="clustering, AHC, ..."),
         ModuleInstall(
             'pycosat', 'wheel', purpose="PicoSAT is a popular SAT solver written by Armin Biere in pure C."),
@@ -375,7 +386,8 @@ def extended_set():
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
         ModuleInstall('python-daemon', 'pip', mname='daemon',
                       purpose="Library to implement a well-behaved Unix daemon process."),
-        ModuleInstall('luigi', 'pip', purpose="workflows, data workflows"),
+        ModuleInstall('luigi', 'pip',
+                      purpose="workflows, data workflows", usage="WORKFLOW"),
         #
         ModuleInstall('setproctitle', 'wheel', mname='setproctitle',
                       purpose="A Python module to customize the process title"),
@@ -388,7 +400,7 @@ def extended_set():
         ModuleInstall(
             'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python"),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
-                      purpose="maps extension for matplotlib"),
+                      purpose="maps extension for matplotlib", usage="VIZ"),
         #
         ModuleInstall("python-linkedin", "pip", mname="linkedin",
                       purpose="python wrapper for linkedin interface"),
@@ -450,9 +462,10 @@ def extended_set():
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
-            "Theano", "wheel", mname="theano", purpose="deep learning, GPU"),
-        ModuleInstall("keras", "pip", purpose="deep learning"),
-        ModuleInstall("neon", "pip", purpose="deep learning"),
+            "Theano", "wheel", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
+        ModuleInstall("keras", "pip", purpose="deep learning",
+                      usage="DATA/ML"),
+        ModuleInstall("neon", "pip", purpose="deep learning", usage="DATA/ML"),
         ModuleInstall(
             "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
@@ -468,10 +481,10 @@ def extended_set():
         # ModuleInstall("pybrain", "pip"),   # some issues with the code
         # (relative import are not well handled in version 0.3.3
         ModuleInstall(
-            "h5py", "wheel", purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. Trillion-Particle Simulation."),
+            "h5py", "wheel", purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. Trillion-Particle Simulation.", usage="DATA/ML"),
         # Bayesian
         ModuleInstall(
-            "bayespy", "pip", purpose="bayesian modelling and computation"),
+            "bayespy", "pip", purpose="bayesian modelling and computation", usage="DATA/ML"),
         ModuleInstall(
             "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas, bcolz and more."),
         #
@@ -479,13 +492,14 @@ def extended_set():
                       purpose="ploting, Multidimensional data visualzation across files"),
         #
         # javascript graphs
-        ModuleInstall("charts", "pip", purpose="plotting in javascript"),
+        ModuleInstall("charts", "pip",
+                      purpose="plotting in javascript", usage="VIZ"),
         #
         ModuleInstall(
             "dill", "pip", purpose="serialize all of python (almost), Dill extends python's \"pickle\" module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
         # parallel computation
         ModuleInstall(
-            "dask", "pip", purpose="parallization of operations with dataframe"),
+            "dask", "pip", purpose="parallization of operations with dataframe", usage="DATA/ML"),
         #
         ModuleInstall(
             "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
@@ -497,7 +511,7 @@ def extended_set():
         ModuleInstall(
             "py2exe", "wheel", purpose="convert a python program into an exe program"),
         ModuleInstall(
-            "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython"),
+            "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
         ModuleInstall(
             "tzlocal", "pip", purpose="tzinfo object for the local timezone"),
         ModuleInstall(
@@ -512,16 +526,11 @@ def extended_set():
         # July 2015
         #
         ModuleInstall("ete", "github", "jhcepas", mname="ete3",
-                      purpose="tree visualisation"),  # graph visualization
+                      purpose="tree visualisation", usage="VIZ"),  # graph visualization
         # visualisation
         ModuleInstall(
             "pyxley", "pip", purpose="plotting, visualization, javascript"),
     ]
-
-    if sys.platform.startswith("win"):
-        mod.append(
-            ModuleInstall("pywin32", "wheel", mname="win32com", purpose="call Windows DLL"))
-        mod.append(ModuleInstall("winshell", "pip"))
 
     return [_ for _ in mod if _ is not None]
 
@@ -532,7 +541,10 @@ def azure_set():
 
     """
     mod = [
-        ModuleInstall("azure", "pip", purpose="Python wrapper for Azure API"),
+        ModuleInstall(
+            "azure", "pip", purpose="Python wrapper for Azure API (HDInsight, Blog Storage)"),
+        ModuleInstall(
+            "azureml", "pip", purpose="Python wrapper for Azure ML API (Azure ML Pipeline)"),
     ]
 
     return mod
@@ -559,7 +571,7 @@ def ensae_set():
         ModuleInstall(
             "pymunk", "pip", purpose="pymunk is a easy-to-use pythonic 2d physics library that can be used whenever you need 2d rigid body physics from Python. Perfect when you need 2d physics in your game, demo or other application! It is built on top of the very nice 2d physics library Chipmunk."),
         ModuleInstall(
-            "nltk", "wheel", purpose="NLP, natural language processing"),
+            "nltk", "wheel", purpose="NLP, natural language processing", usage="DATA/ML"),
         ModuleInstall(
             "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, classification, translation, and more."),
         ModuleInstall(
@@ -650,7 +662,7 @@ def ensae_set():
         # graph, pygal_maps_world only accepts the latest version
         #ModuleInstall("pygal", "github", "Kozea", purpose="plotting"),
         ModuleInstall(
-            "pygal", "pip", "Kozea", purpose="plotting (javascript)"),
+            "pygal", "pip", "Kozea", purpose="plotting (javascript)", usage="VIZ"),
         ModuleInstall(
             "pygal_maps_world", "pip", purpose="extension to pygal (maps)"),  # graph
         #
@@ -664,7 +676,7 @@ def ensae_set():
         # linear optimisation, see
         # http://blog.yhathq.com/posts/decision-making-under-uncertainty.html
         ModuleInstall("PuLP", "wheel", mname="pulp",
-                      purpose="linear, quadratique optimization with constraints"),
+                      purpose="linear, quadratique optimization with constraints", usage="DATA/ML"),
         # for pyensae unit test
         ModuleInstall("JSAnimation", "github", "jakevdp",
                       purpose="provides javascript script to display differences between two files"),
@@ -674,9 +686,9 @@ def ensae_set():
         ModuleInstall("CherryPy", "wheel", mname="cherrypy",
                       purpose="create web application, needed by Spyre"),
         ModuleInstall("SPyRE", "pip", mname="spyre",
-                      purpose="create simple web application to visualize data"),
+                      purpose="create simple web application to visualize data", usage="VIZ"),
         ModuleInstall(
-            "python-recsys", "pip", mname="recsys", purpose="recommendation system"),
+            "python-recsys", "pip", mname="recsys", purpose="recommendation system", usage="DATA/ML"),
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
         ModuleInstall("cubehelix", "github", "jradavenport",
@@ -691,6 +703,10 @@ def ensae_set():
             "nuitka", "pip", purpose="C++ compilation, code optimization"),
         ModuleInstall(
             "tri", "pip", purpose="Delaunay triangulation"),
+        ModuleInstall(
+            "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
+        ModuleInstall(
+            "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
 
     ]
     if sys.platform.startswith("win"):
@@ -708,34 +724,21 @@ def teachings_set():
     """
     mod = [
         ModuleInstall(
-            "pyquickhelper", "pip", purpose="helpers to generation documentation"),
+            "pyquickhelper", "pip", purpose="helpers to generation documentation", usage="TEACH"),
         ModuleInstall(
-            "pymyinstall", "pip", purpose="easy installation of modules including Windows"),
-        ModuleInstall("pymmails", "pip", purpose="read/send emails"),
+            "pymyinstall", "pip", purpose="easy installation of modules including Windows", usage="TEACH"),
+        ModuleInstall("pymmails", "pip",
+                      purpose="read/send emails", usage="TEACH"),
         ModuleInstall(
-            "pyensae", "pip", purpose="helpers, Hadoop, SQL, financial times series, ..."),
-        ModuleInstall("pyrsslocal", "pip", purpose="RSS readers"),
+            "pyensae", "pip", purpose="helpers, Hadoop, SQL, financial times series, ...", usage="TEACH"),
+        ModuleInstall("pyrsslocal", "pip",
+                      purpose="RSS readers", usage="TEACH"),
         ModuleInstall(
-            "code_beatrix", "pip", purpose="teaching programming to kids, lesenfantscodaient.fr"),
+            "code_beatrix", "pip", purpose="teaching programming to kids, lesenfantscodaient.fr", usage="TEACH"),
         ModuleInstall(
-            "actuariat_python", "pip", purpose="teachings, insurance examples"),
+            "actuariat_python", "pip", purpose="teachings, insurance examples", usage="TEACH"),
         ModuleInstall("ensae_teaching_cs", "pip",
-                      purpose="teachings, introduction to programmaing, machine learning, map/reduce"),
+                      purpose="teachings, introduction to programmaing, machine learning, map/reduce", usage="TEACH"),
     ]
     #
-    return mod
-
-
-def bigdata_set():
-    """
-    Modules to handle huge datasets on disk, hierarchical datasets.
-
-    """
-    mod = [
-        ModuleInstall(
-            "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
-        ModuleInstall(
-            "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
-    ]
-
     return mod

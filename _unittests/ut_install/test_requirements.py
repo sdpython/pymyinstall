@@ -40,7 +40,7 @@ except ImportError:
 
 from src.pymyinstall.installhelper.module_install import ModuleInstall
 from src.pymyinstall import build_requirements
-from src.pymyinstall.packaged import small_set, sphinx_theme_set, extended_set, azure_set, ensae_set, teachings_set, bigdata_set
+from src.pymyinstall.packaged import small_set, sphinx_theme_set, extended_set, azure_set, ensae_set, teachings_set
 from pyquickhelper import fLOG, get_temp_folder
 
 
@@ -53,11 +53,26 @@ class TestRequirements (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         mod_list = small_set() + sphinx_theme_set() + extended_set() + \
-            azure_set() + ensae_set() + teachings_set() + bigdata_set()
+            azure_set() + ensae_set() + teachings_set()
         res = build_requirements(mod_list)
-        fLOG(res)
+        # fLOG(res)
         assert "pep8==1.5.7" in res
 
+    def test_sort(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        mod_list = small_set() + sphinx_theme_set() + extended_set() + \
+            azure_set() + ensae_set() + teachings_set()
+        mod_list.sort()
+        res = build_requirements(mod_list)
+        k = [_.usage for _ in mod_list if _.usage is not None]
+        k2 = list(sorted(_.usage for _ in mod_list if _.usage is not None))
+        fLOG(k)
+        fLOG(k2)
+        assert k == k2
 
 if __name__ == "__main__":
     unittest.main()
