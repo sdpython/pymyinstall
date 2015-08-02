@@ -689,7 +689,7 @@ def ensae_set():
         ModuleInstall("dataspyre", "pip", mname="spyre",
                       purpose="create simple web application to visualize data", usage="VIZ"),
         ModuleInstall(
-            "python-recsys", "pip", mname="recsys", purpose="recommendation system", usage="DATA/ML"),
+            "python-recsys", "github", "ocelma", mname="recsys", purpose="recommendation system", usage="DATA/ML"),
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
         ModuleInstall("cubehelix", "github", "jradavenport",
