@@ -686,7 +686,7 @@ def ensae_set():
         #
         ModuleInstall("CherryPy", "wheel", mname="cherrypy",
                       purpose="create web application, needed by Spyre"),
-        ModuleInstall("SPyRE", "pip", mname="spyre",
+        ModuleInstall("dataspyre", "pip", mname="spyre",
                       purpose="create simple web application to visualize data", usage="VIZ"),
         ModuleInstall(
             "python-recsys", "pip", mname="recsys", purpose="recommendation system", usage="DATA/ML"),
