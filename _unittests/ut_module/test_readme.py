@@ -64,14 +64,22 @@ class TestReadme(unittest.TestCase):
         outfile = os.path.join(temp, "conv_readme.html")
 
         script = ["from docutils import core",
+                  "import io",
+                  "with open('{0}', 'r', encoding='utf8') as g: s = g.read()".format(
+                      readme.replace("\\", "\\\\")),
                   "settings_overrides = {'output_encoding': 'unicode', 'doctitle_xform': True, 'initial_header_level': 2, 'warning_stream': io.StringIO()}",
                   "parts = core.publish_parts(source=s, source_path=None, destination_path=None, writer_name='html', settings_overrides=settings_overrides)",
                   "with open('{0}', 'w', encoding='utf8') as f:".format(
-                      outfile),
+                      outfile.replace("\\", "\\\\")),
                   "    f.write(parts['whole']",
                   ]
 
         out = run_venv_script(temp, "\n".join(script), fLOG=fLOG)
+        with open(outfile, "r", encoding="utf8") as h:
+            content = h.read()
+
+        if "System Message" in content:
+            raise Exception(content)
 
 
 if __name__ == "__main__":
