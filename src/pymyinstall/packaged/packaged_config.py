@@ -323,7 +323,8 @@ def extended_set():
         ModuleInstall(
             'python-docx', 'pip', mname="docx", purpose="read/write Word document"),
         ModuleInstall('flask', 'pip', purpose="python server"),
-        #ModuleInstall('flasksphinx', 'pip', purpose="serves Sphinx documentation through a Flask server"), # issue with Python 3
+        # ModuleInstall('flasksphinx', 'pip', purpose="serves Sphinx
+        # documentation through a Flask server"), # issue with Python 3
         ModuleInstall(
             'cffi', 'wheel', purpose="Foreign Function Interface for Python calling C code."),
         ModuleInstall(
@@ -685,7 +686,9 @@ def ensae_set():
                       purpose="create web application, needed by Spyre"),
         ModuleInstall("dataspyre", "pip", mname="spyre",
                       purpose="create simple web application to visualize data", usage="VIZ"),
-        # ModuleInstall("python-recsys", "github", "ocelma", mname="recsys", purpose="recommendation system", usage="DATA/ML"), #only works on Python 2.7
+        # ModuleInstall("python-recsys", "github", "ocelma", mname="recsys",
+        # purpose="recommendation system", usage="DATA/ML"), #only works on
+        # Python 2.7
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
         ModuleInstall("cubehelix", "github", "jradavenport",
@@ -697,7 +700,8 @@ def ensae_set():
         #
         ModuleInstall(
             "nuitka", "pip", purpose="C++ compilation, code optimization"),
-        # ModuleInstall("tri", "pip", purpose="Delaunay triangulation"), # only works on Python 2.7
+        # ModuleInstall("tri", "pip", purpose="Delaunay triangulation"), # only
+        # works on Python 2.7
         ModuleInstall(
             "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
         ModuleInstall(

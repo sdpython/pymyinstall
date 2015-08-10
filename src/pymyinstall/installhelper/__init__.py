@@ -17,56 +17,6 @@ from .install_custom import download_page
 from .module_install import ModuleInstall, get_module_version, get_pypi_version
 
 
-def update_all(temp_folder=".", fLOG=print, verbose=True,
-               list_module=None):
-    """
-    update modules in *list_module* (in that order)
-    if None, this list will be returned by @see fn ensae_fullset,
-    the function starts by updating pip.
-
-    @param  temp_folder     temporary folder
-    @param  verbose         more display
-    @param  list_module     None or of list of @see cl ModuleInstall
-    @param  fLOG            logging function
-    """
-    import os
-    if not os.path.exists(temp_folder):
-        os.makedirs(temp_folder)
-    if not has_pip():
-        from .get_pip import main
-        main()
-
-    if list_module is None:
-        from ..packaged import ensae_fullset
-        list_module = ensae_fullset()
-
-    if verbose:
-        fLOG("update pip if needed")
-    update_pip()
-    if verbose:
-        fLOG("get module order")
-    modules = list_module
-    again = []
-    for mod in modules:
-        if verbose:
-            fLOG("check module: ", mod.name)
-        if mod.is_installed() and mod.has_update():
-            ver = mod.get_pypi_version()
-            inst = mod.get_installed_version()
-            m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
-                .format(mod.name, inst, ver, mod.kind)
-            fLOG(m)
-            b = mod.update(temp_folder=temp_folder, log=verbose)
-            if b:
-                again.append(m)
-
-    if verbose:
-        fLOG("")
-        fLOG("updated modules")
-        for m in again:
-            fLOG(m)
-
-
 def module_as_table(list_module, as_df=False):
     """
     returns a list of dictionaries or a dataframe

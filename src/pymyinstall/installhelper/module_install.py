@@ -284,6 +284,20 @@ class ModuleInstall:
 
         self.fLOG = fLOG
 
+    def copy(self, version=None):
+        """
+        copy the module, if version is not None, change the version number
+
+        @param      version     version number or None for unchanged
+        @return                 @see cl ModuleInstall
+
+        .. versionadded:: 1.0
+        """
+        mod = ModuleInstall(**self.as_dict())
+        if version is not None:
+            mod.version = version
+        return mod
+
     def as_dict(self):
         """
         returns the members in a dictionary

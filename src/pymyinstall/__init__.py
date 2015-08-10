@@ -50,7 +50,7 @@ from .installhelper.link_shortcuts import add_shortcut_to_desktop
 from .installhelper.install_custom_pandoc import install_pandoc
 from .installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
 from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
-from .installhelper import update_all, get_module_version, get_pypi_version
+from .installhelper import get_module_version, get_pypi_version
 from .installhelper.install_custom_revealjs import download_revealjs
 from .installhelper.requirements import build_requirements
 from .setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
