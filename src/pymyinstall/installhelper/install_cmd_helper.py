@@ -922,8 +922,7 @@ def has_pip():
     """
     try:
         import pip
-        f = pip.__file__
-        return f is not None
+        return pip is not None
     except ImportError:
         return False
 

@@ -95,8 +95,8 @@ def get_module_version(module):
     if err is not None and len(err) > 0:
         if len(err.split("\n")) > 3 or \
            "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
-            raise Exception("unable to run, #lines {0}\nERR:\n{1}\nOUT:\n{2}".format(
-                len(err.split("\n")), err, out))
+            raise Exception("unable to run, #lines {0}\nCMD:\n{3}\nERR:\n{1}\nOUT:\n{2}".format(
+                len(err.split("\n")), err, out, cmd))
     lines = out.split("\n")
     res = {}
     for line in lines:
