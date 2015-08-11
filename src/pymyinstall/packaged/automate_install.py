@@ -3,7 +3,6 @@
 @brief Install or update all packages.
 """
 import os
-import sys
 from ..installhelper import ModuleInstall, has_pip, update_pip
 from .packaged_config_full_set import ensae_fullset
 
@@ -145,6 +144,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
     if not has_pip():
+        fLOG("install pip")
         from .get_pip import main
         main()
 
@@ -161,6 +161,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     if verbose:
         fLOG("update pip if needed")
     update_pip()
+
     modules = list_module
     again = []
     for mod in modules:
