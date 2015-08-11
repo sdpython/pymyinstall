@@ -66,10 +66,12 @@ class TestReadme(unittest.TestCase):
         script = ["from docutils import core",
                   "import io",
                   'from docutils.readers.standalone import Reader',
+                  'from docutils.parsers.rst import Parser',
+                  'from docutils.writers.html4css1 import Writer',
                   "with open('{0}', 'r', encoding='utf8') as g: s = g.read()".format(
                       readme.replace("\\", "\\\\")),
                   "settings_overrides = {'output_encoding': 'unicode', 'doctitle_xform': True, 'initial_header_level': 2, 'warning_stream': io.StringIO()}",
-                  "parts = core.publish_parts(source=s, reader=Reader(), source_path=None, destination_path=None, writer_name='html', settings_overrides=settings_overrides)",
+                  "parts = core.publish_parts(source=s, parser=Parser(), reader=Reader(), source_path=None, destination_path=None, writer=Writer(), settings_overrides=settings_overrides)",
                   "with open('{0}', 'w', encoding='utf8') as f: f.write(parts['whole'])".format(
                       outfile.replace("\\", "\\\\")),
                   ]
