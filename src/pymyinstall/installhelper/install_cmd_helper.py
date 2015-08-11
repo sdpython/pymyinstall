@@ -872,7 +872,8 @@ def get_pip_program(exe=None):
                             pi = os.path.join(exe, "Scripts", "pip3.4.exe")
                             tried.append(pi)
                             if not os.path.exists(pi):
-                                raise FileNotFoundError("tried (1):\n" + "\n".join(tried))
+                                raise FileNotFoundError(
+                                    "tried (1):\n" + "\n".join(tried))
         else:
             pi = os.path.join(exe, "pip.exe")
             tried.append(pi)
@@ -887,7 +888,8 @@ def get_pip_program(exe=None):
                         pi = os.path.join(exe, "pip3.4.exe")
                         tried.append(pi)
                         if not os.path.exists(pi):
-                            raise FileNotFoundError("tried (2):\n" + "\n".join(tried))
+                            raise FileNotFoundError(
+                                "tried (2):\n" + "\n".join(tried))
     else:
         if exe is None:
             return "pip"

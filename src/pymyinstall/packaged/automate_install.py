@@ -107,8 +107,6 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     if verbose:
         fLOG("update pip if needed")
     update_pip()
-    if verbose:
-        fLOG("get module order")
     modules = list_module
     again = []
     for mod in modules:
@@ -163,8 +161,6 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     if verbose:
         fLOG("update pip if needed")
     update_pip()
-    if verbose:
-        fLOG("get module order")
     modules = list_module
     again = []
     for mod in modules:

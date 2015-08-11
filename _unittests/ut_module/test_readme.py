@@ -75,7 +75,7 @@ class TestReadme(unittest.TestCase):
                   "with open('{0}', 'w', encoding='utf8') as f: f.write(parts['whole'])".format(
                       outfile.replace("\\", "\\\\")),
                   ]
-                  
+
         file_script = os.path.join(temp, "testreadme.py")
         with open(file_script, "w") as f:
             f.write("\n".join(script))

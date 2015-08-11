@@ -82,18 +82,32 @@ def create_virtual_env(where, symlinks=False, system_site_packages=False,
     if len(err) > 0:
         raise VirtualEnvError(
             "unable to create virtual environement at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, where, cmd))
-            
-    scripts = os.path.join(where, "Scripts")
+
+    if sys.platform.startswith("win"):
+        scripts = os.path.join(where, "Scripts")
+    else:
+        scripts = os.path.join(where, "bin")
+
     if not os.path.exists(scripts):
         files = "\n  ".join(os.listdir(where))
-        raise FileNotFoundError("unable to find {0}, content:\n  {1}".format(scripts, files))
+        raise FileNotFoundError(
+            "unable to find {0}, content:\n  {1}".format(scripts, files))
+
+    in_scripts = os.listdir(scripts)
+    pips = [_ for _ in in_scripts if _.startswith("pip")]
+    if len(pips) == 0:
+        raise NotImpltementedError("pip needs to be installed in " + scripts)
+
+    # the function should check that pip exists
+    out += venv_install(where, "pip", fLOG=fLOG,
+                        temp_folder=temp_folder)
 
     if packages is not None and len(packages) > 0:
         fLOG("install packages in:", where)
-        if "pymyinstall" in packages:
-            packages = [_ for _ in packages if _ != "pymyinstall"]
-        out += venv_install(where, packages, fLOG=fLOG,
-                            temp_folder=temp_folder)
+        packages = [_ for _ in packages if _ != "pymyinstall" and _ != "pip"]
+        if len(packages) > 0:
+            out += venv_install(where, packages, fLOG=fLOG,
+                                temp_folder=temp_folder)
     return out
 
 
@@ -136,7 +150,10 @@ def run_venv_script(venv, script, fLOG=print, file=False):
     @return                 output
     """
     script = ";".join(script.split("\n"))
-    exe = os.path.join(venv, "Scripts", "python")
+    if sys.platform.startswith("win"):
+        exe = os.path.join(venv, "Scripts", "python")
+    else:
+        exe = os.path.join(venv, "bin", "python")
     if file:
         if not os.path.exists(script):
             raise FileNotFoundError(script)
