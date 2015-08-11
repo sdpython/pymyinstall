@@ -78,7 +78,9 @@ except ImportError:
 
 
 def bootstrap(tmpdir=None):
-    # Import pip so we can use it to install pip and maybe setuptools too
+    """
+    Import pip so we can use it to install pip and maybe setuptools too
+    """
     import pip
     from pip.commands.install import InstallCommand
 
@@ -145,6 +147,9 @@ def bootstrap(tmpdir=None):
 
 
 def main():
+    """
+    main function, installs pip
+    """
     tmpdir = None
     try:
         # Create a temporary working directory

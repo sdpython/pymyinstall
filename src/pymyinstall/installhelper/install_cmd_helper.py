@@ -308,7 +308,7 @@ def add_shortcut_to_desktop_for_module(name):
 
 def get_pip_program(exe=None):
     """
-    get ipython executable + fix an issue with PANDOC
+    get pip executable + fix an issue with PANDOC
 
     @param      exe             path to python executable
     @param      pandoc_path     if None, call @see fn find_pandoc_path

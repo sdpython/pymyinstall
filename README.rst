@@ -85,7 +85,7 @@ Versions
     * **new:** function win_python_setup
       to create a setup similar to WinPython but with InnoSetup (avoid limit size)
     * **add:** function to check for update and update an existing module, see 
-    class ModuleInstall
+      class ModuleInstall
 * **0.9 - 2015/06/10**
     * **add:** install wheel packages
     * **add:** add new packages to the list of a datascientist

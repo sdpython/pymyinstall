@@ -1,5 +1,5 @@
 """
-@brief      test tree node (time=320s)
+@brief      test tree node (time=360s)
 """
 
 import sys
@@ -67,7 +67,14 @@ class TestReadme(unittest.TestCase):
                   "import io",
                   'from docutils.readers.standalone import Reader',
                   'from docutils.parsers.rst import Parser',
+                  'from docutils.parsers.rst.directives.images import Image',
+                  'from docutils.parsers.rst.directives import _directives',
                   'from docutils.writers.html4css1 import Writer',
+                  "from docutils.languages import _languages",
+                  "from docutils.languages import en, fr",
+                  "_languages['en'] = en",
+                  "_languages['fr'] = fr",
+                  "_directives['image'] = Image",
                   "with open('{0}', 'r', encoding='utf8') as g: s = g.read()".format(
                       readme.replace("\\", "\\\\")),
                   "settings_overrides = {'output_encoding': 'unicode', 'doctitle_xform': True, 'initial_header_level': 2, 'warning_stream': io.StringIO()}",
