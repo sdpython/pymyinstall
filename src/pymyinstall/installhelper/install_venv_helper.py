@@ -6,7 +6,7 @@ from __future__ import print_function
 
 import os
 import sys
-from .install_cmd_helper import run_cmd, has_pip
+from .install_cmd_helper import run_cmd
 
 
 class VirtualEnvError(Exception):
@@ -25,6 +25,7 @@ def build_venv_cmd(params, posparams):
     @return                 string
     """
     import venv
+    dir(venv)
     exe = sys.executable
     cmd = [exe, "-m", "venv"]
     for k, v in params.items():
