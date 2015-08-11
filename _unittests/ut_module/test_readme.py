@@ -1,5 +1,5 @@
 """
-@brief      test tree node (time=50s)
+@brief      test tree node (time=320s)
 """
 
 import sys
@@ -65,16 +65,20 @@ class TestReadme(unittest.TestCase):
 
         script = ["from docutils import core",
                   "import io",
+                  'from docutils.readers.standalone import Reader',
                   "with open('{0}', 'r', encoding='utf8') as g: s = g.read()".format(
                       readme.replace("\\", "\\\\")),
                   "settings_overrides = {'output_encoding': 'unicode', 'doctitle_xform': True, 'initial_header_level': 2, 'warning_stream': io.StringIO()}",
-                  "parts = core.publish_parts(source=s, source_path=None, destination_path=None, writer_name='html', settings_overrides=settings_overrides)",
-                  "with open('{0}', 'w', encoding='utf8') as f:".format(
+                  "parts = core.publish_parts(source=s, reader=Reader(), source_path=None, destination_path=None, writer_name='html', settings_overrides=settings_overrides)",
+                  "with open('{0}', 'w', encoding='utf8') as f: f.write(parts['whole'])".format(
                       outfile.replace("\\", "\\\\")),
-                  "    f.write(parts['whole']",
                   ]
+                  
+        file_script = os.path.join(temp, "testreadme.py")
+        with open(file_script, "w") as f:
+            f.write("\n".join(script))
 
-        out = run_venv_script(temp, "\n".join(script), fLOG=fLOG)
+        out = run_venv_script(temp, file_script, fLOG=fLOG, file=True)
         with open(outfile, "r", encoding="utf8") as h:
             content = h.read()
 

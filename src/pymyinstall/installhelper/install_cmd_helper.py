@@ -851,29 +851,43 @@ def get_pip_program(exe=None):
 
     @endFAQ
     """
+    tried = []
     if exe is None:
         exe = os.path.dirname(sys.executable)
     if sys.platform.startswith("win"):
         if not exe.endswith("Scripts"):
             pi = os.path.join(exe, "Scripts", "pip.exe")
+            tried.append(pi)
             if not os.path.exists(pi):
                 pi = os.path.join(exe, "Scripts", "pip3.exe")
+                tried.append(pi)
                 if not os.path.exists(pi):
                     # Anaconda is different
                     pi = os.path.join(exe, "Scripts", "pip.exe")
+                    tried.append(pi)
                     if not os.path.exists(pi):
                         pi = os.path.join(exe, "Scripts", "pip3.exe")
+                        tried.append(pi)
                         if not os.path.exists(pi):
-                            raise FileNotFoundError(pi)
+                            pi = os.path.join(exe, "Scripts", "pip3.4.exe")
+                            tried.append(pi)
+                            if not os.path.exists(pi):
+                                raise FileNotFoundError("tried (1):\n" + "\n".join(tried))
         else:
             pi = os.path.join(exe, "pip.exe")
+            tried.append(pi)
             if not os.path.exists(pi):
                 # Anaconda is different
                 pi = os.path.join(exe, "pip.exe")
+                tried.append(pi)
                 if not os.path.exists(pi):
                     pi = os.path.join(exe, "pip3.exe")
+                    tried.append(pi)
                     if not os.path.exists(pi):
-                        raise FileNotFoundError(pi)
+                        pi = os.path.join(exe, "pip3.4.exe")
+                        tried.append(pi)
+                        if not os.path.exists(pi):
+                            raise FileNotFoundError("tried (2):\n" + "\n".join(tried))
     else:
         if exe is None:
             return "pip"

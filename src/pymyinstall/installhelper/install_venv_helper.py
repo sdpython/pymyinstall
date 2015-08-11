@@ -82,6 +82,11 @@ def create_virtual_env(where, symlinks=False, system_site_packages=False,
     if len(err) > 0:
         raise VirtualEnvError(
             "unable to create virtual environement at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, where, cmd))
+            
+    scripts = os.path.join(where, "Scripts")
+    if not os.path.exists(scripts):
+        files = "\n  ".join(os.listdir(where))
+        raise FileNotFoundError("unable to find {0}, content:\n  {1}".format(scripts, files))
 
     if packages is not None and len(packages) > 0:
         fLOG("install packages in:", where)
@@ -120,20 +125,26 @@ def venv_install(venv, packages, fLOG=print, temp_folder=None):
     return run_venv_script(venv, "\n".join(script), fLOG=fLOG)
 
 
-def run_venv_script(venv, script, fLOG=print):
+def run_venv_script(venv, script, fLOG=print, file=False):
     """
     run a script on a vritual environment (the script should be simple
 
     @param      venv        virtual environment
     @param      script      script as a string (not a file)
     @param      fLOG        logging function
+    @param      file        is script a file or a string to execute
     @return                 output
     """
     script = ";".join(script.split("\n"))
     exe = os.path.join(venv, "Scripts", "python")
-    cmd = " ".join([exe, "-u", "-c", '"{0}"'.format(script)])
+    if file:
+        if not os.path.exists(script):
+            raise FileNotFoundError(script)
+        cmd = " ".join([exe, "-u", '"{0}"'.format(script)])
+    else:
+        cmd = " ".join([exe, "-u", "-c", '"{0}"'.format(script)])
     out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
     if len(err) > 0:
         raise VirtualEnvError(
-            "unable to install packages at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, venv, cmd))
+            "unable to run script at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, venv, cmd))
     return out
