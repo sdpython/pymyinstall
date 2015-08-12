@@ -99,6 +99,11 @@ def create_virtual_env(where, symlinks=False, system_site_packages=False,
     if len(pips) == 0:
         out += venv_install(where, "pip", fLOG=fLOG,
                             temp_folder=temp_folder)
+    in_scripts = os.listdir(scripts)
+    pips = [_ for _ in in_scripts if _.startswith("pip")]
+    if len(pips) == 0:
+        raise FileNotFoundError(
+            "unable to find pip in {0}, content:\n  {1}".format(scripts, in_scripts))
 
     if packages is not None and len(packages) > 0:
         fLOG("install packages in:", where)
@@ -125,7 +130,7 @@ def venv_install(venv, packages, fLOG=print, temp_folder=None):
     if isinstance(packages, str):
         packages = [packages]
 
-    if packages == "pip":
+    if packages == "pip" or packages == ["pip"]:
         from .get_pip import __file__ as pip_loc
         ppath = os.path.abspath(pip_loc.replace(".pyc", ".py"))
         script = ["-m", ppath]
