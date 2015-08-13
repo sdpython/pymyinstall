@@ -183,7 +183,7 @@ def run_cmd(cmd,
                                     startupinfo=startupinfo,
                                     cwd=cwd)
         except FileNotFoundError as e:
-            raise Excpetion("unable to run CMD:\n{0}".format(cmd)) from e
+            raise Exception("unable to run CMD:\n{0}".format(cmd)) from e
     else:
         try:
             proc = subprocess.Popen(split_cmp_command(cmd),
@@ -192,7 +192,7 @@ def run_cmd(cmd,
                                     stderr=subprocess.PIPE,
                                     cwd=cwd)
         except FileNotFoundError as e:
-            raise Excpetion("unable to run CMD:\n{0}".format(cmd)) from e
+            raise Exception("unable to run CMD:\n{0}".format(cmd)) from e
     if wait:
 
         out = []
