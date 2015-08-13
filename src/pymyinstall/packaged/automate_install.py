@@ -2,6 +2,7 @@
 @file
 @brief Install or update all packages.
 """
+from __future__ import print_function
 import os
 from ..installhelper import ModuleInstall, has_pip, update_pip
 from .packaged_config_full_set import ensae_fullset
