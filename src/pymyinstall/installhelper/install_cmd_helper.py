@@ -175,18 +175,24 @@ def run_cmd(cmd,
         startupinfo = subprocess.STARTUPINFO()
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
-        proc = subprocess.Popen(cmd,
-                                shell=shell,
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE,
-                                startupinfo=startupinfo,
-                                cwd=cwd)
+        try:
+            proc = subprocess.Popen(cmd,
+                                    shell=shell,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
+                                    startupinfo=startupinfo,
+                                    cwd=cwd)
+        except FileNotFoundError as e:
+            raise Excpetion("unable to run CMD:\n{0}".format(cmd)) from e
     else:
-        proc = subprocess.Popen(split_cmp_command(cmd),
-                                shell=shell,
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE,
-                                cwd=cwd)
+        try:
+            proc = subprocess.Popen(split_cmp_command(cmd),
+                                    shell=shell,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
+                                    cwd=cwd)
+        except FileNotFoundError as e:
+            raise Excpetion("unable to run CMD:\n{0}".format(cmd)) from e
     if wait:
 
         out = []

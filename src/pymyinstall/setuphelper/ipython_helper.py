@@ -50,7 +50,7 @@ def setup_ipython(current_path=None,
     """
     if sys.platform.startswith("win"):
         user_profile = os.environ['USERPROFILE']
-        profile = os.path.join(user_profile, ".ipython", "profile_default")
+        profile = os.path.join(user_profile, ".jupyter", "profile_default")
         ipython_config = os.path.join(profile, "ipython_config.py")
         ipython_notebook_config = os.path.join(
             profile,

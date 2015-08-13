@@ -62,7 +62,7 @@ class TestIPythonProfile(unittest.TestCase):
 
         if sys.platform.startswith("win"):
             ipython_update_profile(path)
-            profile = os.path.join(path, "ipython_notebook_config.py")
+            profile = os.path.join(path, "ipython_kernel_config.py")
             with open(profile, "r", encoding="utf8") as f:
                 lines = f.readlines()
 

@@ -75,7 +75,8 @@ def reorder_module_list(list_module):
 
 
 def update_all(temp_folder=".", fLOG=print, verbose=True,
-               list_module=None, reorder=True):
+               list_module=None, reorder=True,
+               skip_module=None):
     """
     update modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -86,6 +87,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     @param  list_module     None or of list of str or @see cl ModuleInstall
     @param  fLOG            logging function
     @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
+    @param  skip_module     module to skip (list of str)
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -93,12 +95,17 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         from .get_pip import main
         main()
 
+    if skip_module is None:
+        skip_module = []
+
     if list_module is None:
         from ..packaged import ensae_fullset
         list_module = ensae_fullset()
     else:
         list_module = [find_module_install(mod) if isinstance(
             mod, str) else mod for mod in list_module]
+
+    list_module = [_ for _ in list_module if _.name not in skip_module]
 
     if reorder:
         list_module = reorder_module_list(list_module)
@@ -129,7 +136,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
-                list_module=None, reorder=True):
+                list_module=None, reorder=True, skip_module=None):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -140,6 +147,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param  list_module     None or of list of str or @see cl ModuleInstall
     @param  fLOG            logging function
     @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
+    @param  skip_module     module to skip (list of str)
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -148,12 +156,17 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         from .get_pip import main
         main()
 
+    if skip_module is None:
+        skip_module = []
+
     if list_module is None:
         from ..packaged import ensae_fullset
         list_module = ensae_fullset()
     else:
         list_module = [find_module_install(mod) if isinstance(
             mod, str) else mod for mod in list_module]
+
+    list_module = [_ for _ in list_module if _.name not in skip_module]
 
     if reorder:
         list_module = reorder_module_list(list_module)

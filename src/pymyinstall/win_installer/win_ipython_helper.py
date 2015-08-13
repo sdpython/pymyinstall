@@ -49,7 +49,7 @@ def ipython_update_profile(profile_path):
 
     @param      profile_path        path to profile
     """
-    profile = os.path.join(profile_path, "ipython_notebook_config.py")
+    profile = os.path.join(profile_path, "ipython_kernel_config.py")
     with open(profile, "r") as f:
         content = f.read()
     add = """

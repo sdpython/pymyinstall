@@ -21,6 +21,7 @@ dateutils
 docutils
 hachibee-sphinx-theme
 ipython
+nbformat
 jsonschema
 lxml
 matplotlib

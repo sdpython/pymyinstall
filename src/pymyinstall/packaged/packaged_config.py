@@ -171,8 +171,38 @@ def small_set():
             "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
         ModuleInstall(
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
+        # ipython
         ModuleInstall(
-            "ipython", "pip", mname="IPython", purpose="IPython, notebooks, Jupyter", usage="VIZ"),
+            "ipython", "pip", purpose="IPython, Jupyter", usage="VIZ"),
+        ModuleInstall(
+            "jupyter", "pip", purpose="Jupyter", usage="VIZ"),
+        ModuleInstall(
+            "jupyter_core", "pip", purpose="Jupyter Core", usage="VIZ"),
+        ModuleInstall(
+            "jupyter_client", "pip", purpose="Jupyter client", usage="VIZ"),
+        ModuleInstall(
+            "nbformat", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="VIZ"),
+        ModuleInstall(
+            "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="VIZ"),
+        ModuleInstall(
+            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="VIZ"),
+        ModuleInstall(
+            "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="VIZ"),
+        ModuleInstall(
+            "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="VIZ"),
+        ModuleInstall(
+            "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="VIZ"),
+        ModuleInstall(
+            "traitlets", "pip", purpose="IPython, dependency", usage="VIZ"),
+        ModuleInstall(
+            "pickleshare", "pip", purpose="IPython, dependency", usage="VIZ"),
+        ModuleInstall(
+            "path.py", "pip", mname="path", purpose="IPython, dependency", usage="VIZ"),
+        ModuleInstall(
+            "simplegeneric", "pip", purpose="IPython, dependency", usage="VIZ"),
+        ModuleInstall(
+            "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="VIZ"),
+        # end of ipython
         #
         ModuleInstall(
             "mpld3", "pip", purpose="mpld3 project brings together Matplotlib and D3js."),
