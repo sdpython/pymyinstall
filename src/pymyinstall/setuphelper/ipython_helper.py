@@ -48,13 +48,14 @@ def setup_ipython(current_path=None,
     @endcode
 
     """
+    raise NotImplementedError("not implemented for jupyter 4.0")
     if sys.platform.startswith("win"):
         user_profile = os.environ['USERPROFILE']
         profile = os.path.join(user_profile, ".jupyter", "profile_default")
         ipython_config = os.path.join(profile, "ipython_config.py")
         ipython_notebook_config = os.path.join(
             profile,
-            "ipython_notebook_config.py")
+            "ipython_kernel_config.py")
 
         checkpath = os.path.join(profile, "checkspoints")
         if not os.path.exists(checkpath):

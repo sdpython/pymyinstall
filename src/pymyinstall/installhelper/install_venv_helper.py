@@ -134,7 +134,18 @@ def venv_install(venv, packages, fLOG=print, temp_folder=None):
         from .get_pip import __file__ as pip_loc
         ppath = os.path.abspath(pip_loc.replace(".pyc", ".py"))
         script = ["-u", ppath]
-        return run_venv_script(venv, script, fLOG=fLOG, is_cmd=True)
+        out = run_venv_script(venv, script, fLOG=fLOG, is_cmd=True)
+
+        if sys.platform.startswith("win"):
+            scripts = os.path.join(venv, "Scripts")
+        else:
+            scripts = os.path.join(venv, "bin")
+        in_scripts = os.listdir(scripts)
+        pips = [_ for _ in in_scripts if _.startswith("pip")]
+        if len(pips) == 0:
+            raise FileNotFoundError(
+                "unable to find pip in {0},\nvenv:\n{2}\nppath:\n{3}\ncontent:\n  {1}".format(scripts, in_scripts, venv, ppath))
+        return out
     else:
         p = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
