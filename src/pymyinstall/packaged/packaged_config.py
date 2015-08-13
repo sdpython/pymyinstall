@@ -202,6 +202,8 @@ def small_set():
             "simplegeneric", "pip", purpose="IPython, dependency", usage="VIZ"),
         ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="VIZ"),
+        ModuleInstall(
+            "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="VIZ"),
         # end of ipython
         #
         ModuleInstall(
