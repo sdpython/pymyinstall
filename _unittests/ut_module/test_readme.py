@@ -61,7 +61,7 @@ class TestReadme(unittest.TestCase):
 
         temp = get_temp_folder(__file__, "temp_readme")
 
-        if False and __name__ != "__main__":
+        if __name__ != "__main__":
             warnings.warn("does not work well from a virtual environment")
             return
 
