@@ -20,12 +20,14 @@ if sys.version_info[0] == 2:
     import urllib2 as urllib_error
     import xmlrpclib as xmlrpc_client
     from codecs import open
+    from StrinIO import StringIO
 else:
     from urllib.parse import urlsplit
     import urllib.request as urllib_request
     import urllib.error as urllib_error
     import importlib.util
     import xmlrpc.client as xmlrpc_client
+    from io import StringIO
 
 
 class MissingPackageOnPyPiException(Exception):
@@ -82,22 +84,37 @@ def get_page_wheel(page):
 
 
 @install_memoize
-def get_module_version(module):
+def get_module_version(module, use_cmd=False):
     """
     return a dictionary { module:version }
 
     @param      module      unused, None
+    @param      use_cmd     use command line
     @return                 dictionary
     """
-    prog = get_pip_program()
-    cmd = prog + " list"
-    out, err = run_cmd(cmd, wait=True, do_not_log=True)
+    if use_cmd:
+        prog = get_pip_program()
+        cmd = prog + " list"
+        out, err = run_cmd(cmd, wait=True, do_not_log=True)
+    else:
+        kout = sys.stdout
+        kerr = sys.stderr
+        sys.stdout = StringIO()
+        sys.stderr = StringIO()
+        import pip
+        pip.main(["list"])
+        out = sys.stdout.getvalue()
+        err = sys.stderr.getvalue()
+        sys.stdout = kout
+        sys.stderr = kerr
+
     if err is not None and len(err) > 0:
         if len(err.split("\n")) > 3 or \
            "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
             raise Exception("unable to run, #lines {0}\nCMD:\n{3}\nERR:\n{1}\nOUT:\n{2}".format(
                 len(err.split("\n")), err, out, cmd))
     lines = out.split("\n")
+
     res = {}
     for line in lines:
         if "(" in line:

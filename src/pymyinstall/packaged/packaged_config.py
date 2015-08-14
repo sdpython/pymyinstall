@@ -173,37 +173,37 @@ def small_set():
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
         # ipython
         ModuleInstall(
-            "ipython", "pip", purpose="IPython, Jupyter", usage="VIZ"),
+            "ipython", "pip", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
-            "jupyter", "pip", purpose="Jupyter", usage="VIZ"),
+            "jupyter", "pip", purpose="Jupyter", usage="JUPYTER"),
         ModuleInstall(
-            "jupyter_core", "pip", purpose="Jupyter Core", usage="VIZ"),
+            "jupyter_core", "pip", purpose="Jupyter Core", usage="JUPYTER"),
         ModuleInstall(
-            "jupyter_client", "pip", purpose="Jupyter client", usage="VIZ"),
+            "jupyter_client", "pip", purpose="Jupyter client", usage="JUPYTER"),
         ModuleInstall(
-            "nbformat", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="VIZ"),
+            "nbformat", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
-            "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="VIZ"),
+            "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
-            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="VIZ"),
+            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
-            "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="VIZ"),
+            "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
-            "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="VIZ"),
+            "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="JUPYTER"),
         ModuleInstall(
-            "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="VIZ"),
+            "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="JUPYTER"),
         ModuleInstall(
-            "traitlets", "pip", purpose="IPython, dependency", usage="VIZ"),
+            "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "pickleshare", "pip", purpose="IPython, dependency", usage="VIZ"),
+            "pickleshare", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "path.py", "pip", mname="path", purpose="IPython, dependency", usage="VIZ"),
+            "path.py", "pip", mname="path", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "simplegeneric", "pip", purpose="IPython, dependency", usage="VIZ"),
+            "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="VIZ"),
+            "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
-            "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="VIZ"),
+            "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="JUPYTER"),
         # end of ipython
         #
         ModuleInstall(
