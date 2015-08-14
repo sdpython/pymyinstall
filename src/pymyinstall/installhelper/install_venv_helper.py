@@ -26,7 +26,7 @@ def build_venv_cmd(params, posparams):
     """
     import venv
     dir(venv)
-    exe = sys.executable
+    exe = sys.executable.replace("w.exe", "").replace(".exe", "")
     cmd = [exe, "-m", "venv"]
     for k, v in params.items():
         if v is None:
@@ -155,7 +155,7 @@ def venv_install(venv, packages, fLOG=print, temp_folder=None):
                   "import pymyinstall",
                   "ps=[{0}]".format(l),
                   "t='{0}'".format(temp_folder.replace("\\", "\\\\")),
-                  "pymyinstall.packaged.install_all(temp_folder=t,list_module=ps)"]
+                  "pymyinstall.packaged.install_all(temp_folder=t,list_module=ps,up_pip=False)"]
         return run_venv_script(venv, "\n".join(script), fLOG=fLOG)
 
 

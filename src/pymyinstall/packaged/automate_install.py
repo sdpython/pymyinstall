@@ -137,7 +137,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
-                list_module=None, reorder=True, skip_module=None):
+                list_module=None, reorder=True, skip_module=None,
+                up_pip=True):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -149,6 +150,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param  fLOG            logging function
     @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
     @param  skip_module     module to skip (list of str)
+    @param  up_pip          upgrade pip
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -172,9 +174,10 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     if reorder:
         list_module = reorder_module_list(list_module)
 
-    if verbose:
-        fLOG("update pip if needed")
-    update_pip()
+    if up_pip:
+        if verbose:
+            fLOG("update pip if needed")
+        update_pip()
 
     modules = list_module
     again = []
