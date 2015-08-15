@@ -13,7 +13,7 @@ open_tool_on_browser()
 @endcode
 """
 
-__version__ = "1.0"
+__version__ = "1.1"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pymyinstall"
 __url__ = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html"

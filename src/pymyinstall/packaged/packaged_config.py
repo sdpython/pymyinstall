@@ -368,7 +368,8 @@ def extended_set():
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
         ModuleInstall(
-            'dynd', 'wheel', purpose="DyND-Python, a component of the Blaze project, is the Python exposure of the DyND dynamic multi-dimensional array library."),
+            'dynd', 'wheel', purpose="DyND-Python, a component of the Blaze project, is the Python exposure of the DyND dynamic multi-dimensional array library.") \
+            if sys.version_info[0] >= 3 else None,
         ModuleInstall(
             'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets",
             usage="DATA/ML"),

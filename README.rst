@@ -81,6 +81,9 @@ Functionalities
 Versions
 --------
 
+* **1.1 - 2015/??/??/**
+    * **fix:** module dynd is only available on Python 3, remove it for Python 2.7
+
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup
       to create a setup similar to WinPython but with InnoSetup (avoid limit size)
