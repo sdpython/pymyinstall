@@ -81,7 +81,7 @@ Functionalities
 Versions
 --------
 
-* **1.0 - 2015/08/15**
+* **1.0.415 - 2015/08/15**
     * **new:** function win_python_setup
       to create a setup similar to WinPython but with InnoSetup (avoid limit size)
     * **add:** function to check for update and update an existing module, see 
