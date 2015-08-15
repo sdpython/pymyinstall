@@ -20,7 +20,7 @@ if sys.version_info[0] == 2:
     import urllib2 as urllib_error
     import xmlrpclib as xmlrpc_client
     from codecs import open
-    from StrinIO import StringIO
+    from StringIO import StringIO
 else:
     from urllib.parse import urlsplit
     import urllib.request as urllib_request
