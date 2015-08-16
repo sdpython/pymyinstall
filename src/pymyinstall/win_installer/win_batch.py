@@ -33,7 +33,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     has_spyder = False
     has_rss = False
     for mod in module_list:
-        if mod.name == "IPython":
+        if mod.name == "ipython":
             has_ipython = True
         if mod.name == "rodeo":
             has_rodeo = True
