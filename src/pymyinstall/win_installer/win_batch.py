@@ -431,10 +431,13 @@ def update_all_packages(folders, suffix=""):
     @param      folders     see @see fn create_win_batches
     @param      suffix      add a suffix
     @return                 operations (list of what was done)
+
+    .. versionchanged:: 1.3
+         Bug fix, update script to import function update_all (fails in 1.2).
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            '%PYTHON_WINHOME%\\python -c "from pymyinstall import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
+            '%PYTHON_WINHOME%\\python -c "from pymyinstall.packaged import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_update_all_packages.bat")
