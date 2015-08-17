@@ -48,7 +48,7 @@ def do_main(temp_folder="build/update_modules",
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
     try:
-        from pymyinstall.packaged import update_all
+        from pymyinstall.packaged import install_all
     except ImportError:
         folder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))

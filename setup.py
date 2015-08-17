@@ -188,6 +188,10 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
-        scripts=['src/pymyinstall/scripts/pymy_update.py',
-                 'src/pymyinstall/scripts/pymy_install.py']
+        entry_points={
+            'console_scripts': [
+                'pymy_update = pymyinstall.scripts.pymy_update:main',
+                'pymy_install = pymyinstall.scripts.pymy_install:main',
+            ],
+        }
     )
