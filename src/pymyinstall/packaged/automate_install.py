@@ -89,6 +89,11 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     @param  fLOG            logging function
     @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
     @param  skip_module     module to skip (list of str)
+
+    .. versionchanged:: 1.3
+        Catch an exception while updating modules and walk through the end of the list.
+        The function should be run a second time to make sure an exception remains.
+        It can be due to python keeping in memory an updated module.
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -116,6 +121,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     update_pip()
     modules = list_module
     again = []
+    errors = []
     for mod in modules:
         if verbose:
             fLOG("check module: ", mod.name)
@@ -125,7 +131,14 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
             m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
                 .format(mod.name, inst, ver, mod.kind)
             fLOG(m)
-            b = mod.update(temp_folder=temp_folder, log=verbose)
+            try:
+                b = mod.update(temp_folder=temp_folder, log=verbose)
+            except Exception as e:
+                b = False
+                m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
+                    .format(mod.name, inst, ver, mod.kind, str(e))
+                fLOG(m)
+                errors.append((mod, e))
             if b:
                 again.append(m)
 
