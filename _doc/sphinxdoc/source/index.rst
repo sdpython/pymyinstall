@@ -38,32 +38,28 @@ pymyinstall documentation
 What is it?
 -----------
 
-This module contains functions which install a module from pipy, using pip or from a wheel package::
+The module helps installing packages on Windows and Linux.
+The module installs two batch files. The first one
+``pymy_update`` updates existing modules. The second one
+``pymy_install`` installes necessary modules to do machine learning.
+To get help on both::
 
-    from pymyinstall.packaged import ensae_fullset
-    for mod in ensae_fullset():
-        mod.install()
-        
-Or::
-
-    from pymyinstall import ModuleInstall
-    ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+    pymy_update --help
+    pymy_install --help
     
+For example, to install packages for a datascientist::
+
+    pip install pymyinstall
+    pymyinstall
+    
+The module will download and install many modules,
+numpy, scikit-learn, jupyter, pandas and many others.
 If it fails for any reason - lost connexion -, run again the function with the same
 parameter. If it fails again, you can skip the modules by filling the parameter ``skip``.
-Some modules might fail on Windows due to Permission error, in that case, you should go to the
-folder ``install`` and run the installer. Once it is done, you can run the function again 
-to continue. 
 
-It is better to use it outside the interpreter::
-
-    python -c "from pymyinstall.packaged import ensae_fullset;list(mod.install() for mod in ensae_fullset())"
-    
-Or on Linux, you can also run::
-
-    python -c "from pymyinstall import build_requirements;from pymyinstall.packaged import ensae_fullset;print(build_requirements(ensae_fullset()))" > requirements_teachings.txt
-    pip install -r requirements_teachings.txt
-
+The module also includes a function 
+:func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
+which creates a setup with Python and R which modules and packages for a datascientist.
 
 Installation
 ------------
@@ -80,7 +76,23 @@ Functionalities
 - provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
 - function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
   see :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
+
+
+It is better to use it outside the interpreter::
+
+    python -c "from pymyinstall.packaged import ensae_fullset;list(mod.install() for mod in ensae_fullset())"
     
+Or on Linux, you can also run::
+
+    python -c "from pymyinstall import build_requirements;from pymyinstall.packaged import ensae_fullset;print(build_requirements(ensae_fullset()))" > requirements_teachings.txt
+    pip install -r requirements_teachings.txt
+
+To install a single package::
+
+    from pymyinstall import ModuleInstall
+    ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+    
+
 
 Quick start
 -----------
