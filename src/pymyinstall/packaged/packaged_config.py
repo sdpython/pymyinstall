@@ -571,7 +571,10 @@ def extended_set():
         # 2015-08
         #
         ModuleInstall(
-            "pysnmp", "pip", purpose=""),
+            "pysnmp", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
+        # pyinstaller does not install properly on Windows
+        # ModuleInstall(
+        #    "pyinstaller", "pip", purpose="Converts (packages) Python programs into stand-alone executables, under Windows, Linux, Mac OS X, AIX and Solaris."),
     ]
 
     return [_ for _ in mod if _ is not None]
