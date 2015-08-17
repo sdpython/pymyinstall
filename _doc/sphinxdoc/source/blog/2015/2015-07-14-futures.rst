@@ -1,10 +1,10 @@
 
 
-.. index:: futures
+.. index:: futures, issue
 
 .. blogpost::
     :title: Modules futures, concurrent
-    :keywords: futures, concurrent
+    :keywords: futures, concurrent, issue
     :date: 2015-07-14
     :categories: modules
 

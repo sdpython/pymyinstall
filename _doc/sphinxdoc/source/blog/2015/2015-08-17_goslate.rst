@@ -1,0 +1,15 @@
+
+
+.. index:: goslate, issue
+
+.. blogpost::
+    :title: Issue with module goslate 1.5
+    :keywords: goslate, encoding, issue
+    :date: 2015-08-17
+    :categories: modules
+
+    I had issues installing 
+    `goslate <https://pypi.python.org/pypi/goslate>`_ 1.5.
+    It raises an encoding issues while reading
+    file *README.rst*.
+    
