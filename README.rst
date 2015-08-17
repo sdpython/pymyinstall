@@ -83,7 +83,9 @@ Versions
 
 * **1.1 - 2015/??/??/**
     * **fix:** module dynd is only available on Python 3, remove it for Python 2.7
-    * **fix:** fix function *create_win_batches* (batch script ipython were missing)
+    * **fix:** fix function *create_win_batches* (batch script ipython were missing, batch to update all installed packages)
+    * **change:** the function *update_all* continues if an update fails (catches excptions)
+    * **add:** add scripts *pymy_install* and *pymy_update* to folder *<python>/Scripts*
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup

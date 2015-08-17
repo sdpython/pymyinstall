@@ -188,4 +188,6 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
+        scripts=['src/pymyinstall/scripts/pymy_update',
+                 'src/pymyinstall/scripts/pymy_install']
     )
