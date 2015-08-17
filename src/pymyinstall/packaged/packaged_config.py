@@ -109,9 +109,9 @@ def small_set():
         ModuleInstall(
             "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts."),
         ModuleInstall(
-            "tornado", "wheel", purpose="python server, IPython relies on it"),
+            "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
-            "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz"),
+            "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz", usage="NETWORK"),
         #
         ModuleInstall(
             "pycparser", "wheel", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
@@ -230,7 +230,8 @@ def small_set():
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
-        ModuleInstall("goslate", "pip", purpose="calls google translate"),
+        ModuleInstall("goslate", "pip", version="1.4",
+                      purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
         # XML to JSON
         ModuleInstall(
@@ -348,13 +349,15 @@ def extended_set():
                       purpose="Various helpers to pass trusted data to untrusted environments and back."),
         ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy',
                       purpose="model SQL queries as objects"),
-        ModuleInstall('flask-sqlalchemy', 'pip', mname='flask.ext.sqlalchemy'),
         ModuleInstall('simplejson', 'wheel', purpose="json parser"),
         ModuleInstall('python-pptx', 'pip', mname="pptx",
                       purpose="read/write PowerPoint presentation"),
         ModuleInstall(
             'python-docx', 'pip', mname="docx", purpose="read/write Word document"),
-        ModuleInstall('flask', 'pip', purpose="python server"),
+        ModuleInstall('flask', 'pip', purpose="python server",
+                      usage="NETWORK"),
+        ModuleInstall('flask-sqlalchemy', 'pip',
+                      mname='flask.ext.sqlalchemy', usage="NETWORK"),
         # ModuleInstall('flasksphinx', 'pip', purpose="serves Sphinx
         # documentation through a Flask server"), # issue with Python 3
         ModuleInstall(
@@ -368,8 +371,8 @@ def extended_set():
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
         ModuleInstall(
-            'dynd', 'wheel', purpose="DyND-Python, a component of the Blaze project, is the Python exposure of the DyND dynamic multi-dimensional array library.") \
-            if sys.version_info[0] >= 3 else None,
+            'dynd', 'wheel', purpose="DyND-Python, a component of the Blaze project, is the Python exposure of the DyND dynamic multi-dimensional array library.")
+        if sys.version_info[0] >= 3 else None,
         ModuleInstall(
             'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets",
             usage="DATA/ML"),
@@ -404,7 +407,7 @@ def extended_set():
         ModuleInstall(
             'vispy', 'pip', purpose="Vispy is a high-performance interactive 2D/3D data visualization library."),
         ModuleInstall(
-            'selenium', 'pip', purpose="Python wrapper for Selenium"),
+            'selenium', 'pip', purpose="Python wrapper for Selenium", usage="NETWORK"),
         ModuleInstall(
             'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         ModuleInstall('pygame', 'wheel', purpose="GUI, interface for games"),
@@ -454,7 +457,8 @@ def extended_set():
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
         ModuleInstall("pycrypto", "wheel_xd", mname="Crypto",
                       purpose="Cryptographic modules for Python."),
-        ModuleInstall("paramiko", "pip", purpose="SSH2 protocol library"),
+        ModuleInstall("paramiko", "pip",
+                      purpose="SSH2 protocol library", usage="NETWORK"),
         #
         # ModuleInstall("pattern", "pip", purpose="Web mining module for Python, with tools for scraping, natural language processing, machine learning, network analysis and visualization.") #only works on Python 2.7
         #
@@ -503,7 +507,7 @@ def extended_set():
         ModuleInstall("deap", "pip", purpose="deep learning"),
         # for gensim
         ModuleInstall(
-            "boto", "pip", purpose="A Python interface to Amazon Web Services"),
+            "boto", "pip", purpose="A Python interface to Amazon Web Services", usage="NETWORK"),
         # for gensim
         ModuleInstall("bz2file", "pip", purpose="process bz2 files"),
         # for gensim
@@ -561,7 +565,13 @@ def extended_set():
                       purpose="tree visualisation", usage="VIZ"),  # graph visualization
         # visualisation
         ModuleInstall(
-            "pyxley", "pip", purpose="plotting, visualization, javascript"),
+            "pyxley", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
+
+        #
+        # 2015-08
+        #
+        ModuleInstall(
+            "pysnmp", "pip", purpose=""),
     ]
 
     return [_ for _ in mod if _ is not None]
@@ -595,7 +605,7 @@ def ensae_set():
             "tweepy", "pip", purpose="Python wrapper for the twitter API"),
         #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
         ModuleInstall(
-            "django", "pip", purpose="web application, most famous module about it, the only when to build a scalable website"),
+            "django", "pip", purpose="web application, most famous module about it, the only when to build a scalable website", usage="NETWORK"),
         ModuleInstall("django-audiotracks", "pip",
                       mname="audiotracks", purpose="read audio with django"),
         ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
@@ -626,7 +636,8 @@ def ensae_set():
             "la", "wheel", purpose="Label the rows, columns, any dimension, of your NumPy arrays."),
         ModuleInstall(
             "mahotas", "wheel", purpose="Mahotas: Computer Vision Library"),
-        ModuleInstall("milk", "wheel", purpose="machine learning toolkit"),
+        ModuleInstall("milk", "wheel",
+                      purpose="machine learning toolkit", usage="DATA/ML"),
         ModuleInstall("minepy", "wheel", purpose="interface to MineCraft"),
         ModuleInstall(
             "NLopt", "wheel", mname="nlopt", purpose="linear, quadratic optimization"),
@@ -739,7 +750,6 @@ def ensae_set():
             "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
         ModuleInstall(
             "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
-
     ]
     if sys.platform.startswith("win"):
         mod.append(ModuleInstall("VideoCapture", "wheel",
