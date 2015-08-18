@@ -47,10 +47,10 @@ Name: "{app}\SQLiteSpy"; IconFilename: "{app}\tools\icons\sqlitespy.ico"; Filena
 Name: "{app}\R Console"; IconFilename: "{app}\tools\icons\r.ico"; Filename: "{app}\config\r_console.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 Name: "{app}\R Gui"; IconFilename: "{app}\tools\icons\r.ico"; Filename: "{app}\config\r_gui.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 ;Name: "{app}\Julia Console"; IconFilename: "{app}\tools\icons\julia.ico"; Filename: "{app}\tools\Julia\bin\x64\julia.exe"; IconIndex: 0; WorkingDir: "{app}\workspace"
-; IPython
-Name: "{app}\IPython Console"; IconFilename: "{app}\tools\icons\ipython.ico"; Filename: "{app}\config\ipython_console.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
-Name: "{app}\IPython Qt Console"; IconFilename: "{app}\tools\icons\ipython.ico"; Filename: "{app}\config\ipython_qtconsole.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "qtconsole --pylab=inline"
-Name: "{app}\IPython Notebook"; IconFilename: "{app}\tools\icons\jupyter.ico"; Filename: "{app}\config\ipython_notebook.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "notebook --notebook-dir={app}\workspace --pylab=inline"
+; Jupyter
+Name: "{app}\Jupyter Console"; IconFilename: "{app}\tools\icons\ipython.ico"; Filename: "{app}\config\jupyter_console.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
+Name: "{app}\Jupyter Qt Console"; IconFilename: "{app}\tools\icons\ipython.ico"; Filename: "{app}\config\jupyter_qtconsole.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "--pylab=inline"
+Name: "{app}\Jupyter Notebook"; IconFilename: "{app}\tools\icons\jupyter.ico"; Filename: "{app}\config\jupyter_notebook.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "--notebook-dir={app}\workspace --pylab=inline"
 ; python
 Name: "{app}\Python Console"; IconFilename: "{app}\tools\icons\python.ico"; Filename: "{app}\config\python_console.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 Name: "{app}\Rodeo"; IconFilename: "{app}\tools\icons\yhat.ico"; Filename: "{app}\config\rodeo.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"

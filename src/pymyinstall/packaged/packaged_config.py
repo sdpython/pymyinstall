@@ -525,7 +525,7 @@ def extended_set():
             "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas, bcolz and more."),
         #
         ModuleInstall("glueviz", "wheel", mname="glue",
-                      purpose="ploting, Multidimensional data visualzation across files"),
+                      purpose="ploting, Multidimensional data visualzation across files", usage="DATA/ML"),
         #
         # javascript graphs
         ModuleInstall("charts", "pip",
@@ -575,6 +575,8 @@ def extended_set():
         # pyinstaller does not install properly on Windows
         # ModuleInstall(
         #    "pyinstaller", "pip", purpose="Converts (packages) Python programs into stand-alone executables, under Windows, Linux, Mac OS X, AIX and Solaris."),
+        ModuleInstall(
+            "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
     ]
 
     return [_ for _ in mod if _ is not None]
@@ -756,7 +758,9 @@ def ensae_set():
     ]
     if sys.platform.startswith("win"):
         mod.append(ModuleInstall("VideoCapture", "wheel",
-                                 purpose="A Win32 Python Extension for Accessing Video Devices"))
+                                 purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))
+        mod.append(ModuleInstall("jaraco.video", "pip",
+                                 purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
     return mod
 

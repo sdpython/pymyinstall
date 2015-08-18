@@ -51,7 +51,7 @@ julia_kernel = {
 }
 
 
-def add_kernel_ipython(kernel, path, tools_path, python_path, suffix="WP"):
+def add_kernel_jupyter(kernel, path, tools_path, python_path, suffix="WP"):
     """
     add a kernel to jupyter
 
@@ -105,11 +105,11 @@ def install_kernels(tools_path, python_path, suffix="WP"):
     res = []
     if os.path.exists(python_path):
         res.append(
-            add_kernel_ipython(python_kernel, jupyter, tools_path, python_path, suffix))
+            add_kernel_jupyter(python_kernel, jupyter, tools_path, python_path, suffix))
     if os.path.exists(os.path.join(tools_path, "R")):
         res.append(
-            add_kernel_ipython(r_kernel, jupyter, tools_path, python_path, suffix))
+            add_kernel_jupyter(r_kernel, jupyter, tools_path, python_path, suffix))
     if os.path.exists(os.path.join(tools_path, "Julia")):
         res.append(
-            add_kernel_ipython(julia_kernel, jupyter, tools_path, python_path, suffix))
+            add_kernel_jupyter(julia_kernel, jupyter, tools_path, python_path, suffix))
     return res

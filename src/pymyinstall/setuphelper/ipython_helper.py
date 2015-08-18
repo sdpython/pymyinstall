@@ -1,7 +1,7 @@
 # coding: latin-1
 """
 @file
-@brief Change ipython configuration
+@brief Change Jupyter configuration
 """
 import sys
 import os
@@ -32,7 +32,7 @@ def setup_ipython(current_path=None,
     The function applies the modification suggested in this blog post:
     `Travailler avec IPython notebook <http://www.xavierdupre.fr/blog/2014-02-24_nojs.html>`_ (written in French).
 
-    @param      additional_path     additional paths to add to ipython (a list)
+    @param      additional_path     additional paths to add to jupyter (a list)
     @param      current_path        change the current path when running a notebook
     @param      apply_modification  apply the modification, otherwise, just create the profile
     @param      shortcut            add short cut the desktop
@@ -40,11 +40,11 @@ def setup_ipython(current_path=None,
     @return                         path the config file
 
     If you need to create a shortcut with the appropriate paths, you can use the following instructions
-    to open IPython notebook on a specific folder:
+    to open Jupyter notebook on a specific folder:
 
     @code
-    set path=%path%;c:\Python34;c:\\Python34\\Scripts
-    ipython3 notebook --notebook-dir=_doc\\notebooks
+    set path=%path%;c:\\Python34;c:\\Python34\\Scripts
+    jupyter-notebook --notebook-dir=_doc\\notebooks
     @endcode
 
     """
@@ -67,13 +67,13 @@ def setup_ipython(current_path=None,
                 os.path.split(
                     sys.executable)[0],
                 "Scripts",
-                "ipython3.exe")
+                "jupyter-notebook.exe")
             cmd = exe + " profile create"
             out, err = run_cmd(cmd, wait=True, fLOG=noLOG)
 
             if not os.path.exists(ipython_config):
                 raise Exception(
-                    "unable to create ipython configuration because of:\n{0}\nERR:\n{1}\ncmd={2}".format(
+                    "unable to create jupyter configuration because of:\n{0}\nERR:\n{1}\ncmd={2}".format(
                         out,
                         err,
                         cmd))
@@ -110,16 +110,16 @@ def setup_ipython(current_path=None,
                 else:
                     text = text.replace(
                         alls[0],
-                        "c.{1} = r'{0}\ipython_startup.py'".format(
+                        "c.{1} = '{0}\\jupyter_startup.py'".format(
                             current_path,
                             var))
 
         # browser
         if browser is not None:
             if sys.platform.startswith("win"):
-                paths = {"firefox": r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe",
-                         "ie": r"C:\Program Files\Internet Explorer\iexplore.exe",
-                         "chrome": r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+                paths = {"firefox": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
+                         "ie": "C:\\Program Files\\Internet Explorer\\iexplore.exe",
+                         "chrome": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
                          }
                 browser = browser.lower()
                 if browser not in paths:
@@ -142,7 +142,7 @@ def setup_ipython(current_path=None,
             with open(ipython_notebook_config, "w") as f:
                 f.write(text)
 
-        # write ipython_startup.py
+        # write jupyter_startup.py
         rows = ["import sys"]
         if additional_path is not None:
             for p in additional_path:
@@ -152,7 +152,7 @@ def setup_ipython(current_path=None,
         s = "\n".join(rows)
 
         if apply_modification:
-            with open(os.path.join(current_path, "ipython_startup.py"), "w") as f:
+            with open(os.path.join(current_path, "jupyter_startup.py"), "w") as f:
                 f.write(s)
 
         return [ipython_notebook_config, ipython_config]
@@ -172,11 +172,11 @@ def add_shortcut_to_desktop_for_ipython(folder):
         os.path.split(
             sys.executable)[0],
         "Scripts",
-        "ipython3")
-    arguments = " notebook --notebook-dir=" + folder
+        "jupyter-notebook")
+    arguments = " --notebook-dir=" + folder
     ver = suffix()
     return add_shortcut_to_desktop(
-        file, "notebook." + ver, "IPython Notebook {1} ({0})".format(folder, ver), arguments)
+        file, "notebook." + ver, "Jupyter Notebook {1} ({0})".format(folder, ver), arguments)
 
 if __name__ == "__main__":
-    setup_ipython(r"C:\temp", [], apply_modification=False)
+    setup_ipython("C:\\temp", [], apply_modification=False)

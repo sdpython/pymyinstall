@@ -39,7 +39,7 @@ except ImportError:
 
 
 from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
-from src.pymyinstall.win_installer.win_ipy_kernels import add_kernel_ipython, python_kernel
+from src.pymyinstall.win_installer.win_ipy_kernels import add_kernel_jupyter, python_kernel
 
 
 class TestKernels(unittest.TestCase):
@@ -51,7 +51,7 @@ class TestKernels(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         temp = get_temp_folder(__file__, "temp_kernels")
-        ker = add_kernel_ipython(
+        ker = add_kernel_jupyter(
             python_kernel, temp, temp, os.path.dirname(sys.executable), suffix="ZZZ")
         with open(ker, "r", encoding="utf8") as f:
             content = f.read()

@@ -28,13 +28,13 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     if module_list is None:
         raise ValueError("module_list cannot be None")
 
-    has_ipython = False
+    has_jupyter = False
     has_rodeo = False
     has_spyder = False
     has_rss = False
     for mod in module_list:
-        if mod.name == "ipython":
-            has_ipython = True
+        if mod.name == "jupyter":
+            has_jupyter = True
         if mod.name == "rodeo":
             has_rodeo = True
         if mod.name == "spyder":
@@ -50,10 +50,10 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
                       win_replace_shebang,
                       ]
 
-    if has_ipython:
-        list_functions.extend([create_win_ipython_console,
-                               create_win_ipython_qtconsole,
-                               create_win_ipython_notebook,
+    if has_jupyter:
+        list_functions.extend([create_win_jupyter_console,
+                               create_win_jupyter_qtconsole,
+                               create_win_jupyter_notebook,
                                win_install_kernels,
                                ])
 
@@ -118,9 +118,9 @@ def create_win_env(folders):
     return [("batch", name)]
 
 
-def create_win_ipython_console(folders):
+def create_win_jupyter_console(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start jupyter
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -128,9 +128,9 @@ def create_win_ipython_console(folders):
     text = ["@echo off",
             "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
+            "set JUPYTERC=%CURRENT2%\\..\\python\\Scripts\\jupyter-console.exe",
             "cd %WORKSPACE%",
-            "%IPYTHON% --ipython-dir=%CURRENT2% --profile=win_profile"]
+            "%JUPYTERC% --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "ipython_console.bat")
@@ -139,7 +139,7 @@ def create_win_ipython_console(folders):
     return [("batch", name)]
 
 
-def create_win_ipython_qtconsole(folders):
+def create_win_jupyter_qtconsole(folders):
     """
     create a batch file to start ipython QtConsole
 
@@ -148,9 +148,9 @@ def create_win_ipython_qtconsole(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
+            "set JUPYTERQTC=%CURRENT2%\\..\\python\\Scripts\\jupyter-qtconsole.exe",
             "cd %WORKSPACE%",
-            "start %IPYTHON% qtconsole --ipython-dir=%CURRENT2% --profile=win_profile"]
+            "start %JUPYTERQTC% --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "ipython_qtconsole.bat")
@@ -159,7 +159,7 @@ def create_win_ipython_qtconsole(folders):
     return [("batch", name)]
 
 
-def create_win_ipython_notebook(folders):
+def create_win_jupyter_notebook(folders):
     """
     create a batch file to start ipython
 
@@ -168,9 +168,9 @@ def create_win_ipython_notebook(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set IPYTHON=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
+            "set JUPYTERNB=%CURRENT2%\\..\\python\\Scripts\\jupyter-notebook.exe",
             "cd %WORKSPACE%",
-            "%IPYTHON% notebook --notebook-dir=%CURRENT2%\\..\\workspace --ipython-dir=%CURRENT2% --profile=win_profile"]
+            "%JUPYTERNB% --notebook-dir=%CURRENT2%\\..\\workspace --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "ipython_notebook.bat")
@@ -181,7 +181,7 @@ def create_win_ipython_notebook(folders):
 
 def create_win_rodeo(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start rodeo
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -201,7 +201,7 @@ def create_win_rodeo(folders):
 
 def create_win_scite(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start scite
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -221,7 +221,7 @@ def create_win_scite(folders):
 
 def create_win_sqllitespy(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start sqlitespy
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -241,7 +241,7 @@ def create_win_sqllitespy(folders):
 
 def create_win_python_console(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start python
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -261,7 +261,7 @@ def create_win_python_console(folders):
 
 def create_win_julia_console(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start julia
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -281,7 +281,7 @@ def create_win_julia_console(folders):
 
 def create_win_spyder(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start spyder
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -300,7 +300,7 @@ def create_win_spyder(folders):
 
 def create_win_r_console(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start R
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -320,7 +320,7 @@ def create_win_r_console(folders):
 
 def create_win_r_gui(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start R Gui
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -340,7 +340,7 @@ def create_win_r_gui(folders):
 
 def win_install_kernels(folders, suffix=""):
     """
-    create a batch file to start ipython
+    create a batch file to install kernels
 
     @param      folders     see @see fn create_win_batches
     @param      suffix      add a suffix
@@ -359,7 +359,7 @@ def win_install_kernels(folders, suffix=""):
 
 def win_replace_shebang(folders, suffix=""):
     """
-    create a batch file to start ipython
+    create a batch file to replace the shebang
 
     @param      folders     see @see fn create_win_batches
     @param      suffix      add a suffix
@@ -388,7 +388,7 @@ def win_replace_shebang(folders, suffix=""):
 
 def create_win_rss(folders, suffix=""):
     """
-    create a batch file to start ipython
+    create a batch file to start RSS reader
 
     @param      folders     see @see fn create_win_batches
     @param      suffix      add a suffix
@@ -426,7 +426,7 @@ def create_win_rss(folders, suffix=""):
 
 def update_all_packages(folders, suffix=""):
     """
-    create a batch file to start ipython
+    create a batch file to update all packages
 
     @param      folders     see @see fn create_win_batches
     @param      suffix      add a suffix

@@ -380,15 +380,15 @@ def win_python_setup(folder="dist/win_python_setup",
                 operations.append(("modify", o))
 
         ######################
-        # create ipython profile
+        # create jupyter profile
         ######################
-        has_ipython = False
+        has_jupyter = False
         for mod in module_list:
-            if mod.name == "ipython":
-                has_ipython = True
-        if has_ipython:
-            fLOG("--- create ipython profile")
-            operations.append(("ipython", "create profile"))
+            if mod.name == "jupyter":
+                has_jupyter = True
+        if has_jupyter:
+            fLOG("--- create jupyter profile")
+            operations.append(("jupyter", "create profile"))
             ipath = ipython_create_profile(
                 folders["config"], folders["python"], fLOG=fLOG)
             operations.append(("profile", ipath))
@@ -397,9 +397,9 @@ def win_python_setup(folder="dist/win_python_setup",
         ######################
         # update ipython profile
         ######################
-        if has_ipython:
-            fLOG("--- update ipython profile")
-            operations.append(("ipython", "update profile"))
+        if has_jupyter:
+            fLOG("--- update jupyter profile")
+            operations.append(("jupyter", "update profile"))
             ipython_update_profile(ipath)
             operations.append(("time", dtnow()))
 
@@ -425,7 +425,7 @@ def win_python_setup(folder="dist/win_python_setup",
         ########
         # kernels
         ########
-        if has_ipython:
+        if has_jupyter:
             fLOG("--- add kernels")
             operations.append(("kernel", "add"))
             res = install_kernels(folders["tools"], folders["python"])

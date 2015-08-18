@@ -10,6 +10,7 @@ def ensae_fullset():
     .. index:: ENSAE
 
     Installation of all possible modules for my teachings at the ENSAE.
+    This list is described at :ref:`l-ensae_fullset-table`.
     """
     base = small_set() +  \
         sphinx_theme_set() + \

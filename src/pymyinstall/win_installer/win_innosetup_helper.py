@@ -96,7 +96,7 @@ def innosetup_replacements(script=None, innosetup=None, replacements=None, log_s
 
 def inno_install_kernels(root, suffix):
     """
-    install kernels for IPython notebooks
+    install kernels for Jupyter notebooks
 
     @param      root        root folder
     @param      suffix      suffix

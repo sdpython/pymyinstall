@@ -27,7 +27,7 @@ def switch_to_VS_compiler(python_path, version=12):
 
 def switch_to_mingw_compiler(python_path):
     """
-    applies a fix to use MinGW to compile extensions (does not work with IPython)
+    applies a fix to use MinGW to compile extensions (does not work with Jupyter)
 
     @param  python_path     python path
     """
