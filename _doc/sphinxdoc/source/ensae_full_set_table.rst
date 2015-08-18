@@ -14,6 +14,7 @@ defined in pymyinstall as a table.
     
     from pymyinstall.packaged import ensae_fullset
     from pyquickhelper import df2rst
+    import pandas
     mod = ensae_fullset()
     mod.sort()
     df = pandas.DataFrame(_.as_dict() for _ in mod)
