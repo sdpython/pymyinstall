@@ -133,7 +133,7 @@ def create_win_jupyter_console(folders):
             "%JUPYTERC% --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
-    name = os.path.join(folders["config"], "ipython_console.bat")
+    name = os.path.join(folders["config"], "jupyter_console.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]
@@ -141,7 +141,7 @@ def create_win_jupyter_console(folders):
 
 def create_win_jupyter_qtconsole(folders):
     """
-    create a batch file to start ipython QtConsole
+    create a batch file to start Jupyter QtConsole
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -153,7 +153,7 @@ def create_win_jupyter_qtconsole(folders):
             "start %JUPYTERQTC% --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
-    name = os.path.join(folders["config"], "ipython_qtconsole.bat")
+    name = os.path.join(folders["config"], "jupyter_qtconsole.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]
@@ -161,7 +161,7 @@ def create_win_jupyter_qtconsole(folders):
 
 def create_win_jupyter_notebook(folders):
     """
-    create a batch file to start ipython
+    create a batch file to start Jupyter Notebook
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
@@ -173,7 +173,7 @@ def create_win_jupyter_notebook(folders):
             "%JUPYTERNB% --notebook-dir=%CURRENT2%\\..\\workspace --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
-    name = os.path.join(folders["config"], "ipython_notebook.bat")
+    name = os.path.join(folders["config"], "jupyter_notebook.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]
