@@ -11,7 +11,9 @@ import os
 import time
 import importlib
 import datetime
-from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version
+import warnings
+
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
 from .install_memoize import install_memoize
 
 if sys.version_info[0] == 2:
@@ -58,6 +60,20 @@ class MissingVersionOnPyPiException(Exception):
 
     """
     raised when a version is missing on pipy
+    """
+    pass
+
+
+class InstallError(Exception):
+    """
+    raised when a package cannot be installed
+    """
+    pass
+
+
+class DownloadError(Exception):
+    """
+    raised when a package cannot be downloaded
     """
     pass
 
@@ -636,8 +652,8 @@ class ModuleInstall:
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
             if "Successfully downloaded" not in out:
-                raise Exception(
-                    "unable to download " +
+                raise DownloadError(
+                    "unable to download with pip " +
                     str(self) +
                     "\nCMD:\n" +
                     cmd +
@@ -947,7 +963,20 @@ class ModuleInstall:
 
         .. versionchanged:: 1.0
             *deps* is overwritten by *self.deps* if not None
+
+        .. versionchanged:: 1.1
+            On Anaconda (we assume Anaconda is in sys.executable), we try *conda* first
+            before switching to the regular way if it did not work.
+            Exception were changed from ``Exception`` to ``InstallError``.
         """
+        if not force and force_kind is None and "anaconda" in sys.executable.lower():
+            try:
+                return self.install(force_kind="conda", force=True, temp_folder=temp_folder,
+                                    log=log, options=options, deps=deps)
+            except InstallError as e:
+                warnings.warn(e)
+                # we try the regular way now
+
         if not force and self.IsInstalled():
             return True
 
@@ -981,8 +1010,8 @@ class ModuleInstall:
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
             if "No distributions matching the version" in out:
-                raise Exception(
-                    "unable to install " +
+                raise InstallError(
+                    "unable to install with pip " +
                     str(self) +
                     "\nOUT:\n" +
                     out +
@@ -993,8 +1022,8 @@ class ModuleInstall:
             elif "Successfully installed" not in out:
                 if "error: Unable to find vcvarsall.bat" in out:
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                    raise Exception(
-                        "unable to install " +
+                    raise InstallError(
+                        "unable to install with pip " +
                         str(self) +
                         "\nread:\n" +
                         url +
@@ -1003,8 +1032,60 @@ class ModuleInstall:
                         "\nERR:\n" +
                         err)
                 if "Requirement already satisfied" not in out:
-                    raise Exception(
-                        "unable to install " +
+                    raise InstallError(
+                        "unable to install with pip " +
+                        str(self) +
+                        "\nOUT:\n" +
+                        out +
+                        "\nERR:\n" +
+                        err)
+            else:
+                ret = True
+
+        elif kind == "conda":
+            if "--upgrade" in options:
+                options = [_ for _ in options if _ != "--upgrade"]
+                command = "update"
+            else:
+                command = "install"
+            pp = get_conda_program()
+            cmd = pp + " {1} {0}".format(self.name, command)
+            if self.version is not None:
+                cmd += "=={0}".format(self.version)
+            if len(options) > 0:
+                cmd += " " + " ".join(options)
+
+            cmd += " --no-pin"
+            if not deps:
+                cmd += ' --no-deps'
+
+            out, err = run_cmd(
+                cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+            if "No distributions matching the version" in out:
+                raise InstallError(
+                    "unable to install with conda " +
+                    str(self) +
+                    "\nOUT:\n" +
+                    out +
+                    "\nERR:\n" +
+                    err)
+            elif "Testing of typecheck-decorator passed without failure." in out:
+                ret = True
+            elif "Successfully installed" not in out:
+                if "error: Unable to find vcvarsall.bat" in out:
+                    url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
+                    raise InstallError(
+                        "unable to install with conda " +
+                        str(self) +
+                        "\nread:\n" +
+                        url +
+                        "OUT:\n" +
+                        out +
+                        "\nERR:\n" +
+                        err)
+                if "Requirement already satisfied" not in out:
+                    raise InstallError(
+                        "unable to install with conda " +
                         str(self) +
                         "\nOUT:\n" +
                         out +
@@ -1047,8 +1128,8 @@ class ModuleInstall:
                 out, err = run_cmd(
                     cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
                 if "No distributions matching the version" in out:
-                    raise Exception(
-                        "unable to install " +
+                    raise InstallError(
+                        "unable to install with wheel " +
                         str(self) +
                         "\nOUT:\n" +
                         out +
@@ -1059,8 +1140,8 @@ class ModuleInstall:
                 elif "Successfully installed" not in out:
                     if "error: Unable to find vcvarsall.bat" in out:
                         url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                        raise Exception(
-                            "unable to install " +
+                        raise InstallError(
+                            "unable to install with wheel " +
                             str(self) +
                             "\nread:\n" +
                             url +
@@ -1069,8 +1150,8 @@ class ModuleInstall:
                             "\nERR:\n" +
                             err)
                     if "Requirement already satisfied" not in out:
-                        raise Exception(
-                            "unable to install " +
+                        raise InstallError(
+                            "unable to install with wheel " +
                             str(self) +
                             "\nOUT:\n" +
                             out +
@@ -1102,7 +1183,7 @@ class ModuleInstall:
                 setu = [(len(_), _) for _ in setu]
                 setu.sort()
                 if setu[0][0] == setu[1][0]:
-                    raise Exception(
+                    raise InstallError(
                         "more than one setup.py for module " +
                         self.name +
                         "\n" +
@@ -1127,8 +1208,8 @@ class ModuleInstall:
             os.chdir(cwd)
             if "Successfully installed" not in out and "install  C" not in out:
                 if "Finished processing dependencies" not in out:
-                    raise Exception(
-                        "unable to install " +
+                    raise InstallError(
+                        "unable to install with github " +
                         str(self) +
                         "\nOUT:\n" +
                         out +
@@ -1139,7 +1220,7 @@ class ModuleInstall:
                         "warning: ``Successfully installed`` or ``install  C`` not found")
                 if "Permission denied" in out:
                     raise PermissionError(
-                        "unable to install " +
+                        "unable to install with github " +
                         str(self) +
                         "\nOUT:\n" +
                         out +

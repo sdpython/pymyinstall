@@ -86,22 +86,12 @@ Versions
     * **fix:** fix function *create_win_batches* (batch script ipython were missing, batch to update all installed packages)
     * **change:** the function *update_all* continues if an update fails (catches excptions)
     * **add:** add scripts *pymy_install* and *pymy_update* to folder *<python>/Scripts*
+    * **change:** on Anaconda, the module tries to use *conda* first before trying another way (*pip*, *wheel*)
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup
       to create a setup similar to WinPython but with InnoSetup (avoid limit size)
     * **add:** function to check for update and update an existing module, see 
       class ModuleInstall
-* **0.9 - 2015/06/10**
-    * **add:** install wheel packages
-    * **add:** add new packages to the list of a datascientist
-* **0.8 - 2014/11/09**
-    * **add:** Python version is now checked, ImportError is raised if it used on Python 2
-    * **add:** module `ansiconv <http://pythonhosted.org/ansiconv/>`_, `ansi2html <https://pypi.python.org/pypi/ansi2html/>`_
-    * **add:** function `installation_azure <pymyinstall.packaged.packaged_config.installation_azure>`_
-    * **fix:** the setup does not need the file ``README.rst`` anymore
-* **0.7 - 2014/10/22**
-    * **new:** list of modules to manipulate and view data cubes (not included in the main function as their design might evolve in the future)
-    * **new:** a few modules such as `paramiko <http://www.paramiko.org/>`_ to open a SSH connection
-    * **add:** add a new source for Windows setups: ``exe_xd``
+
 
