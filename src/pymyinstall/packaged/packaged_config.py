@@ -77,6 +77,7 @@ def small_set():
             "six", "pip", purpose="helpers for python 2/3 conversion"),
         ModuleInstall("lxml", "wheel", purpose="xml parsers (C++)"),
         ModuleInstall("jinja2", "pip", purpose="templating"),
+        ModuleInstall("Mako", "pip", mname="mako", purpose="templating"),
         ModuleInstall(
             "pygments", "pip", purpose="syntax highlighting package written in Python"),
         ModuleInstall(
