@@ -161,7 +161,7 @@ if is_local():
         this = os.path.dirname(__file__)
         with open(os.path.join(this, "auto_setup_build_sphinx.bat"), "r") as f:
             content = f.read()
-        code = "%pythonexe% -u -c \"import sys;sys.path.append('src');from pymyinstall import update_all;update_all(temp_folder='build/update_modules', verbose=True)\""
+        code = "%pythonexe% -u -c \"import sys;sys.path.append('src');from pymyinstall.packaged import update_all;update_all(temp_folder='build/update_modules', verbose=True)\""
         content = content.replace("%pythonexe% -u setup.py build_sphinx", code)
         with open(os.path.join(this, "auto_update_modules.bat"), "w") as f:
             f.write(content)

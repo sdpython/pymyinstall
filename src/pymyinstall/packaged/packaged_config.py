@@ -48,7 +48,7 @@ def minimal_set():
         mod.append(
             ModuleInstall("pythonnet", "wheel", purpose="call .net DLL from python"))
 
-    return mod
+    return [_ for _ in mod if _ is not None]
 
 
 def small_set():
@@ -222,7 +222,7 @@ def small_set():
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
         ModuleInstall(
-            "rope_py3k", "pip", mname="rope", purpose="refactoring library"),  #
+            "rope_py3k", "pip", mname="rope", purpose="refactoring library") if sys.version_info[0] >= 3 else None,  #
         ModuleInstall(
             "pylint", "pip", purpose="statistics on Python script style"),  #
         ModuleInstall(
@@ -288,24 +288,26 @@ def small_set():
         mod.append(
             ModuleInstall("winshell", "pip", purpose="Windows shell functions"))
 
-    return mod
+    return [_ for _ in mod if _ is not None]
 
 
 def sphinx_theme_set():
     """
     list of sphinx themes
     """
-    res = [ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme', purpose="sphinx theme", usage="SPHINX"),
-           ModuleInstall(
-               'sphinxjp.themes.basicstrap', 'pip', purpose="sphinx theme", usage="SPHINX"),
-           ModuleInstall('solar_theme', 'pip',
-                         purpose="sphinx theme", usage="SPHINX"),
-           ModuleInstall('cloud_sptheme', 'pip',
-                         purpose="sphinx theme", usage="SPHINX"),
-           ModuleInstall(
-               'sphinx_readable_theme', 'pip', purpose="sphinx theme", usage="SPHINX"),
-           ModuleInstall(
-        "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme", purpose="sphinx theme", usage="SPHINX"),
+    mod = [
+        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall(
+            'sphinxjp.themes.basicstrap', 'pip', purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall('solar_theme', 'pip',
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall('cloud_sptheme', 'pip',
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall(
+            'sphinx_readable_theme', 'pip', purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall(
+            "hachibee-sphinx-theme", "pip", mname="hachibee_sphinx_theme", purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("wild_sphinx_theme", "pip",
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinx_bootstrap_theme", "pip",
@@ -313,7 +315,7 @@ def sphinx_theme_set():
         ModuleInstall(
             "sphinxjp.themes.sphinxjp", "pip", purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
-            "sphinx_py3doc_enhanced_theme", "pip", purpose="sphinx theme", usage="SPHINX"),
+            "sphinx_py3doc_enhanced_theme", "pip", purpose="sphinx theme", usage="SPHINX") if sys.version_info[0] >= 3 else None,
         ModuleInstall(
             "epfl-sphinx-theme", "pip", mname="epfl_theme", purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
@@ -327,7 +329,7 @@ def sphinx_theme_set():
         ModuleInstall("sphinxtrap", "pip",
                       purpose="sphinx theme", usage="SPHINX"),
     ]
-    return res
+    return [_ for _ in mod if _ is not None]
 
 
 def extended_set():
@@ -469,7 +471,7 @@ def extended_set():
         # 2015-02-05
         #
         ModuleInstall("autopy3", "wheel", mname="autopy3",
-                      purpose="A simple, cross-platform GUI automation toolkit for Python 3"),  # simulate events
+                      purpose="A simple, cross-platform GUI automation toolkit for Python 3") if sys.version_info[0] >= 3 else None,  # simulate events
         # large double
         ModuleInstall("bigfloat", "wheel", purpose="big float"),
         # convex optimization, depends on CVXOPT
@@ -595,7 +597,7 @@ def azure_set():
             "azureml", "pip", purpose="Python wrapper for Azure ML API (Azure ML Pipeline)"),
     ]
 
-    return mod
+    return [_ for _ in mod if _ is not None]
 
 
 def ensae_set():
@@ -763,7 +765,7 @@ def ensae_set():
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
-    return mod
+    return [_ for _ in mod if _ is not None]
 
 
 def teachings_set():
@@ -791,4 +793,4 @@ def teachings_set():
                       purpose="teachings, introduction to programmaing, machine learning, map/reduce", usage="TEACH"),
     ]
     #
-    return mod
+    return [_ for _ in mod if _ is not None]
