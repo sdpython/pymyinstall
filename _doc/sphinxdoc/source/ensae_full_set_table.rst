@@ -1,4 +1,5 @@
 
+.. index:: modules
 
 .. _l-ensae_fullset-table:
 

@@ -102,7 +102,7 @@ Quick start
     
     all_example
     all_notebooks
-        
+    ensae_full_set_table    
     
 Indices and tables
 ------------------

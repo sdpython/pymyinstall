@@ -11,5 +11,5 @@
     I had issues installing 
     `goslate <https://pypi.python.org/pypi/goslate>`_ 1.5.
     It raises an encoding issues while reading
-    file *README.rst*.
+    file *README.rst*. I reverted to version 1.4.
     
