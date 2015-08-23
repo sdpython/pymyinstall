@@ -66,8 +66,16 @@ parameter. If it fails again, you can skip the modules by filling the parameter 
 Some modules might fail on Windows due to Permission error, in that case, you should go to the
 folder ``install`` and run the installer. Once it is done, you can run the function again 
 to continue. 
+If you are not on Anaconda or a distribution which knows how to update modules, you can run
+from the scripts folder::
 
+    pymy_update
+    
+If you want to install a list of module for datascientist::
 
+    pymy_install
+    
+``--help`` gives the usage.
 
 Functionalities
 ---------------
