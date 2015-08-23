@@ -167,6 +167,8 @@ def small_set():
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
+            "netCDF4", "wheel", purpose="xray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
+        ModuleInstall(
             "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
         ModuleInstall(
             "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
