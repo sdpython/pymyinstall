@@ -12,6 +12,7 @@ import time
 import importlib
 import datetime
 import warnings
+from pip.utils import get_installed_distributions
 
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
 from .install_memoize import install_memoize
@@ -99,7 +100,9 @@ def get_page_wheel(page):
     return text
 
 
-@install_memoize
+_get_module_version_manual_memoize = {}
+
+
 def get_module_version(module, use_cmd=False):
     """
     return a dictionary { module:version }
@@ -108,44 +111,54 @@ def get_module_version(module, use_cmd=False):
     @param      use_cmd     use command line
     @return                 dictionary
     """
+    if module is not None:
+        modl = module.lower()
+        res = get_module_version(None, use_cmd=use_cmd)
+        return res.get(modl, None)
+
+    global _get_module_version_manual_memoize
+    if len(_get_module_version_manual_memoize) > 0:
+        return _get_module_version_manual_memoize
+
+    res = {}
+
     if use_cmd:
         prog = get_pip_program()
         cmd = prog + " list"
         out, err = run_cmd(cmd, wait=True, do_not_log=True)
+
+        if err is not None and len(err) > 0:
+            if len(err.split("\n")) > 3 or \
+               "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
+                raise Exception("unable to run, #lines {0}\nCMD:\n{3}\nERR:\n{1}\nOUT:\n{2}".format(
+                    len(err.split("\n")), err, out, cmd))
+        lines = out.split("\n")
+
+        for line in lines:
+            if "(" in line:
+                spl = line.split()
+                if len(spl) == 2:
+                    a = spl[0]
+                    b = spl[1].strip(" \n\r")
+                    res[a] = b.strip("()")
+                    al = a.lower()
+                    if al != a:
+                        res[al] = res[a]
     else:
-        kout = sys.stdout
-        kerr = sys.stderr
-        sys.stdout = StringIO()
-        sys.stderr = StringIO()
-        import pip
-        pip.main(["list"])
-        out = sys.stdout.getvalue()
-        err = sys.stderr.getvalue()
-        sys.stdout = kout
-        sys.stderr = kerr
+        dist = get_installed_distributions()
+        for mod in dist:
+            al = mod.key.lower()
+            a = mod.key
+            v = mod.version
+            res[a] = v
+            if a != al:
+                res[al] = v
 
-    if err is not None and len(err) > 0:
-        if len(err.split("\n")) > 3 or \
-           "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
-            raise Exception("unable to run, #lines {0}\nCMD:\n{3}\nERR:\n{1}\nOUT:\n{2}".format(
-                len(err.split("\n")), err, out, cmd))
-    lines = out.split("\n")
-
-    res = {}
-    for line in lines:
-        if "(" in line:
-            spl = line.split()
-            if len(spl) == 2:
-                a = spl[0]
-                b = spl[1].strip(" \n\r")
-                res[a] = b.strip("()")
-                al = a.lower()
-                if al != a:
-                    res[al] = res[a]
+    _get_module_version_manual_memoize.update(res)
     return res
 
 
-def _get_pypi_version_memoize(f):
+def _get_pypi_version_memoize_op(f):
     memo = {}
 
     def helper(module_name, full_list=False, url="http://pypi.python.org/pypi"):
@@ -155,8 +168,9 @@ def _get_pypi_version_memoize(f):
         return memo[key]
     return helper
 
+_get_pypi_version_memoize = {}
 
-@_get_pypi_version_memoize
+
 def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/pypi"):
     """
     returns the version of a package on pypi,
@@ -169,7 +183,18 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
 
     See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
     `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
+
+    The function leaves a connection open::
+
+        ResourceWarning: unclosed <socket.socket fd=XXX, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('XXX.XXX.X...
+
+    It should be fixed in Python > 3.4.
     """
+    global _get_pypi_version_memoize
+    key = module_name, full_list, url
+    if key in _get_pypi_version_memoize:
+        return _get_pypi_version_memoize[key]
+
     pypi = xmlrpc_client.ServerProxy(url)
     tried = [module_name]
     available = pypi.package_releases(module_name, True)
@@ -216,10 +241,15 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
         elif module_name in ModuleInstall.annoying_modules:
             raise AnnoyingPackageException(module_name)
 
+    # this raises a warning about an opened connection
+    # see documentation of the function
+    # del pypi
+
     if available is None or len(available) == 0:
         raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
 
     if full_list:
+        _get_pypi_version_memoize[key] = available
         return available
 
     for a in available:
@@ -227,8 +257,10 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
         if len(spl) in (2, 3):
             last = spl[-1]
             if "a" not in last and "b" not in last and "dev" not in last:
+                _get_pypi_version_memoize[key] = available
                 return a
         else:
+            _get_pypi_version_memoize[key] = available
             return a
 
     raise MissingVersionOnPyPiException(
