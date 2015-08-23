@@ -1,4 +1,4 @@
-"""
+﻿"""
 @file
 @brief Various function to install various python module from various location.
 """
@@ -193,57 +193,58 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
     global _get_pypi_version_memoize
     key = module_name, full_list, url
     if key in _get_pypi_version_memoize:
-        return _get_pypi_version_memoize[key]
+        available = _get_pypi_version_memoize[key]
+    else:
 
-    pypi = xmlrpc_client.ServerProxy(url)
-    tried = [module_name]
-    available = pypi.package_releases(module_name, True)
+        pypi = xmlrpc_client.ServerProxy(url)
+        tried = [module_name]
+        available = pypi.package_releases(module_name, True)
 
-    if available is None or len(available) == 0:
-        tried.append(module_name.capitalize())
-        available = pypi.package_releases(tried[-1], True)
-
-    if available is None or len(available) == 0:
-        tried.append(module_name.replace("-", "_"))
-        available = pypi.package_releases(tried[-1], True)
-
-    if available is None or len(available) == 0:
-        tried.append(module_name.replace("_", "-"))
-        available = pypi.package_releases(tried[-1], True)
-
-    if available is None or len(available) == 0:
-        tried.append(module_name.lower())
-        available = pypi.package_releases(tried[-1], True)
-
-    if available is None or len(available) == 0:
-        ml = module_name.lower()
-        if ml == "markupsafe":
-            tried.append("MarkupSafe")
+        if available is None or len(available) == 0:
+            tried.append(module_name.capitalize())
             available = pypi.package_releases(tried[-1], True)
-        elif ml == "flask-sqlalchemy":
-            tried.append("Flask-SQLAlchemy")
-            available = pypi.package_releases(tried[-1], True)
-        elif ml == "apscheduler":
-            tried.append("APScheduler")
-            available = pypi.package_releases(tried[-1], True)
-        elif ml == "datashape":
-            tried.append("DataShape")
-            available = pypi.package_releases(tried[-1], True)
-        elif ml == "pycontracts":
-            tried.append("PyContracts")
-            available = pypi.package_releases(tried[-1], True)
-        elif ml == "pybrain":
-            tried.append("PyBrain")
-            available = pypi.package_releases(tried[-1], True)
-        elif ml == "jsanimation":  # github
-            tried.append("JSAnimation")
-            available = ["-"]
-        elif module_name in ModuleInstall.annoying_modules:
-            raise AnnoyingPackageException(module_name)
 
-    # this raises a warning about an opened connection
-    # see documentation of the function
-    # del pypi
+        if available is None or len(available) == 0:
+            tried.append(module_name.replace("-", "_"))
+            available = pypi.package_releases(tried[-1], True)
+
+        if available is None or len(available) == 0:
+            tried.append(module_name.replace("_", "-"))
+            available = pypi.package_releases(tried[-1], True)
+
+        if available is None or len(available) == 0:
+            tried.append(module_name.lower())
+            available = pypi.package_releases(tried[-1], True)
+
+        if available is None or len(available) == 0:
+            ml = module_name.lower()
+            if ml == "markupsafe":
+                tried.append("MarkupSafe")
+                available = pypi.package_releases(tried[-1], True)
+            elif ml == "flask-sqlalchemy":
+                tried.append("Flask-SQLAlchemy")
+                available = pypi.package_releases(tried[-1], True)
+            elif ml == "apscheduler":
+                tried.append("APScheduler")
+                available = pypi.package_releases(tried[-1], True)
+            elif ml == "datashape":
+                tried.append("DataShape")
+                available = pypi.package_releases(tried[-1], True)
+            elif ml == "pycontracts":
+                tried.append("PyContracts")
+                available = pypi.package_releases(tried[-1], True)
+            elif ml == "pybrain":
+                tried.append("PyBrain")
+                available = pypi.package_releases(tried[-1], True)
+            elif ml == "jsanimation":  # github
+                tried.append("JSAnimation")
+                available = ["-"]
+            elif module_name in ModuleInstall.annoying_modules:
+                raise AnnoyingPackageException(module_name)
+
+        # this raises a warning about an opened connection
+        # see documentation of the function
+        # del pypi
 
     if available is None or len(available) == 0:
         raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
@@ -861,6 +862,8 @@ class ModuleInstall:
         """
         if isinstance(vers, tuple):
             return vers
+        if isinstance(vers, list):
+            raise Exception("unexpected value:" + str(vers))
         spl = vers.split(".")
         r = []
         for _ in spl:
@@ -880,6 +883,9 @@ class ModuleInstall:
         vers = self.get_pypi_version()
         if vers is None:
             return None
+        if isinstance(vers, list):
+            v = self.get_pypi_version()
+            raise TypeError("unexpected type: {0} -- {1}".format(vers, v))
         return ModuleInstall.numeric_version(vers)
 
     def get_installed_version(self):
