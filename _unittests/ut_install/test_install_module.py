@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @brief      test log(time=1s)
 """
@@ -87,7 +86,7 @@ class TestInstallModule (unittest.TestCase):
         if len(d) < 10:
             for k, v in sorted(d.items()):
                 fLOG(k, v)
-            assert False
+            raise Exception("el {0}\nD\n{1}".format(len(d), d))
 
     def test_compare_version(self):
         fLOG(

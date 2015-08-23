@@ -1,4 +1,4 @@
-﻿"""
+"""
 @file
 @brief Various function to install various python module from various location.
 """
@@ -79,6 +79,13 @@ class DownloadError(Exception):
     pass
 
 
+class ConfigurationError(Exception):
+    """
+    raised when something is wrong the current configuration
+    """
+    pass
+
+
 @install_memoize
 def get_page_wheel(page):
     """
@@ -145,7 +152,15 @@ def get_module_version(module, use_cmd=False):
                     if al != a:
                         res[al] = res[a]
     else:
-        dist = get_installed_distributions()
+        # local_only must be False to get all modules
+        # not only the ones installed in the virtual environment
+        dist = get_installed_distributions(local_only=False)
+        if len(dist) == 0:
+            raise ConfigurationError("no installed module, unexpected: sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
+                sys.executable, sys.prefix, sys.base_prefix))
+        if len(dist) <= 10:
+            raise ConfigurationError("two few installed modules, unexpected: sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}\nlist={3}".format(
+                sys.executable, sys.prefix, sys.base_prefix, ", ".join(str(_) for _ in dist)))
         for mod in dist:
             al = mod.key.lower()
             a = mod.key

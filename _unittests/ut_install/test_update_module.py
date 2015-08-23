@@ -1,4 +1,4 @@
-﻿"""
+"""
 @brief      test log(time=1s)
 """
 
