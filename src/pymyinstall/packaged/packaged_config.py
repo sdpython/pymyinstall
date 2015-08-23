@@ -580,6 +580,8 @@ def extended_set():
         #    "pyinstaller", "pip", purpose="Converts (packages) Python programs into stand-alone executables, under Windows, Linux, Mac OS X, AIX and Solaris."),
         ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
+        ModuleInstall(
+            "xgboost", "wheel_xd", purpose="Parallelized Stochastic Gradient Descent", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
     ]
 
     return [_ for _ in mod if _ is not None]

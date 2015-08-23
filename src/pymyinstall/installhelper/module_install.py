@@ -477,7 +477,16 @@ class ModuleInstall:
             elif ext == "whl":
                 exe = "pycrypto-2.6.1-cp34-none-win_amd64.whl"
             else:
-                raise Exception("unexpected exception: " + ext)
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
+        elif self.name == "xgboost":
+            if ext == "whl":
+                exe = "xgboost-0.4-py3-none-any.whl"
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
         else:
