@@ -323,7 +323,8 @@ class ModuleInstall:
                  index_url=None,
                  deps=None,
                  purpose=None,
-                 usage=None):
+                 usage=None,
+                 web=None):
         """
         constructor
 
@@ -339,6 +340,7 @@ class ModuleInstall:
         @param      index_url       to get the package from a custom pypi server
         @param      purpose         purpose of the module
         @param      usage           main usage for the module
+        @param      web             website for the module, if None, default to pipy
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -354,6 +356,8 @@ class ModuleInstall:
         self.deps = deps
         self.purpose = purpose
         self.usage = usage
+        self.web = web if web is not None else (
+            "https://pypi.python.org/pypi/" + self.name)
 
         if self.kind not in ModuleInstall.allowedKind:
             raise Exception(
@@ -379,17 +383,20 @@ class ModuleInstall:
             mod.version = version
         return mod
 
-    def as_dict(self):
+    def as_dict(self, rst_link=False):
         """
         returns the members in a dictionary
 
-        @return         dictionary
+        @return                 dictionary
         """
-        return dict(name=self.name, kind=self.kind, gitrepo=self.gitrepo,
-                    version=self.version, mname=self.mname,
-                    script=self.script, deps=self.deps,
-                    index_url=self.index_url, purpose=self.purpose,
-                    usage=self.usage)
+        r = dict(name=self.name, kind=self.kind, gitrepo=self.gitrepo,
+                 version=self.version, mname=self.mname,
+                 script=self.script, deps=self.deps,
+                 index_url=self.index_url, purpose=self.purpose,
+                 usage=self.usage, web=self.web)
+        if rst_link:
+            r["rst_link"] = "`{0} <{1}>`_".format(self.name, self.web)
+        return r
 
     def __cmp__(self, o):
         """

@@ -18,8 +18,9 @@ defined in pymyinstall as a table.
     import pandas
     mod = ensae_fullset()
     mod.sort()
-    df = pandas.DataFrame(_.as_dict() for _ in mod)
-    df = df[["usage", "name", "kind", "version", "purpose"]]
+    df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
+    df = df[["usage", "rst_link", "kind", "version", "purpose"]]
+    df.columns=["usage", "name", "kind", "version", "purpose"]
     print(df2rst(df))
 
 
