@@ -92,6 +92,21 @@ To install a single package::
     from pymyinstall import ModuleInstall
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
     
+.. index:: pymy_install, pymy_update    
+    
+Scripts
+-------
+
+If you are not on Anaconda or a distribution which knows how to update modules, you can run
+from the scripts folder::
+
+    pymy_update
+    
+If you want to install a list of module for datascientist::
+
+    pymy_install
+    
+``--help`` gives the usage.
 
 
 Quick start
