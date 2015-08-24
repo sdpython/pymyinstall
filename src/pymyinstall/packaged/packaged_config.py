@@ -7,6 +7,15 @@ import sys
 from ..installhelper.module_install import ModuleInstall
 
 
+def is_64bit():
+    """
+    tells if the python is 64 bit or not
+
+    @return     boolean
+    """
+    return sys.maxsize > 2 ** 32
+
+
 def minimal_set():
     """
     returns a list of modules to add to python to get a minimal python
@@ -207,6 +216,16 @@ def small_set():
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="JUPYTER"),
+        ModuleInstall(
+            "metakernel", "pip", purpose="more magic commands for Jupyter", usage="JUPYTER"),
+        ModuleInstall(
+            "simplepan", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)", usage="JUPYTER"),
+        ModuleInstall(
+            "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
+        ModuleInstall(
+            "ipystata", "pip", purpose="Jupyter kernel for Stata", usage="JUPYTER"),
+        ModuleInstall(
+            "jupyter-pip", "pip", mname="jupyterpip", purpose="Allows Jupyter notebook extension writers to make their extension pip installable!", usage="JUPYTER"),
         # end of ipython
         #
         ModuleInstall(
@@ -280,7 +299,6 @@ def small_set():
         # 2015-07
         #
         ModuleInstall("pyprofiler", "pip", purpose="profiler"),
-        ModuleInstall("whoosh", "pip", purpose="search engine in Python"),
 
     ]
 
@@ -438,9 +456,9 @@ def extended_set():
             'thriftpy', 'pip', purpose="ure python implemention of Apache Thrift."),
         # ModuleInstall('airflow', 'pip'),  # does not work on Python 3
         ModuleInstall(
-            'smopy', 'pip', purpose="OpenStreetMap image tiles in Python "),
+            'smopy', 'pip', purpose="OpenStreetMap image tiles in Python", usage="VIZ"),
         ModuleInstall(
-            'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python"),
+            'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python", usage="VIZ"),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
                       purpose="maps extension for matplotlib", usage="VIZ"),
         #
@@ -461,7 +479,7 @@ def extended_set():
         ModuleInstall(
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
         ModuleInstall("pycrypto", "wheel_xd", mname="Crypto",
-                      purpose="Cryptographic modules for Python."),
+                      purpose="Cryptographic modules for Python (not available on x64 and Python 3)") if sys.version_info[0] >= 3 and is_64bit() else None,
         ModuleInstall("paramiko", "pip",
                       purpose="SSH2 protocol library", usage="NETWORK"),
         #
@@ -583,7 +601,18 @@ def extended_set():
         ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
-            "xgboost", "wheel_xd", purpose="Parallelized Stochastic Gradient Descent", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
+            "xgboost", "wheel_xd", purpose="Parallelized Stochastic Gradient Descent (only available on Python 3 and x64)", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
+        ModuleInstall("pygling", "pip",
+                      purpose="to build makefile with python"),
+        ModuleInstall("cuda4py", "pip",
+                      purpose="Python cffi CUDA bindings and helper classes"),
+        ModuleInstall("whoosh", "pip", purpose="search engine in Python"),
+        ModuleInstall("pymatbridge", "pip",
+                      purpose="pymatbridge is a set of python and matlab functions to allow these two systems to talk to each other"),
+        ModuleInstall("scilab2py", "pip",
+                      purpose="Python to Scilab bridge", usage="DATA/ML"),
+        ModuleInstall("scilab_kernel", "pip",
+                      purpose="A Scilab kernel for IPython", usage="JUPYTER"),
     ]
 
     return [_ for _ in mod if _ is not None]

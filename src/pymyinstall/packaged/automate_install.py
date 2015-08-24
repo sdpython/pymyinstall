@@ -5,6 +5,7 @@
 from __future__ import print_function
 import os
 from ..installhelper import ModuleInstall, has_pip, update_pip
+from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException
 from .packaged_config_full_set import ensae_fullset
 
 
@@ -125,22 +126,34 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     for mod in modules:
         if verbose:
             fLOG("check module: ", mod.name)
-        if mod.is_installed() and mod.has_update():
-            ver = mod.get_pypi_version()
-            inst = mod.get_installed_version()
-            m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
-                .format(mod.name, inst, ver, mod.kind)
+
+        is_installed = mod.is_installed()
+        if not is_installed:
+            continue
+
+        try:
+            has_update = mod.has_update()
+        except MissingVersionOnPyPiException:
+            # this happens for custom made version such as xgboost
+            has_update = False
+        if not has_update:
+            continue
+
+        ver = mod.get_pypi_version()
+        inst = mod.get_installed_version()
+        m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
+            .format(mod.name, inst, ver, mod.kind)
+        fLOG(m)
+        try:
+            b = mod.update(temp_folder=temp_folder, log=verbose)
+        except Exception as e:
+            b = False
+            m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
+                .format(mod.name, inst, ver, mod.kind, str(e))
             fLOG(m)
-            try:
-                b = mod.update(temp_folder=temp_folder, log=verbose)
-            except Exception as e:
-                b = False
-                m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
-                    .format(mod.name, inst, ver, mod.kind, str(e))
-                fLOG(m)
-                errors.append((mod, e))
-            if b:
-                again.append(m)
+            errors.append((mod, e))
+        if b:
+            again.append(m)
 
     if verbose:
         fLOG("")

@@ -95,6 +95,8 @@ Versions
     * **change:** the function *update_all* continues if an update fails (catches excptions)
     * **add:** add scripts *pymy_install* and *pymy_update* to folder *<python>/Scripts*
     * **change:** on Anaconda, the module tries to use *conda* first before trying another way (*pip*, *wheel*)
+    * **fix:** fix function *update_all* when cannot check if there is a new version
+    * **add:** retrieve license and classifier of installed modules
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup
