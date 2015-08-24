@@ -38,7 +38,8 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.module_install import ModuleInstall, get_module_version
+from src.pymyinstall.installhelper.module_install import ModuleInstall
+from src.pymyinstall.installhelper.module_install_version import get_module_version
 from pyquickhelper import fLOG
 
 

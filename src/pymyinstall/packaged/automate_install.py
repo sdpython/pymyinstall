@@ -133,8 +133,9 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
         try:
             has_update = mod.has_update()
-        except (MissingVersionOnPyPiException, MissingPackageOnPyPiException):
+        except (MissingVersionOnPyPiException, MissingPackageOnPyPiException) as e:
             # this happens for custom made version such as xgboost
+            fLOG("    - unable to check updates", e)
             has_update = False
         if not has_update:
             continue

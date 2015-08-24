@@ -39,7 +39,8 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.module_install import ModuleInstall, MissingPackageOnPyPiException, MissingVersionOnPyPiException, AnnoyingPackageException
+from src.pymyinstall.installhelper.module_install import ModuleInstall
+from src.pymyinstall.installhelper.module_install.exceptions import MissingPackageOnPyPiException, MissingVersionOnPyPiException, AnnoyingPackageException
 from src.pymyinstall.packaged import ensae_fullset
 from pyquickhelper import fLOG, get_temp_folder
 
