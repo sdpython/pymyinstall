@@ -219,7 +219,7 @@ def small_set():
         ModuleInstall(
             "metakernel", "pip", purpose="more magic commands for Jupyter", usage="JUPYTER"),
         ModuleInstall(
-            "simplepan", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)", usage="JUPYTER"),
+            "simplepam", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)", usage="JUPYTER"),
         ModuleInstall(
             "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
         ModuleInstall(
@@ -461,6 +461,11 @@ def extended_set():
             'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python", usage="VIZ"),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
                       purpose="maps extension for matplotlib", usage="VIZ"),
+        ModuleInstall('pyproj', 'wheel',
+                      purpose="python interface to PROJ4 library for cartographic transformations https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
+        # ModuleInstall('cartopy', 'pip',
+        #              purpose="Cartopy is a Python package designed to make drawing maps for data analysis and visualisation as easy as possible.", usage="VIZ"),
+        # the module cartopy requires GEOS https://trac.osgeo.org/geos/
         #
         ModuleInstall("python-linkedin", "pip", mname="linkedin",
                       purpose="python wrapper for linkedin interface"),
