@@ -39,7 +39,7 @@ except ImportError:
 
 
 from src.pymyinstall.installhelper.module_install import ModuleInstall, get_pypi_version
-from src..pymyinstall.installhelper.module_install_exceptions import MissingInstalledPackageException
+from src.pymyinstall.installhelper.module_install_exceptions import MissingInstalledPackageException
 from pyquickhelper import fLOG, get_temp_folder
 
 
