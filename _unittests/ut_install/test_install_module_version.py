@@ -70,9 +70,9 @@ class TestInstallModuleVersion(unittest.TestCase):
         mod = ensae_fullset()
         mod.sort()
         df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
-        df = df[["usage", "rst_link", "kind", "version",
+        df = df[["usage", "rst_link", "kind", "version", "installed",
                  "license", "purpose", "classifier"]]
-        df.columns = ["usage", "name", "kind", "version",
+        df.columns = ["usage", "name", "kind", "version", "installed",
                       "license", "purpose", "classifier"]
         lic = df[~df.license.isnull()]
         # fLOG(lic[["name","license"]])

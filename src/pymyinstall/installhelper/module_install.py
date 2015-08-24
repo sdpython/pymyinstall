@@ -142,6 +142,7 @@ class ModuleInstall:
         if rst_link:
             r["rst_link"] = "`{0} <{1}>`_".format(self.name, self.web)
             r["license"] = self.get_installed_license()
+            r["installed"] = self.get_installed_version()
             r["classifier"] = self.get_installed_classifier()
         return r
 
