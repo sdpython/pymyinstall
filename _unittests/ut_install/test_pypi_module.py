@@ -40,7 +40,8 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.module_install import ModuleInstall, MissingVersionOnPyPiException
+from src.pymyinstall.installhelper.module_install import ModuleInstall
+from src.pymyinstall.installhelper.module_install_exceptions import MissingVersionOnPyPiException
 from pyquickhelper import fLOG, get_temp_folder
 
 

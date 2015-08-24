@@ -5,7 +5,7 @@
 from __future__ import print_function
 import os
 from ..installhelper import ModuleInstall, has_pip, update_pip
-from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException
+from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
 from .packaged_config_full_set import ensae_fullset
 
 
@@ -133,7 +133,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
         try:
             has_update = mod.has_update()
-        except MissingVersionOnPyPiException:
+        except (MissingVersionOnPyPiException, MissingPackageOnPyPiException):
             # this happens for custom made version such as xgboost
             has_update = False
         if not has_update:

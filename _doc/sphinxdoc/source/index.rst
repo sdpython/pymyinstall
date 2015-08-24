@@ -50,12 +50,15 @@ To get help on both::
 For example, to install packages for a datascientist::
 
     pip install pymyinstall
-    pymyinstall
+    pymy_install
     
-The module will download and install many modules,
-numpy, scikit-learn, jupyter, pandas and many others.
+The module will download and install many modules (see :ref:`l-ensae_fullset-table`).
+It includes *numpy*, *scikit-learn*, *jupyter*, *pandas* and many others.
 If it fails for any reason - lost connexion -, run again the function with the same
 parameter. If it fails again, you can skip the modules by filling the parameter ``skip``.
+To update modules::
+
+    pymy_update
 
 The module also includes a function 
 :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
@@ -93,20 +96,7 @@ To install a single package::
     ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
     
 .. index:: pymy_install, pymy_update    
-    
-Scripts
--------
 
-If you are not on Anaconda or a distribution which knows how to update modules, you can run
-from the scripts folder::
-
-    pymy_update
-    
-If you want to install a list of module for datascientist::
-
-    pymy_install
-    
-``--help`` gives the usage.
 
 
 Quick start
