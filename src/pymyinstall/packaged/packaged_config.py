@@ -459,6 +459,8 @@ def extended_set():
             'smopy', 'pip', purpose="OpenStreetMap image tiles in Python", usage="VIZ"),
         ModuleInstall(
             'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python", usage="VIZ"),
+        ModuleInstall(
+            'geopy', 'pip', purpose="Python Geocoding Toolbox", usage="VIZ"),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
                       purpose="maps extension for matplotlib", usage="VIZ"),
         ModuleInstall('pyproj', 'wheel',
