@@ -463,8 +463,8 @@ def extended_set():
                       purpose="maps extension for matplotlib", usage="VIZ"),
         ModuleInstall('pyproj', 'wheel',
                       purpose="python interface to PROJ4 library for cartographic transformations https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
-        # ModuleInstall('cartopy', 'pip',
-        #              purpose="Cartopy is a Python package designed to make drawing maps for data analysis and visualisation as easy as possible.", usage="VIZ"),
+        ModuleInstall('Cartopy', 'wheel', mname="cartopy",
+                      purpose="Cartopy is a Python package designed to make drawing maps for data analysis and visualisation as easy as possible.", usage="VIZ"),
         # the module cartopy requires GEOS https://trac.osgeo.org/geos/
         #
         ModuleInstall("python-linkedin", "pip", mname="linkedin",
