@@ -98,6 +98,12 @@ To install a single package::
 .. index:: pymy_install, pymy_update    
 
 
+Source of the packages:
+
+* `PyPI <https://pypi.python.org/pypi>`_: pure python packages
+* `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_: packages with C++
+* `xavierdupre.fr <http://www.xavierdupre.fr/>`_: custom build (xgboost, ...)
+
 
 Quick start
 -----------

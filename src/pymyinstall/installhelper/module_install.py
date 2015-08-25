@@ -29,6 +29,7 @@ else:
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
 from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata
+from .missing_license import missing_module_licenses
 
 
 class ModuleInstall:
@@ -697,11 +698,16 @@ class ModuleInstall:
         """
         meta = self.get_installed_metadata()
         if meta is None:
-            return None
+            res = None
         for k, v in meta.items():
             if k.lower() == "license":
-                return v
-        return None
+                res = v
+                break
+        if res in {None, "", "UNKNOWN"}:
+            res = missing_module_licenses.get(self.name, None)
+            if res is None:
+                res = missing_module_licenses.get(self.mname, None)
+        return res
 
     def get_installed_classifier(self):
         """

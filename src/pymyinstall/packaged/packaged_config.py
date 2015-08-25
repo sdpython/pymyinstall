@@ -299,7 +299,10 @@ def small_set():
         # 2015-07
         #
         ModuleInstall("pyprofiler", "pip", purpose="profiler"),
-
+        ModuleInstall("mock", "pip",
+                      purpose="mock is a library for testing in Python. It allows you to replace parts of your system under test with mock objects and make assertions about how they have been used."),
+        ModuleInstall("multimethods", "pip",
+                      purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
     ]
 
     if sys.platform.startswith("win"):
@@ -371,7 +374,7 @@ def extended_set():
         ModuleInstall('itsdangerous', 'pip',
                       purpose="Various helpers to pass trusted data to untrusted environments and back."),
         ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy',
-                      purpose="model SQL queries as objects"),
+                      purpose="model SQL queries as objects", usage="SQL"),
         ModuleInstall('simplejson', 'wheel', purpose="json parser"),
         ModuleInstall('python-pptx', 'pip', mname="pptx",
                       purpose="read/write PowerPoint presentation"),
@@ -524,7 +527,7 @@ def extended_set():
         ModuleInstall(
             "pygit2", "wheel", purpose="Pygit2 is a set of Python bindings to the libgit2 shared library, libgit2 implements the core of Git."),
         ModuleInstall(
-            "pymongo", "wheel", purpose="Python wrapper for MongoDB"),
+            "pymongo", "wheel", purpose="Python wrapper for MongoDB", usage="NoSQL"),
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
@@ -592,6 +595,7 @@ def extended_set():
         # July 2015
         #
         ModuleInstall("ete", "github", "jhcepas", mname="ete3",
+                      web="https://github.com/jhcepas/ete/tree/3.0",
                       purpose="tree visualisation", usage="VIZ"),  # graph visualization
         # visualisation
         ModuleInstall(
@@ -620,6 +624,16 @@ def extended_set():
                       purpose="Python to Scilab bridge", usage="DATA/ML"),
         ModuleInstall("scilab_kernel", "pip",
                       purpose="A Scilab kernel for IPython", usage="JUPYTER"),
+        ModuleInstall("psycopg2", "wheel",
+                      purpose="Psycopg is the most popular PostgreSQL adapter for the Python programming language.", usage="SQL"),
+        ModuleInstall("pymssql", "wheel",
+                      purpose="A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.", usage="SQL"),
+        ModuleInstall("mysql-connector-python", "pip",
+                      purpose="MySQL driver written in Python which does not depend on MySQL C client libraries and implements the DB API v2.0 specification (PEP-249).", usage="SQL"),
+        ModuleInstall("line_profiler", "wheel",
+                      purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof is a convenient script for running either line_profiler or the Python standard library's cProfile or profile modules, depending on what is available."),
+        ModuleInstall("mpmath", "pip",
+                      purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
     ]
 
     return [_ for _ in mod if _ is not None]
@@ -702,12 +716,13 @@ def ensae_set():
         ModuleInstall("pymvpa2", "wheel", mname="mvpa2",
                       purpose="PyMVPA is a Python module intended to ease pattern classification analyses of large datasets."),
         ModuleInstall(
-            "pyodbc", "wheel", purpose="access to protocal ODBC (SQL databases)"),
+            "pyodbc", "wheel", purpose="access to protocal ODBC (SQL databases)", usage="SQL"),
         ModuleInstall(
             "pypmc", "wheel", purpose="pypmc is a python package focusing on adaptive importance sampling."),
         ModuleInstall(
             "pyserial", "wheel", mname="serial", purpose="access to serial port"),
-        ModuleInstall("PyX", "wheel", mname="pyx", purpose="plotting"),
+        ModuleInstall("PyX", "wheel", mname="pyx",
+                      purpose="plotting", usage="VIZ"),
         ModuleInstall(
             "scandir", "wheel", purpose="Better directory iterator and faster os.walk(), now in the Python 3.5 stdlib"),
         ModuleInstall(
@@ -798,7 +813,70 @@ def ensae_set():
             "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
         ModuleInstall(
             "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
+        ModuleInstall(
+            "heatmap", "wheel", purpose="draw heatmap", usage="VIZ"),
+        ModuleInstall("planar", "wheel",
+                      purpose="2D planar geometry library for Python."),
+        ModuleInstall("GDAL", "wheel", mname="osgeo",
+                      purpose="GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundation."),
+        ModuleInstall("CGAL_bindings", "wheel", mname="CGAL",
+                      purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python."),
+        ModuleInstall("trackpy", "pip",
+                      purpose="trackpy is a Python package for particle tracking in 2D, 3D, and higher dimensions.", usage="DATA/ML"),
+        ModuleInstall("triangle", "wheel",
+                      purpose="Python Triangle is a python wrapper around Jonathan Richard Shewchuk's two-dimensional quality mesh generator and delaunay triangulator library."),
+        ModuleInstall("redis", "pip",
+                      purpose="Python client for Redis key-value store"),
+        ModuleInstall("skdata", "pip",
+                      purpose="Data Sets for Machine Learning in Python", uage="DATA"),
+        ModuleInstall("hebel", "pip",
+                      purpose="GPU-Accelerated Deep Learning Library in Python", usage="DATA/ML"),
+        # ModuleInstall("vowpal_porpoise", "pip",
+        #              purpose="Lightweight python wrapper for vowpal_wabbit.", purpose="DATA/ML"),
+        # it requires to build vowpal_wabbit for Windows
+        ModuleInstall("python-recsys", "github", mname="recsys", name="ocelma",
+                      purpose="A python library for implementing a recommender system.", usage="DATA/ML"),
+        # dpark
+        ModuleInstall("invoke", "pip",
+                      purpose="Invoke is a Python task execution tool & library, drawing inspiration from various sources to arrive at a powerful & clean feature set. (for dpark)"),
+        ModuleInstall("mesos.interface", "pip",
+                      purpose="Mesos interfaces (for dpark)"),
+        ModuleInstall("pymesos", "pip",
+                      purpose="Mesos interfaces (for dpark)"),
+        ModuleInstall("fabric", "pip",
+                      purpose="Fabric is a Python library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks. (for steamsparse)"),
+        ModuleInstall("prettytable", "pip",
+                      purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for steamsparse)"),
+        ModuleInstall("steamsparse", "pip",
+                      purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
+        ModuleInstall("msgpack-python", "pip", mname="msgpack",
+                      purpose="MessagePack (de)serializer. (for dpark)"),
+        ModuleInstall("lz4", "wheel",
+                      purpose="LZ4 Bindings for Python (for dpark)"),
+        ModuleInstall("dpark", "pip",
+                      purpose="DPark is a Python clone of Spark, MapReduce(R) alike computing framework supporting iterative computation.", usage="DATA/ML"),
+        ModuleInstall("tinydb", "pip",
+                      purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) It's written in pure Python and has no external requirements.", usage="noSQL"),
+        ModuleInstall("urllib3", "pip",
+                      purpose="urllib2 extension"),
+        ModuleInstall("greenlet", "wheel",
+                      purpose="Greenlet allows lightweight in-process concurrent programming."),
+        ModuleInstall("gevent", "pip",
+                      purpose="gevent is a coroutine-based Python networking library"),
+        ModuleInstall("grequests", "pip",
+                      purpose="GRequests allows you to use Requests with Gevent to make asynchronous HTTP Requests easily."),
+        ModuleInstall("pycurl", "wheel",
+                      purpose="PycURL, a interface to the libcurl library. (for grab)"),
+        ModuleInstall("selection", "pip",
+                      purpose="API to extract data from HTML and XML documents. (for grab)"),
+        ModuleInstall("grab", "pip",
+                      purpose="Grab is a python web scraping framework. Grab provides tons of helpful methods to scrape web sites "),
+        ModuleInstall("imbox", "pip",
+                      purpose="Python library for reading IMAP mailboxes and converting email content to machine readable data"),
+        ModuleInstall("python-recsys", "github", mname="recsys", name="ocelma",
+                      purpose="A python library for implementing a recommender system.", usage="DATA/ML"),
     ]
+
     if sys.platform.startswith("win"):
         mod.append(ModuleInstall("VideoCapture", "wheel",
                                  purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))

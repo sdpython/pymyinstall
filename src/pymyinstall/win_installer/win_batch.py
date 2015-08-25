@@ -129,8 +129,9 @@ def create_win_jupyter_console(folders):
             "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set JUPYTERC=%CURRENT2%\\..\\python\\Scripts\\jupyter-console.exe",
+            "set IPYTHONRC=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
             "cd %WORKSPACE%",
-            "%JUPYTERC% --ipython-dir=%CURRENT2% --profile=win_profile"]
+            "%IPYTHONRC% console --ipython-dir=%CURRENT2% --profile=win_profile"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_console.bat")
@@ -150,7 +151,7 @@ def create_win_jupyter_qtconsole(folders):
             "call %CURRENT2%\\env.bat",
             "set JUPYTERQTC=%CURRENT2%\\..\\python\\Scripts\\jupyter-qtconsole.exe",
             "cd %WORKSPACE%",
-            "start %JUPYTERQTC% --ipython-dir=%CURRENT2% --profile=win_profile"]
+            "start %JUPYTERQTC%"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_qtconsole.bat")
@@ -170,7 +171,7 @@ def create_win_jupyter_notebook(folders):
             "call %CURRENT2%\\env.bat",
             "set JUPYTERNB=%CURRENT2%\\..\\python\\Scripts\\jupyter-notebook.exe",
             "cd %WORKSPACE%",
-            "%JUPYTERNB% --notebook-dir=%CURRENT2%\\..\\workspace --ipython-dir=%CURRENT2% --profile=win_profile"]
+            "%JUPYTERNB% --notebook-dir=%CURRENT2%\\..\\workspace --config=%CURRENT2%\\profile_win_profile\\ipython_kernel_config.py"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_notebook.bat")

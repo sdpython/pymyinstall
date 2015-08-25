@@ -166,7 +166,7 @@ def get_module_metadata(module, use_cmd=False):
         lines = mod._get_metadata(mod.PKG_INFO)
         for line in lines:
             spl = line.split(":")
-            d[spl[0]] = ":".join(spl[1:])
+            d[spl[0].strip()] = ":".join(spl[1:]).strip()
         a = mod.key
         res[a] = d
         al = mod.key.lower()

@@ -83,7 +83,13 @@ Functionalities
 * help installing module from GitHub, pip and setup
 * install other common tools or editors
 * provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
-* function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
+* function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_
+
+Source of the packages:
+
+* `PyPI <https://pypi.python.org/pypi>`_: pure python packages
+* `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_: packages with C++
+* `xavierdupre.fr <http://www.xavierdupre.fr/>`_: custom build (xgboost, ...)
 
 
 Versions
