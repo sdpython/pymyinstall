@@ -15,6 +15,7 @@ from .install_custom_7z import install_7z
 from .install_cmd_helper import run_cmd, update_pip, has_pip
 from .install_custom import download_page
 from .module_install import ModuleInstall, get_module_version, get_pypi_version
+from .module_dependencies import missing_dependencies
 
 
 def module_as_table(list_module, as_df=False):

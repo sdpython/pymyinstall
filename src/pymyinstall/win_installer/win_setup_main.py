@@ -11,6 +11,7 @@ import sys
 
 from ..installhelper.install_cmd_helper import update_pip
 from ..installhelper.install_custom_scite import modify_scite_properties
+from ..installhelper.module_dependencies import missing_dependencies
 
 from .win_batch import create_win_batches
 from .win_ipy_kernels import install_kernels
@@ -23,6 +24,7 @@ from .win_packages import win_install_packages_other_python, get_modules_version
 from .win_extract import clean_msi
 from .win_ipython_helper import ipython_create_profile, ipython_update_profile
 from .win_setup_r import get_package_description
+from .win_exception import WinInstallMissingDependency
 
 if sys.version_info[0] == 2:
     from codecs import open
@@ -452,6 +454,22 @@ def win_python_setup(folder="dist/win_python_setup",
         operations.append(("start", "last_function"))
         last_function(new_script, folders, verbose=verbose, fLOG=fLOG)
         operations.append(("time", dtnow()))
+
+    ##################
+    # check there is no missing modules
+    ##################
+    scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies(); for k,v in sorted(r.items()): print(k,' misses ', v)"
+    cmd = '{0} -m "{1}"'.format(os.path.join(
+        folders["python"], "python.exe"), scr)
+    out, err = run_cmd(cmd, wait=True)
+    if len(out) > 0:
+        raise WinInstallMissingDependency(out)
+
+    miss = missing_dependencies()
+    if len(miss) > 0:
+        mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
+                        for k, v in sorted(miss.items()))
+        warnings.warn(mes)
 
     ##################
     # patch exe in scripts

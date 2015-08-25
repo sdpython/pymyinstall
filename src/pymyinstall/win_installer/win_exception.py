@@ -18,3 +18,10 @@ class WinInstallPackageException(Exception):
     exception raised by this package when installing a Python package
     """
     pass
+
+
+class WinInstallMissingDependency(Exception):
+    """
+    raised when a dependency is missing
+    """
+    pass

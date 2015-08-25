@@ -4,8 +4,10 @@
 """
 from __future__ import print_function
 import os
+import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
+from ..installhelper.module_dependencies import missing_dependencies
 from .packaged_config_full_set import ensae_fullset
 
 
@@ -225,3 +227,9 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         fLOG("installed modules")
         for m in again:
             fLOG(m)
+
+    miss = missing_dependencies()
+    if len(miss) > 0:
+        mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
+                        for k, v in sorted(miss.items()))
+        warnings.warn(mes)

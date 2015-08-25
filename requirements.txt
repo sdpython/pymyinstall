@@ -75,4 +75,5 @@ pyflakes
 mccabe
 pep8
 mistune
+pipdeptree
 pyquickhelper

@@ -46,7 +46,12 @@ def minimal_set():
         ModuleInstall('markupsafe', 'pip', purpose="interpret markdown"),
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),
-        ModuleInstall("pylint", "pip", purpose="script syntax analysis"),
+        ModuleInstall("astroid", "pip",
+                      purpose="script syntax analysis (for pylint)"),
+        ModuleInstall("logilab-common", "pip",
+                      purpose="collection of low-level Python packages and modules used by Logilab projects (for pylint)"),
+        ModuleInstall(
+            "pylint", "pip", purpose="A abstract syntax tree for Python with inference support."),
     ]
 
     if sys.platform.startswith("win"):
@@ -125,7 +130,8 @@ def small_set():
         #
         ModuleInstall(
             "pycparser", "wheel", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
-        ModuleInstall("Cython", "wheel", purpose="pseudo C++ in python"),
+        ModuleInstall("Cython", "wheel", mname="cython",
+                      purpose="pseudo C++ in python"),
         ModuleInstall("numpy", "wheel",
                       purpose="matrix computation", usage="DATA/ML"),
         ModuleInstall("matplotlib", "wheel", purpose="plots", usage="VIZ"),
@@ -176,7 +182,7 @@ def small_set():
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
-            "netCDF4", "wheel", purpose="xray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
+            "netCDF4", "wheel", mname="netcdf4", purpose="xray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
         ModuleInstall(
             "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
         ModuleInstall(
@@ -273,6 +279,10 @@ def small_set():
         #
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
+        ModuleInstall(
+            'markdown', 'pip', purpose="markdown parser (for bokeh)"),
+        ModuleInstall(
+            'pystache', 'pip', purpose="Mustache for Python (for bokeh)"),
         ModuleInstall(
             'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
         ModuleInstall('rpy2', 'wheel', purpose="interact with R",
@@ -449,6 +459,8 @@ def extended_set():
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
         ModuleInstall('python-daemon', 'pip', mname='daemon',
                       purpose="Library to implement a well-behaved Unix daemon process."),
+        ModuleInstall('cached_property', 'pip',
+                      purpose="A decorator for caching properties in classes (for luigi)"),
         ModuleInstall('luigi', 'pip',
                       purpose="workflows, data workflows", usage="WORKFLOW"),
         #
@@ -456,7 +468,9 @@ def extended_set():
                       purpose="A Python module to customize the process title"),
         # thrift only works only for Python 2.7
         ModuleInstall(
-            'thriftpy', 'pip', purpose="ure python implemention of Apache Thrift."),
+            'ply', 'pip', purpose="Python Lex & Yacc (for thrifty)"),
+        ModuleInstall(
+            'thriftpy', 'pip', purpose="pure python implemention of Apache Thrift."),
         # ModuleInstall('airflow', 'pip'),  # does not work on Python 3
         ModuleInstall(
             'smopy', 'pip', purpose="OpenStreetMap image tiles in Python", usage="VIZ"),
@@ -599,16 +613,26 @@ def extended_set():
                       purpose="tree visualisation", usage="VIZ"),  # graph visualization
         # visualisation
         ModuleInstall(
+            "pyexecjs", "pip", mname="execjs", purpose="Run JavaScript code from Python (for pyreact)", usage="NETWORK"),
+        ModuleInstall(
+            "pyreact", "pip", purpose="Python bridge to JSX & the React JavaScript library. (for pyxley)", usage="NETWORK"),
+        ModuleInstall(
             "pyxley", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
 
         #
         # 2015-08
         #
         ModuleInstall(
+            "pyasn1", "pip", purpose="ASN.1 types and codecs (for pysnmp)"),
+        ModuleInstall(
             "pysnmp", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
         # pyinstaller does not install properly on Windows
         # ModuleInstall(
         #    "pyinstaller", "pip", purpose="Converts (packages) Python programs into stand-alone executables, under Windows, Linux, Mac OS X, AIX and Solaris."),
+        ModuleInstall(
+            "imageio", "pip", purpose="Library for reading and writing a wide range of image, video, scientific, and volumetric data formats (for moviepy)", usage="VIDEO"),
+        ModuleInstall(
+            "tqdm", "pip", purpose="A Simple Python Progress Meter (for moviepy)", usage="VIDEO"),
         ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
@@ -628,7 +652,7 @@ def extended_set():
                       purpose="Psycopg is the most popular PostgreSQL adapter for the Python programming language.", usage="SQL"),
         ModuleInstall("pymssql", "wheel",
                       purpose="A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.", usage="SQL"),
-        ModuleInstall("mysql-connector-python", "pip",
+        ModuleInstall("mysqlclient", "pip",
                       purpose="MySQL driver written in Python which does not depend on MySQL C client libraries and implements the DB API v2.0 specification (PEP-249).", usage="SQL"),
         ModuleInstall("line_profiler", "wheel",
                       purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof is a convenient script for running either line_profiler or the Python standard library's cProfile or profile modules, depending on what is available."),
@@ -662,12 +686,22 @@ def ensae_set():
     """
     mod = [
         ModuleInstall(
+            "billiard", "pip", purpose="Python multiprocessing fork with improvements and bugfixes (for celery)"),
+        ModuleInstall(
+            "kombu", "pip", purpose="Messaging library for Python (for celery)"),
+        ModuleInstall(
+            "anyjson", "pip", purpose="Wraps the best available JSON implementation available in a common interface (for celery)"),
+        ModuleInstall(
+            "amqp", "pip", purpose="Low-level AMQP client for Python (fork of amqplib) (for celery)"),
+        ModuleInstall(
             "celery", "pip", purpose="Celery is an asynchronous task queue/job queue based on distributed message passing."),
         ModuleInstall(
             "tweepy", "pip", purpose="Python wrapper for the twitter API"),
         #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
         ModuleInstall(
             "django", "pip", purpose="web application, most famous module about it, the only when to build a scalable website", usage="NETWORK"),
+        ModuleInstall(
+            "mutagenx", "pip", purpose="ead and write audio tags for many formats in Python 3"),
         ModuleInstall("django-audiotracks", "pip",
                       mname="audiotracks", purpose="read audio with django"),
         ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
@@ -795,7 +829,9 @@ def ensae_set():
                       purpose="create simple web application to visualize data", usage="VIZ"),
         # ModuleInstall("python-recsys", "github", "ocelma", mname="recsys",
         # purpose="recommendation system", usage="DATA/ML"), #only works on
-        # Python 2.7
+        # Python 2.7 + csc-pysparse + dividi2 (not maintained anymore)
+        ModuleInstall(
+            "colorspacious", "pip", purpose="A powerful, accurate, and easy-to-use Python library for doing colorspace conversions (for viscm)"),
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
         ModuleInstall("cubehelix", "github", "jradavenport",
@@ -819,24 +855,28 @@ def ensae_set():
                       purpose="2D planar geometry library for Python."),
         ModuleInstall("GDAL", "wheel", mname="osgeo",
                       purpose="GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundation."),
-        ModuleInstall("CGAL_bindings", "wheel", mname="CGAL",
+        ModuleInstall("cgal_bindings", "wheel", mname="CGAL",
                       purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python."),
+        ModuleInstall("tifffile", "pip",
+                      purpose="Read and write image data from and to TIFF files. (for pims)"),
+        ModuleInstall("pims", "pip",
+                      purpose="Python Image Sequence (for trackpy)"),
         ModuleInstall("trackpy", "pip",
                       purpose="trackpy is a Python package for particle tracking in 2D, 3D, and higher dimensions.", usage="DATA/ML"),
         ModuleInstall("triangle", "wheel",
                       purpose="Python Triangle is a python wrapper around Jonathan Richard Shewchuk's two-dimensional quality mesh generator and delaunay triangulator library."),
         ModuleInstall("redis", "pip",
                       purpose="Python client for Redis key-value store"),
-        ModuleInstall("skdata", "pip",
-                      purpose="Data Sets for Machine Learning in Python", uage="DATA"),
+        ModuleInstall("skdata", "github", gitrepo="jaberg",
+                      purpose="Data Sets for Machine Learning in Python", usage="DATA"),
         ModuleInstall("hebel", "pip",
                       purpose="GPU-Accelerated Deep Learning Library in Python", usage="DATA/ML"),
         # ModuleInstall("vowpal_porpoise", "pip",
         #              purpose="Lightweight python wrapper for vowpal_wabbit.", purpose="DATA/ML"),
         # it requires to build vowpal_wabbit for Windows
-        ModuleInstall("python-recsys", "github", mname="recsys", name="ocelma",
-                      purpose="A python library for implementing a recommender system.", usage="DATA/ML"),
         # dpark
+        ModuleInstall("protobuf", "pip",
+                      purpose="Protocol Buffers are Google’s data interchange format (for dpark)"),
         ModuleInstall("invoke", "pip",
                       purpose="Invoke is a Python task execution tool & library, drawing inspiration from various sources to arrive at a powerful & clean feature set. (for dpark)"),
         ModuleInstall("mesos.interface", "pip",
@@ -844,16 +884,16 @@ def ensae_set():
         ModuleInstall("pymesos", "pip",
                       purpose="Mesos interfaces (for dpark)"),
         ModuleInstall("fabric", "pip",
-                      purpose="Fabric is a Python library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks. (for steamsparse)"),
+                      purpose="Fabric is a Python library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks. (for streamparse)"),
         ModuleInstall("prettytable", "pip",
-                      purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for steamsparse)"),
-        ModuleInstall("steamsparse", "pip",
+                      purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
+        ModuleInstall("streamparse", "pip",
                       purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
         ModuleInstall("msgpack-python", "pip", mname="msgpack",
                       purpose="MessagePack (de)serializer. (for dpark)"),
         ModuleInstall("lz4", "wheel",
                       purpose="LZ4 Bindings for Python (for dpark)"),
-        ModuleInstall("dpark", "pip",
+        ModuleInstall("dpark", "github", gitrepo="douban",
                       purpose="DPark is a Python clone of Spark, MapReduce(R) alike computing framework supporting iterative computation.", usage="DATA/ML"),
         ModuleInstall("tinydb", "pip",
                       purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) It's written in pure Python and has no external requirements.", usage="noSQL"),
@@ -867,19 +907,25 @@ def ensae_set():
                       purpose="GRequests allows you to use Requests with Gevent to make asynchronous HTTP Requests easily."),
         ModuleInstall("pycurl", "wheel",
                       purpose="PycURL, a interface to the libcurl library. (for grab)"),
+        ModuleInstall("pytils", "pip",
+                      purpose="Russian-specific string utils (for selection, weblib)"),
         ModuleInstall("selection", "pip",
                       purpose="API to extract data from HTML and XML documents. (for grab)"),
+        ModuleInstall("weblib", "pip",
+                      purpose="Set of tools for web scraping projects (for grab)"),
         ModuleInstall("grab", "pip",
                       purpose="Grab is a python web scraping framework. Grab provides tons of helpful methods to scrape web sites "),
         ModuleInstall("imbox", "pip",
                       purpose="Python library for reading IMAP mailboxes and converting email content to machine readable data"),
-        ModuleInstall("python-recsys", "github", mname="recsys", name="ocelma",
-                      purpose="A python library for implementing a recommender system.", usage="DATA/ML"),
     ]
 
     if sys.platform.startswith("win"):
         mod.append(ModuleInstall("VideoCapture", "wheel",
                                  purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))
+        mod.append(ModuleInstall("comtypes", "pip",
+                                 purpose="Pure Python COM package"))
+        mod.append(ModuleInstall("jaraco.util", "pip",
+                                 purpose="General utility modules that supply commonly-used functionality"))
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 

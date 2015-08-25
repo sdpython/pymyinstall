@@ -48,7 +48,8 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
         for prog in ["python.exe", "pythonw.exe"]:
             shebangs = ["#!" + python_path + prog,
                         "#!" + python_path[0].lower() + python_path[1:] + prog]
-            bshebangs = [bytes(shebang, encoding="ascii") for shebang in shebangs]
+            bshebangs = [bytes(shebang, encoding="ascii")
+                         for shebang in shebangs]
             into = "#!" + os.path.normpath(path_to_python + prog)
             binto = bytes(into, encoding="ascii")
 
