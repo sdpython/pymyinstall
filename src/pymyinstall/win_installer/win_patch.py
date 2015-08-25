@@ -46,12 +46,14 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
 
         operations = []
         for prog in ["python.exe", "pythonw.exe"]:
-            shebang = "#!" + python_path + prog
-            bshebang = bytes(shebang, encoding="ascii")
+            shebangs = ["#!" + python_path + prog,
+                        "#!" + python_path[0].lower() + python_path[1:] + prog]
+            bshebangs = [bytes(shebang, encoding="ascii") for shebang in shebangs]
             into = "#!" + os.path.normpath(path_to_python + prog)
             binto = bytes(into, encoding="ascii")
 
-            fLOG("replace {0} by {1}".format(shebang, into))
+            for shebang in shebangs:
+                fLOG("SHEBANG: replace {0} by {1}".format(shebang, into))
 
             for file in files:
                 full = os.path.join(folder, file)
@@ -61,21 +63,23 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
                     if ext in {".py", ""}:
                         with open(full, "r") as f:
                             content = f.read()
-                        if shebang in content:
-                            content = content.replace(shebang, into)
-                            fLOG("update ", full)
-                            operations.append(("update", full))
-                            with open(full, "w") as f:
-                                f.write(content)
+                        for shebang in shebangs:
+                            if shebang in content:
+                                content = content.replace(shebang, into)
+                                fLOG("update ", full)
+                                operations.append(("update", full))
+                                with open(full, "w") as f:
+                                    f.write(content)
                     elif ext == ".exe":
                         with open(full, "rb") as f:
                             content = f.read()
-                        if bshebang in content:
-                            content = content.replace(bshebang, binto)
-                            fLOG("update ", full)
-                            operations.append(("update", full))
-                            with open(full, "wb") as f:
-                                f.write(content)
+                        for bshebang in bshebangs:
+                            if bshebang in content:
+                                content = content.replace(bshebang, binto)
+                                fLOG("update ", full)
+                                operations.append(("update", full))
+                                with open(full, "wb") as f:
+                                    f.write(content)
                     else:
                         pass
 
