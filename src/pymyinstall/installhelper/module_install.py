@@ -697,12 +697,13 @@ class ModuleInstall:
         @return         string
         """
         meta = self.get_installed_metadata()
-        if meta is None:
+        if meta is None or len(meta) == 0:
             res = None
-        for k, v in meta.items():
-            if k.lower() == "license":
-                res = v
-                break
+        else:
+            for k, v in meta.items():
+                if k.lower() == "license":
+                    res = v
+                    break
         if res in {None, "", "UNKNOWN"}:
             res = missing_module_licenses.get(self.name, None)
             if res is None:
