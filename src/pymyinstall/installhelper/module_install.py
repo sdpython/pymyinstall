@@ -710,6 +710,7 @@ class ModuleInstall:
         if meta is None or len(meta) == 0:
             res = None
         else:
+            res = None
             for k, v in meta.items():
                 if k.lower() == "license":
                     res = v

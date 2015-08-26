@@ -69,12 +69,12 @@ class TestAllPyPiModule (unittest.TestCase):
             except AnnoyingPackageException:
                 annoying.append(mod.name)
 
-        if len(error) > 5:
+        if len(error) > 15:
             # we accept some errors
             # joblib seems to give errors from time to time
             # multipledispatch
             # ipython --> jupyter (transitionning)
-            raise MissingPackageOnPyPiException(
+            raise MissingPackageOnPyPiException("Two many errors\n" + \
                 "\n".join("{0}:{1}".format(a, b) for a, b in sorted(error)))
 
         if len(annoying) > 0:
