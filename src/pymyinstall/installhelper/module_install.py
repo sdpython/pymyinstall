@@ -267,6 +267,8 @@ class ModuleInstall:
         @param      file_save   for debug purposes
         @param      wheel       returns the wheel file or the exe file
         @return                 url, exe name
+
+        @todo get the content of a folder and take the latest or install a pipy server
         """
         ext = "exe" if not wheel else "whl"
         if self.name == "pycrypto":
@@ -288,6 +290,14 @@ class ModuleInstall:
         elif self.name == "xgboost":
             if ext == "whl":
                 exe = "xgboost-0.4-py3-none-any.whl"
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
+        elif self.name == "skdata":
+            if ext == "whl":
+                exe = "skdata-0.0.4-py3-none-any.whl"
             else:
                 raise Exception("unexpected extension: " +
                                 ext + " for module " + file_save)

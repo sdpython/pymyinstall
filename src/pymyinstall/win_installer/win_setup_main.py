@@ -8,8 +8,9 @@ from __future__ import print_function
 import os
 import shutil
 import sys
+import warnings
 
-from ..installhelper.install_cmd_helper import update_pip
+from ..installhelper.install_cmd_helper import update_pip, run_cmd
 from ..installhelper.install_custom_scite import modify_scite_properties
 from ..installhelper.module_dependencies import missing_dependencies
 
@@ -458,8 +459,8 @@ def win_python_setup(folder="dist/win_python_setup",
     ##################
     # check there is no missing modules
     ##################
-    scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies(); for k,v in sorted(r.items()): print(k,' misses ', v)"
-    cmd = '{0} -m "{1}"'.format(os.path.join(
+    scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies();print('\n'.join('{0} misses {1}'.format(k,v) for k,v in sorted(r.items())))"
+    cmd = '{0} -c "{1}"'.format(os.path.join(
         folders["python"], "python.exe"), scr)
     out, err = run_cmd(cmd, wait=True)
     if len(out) > 0:

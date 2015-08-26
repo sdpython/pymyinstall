@@ -867,7 +867,10 @@ def ensae_set():
                       purpose="Python Triangle is a python wrapper around Jonathan Richard Shewchuk's two-dimensional quality mesh generator and delaunay triangulator library."),
         ModuleInstall("redis", "pip",
                       purpose="Python client for Redis key-value store"),
-        ModuleInstall("skdata", "github", gitrepo="jaberg",
+        # this module is not on pypi and the py3k version is in a separate folder
+        # i don't want to write too much specific code for it
+        # i compile it into a wheel
+        ModuleInstall("skdata", "wheel_xd",
                       purpose="Data Sets for Machine Learning in Python", usage="DATA"),
         ModuleInstall("hebel", "pip",
                       purpose="GPU-Accelerated Deep Learning Library in Python", usage="DATA/ML"),
