@@ -74,8 +74,8 @@ class TestAllPyPiModule (unittest.TestCase):
             # joblib seems to give errors from time to time
             # multipledispatch
             # ipython --> jupyter (transitionning)
-            raise MissingPackageOnPyPiException("Two many errors\n" + \
-                "\n".join("{0}:{1}".format(a, b) for a, b in sorted(error)))
+            raise MissingPackageOnPyPiException("Two many errors\n" +
+                                                "\n".join("{0}:{1}".format(a, b) for a, b in sorted(error)))
 
         if len(annoying) > 0:
             fLOG("Annoying\n", "\n".join(annoying))
