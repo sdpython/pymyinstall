@@ -59,7 +59,8 @@ parameter. If it fails again, you can skip the modules by filling the parameter 
 To update modules::
 
     pymy_update
-
+    
+If some modules fail, they can be skipped by using option ``--skip=<modules comma separated>``.
 The module also includes a function 
 :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
 which creates a setup with Python and R which modules and packages for a datascientist.

@@ -117,7 +117,8 @@ def small_set():
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
         ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
-        ModuleInstall("xlwings", "pip", purpose="reads/writes Excel files"),
+        ModuleInstall(
+            "xlwings", "pip", purpose="reads/writes Excel files") if sys.platform.startswith("win") else None,
         ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
         #
@@ -136,7 +137,9 @@ def small_set():
                       purpose="matrix computation", usage="DATA/ML"),
         ModuleInstall("matplotlib", "wheel", purpose="plots", usage="VIZ"),
         ModuleInstall(
-            "gr", "wheel", purpose="GR is a universal framework for cross-platform visualization applications."),
+            "gr", "wheel",
+            purpose="GR is a universal framework for cross-platform visualization applications (issues on Linux and Anaconda)",
+            usage="VIZ"),
         # ModuleInstall("seaborn", "pip"),   # it seems problematic for this
         # small config
         ModuleInstall(
@@ -243,9 +246,9 @@ def small_set():
             "decorator", "pip", purpose="Better living through Python with decorators"),
         #
         ModuleInstall("requests", "pip", purpose="human interface for http"),
-        #ModuleInstall("PyQt",           "wheel", mname="PyQt4"),
+        #ModuleInstall("PyQt",           "wheel", mname="PyQt4", usage="GUI"),
         ModuleInstall(
-            "PySide", "wheel", purpose="open source version of PyQt"),
+            "PySide", "wheel", purpose="open source version of PyQt (issue on Linux and Anaconda)", usage="GUI"),
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
         ModuleInstall(
@@ -285,7 +288,7 @@ def small_set():
             'pystache', 'pip', purpose="Mustache for Python (for bokeh)"),
         ModuleInstall(
             'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
-        ModuleInstall('rpy2', 'wheel', purpose="interact with R",
+        ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
                       usage="DATA/ML"),
         ModuleInstall(
             'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
@@ -414,7 +417,8 @@ def extended_set():
             usage="DATA/ML"),
         ModuleInstall(
             'sympy', 'pip', purpose="SymPy is a Python library for symbolic mathematics."),
-        ModuleInstall('gmpy2', 'wheel', purpose="big real numbers"),
+        ModuleInstall('gmpy2', 'wheel',
+                      purpose="big real numbers (issue on Linux and Anaconda)"),
         ModuleInstall('llvmpy', 'wheel', mname='llvm',
                       purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools."),
         ModuleInstall(
@@ -433,7 +437,8 @@ def extended_set():
                       purpose="Monte Carlo computation", usage="DATA/ML"),
         ModuleInstall(
             'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation", usage="DATA/ML"),
-        ModuleInstall('fastcluster', 'wheel', purpose="clustering, AHC, ..."),
+        ModuleInstall('fastcluster', 'wheel',
+                      purpose="clustering, AHC, ... (issue on Linux and Anaconda)", usage="DATA/ML"),
         ModuleInstall(
             'pycosat', 'wheel', purpose="PicoSAT is a popular SAT solver written by Armin Biere in pure C."),
         ModuleInstall('pyshp', 'pip', mname='shapefile',
@@ -446,15 +451,16 @@ def extended_set():
             'selenium', 'pip', purpose="Python wrapper for Selenium", usage="NETWORK"),
         ModuleInstall(
             'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
-        ModuleInstall('pygame', 'wheel', purpose="GUI, interface for games"),
         ModuleInstall(
-            'Kivy', 'wheel', mname='kivy', purpose="GUI, interface for games, mobile"),
+            'pygame', 'wheel', purpose="GUI, interface for games (needs to be installed from www.pygame.org on Linux)", usage="GUI"),
+        ModuleInstall(
+            'Kivy', 'wheel', mname='kivy', purpose="GUI, interface for games, mobile (use sudo apt-get install python3-kivy on Linux)", usage="GUI"),
         ModuleInstall('kivy-garden', 'pip', mname='kivy.garden',
-                      purpose="Garden tool for kivy flowers."),
+                      purpose="Garden tool for kivy flowers.", usage="GUI"),
         ModuleInstall(
             'py4j', 'pip', purpose="Enables Python programs to dynamically access arbitrary Java objects"),
         ModuleInstall('python-igraph', 'wheel', mname='igraph',
-                      purpose="High performance graph data structures and algorithms"),
+                      purpose="High performance graph data structures and algorithms (issue on Linux and Anaconda)"),
         ModuleInstall(
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
         ModuleInstall('python-daemon', 'pip', mname='daemon',
@@ -550,7 +556,7 @@ def extended_set():
                       usage="DATA/ML"),
         ModuleInstall("neon", "pip", purpose="deep learning", usage="DATA/ML"),
         ModuleInstall(
-            "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide"),
+            "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide", usage="GUI"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
         # for gensim
         ModuleInstall(

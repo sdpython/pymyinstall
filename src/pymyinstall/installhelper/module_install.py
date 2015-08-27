@@ -857,7 +857,7 @@ class ModuleInstall:
                 return self.install(force_kind="conda", force=True, temp_folder=temp_folder,
                                     log=log, options=options, deps=deps)
             except InstallError as e:
-                warnings.warn(e)
+                warnings.warn(str(e))
                 # we try the regular way now
 
         if not force and self.IsInstalled():
@@ -868,7 +868,8 @@ class ModuleInstall:
         if options is None:
             options = []
 
-        self.fLOG("installation of ", self)
+        add = (" with " + kind) if kind != self.kind else ""
+        self.fLOG("installation of " + str(self) + add)
         kind = force_kind if force_kind is not None else self.kind
         ret = None
 
@@ -938,13 +939,14 @@ class ModuleInstall:
             if len(options) > 0:
                 cmd += " " + " ".join(options)
 
-            cmd += " --no-pin"
+            cmd += " --no-pin --yes --quiet"
             if not deps:
                 cmd += ' --no-deps'
 
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
-            if "No distributions matching the version" in out:
+            if "No distributions matching the version" in out or \
+               "No packages found in current linux" in out:
                 raise InstallError(
                     "unable to install with conda " +
                     str(self) +
@@ -980,7 +982,7 @@ class ModuleInstall:
         elif kind in ("wheel", "wheel_xd"):
             ver = python_version()
             if ver[0] != "win32":
-                ret = self.install("wheel")
+                ret = self.install("pip")
                 whlname = self.name
                 ret = True
             else:
