@@ -489,7 +489,7 @@ def extended_set():
         ModuleInstall('pyproj', 'wheel',
                       purpose="python interface to PROJ4 library for cartographic transformations https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
         ModuleInstall('Cartopy', 'wheel', mname="cartopy",
-                      purpose="Cartopy is a Python package designed to make drawing maps for data analysis and visualisation as easy as possible.", usage="VIZ"),
+                      purpose="Cartopy is a Python package designed to make drawing maps for data analysis and visualisation as easy as possible (issue on Linux and Anaconda)", usage="VIZ"),
         # the module cartopy requires GEOS https://trac.osgeo.org/geos/
         #
         ModuleInstall("python-linkedin", "pip", mname="linkedin",
@@ -521,9 +521,9 @@ def extended_set():
         # 2015-02-05
         #
         ModuleInstall("autopy3", "wheel", mname="autopy3",
-                      purpose="A simple, cross-platform GUI automation toolkit for Python 3") if sys.version_info[0] >= 3 else None,  # simulate events
+                      purpose="A simple, cross-platform GUI automation toolkit for Python 3 (issue on Linux and Anaconda)") if sys.version_info[0] >= 3 else None,  # simulate events
         # large double
-        ModuleInstall("bigfloat", "wheel", purpose="big float"),
+        ModuleInstall("bigfloat", "wheel", purpose="big float (issue with Linux and Anaconda)"),
         # convex optimization, depends on CVXOPT
         ModuleInstall(
             "scs", "wheel", purpose="Solves convex cone programs via operator splitting."),
