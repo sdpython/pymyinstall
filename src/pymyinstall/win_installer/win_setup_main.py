@@ -459,7 +459,7 @@ def win_python_setup(folder="dist/win_python_setup",
     ##################
     # check there is no missing modules
     ##################
-    scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies();print('\n'.join('{0} misses {1}'.format(k,v) for k,v in sorted(r.items())))"
+    scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies();print('\\n'.join('{0} misses {1}'.format(k,v) for k,v in sorted(r.items())))"
     cmd = '{0} -c "{1}"'.format(os.path.join(
         folders["python"], "python.exe"), scr)
     out, err = run_cmd(cmd, wait=True)

@@ -724,25 +724,27 @@ def ensae_set():
             "persistent", "wheel", purpose="Objets persistants translucides"),
         # requires zope.interface, persistents
         ModuleInstall(
-            "BTrees", "wheel", purpose="This package contains a set of persistent object containers built around a modified BTree data structure."),
+            "BTrees", "wheel", purpose="This package contains a set of persistent object containers built around a modified BTree data structure.", usage="ALGO"),
         ModuleInstall(
-            "datrie", "wheel", purpose="Fast, efficiently stored Trie for Python."),
+            "datrie", "wheel", purpose="Fast, efficiently stored Trie for Python.", usage="ALGO"),
         # ModuleInstall("pysparse", "pip"), #does not work
         ModuleInstall(
             "la", "wheel", purpose="Label the rows, columns, any dimension, of your NumPy arrays."),
         ModuleInstall(
-            "mahotas", "wheel", purpose="Mahotas: Computer Vision Library"),
+            "mahotas", "wheel", purpose="Mahotas: Computer Vision Library", usage="VIZ"),
         ModuleInstall("milk", "wheel",
                       purpose="machine learning toolkit", usage="DATA/ML"),
         ModuleInstall("minepy", "wheel", purpose="interface to MineCraft"),
         ModuleInstall(
-            "NLopt", "wheel", mname="nlopt", purpose="linear, quadratic optimization"),
+            "NLopt", "wheel", mname="nlopt", purpose="linear, quadratic optimization",
+            web="http://ab-initio.mit.edu/wiki/index.php/NLopt", usage="DATA/ML"),
         ModuleInstall("Pmw", "wheel", mname="Pmw",
                       purpose="Pmw is a toolkit for building high-level compound widgets in Python using the Tkinter module."),
         ModuleInstall(
             "pytools", "pip", purpose="A collection of tools for Python"),
         ModuleInstall(
-            "pycuda", "wheel", purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python."),
+            "pycuda", "wheel", purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python.",
+            usage="GPU"),
         # ModuleInstall("scikits.cuda", "pip", mname="skcuda"), # no stable
         # version
         ModuleInstall(
@@ -768,13 +770,15 @@ def ensae_set():
         # teachings
         #
         ModuleInstall(
-            "tutormagic", "pip", purpose="brings PythonTutor in a notebok"),
+            "tutormagic", "pip", purpose="brings PythonTutor in a notebok", usage="TEACH"),
         # cache resuls from a long computation
         ModuleInstall(
-            "ipycache", "pip", purpose="Defines a %%cache cell magic in the IPython notebook to cache results of long-lasting computations in a persistent pickle file "),
+            "ipycache", "pip", purpose="Defines a %%cache cell magic in the IPython notebook to cache results of long-lasting computations in a persistent pickle file",
+            usage="JUPYTER"),
         # to upload a file in a notebook
         ModuleInstall(
-            "nbupload", "pip", purpose="widget to upload a file in a notebook"),
+            "nbupload", "pip", purpose="widget to upload a file in a notebook",
+            usage="JUPYTER"),
         # see https://github.com/PetterS/numpy_display/blob/master/numpy_display.py
         # https://github.com/damiendr/callipy
         #
@@ -798,13 +802,14 @@ def ensae_set():
         #
         ModuleInstall(
             "zipline", "pip", purpose="Zipline is a Pythonic algorithmic trading library. The system is fundamentally event-driven and a close approximation of how live-trading systems operate."),  # finance
-        ModuleInstall("vincent", "pip", purpose="plotting"),  # graph
+        ModuleInstall("vincent", "pip", purpose="plotting",
+                      usage="VIZ"),  # graph
         # graph, pygal_maps_world only accepts the latest version
         #ModuleInstall("pygal", "github", "Kozea", purpose="plotting"),
         ModuleInstall(
             "pygal", "pip", "Kozea", purpose="plotting (javascript)", usage="VIZ"),
         ModuleInstall(
-            "pygal_maps_world", "pip", purpose="extension to pygal (maps)"),  # graph
+            "pygal_maps_world", "pip", purpose="extension to pygal (maps)", usage="VIZ"),  # graph
         #
         # 2015-06-30
         #
@@ -835,7 +840,8 @@ def ensae_set():
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
         ModuleInstall("cubehelix", "github", "jradavenport",
-                      purpose="a full implementation of Dave Green's cubehelix colormap for Python"),
+                      purpose="a full implementation of Dave Green's cubehelix colormap for Python",
+                      web="https://github.com/jradavenport/cubehelix"),
         ModuleInstall("lifelines", "pip", purpose="survival analysis"),
         # ModuleInstall("pysnptools", "pip", purpose="operation on DNA sequences"), # only available on Python 2.7
         #
@@ -856,7 +862,8 @@ def ensae_set():
         ModuleInstall("GDAL", "wheel", mname="osgeo",
                       purpose="GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundation."),
         ModuleInstall("cgal_bindings", "wheel", mname="CGAL",
-                      purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python."),
+                      purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python.",
+                      web="https://github.com/cgal/cgal-swig-bindings"),
         ModuleInstall("tifffile", "pip",
                       purpose="Read and write image data from and to TIFF files. (for pims)"),
         ModuleInstall("pims", "pip",
@@ -920,6 +927,8 @@ def ensae_set():
                       purpose="Grab is a python web scraping framework. Grab provides tons of helpful methods to scrape web sites "),
         ModuleInstall("imbox", "pip",
                       purpose="Python library for reading IMAP mailboxes and converting email content to machine readable data"),
+        ModuleInstall("neural-python", "pip", mname="neuralpy",
+                      purpose="NeuralPy is the Artificial Neural Network library implemented in Python.", usage="DATA/ML"),
     ]
 
     if sys.platform.startswith("win"):
