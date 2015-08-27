@@ -303,6 +303,14 @@ class ModuleInstall:
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+        elif self.name == "JSAnimation":
+            if ext == "whl":
+                exe = "JSAnimation-0.1.tar.gz"
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
         else:
             raise ImportError(
                 "unable to get this module {0} from this location {1}".format(

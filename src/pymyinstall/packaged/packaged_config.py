@@ -823,8 +823,8 @@ def ensae_set():
         ModuleInstall("PuLP", "wheel", mname="pulp",
                       purpose="linear, quadratique optimization with constraints", usage="DATA/ML"),
         # for pyensae unit test
-        ModuleInstall("JSAnimation", "github", "jakevdp",
-                      purpose="provides javascript script to display differences between two files"),
+        ModuleInstall("JSAnimation", "wheel_xd",
+                      purpose="provides javascript script to display differences between two files", usage="JUPYTER"),
         #
         # pydata
         #
