@@ -131,7 +131,8 @@ def create_win_jupyter_console(folders):
             "set JUPYTERC=%CURRENT2%\\..\\python\\Scripts\\jupyter-console.exe",
             "set IPYTHONRC=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
             "cd %WORKSPACE%",
-            "%IPYTHONRC% console --ipython-dir=%CURRENT2% --profile=win_profile"]
+            "%IPYTHONRC% console --profile=win_profile"]
+            # command jupyter console does not work yet even if the documentation says so
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_console.bat")
@@ -286,10 +287,20 @@ def create_win_spyder(folders):
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
+    
+    .. index:: Spyder, PySide, PyQt
+    
+    This installation uses `PySide <https://pypi.python.org/pypi/PySide/1.2.2>`_
+    instead of `PyQt <https://www.riverbankcomputing.com/software/pyqt/intro>`_.
+    The environment variable ``QT_API`` needs to be set to ``pyside`` before 
+    running Spyder.
+    
+        set QT_API=pyside
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "cd %CURRENT2%\\..\\python\\Scripts",
+            "set QT_API=pyside",
             "spyder.exe --workdir=%WORKSPACE%"]
 
     text = "\n".join(text)
@@ -349,7 +360,7 @@ def win_install_kernels(folders, suffix=""):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            '%PYTHON_WINHOME%\\python -c "from pymyinstall.win_installer import inno_install_kernels;inno_install_kernels(\'CURRENT2\', \'%1\')"']
+            '%PYTHON_WINHOME%\\python -u -c "from pymyinstall.win_installer import inno_install_kernels;inno_install_kernels(\'CURRENT2\', \'%1\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "add_kernels.bat")
@@ -378,7 +389,7 @@ def win_replace_shebang(folders, suffix=""):
             ') ELSE (',
             '    set P2=%2',
             ')',
-            '%PYTHON_WINHOME%\\python -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', [\'\', \'P1\'], \'P2\')"']
+            '%PYTHON_WINHOME%\\python -u -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', [\'\', \'P1\'], \'P2\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "replace_shebang.bat")
@@ -397,7 +408,7 @@ def create_win_rss(folders, suffix=""):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            '%PYTHON_WINHOME%\\python -c "from pyquickhelper import fLOG;from pyquickhelper.pycode.blog_helper import rss_update_run_server;fLOG(OutputPrint=True);rss_update_run_server(r\'%CURRENT2%rss_database.db3\', r\'%CURRENT2%rss_list.xml\')"']
+            '%PYTHON_WINHOME%\\python -u -c "from pyquickhelper import fLOG;from pyquickhelper.pycode.blog_helper import rss_update_run_server;fLOG(OutputPrint=True);rss_update_run_server(r\'%CURRENT2%rss_database.db3\', r\'%CURRENT2%rss_list.xml\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_fetch_rss.bat")
@@ -438,7 +449,7 @@ def update_all_packages(folders, suffix=""):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            '%PYTHON_WINHOME%\\python -c "from pymyinstall.packaged import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
+            '%PYTHON_WINHOME%\\python -u -c "from pymyinstall.packaged import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_update_all_packages.bat")
