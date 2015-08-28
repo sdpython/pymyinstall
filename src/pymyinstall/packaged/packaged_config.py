@@ -171,6 +171,34 @@ def small_set():
             'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
+
+        ModuleInstall('Versio', 'pip', mname="version",
+                      purpose="localshop dependency, manages versions"),
+        ModuleInstall('django-celery', 'pip', mname="djcelery",
+                      purpose="localshop dependency, Old django celery integration project."),
+        ModuleInstall('django-configurations', 'pip', mname="configurations",
+                      purpose="localshop dependency, A helper for organizing Django settings."),
+        ModuleInstall('django-environ', 'pip', mname="environ",
+                      purpose="localshop dependency, Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application."),
+        ModuleInstall('django-model-utils', 'pip', mname="model_utils",
+                      purpose="localshop dependency, Django model mixins and utilities."),
+        ModuleInstall('django-storages', 'pip', mname="storages",
+                      purpose="localshop dependency, django-storages is a collection of custom storage backends for Django."),
+        ModuleInstall('django-userena', 'pip', mname="userena",
+                      purpose="localshop dependency, Accounts for Django made beautifully simple"),
+        ModuleInstall('django-uuidfield', 'pip', mname="uuidfield",
+                      purpose="localshop dependency, UUIDField in Django"),
+        ModuleInstall('django-guardian', 'pip', mname="guardian",
+                      purpose="localshop dependency, Implementation of per object permissions for Django 1.2 or later."),
+        ModuleInstall(
+            'gunicorn', 'pip', purpose="localshop dependency, WSGI HTTP Server for UNIX"),
+        ModuleInstall(
+            'netaddr', 'pip', purpose="Pythonic manipulation of IPv4, IPv6, CIDR, EUI and MAC network addresses"),
+        ModuleInstall('easy_thumbnails', 'pip',
+                      purpose="Easy thumbnails for Django"),
+        ModuleInstall('html2text', 'pip',
+                      purpose="Turn HTML into equivalent Markdown-structured text."),
+
         ModuleInstall('localshop', 'pip',
                       purpose="run a local pypi server"),
         # flake8, pep8
@@ -308,7 +336,7 @@ def small_set():
                       purpose="A logging replacement for Python"),
         ModuleInstall(
             'pkginfo', 'pip', purpose="Query metadatdata from sdists / bdists / installed packages."),
-        ModuleInstall("multipledispatch ", "pip",
+        ModuleInstall("multipledispatch", "pip",
                       purpose="A relatively sane approach to multiple dispatch in Python."),
         #
         # 2015-07
@@ -948,12 +976,15 @@ def ensae_set():
                       purpose="cssselect parses CSS3 Selectors and translates them to XPath 1.0"),
         ModuleInstall("jieba", "pip",
                       purpose="Chinese Words Segementation Utilities"),
-        ModuleInstall("python-goose", "pip", mname="goose",
-                      purpose="Html Content / Article Extractor, web scrapping lib in Python"),
+        # goose still depends on BeautifulSoup which does not work on Python 3
+        # ModuleInstall("goose-extractor", "pip", mname="goose",
+        # purpose="Html Content / Article Extractor, web scrapping lib in
+        # Python"),
         ModuleInstall("untangle", "pip",
                       purpose="Converts XML to Python objects"),
-        ModuleInstall("code2flow", "pip",
-                      purpose="Turn your Python and Javascript code into DOT flowcharts"),
+        # promising but not released yet
+        # ModuleInstall("code2flow", "pip",
+        # purpose="Turn your Python and Javascript code into DOT flowcharts"),
     ]
 
     if sys.platform.startswith("win"):

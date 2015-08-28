@@ -689,11 +689,21 @@ class ModuleInstall:
         cap = self.name.capitalize()
         if cap in vers:
             return vers[cap]
+        cap = self.name.lower()
+        if cap in vers:
+            return vers[cap]
         cap = self.name.replace("-", "_")
         if cap in vers:
             return vers[cap]
-        if self.mname is not None and self.mname in vers:
-            return vers[self.mname]
+        cap = self.name.replace("_", "-")
+        if cap in vers:
+            return vers[cap]
+        if self.mname is not None:
+            if self.mname in vers:
+                return vers[self.mname]
+            cal = self.mname.lower()
+            if cap in vers:
+                return vers[cap]
         return None
 
     def get_installed_metadata(self):
@@ -746,6 +756,8 @@ class ModuleInstall:
     def is_installed(self):
         """
         tells if a module is installed
+
+        @return boolean
         """
         return self.get_installed_version() is not None
 
