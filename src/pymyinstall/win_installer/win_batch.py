@@ -132,7 +132,8 @@ def create_win_jupyter_console(folders):
             "set IPYTHONRC=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
             "cd %WORKSPACE%",
             "%IPYTHONRC% console --profile=win_profile"]
-            # command jupyter console does not work yet even if the documentation says so
+    # command jupyter console does not work yet even if the documentation says
+    # so
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_console.bat")
@@ -287,14 +288,14 @@ def create_win_spyder(folders):
 
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
-    
+
     .. index:: Spyder, PySide, PyQt
-    
+
     This installation uses `PySide <https://pypi.python.org/pypi/PySide/1.2.2>`_
     instead of `PyQt <https://www.riverbankcomputing.com/software/pyqt/intro>`_.
-    The environment variable ``QT_API`` needs to be set to ``pyside`` before 
+    The environment variable ``QT_API`` needs to be set to ``pyside`` before
     running Spyder.
-    
+
         set QT_API=pyside
     """
     text = ["@echo off", "set CURRENT2=%~dp0",

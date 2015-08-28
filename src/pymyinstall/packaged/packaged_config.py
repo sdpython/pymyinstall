@@ -170,7 +170,9 @@ def small_set():
         ModuleInstall(
             'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
         ModuleInstall('pypiserver', 'pip',
-                      purpose="run a local pipy server", usage="SPHINX"),
+                      purpose="run a local pypi server"),
+        ModuleInstall('localshop', 'pip',
+                      purpose="run a local pypi server"),
         # flake8, pep8
         ModuleInstall(
             "pep8", "pip", version="1.5.7", purpose="official guidelines on Python style"),
@@ -311,7 +313,8 @@ def small_set():
         #
         # 2015-07
         #
-        ModuleInstall("pyprofiler", "pip", purpose="profiler"),
+        ModuleInstall("pyprofiler", "pip",
+                      purpose="profiler", usage="PROFILING"),
         ModuleInstall("mock", "pip",
                       purpose="mock is a library for testing in Python. It allows you to replace parts of your system under test with mock objects and make assertions about how they have been used."),
         ModuleInstall("multimethods", "pip",
@@ -523,7 +526,8 @@ def extended_set():
         ModuleInstall("autopy3", "wheel", mname="autopy3",
                       purpose="A simple, cross-platform GUI automation toolkit for Python 3 (issue on Linux and Anaconda)") if sys.version_info[0] >= 3 else None,  # simulate events
         # large double
-        ModuleInstall("bigfloat", "wheel", purpose="big float (issue with Linux and Anaconda)"),
+        ModuleInstall("bigfloat", "wheel",
+                      purpose="big float (issue with Linux and Anaconda)"),
         # convex optimization, depends on CVXOPT
         ModuleInstall(
             "scs", "wheel", purpose="Solves convex cone programs via operator splitting."),
@@ -661,7 +665,12 @@ def extended_set():
         ModuleInstall("mysqlclient", "pip",
                       purpose="MySQL driver written in Python which does not depend on MySQL C client libraries and implements the DB API v2.0 specification (PEP-249).", usage="SQL"),
         ModuleInstall("line_profiler", "wheel",
-                      purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof is a convenient script for running either line_profiler or the Python standard library's cProfile or profile modules, depending on what is available."),
+                      purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof is a convenient script for running either line_profiler or the Python standard library's cProfile or profile modules, depending on what is available.",
+                      usage="PROFILING"),
+        ModuleInstall("memory_profiler", "pip",
+                      purpose="A module for monitoring memory usage of a python program", usage="PROFILING"),
+        ModuleInstall("snakeviz", "pip",
+                      purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
         ModuleInstall("mpmath", "pip",
                       purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
     ]
@@ -935,6 +944,16 @@ def ensae_set():
                       purpose="Python library for reading IMAP mailboxes and converting email content to machine readable data"),
         ModuleInstall("neural-python", "pip", mname="neuralpy",
                       purpose="NeuralPy is the Artificial Neural Network library implemented in Python.", usage="DATA/ML"),
+        ModuleInstall("cssselect", "pip",
+                      purpose="cssselect parses CSS3 Selectors and translates them to XPath 1.0"),
+        ModuleInstall("jieba", "pip",
+                      purpose="Chinese Words Segementation Utilities"),
+        ModuleInstall("python-goose", "pip", mname="goose",
+                      purpose="Html Content / Article Extractor, web scrapping lib in Python"),
+        ModuleInstall("untangle", "pip",
+                      purpose="Converts XML to Python objects"),
+        ModuleInstall("code2flow", "pip",
+                      purpose="Turn your Python and Javascript code into DOT flowcharts"),
     ]
 
     if sys.platform.startswith("win"):
