@@ -880,9 +880,9 @@ class ModuleInstall:
         if options is None:
             options = []
 
+        kind = force_kind if force_kind is not None else self.kind
         add = (" with " + kind) if kind != self.kind else ""
         self.fLOG("installation of " + str(self) + add)
-        kind = force_kind if force_kind is not None else self.kind
         ret = None
 
         if kind == "pip":
