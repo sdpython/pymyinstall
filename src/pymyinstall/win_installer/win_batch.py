@@ -131,7 +131,7 @@ def create_win_jupyter_console(folders):
             "set JUPYTERC=%CURRENT2%\\..\\python\\Scripts\\jupyter-console.exe",
             "set IPYTHONRC=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
             "cd %WORKSPACE%",
-            "%IPYTHONRC% console --profile=win_profile"]
+            "%IPYTHONRC% console"]
     # command jupyter console does not work yet even if the documentation says
     # so
 

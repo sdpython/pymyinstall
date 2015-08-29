@@ -191,6 +191,22 @@ def win_python_setup(folder="dist/win_python_setup",
              and started again. If it has completed, it will go to the
              next step.
 
+    .. index:: issue
+
+    **Known issues while preparing the setup:**
+
+    * Some modules generates utf-8 encoding errors while being installed.
+      The python scripts stops. It should be started again, it will
+      detect the module was insalled and will go to the next one in the list.
+    * The setup are started by the Python script but the user needs to manually
+      click on the final ok button to proceed.
+
+    **Known issues after the setup is installed:**
+
+    * The first run of Spyder after the installation usually fails (failure of python.exe).
+      The second one succeeds. You should run Spyder from the installation setup before
+      compiling the setup.
+
     @todo Use chocolatey to process installation.
 
     @todo Fix Julia installation.
@@ -513,6 +529,15 @@ def win_python_setup(folder="dist/win_python_setup",
                 f.write("{0}\t{1}\n".format(pack, vers))
 
     if not no_setup:
+
+        # remove
+        fLOG("--- remove setup")
+        dist = os.path.join(folders["logs"], "..", "dist", "setup")
+        exe = [_ for _ in os.listdir(dist) if ".exe" in _]
+        if len(exe) > 0:
+            for e in exe:
+                os.remove(os.path.join(dist, e))
+
         ################################
         # prepare setup script for InnoSetup
         ###############################
@@ -524,6 +549,22 @@ def win_python_setup(folder="dist/win_python_setup",
         fLOG("done")
         operations.append(("InnoSetup", "done"))
         operations.append(("time", dtnow()))
+
+        # copy
+        fLOG("--- copy setup")
+        dist = os.path.join(folders["logs"], "..", "dist", "setup")
+        to = os.path.join(folders["logs"], "..", "..")
+        exe = [_ for _ in os.listdir(dist) if ".exe" in _]
+        if len(exe) > 0:
+            dt = datetime.datetime.now()
+            suffix = "%d%02d%02d" % (dt.year, dt.month, dt.day)
+            for e in exe:
+                shutil.copy(os.path.join(dist, e), to)
+                operations.append(("copy", e))
+                final = os.path.join(to, e)
+                tof = final.replace(".exe", "_" + suffix + ".exe")
+                operations.append(("rename", tof))
+                os.rename(final, tof)
 
     ##########
     # store logs
