@@ -189,6 +189,7 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
+        install_requires=["pip>=7.1"],
         entry_points={
             'console_scripts': [
                 'pymy_update = pymyinstall.scripts.pymy_update:main',
