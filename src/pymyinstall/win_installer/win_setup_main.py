@@ -11,7 +11,7 @@ import sys
 import warnings
 import datetime
 
-from ..installhelper.install_cmd_helper import update_pip, run_cmd
+from ..installhelper.install_cmd_helper import update_pip, run_cmd, python_version
 from ..installhelper.module_dependencies import missing_dependencies
 
 from .win_batch import create_win_batches
@@ -64,8 +64,16 @@ _default_notebooks = [
 ]
 
 
-def win_python_setup(folder="dist/win_python_setup",
-                     download_folder="build/win_python_setup",
+def architecture():
+    """
+    @return either 32bit or 64bit
+    """
+    o, b = python_version()
+    return b
+
+
+def win_python_setup(folder="dist/win_python_setup_" + architecture(),
+                     download_folder="build/win_python_setup_" + architecture(),
                      module_list=None,
                      verbose=False,
                      fLOG=print,

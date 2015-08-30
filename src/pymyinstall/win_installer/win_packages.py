@@ -157,6 +157,8 @@ def _is_package_in_list(module_name, list_packages):
 
     for a in list_packages:
         al = a.lower()
+        if module_name == "python" and ".msi" not in a:
+            continue
         if "theme-" in al:
             al = al.split("theme-")
             al = al[0].replace("-", "_") + "theme-" + al[1]

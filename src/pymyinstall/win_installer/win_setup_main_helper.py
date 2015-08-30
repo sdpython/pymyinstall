@@ -67,7 +67,7 @@ def copy_icons(src, dest):
     return operations
 
 
-def win_download(folder="build/win_python_setup",
+def win_download(folder=None,
                  module_list=None,
                  verbose=False,
                  fLOG=print,
@@ -76,7 +76,7 @@ def win_download(folder="build/win_python_setup",
     """
     The function downloads everything needed to prepare a setup.
 
-    @param      folder          where to prepare the python version
+    @param      folder          where to prepare the python version (the user must replace None)
     @param      module_list     list of module to install (see @see fn minimal_set = default options)
     @param      fLOG            logging function
     @param      download_only   only downloads
@@ -90,7 +90,8 @@ def win_download(folder="build/win_python_setup",
     available = os.listdir(folder)
 
     def is_here(program):
-        return _is_package_in_list(program, available)
+        b =  _is_package_in_list(program, available)
+        return b
 
     operations = []
 

@@ -7,7 +7,7 @@ import sys
 import re
 import os
 
-from .install_cmd_helper import run_cmd
+from .install_cmd_helper import run_cmd, python_version
 from .install_custom import download_page, download_file
 
 
@@ -28,8 +28,14 @@ def install_python(
     link = "https://www.python.org/downloads/release/python-343/"
     page = download_page(link)
     if sys.platform.startswith("win"):
-        reg = re.compile("href=\\\"(.*?amd64[.]msi)\\\"")
-        alls = reg.findall(page)
+        o, b = python_version()
+        if "32" in b:
+            reg = re.compile("href=\\\"(.*?[.]msi)\\\"")
+            alls = reg.findall(page)
+            alls = [_ for _ in alls if "amd64" not in _]
+        else:
+            reg = re.compile("href=\\\"(.*?amd64[.]msi)\\\"")
+            alls = reg.findall(page)
         if len(alls) == 0:
             raise Exception(
                 "unable to find a link on a .exe file on page: " +
