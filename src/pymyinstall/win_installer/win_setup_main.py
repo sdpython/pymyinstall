@@ -535,7 +535,10 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         # remove
         fLOG("--- remove setup")
         dist = os.path.join(folders["logs"], "..", "dist", "setup")
-        exe = [_ for _ in os.listdir(dist) if ".exe" in _]
+        if os.path.exists(dist):
+            exe = [_ for _ in os.listdir(dist) if ".exe" in _]
+        else:
+            exe = []
         if len(exe) > 0:
             for e in exe:
                 os.remove(os.path.join(dist, e))

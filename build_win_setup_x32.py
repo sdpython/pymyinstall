@@ -11,6 +11,6 @@ from pymyinstall.packaged import small_set
 if True:
     win_python_setup(module_list=small_set(), verbose=True,
                      download_only=False,
-                     no_setup=True,
+                     no_setup=False,
                      selection={},
                      notebooks=[])
