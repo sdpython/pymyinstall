@@ -30,7 +30,9 @@ def minimal_set():
     """
     mod = [
         ModuleInstall(
-            "virtualenv", "pip", purpose="creatre virtual environments"),
+            "pipwin", "pip", purpose="pip on Windows") if sys.platform.startswith("win") else None,
+        ModuleInstall(
+            "virtualenv", "pip", purpose="create virtual environments"),
         ModuleInstall(
             "six", "pip", purpose="helpers for python 2/3 conversion"),
         ModuleInstall("wheel", "pip", purpose="to play with wheel"),
@@ -84,6 +86,8 @@ def small_set():
         # issue with 3.0.3 because of line: raise type(self._exception),
         # self._exception, self._traceback, weird because the same exists in
         # folder lib
+        ModuleInstall(
+            "pipwin", "pip", purpose="pip on Windows") if sys.platform.startswith("win") else None,
         ModuleInstall("futures", "pip", version="2.2.0"),
         ModuleInstall(
             "virtualenv", "pip", purpose="creatre virtual environments"),
@@ -758,7 +762,8 @@ def ensae_set():
         ModuleInstall(
             "dev", "pip", purpose="Header files, a static library and development tools for building Python modules, extending the Python interpreter or embedding Python in applications."),
         ModuleInstall(
-            "opencv_python", "wheel", mname="cv", purpose="OpenVC wrapper"),
+            "opencv_python", "wheel", mname="cv", purpose="OpenVC wrapper",
+            web="https://opencv-python-tutroals.readthedocs.org/en/latest/"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio",
                       purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. With PyAudio, you can easily use Python to play and record audio streams on a variety of platforms (e.g., GNU/Linux, Microsoft Windows, and Mac OS X)."),
         ModuleInstall(
