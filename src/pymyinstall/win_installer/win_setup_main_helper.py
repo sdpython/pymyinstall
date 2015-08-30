@@ -26,7 +26,7 @@ from ..packaged import minimal_set
 
 from .win_packages import _is_package_in_list
 from .import_pywin32 import import_pywin32
-from .win_extract import extract_msi, extract_exe, extract_archive
+from .win_extract import extract_msi, extract_exe, extract_archive, extract_copy
 from .win_exception import WinInstallException
 from .win_setup_mark_step import mark_step, is_step_done
 from .win_setup_r import r_run_script, _script as _script_r
@@ -201,7 +201,8 @@ def win_install(folders,
     and whose extension is .exe, .msi or .zip.
     """
     operations = []
-    dfunc = {".zip": extract_archive, ".exe": extract_exe, ".msi": extract_msi}
+    dfunc = {".zip": extract_archive, ".exe": extract_exe,
+             ".msi": extract_msi, "putty.exe": extract_copy}
 
     def location(file):
         ext = os.path.splitext(file)[-1]
@@ -254,12 +255,14 @@ def win_install(folders,
         exe = find_exe(loc, name)
         if exe is not None:
             # already done
+            fLOG("--- already installed", exe)
             pass
         else:
             fLOG("--- install", cand, " in ", loc)
             full = os.path.join(download_folder, cand)
             ext = os.path.splitext(cand)[-1]
-            func = dfunc[ext]
+            filename = os.path.split(cand)[-1]
+            func = dfunc.get(filename, dfunc[ext])
 
             if ext == ".exe":
                 func(
@@ -295,8 +298,8 @@ def win_install(folders,
                 found = os.path.join(loc, cand)
 
         if found is None:
-            raise FileNotFoundError("unable to find executable for name={0} in {1}, found: {2}".format(
-                name, loc, found))
+            raise FileNotFoundError("unable to find executable for name={0} in {1}, found: {2}, exe={3}, function={4}".format(
+                name, loc, found, exe, func))
         installed[name] = found
 
     return operations, installed

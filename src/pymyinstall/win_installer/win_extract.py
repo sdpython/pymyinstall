@@ -13,6 +13,7 @@ import zipfile
 import fnmatch
 # import winreg
 import glob
+import shutil
 
 from .win_helper import patch_shebang_line
 
@@ -146,3 +147,17 @@ def clean_msi(folder, pattern, verbose=False, fLOG=print):
             os.remove(r)
             operations.append(("remove", r))
     return operations
+
+
+def extract_copy(fname, targetdir=None, verbose=False, fLOG=print, szip=None):
+    """
+    Copy *.exe* to targetdir
+
+    @param  fname           local installer (exe)
+    @param  targetdir       where to install
+    @param  verbose         verbose
+    @param  fLOG            logging function
+    @param  szip            unused
+    @return                 targetdir
+    """
+    shutil.copy(fname, targetdir)
