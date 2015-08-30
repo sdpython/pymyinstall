@@ -42,10 +42,10 @@ def _main_pipdeptree(local_only=False, addw=False, freeze=True, list_all=True):
 
         is_empty, cyclic = peek_into(cyclic_deps(pkgs, pkg_index))
         if not is_empty:
-            print('Warning!!! Cyclic dependencies found:', file=sys.stderr)
+            sys.stderr.write('Warning!!! Cyclic dependencies found:\n')
             for xs in cyclic:
-                print('- {0}'.format(xs), file=sys.stderr)
-            print('-' * 72, file=sys.stderr)
+                sys.stderr.write('- {0}\n'.format(xs))
+            sys.stderr.write('-' * 72 + "\n")
 
     if freeze:
         top_pkg_str, non_top_pkg_str = top_pkg_src, non_top_pkg_src

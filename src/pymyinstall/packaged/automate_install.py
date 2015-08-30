@@ -162,7 +162,11 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         fLOG("")
         fLOG("updated modules")
         for m in again:
-            fLOG(m)
+            fLOG("  ", m)
+        if len(errors) > 0:
+            fLOG("failed modules")
+            for m in errors:
+                fLOG("  ", m)
 
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
@@ -210,6 +214,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
     modules = list_module
     again = []
+    errors = []
     for mod in modules:
         if verbose:
             fLOG("check module: ", mod.name)
@@ -218,7 +223,14 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             m = "    - installing module  {0} --- --> {1} (kind={2})" \
                 .format(mod.name, ver, mod.kind)
             fLOG(m)
-            b = mod.install(temp_folder=temp_folder, log=verbose)
+            try:
+                b = mod.install(temp_folder=temp_folder, log=verbose)
+            except Exception as e:
+                b = False
+                m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
+                    .format(mod.name, inst, ver, mod.kind, str(e))
+                fLOG(m)
+                errors.append((mod, e))
             if b:
                 again.append(m)
 
@@ -226,7 +238,11 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         fLOG("")
         fLOG("installed modules")
         for m in again:
-            fLOG(m)
+            fLOG("  ", m)
+        if len(errors) > 0:
+            fLOG("failed modules")
+            for m in errors:
+                fLOG("  ", m)
 
     miss = missing_dependencies()
     if len(miss) > 0:
