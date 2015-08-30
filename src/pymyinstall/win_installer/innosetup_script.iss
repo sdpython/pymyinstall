@@ -74,6 +74,8 @@ Name: "{app}\Rodeo"; IconFilename: "{app}\tools\icons\yhat.ico"; Filename: "{app
 Name: "{app}\Spyder"; IconFilename: "{app}\tools\icons\spyder.ico"; Filename: "{app}\config\spyder.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
 ; rss
 Name: "{app}\RSS"; IconFilename: "{app}\tools\icons\pyrsslocal.ico"; Filename: "{app}\config\run_fetch_rss.bat"; IconIndex: 0; WorkingDir: "{app}\config"; Parameters: "{app}\config"
+; putty
+Name: "{app}\Putty"; IconFilename: "{app}\tools\icons\putty.ico"; Filename: "{app}\config\putty.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 ; update
 Name: "{app}\UpdatePython"; IconFilename: "{app}\tools\icons\pymyinstall.ico"; Filename: "{app}\config\run_update_all_packages.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\config"
 

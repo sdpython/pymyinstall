@@ -70,7 +70,8 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     if sys.version_info[0] == 2:
         pip = os.path.join(python_path, "Scripts", "pip.exe")
     else:
-        pip = os.path.join(python_path, "Scripts", "pip3.exe")
+        pip = os.path.join(python_path, "Scripts",
+                           "pip%d.exe" % sys.version_info[0])
 
     if not os.path.exists(pip):
         raise FileNotFoundError(pip)

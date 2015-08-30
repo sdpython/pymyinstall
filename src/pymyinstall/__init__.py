@@ -42,16 +42,11 @@ def check(log=False):
     """
     return True
 
-from .installhelper.install_cmd_helper import run_cmd, unzip_files, add_shortcut_to_desktop_for_module
+from .installhelper.install_cmd_helper import run_cmd, unzip_files
 from .installhelper.module_install import ModuleInstall
 from .installhelper.install_custom import download_from_sourceforge, download_file, download_page
-from .installhelper.install_manual import get_install_list, open_tool_on_browser
-from .installhelper.link_shortcuts import add_shortcut_to_desktop
-from .installhelper.install_custom_pandoc import install_pandoc
-from .installhelper.install_custom_scite import install_scite, add_shortcut_to_desktop_for_scite
-from .installhelper.install_custom_sqlitespy import install_sqlitespy, add_shortcut_to_desktop_for_sqlitespy
+from .installhelper.install_manual import get_install_list
 from .installhelper import get_module_version, get_pypi_version
 from .installhelper.install_custom_revealjs import download_revealjs
 from .installhelper.requirements import build_requirements
-from .setuphelper.ipython_helper import setup_ipython, add_shortcut_to_desktop_for_ipython
 from .win_installer.win_setup_main import win_python_setup
