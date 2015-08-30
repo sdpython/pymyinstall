@@ -213,6 +213,7 @@ def create_win_scite(folders):
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
             "set SCITE=%CURRENT2%\\..\\tools\\Scite\\wscite\\scite.exe",
+            "set PATH=%CURRENT%\\..\\python;%PATH%",
             "cd %WORKSPACE%",
             "start %SCITE% %1"]
 

@@ -12,7 +12,6 @@ import warnings
 import datetime
 
 from ..installhelper.install_cmd_helper import update_pip, run_cmd
-from ..installhelper.install_custom_scite import modify_scite_properties
 from ..installhelper.module_dependencies import missing_dependencies
 
 from .win_batch import create_win_batches
@@ -341,13 +340,6 @@ def win_python_setup(folder="dist/win_python_setup",
         op = create_win_batches(
             folders, verbose=verbose, fLOG=fLOG, selection=selection, module_list=module_list)
         operations.extend(op)
-
-        #######################
-        # modifies scite properties
-        #######################
-        fLOG("--- modifies Scite properties")
-        modify_scite_properties(os.path.join("%PYTHON_WINHOME%", "pythonw"),
-                                os.path.join(folders["tools"], "Scite", "wscite"))
 
         ###########
         # update pip

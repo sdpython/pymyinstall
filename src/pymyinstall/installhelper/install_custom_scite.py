@@ -113,9 +113,17 @@ def modify_scite_properties(python_path, scite_path):
     config = os.path.join(scite_path, "python.properties")
     with open(config, "r") as f:
         content = f.read()
-    content = content.replace("=pythonw", "=" + python_path)
-    with open(config, "w") as f:
-        f.write(content)
+
+    # we change the executable
+    lines = content.split("\n")
+    for i, line in enumerate(lines):
+        if "command.go.*.py=" in line:
+            lines[
+                i] = 'command.go.*.py={0} -u "$(FileNameExt)"'.format(python_path)
+        elif "command.go.*.pyw=" in line:
+            lines[
+                i] = 'command.go.*.pyw={0} -u "$(FileNameExt)"'.format(python_path)
+    content = "\n".join(lines)
 
     # we change the options
     config = os.path.join(scite_path, "SciTEGlobal.properties")

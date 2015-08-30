@@ -7,7 +7,7 @@ from __future__ import print_function
 from .install_custom_pandoc import install_pandoc
 from .install_custom_R import install_R
 from .install_custom_julia import install_julia
-from .install_custom_scite import install_scite
+from .install_custom_scite import install_scite, modify_scite_properties
 from .install_custom_putty import install_putty
 from .install_custom_sqlitespy import install_sqlitespy
 from .install_custom_python import install_python

@@ -26,7 +26,8 @@ def _main_pipdeptree(local_only=False, addw=False, freeze=True, list_all=True):
     if addw:
         confusing = confusing_deps(req_map)
         if confusing:
-            sys.stderr.write('Warning!!! Possible confusing dependencies found:\n')
+            sys.stderr.write(
+                'Warning!!! Possible confusing dependencies found:\n')
             for xs in confusing:
                 for i, (p, d) in enumerate(xs):
                     if d.key in skip:
