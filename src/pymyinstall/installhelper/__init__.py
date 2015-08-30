@@ -13,7 +13,7 @@ from .install_custom_sqlitespy import install_sqlitespy
 from .install_custom_python import install_python
 from .install_custom_mingw import install_mingw
 from .install_custom_7z import install_7z
-from .install_cmd_helper import run_cmd, update_pip, has_pip
+from .install_cmd_helper import run_cmd, update_pip, has_pip, add_shortcut_to_desktop_for_module
 from .install_custom import download_page
 from .module_install import ModuleInstall, get_module_version, get_pypi_version
 from .module_dependencies import missing_dependencies

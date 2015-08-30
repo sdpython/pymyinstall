@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall import install_scite
+from src.pymyinstall.installhelper import install_scite
 from pyquickhelper import fLOG
 
 

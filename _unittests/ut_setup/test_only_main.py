@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall import add_shortcut_to_desktop_for_module
+from src.pymyinstall.installhelper import add_shortcut_to_desktop_for_module
 from pyquickhelper import fLOG
 
 

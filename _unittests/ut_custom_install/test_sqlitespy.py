@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall import install_sqlitespy
+from src.pymyinstall.installhelper import install_sqlitespy
 from pyquickhelper import fLOG
 
 
