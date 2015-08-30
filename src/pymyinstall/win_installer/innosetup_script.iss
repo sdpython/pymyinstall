@@ -14,6 +14,7 @@
 #define MyAppGitHubURL "https://desktop.github.com/"
 #define MyAppTGitURL "https://tortoisegit.org/"
 #define MyAppRStudioURL "https://www.rstudio.com/"
+#define MyAppPyCharmURL "https://www.jetbrains.com/pycharm/"
 
 
 [Setup]
@@ -57,6 +58,7 @@ Name: "{app}\Installer\Git"; IconFilename: "{app}\tools\icons\git.ico"; Filename
 Name: "{app}\Installer\GitHub Desktop"; IconFilename: "{app}\tools\icons\github.ico"; Filename: "{#MyAppGitHubURL}"
 Name: "{app}\Installer\Tortoise Git"; IconFilename: "{app}\tools\icons\tortoisegit.ico"; Filename: "{#MyAppTGitURL}"
 Name: "{app}\Installer\RSudio"; IconFilename: "{app}\tools\icons\rstudio.ico"; Filename: "{#MyAppRStudioURL}"
+Name: "{app}\Installer\PyCharm"; IconFilename: "{app}\tools\icons\pycharm.ico"; Filename: "{#MyAppPyCharmURL}"
 ; editors
 Name: "{app}\Scite"; IconFilename: "{app}\tools\icons\Scite.ico"; Filename: "{app}\config\scite.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 Name: "{app}\SQLiteSpy"; IconFilename: "{app}\tools\icons\sqlitespy.ico"; Filename: "{app}\config\sqlitespy.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
