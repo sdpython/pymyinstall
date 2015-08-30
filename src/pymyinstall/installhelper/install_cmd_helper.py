@@ -412,10 +412,18 @@ def get_pip_program(exe=None):
                             raise FileNotFoundError(
                                 "tried (2):\n" + "\n".join(tried))
     else:
-        if exe is None:
-            return "pip"
+        if sys.version_info[0] == 2:
+            if exe is None:
+                return "pip"
+            else:
+                pi = os.path.join(exe, "pip")
         else:
-            pi = os.path.join(exe, "pip")
+            major = sys.version_info[0]
+            minor = sys.version_info[1]
+            if exe is None:
+                return "pip%d.%d" % (major, minor)
+            else:
+                pi = os.path.join(exe, "pip%d.%d" % (major, minor))
 
     return pi
 
