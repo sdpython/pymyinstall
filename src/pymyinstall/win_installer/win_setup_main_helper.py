@@ -14,6 +14,7 @@ from ..installhelper.install_custom_pandoc import install_pandoc
 from ..installhelper.install_custom_R import install_R
 from ..installhelper.install_custom_julia import install_julia
 from ..installhelper.install_custom_scite import install_scite
+from ..installhelper.install_custom_putty import install_putty
 from ..installhelper.install_custom_sqlitespy import install_sqlitespy
 from ..installhelper.install_custom_python import install_python
 from ..installhelper.install_custom_mingw import install_mingw
@@ -99,6 +100,12 @@ def win_download(folder="build/win_python_setup",
         operations.append(("download", r))
         fLOG("done")
 
+    if not is_here("putty") and "putty" in selection:
+        fLOG("--- download", "putty")
+        r = install_putty(dest_folder=folder, fLOG=fLOG, install=False)
+        operations.append(("download", r))
+        fLOG("done")
+
     if not is_here("mingw") and "mingw" in selection:
         fLOG("--- download", "mingw")
         r = install_mingw(dest_folder=folder, fLOG=fLOG, install=False)
@@ -177,7 +184,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS"],
+                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty"],
                 selection=None):
     """
     Install setups

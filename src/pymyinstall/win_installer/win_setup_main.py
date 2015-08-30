@@ -137,7 +137,7 @@ def win_python_setup(folder="dist/win_python_setup",
 
     The distribution will contain the following subfolders:
 
-    * *tools*: subfolders for R, Julia, MinGW, Scite, pandoc, 7z...
+    * *tools*: subfolders for R, Julia, MinGW, Scite, pandoc, 7z, Putty...
     * *python*: subfolder for python interpreter
     * *workspace*: current folder for the notebooks
     * *build*: location of downloaded modules and tools
@@ -220,6 +220,7 @@ def win_python_setup(folder="dist/win_python_setup",
     selection.add("pandoc")
     selection.add("7z")
     selection.add("scite")
+    selection.add("putty")
     selection.add("sqlitespy")
     selection.add("python")
     selection = set(_.lower() for _ in selection)

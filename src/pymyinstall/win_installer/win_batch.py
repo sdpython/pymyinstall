@@ -44,6 +44,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
 
     list_functions = [create_win_env,
                       create_win_scite,
+                      create_win_putty,
                       create_win_sqllitespy,
                       create_win_python_console,
                       update_all_packages,
@@ -217,6 +218,26 @@ def create_win_scite(folders):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "scite.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [("batch", name)]
+
+
+def create_win_putty(folders):
+    """
+    create a batch file to start scite
+
+    @param      folders     see @see fn create_win_batches
+    @return                 operations (list of what was done)
+    """
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            "set PUTTY=%CURRENT2%\\..\\tools\\Putty\\putty.exe",
+            "cd %WORKSPACE%",
+            "start %PUTTY%"]
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "putty.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]
