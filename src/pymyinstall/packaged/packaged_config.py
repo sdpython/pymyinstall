@@ -30,6 +30,8 @@ def minimal_set():
     """
     mod = [
         ModuleInstall(
+            "pyprind", "pip", purpose="Python Progress Indicator Utility"),
+        ModuleInstall(
             "pipwin", "pip", purpose="pip on Windows") if sys.platform.startswith("win") else None,
         ModuleInstall(
             "virtualenv", "pip", purpose="create virtual environments"),
@@ -86,6 +88,8 @@ def small_set():
         # issue with 3.0.3 because of line: raise type(self._exception),
         # self._exception, self._traceback, weird because the same exists in
         # folder lib
+        ModuleInstall(
+            "pyprind", "pip", purpose="Python Progress Indicator Utility"),
         ModuleInstall(
             "pipwin", "pip", purpose="pip on Windows") if sys.platform.startswith("win") else None,
         ModuleInstall("futures", "pip", version="2.2.0"),
@@ -242,7 +246,7 @@ def small_set():
         ModuleInstall(
             "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
-            "pexpect", "pip", purpose="needed by ipykernel", usage="JUPYTER"),
+            "pexpect", "pip", purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.", usage="JUPYTER") if not sys.platform.startswith("win") else None,
         ModuleInstall(
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
@@ -258,9 +262,9 @@ def small_set():
         ModuleInstall(
             "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "ptyprocess", "pip", purpose="dependency for the terminado", usage="JUPYTER"),
+            "ptyprocess", "pip", purpose="dependency for the terminado, Run a subprocess in a pseudo terminal", usage="JUPYTER"),
         ModuleInstall(
-            "terminado", "pip", purpose="dependency for the notebooks", usage="JUPYTER"),
+            "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets", usage="JUPYTER"),
         ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
@@ -795,9 +799,9 @@ def ensae_set():
         ModuleInstall("Pmw", "wheel", mname="Pmw",
                       purpose="Pmw is a toolkit for building high-level compound widgets in Python using the Tkinter module."),
         ModuleInstall(
-            "appdirs", "pip", purpose="for pytools"),
+            "appdirs", "pip", purpose="for pytool, A small Python module for determining appropriate + platform-specific dirs, e.g. a 'user data dir'."),
         ModuleInstall(
-            "pytools", "pip", purpose="A collection of tools for Python"),
+            "pytool", "pip", purpose="A collection of tools for Python"),
         ModuleInstall(
             "pycuda", "wheel", purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python.",
             usage="GPU"),

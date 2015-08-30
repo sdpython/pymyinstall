@@ -47,8 +47,8 @@
         
         sudo apt-get install libhdf5-dev libatlas-dev libatlas3gf-base llvm libgeos-dev freeglut3-dev libnetcdf-dev
         sudo apt-get install libgmp-dev libgmp3-dev
-        sudo apt-get install binutils libproj-dev gdal-bin libgeoip1
-        sudo apt-get install libmpfr-dev llvm-dev git libopencv-dev libsvm-dev
+        sudo apt-get install binutils libproj-dev gdal-bin libgeoip1 libgdal-dev
+        sudo apt-get install libmpfr-dev llvm-dev git libopencv-dev libsvm-dev libxml++ curl gmpc-dev libcurlpp-dev
         
     To get a minimal Gnome installation (takes some time), I don't know if
     it is mandatory::
