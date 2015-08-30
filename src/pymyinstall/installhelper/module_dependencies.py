@@ -26,7 +26,7 @@ def _main_pipdeptree(local_only=False, addw=False, freeze=True, list_all=True):
     if addw:
         confusing = confusing_deps(req_map)
         if confusing:
-            print('Warning!!! Possible confusing dependencies found:', file=sys.stderr)
+            sys.stderr.write('Warning!!! Possible confusing dependencies found:\n')
             for xs in confusing:
                 for i, (p, d) in enumerate(xs):
                     if d.key in skip:
@@ -34,8 +34,10 @@ def _main_pipdeptree(local_only=False, addw=False, freeze=True, list_all=True):
                     pkg = top_pkg_name(p)
                     req = non_top_pkg_name(d, pkg_index[d.key])
                     tmpl = '  {0} -> {1}' if i > 0 else '* {0} -> {1}'
-                    print(tmpl.format(pkg, req), file=sys.stderr)
-            print('-' * 72, file=sys.stderr)
+                    sys.stderr.write(tmpl.format(pkg, req))
+                    sys.stderr.write("\n")
+            sys.stderr.write('-' * 72)
+            sys.stderr.write("\n")
 
         is_empty, cyclic = peek_into(cyclic_deps(pkgs, pkg_index))
         if not is_empty:
