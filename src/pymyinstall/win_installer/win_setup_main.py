@@ -9,6 +9,7 @@ import os
 import shutil
 import sys
 import warnings
+import datetime
 
 from ..installhelper.install_cmd_helper import update_pip, run_cmd
 from ..installhelper.install_custom_scite import modify_scite_properties
@@ -557,7 +558,7 @@ def win_python_setup(folder="dist/win_python_setup",
         exe = [_ for _ in os.listdir(dist) if ".exe" in _]
         if len(exe) > 0:
             dt = datetime.datetime.now()
-            suffix = "%d%02d%02d" % (dt.year, dt.month, dt.day)
+            suffix = "%d%02d%02d.%d" % (dt.year, dt.month, dt.day, dt.hour)
             for e in exe:
                 shutil.copy(os.path.join(dist, e), to)
                 operations.append(("copy", e))
