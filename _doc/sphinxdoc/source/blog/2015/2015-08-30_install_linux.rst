@@ -42,25 +42,26 @@
     And then gcc::
 	
         sudo apt-get install gcc
-        
-    Some C++ libraries are required::
-        
+
+    This is needed when a package includes C++ code which needs to be compiled.
+    That's why some C++ libraries are required::
+
         sudo apt-get install libhdf5-dev libatlas-dev libatlas3gf-base llvm libgeos-dev freeglut3-dev libnetcdf-dev
-        sudo apt-get install libgmp-dev libgmp3-dev
+        sudo apt-get install libgmp-dev libgmp3-dev libcpl-dev libmpc-dev
         sudo apt-get install binutils libproj-dev gdal-bin libgeoip1 libgdal-dev
         sudo apt-get install libmpfr-dev llvm-dev git libopencv-dev libsvm-dev libxml++ curl gmpc-dev libcurlpp-dev
-        
+
     To get a minimal Gnome installation (takes some time), I don't know if
     it is mandatory::
-    
+
         sudo apt-get install gdm gnome-core xfonts-base xserver-xorg
                 
     Some modules are already available through `apt-get <http://doc.ubuntu-fr.org/apt-get>`_
     (check `Ubuntu packages <http://packages.ubuntu.com/search?suite=default&section=all&arch=any&keywords=python3-f&searchon=names>`_)::
     
-        sudo apt-get install python3-dev python3-numpy python3-matplotlib python3-scipy python3-pandas python3-zmq python3-lxml python3-pyside python3-gmpy2 python3-ecdsa python3-pillow python3-h5py python3-six python3-skimage
+        sudo apt-get install python3-dev python3-numpy python3-matplotlib python3-scipy python3-pandas python3-zmq python3-lxml python3-pyside 
+        sudo apt-get install python3-gmpy2 python3-ecdsa python3-pillow python3-h5py python3-six python3-skimage
         sudo apt-get install python3-kivy
-        #sudo apt-get install python3-liblinear
         sudo apt-get install python3-babel python3-bitarray python3-bs4
         sudo apt-get install python3-cffi python3-cherrypy3 python3-cloud-sptheme python3-colorama python3-coverage
         sudo apt-get install python3-dateutil python3-docutils python3-feedparser
@@ -99,6 +100,8 @@
     
         sudo -H pymy_update
         
+    This command fails for a couple of libraries installed using ``apt-get python3-``. 
+    Some dependencies are still missing from the list mentioned above.
     
     Issues during installation (skipped packages)::
         
@@ -141,3 +144,9 @@
         * heatmap: ...
         * cgal_bindings: ...
         * skdata: needs to download the source
+        
+    Finally, some tools (requires more than 1 Gb)::
+    
+        sudo apt-get install pandoc i7z i7z-gui scite java-common sqlitebrowser latex-cjk-all texlive-latex-base texlive-latex-recommended texlive-latex-extra mono-complete
+    
+        
