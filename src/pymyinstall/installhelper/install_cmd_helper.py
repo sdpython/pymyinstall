@@ -423,6 +423,12 @@ def get_pip_program(exe=None):
             if exe is None:
                 return "pip%d.%d" % (major, minor)
             else:
+                # this does not work because on Linux, the binary is installed on the local path
+                # pip3.4 are not in the same place
+                # pi = os.path.join(exe, "pip%d.%d" % (major, minor))
+                import pip
+                exe = os.path.normpath(os.path.join(os.path.dirname(
+                    pip.__file__), "..", "..", "..", "..", "bin"))
                 pi = os.path.join(exe, "pip%d.%d" % (major, minor))
 
     return pi

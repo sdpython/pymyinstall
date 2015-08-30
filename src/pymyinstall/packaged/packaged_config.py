@@ -242,6 +242,8 @@ def small_set():
         ModuleInstall(
             "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
+            "pexpect", "pip", purpose="needed by ipykernel", usage="JUPYTER"),
+        ModuleInstall(
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
             "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="JUPYTER"),
@@ -255,6 +257,10 @@ def small_set():
             "path.py", "pip", mname="path", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
             "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
+        ModuleInstall(
+            "ptyprocess", "pip", purpose="dependency for the terminado", usage="JUPYTER"),
+        ModuleInstall(
+            "terminado", "pip", purpose="dependency for the notebooks", usage="JUPYTER"),
         ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
@@ -367,6 +373,8 @@ def sphinx_theme_set():
     list of sphinx themes
     """
     mod = [
+        ModuleInstall('snowballstemmer', 'pip',
+                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball algorithms, needed by sphinx-rtd-theme."),
         ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
@@ -455,13 +463,11 @@ def extended_set():
         ModuleInstall('gmpy2', 'wheel',
                       purpose="big real numbers (issue on Linux and Anaconda)"),
         ModuleInstall('llvmpy', 'wheel', mname='llvm',
-                      purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools."),
+                      purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools, not maintained anymore, use llvmlite instead"),
         ModuleInstall(
             'llvmlite', 'wheel', purpose="lightweight wrapper around basic LLVM functionality"),
         ModuleInstall(
             'numba', 'wheel', purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
-        ModuleInstall('snowballstemmer', 'pip',
-                      purpose="This package provides 16 stemmer algorithms (15 + Poerter English stemmer) generated from Snowball algorithms."),
         ModuleInstall('scikit-image', 'wheel', mname='skimage',
                       purpose="scikit-image is a collection of algorithms for image processing."),
         ModuleInstall(
@@ -634,7 +640,7 @@ def extended_set():
         ModuleInstall(
             "structures", "pip", purpose="User-friendly library for creating data structures."),
         ModuleInstall(
-            "py2exe", "wheel", purpose="convert a python program into an exe program"),
+            "py2exe", "wheel", purpose="convert a python program into an exe program") if sys.platform.startswith("win") else None,
         ModuleInstall(
             "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
         ModuleInstall(
@@ -788,6 +794,8 @@ def ensae_set():
             web="http://ab-initio.mit.edu/wiki/index.php/NLopt", usage="DATA/ML"),
         ModuleInstall("Pmw", "wheel", mname="Pmw",
                       purpose="Pmw is a toolkit for building high-level compound widgets in Python using the Tkinter module."),
+        ModuleInstall(
+            "appdirs", "pip", purpose="for pytools"),
         ModuleInstall(
             "pytools", "pip", purpose="A collection of tools for Python"),
         ModuleInstall(

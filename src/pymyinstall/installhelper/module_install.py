@@ -909,6 +909,8 @@ class ModuleInstall:
                 raise InstallError(
                     "unable to install with pip " +
                     str(self) +
+                    "\nCMD:\n" +
+                    cmd +
                     "\nOUT:\n" +
                     out +
                     "\nERR:\n" +
@@ -923,6 +925,8 @@ class ModuleInstall:
                         str(self) +
                         "\nread:\n" +
                         url +
+                        "\nCMD:\n" +
+                        cmd +
                         "OUT:\n" +
                         out +
                         "\nERR:\n" +
@@ -931,6 +935,8 @@ class ModuleInstall:
                     raise InstallError(
                         "unable to install with pip " +
                         str(self) +
+                        "\nCMD:\n" +
+                        cmd +
                         "\nOUT:\n" +
                         out +
                         "\nERR:\n" +
@@ -962,6 +968,8 @@ class ModuleInstall:
                 raise InstallError(
                     "unable to install with conda " +
                     str(self) +
+                    "\nCMD:\n" +
+                    cmd +
                     "\nOUT:\n" +
                     out +
                     "\nERR:\n" +
@@ -976,6 +984,8 @@ class ModuleInstall:
                         str(self) +
                         "\nread:\n" +
                         url +
+                        "\nCMD:\n" +
+                        cmd +
                         "OUT:\n" +
                         out +
                         "\nERR:\n" +
@@ -984,6 +994,8 @@ class ModuleInstall:
                     raise InstallError(
                         "unable to install with conda " +
                         str(self) +
+                        "\nCMD:\n" +
+                        cmd +
                         "\nOUT:\n" +
                         out +
                         "\nERR:\n" +
@@ -1028,6 +1040,8 @@ class ModuleInstall:
                     raise InstallError(
                         "unable to install with wheel " +
                         str(self) +
+                        "\nCMD:\n" +
+                        cmd +
                         "\nOUT:\n" +
                         out +
                         "\nERR:\n" +
@@ -1042,6 +1056,8 @@ class ModuleInstall:
                             str(self) +
                             "\nread:\n" +
                             url +
+                            "\nCMD:\n" +
+                            cmd +
                             "OUT:\n" +
                             out +
                             "\nERR:\n" +
@@ -1050,6 +1066,8 @@ class ModuleInstall:
                         raise InstallError(
                             "unable to install with wheel " +
                             str(self) +
+                            "\nCMD:\n" +
+                            cmd +
                             "\nOUT:\n" +
                             out +
                             "\nERR:\n" +
@@ -1119,6 +1137,8 @@ class ModuleInstall:
                     raise PermissionError(
                         "unable to install with github " +
                         str(self) +
+                        "\nCMD:\n" +
+                        cmd +
                         "\nOUT:\n" +
                         out +
                         "\nERR:\n" +
