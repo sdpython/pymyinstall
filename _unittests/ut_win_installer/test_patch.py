@@ -5,6 +5,7 @@
 import sys
 import os
 import unittest
+import re
 
 try:
     import src
@@ -49,6 +50,11 @@ class TestPatch(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+
+        pattern = "([#][!](([A-Za-z][:])?[/\\\\]?[-a-zA-Z0-9_.]+[/\\\\])*pythonw?[.]exe)"
+        reg_exe = re.compile(pattern, re.IGNORECASE)
+        text = "#!C:\\github\\pymyinstall\\dist\\win_python_setup\\python\\python.exe"
+        assert len(reg_exe.findall(text)) > 0
 
         temp = get_temp_folder(__file__, "temp_patch")
         data = os.path.join(temp, "..", "Scripts")

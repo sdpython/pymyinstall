@@ -3,7 +3,9 @@ print(sys.executable)
 import platform
 print(platform.architecture())
 sys.path.append("src")
+sys.path.append("../pyquickhelper/src")
 print("----")
+import pyquickhelper
 from pymyinstall import win_python_setup
 from pymyinstall.packaged import small_set
 
@@ -13,4 +15,5 @@ if True:
                      download_only=False,
                      no_setup=False,
                      selection={},
-                     notebooks=[])
+                     notebooks=[],
+                     tutorial=["french"])

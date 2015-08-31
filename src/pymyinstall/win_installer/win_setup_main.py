@@ -26,6 +26,7 @@ from .win_extract import clean_msi
 from .win_ipython_helper import ipython_create_profile, ipython_update_profile
 from .win_setup_r import get_package_description
 from .win_exception import WinInstallMissingDependency
+from .tutorial import copy_tutorial
 
 if sys.version_info[0] == 2:
     from codecs import open
@@ -84,7 +85,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                      documentation=True,
                      last_function=None,
                      r_packages=True,
-                     julia_packages=True
+                     julia_packages=True,
+                     tutorial=None
                      ):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
@@ -104,6 +106,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     @param      r_packages      install R packages
     @param      julia_packages  install Julia packages
     @param      documentation   add documentation
+    @param      tutorial        list of folders to copy in ``workspace/tutorial``,
+                                it can refer to internal tutorials (see folder ``win_installer/tutorial``)
     @return                     list of completed operations
 
     The available tools to install must be chose among:
@@ -454,6 +458,26 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                 fLOG("ADD: kernel", r)
             operations.append(("time", dtnow()))
 
+    ########
+    # tutorial
+    ########
+    if tutorial is not None:
+        fLOG("--- copy tutorial")
+        operations.append(("tutorial", "begin"))
+        fold_tuto = os.path.join(folders["workspace"], "tutorial")
+        if not os.path.exists(fold_tuto):
+            fLOG("--- create ", fold_tuto)
+            operations.append(("create", fold_tuto))
+            os.mkdir(fold_tuto)
+        for tuto in tutorial:
+            fLOG("copy tutorial", tuto)
+            operations.append(("tutorial", tuto))
+            res = copy_tutorial(tuto, fold_tuto)
+            for a, b, c in res:
+                operations.append(("copy", c))
+
+        operations.append(("time", dtnow()))
+
     ################################
     # prepare setup script for InnoSetup
     ###############################
@@ -531,6 +555,12 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                 f.write("{0}\t{1}\n".format(pack, vers))
 
     if not no_setup:
+
+        if not os.path.exists(folders["workspace"]):
+            raise FileNotFoundError(folders["workspace"])
+        if len(os.listdir(folders["workspace"])) == 0:
+            raise FileNotFoundError(
+                "folder {0} is empty, it should not".format(folders["workspace"]))
 
         # remove
         fLOG("--- remove setup")

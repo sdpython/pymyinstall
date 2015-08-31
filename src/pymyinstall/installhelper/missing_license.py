@@ -111,4 +111,8 @@ missing_module_licenses = {
     "gevent": "MIT",
     "lz4": "BSD",
     "opencv_python": "BSD",
+    "ptyprocess": "ISC",
+    "terminado": "BSD",
+    "easy_thumbnails": "BSD",
+    "llvmpy": "BSD",
 }
