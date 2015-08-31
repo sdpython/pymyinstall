@@ -95,13 +95,18 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
         fLOG(out)
 
     if err is not None and len(err) > 0:
-        raise WinInstallPackageException(
-            "unable to install {0}, due to:\nOUT:\n{0}\nERR:\n{1}".format(package, out, err))
+        name = "-".join(package.split("-")[:-1])
+        look = "Successfully installed " + name
+        if look not in err:
+            raise WinInstallPackageException(
+                "unable to install {0}, due to:\nCMD\n{2}\nOUT:\n{0}\nERR:\n{1}".format(package, out, err, cmd))
 
     if "No distributions matching the version" in out:
         raise WinInstallPackageException(
             "unable to install " +
             package +
+            "\nCMD\n" +
+            cmd +
             "\nOUT:\n" +
             out +
             "\nERR:\n" +
@@ -116,6 +121,8 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
                 package +
                 "\nread:\n" +
                 url +
+                "\nCMD\n" +
+                cmd +
                 "OUT:\n" +
                 out +
                 "\nERR:\n" +
@@ -124,6 +131,8 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
             raise WinInstallPackageException(
                 "unable to install " +
                 package +
+                "\nCMD\n" +
+                cmd +
                 "\nOUT:\n" +
                 out +
                 "\nERR:\n" +

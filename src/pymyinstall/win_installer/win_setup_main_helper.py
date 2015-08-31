@@ -90,7 +90,7 @@ def win_download(folder=None,
     available = os.listdir(folder)
 
     def is_here(program):
-        b =  _is_package_in_list(program, available)
+        b = _is_package_in_list(program, available)
         return b
 
     operations = []

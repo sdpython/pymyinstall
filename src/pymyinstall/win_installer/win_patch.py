@@ -7,6 +7,13 @@ from __future__ import print_function
 import os
 
 
+class ShebangException(Exception):
+    """
+    exception raised when the shebang is not correct
+    """
+    pass
+
+
 def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
     """
     path are absolute when they are installed,
@@ -71,6 +78,9 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
                                 operations.append(("update", full))
                                 with open(full, "w") as f:
                                     f.write(content)
+                            elif into not in content:
+                                raise ShebangException(
+                                    "unable to find '{0}' in {1}".format(into, full))
                     elif ext == ".exe":
                         with open(full, "rb") as f:
                             content = f.read()
@@ -81,6 +91,9 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
                                 operations.append(("update", full))
                                 with open(full, "wb") as f:
                                     f.write(content)
+                            elif binto not in content:
+                                raise ShebangException(
+                                    "unable to find '{0}' in {1}".format(binto, full))
                     else:
                         pass
 
