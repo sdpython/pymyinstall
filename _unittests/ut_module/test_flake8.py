@@ -57,7 +57,7 @@ class TestFlake8(unittest.TestCase):
         exe = os.path.dirname(sys.executable)
         scr = os.path.join(exe, "Scripts")
         fla = os.path.join(scr, "flake8")
-        cmd = fla + " " + src
+        cmd = fla + " " + src + " --exclude=packaged_config.py"
         out, err = run_cmd(cmd, fLOG=fLOG, wait=True)
 
         lines = out.split("\n")

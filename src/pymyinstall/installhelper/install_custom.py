@@ -7,6 +7,7 @@ from __future__ import print_function
 
 import os
 import sys
+import http.client
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
     import urllib2 as urllib_error
@@ -63,6 +64,8 @@ def download_file(url, outfile):
         u.close()
     except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
+    except http.client.IncompleteRead as ee:
+        raise Exception("unable to complete reading from: " + url) from ee
 
     with open(outfile, "wb") as f:
         f.write(text)

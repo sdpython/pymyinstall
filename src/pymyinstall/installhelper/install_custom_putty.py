@@ -7,12 +7,7 @@ import sys
 import re
 import os
 
-from .install_cmd_helper import unzip_files
-from .install_custom import download_page, download_from_sourceforge, download_file
-from .link_shortcuts import add_shortcut_to_desktop, suffix
-
-if sys.version_info[0] == 2:
-    from codecs import open
+from .install_custom import download_page, download_file
 
 
 def IsPuttyInstalled(dest_folder):
@@ -61,9 +56,7 @@ def install_putty(dest_folder=".", fLOG=print, install=True):
     if not os.path.exists(outfile):
         download_file(newurl, outfile)
 
-        if os.path.exists(outfile):
-            file = outfile
-        else:
+        if not os.path.exists(outfile):
             raise FileNotFoundError(outfile)
 
     return outfile

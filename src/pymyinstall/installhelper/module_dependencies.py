@@ -10,8 +10,8 @@ def _main_pipdeptree(local_only=False, addw=False, freeze=True, list_all=True):
     """
     replicate pipdeptree.main to catch the standard output
     """
-    from pipdeptree import req_version, top_pkg_name, non_top_pkg_name, top_pkg_src
-    from pipdeptree import non_top_pkg_src, has_multi_versions, confusing_deps, render_tree
+    from pipdeptree import top_pkg_name, non_top_pkg_name, top_pkg_src
+    from pipdeptree import non_top_pkg_src, confusing_deps, render_tree
     from pipdeptree import cyclic_deps, peek_into
 
     default_skip = ['setuptools', 'pip', 'python', 'distribute']

@@ -701,7 +701,7 @@ class ModuleInstall:
         if self.mname is not None:
             if self.mname in vers:
                 return vers[self.mname]
-            cal = self.mname.lower()
+            cap = self.mname.lower()
             if cap in vers:
                 return vers[cap]
         return None

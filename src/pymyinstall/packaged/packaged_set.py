@@ -1,8 +1,8 @@
 """
 @file
-@brief Defines different set of modules to install.
+@brief Defines different sets of modules to install in addition to the existing ones in @see md packaged_config.
 """
-from .packaged_config import small_set, sphinx_theme_set, extended_set, azure_set, ensae_set, teachings_set
+from .packaged_config import small_set, sphinx_theme_set, extended_set, ensae_set, teachings_set
 
 
 def ensae_fullset():
@@ -15,7 +15,6 @@ def ensae_fullset():
     base = small_set() +  \
         sphinx_theme_set() + \
         extended_set() + \
-        azure_set() + \
         ensae_set() + \
         teachings_set()
 

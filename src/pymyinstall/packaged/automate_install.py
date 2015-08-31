@@ -8,7 +8,7 @@ import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
 from ..installhelper.module_dependencies import missing_dependencies
-from .packaged_config_full_set import ensae_fullset
+from .packaged_set import ensae_fullset
 
 
 def _build_reverse_index():
@@ -228,7 +228,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             except Exception as e:
                 b = False
                 m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
-                    .format(mod.name, inst, ver, mod.kind, str(e))
+                    .format(mod.name, '', ver, mod.kind, str(e))
                 fLOG(m)
                 errors.append((mod, e))
             if b:

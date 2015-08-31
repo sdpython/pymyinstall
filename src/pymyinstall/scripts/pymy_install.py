@@ -27,8 +27,8 @@ def get_parser():
         default="build/update_modules",
         help='folder where modules will be downloaded')
     parser.add_argument(
-        '-o',
-        '--only',
+        'module',
+        nargs='*',
         default="all",
         help='update only the list of modules included in this list or all modules if not specified or equal to all')
     return parser
@@ -71,8 +71,8 @@ def main():
 
     if res is not None:
         skip_module = res.skip.split(",")
-        list_module = None if res.only in [
-            "all", "", None] else res.only.split(",")
+        list_module = None if res.module in [
+            "all", "", None, []] else res.module
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module)
 
