@@ -58,10 +58,12 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
 
         all_she = set()
         bintos = set()
+        memo_shebang = {}
 
         operations = []
         for prog in ["python.exe", "pythonw.exe"]:
             shebangs = ["#!" + python_path + prog,
+                        "#!" + python_path.lower() + prog,
                         "#!" + python_path[0].upper() + python_path[1:] + prog,
                         "#!" + python_path[0].lower() + python_path[1:] + prog]
             bshebangs = [bytes(shebang, encoding="ascii")
@@ -94,6 +96,10 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
                             fall2 = set(_[0] for _ in reg_exe.findall(content))
                             if len(fall2) > 0:
                                 all_she.update(fall2)
+                                for a in fall2:
+                                    if a not in memo_shebang:
+                                        memo_shebang[a] = []
+                                    memo_shebang[a].append(full)
 
                     elif ext == ".exe":
                         with open(full, "rb") as f:
@@ -111,11 +117,19 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
                                         for _ in breg_exe.findall(content))
                             if len(fall2) > 0:
                                 all_she.update(fall2)
+                                for a in fall2:
+                                    if a not in memo_shebang:
+                                        memo_shebang[a] = []
+                                    memo_shebang[a].append(full)
+
                     else:
                         pass
 
         for i, she in enumerate(all_she):
             fLOG("  shebang ", i, ":", type(she), she)
+        for k, v in memo_shebang.items():
+            fLOG("  shebang", k, " in ", v)
+
         intersection = bintos.intersection(all_she)
         if len(intersection) == 0:
             raise ShebangException("no expected shebang was found\nFOUND:\n{0}\nEXPECTED:\n{1}".format(

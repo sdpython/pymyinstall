@@ -101,6 +101,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
     if not has_pip():
+        fLOG("install pip")
         from .get_pip import main
         main()
 
@@ -121,7 +122,10 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
     if verbose:
         fLOG("update pip if needed")
-    update_pip()
+
+    if "pip" not in skip_module:
+        update_pip()
+
     modules = list_module
     again = []
     errors = []
@@ -183,7 +187,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param  fLOG            logging function
     @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
     @param  skip_module     module to skip (list of str)
-    @param  up_pip          upgrade pip
+    @param  up_pip          upgrade pip (pip must not be in *skip_module*)
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -207,7 +211,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     if reorder:
         list_module = reorder_module_list(list_module)
 
-    if up_pip:
+    if up_pip and "pip" not in skip_module:
         if verbose:
             fLOG("update pip if needed")
         update_pip()

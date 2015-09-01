@@ -9,3 +9,4 @@ from .packaged_config_ml import ml_set, ensae_set
 from .packaged_config_small import small_set
 from .packaged_config_sphinx import sphinx_theme_set
 from .packaged_config_teachings import teachings_set
+from .packaged_iot import iot_set

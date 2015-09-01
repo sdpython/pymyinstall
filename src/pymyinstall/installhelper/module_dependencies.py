@@ -2,7 +2,6 @@
 @file
 @brief Guess missing dependencies
 """
-import pip
 import sys
 
 
@@ -13,10 +12,11 @@ def _main_pipdeptree(local_only=False, addw=False, freeze=True, list_all=True):
     from pipdeptree import top_pkg_name, non_top_pkg_name, top_pkg_src
     from pipdeptree import non_top_pkg_src, confusing_deps, render_tree
     from pipdeptree import cyclic_deps, peek_into
+    from pip import get_installed_distributions
 
     default_skip = ['setuptools', 'pip', 'python', 'distribute']
     skip = default_skip + ['pipdeptree']
-    pkgs = pip.get_installed_distributions(local_only=local_only, skip=skip)
+    pkgs = get_installed_distributions(local_only=local_only, skip=skip)
 
     pkg_index = dict((p.key, p) for p in pkgs)
     req_map = dict((p, p.requires()) for p in pkgs)

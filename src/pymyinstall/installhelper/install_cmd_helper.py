@@ -12,6 +12,7 @@ import time
 import subprocess
 import datetime
 import re
+from .module_install_exceptions import UpdatePipError, RunCmdError
 
 
 def python_version():
@@ -183,7 +184,7 @@ def run_cmd(cmd,
                                     startupinfo=startupinfo,
                                     cwd=cwd)
         except FileNotFoundError as e:
-            raise Exception("unable to run CMD:\n{0}".format(cmd)) from e
+            raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e
     else:
         try:
             proc = subprocess.Popen(split_cmp_command(cmd),
@@ -192,7 +193,7 @@ def run_cmd(cmd,
                                     stderr=subprocess.PIPE,
                                     cwd=cwd)
         except FileNotFoundError as e:
-            raise Exception("unable to run CMD:\n{0}".format(cmd)) from e
+            raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e
     if wait:
 
         out = []
@@ -208,7 +209,7 @@ def run_cmd(cmd,
                             encoding,
                             errors=encerror).strip("\n"))
                 except UnicodeDecodeError as exu:
-                    raise Exception(
+                    raise RunCmdError(
                         "issue with cmd:" +
                         str(cmd) +
                         "\n" +
@@ -493,6 +494,16 @@ def update_pip(python_path=None, fLOG=print):
     @param      python_path     python path (or sys.executable if None)
     @param      fLOG            logging function
     @return                     output
+
+    The command ``python -m pip install -U pip`` or
+    ``pip install --upgrade pip`` might fails on Windows due to very long paths
+    (see `Upgrading pip fails on Windows when install path is too long <https://github.com/pypa/pip/issues/3055>`_).
+    If that happens,
+    assuming the module *pymyinstall* was installed with pip, we can now remove
+    *pip* and use *get_pip.py* instead. This part requires *pyquickhelper*.
+
+    We try the url `bootstrap.pypa.io/get-pip.py <https://bootstrap.pypa.io/get-pip.py>`_ first
+    then a local copy.
     """
     if python_path is None:
         python_path = sys.executable
@@ -501,8 +512,44 @@ def update_pip(python_path=None, fLOG=print):
     cmd = python_path + " -m pip install -U pip"
     out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
     if err and len(err) > 0:
-        raise Exception(
-            "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+        if ("FileNotFoundError" in err or "No module named pip.__main__" in err) \
+           and sys.platform.startswith("win"):
+            from pyquickhelper.filehelper import remove_folder
+            # we try to remove pip and to install it again
+            # it might be due to long path on Windows
+            pack = os.path.join(os.path.dirname(
+                python_path), "Lib", "site-packages")
+            if not os.path.exists(pack):
+                raise FileNotFoundError(pack)
+            fpip = os.path.join(pack, "pip")
+            if os.path.exists(fpip):
+                # remove the folder
+                fLOG("  remove folder", fpip)
+                remove_folder(fpip)
+
+            pip_ = [_ for _ in os.listdir(pack) if _.startswith("pip-")]
+            if len(pip_) > 0:
+                for _ in pip_:
+                    fp = os.path.join(pack, _)
+                    fLOG("  remove folder", fp)
+                    remove_folder(fpip)
+
+            url = "https://bootstrap.pypa.io/get-pip.py"
+            cmd = python_path + " " + url
+            out, err = run_cmd(cmd, wait=True)
+            if err and len(err) > 0:
+                get_pip = os.path.abspath(os.path.join(
+                    os.path.dirname(__file__), "get_pip.py"))
+                if not os.path.exists(get_pip):
+                    raise FileNotFoundError(get_pip)
+                cmd = python_path + " " + get_pip
+                out, err = run_cmd(cmd, wait=True)
+                if err and len(err) > 0:
+                    raise UpdatePipError(
+                        "unable to update pip with get_pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+        else:
+            raise UpdatePipError(
+                "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
     return out
 
 
@@ -530,9 +577,9 @@ def get_wheel_version(whlname):
     exp = re.compile("[-]([0-9]+[.][0-9]+([.][0-9abdevcr]+)?)[-]")
     find = exp.findall(whlname)
     if len(find) == 0:
-        raise Exception(
+        raise ValueError(
             "unable to extract version of {0} (pattern: {1})".format(whlname, exp.pattern))
     if len(find) > 1:
-        raise Exception(
+        raise ValueError(
             "unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))
     return find[0][0]

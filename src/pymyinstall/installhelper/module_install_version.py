@@ -3,8 +3,6 @@
 @brief Functions to get module version, license
 """
 import sys
-from pip.utils import get_installed_distributions
-from pip.compat import stdlib_pkgs
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
@@ -45,7 +43,7 @@ def get_page_wheel(page):
 
 
 def call_get_installed_distributions(local_only=True,
-                                     skip=stdlib_pkgs,
+                                     skip=None,
                                      include_editables=True,
                                      editables_only=False,
                                      user_only=False):
@@ -58,13 +56,17 @@ def call_get_installed_distributions(local_only=True,
     @param  local_only      if True (default), only return installations
                             local to the current virtualenv, if in a virtualenv.
     @param  skip            argument is an iterable of lower-case project names to
-                            ignore; defaults to stdlib_pkgs
+                            ignore; defaults to ``pip.compat.stdlib_pkgs`` (if *skip* is None)
     @param  editables       if False, don't report editables.
     @param  editables_only  if True , only report editables.
     @param  user_only       if True , only report installations in the user
                             site directory.
     @return                 list of installed Distribution objects.
     """
+    if skip is None:
+        from pip.compat import stdlib_pkgs
+        skip = stdlib_pkgs
+    from pip.utils import get_installed_distributions
     return get_installed_distributions(local_only=local_only,
                                        skip=skip,
                                        include_editables=include_editables,

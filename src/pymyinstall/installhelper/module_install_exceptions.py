@@ -55,3 +55,17 @@ class ConfigurationError(Exception):
     raised when something is wrong the current configuration
     """
     pass
+
+
+class UpdatePipError(Exception):
+    """
+    raised when pip cannot be update or reinstalled
+    """
+    pass
+
+
+class RunCmdError(Exception):
+    """
+    raised when a command line cannot be run
+    """
+    pass
