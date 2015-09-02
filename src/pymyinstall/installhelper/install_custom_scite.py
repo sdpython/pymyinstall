@@ -29,14 +29,15 @@ def IsSciteInstalled(dest_folder):
         raise NotImplementedError("not available on platform " + sys.platform)
 
 
-def install_scite(dest_folder=".", fLOG=print, install=True):
+def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=False):
     """
     install `SciTE <http://www.scintilla.org/SciTE.html>`_ (only on Windows)
 
-    @param      dest_folder     where to download the setup
-    @param      fLOG            logging function
-    @param      install         install (otherwise only download)
-    @return                     temporary file
+    @param      dest_folder         where to download the setup
+    @param      fLOG                logging function
+    @param      install             install (otherwise only download)
+    @param      change_python_path  update python path as well (if *install* is True)
+    @return                         temporary file
 
     @example(install SciTE)
     The function downloads the latest version of SciTE.
@@ -45,6 +46,9 @@ def install_scite(dest_folder=".", fLOG=print, install=True):
     install_scite("my_folder_for_scite")
     @endcode
     @endexample
+
+    .. versionchanged:: 1.1
+        Parameter *change_python_path* was added.
     """
     if IsSciteInstalled(dest_folder):
         return os.path.join(
@@ -93,7 +97,7 @@ def install_scite(dest_folder=".", fLOG=print, install=True):
 
     if install:
         unzip_files(file, whereTo=dest_folder, fLOG=fLOG)
-        modify_scite_properties(sys.executable,
+        modify_scite_properties(sys.executable if change_python_path else None,
                                 os.path.join(dest_folder, "wscite"))
         return os.path.join(os.path.abspath(dest_folder), "wscite", "SciTE.exe")
     else:
@@ -107,25 +111,29 @@ def modify_scite_properties(python_path, scite_path):
     @param      python_path     python path
     @param      scite_path      scrite path
 
-    Avoid tabulations, change the path to the interpreter
-    """
-    # we change the path
-    config = os.path.join(scite_path, "python.properties")
-    with open(config, "r") as f:
-        content = f.read()
+    Avoid tabulations, change the path to the interpreter.
 
-    # we change the executable
-    lines = content.split("\n")
-    for i, line in enumerate(lines):
-        if "command.go.*.py=" in line:
-            lines[
-                i] = '    command.go.*.py={0} -u "$(FileNameExt)"'.format(python_path)
-        elif "command.go.*.pyw=" in line:
-            lines[
-                i] = '    command.go.*.pyw={0} -u "$(FileNameExt)"'.format(python_path)
-    content = "\n".join(lines)
-    with open(config, "w") as f:
-        f.write(content)
+    .. versionchanged:: 1.1
+        If *python_path* is None, the function does not change it.
+    """
+    if python_path is not None:
+        # we change the path
+        config = os.path.join(scite_path, "python.properties")
+        with open(config, "r") as f:
+            content = f.read()
+
+        # we change the executable
+        lines = content.split("\n")
+        for i, line in enumerate(lines):
+            if "command.go.*.py=" in line:
+                lines[
+                    i] = '    command.go.*.py={0} -u "$(FileNameExt)"'.format(python_path)
+            elif "command.go.*.pyw=" in line:
+                lines[
+                    i] = '    command.go.*.pyw={0} -u "$(FileNameExt)"'.format(python_path)
+        content = "\n".join(lines)
+        with open(config, "w") as f:
+            f.write(content)
 
     # we change the options
     config = os.path.join(scite_path, "SciTEGlobal.properties")

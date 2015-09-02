@@ -66,7 +66,7 @@ class TestScite (unittest.TestCase):
                     os.remove(f)
 
         if sys.platform.startswith("win"):
-            r = install_scite(temp, fLOG=fLOG)
+            r = install_scite(temp, fLOG=fLOG, change_python_path=True)
             exe = os.path.abspath(r)
             assert os.path.exists(exe)
             conf = exe.replace("SciTE.exe", "python.properties")
