@@ -7,13 +7,14 @@ from __future__ import print_function
 
 import os
 import sys
-import http.client
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
     import urllib2 as urllib_error
+    import httplib as http_client
 else:
     import urllib.request as urllib_request
     import urllib.error as urllib_error
+    import http.client as http_client
 
 from .module_install import ModuleInstall
 from .install_memoize import install_memoize
@@ -64,7 +65,7 @@ def download_file(url, outfile):
         u.close()
     except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
-    except http.client.IncompleteRead as ee:
+    except http_client.IncompleteRead as ee:
         raise Exception("unable to complete reading from: " + url) from ee
 
     with open(outfile, "wb") as f:
