@@ -170,7 +170,11 @@ def get_module_metadata(module, use_cmd=False):
             if sys.version_info[0] == 2:
                 typstr = str  # unicode#
                 line = typstr(line, encoding="utf8", error="ignore")
-            spl = line.split(":")
+            try:
+                spl = line.split(":")
+            except UnicodeDecodeError:
+                warnings.warn("UnicodeDecodeError with: " + line)
+                continue
             d[spl[0].strip()] = ":".join(spl[1:]).strip()
         a = mod.key
         res[a] = d
