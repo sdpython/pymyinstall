@@ -128,7 +128,10 @@ def get_module_version(module, use_cmd=False):
         for mod in dist:
             al = mod.key.lower()
             a = mod.key
-            v = mod.version
+            try:
+                v = mod.version
+            except ValueError:
+                v = "UNKNOWN"
             res[a] = v
             if a != al:
                 res[al] = v
