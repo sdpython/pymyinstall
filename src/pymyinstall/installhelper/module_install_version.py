@@ -167,6 +167,9 @@ def get_module_metadata(module, use_cmd=False):
         d = {}
         lines = mod._get_metadata(mod.PKG_INFO)
         for line in lines:
+            if sys.version_info[0] == 2:
+                typstr = str  # unicode#
+                line = typstr(line, encoding="utf8", error="ignore")
             spl = line.split(":")
             d[spl[0].strip()] = ":".join(spl[1:]).strip()
         a = mod.key
