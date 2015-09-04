@@ -41,6 +41,9 @@ except ImportError:
 from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
 from src.pymyinstall.win_installer.win_ipy_kernels import add_kernel_jupyter, python_kernel
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
 
 class TestKernels(unittest.TestCase):
 

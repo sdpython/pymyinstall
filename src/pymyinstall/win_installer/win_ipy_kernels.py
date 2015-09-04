@@ -82,7 +82,10 @@ def add_kernel_jupyter(kernel, path, tools_path, python_path, suffix="WP"):
                              .replace("%JULIA_PKGDIR%", os.path.join(tools_path, "Julia", "pkg"))
 
     # dump
-    json.dump(kernel, st)
+    if sys.version_info[0] == 2:
+        json.dump(kernel, st, encoding="utf8")
+    else:
+        json.dump(kernel, st)
     ker = os.path.join(fold, "kernel.json")
     with open(ker, "w", encoding="utf8") as f:
         f.write(st.getvalue())
