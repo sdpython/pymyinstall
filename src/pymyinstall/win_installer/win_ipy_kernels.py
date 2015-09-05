@@ -3,13 +3,15 @@
 @brief Functions to prepare a setup on Windows, R functions
 """
 
-import io
 import json
 import os
 import sys
 
 if sys.version_info[0] == 2:
     from codecs import open
+    from SintrgIO import StringIO
+else:
+    from io import StringIO
 
 
 r_kernel = {
@@ -70,7 +72,7 @@ def add_kernel_jupyter(kernel, path, tools_path, python_path, suffix="WP"):
     fold = os.path.join(path, name)
     if not os.path.exists(fold):
         os.mkdir(fold)
-    st = io.StringIO()
+    st = StringIO()
 
     # replacements
     argv = kernel["argv"]
