@@ -12,6 +12,9 @@ import sys
 
 from .win_exception import WinInstallDistributionError
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def distribution_checkings(python_path, tools_path, fLOG=print):
     """
