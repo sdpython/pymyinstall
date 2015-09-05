@@ -281,10 +281,39 @@ def ensae_set():
         # promising but not released yet
         # ModuleInstall("code2flow", "pip",
         # purpose="Turn your Python and Javascript code into DOT flowcharts"),
+
+        # azure part
+        ModuleInstall("azure_nspkg", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
+        ModuleInstall("azure_common", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Client Library for Python (Common)"),
+        ModuleInstall("azure_mgmt_nspkg", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
+        ModuleInstall("azure_mgmt_common", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Resource Management Client Library for Python (Common)"),
+        ModuleInstall("azure_mgmt_compute", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Compute Resource Management Client Library for Python"),
+        ModuleInstall("azure_mgmt_network", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Network Resource Management Client Library for Python"),
+        ModuleInstall("azure_mgmt_resource", "pip", usage="AZURE",
+                      purpose=""),
+        ModuleInstall("azure_mgmt_storage", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Storage Resource Management Client Library for Python"),
+        ModuleInstall("azure_mgmt", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Resource Management Client Libraries for Python"),
+        ModuleInstall("azure_servicebus", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Service Bus Client Library for Python"),
+        ModuleInstall("azure_storage", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Storage Client Library for Python"),
+        ModuleInstall("azure_servicemanagement_legacy", "pip", usage="AZURE",
+                      purpose="Microsoft Azure Legacy Service Management Client Library for Python"),
         ModuleInstall(
-            "azure", "pip", purpose="Python wrapper for Azure API (HDInsight, Blog Storage)"),
+            "azure", "pip", purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE"),
         ModuleInstall(
-            "azureml", "pip", purpose="Python wrapper for Azure ML API (Azure ML Pipeline)"),
+            "azureml", "pip", purpose="Python wrapper for Azure ML API (Azure ML Pipeline)", usage="AZURE"),
+        ModuleInstall(
+            "azure_batch_apps", "pip", usage="AZURE", mname="batchapps",
+            purpose="Python wrapper for Azure ML API (Azure ML Pipeline)"),
     ]
 
     if sys.platform.startswith("win"):

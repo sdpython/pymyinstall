@@ -310,6 +310,8 @@ def extended_set():
                       purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
         ModuleInstall("python-gmaps", "pip", mname="gmaps",
                       purpose="Google Maps API client http://python-gmaps.readthedocs.org"),
+        ModuleInstall("keyring", "pip",
+                      purpose="Store and access your passwords safely."),
     ]
 
     return [_ for _ in mod if _ is not None]
