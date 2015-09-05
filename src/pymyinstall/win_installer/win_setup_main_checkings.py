@@ -41,13 +41,14 @@ def distribution_checkings(python_path, tools_path, fLOG=print):
     #############################################
     # check Jupyter, Rodeo, numpy works properly
     #############################################
-    for file in files_to_check:
-        f = os.path.join(scripts, file)
-        if not os.path.exists(f):
-            try:
-                raise FileNotFoundError(f)
-            except Exception as e:
-                exceptions.append(e)
+    if sys.platform.startswith("win"):
+        for file in files_to_check:
+            f = os.path.join(scripts, file)
+            if not os.path.exists(f):
+                try:
+                    raise FileNotFoundError(f)
+                except Exception as e:
+                    exceptions.append(e)
 
     ########
     # final
