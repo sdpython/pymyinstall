@@ -44,6 +44,10 @@ from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
 from src.pymyinstall.win_installer.win_patch import win_patch_paths
 
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
+
 class TestPatch(unittest.TestCase):
 
     def test_patch(self):
