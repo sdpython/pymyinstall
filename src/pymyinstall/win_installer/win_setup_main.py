@@ -27,6 +27,7 @@ from .win_ipython_helper import ipython_create_profile, ipython_update_profile
 from .win_setup_r import get_package_description
 from .win_exception import WinInstallMissingDependency
 from .tutorial import copy_tutorial
+from .win_setup_main_checkings import distribution_checkings
 
 if sys.version_info[0] == 2:
     from codecs import open
@@ -457,6 +458,11 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             for r in res:
                 fLOG("ADD: kernel", r)
             operations.append(("time", dtnow()))
+
+        #########
+        # checking
+        #########
+        distribution_checkings(folders["python"], folders["tools"], fLOG=fLOG)
 
     ########
     # tutorial

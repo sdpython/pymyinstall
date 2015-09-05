@@ -25,3 +25,10 @@ class WinInstallMissingDependency(Exception):
     raised when a dependency is missing
     """
     pass
+
+
+class WinInstallDistributionError(Exception):
+    """
+    raised when an issue is detected in the distribution
+    """
+    pass

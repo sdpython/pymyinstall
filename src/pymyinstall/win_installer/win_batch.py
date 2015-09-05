@@ -22,6 +22,9 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     @param      selection   list of batchs to create
     @param      module_list list of python modules to install, to know which script to install or not
     @return                 operations (list of what was done)
+
+    .. versionchanged:: 1.3
+        Add batch file for glue and to run some checkings.
     """
     if selection is None:
         raise ValueError("selection cannot be None")
@@ -32,6 +35,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     has_rodeo = False
     has_spyder = False
     has_rss = False
+    has_glue = False
     for mod in module_list:
         if mod.name == "jupyter":
             has_jupyter = True
@@ -41,6 +45,8 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
             has_spyder = True
         if mod.name == "pyrsslocal":
             has_rss = True
+        if mod.name == "glueviz":
+            has_glue = True
 
     list_functions = [create_win_env,
                       create_win_scite,
@@ -48,6 +54,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
                       create_win_sqllitespy,
                       create_win_python_console,
                       update_all_packages,
+                      run_checkings,
                       win_replace_shebang,
                       ]
 
@@ -66,6 +73,9 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
 
     if has_rss:
         list_functions.append(create_win_rss)
+
+    if has_glue:
+        list_functions.append(create_win_glue)
 
     if "r" in selection:
         list_functions.append((create_win_r_console, "r"))
@@ -99,18 +109,19 @@ def create_win_env(folders):
     """
     tools = folders["tools"]
     text = ["@echo off", "set CURRENT=%~dp0",
+            "set PYTHON_TOOLS=%CURRENT%\\..\\tools",
             "set PYTHON_WINHOME=%CURRENT%\\..\\python",
             "set PYTHON_WINSCRIPTS=%CURRENT%\\..\\python\\Scripts",
             "set WORKSPACE=%CURRENT%\\..\\workspace",
-            "set PATH=%PYTHON_WINHOME%;%PATH%"]
+            "set PATH=%PYTHON_WINHOME%;%PYTHON_WINSCRIPTS%;%PATH%"]
     if os.path.exists(os.path.join(tools, "R")):
-        text.append("set R_HOME=%CURRENT%\\..\\tools\\R")
-        text.append("set R_LIBS=%CURRENT%\\..\\tools\\R\\library")
+        text.append("set R_HOME=%PYTHON_TOOLS%\\R")
+        text.append("set R_LIBS=%PYTHON_TOOLS%\\R\\library")
     if os.path.exists(os.path.join(tools, "Julia")):
-        text.append("set JULIA_HOME=%CURRENT%\\..\\tools\\Julia")
-        text.append("set JULIA_PKGDIR=%CURRENT%\\..\\tools\\Julia\\pkg")
+        text.append("set JULIA_HOME=%PYTHON_TOOLS%\\Julia")
+        text.append("set JULIA_PKGDIR=%PYTHON_TOOLS%\\Julia\\pkg")
     if os.path.exists(os.path.join(tools, "MinGW")):
-        text.append("set PATH=%PATH%;%CURRENT%\\..\\tools\\MinGW\\bin")
+        text.append("set PATH=%PATH%;%PYTHON_TOOLS%\\MinGW\\bin")
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "env.bat")
@@ -129,9 +140,8 @@ def create_win_jupyter_console(folders):
     text = ["@echo off",
             "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set JUPYTERC=%CURRENT2%\\..\\python\\Scripts\\jupyter-console.exe",
-            "set IPYTHONRC=%CURRENT2%\\..\\python\\Scripts\\ipython.exe",
-            "cd %WORKSPACE%",
+            "set JUPYTERC=%PYTHON_WINSCRIPTS%\\jupyter-console.exe",
+            "set IPYTHONRC=%PYTHON_WINSCRIPTS%\\ipython.exe",
             "%IPYTHONRC% console"]
     # command jupyter console does not work yet even if the documentation says
     # so
@@ -152,8 +162,7 @@ def create_win_jupyter_qtconsole(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set JUPYTERQTC=%CURRENT2%\\..\\python\\Scripts\\jupyter-qtconsole.exe",
-            "cd %WORKSPACE%",
+            "set JUPYTERQTC=%PYTHON_WINSCRIPTS%\\jupyter-qtconsole.exe",
             "start %JUPYTERQTC%"]
 
     text = "\n".join(text)
@@ -172,9 +181,8 @@ def create_win_jupyter_notebook(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set JUPYTERNB=%CURRENT2%\\..\\python\\Scripts\\jupyter-notebook.exe",
-            "cd %WORKSPACE%",
-            "%JUPYTERNB% --notebook-dir=%CURRENT2%\\..\\workspace --config=%CURRENT2%\\profile_win_profile\\ipython_kernel_config.py"]
+            "set JUPYTERNB=%PYTHON_WINSCRIPTS%\\jupyter-notebook.exe",
+            "%JUPYTERNB% --notebook-dir=%WORKSPACE% --config=%CURRENT2%\\profile_win_profile\\ipython_kernel_config.py"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_notebook.bat")
@@ -192,9 +200,8 @@ def create_win_rodeo(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set RODEO=%CURRENT2%\\..\\python\\Scripts\\rodeo.exe",
-            "cd %WORKSPACE%",
-            "%RODEO% %CURRENT2%\\..\\workspace"]
+            "set RODEO=%PYTHON_WINSCRIPTS%\\rodeo.exe",
+            "%RODEO% %WORKSPACE%"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "rodeo.bat")
@@ -212,9 +219,7 @@ def create_win_scite(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set SCITE=%CURRENT2%\\..\\tools\\Scite\\wscite\\scite.exe",
-            "set PATH=%CURRENT%\\..\\python;%PATH%",
-            "cd %WORKSPACE%",
+            "set SCITE=%PYTHON_TOOLS%\\Scite\\wscite\\scite.exe",
             "start %SCITE% %1"]
 
     text = "\n".join(text)
@@ -233,8 +238,7 @@ def create_win_putty(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set PUTTY=%CURRENT2%\\..\\tools\\Putty\\putty.exe",
-            "cd %WORKSPACE%",
+            "set PUTTY=%PYTHON_TOOLS%\\Putty\\putty.exe",
             "start %PUTTY%"]
 
     text = "\n".join(text)
@@ -253,7 +257,7 @@ def create_win_sqllitespy(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set SQLITESPY=%CURRENT2%\\..\\tools\\SQLiteSpy\\SQLiteSpy.exe",
+            "set SQLITESPY=%PYTHON_TOOLS%\\SQLiteSpy\\SQLiteSpy.exe",
             "cd %WORKSPACE%",
             "start %SQLITESPY%"]
 
@@ -273,8 +277,7 @@ def create_win_python_console(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set PYTHON=%CURRENT2%\\..\\python\\python.exe",
-            "cd %WORKSPACE%",
+            "set PYTHON=%PYTHON_WINHOME%\\python.exe",
             "%PYTHON%"]
 
     text = "\n".join(text)
@@ -293,8 +296,7 @@ def create_win_julia_console(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "rem call %CURRENT2%\\env.bat",
-            "set JULIA=%CURRENT2%\\..\\tools\\Julia\\bin\\julia.exe",
-            "cd %CURRENT2%\\..\\workspace",
+            "set JULIA=%PYTHON_TOOLS%\\Julia\\bin\\julia.exe",
             "%JULIA%"]
 
     text = "\n".join(text)
@@ -322,9 +324,8 @@ def create_win_spyder(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "cd %CURRENT2%\\..\\python\\Scripts",
             "set QT_API=pyside",
-            "spyder.exe --workdir=%WORKSPACE%"]
+            "%PYTHON_WINSCRIPTS%\\spyder.exe --workdir=%WORKSPACE%"]
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "spyder.bat")
@@ -342,8 +343,7 @@ def create_win_r_console(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set REXE=%CURRENT2%\\..\\tools\\R\\bin\\x64\\R.exe",
-            "cd %WORKSPACE%",
+            "set REXE=%PYTHON_TOOLS%\\R\\bin\\x64\\R.exe",
             "%REXE%"]
 
     text = "\n".join(text)
@@ -362,8 +362,7 @@ def create_win_r_gui(folders):
     """
     text = ["@echo off", "set CURRENT2=%~dp0",
             "call %CURRENT2%\\env.bat",
-            "set RGUI=%CURRENT2%\\..\\tools\\R\\bin\\x64\\Rgui.exe",
-            "cd %WORKSPACE%",
+            "set RGUI=%PYTHON_TOOLS%\\R\\bin\\x64\\Rgui.exe",
             "start %RGUI%"]
 
     text = "\n".join(text)
@@ -459,6 +458,27 @@ def create_win_rss(folders, suffix=""):
     return [("batch", name), ("rss", rss_name)]
 
 
+def create_win_glue(folders, suffix=""):
+    """
+    create a batch file to start Glue
+
+    @param      folders     see @see fn create_win_batches
+    @param      suffix      add a suffix
+    @return                 operations (list of what was done)
+
+    .. versionadded:: 1.3
+    """
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            '%PYTHON_WINSCRIPTS%\\glue.exe %1']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "run_glue.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [("batch", name)]
+
+
 def update_all_packages(folders, suffix=""):
     """
     create a batch file to update all packages
@@ -476,6 +496,27 @@ def update_all_packages(folders, suffix=""):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_update_all_packages.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [("batch", name)]
+
+
+def run_checkings(folders, suffix=""):
+    """
+    create a batch file to update all packages
+
+    @param      folders     see @see fn create_win_batches
+    @param      suffix      add a suffix
+    @return                 operations (list of what was done)
+
+    .. versionadded:: 1.3
+    """
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            '%PYTHON_WINHOME%\\python -u -c "from pymyinstall.win_installer import distribution_checkings;distribution_checkings(None, None)"']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "run_checkings.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]

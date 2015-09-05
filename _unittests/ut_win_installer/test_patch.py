@@ -68,7 +68,7 @@ class TestPatch(unittest.TestCase):
             raise FileNotFoundError(data)
         synchronize_folder(data, dest)
 
-        pp = r"C:\github\pymyinstall\dist\win_python_setup\python"
+        pp = "C:\\github\\pymyinstall\\dist\\win_python_setup\\python"
         op = win_patch_paths(dest, pp, fLOG=fLOG)
         into = "#!python.exe"
         binto = bytes(into, encoding="ascii")
