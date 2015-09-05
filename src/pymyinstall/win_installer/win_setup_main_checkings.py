@@ -38,8 +38,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print):
 
     files_to_check = ["rodeo.exe", "jupyter-console.exe", "jupyter-qtconsole.exe",
                       "jupyter-notebook.exe", "jupyter.exe", "spyder.exe", "pip.exe",
-                      "autopep8.exe",
-                      "virtualenv.exe"]
+                      "autopep8.exe"]
 
     #############################################
     # check Jupyter, Rodeo, numpy works properly

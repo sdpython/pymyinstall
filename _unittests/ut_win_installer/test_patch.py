@@ -6,6 +6,7 @@ import sys
 import os
 import unittest
 import re
+import warnings
 
 try:
     import src
