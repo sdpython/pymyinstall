@@ -31,14 +31,18 @@ def distribution_checkings(python_path, tools_path, fLOG=print):
     .. versionadded:: 1.3
     """
     exceptions = []
+    files_to_check = ["jupyter-console.exe", "jupyter-qtconsole.exe",
+                      "jupyter-notebook.exe", "jupyter.exe"]
 
     if python_path is None:
         python_path = os.path.dirname(sys.executable)
-    scripts = os.path.join(python_path, "Scripts")
-
-    files_to_check = ["rodeo.exe", "jupyter-console.exe", "jupyter-qtconsole.exe",
-                      "jupyter-notebook.exe", "jupyter.exe", "spyder.exe", "pip.exe",
-                      "autopep8.exe"]
+    pip = os.path.join(python_path, "pip.exe")
+    if not os.path.exists(pip):
+        scripts = os.path.join(python_path, "Scripts")
+        files_to_check2.extend(
+            ["rodeo.exe", "spyder.exe", "pip.exe", "autopep8.exe"])
+    else:
+        scripts = python_path
 
     #############################################
     # check Jupyter, Rodeo, numpy works properly
