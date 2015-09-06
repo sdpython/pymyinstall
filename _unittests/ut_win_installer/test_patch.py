@@ -62,7 +62,7 @@ class TestPatch(unittest.TestCase):
         assert len(reg_exe.findall(text)) > 0
 
         temp = get_temp_folder(__file__, "temp_patch")
-        data = os.path.join(temp, "..", "Scripts")
+        data = os.path.join(temp, "..", "data", "Scripts")
         dest = os.path.join(temp, "Scripts")
         if not os.path.exists(dest):
             os.mkdir(dest)

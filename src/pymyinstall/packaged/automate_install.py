@@ -193,7 +193,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         os.makedirs(temp_folder)
     if not has_pip():
         fLOG("install pip")
-        from .get_pip import main
+        from ..installhelper.get_pip import main
         main()
 
     if skip_module is None:

@@ -39,7 +39,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print):
     pip = os.path.join(python_path, "pip.exe")
     if not os.path.exists(pip):
         scripts = os.path.join(python_path, "Scripts")
-        files_to_check2.extend(
+        files_to_check.extend(
             ["rodeo.exe", "spyder.exe", "pip.exe", "autopep8.exe"])
     else:
         scripts = python_path

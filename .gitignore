@@ -252,3 +252,4 @@ auto_*.xml
 auto_*.db3
 src/pymyinstall/installhelper/page.html
 *.RData
+t.bat
