@@ -85,7 +85,8 @@ class TestPatch(unittest.TestCase):
             if binto not in content:
                 raise Exception(full)
             i += 1
-        assert i == 3
+        if i != 3:
+            raise Exception("i != 3 " + str(op))
 
 if __name__ == "__main__":
     unittest.main()
