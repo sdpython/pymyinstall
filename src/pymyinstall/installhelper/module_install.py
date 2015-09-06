@@ -287,6 +287,39 @@ class ModuleInstall:
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+        elif self.name == "gevent":
+            if ext == "whl":
+                if platform.architecture()[0] == "64bit":
+                    exe = "gevent-1.1b3-cp34-none-win_amd64.whl"
+                else:
+                    exe = "gevent-1.1b3-cp34-none-win32.whl"
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
+        elif self.name == "dpark":
+            if ext == "whl":
+                if platform.architecture()[0] == "64bit":
+                    exe = "DPark-0.1-cp34-none-win_amd64.whl"
+                else:
+                    exe = "DPark-0.1-cp34-none-win32.whl"
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
+        elif self.name == "tifffile":
+            if ext == "whl":
+                if platform.architecture()[0] == "64bit":
+                    exe = "tifffile-0.7.0-cp34-none-win_amd64.whl"
+                else:
+                    exe = "tifffile-0.7.0-cp34-none-win32.whl"
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
         elif self.name == "xgboost":
             if ext == "whl":
                 exe = "xgboost-0.4-py3-none-any.whl"

@@ -85,9 +85,14 @@ def missing_dependencies():
         else:
             parent = line.split("==")[0]
             installed.add(parent)
+    rem = []
     for k in stack:
         v = list(sorted(set(stack[k])))
         v = [_ for _ in v if _ not in installed]
         v.sort()
         stack[k] = v
+        if v == ["pip"] or v == ["argparse"]:
+            rem.append(k)
+    for k in rem:
+        del stack[k]
     return stack
