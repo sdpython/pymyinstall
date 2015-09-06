@@ -85,8 +85,9 @@ class TestPatch(unittest.TestCase):
             if binto not in content:
                 raise Exception(full)
             i += 1
-        if i != 3:
-            raise Exception("i != 3 " + str(op))
+        exp = 3 if sys.platform.startswith("win") else 2
+        if i != exp:
+            raise Exception("i != " + str(exp) + "\n" + str(op))
 
 if __name__ == "__main__":
     unittest.main()
