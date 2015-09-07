@@ -23,7 +23,7 @@ def iot_set():
 
         ModuleInstall('enum-compat', 'pip'),
         ModuleInstall('netifaces', 'pip'),
-        ModuleInstall('protobuf', 'pip'),
+        ModuleInstall('protobuf-py3', 'pip', mname="google.protobuf"),
         ModuleInstall('zeroconf', 'pip'),
         ModuleInstall('pychromecast', 'pip'),
         ModuleInstall('pyuserinput', 'pip'),
@@ -51,7 +51,7 @@ def iot_set():
         ModuleInstall('pbr', 'pip'),
         ModuleInstall('responses', 'pip'),
         ModuleInstall('python-forecastio', 'pip', usage="IoT"),
-        ModuleInstall('pyserial', 'pip', usage="IoT"),
+        ModuleInstall('pyserial', 'pip', mname="serial", usage="IoT"),
         ModuleInstall('PyMata', 'pip', usage="IoT"),
         ModuleInstall('pyRFXtrx', 'github', 'Danielhiversen'),
         ModuleInstall('pymysensors', 'github', 'theolind'),

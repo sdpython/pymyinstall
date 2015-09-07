@@ -94,8 +94,6 @@ def ensae_set():
             "pyodbc", "wheel", purpose="access to protocal ODBC (SQL databases)", usage="SQL"),
         ModuleInstall(
             "pypmc", "wheel", purpose="pypmc is a python package focusing on adaptive importance sampling."),
-        ModuleInstall(
-            "pyserial", "wheel", mname="serial", purpose="access to serial port"),
         ModuleInstall("PyX", "wheel", mname="pyx",
                       purpose="plotting", usage="VIZ"),
         ModuleInstall(
@@ -110,10 +108,6 @@ def ensae_set():
         #
         ModuleInstall(
             "tutormagic", "pip", purpose="brings PythonTutor in a notebok", usage="TEACH"),
-        # cache resuls from a long computation
-        ModuleInstall(
-            "ipycache", "pip", purpose="Defines a %%cache cell magic in the IPython notebook to cache results of long-lasting computations in a persistent pickle file",
-            usage="JUPYTER"),
         # to upload a file in a notebook
         ModuleInstall(
             "nbupload", "pip", purpose="widget to upload a file in a notebook",
@@ -223,27 +217,6 @@ def ensae_set():
         # ModuleInstall("vowpal_porpoise", "pip",
         #              purpose="Lightweight python wrapper for vowpal_wabbit.", purpose="DATA/ML"),
         # it requires to build vowpal_wabbit for Windows
-        # dpark
-        ModuleInstall("protobuf", "pip",
-                      purpose="Protocol Buffers are Google’s data interchange format (for dpark)"),
-        ModuleInstall("invoke", "pip",
-                      purpose="Invoke is a Python task execution tool & library, drawing inspiration from various sources to arrive at a powerful & clean feature set. (for dpark)"),
-        ModuleInstall("mesos.interface", "pip",
-                      purpose="Mesos interfaces (for dpark)"),
-        ModuleInstall("pymesos", "pip",
-                      purpose="Mesos interfaces (for dpark)"),
-        ModuleInstall("fabric", "pip",
-                      purpose="Fabric is a Python library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks. (for streamparse)"),
-        ModuleInstall("prettytable", "pip",
-                      purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
-        ModuleInstall("streamparse", "pip",
-                      purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
-        ModuleInstall("msgpack-python", "pip", mname="msgpack",
-                      purpose="MessagePack (de)serializer. (for dpark)"),
-        ModuleInstall("lz4", "wheel",
-                      purpose="LZ4 Bindings for Python (for dpark)"),
-        ModuleInstall("dpark", "wheel_xd",
-                      purpose="DPark is a Python clone of Spark, MapReduce(R) alike computing framework supporting iterative computation., see https://github.com/douban/dpark", usage="DATA/ML"),
         ModuleInstall("tinydb", "pip",
                       purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) It's written in pure Python and has no external requirements.", usage="noSQL"),
         ModuleInstall("urllib3", "pip",
@@ -283,29 +256,29 @@ def ensae_set():
         # purpose="Turn your Python and Javascript code into DOT flowcharts"),
 
         # azure part
-        ModuleInstall("azure_nspkg", "pip", usage="AZURE",
+        ModuleInstall("azure_nspkg", "pip", usage="AZURE", mname="azure.mgmt",
                       purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
-        ModuleInstall("azure_common", "pip", usage="AZURE",
+        ModuleInstall("azure_common", "pip", usage="AZURE", mname="azure.common",
                       purpose="Microsoft Azure Client Library for Python (Common)"),
-        ModuleInstall("azure_mgmt_nspkg", "pip", usage="AZURE",
+        ModuleInstall("azure_mgmt_nspkg", "pip", usage="AZURE", mname="azure.mgmt.common",
                       purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
-        ModuleInstall("azure_mgmt_common", "pip", usage="AZURE",
+        ModuleInstall("azure_mgmt_common", "pip", usage="AZURE", mname="azure.mgmt.common",
                       purpose="Microsoft Azure Resource Management Client Library for Python (Common)"),
-        ModuleInstall("azure_mgmt_compute", "pip", usage="AZURE",
+        ModuleInstall("azure_mgmt_compute", "pip", usage="AZURE", mname="azure.mgmt.compute",
                       purpose="Microsoft Azure Compute Resource Management Client Library for Python"),
-        ModuleInstall("azure_mgmt_network", "pip", usage="AZURE",
+        ModuleInstall("azure_mgmt_network", "pip", usage="AZURE", mname="azure.mgmt.network",
                       purpose="Microsoft Azure Network Resource Management Client Library for Python"),
-        ModuleInstall("azure_mgmt_resource", "pip", usage="AZURE",
+        ModuleInstall("azure_mgmt_resource", "pip", usage="AZURE", mname="azure.mgmt.resource",
                       purpose=""),
-        ModuleInstall("azure_mgmt_storage", "pip", usage="AZURE",
+        ModuleInstall("azure_mgmt_storage", "pip", usage="AZURE", mname="azure.mgmt.storage",
                       purpose="Microsoft Azure Storage Resource Management Client Library for Python"),
-        ModuleInstall("azure_mgmt", "pip", usage="AZURE",
+        ModuleInstall("azure_mgmt", "pip", usage="AZURE", mname="azure.mgmt",
                       purpose="Microsoft Azure Resource Management Client Libraries for Python"),
-        ModuleInstall("azure_servicebus", "pip", usage="AZURE",
+        ModuleInstall("azure_servicebus", "pip", usage="AZURE", mname="azure.servicebus",
                       purpose="Microsoft Azure Service Bus Client Library for Python"),
-        ModuleInstall("azure_storage", "pip", usage="AZURE",
+        ModuleInstall("azure_storage", "pip", usage="AZURE", mname="azure.storage",
                       purpose="Microsoft Azure Storage Client Library for Python"),
-        ModuleInstall("azure_servicemanagement_legacy", "pip", usage="AZURE",
+        ModuleInstall("azure_servicemanagement_legacy", "pip", usage="AZURE", mname="azure.servicemanagement",
                       purpose="Microsoft Azure Legacy Service Management Client Library for Python"),
         ModuleInstall(
             "azure", "pip", purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE"),
@@ -314,7 +287,34 @@ def ensae_set():
         ModuleInstall(
             "azure_batch_apps", "pip", usage="AZURE", mname="batchapps",
             purpose="Python wrapper for Azure ML API (Azure ML Pipeline)"),
+        #
+        #
+        #
+        ModuleInstall("lz4", "wheel",
+                      purpose="LZ4 Bindings for Python (for dpark)"),
+        ModuleInstall("fabric", "pip",
+                      purpose="Fabric is a Python library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks."),
+        ModuleInstall("invoke", "pip",
+                      purpose="Invoke is a Python task execution tool & library, drawing inspiration from various sources to arrive at a powerful & clean feature set."),
+        ModuleInstall("msgpack-python", "pip", mname="msgpack",
+                      purpose="MessagePack (de)serializer."),
     ]
+
+    if sys.version_info[0] == 2:
+        mod.extend([
+            ModuleInstall("protobuf-py3", "pip", mname="google.protobuf",
+                          purpose="Protocol Buffers are Google’s data interchange format (for dpark)"),
+            ModuleInstall("mesos.interface", "pip",
+                          purpose="Mesos interfaces (for dpark)"),
+            ModuleInstall("pymesos", "pip",
+                          purpose="Mesos interfaces (for dpark)"),
+            ModuleInstall("prettytable", "pip",
+                          purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
+            ModuleInstall("streamparse", "pip",
+                          purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
+            ModuleInstall("dpark", "wheel_xd",
+                          purpose="DPark is a Python clone of Spark, MapReduce(R) alike computing framework supporting iterative computation., see https://github.com/douban/dpark", usage="DATA/ML"),
+        ])
 
     if sys.platform.startswith("win"):
         mod.append(ModuleInstall("VideoCapture", "wheel",
