@@ -25,7 +25,7 @@ from ..installhelper.link_shortcuts import add_shortcut
 from ..packaged import minimal_set
 
 from .win_packages import _is_package_in_list
-from .import_pywin32 import import_pywin32
+from .pywin32_helper import import_pywin32
 from .win_extract import extract_msi, extract_exe, extract_archive, extract_copy
 from .win_exception import WinInstallException
 from .win_setup_mark_step import mark_step, is_step_done
