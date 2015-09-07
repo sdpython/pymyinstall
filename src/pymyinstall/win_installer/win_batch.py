@@ -56,6 +56,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
                       update_all_packages,
                       run_checkings,
                       win_replace_shebang,
+                      win_check_installation,
                       ]
 
     if has_jupyter:
@@ -415,6 +416,25 @@ def win_replace_shebang(folders, suffix=""):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "replace_shebang.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [("batch", name)]
+
+
+def win_check_installation(folders, suffix=""):
+    """
+    create a batch file to check the installation when well
+
+    @param      folders     see @see fn create_win_batches
+    @param      suffix      add a suffix (unused)
+    @return                 operations (list of what was done)
+    """
+    text = ["@echo off", "set CURRENT2=%~dp0",
+            "call %CURRENT2%\\env.bat",
+            '%PYTHON_WINHOME%\\python -u -c "import sys;from pymyinstall.win_installer import import_every_module;import_every_module(sys.executable, None, fLOG=print)"']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "win_check_installation.bat")
     with open(name, "w") as f:
         f.write(text)
     return [("batch", name)]
