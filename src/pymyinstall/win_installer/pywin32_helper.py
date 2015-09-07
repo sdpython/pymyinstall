@@ -3,6 +3,12 @@
 @grief Functions to help using pywin32.
 """
 
+from __future__ import print_function
+
+import sys
+import os
+import shutil
+
 
 def import_pywin32():
     """
@@ -10,6 +16,8 @@ def import_pywin32():
     this function tries to add the path to the DLL to ``PATH``
     before throwing the exception:
     ``DLL load failed: The specified module could not be found``.
+
+    It checks the instruction ``import win32com``.
     """
     try:
         import win32com
@@ -59,3 +67,52 @@ def import_pywin32():
                             "Some DLL must be copied:\n" + "\n".join(dll)) from e
         else:
             raise e
+
+
+def fix_pywin32_installation(python_path=None, fLOG=print):
+    """
+    copy DLL at the right place
+
+    @param      python_path     python path
+    @param      fLOG            logging function
+
+    @FAQ(pywin32 does not work)
+
+    To check module `pywin32 <https://pypi.python.org/pypi/pywin32>`_ is installed,
+    you must run::
+
+        import win32com
+
+    If it displays the message ``ImportError: DLL load failed``, it means
+    it was not able to find DLLs *pythoncom34.dll*, *pythoncom34.dll*.
+    Two solutions:
+
+    * Add the folder ``C:\\Python34_x64\\Lib\\site-packages\\pywin32_system32``
+      to environment variable ``PATH``. That's what function
+      @see fn import_pywin32 is doing every time it is called.
+    * Copy the two DLLs to ``C:\\Windows\\System32``, that's what function
+      @see fn fix_pywin32_installation does if it is run with admin rights.
+
+    @endFAQ
+
+    .. versionadded:: 1.1
+    """
+    if python_path is None:
+        python_path = sys.executable.replace("w.exe", ".exe")
+    if os.path.isfile(python_path):
+        python_path = os.path.dirname(python_path)
+    fdll = os.path.join(python_path, "Lib",
+                        "site-packages", "pywin32_system32")
+    dest_fold = [python_path, os.path.join(python_path, "DLLs"),
+                 "C:\\Windows\\System32"]
+    for dll in os.listdir(fdll):
+        full = os.path.join(fdll, dll)
+        if os.path.isdir(full):
+            continue
+        for destf in dest_fold:
+            dest = os.path.join(destf, dll)
+            if not os.path.exists(dest):
+                shutil.copy(full, destf)
+                fLOG("copy", full, "to", destf)
+            else:
+                fLOG("already copied", dest)
