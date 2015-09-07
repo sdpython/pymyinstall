@@ -1,12 +1,10 @@
 """
-@brief      test log(time=7s)
+@brief      test log(time=45s)
 """
 
 import sys
 import os
 import unittest
-import re
-import warnings
 
 try:
     import src
@@ -40,32 +38,24 @@ except ImportError:
     import pyquickhelper
 
 
-from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
-from src.pymyinstall.win_installer import import_every_module
+from src.pymyinstall.installhelper import install_tgm_gcc
+from pyquickhelper import fLOG, get_temp_folder
 
 
-if sys.version_info[0] == 2:
-    FileNotFoundError = Exception
+class TestTGMGCC (unittest.TestCase):
 
-
-class TestSuccessfulImport(unittest.TestCase):
-
-    def test_import_every_module(self):
+    def test_install_gm_gcc(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        res = import_every_module(
-            sys.executable, None, fLOG=fLOG, start=0, end=10)
-        nb = 0
-        for r in res:
-            if not r[0]:
-                fLOG("---------------------------------")
-                fLOG("FAILED", r[1], "\nOUT\n", r[2], "\nERR\n", r[3])
-            else:
-                nb += 1
-        assert nb > 0
+        temp = get_temp_folder(__file__, "temp_tgc_gcc")
+
+        if sys.platform.startswith("win"):
+            r = install_tgm_gcc(temp, fLOG=fLOG)
+            exe = os.path.abspath(r)
+            assert os.path.exists(exe)
 
 
 if __name__ == "__main__":

@@ -17,21 +17,26 @@ else:
     import http.client as http_client
 
 from .module_install import ModuleInstall
-from .install_memoize import install_memoize
+from .install_memoize import install_memoize2
 
 
-@install_memoize
-def download_page(url):
+@install_memoize2
+def download_page(url, is406=False):
     """
     download a page from a url
 
     @param      url     url
+    @param      is406   if the function raised *HTTP Error 406*, try *True*
     @return             content
+
+    .. versionchanged:: 1.1
+        Parameter *is406* was added.
     """
+    agent = "Mozilla" if is406 else "Mozilla/5.0"
     try:
         req = urllib_request.Request(
             url, headers={
-                'User-agent': 'Mozilla/5.0'})
+                'User-agent': agent})
         u = urllib_request.urlopen(req)
         text = u.read()
         u.close()

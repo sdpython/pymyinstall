@@ -85,7 +85,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print):
         raise WinInstallDistributionError("\n" + errors)
 
 
-def import_every_module(python_path, module_list, only_installed=True, fLOG=print, start=0):
+def import_every_module(python_path, module_list, only_installed=True, fLOG=print, start=0, end=-1):
     """
     import every module in *module_list* assuming they are defined
     by @see cl ModuleInstall or a string
@@ -94,6 +94,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
     @param      module_list     module list, if None, consider the largest list
     @param      only_installed  True to check only installed module in the list, False to test them without checking they were installed
     @param      start           start the list at *start*
+    @param      end             end the list at *end* or -1 for all
     @return                     list of tuple (success, failing modules, output, error)
     """
     if os.path.isfile(python_path):
@@ -128,6 +129,8 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
     for i, m in enumerate(module_list):
         if i < start:
             continue
+        if end != -1 and i >= end:
+            break
         if m.is_installed():
 
             if m.name in ["libpython", "tutormagic", "pymyinstall"]:
