@@ -220,6 +220,16 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
       The second one succeeds. You should run Spyder from the installation setup before
       compiling the setup.
 
+    **Known extra steps needed by some modules**
+
+    * **llvmlite**, **numba**, **blaze**, on Windows, if the dll
+      *api-ms-win-crt-runtime-l1-1-0.dll* is missing, it is explained
+      in ` <https://github.com/cmderdev/cmder/issues/490>`_,
+      `Visual C++ Redistributable for Visual Studio 2015 <https://www.microsoft.com/en-us/download/details.aspx?id=48145>`_
+      needs to be installed.
+    * **theano** requires `TDM-GCC <http://tdm-gcc.tdragon.net/>`_,
+      read `Installation of Theano on Windows <http://deeplearning.net/software/theano/install_windows.html>`_
+
     @todo Use chocolatey to process installation.
 
     @todo Fix Julia installation.
