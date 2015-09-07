@@ -41,7 +41,7 @@ def sphinx_theme_set():
         ModuleInstall("guzzle_sphinx_theme", "pip",
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("flyingsphinx", "pip",
-                      purpose="sphinx theme", usage="SPHINX"),
+                      purpose="sphinx theme", usage="SPHINX/PY2") if sys.version_info[0] == 2 else None,
         ModuleInstall("itcase_sphinx_theme", "pip",
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinxtrap", "pip",

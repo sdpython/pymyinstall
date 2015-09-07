@@ -43,15 +43,13 @@ def ensae_set():
         ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
         #ModuleInstall("Lasagne", "pip", mname="lasagne"),
         ModuleInstall(
-            "pymunk", "pip", purpose="pymunk is a easy-to-use pythonic 2d physics library that can be used whenever you need 2d rigid body physics from Python. Perfect when you need 2d physics in your game, demo or other application! It is built on top of the very nice 2d physics library Chipmunk."),
-        ModuleInstall(
             "nltk", "wheel", purpose="NLP, natural language processing", usage="DATA/ML"),
         ModuleInstall(
             "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, classification, translation, and more."),
         ModuleInstall(
             "dev", "pip", purpose="Header files, a static library and development tools for building Python modules, extending the Python interpreter or embedding Python in applications."),
         ModuleInstall(
-            "opencv_python", "wheel", mname="cv", purpose="OpenVC wrapper",
+            "opencv_python", "wheel", mname="cv2", purpose="OpenVC wrapper",
             web="https://opencv-python-tutroals.readthedocs.org/en/latest/"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio",
                       purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. With PyAudio, you can easily use Python to play and record audio streams on a variety of platforms (e.g., GNU/Linux, Microsoft Windows, and Mac OS X)."),
@@ -65,6 +63,8 @@ def ensae_set():
         ModuleInstall(
             "datrie", "wheel", purpose="Fast, efficiently stored Trie for Python.", usage="ALGO"),
         # ModuleInstall("pysparse", "pip"), #does not work
+        ModuleInstall(
+            "Bottleneck", "wheel", mname="bottleneck", purpose="Fast NumPy array functions written in Cython, needed by la"),
         ModuleInstall(
             "la", "wheel", purpose="Label the rows, columns, any dimension, of your NumPy arrays."),
         ModuleInstall(

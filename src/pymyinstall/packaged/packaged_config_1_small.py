@@ -63,8 +63,12 @@ def small_set():
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
         ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
+        ModuleInstall("pywin32", "wheel", mname="win32com", purpose="call Windows DLL",
+                      usage="WINDOWS") if sys.platform.startswith("win") else None,
+        ModuleInstall("winshell", "pip", purpose="Windows shell functions",
+                      usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
-            "xlwings", "pip", purpose="reads/writes Excel files") if sys.platform.startswith("win") else None,
+            "xlwings", "pip", purpose="reads/writes Excel files", usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
         #
@@ -118,7 +122,7 @@ def small_set():
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
 
-        ModuleInstall('Versio', 'pip', mname="version",
+        ModuleInstall('Versio', 'pip', mname="versio",
                       purpose="localshop dependency, manages versions"),
         ModuleInstall('django-celery', 'pip', mname="djcelery",
                       purpose="localshop dependency, Old django celery integration project."),
@@ -170,7 +174,7 @@ def small_set():
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
         # ipython
         ModuleInstall(
-            "ipython", "pip", purpose="IPython, Jupyter", usage="JUPYTER"),
+            "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
             "jupyter", "pip", purpose="Jupyter", usage="JUPYTER"),
         ModuleInstall(
@@ -200,9 +204,20 @@ def small_set():
         ModuleInstall(
             "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "ptyprocess", "pip", purpose="dependency for the terminado, Run a subprocess in a pseudo terminal", usage="JUPYTER"),
+            "micropython-libc", "pip", mname="libc", purpose="dependency for ptyprocess, MicroPython FFI helper module",
+            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
         ModuleInstall(
-            "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets", usage="JUPYTER"),
+            "micropython-ffilib", "pip", mname="ffi", purpose="dependency for ptyprocess, MicroPython FFI helper module",
+            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+        ModuleInstall(
+            "micropython-fcntl", "pip", mname="fcntl", purpose="dependency for ptyprocess, Functions to compute fnctl.ioctl's opt argument",
+            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+        ModuleInstall(
+            "ptyprocess", "pip", purpose="dependency for the terminado, Run a subprocess in a pseudo terminal",
+            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+        ModuleInstall(
+            "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets",
+            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
         ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
@@ -210,11 +225,13 @@ def small_set():
         ModuleInstall(
             "metakernel", "pip", purpose="more magic commands for Jupyter", usage="JUPYTER"),
         ModuleInstall(
-            "simplepam", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)", usage="JUPYTER"),
+            "simplepam", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)",
+            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
         ModuleInstall(
             "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
         ModuleInstall(
-            "ipystata", "pip", purpose="Jupyter kernel for Stata", usage="JUPYTER"),
+            "ipystata", "pip", purpose="Jupyter kernel for Stata",
+            usage="JUPYTER/PY2") if sys.version_info[0] == 2 else None,
         ModuleInstall(
             "jupyter-pip", "pip", mname="jupyterpip", purpose="Allows Jupyter notebook extension writers to make their extension pip installable!", usage="JUPYTER"),
         # end of ipython
@@ -293,6 +310,8 @@ def small_set():
         #
         # 2015-07
         #
+        ModuleInstall("future", "pip",
+                      purpose="Clean single-source support for Python 3 and 2"),
         ModuleInstall("pyprofiler", "pip",
                       purpose="profiler", usage="PROFILING"),
         ModuleInstall("mock", "pip",
@@ -300,11 +319,5 @@ def small_set():
         ModuleInstall("multimethods", "pip",
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
     ]
-
-    if sys.platform.startswith("win"):
-        mod.append(
-            ModuleInstall("pywin32", "wheel", mname="win32com", purpose="call Windows DLL"))
-        mod.append(
-            ModuleInstall("winshell", "pip", purpose="Windows shell functions"))
 
     return [_ for _ in mod if _ is not None]

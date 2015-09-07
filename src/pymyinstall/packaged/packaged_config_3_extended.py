@@ -53,16 +53,16 @@ def extended_set():
             'dynd', 'wheel', purpose="DyND-Python, a component of the Blaze project, is the Python exposure of the DyND dynamic multi-dimensional array library.")
         if sys.version_info[0] >= 3 else None,
         ModuleInstall(
-            'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets",
-            usage="DATA/ML"),
-        ModuleInstall(
             'sympy', 'pip', purpose="SymPy is a Python library for symbolic mathematics."),
         ModuleInstall('gmpy2', 'wheel',
                       purpose="big real numbers (issue on Linux and Anaconda)"),
         ModuleInstall('llvmpy', 'wheel', mname='llvm',
                       purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools, not maintained anymore, use llvmlite instead"),
         ModuleInstall(
-            'llvmlite', 'wheel', purpose="lightweight wrapper around basic LLVM functionality"),
+            'llvmlite', 'wheel', purpose="lightweight wrapper around basic LLVM functionality, check issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll"),
+        ModuleInstall(
+            'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets, check issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll",
+            usage="DATA/ML"),
         ModuleInstall(
             'numba', 'wheel', purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
         ModuleInstall('scikit-image', 'wheel', mname='skimage',
@@ -71,8 +71,6 @@ def extended_set():
             'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
         ModuleInstall(
             'cvxopt', 'wheel', purpose="linear, quadratique optimization", usage="DATA/ML"),
-        ModuleInstall('pymc', 'wheel',
-                      purpose="Monte Carlo computation", usage="DATA/ML"),
         ModuleInstall(
             'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation", usage="DATA/ML"),
         ModuleInstall('fastcluster', 'wheel',
@@ -101,8 +99,6 @@ def extended_set():
                       purpose="High performance graph data structures and algorithms (issue on Linux and Anaconda)"),
         ModuleInstall(
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
-        ModuleInstall('python-daemon', 'pip', mname='daemon',
-                      purpose="Library to implement a well-behaved Unix daemon process."),
         ModuleInstall('cached_property', 'pip',
                       purpose="A decorator for caching properties in classes (for luigi)"),
         ModuleInstall('luigi', 'pip',
@@ -190,10 +186,17 @@ def extended_set():
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
+            "libpython", "wheel", purpose="needed for theano (C++ compilation)"),
+        ModuleInstall(
             "Theano", "wheel", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
+        ModuleInstall('pymc', 'wheel',
+                      purpose="Monte Carlo computation", usage="DATA/ML"),
+        ModuleInstall('pymc3', 'github', 'pymc-devs',
+                      purpose="Monte Carlo computation (Python 3 only)", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
+        ModuleInstall('pysterior', 'pip',
+                      purpose="pysterior is a machine learning library for Python which aims to make Bayesian parametric regression and classification models accessible and easy to use. The library allows users to construct supervised learning models using an intuitive interface similar to that used by scikit-learn.", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall("keras", "pip", purpose="deep learning",
                       usage="DATA/ML"),
-        ModuleInstall("neon", "pip", purpose="deep learning", usage="DATA/ML"),
         ModuleInstall(
             "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide", usage="GUI"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
@@ -220,8 +223,8 @@ def extended_set():
                       purpose="ploting, Multidimensional data visualzation across files", usage="DATA/ML"),
         #
         # javascript graphs
-        ModuleInstall("charts", "pip",
-                      purpose="plotting in javascript", usage="VIZ"),
+        ModuleInstall("pandas_highcharts", "pip",
+                      purpose="plotting in javascript and pandas", usage="VIZ"),
         #
         ModuleInstall(
             "dill", "pip", purpose="serialize all of python (almost), Dill extends python's \"pickle\" module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
@@ -259,8 +262,8 @@ def extended_set():
         # visualisation
         ModuleInstall(
             "pyexecjs", "pip", mname="execjs", purpose="Run JavaScript code from Python (for pyreact)", usage="NETWORK"),
-        ModuleInstall(
-            "pyreact", "pip", purpose="Python bridge to JSX & the React JavaScript library. (for pyxley)", usage="NETWORK"),
+        ModuleInstall("pyreact", "pip", mname="react",
+                      purpose="Python bridge to JSX & the React JavaScript library. (for pyxley)", usage="NETWORK"),
         ModuleInstall(
             "pyxley", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
 
@@ -283,7 +286,7 @@ def extended_set():
         ModuleInstall(
             "xgboost", "wheel_xd", purpose="Parallelized Stochastic Gradient Descent (only available on Python 3 and x64)", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
         ModuleInstall("pygling", "pip",
-                      purpose="to build makefile with python"),
+                      purpose="to build makefile with python") if sys.version_info[0] == 2 else None,
         ModuleInstall("cuda4py", "pip",
                       purpose="Python cffi CUDA bindings and helper classes"),
         ModuleInstall("whoosh", "pip", purpose="search engine in Python"),
@@ -291,13 +294,14 @@ def extended_set():
                       purpose="pymatbridge is a set of python and matlab functions to allow these two systems to talk to each other"),
         ModuleInstall("scilab2py", "pip",
                       purpose="Python to Scilab bridge", usage="DATA/ML"),
-        ModuleInstall("scilab_kernel", "pip",
-                      purpose="A Scilab kernel for IPython", usage="JUPYTER"),
+        # ModuleInstall("scilab_kernel", "pip",
+        #              purpose="A Scilab kernel for IPython", usage="JUPYTER"),
+        # does not work
         ModuleInstall("psycopg2", "wheel",
                       purpose="Psycopg is the most popular PostgreSQL adapter for the Python programming language.", usage="SQL"),
         ModuleInstall("pymssql", "wheel",
                       purpose="A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.", usage="SQL"),
-        ModuleInstall("mysqlclient", "pip",
+        ModuleInstall("mysqlclient", "pip", mname="MySQLdb",
                       purpose="MySQL driver written in Python which does not depend on MySQL C client libraries and implements the DB API v2.0 specification (PEP-249).", usage="SQL"),
         ModuleInstall("line_profiler", "wheel",
                       purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof is a convenient script for running either line_profiler or the Python standard library's cProfile or profile modules, depending on what is available.",
