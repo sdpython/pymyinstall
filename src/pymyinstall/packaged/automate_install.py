@@ -8,7 +8,7 @@ import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
 from ..installhelper.module_dependencies import missing_dependencies
-from .packaged_set import ensae_fullset
+from .packaged_set import all_fullset
 
 
 def _build_reverse_index():
@@ -16,7 +16,7 @@ def _build_reverse_index():
     builds a reverse index of the module,
     """
     res = {}
-    mods = ensae_fullset()
+    mods = all_fullset()
     for m in mods:
         res[m.name] = m
         if m.mname is not None:
@@ -68,8 +68,8 @@ def reorder_module_list(list_module):
     """
     inset = {m.name: m for m in list_module}
     res = []
-    for mod in ensae_fullset():
-        if mod.name in inset:
+    for mod in all_fullset():
+        if mod.name in inset and inset[mod.name] is not None:
             res.append(mod.copy(version=inset[mod.name].version))
             inset[mod.name] = None
     for mod in list_module:
