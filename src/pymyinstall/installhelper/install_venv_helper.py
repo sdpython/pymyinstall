@@ -161,7 +161,7 @@ def venv_install(venv, packages, fLOG=print, temp_folder=None):
 
 def run_venv_script(venv, script, fLOG=print, file=False, is_cmd=False):
     """
-    run a script on a vritual environment (the script should be simple
+    run a script on a virtual environment (the script should be simple
 
     @param      venv        virtual environment
     @param      script      script as a string (not a file)
@@ -194,3 +194,34 @@ def run_venv_script(venv, script, fLOG=print, file=False, is_cmd=False):
             raise VirtualEnvError(
                 "unable to run script at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, venv, cmd))
         return out
+
+
+def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False):
+    """
+    run a script knowing python path, it does not raise an exception.
+
+    @param      python_path     python path
+    @param      script          script as a string (not a file)
+    @param      fLOG            logging function
+    @param      file            is script a file or a string to execute
+    @param      is_cmd          if True, script is a command line to run (as a list) for python executable
+    @return                     output, error
+    """
+    if sys.platform.startswith("win"):
+        exe = os.path.join(python_path, "python")
+    else:
+        exe = os.path.join(python_path, "bin", "python")
+    if is_cmd:
+        cmd = " ".join([exe] + script)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+        return out, err
+    else:
+        script = ";".join(script.split("\n"))
+        if file:
+            if not os.path.exists(script):
+                raise FileNotFoundError(script)
+            cmd = " ".join([exe, "-u", '"{0}"'.format(script)])
+        else:
+            cmd = " ".join([exe, "-u", "-c", '"{0}"'.format(script)])
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+        return out, err
