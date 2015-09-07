@@ -15,6 +15,7 @@
 #define MyAppTGitURL "https://tortoisegit.org/"
 #define MyAppRStudioURL "https://www.rstudio.com/"
 #define MyAppPyCharmURL "https://www.jetbrains.com/pycharm/"
+#define MyAppVS2015 "https://www.microsoft.com/en-us/download/details.aspx?id=48145"
 
 
 [Setup]
@@ -59,6 +60,7 @@ Name: "{app}\Installer\GitHub Desktop"; IconFilename: "{app}\tools\icons\github.
 Name: "{app}\Installer\Tortoise Git"; IconFilename: "{app}\tools\icons\tortoisegit.ico"; Filename: "{#MyAppTGitURL}"
 Name: "{app}\Installer\RSudio"; IconFilename: "{app}\tools\icons\rstudio.ico"; Filename: "{#MyAppRStudioURL}"
 Name: "{app}\Installer\PyCharm"; IconFilename: "{app}\tools\icons\pycharm.ico"; Filename: "{#MyAppPyCharmURL}"
+Name: "{app}\Installer\Visual C++ Redistributable for Visual Studio 2015"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppVS2015}"
 ; editors
 Name: "{app}\Scite"; IconFilename: "{app}\tools\icons\Scite.ico"; Filename: "{app}\config\scite.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 Name: "{app}\SQLiteSpy"; IconFilename: "{app}\tools\icons\sqlitespy.ico"; Filename: "{app}\config\sqlitespy.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
