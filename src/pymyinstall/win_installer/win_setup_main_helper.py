@@ -18,6 +18,7 @@ from ..installhelper.install_custom_putty import install_putty
 from ..installhelper.install_custom_sqlitespy import install_sqlitespy
 from ..installhelper.install_custom_python import install_python
 from ..installhelper.install_custom_mingw import install_mingw
+from ..installhelper.install_custom_tgm_gcc import install_tgm_gcc
 from ..installhelper.install_custom_7z import install_7z
 from ..installhelper.install_custom_vs import install_vs
 from ..installhelper.install_custom import download_page
@@ -113,6 +114,12 @@ def win_download(folder=None,
         operations.append(("download", r))
         fLOG("done")
 
+    if not is_here("tgm") and "tgm" in selection:
+        fLOG("--- download", "tgm")
+        r = install_tgm_gcc(dest_folder=folder, fLOG=fLOG, install=False)
+        operations.append(("download", r))
+        fLOG("done")
+
     if not is_here("SQLiteSpy") and "sqlitespy" in selection:
         fLOG("--- download", "sqllitespy")
         r = install_sqlitespy(temp_folder=folder, fLOG=fLOG, install=False)
@@ -185,7 +192,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty"],
+                    "Julia", "Scite", "7z", "TGM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty"],
                 selection=None):
     """
     Install setups
