@@ -38,22 +38,22 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper import install_tgm_gcc
+from src.pymyinstall.installhelper import install_tdm_gcc
 from pyquickhelper import fLOG, get_temp_folder
 
 
-class TestTGMGCC (unittest.TestCase):
+class TestTDMGCC (unittest.TestCase):
 
-    def test_install_gm_gcc(self):
+    def test_install_tdm_gcc(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        temp = get_temp_folder(__file__, "temp_tgc_gcc")
+        temp = get_temp_folder(__file__, "temp_tdc_gcc")
 
         if sys.platform.startswith("win"):
-            r = install_tgm_gcc(temp, fLOG=fLOG)
+            r = install_tdm_gcc(temp, fLOG=fLOG)
             exe = os.path.abspath(r)
             assert os.path.exists(exe)
 

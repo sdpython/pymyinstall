@@ -104,6 +104,7 @@ Versions
     * **fix:** fix function *update_all* when cannot check if there is a new version
     * **add:** retrieve license and classifier of installed modules
     * **add:** putty was added to the setup
+    * **add:** TDM-GCC was added to the setup (for theano)
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup
