@@ -9,13 +9,14 @@ import os
 from .install_custom import download_from_sourceforge
 
 
-def install_mingw(dest_folder=".", fLOG=print, install=True):
+def install_mingw(dest_folder=".", fLOG=print, install=True, version=None):
     """
     install `MinGW <http://www.mingw.org/>`_ (only on Windows)
 
     @param      dest_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
+    @param      version         version to install (unused)
     @return                     temporary file
 
     Packages to install:
@@ -39,6 +40,8 @@ def install_mingw(dest_folder=".", fLOG=print, install=True):
         mingw-get install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77==3.4.5
 
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     if not sys.platform.startswith("win"):
         raise NotImplementedError(
             "MinGW can only be installed on Windows at the moment")

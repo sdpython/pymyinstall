@@ -12,7 +12,7 @@ from .install_custom import download_page, download_file
 
 
 def install_python(
-        temp_folder=".", fLOG=print, install=True, force_download=False):
+        temp_folder=".", fLOG=print, install=True, force_download=False, version="3.4.3"):
     """
     Install `python <http://www.python.org/>`_.
     It does not do it a second time if it is already installed.
@@ -20,12 +20,18 @@ def install_python(
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
-    @param      force_download  force the downloading of pandoc
+    @param      force_download  force the downloading of python
+    @param      version         version to download (by default 3.4.3)
     @return                     temporary file
 
     The version is fixed to 3.4.3. and amd64.
     """
-    link = "https://www.python.org/downloads/release/python-343/"
+    if version is None:
+        version = "3.4.3"
+    if version != "3.4.3":
+        raise ValueError("cannot specify a version other than 3.4.3")
+    link = "https://www.python.org/downloads/release/python-%s/" % version.replace(
+        ".", "")
     page = download_page(link)
     if sys.platform.startswith("win"):
         o, b = python_version()

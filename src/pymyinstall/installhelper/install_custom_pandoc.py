@@ -24,7 +24,7 @@ def IsPandocInstalled():
 
 
 def install_pandoc(
-        temp_folder=".", fLOG=print, install=True, force_download=False):
+        temp_folder=".", fLOG=print, install=True, force_download=False, version=None):
     """
     Install `pandoc <http://johnmacfarlane.net/pandoc/>`_.
     It does not do it a second time if it is already installed.
@@ -33,8 +33,11 @@ def install_pandoc(
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
     @param      force_download  force the downloading of pandoc
+    @param      version         version to install (unused)
     @return                     temporary file
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     bb = IsPandocInstalled()
     if bb and not force_download:
         return True

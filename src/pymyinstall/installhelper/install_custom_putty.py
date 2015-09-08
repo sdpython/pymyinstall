@@ -24,15 +24,18 @@ def IsPuttyInstalled(dest_folder):
         raise NotImplementedError("not available on platform " + sys.platform)
 
 
-def install_putty(dest_folder=".", fLOG=print, install=True):
+def install_putty(dest_folder=".", fLOG=print, install=True, version=None):
     """
     install `Putty <http://www.putty.org/>`_ (only on Windows)
 
     @param      dest_folder     where to download putty
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
+    @param      version         version to install (unused)
     @return                     temporary file
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     if IsPuttyInstalled(dest_folder):
         return os.path.join(
             os.path.abspath(dest_folder), "putty.exe")

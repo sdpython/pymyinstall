@@ -98,58 +98,64 @@ def win_download(folder=None,
 
     if not is_here("scite") and "scite" in selection:
         fLOG("--- download", "scite")
-        r = install_scite(dest_folder=folder, fLOG=fLOG, install=False)
+        r = install_scite(dest_folder=folder, fLOG=fLOG,
+                          install=False, version=selection.get("scite", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("putty") and "putty" in selection:
         fLOG("--- download", "putty")
-        r = install_putty(dest_folder=folder, fLOG=fLOG, install=False)
+        r = install_putty(dest_folder=folder, fLOG=fLOG,
+                          install=False, version=selection.get("putty", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("mingw") and "mingw" in selection:
         fLOG("--- download", "mingw")
-        r = install_mingw(dest_folder=folder, fLOG=fLOG, install=False)
+        r = install_mingw(dest_folder=folder, fLOG=fLOG,
+                          install=False, version=selection.get("mingw", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("tgm") and "tgm" in selection:
         fLOG("--- download", "tgm")
-        r = install_tgm_gcc(dest_folder=folder, fLOG=fLOG, install=False)
+        r = install_tgm_gcc(dest_folder=folder, fLOG=fLOG,
+                            install=False, version=selection.get("tgm", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("SQLiteSpy") and "sqlitespy" in selection:
         fLOG("--- download", "sqllitespy")
-        r = install_sqlitespy(temp_folder=folder, fLOG=fLOG, install=False)
+        r = install_sqlitespy(temp_folder=folder, fLOG=fLOG,
+                              install=False, version=selection.get("sqlitespy", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("python"):
         fLOG("--- download", "python")
         r = install_python(
-            temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("python", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("R-") and "r" in selection:
         fLOG("--- download", "R")
         r = install_R(
-            temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("r", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("vs") and "vs" in selection:
         fLOG("--- download", "Visual Studio Express")
-        r = install_vs(folder, fLOG=fLOG, install=False)
+        r = install_vs(folder, fLOG=fLOG, install=False,
+                       version=selection.get("vs", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("julia") and "julia" in selection:
         fLOG("--- download", "julia")
         r = install_julia(
-            temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("julia", None))
         operations.append(("download", r))
         fLOG("done")
 
@@ -157,7 +163,7 @@ def win_download(folder=None,
         if verbose:
             fLOG("download", "pandoc")
         r = install_pandoc(
-            temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("pandoc", None))
         operations.append(("download", r))
         fLOG("done")
 
@@ -165,7 +171,7 @@ def win_download(folder=None,
         if verbose:
             fLOG("download", "7z")
         r = install_7z(
-            temp_folder=folder, fLOG=fLOG, install=False, force_download=True)
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("7z", None))
         operations.append(("download", r))
         fLOG("done")
 

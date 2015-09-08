@@ -195,8 +195,6 @@ def extended_set():
                       purpose="Monte Carlo computation (Python 3 only)", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall('pysterior', 'pip',
                       purpose="pysterior is a machine learning library for Python which aims to make Bayesian parametric regression and classification models accessible and easy to use. The library allows users to construct supervised learning models using an intuitive interface similar to that used by scikit-learn.", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
-        ModuleInstall("keras", "pip", purpose="deep learning",
-                      usage="DATA/ML"),
         ModuleInstall(
             "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide", usage="GUI"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
@@ -213,6 +211,8 @@ def extended_set():
         # (relative import are not well handled in version 0.3.3
         ModuleInstall(
             "h5py", "wheel", purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. Trillion-Particle Simulation.", usage="DATA/ML"),
+        ModuleInstall("keras", "pip", purpose="deep learning",
+                      usage="DATA/ML"),
         # Bayesian
         ModuleInstall(
             "bayespy", "pip", purpose="bayesian modelling and computation", usage="DATA/ML"),

@@ -29,7 +29,7 @@ def IsSciteInstalled(dest_folder):
         raise NotImplementedError("not available on platform " + sys.platform)
 
 
-def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=False):
+def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=False, version=None):
     """
     install `SciTE <http://www.scintilla.org/SciTE.html>`_ (only on Windows)
 
@@ -37,6 +37,7 @@ def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=
     @param      fLOG                logging function
     @param      install             install (otherwise only download)
     @param      change_python_path  update python path as well (if *install* is True)
+    @param      version             version to install (unused)
     @return                         temporary file
 
     @example(install SciTE)
@@ -50,6 +51,8 @@ def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=
     .. versionchanged:: 1.1
         Parameter *change_python_path* was added.
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     if IsSciteInstalled(dest_folder):
         return os.path.join(
             os.path.abspath(dest_folder), "wscite", "SciTE.exe")

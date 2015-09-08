@@ -97,7 +97,7 @@ def small_set():
         ModuleInstall(
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
-            "networkx", "pip", purpose="graph libraries, basic drawing", usage="VIZ"),
+            "networkx", "wheel", purpose="graph libraries, basic drawing", usage="VIZ"),
         # small config
         ModuleInstall(
             "graphviz", "pip", purpose="wrapper for graphviz (most famous tool to draw graphs", usage="VIZ"),

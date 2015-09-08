@@ -44,7 +44,7 @@ def IsRInstalled():
 
 
 def install_R(
-        temp_folder=".", fLOG=print, install=True, force_download=False):
+        temp_folder=".", fLOG=print, install=True, force_download=False, version=None):
     """
     Install `R <http://www.r-project.org/>`_.
     It does not do it a second time if it is already installed.
@@ -52,7 +52,8 @@ def install_R(
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
-    @param      force_download  force the downloading of pandoc
+    @param      force_download  force the downloading of R
+    @param      version         None for last, otherwise requested version
     @return                     temporary file
     """
     bb = IsRInstalled()
@@ -70,6 +71,9 @@ def install_R(
                 page)
 
         url = link + alls[0]
+        if version is not None:
+            spl = url.split("/R-")
+            url = spl[0] + "/old/" + version + "/R-" + version + "-win.exe"
         full = url.split("/")[-1]
         outfile = os.path.join(temp_folder, full)
         fLOG("download ", url)

@@ -12,7 +12,7 @@ from .install_custom import download_page, download_file
 
 
 def install_7z(
-        temp_folder=".", fLOG=print, install=True, force_download=False):
+        temp_folder=".", fLOG=print, install=True, force_download=False, version=None):
     """
     Install `7z <http://www.7-zip.org/>`_.
     It does not do it a second time if it is already installed.
@@ -20,9 +20,12 @@ def install_7z(
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
-    @param      force_download  force the downloading of pandoc
+    @param      force_download  force the downloading of 7z
+    @param      version         specify a version (unused)
     @return                     temporary file
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     link = "http://www.7-zip.org/"
     page = download_page(link)
     if sys.platform.startswith("win"):

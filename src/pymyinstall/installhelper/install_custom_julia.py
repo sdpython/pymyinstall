@@ -44,7 +44,7 @@ def IsJuliaInstalled():
 
 
 def install_julia(
-        temp_folder=".", fLOG=print, install=True, force_download=False):
+        temp_folder=".", fLOG=print, install=True, force_download=False, version=None):
     """
     Install `R <http://www.r-project.org/>`_.
     It does not do it a second time if it is already installed.
@@ -52,9 +52,12 @@ def install_julia(
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
-    @param      force_download  force the downloading of pandoc
+    @param      force_download  force the downloading of Julia
+    @param      version         version to download (unused)
     @return                     temporary file
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     bb = IsJuliaInstalled()
     if bb and not force_download:
         return True

@@ -248,7 +248,28 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     selection.add("sqlitespy")
     selection.add("python")
     selection = set(_.lower() for _ in selection)
+
+    _allowed = {"pandoc", "7z", "scite", "putty",
+                "sqlitespy", "scite", "python", "tgm", "vs", "r"}
+    for s in selection:
+        s_ = s.split("==")[0]
+        if s_ not in _allowed:
+            raise ValueError("{0} unknown, should be in {1}".format(
+                s, ", ".join(sorted(_allowed))))
+
     fLOG("--- selection", selection)
+
+    #####
+    # we change  for the version
+    #####
+    versions = {}
+    for sel in selection:
+        if "==" in sel:
+            spl = sel.split("==")
+            versions[spl[0].lower()] = spl[1]
+        else:
+            versions[sel.lower()] = None
+    selection = versions
 
     ######
     # next

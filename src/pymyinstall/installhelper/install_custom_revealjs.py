@@ -16,7 +16,8 @@ def download_revealjs(
         fLOG=print,
         force_download=False,
         location="https://github.com/hakimel/reveal.js/releases",
-        clean=True):
+        clean=True,
+        version=None):
     """
     Download `reveal.js <https://github.com/hakimel/reveal.js/releases>`_ release.
     and unzip it.
@@ -28,8 +29,11 @@ def download_revealjs(
     @param      force_download  force the downloading of pandoc
     @param      location        location of reveal.js release
     @param      clean           clean unnecessary files
+    @param      version         version to download (unused)
     @return                     list of downloaded and unzipped files
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     link = location
     page = download_page(link)
     reg = re.compile("href=\\\"(.*?[.]zip)\\\"")

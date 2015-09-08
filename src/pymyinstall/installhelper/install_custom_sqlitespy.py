@@ -26,7 +26,7 @@ def IsSQLiteSpyInstalled(dest_folder):
         raise NotImplementedError("not available on platform " + sys.platform)
 
 
-def install_sqlitespy(temp_folder=".", fLOG=print, install=True):
+def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
     """
     Install `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_.
     It does not do it a second time if it is already installed.
@@ -34,8 +34,11 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True):
     @param      temp_folder     where to download the setup
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
+    @param      version         version to install (unused)
     @return                     temporary file
     """
+    if version is not None:
+        raise ValueError("cannot specify a version")
     if IsSQLiteSpyInstalled(temp_folder):
         return os.path.join(temp_folder, "SQLiteSpy.exe")
 
