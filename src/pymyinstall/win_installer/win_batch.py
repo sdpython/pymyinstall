@@ -121,6 +121,8 @@ def create_win_env(folders):
     if os.path.exists(os.path.join(tools, "Julia")):
         text.append("set JULIA_HOME=%PYTHON_TOOLS%\\Julia")
         text.append("set JULIA_PKGDIR=%PYTHON_TOOLS%\\Julia\\pkg")
+    if os.path.exists(os.path.join(tools, "TDM")):
+        text.append("set PATH=%PATH%;%PYTHON_TOOLS%\\TDM\\bin")
     if os.path.exists(os.path.join(tools, "MinGW")):
         text.append("set PATH=%PATH%;%PYTHON_TOOLS%\\MinGW\\bin")
 
