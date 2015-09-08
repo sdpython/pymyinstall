@@ -285,7 +285,7 @@ def ensae_set():
         ModuleInstall(
             "azureml", "pip", purpose="Python wrapper for Azure ML API (Azure ML Pipeline)", usage="AZURE"),
         ModuleInstall(
-            "azure_batch_apps", "pip", usage="AZURE", mname="batchapps",
+            "azure-batch-apps", "pip", usage="AZURE", mname="batchapps",
             purpose="Python wrapper for Azure ML API (Azure ML Pipeline)"),
         #
         #

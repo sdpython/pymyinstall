@@ -223,7 +223,7 @@ def extended_set():
                       purpose="ploting, Multidimensional data visualzation across files", usage="DATA/ML"),
         #
         # javascript graphs
-        ModuleInstall("pandas_highcharts", "pip",
+        ModuleInstall("pandas-highcharts", "pip", mname="pandas_highcharts",
                       purpose="plotting in javascript and pandas", usage="VIZ"),
         #
         ModuleInstall(

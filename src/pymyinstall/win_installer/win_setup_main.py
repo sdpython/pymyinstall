@@ -82,7 +82,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                      download_only=False,
                      no_setup=False,
                      notebooks=None,
-                     selection={"R", "mingw", "tgm"},
+                     selection={"R", "mingw", "tdm"},
                      documentation=True,
                      last_function=None,
                      r_packages=True,
@@ -115,7 +115,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         * `R <http://www.r-project.org/>`_
         * `Julia <http://julialang.org/>`_
         * `MinGW <http://www.mingw.org/>`_
-        * `TGM-GCC <http://tdm-gcc.tdragon.net/>`_
+        * `TDM-GCC <http://tdm-gcc.tdragon.net/>`_
         * `VS <https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx>`_
 
     By default, only R is included. Julia requires too much work.
@@ -160,7 +160,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     * 7z setup needs a last click to complete
     * pandoc needs a last click to complete
     * R must be manually installed in the right folder
-    * TGM-GCC is manually installed in the right folder
+    * TDM-GCC is manually installed in the right folder
     * Julia produces a file exe, for the time being it must be done manually
     * MinGW is also installed manually, the command line is different from others tools,
       once it is installed, you should run the command line::
@@ -250,7 +250,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     selection = set(_.lower() for _ in selection)
 
     _allowed = {"pandoc", "7z", "scite", "putty",
-                "sqlitespy", "scite", "python", "tgm", "vs", "r"}
+                "sqlitespy", "scite", "python", "tdm", "vs", "r"}
     for s in selection:
         s_ = s.split("==")[0]
         if s_ not in _allowed:

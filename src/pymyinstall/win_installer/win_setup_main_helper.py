@@ -18,7 +18,7 @@ from ..installhelper.install_custom_putty import install_putty
 from ..installhelper.install_custom_sqlitespy import install_sqlitespy
 from ..installhelper.install_custom_python import install_python
 from ..installhelper.install_custom_mingw import install_mingw
-from ..installhelper.install_custom_tgm_gcc import install_tgm_gcc
+from ..installhelper.install_custom_tdm_gcc import install_tdm_gcc
 from ..installhelper.install_custom_7z import install_7z
 from ..installhelper.install_custom_vs import install_vs
 from ..installhelper.install_custom import download_page
@@ -117,10 +117,10 @@ def win_download(folder=None,
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("tgm") and "tgm" in selection:
-        fLOG("--- download", "tgm")
-        r = install_tgm_gcc(dest_folder=folder, fLOG=fLOG,
-                            install=False, version=selection.get("tgm", None))
+    if not is_here("tdm") and "tdm" in selection:
+        fLOG("--- download", "tdm")
+        r = install_tdm_gcc(dest_folder=folder, fLOG=fLOG,
+                            install=False, version=selection.get("tdm", None))
         operations.append(("download", r))
         fLOG("done")
 
@@ -198,7 +198,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "TGM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty"],
+                    "Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty"],
                 selection=None):
     """
     Install setups
@@ -232,23 +232,20 @@ def win_install(folders,
         return None
 
     def find_exe(loc, name):
-        exes = []
-        for root, dirnames, filenames in os.walk(loc):
-            for filename in fnmatch.filter(filenames, '*.exe'):
-                exes.append(os.path.join(root, filename))
-
         name = name.lower()
         if name.lower() == "mingw":
             name = "gcc"
+        elif name.lower() == "tdm":
+            name = "gcc"
         exp = name + ".exe"
-        found = None
 
-        for exe in exes:
-            file = os.path.split(exe)[-1].lower()
-            if file == exp:
-                found = exe
-                break
-        return found
+        for root, dirnames, filenames in os.walk(loc):
+            for filename in fnmatch.filter(filenames, '*.exe'):
+                exe = os.path.join(root, filename)
+                file = os.path.split(exe)[-1].lower()
+                if file == exp:
+                    return exe
+        return None
 
     # we sort to get 7z installed first as it is needed for exe files
     cands = os.listdir(download_folder)
@@ -274,6 +271,8 @@ def win_install(folders,
         else:
             fLOG("--- install", cand, " in ", loc)
             full = os.path.join(download_folder, cand)
+            if 'tdm' in cand and 'gcc' in cand:
+                raise WinInstallException("TM must be manually installed from the setup\n{0}\nin\n{1}".format(full, loc))
             ext = os.path.splitext(cand)[-1]
             filename = os.path.split(cand)[-1]
             func = dfunc.get(filename, dfunc[ext])
