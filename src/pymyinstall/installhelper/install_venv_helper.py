@@ -210,7 +210,9 @@ def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False):
     if sys.platform.startswith("win"):
         exe = os.path.join(python_path, "python")
     else:
-        exe = os.path.join(python_path, "bin", "python")
+        exe = os.path.join(python_path, "python")
+        if not os.path.exists(exe):
+            exe = os.path.join(python_path, "bin", "python")
     if is_cmd:
         cmd = " ".join([exe] + script)
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)

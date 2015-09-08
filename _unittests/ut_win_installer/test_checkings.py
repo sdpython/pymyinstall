@@ -51,7 +51,7 @@ class TestCheckings(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        distribution_checkings(None, None, fLOG=fLOG)
+        distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
 
 
 if __name__ == "__main__":

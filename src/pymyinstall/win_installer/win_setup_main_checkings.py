@@ -20,13 +20,14 @@ if sys.version_info[0] == 2:
     FileNotFoundError = Exception
 
 
-def distribution_checkings(python_path, tools_path, fLOG=print):
+def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=False):
     """
     checks a distribution was properly executed
 
     @param      python_path     path for python
     @param      tools_path      path for tools
     @param      fLOG            logging function
+    @param      skip_import     skip the validation of every installed module (for unit test purposes)
 
     The function raises @see cl WinInstallDistributionError if an issue is detected.
 
@@ -63,17 +64,18 @@ def distribution_checkings(python_path, tools_path, fLOG=print):
     ################################
     # check that module can be imported
     ################################
-    res = import_every_module(
-        python_path, None, only_installed=True, fLOG=fLOG)
-    mes = []
-    for r in res:
-        if not r[0]:
-            m = "FAILED {0}\nOUT\n{1}\nERR\n{2}".format(
-                r[1].name, r[2], r[3])
-            mes.append(m)
-    if len(mes) > 0:
-        raise WinInstallDistributionError(
-            "cannot import modules\n" + "\n".join(mes))
+    if not skip_import:
+        res = import_every_module(
+            python_path, None, only_installed=True, fLOG=fLOG)
+        mes = []
+        for r in res:
+            if not r[0]:
+                m = "FAILED {0}\nOUT\n{1}\nERR\n{2}".format(
+                    r[1].name, r[2], r[3])
+                mes.append(m)
+        if len(mes) > 0:
+            raise WinInstallDistributionError(
+                "cannot import modules\n" + "\n".join(mes))
 
     ########
     # final
