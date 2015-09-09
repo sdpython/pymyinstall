@@ -57,6 +57,10 @@ class TestRunNotebooks(unittest.TestCase):
             # notebooks are not converted into python 2.7, so not tested
             return
 
+        if "travis" in sys.executable:
+            # requires too many dependencies
+            return
+
         if compare_module_version(IPython.__version__, "4.0.0") < 0:
             # IPython is not recent enough
             return

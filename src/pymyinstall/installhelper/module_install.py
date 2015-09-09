@@ -766,10 +766,16 @@ class ModuleInstall:
                 if k.lower() == "license":
                     res = v
                     break
-        if res in {None, "", "UNKNOWN"}:
+        adm = {None, "", "UNKNOWN"}
+        if res is not None:
+            if isinstance(res, list):
+                res = [_ for _ in res if _ and _ not in adm]
+                if len(res) > 0:
+                    res = res[0]
+                else:
+                    res = None
+        if res in adm:
             res = missing_module_licenses.get(self.name, None)
-            if res is None:
-                res = missing_module_licenses.get(self.mname, None)
         return res
 
     def get_installed_classifier(self):

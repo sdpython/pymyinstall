@@ -54,7 +54,8 @@ class TestModuleDependencies (unittest.TestCase):
         for r in res:
             assert isinstance(r, tuple)
             fLOG(r)
-        assert len(res) > 4
+        if len(res) < 3:
+            raise Exception(str(res))
 
 
 if __name__ == "__main__":

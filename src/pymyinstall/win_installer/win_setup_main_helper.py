@@ -272,7 +272,8 @@ def win_install(folders,
             fLOG("--- install", cand, " in ", loc)
             full = os.path.join(download_folder, cand)
             if 'tdm' in cand and 'gcc' in cand:
-                raise WinInstallException("TM must be manually installed from the setup\n{0}\nin\n{1}".format(full, loc))
+                raise WinInstallException(
+                    "TM must be manually installed from the setup\n{0}\nin\n{1}".format(full, loc))
             ext = os.path.splitext(cand)[-1]
             filename = os.path.split(cand)[-1]
             func = dfunc.get(filename, dfunc[ext])
