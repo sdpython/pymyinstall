@@ -39,7 +39,7 @@ except ImportError:
 
 
 from pyquickhelper import fLOG, get_temp_folder
-from src.pymyinstall.installhelper import get_module_dependencies
+from src.pymyinstall.installhelper import get_module_dependencies, get_module_metadata
 
 
 class TestModuleDependencies (unittest.TestCase):
@@ -55,7 +55,7 @@ class TestModuleDependencies (unittest.TestCase):
             assert isinstance(r, tuple)
             fLOG(r)
         if len(res) < 3:
-            raise Exception(str(res))
+            raise Exception(str(res) + "\n" + str(get_module_metadata("matplotlib")))
 
 
 if __name__ == "__main__":
