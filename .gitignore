@@ -196,7 +196,6 @@ $RECYCLE.BIN/
 *.egg-info
 *.whl
 *.zip
-*.exe
 *.whl
 *master/*
 dist/
@@ -253,3 +252,5 @@ auto_*.db3
 src/pymyinstall/installhelper/page.html
 *.RData
 t.bat
+_doc/notebooks/best_boston.pkl
+_doc/notebooks/profile_example.*
