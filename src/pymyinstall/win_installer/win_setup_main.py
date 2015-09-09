@@ -231,6 +231,9 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
       needs to be installed.
     * **theano** requires `TDM-GCC <http://tdm-gcc.tdragon.net/>`_,
       read `Installation of Theano on Windows <http://deeplearning.net/software/theano/install_windows.html>`_
+    * **xgboost** if DLL ``vcomp110.dll`` is missing, you should read
+      `Building xgboost on Windows for Python <http://www.xavierdupre.fr/blog/2015-08-23_nojs.html>`_
+      to understand how to get it.
 
     @todo Use chocolatey to process installation.
 

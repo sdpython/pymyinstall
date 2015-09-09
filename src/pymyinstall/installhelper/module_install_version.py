@@ -178,7 +178,15 @@ def get_module_metadata(module, use_cmd=False):
             except UnicodeDecodeError:
                 warnings.warn("UnicodeDecodeError with: " + line)
                 continue
-            d[spl[0].strip()] = ":".join(spl[1:]).strip()
+            key = spl[0].strip()
+            value = ":".join(spl[1:]).strip()
+            if key not in d:
+                d[key] = value
+            else:
+                if not isinstance(d[key], list):
+                    d[key] = [d[key]]
+                d[key].append(value)
+
         a = mod.key
         res[a] = d
         al = mod.key.lower()
@@ -297,3 +305,42 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
 
     raise MissingVersionOnPyPiException(
         "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
+
+
+def get_module_dependencies(module, use_cmd=False, deep=False):
+    """
+    return the dependencies for a module
+
+    @param      module      unused, None
+    @param      use_cmd     use command line
+    @param      deep        dig into dependencies of dependencies
+    @return                 list of tuple (module, version, required by as a list)
+    """
+    meta = get_module_metadata(module, use_cmd)
+    deps = [v for k, v in meta.items() if "Requires" in k]
+    res = []
+    for d in deps:
+        if not isinstance(d, list):
+            dl = [d]
+        else:
+            dl = d
+        for v in dl:
+            spl = v.split()
+            if len(spl) == 1:
+                res.append((v, None, [module]))
+            else:
+                res.append((spl[0], spl[1], [module]))
+
+    if deep:
+        done = {module: None}
+        mod = 1
+        while mod > 0:
+            mod = 0
+            for r in res:
+                if r[0] not in done:
+                    temp = get_module_dependencies(
+                        r[0], use_cmd=use_cmd, deep=deep)
+                    res.extend(temp)
+                    mod += 1
+                    done[r[0]] = None
+    return res
