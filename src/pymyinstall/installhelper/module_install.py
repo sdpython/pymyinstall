@@ -28,7 +28,7 @@ else:
 
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
-from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata
+from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version
 from .missing_license import missing_module_licenses
 
 
@@ -674,28 +674,6 @@ class ModuleInstall:
 
             return available[0]
 
-    @staticmethod
-    def numeric_version(vers):
-        """
-        convert a string into a tuple with numbers whever possible
-
-        @param      vers    string
-        @return             tuple
-        """
-        if isinstance(vers, tuple):
-            return vers
-        if isinstance(vers, list):
-            raise Exception("unexpected value:" + str(vers))
-        spl = vers.split(".")
-        r = []
-        for _ in spl:
-            try:
-                i = int(_)
-                r.append(i)
-            except:
-                r.append(_)
-        return tuple(r)
-
     def get_pypi_numeric_version(self):
         """
         returns the version of a package in pypi
@@ -708,7 +686,7 @@ class ModuleInstall:
         if isinstance(vers, list):
             v = self.get_pypi_version()
             raise TypeError("unexpected type: {0} -- {1}".format(vers, v))
-        return ModuleInstall.numeric_version(vers)
+        return numeric_version(vers)
 
     def get_installed_version(self):
         """
@@ -809,7 +787,7 @@ class ModuleInstall:
         vers = self.get_installed_version()
         if vers is None:
             return None
-        return ModuleInstall.numeric_version(vers)
+        return numeric_version(vers)
 
     def has_update(self):
         """
@@ -822,55 +800,10 @@ class ModuleInstall:
         vers = self.get_installated_numeric_version()
         if self.version is None:
             pypi = self.get_pypi_numeric_version()
-            return ModuleInstall.compare_version(pypi, vers) > 0
+            return compare_version(pypi, vers) > 0
         else:
-            num = ModuleInstall.numeric_version(self.version)
-            return ModuleInstall.compare_version(num, vers) > 0
-
-    @staticmethod
-    def compare_version(num, vers):
-        """
-        compare two versions
-
-        @param      num     first version
-        @param      vers    second version
-        @return             -1, 0, 1
-        """
-        if num is None:
-            if vers is None:
-                return 0
-            else:
-                return 1
-        if vers is None:
-            return -1
-
-        if not isinstance(vers, tuple):
-            vers = ModuleInstall.numeric_version(vers)
-        if not isinstance(num, tuple):
-            num = ModuleInstall.numeric_version(num)
-
-        if len(num) == len(vers):
-            for a, b in zip(num, vers):
-                if isinstance(a, int) and isinstance(b, int):
-                    if a < b:
-                        return -1
-                    elif a > b:
-                        return 1
-                else:
-                    a = str(a)
-                    b = str(b)
-                    if a < b:
-                        return -1
-                    elif a > b:
-                        return 1
-            return 0
-        else:
-            if len(num) < len(vers):
-                num = num + (0,) * (len(vers) - len(num))
-                return ModuleInstall.compare_version(num, vers)
-            else:
-                vers = vers + (0,) * (len(num) - len(vers))
-                return ModuleInstall.compare_version(num, vers)
+            num = numeric_version(self.version)
+            return compare_version(num, vers) > 0
 
     def install(self,
                 force_kind=None,
@@ -1056,9 +989,8 @@ class ModuleInstall:
                 vers = self.get_installated_numeric_version()
                 ret = True
                 if vers is not None:
-                    whlvers = ModuleInstall.numeric_version(
-                        get_wheel_version(whlname))
-                    if ModuleInstall.compare_version(vers, whlvers) >= 0:
+                    whlvers = numeric_version(get_wheel_version(whlname))
+                    if compare_version(vers, whlvers) >= 0:
                         self.fLOG("skipping, no newer version {0} <= {1}: whl= {2}".format(
                             whlvers, vers, whlname))
                         ret = False

@@ -39,27 +39,91 @@ except ImportError:
 
 
 from pyquickhelper import fLOG, get_temp_folder
-from src.pymyinstall.installhelper import get_module_dependencies, get_module_metadata
+from src.pymyinstall.installhelper import get_module_dependencies, get_module_metadata, version_consensus
+from src.pymyinstall.installhelper.module_install_exceptions import WrongVersionError
 
 
 class TestModuleDependencies (unittest.TestCase):
 
-    def test_dependencies(self):
+    def common_function(self, name, use_pip=False):
+        res = get_module_dependencies(name, deep=True, use_pip=use_pip)
+        for k, v in sorted(res.items()):
+            assert isinstance(v, tuple)
+            fLOG(k, "-->", v)
+        if len(res) < 3:
+            from pip import get_installed_distributions
+            pkgs = get_installed_distributions(
+                local_only=False, skip=[], use_pip=use_pip)
+            req_map = dict((p.key, (p, p.requires())) for p in pkgs)
+            mat = req_map.get(name, None)
+            raise Exception(str(res) + "\n" +
+                            str(get_module_metadata(name)) + "\n" + str(mat))
+
+    def test_dependencies_matplotlib(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        self.common_function("matplotlib")
+
+    def test_dependencies_ggplot(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        self.common_function("ggplot")
+
+    def test_dependencies_ggplot_pip(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        self.common_function("ggplot", use_pip=True)
+
+    def test_version_consensus(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        res = get_module_dependencies("matplotlib", deep=True)
-        for r in res:
-            assert isinstance(r, tuple)
-            fLOG(r)
-        if len(res) < 3:
-            from pip import get_installed_distributions
-            pkgs = get_installed_distributions(local_only=False, skip=[])
-            req_map = dict((p.key, (p, p.requires())) for p in pkgs)
-            mat = req_map.get("matplotlib", None)
-            raise Exception(str(res) + "\n" + str(get_module_metadata("matplotlib")) + "\n" + str(mat))
+        self.assertEqual(version_consensus('>=2.3', '>=2.4'), '>=2.4')
+        self.assertEqual(version_consensus('>=2.5', '>=2.4'), '>=2.5')
+        self.assertEqual(version_consensus('>2.3', '>2.4'), '>2.4')
+        self.assertEqual(version_consensus('>2.5', '>2.4'), '>2.5')
+        self.assertEqual(version_consensus('>=2.3', '>2.4'), '>2.4')
+        self.assertEqual(version_consensus('>2.3', '>=2.4'), '>=2.4')
+        self.assertEqual(version_consensus('>2.5', '>2.4'), '>2.5')
+        self.assertEqual(version_consensus('>=2.5', '>2.4'), '>=2.5')
+        self.assertEqual(version_consensus('>2.5', '>=2.4'), '>2.5')
+
+        self.assertEqual(version_consensus('<=2.3', '<=2.4'), '<=2.3')
+        self.assertEqual(version_consensus('<=2.5', '<=2.4'), '<=2.4')
+        self.assertEqual(version_consensus('<2.3', '<2.4'), '<2.3')
+        self.assertEqual(version_consensus('<2.5', '<2.4'), '<2.4')
+        self.assertEqual(version_consensus('<=2.3', '<2.4'), '<=2.3')
+        self.assertEqual(version_consensus('<2.3', '<=2.4'), '<2.3')
+        self.assertEqual(version_consensus('<2.5', '<2.4'), '<2.4')
+        self.assertEqual(version_consensus('<=2.5', '<2.4'), '<2.4')
+        self.assertEqual(version_consensus('<2.5', '<=2.4'), '<=2.4')
+
+        self.assertEqual(version_consensus('==2.3', '<=2.4'), '==2.3')
+        self.assertEqual(version_consensus('<=2.5', '==2.4'), '==2.4')
+        self.assertEqual(version_consensus('==2.3', '<2.4'), '==2.3')
+        self.assertEqual(version_consensus('<2.5', '==2.4'), '==2.4')
+        self.assertEqual(version_consensus('>2.3', '==2.4'), '==2.4')
+        self.assertEqual(version_consensus('==2.5', '>2.4'), '==2.5')
+        self.assertEqual(version_consensus('==2.5', '>2.4'), '==2.5')
+        self.assertEqual(version_consensus('==2.5', '>=2.4'), '==2.5')
+
+        try:
+            version_consensus('<=2.3', '>=2.4')
+        except WrongVersionError:
+            pass
+
+        try:
+            version_consensus('<=2.3', '==2.4')
+        except WrongVersionError:
+            pass
 
 
 if __name__ == "__main__":

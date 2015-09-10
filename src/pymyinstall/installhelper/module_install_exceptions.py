@@ -69,3 +69,10 @@ class RunCmdError(Exception):
     raised when a command line cannot be run
     """
     pass
+
+
+class WrongVersionError(Exception):
+    """
+    cannot interpret a version
+    """
+    pass

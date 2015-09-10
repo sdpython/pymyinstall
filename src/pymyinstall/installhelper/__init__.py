@@ -19,7 +19,7 @@ from .install_custom_sqlitespy import install_sqlitespy
 from .install_venv_helper import run_cmd_path, run_venv_script, venv_install, create_virtual_env
 from .module_install import ModuleInstall
 from .module_dependencies import missing_dependencies
-from .module_install_version import get_module_dependencies, get_module_version, get_pypi_version, get_module_metadata
+from .module_install_version import get_module_dependencies, get_module_version, get_pypi_version, get_module_metadata, version_consensus, numeric_version, compare_version
 
 
 def module_as_table(list_module, as_df=False):

@@ -1,8 +1,9 @@
 """
 @file
-@brief Functions to get module version, license
+@brief Functions to get module version, license, dependencies
 """
 import sys
+import re
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
@@ -13,7 +14,7 @@ else:
 
 from .install_cmd_helper import run_cmd, get_pip_program
 from .install_memoize import install_memoize
-from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException
+from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError
 
 
 annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",
@@ -307,29 +308,265 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
         "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
 
 
-def get_module_dependencies(module, use_cmd=False, deep=False):
+def numeric_version(vers):
+    """
+    convert a string into a tuple with numbers wherever possible
+
+    @param      vers    string
+    @return             tuple
+    """
+    if isinstance(vers, tuple):
+        return vers
+    if isinstance(vers, list):
+        raise Exception("unexpected value:" + str(vers))
+    spl = vers.split(".")
+    r = []
+    for _ in spl:
+        try:
+            i = int(_)
+            r.append(i)
+        except:
+            r.append(_)
+    return tuple(r)
+
+
+def compare_version(num, vers):
+    """
+    compare two versions
+
+    @param      num     first version
+    @param      vers    second version
+    @return             -1, 0, 1
+    """
+    if num is None:
+        if vers is None:
+            return 0
+        else:
+            return 1
+    if vers is None:
+        return -1
+
+    if not isinstance(vers, tuple):
+        vers = numeric_version(vers)
+    if not isinstance(num, tuple):
+        num = numeric_version(num)
+
+    if len(num) == len(vers):
+        for a, b in zip(num, vers):
+            if isinstance(a, int) and isinstance(b, int):
+                if a < b:
+                    return -1
+                elif a > b:
+                    return 1
+            else:
+                a = str(a)
+                b = str(b)
+                if a < b:
+                    return -1
+                elif a > b:
+                    return 1
+        return 0
+    else:
+        if len(num) < len(vers):
+            num = num + (0,) * (len(vers) - len(num))
+            return ModuleInstall.compare_version(num, vers)
+        else:
+            vers = vers + (0,) * (len(num) - len(vers))
+            return ModuleInstall.compare_version(num, vers)
+
+
+def version_consensus(v1, v2):
+    """
+    *v1* and *v2* are two versions of the same module, which one to keep?
+
+    @param      v1      version 1
+    @param      v2      version 2
+    @return             consensus
+
+    * ``v1=None``, ``v2='(>=1.5)'`` --> ``v='>=1.5'``
+
+    To improve:
+
+    * ``v1='<=1.6'``, ``v2='(>=1.5)'`` --> ``v='==1.6'``
+    """
+    reg = re.compile("([><=]*)([^><=]+)")
+
+    def process_version(v):
+        if isinstance(v, str  # unicode#
+                      ):
+            v = v.strip('()')
+            find = reg.search(v)
+            if not find:
+                raise WrongVersionError(v)
+            sign = find.groups()[0]
+            number = numeric_version(find.groups()[1])
+        else:
+            try:
+                sign, number = v
+            except ValueError as e:
+                raise ValueError("weird format: " + str(v) +
+                                 " - " + str(type(v))) from e
+        return sign, number
+
+    if v1 is None:
+        return v2
+    elif v2 is None:
+        return v1
+    else:
+        s1, n1 = process_version(v1)
+        s2, n2 = process_version(v2)
+
+        if s1 not in ('<=', '==', '<', '>', '>='):
+            raise ValueError("wrong sign {0} for v1={1}", s1, v1)
+        if s2 not in ('<=', '==', '<', '>', '>='):
+            raise ValueError("wrong sign {0} for v1={1}", s2, v2)
+
+        if s1 == "==":
+            if s2 == "==":
+                if compare_version(n1, n2) != 0:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            else:
+                res = s1, n1
+
+        elif s1 == "<=":
+            if s2 == "<=":
+                res = s1, min(n1, n2)
+            elif s2 == "==":
+                if compare_version(n1, n2) < 0:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s2, n2
+            elif s2 == '<':
+                if compare_version(n1, n2) == -1:
+                    res = s1, n1
+                else:
+                    res = s2, n2
+            elif s2 in ('>', '>='):
+                if compare_version(n1, n2) <= 0:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s1, n1
+
+        elif s1 == "<":
+            if s2 == "<":
+                res = s1, min(n1, n2)
+            elif s2 == "==":
+                if compare_version(n1, n2) <= 0:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s2, n2
+            elif s2 == '<=':
+                if compare_version(n1, n2) <= 0:
+                    res = s1, n1
+                else:
+                    res = s2, n2
+            elif s2 in ('>', '>='):
+                if compare_version(n1, n2) <= 0:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s1, n1
+
+        elif s1 == ">=":
+            if s2 == ">=":
+                res = s1, max(n1, n2)
+            elif s2 == "==":
+                if compare_version(n1, n2) == -1:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s2, n2
+            elif s2 == '>':
+                if compare_version(n1, n2) <= 0:
+                    res = s2, n2
+                else:
+                    res = s1, n1
+            elif s2 in ('<', '<='):
+                if compare_version(n1, n2) >= 0:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s2, n2
+
+        elif s1 == ">":
+            if s2 == ">":
+                res = s1, max(n1, n2)
+            elif s2 == "==":
+                if compare_version(n1, n2) >= 0:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s2, n2
+            elif s2 == '>=':
+                if compare_version(n1, n2) == -1:
+                    res = s2, n2
+                else:
+                    res = s1, n1
+            elif s2 in ('<', '<='):
+                if compare_version(n1, n2) == 1:
+                    raise WrongVersionError(
+                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+                res = s2, n2
+        else:
+            res = None, None
+
+        if res[0] is None:
+            raise WrongVersionError(
+                "incompatible version and wrong format: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+
+        return '{0}{1}'.format(res[0], '.'.join(str(_) for _ in res[1]))
+
+_get_module_dependencies_deps = None
+
+
+def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, use_pip=None):
     """
     return the dependencies for a module
 
     @param      module      unused, None
     @param      use_cmd     use command line
     @param      deep        dig into dependencies of dependencies
-    @return                 list of tuple (module, version, required by as a list)
+    @param      collapse    only one row per module
+    @param      use_pip     use pip to discover dependencies or not (parse metadata)
+    @return                 list of tuple (module, version, required by as a str)
+                            or dictionary  { module: (version, required by as a list) } if *collapse* is True
+
+    The function which uses *use_pip=True* is not fully tested, it does not
+    return contraints (== 2.4).
     """
-    meta = get_module_metadata(module, use_cmd)
-    deps = [v for k, v in meta.items() if "Requires" in k]
-    res = []
-    for d in deps:
-        if not isinstance(d, list):
-            dl = [d]
-        else:
-            dl = d
-        for v in dl:
-            spl = v.split()
-            if len(spl) == 1:
-                res.append((v, None, [module]))
+    if use_pip is None:
+        use_pip = not sys.platform.startswith("win")
+
+    if use_pip:
+        global _get_module_dependencies_deps
+        if _get_module_dependencies_deps is None:
+            from pip import get_installed_distributions
+            temp = get_installed_distributions(local_only=False, skip=[])
+            _get_module_dependencies_deps = dict(
+                (p.key, (p, p.requires())) for p in temp)
+        if module not in _get_module_dependencies_deps:
+            raise ValueError("module {0} was not installed".format(module))
+        res = []
+        for req in _get_module_dependencies_deps[module]:
+            if isinstance(req, list):
+                for r in req:
+                    res.append((r.key, None, module))
             else:
-                res.append((spl[0], spl[1], [module]))
+                res.append((req.key, None, module))
+    else:
+        meta = get_module_metadata(module, use_cmd)
+        deps = [v for k, v in meta.items() if "Requires" in k]
+        res = []
+        for d in deps:
+            if not isinstance(d, list):
+                dl = [d]
+            else:
+                dl = d
+            for v in dl:
+                spl = v.split()
+                if len(spl) == 1:
+                    key = (v, None, module)
+                else:
+                    key = (spl[0], spl[1], module)
+                if key not in res:
+                    res.append(key)
 
     if deep:
         done = {module: None}
@@ -339,8 +576,28 @@ def get_module_dependencies(module, use_cmd=False, deep=False):
             for r in res:
                 if r[0] not in done:
                     temp = get_module_dependencies(
-                        r[0], use_cmd=use_cmd, deep=deep)
-                    res.extend(temp)
+                        r[0], use_cmd=use_cmd, deep=deep, collapse=False, use_pip=use_pip)
+                    for key in temp:
+                        if key not in res:
+                            res.append(key)
                     mod += 1
                     done[r[0]] = None
-    return res
+
+    if collapse:
+        final = {}
+        for name, version, required in res:
+            if name not in final:
+                final[name] = (version, [required])
+            else:
+                ex = final[name][1]
+                ex.append(required)
+                try:
+                    v = version_consensus(final[name][0], version)
+                except WrongVersionError as e:
+                    raise WrongVersionError("unable to reconcile versions:\n{0}\n{1}".format(
+                        ex, str((name, version, required)))) from e
+                final[name] = (v, ex)
+        return final
+    else:
+        return [(name, version.strip('()') if version is not None else version, required)
+                for name, version, required in res]
