@@ -55,10 +55,12 @@ class TestLONGSuccessfulImport0(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-            
-        nb = int("".join( _ for _ in os.path.split(__file__)[-1] if "0" <= _ <= "9"))
 
-        res = import_every_module(sys.executable, None, fLOG=fLOG, start=50*nb, end=50*(nb+1))
+        nb = int("".join(_ for _ in os.path.split(
+            __file__)[-1] if "0" <= _ <= "9"))
+
+        res = import_every_module(
+            sys.executable, None, fLOG=fLOG, start=50 * nb, end=50 * (nb + 1))
         nb = 0
         for r in res:
             if not r[0]:
