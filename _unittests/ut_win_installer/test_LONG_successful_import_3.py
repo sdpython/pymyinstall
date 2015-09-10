@@ -1,5 +1,5 @@
 """
-@brief      test log(time=570s)
+@brief      test log(time=103s)
 """
 
 import sys
@@ -48,15 +48,17 @@ if sys.version_info[0] == 2:
     FileNotFoundError = Exception
 
 
-class TestLONGSuccessfulImport(unittest.TestCase):
+class TestLONGSuccessfulImport3(unittest.TestCase):
 
     def test_long_import_every_module(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+            
+        nb = int("".join( _ for _ in os.path.split(__file__)[-1] if "0" <= _ <= "9"))
 
-        res = import_every_module(sys.executable, None, fLOG=fLOG)
+        res = import_every_module(sys.executable, None, fLOG=fLOG, start=50*nb, end=50*(nb+1))
         nb = 0
         for r in res:
             if not r[0]:
