@@ -55,7 +55,11 @@ class TestModuleDependencies (unittest.TestCase):
             assert isinstance(r, tuple)
             fLOG(r)
         if len(res) < 3:
-            raise Exception(str(res) + "\n" + str(get_module_metadata("matplotlib")))
+            from pip import get_installed_distributions
+            pkgs = get_installed_distributions(local_only=False, skip=[])
+            req_map = dict((p.key, (p, p.requires())) for p in pkgs)
+            mat = req_map.get("matplotlib", None)
+            raise Exception(str(res) + "\n" + str(get_module_metadata("matplotlib")) + "\n" + str(mat))
 
 
 if __name__ == "__main__":
