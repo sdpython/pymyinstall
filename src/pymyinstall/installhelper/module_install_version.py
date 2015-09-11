@@ -544,8 +544,6 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
     if use_pip is None:
         use_pip = not sys.platform.startswith("win")
         
-    raise Exception("**** {0}-{1}".format(use_pip, sys.platform))
-
     if use_pip:
         global _get_module_dependencies_deps
         if _get_module_dependencies_deps is None:

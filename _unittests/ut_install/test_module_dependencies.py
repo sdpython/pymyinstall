@@ -45,7 +45,7 @@ from src.pymyinstall.installhelper.module_install_exceptions import WrongVersion
 
 class TestModuleDependencies (unittest.TestCase):
 
-    def common_function(self, name, use_pip=False):
+    def common_function(self, name, use_pip=None):
         res = get_module_dependencies(name, deep=True, use_pip=use_pip)
         for k, v in sorted(res.items()):
             assert isinstance(v, tuple)
