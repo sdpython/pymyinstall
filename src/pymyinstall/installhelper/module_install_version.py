@@ -4,6 +4,8 @@
 """
 import sys
 import re
+import pip._vendor.pkg_resources
+from importlib import reload
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
@@ -47,7 +49,8 @@ def call_get_installed_distributions(local_only=True,
                                      skip=None,
                                      include_editables=True,
                                      editables_only=False,
-                                     user_only=False):
+                                     user_only=False,
+                                     use_cmd=False):
     """
     Direct call to function *get_installed_distributions* from
     `pip <https://pip.pypa.io/en/stable/>`_
@@ -62,8 +65,12 @@ def call_get_installed_distributions(local_only=True,
     @param  editables_only  if True , only report editables.
     @param  user_only       if True , only report installations in the user
                             site directory.
+    @param  use_cmd         if True, use a different process (updated package list)
     @return                 list of installed Distribution objects.
     """
+    if use_cmd:
+        raise NotImplementedError("use_cmd should be False")
+    reload(pip._vendor.pkg_resources)
     if skip is None:
         from pip.compat import stdlib_pkgs
         skip = stdlib_pkgs
@@ -139,12 +146,12 @@ def get_module_version(module, use_cmd=False):
 
     _get_module_version_manual_memoize.update(res)
     return res
-    
+
 
 def is_installed(name):
     """
     tells if a module is installed or not
-    
+
     @param      name        module name
     @return                 boolean
     """
@@ -164,20 +171,21 @@ def get_module_metadata(module, use_cmd=False, refresh_cache=False):
     """
     if module is not None:
         modl = module.lower()
-        res = get_module_metadata(None, use_cmd=use_cmd)
+        res = get_module_metadata(
+            None, use_cmd=use_cmd, refresh_cache=refresh_cache)
         return res.get(modl, None)
 
     global _get_module_metadata_manual_memoize
     if not refresh_cache and len(_get_module_metadata_manual_memoize) > 0:
         return _get_module_metadata_manual_memoize
 
-    res = {}
     # local_only must be False to get all modules
     # not only the ones installed in the virtual environment
-    dist = call_get_installed_distributions(local_only=False)
+    dist = call_get_installed_distributions(local_only=False, use_cmd=use_cmd)
     if len(dist) == 0:
         raise ConfigurationError("no installed module, unexpected (pip should be there): sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
             sys.executable, sys.prefix, sys.base_prefix))
+    res = {}
     for mod in dist:
         d = {}
         lines = mod._get_metadata(mod.PKG_INFO)
@@ -546,12 +554,12 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
     """
     if use_pip is None:
         use_pip = not sys.platform.startswith("win")
-        
+
     if use_pip:
         global _get_module_dependencies_deps
         if _get_module_dependencies_deps is None or refresh_cache:
-            from pip import get_installed_distributions
-            temp = get_installed_distributions(local_only=False, skip=[])
+            temp = call_get_installed_distributions(
+                local_only=False, skip=[], use_cmd=use_cmd)
             _get_module_dependencies_deps = dict(
                 (p.key, (p, p.requires())) for p in temp)
         if module not in _get_module_dependencies_deps:
@@ -564,7 +572,11 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         else:
             res.append((req.key, None, module))
     else:
-        meta = get_module_metadata(module, use_cmd, refresh_cache=refresh_cache)
+        meta = get_module_metadata(
+            module, use_cmd, refresh_cache=refresh_cache)
+        if meta is None:
+            raise ImportError(
+                "unable to get metadata for {0} - refresh_cache={1}".format(module, refresh_cache))
         deps = [v for k, v in meta.items() if "Requires" in k]
         res = []
         for d in deps:

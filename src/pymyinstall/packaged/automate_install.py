@@ -5,7 +5,7 @@
 from __future__ import print_function
 import os
 import warnings
-from ..installhelper import ModuleInstall, has_pip, update_pip
+from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
 from ..installhelper.module_dependencies import missing_dependencies
 from .packaged_set import all_fullset
@@ -175,19 +175,20 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
                 list_module=None, reorder=True, skip_module=None,
-                up_pip=True):
+                up_pip=True, skip_missing=False):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
     the function starts by updating pip.
 
-    @param  temp_folder     temporary folder
-    @param  verbose         more display
-    @param  list_module     None or of list of str or @see cl ModuleInstall
-    @param  fLOG            logging function
-    @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
-    @param  skip_module     module to skip (list of str)
-    @param  up_pip          upgrade pip (pip must not be in *skip_module*)
+    @param      temp_folder     temporary folder
+    @param      verbose         more display
+    @param      list_module     None or of list of str or @see cl ModuleInstall
+    @param      fLOG            logging function
+    @param      reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
+    @param      skip_module     module to skip (list of str)
+    @param      up_pip          upgrade pip (pip must not be in *skip_module*)
+    @param      skip_missing    skip the checking of the missing dependencies
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -248,8 +249,50 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             for m in errors:
                 fLOG("  ", m)
 
-    miss = missing_dependencies()
-    if len(miss) > 0:
-        mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
-                        for k, v in sorted(miss.items()))
-        warnings.warn(mes)
+    if not skip_missing:
+        miss = missing_dependencies()
+        if len(miss) > 0:
+            mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
+                            for k, v in sorted(miss.items()))
+            warnings.warn(mes)
+
+
+def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True):
+    """
+    install a module with its dependencies
+
+    @param      module          module name
+    @param      temp_folder     where to download
+    @param      fLOG            logging function
+    @param      verbose         more display
+    @param      deps            add dependencies
+    @return                     list of installed modules
+
+    The function does not handle properly contraints on versions.
+    It checks in the registered list of modules if *name* is present.
+    If it is the case, it uses it, otherwise, it uses *pip*.
+    """
+    installed = []
+    if not is_installed(name):
+        install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
+                    list_module=[name], reorder=True, up_pip=False,
+                    skip_missing=True)
+        installed.append(name)
+
+    stack = [name]
+    while len(stack) > 0:
+        name = stack[-1]
+        del stack[-1]
+        res = get_module_dependencies(name, refresh_cache=True, use_pip=True)
+        if res is None:
+            raise ImportError("unable to check dependencies of module {0}\ninstalled:\n{1}".format(
+                name, "\n".join(inst)))
+        list_m = [k for k, v in res.items()]
+        inst = [k for k in list_m if not is_installed(k)]
+        install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
+                    list_module=inst, reorder=True, up_pip=False,
+                    skip_missing=True)
+        stack.extend(inst)
+        installed.extend(inst)
+
+    return list(sorted(set(installed)))
