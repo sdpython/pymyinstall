@@ -154,12 +154,13 @@ def is_installed(name):
 _get_module_metadata_manual_memoize = {}
 
 
-def get_module_metadata(module, use_cmd=False):
+def get_module_metadata(module, use_cmd=False, refresh_cache=False):
     """
     return a dictionary { module:metadata }
 
-    @param      module      unused, None
-    @return                 dictionary
+    @param      module          unused, None
+    @param      refresh_cache   refresh the cache before getting metadata
+    @return                     dictionary
     """
     if module is not None:
         modl = module.lower()
@@ -167,7 +168,7 @@ def get_module_metadata(module, use_cmd=False):
         return res.get(modl, None)
 
     global _get_module_metadata_manual_memoize
-    if len(_get_module_metadata_manual_memoize) > 0:
+    if not refresh_cache and len(_get_module_metadata_manual_memoize) > 0:
         return _get_module_metadata_manual_memoize
 
     res = {}
@@ -526,27 +527,29 @@ def version_consensus(v1, v2):
 _get_module_dependencies_deps = None
 
 
-def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, use_pip=None):
+def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, use_pip=None, refresh_cache=False):
     """
     return the dependencies for a module
 
-    @param      module      unused, None
-    @param      use_cmd     use command line
-    @param      deep        dig into dependencies of dependencies
-    @param      collapse    only one row per module
-    @param      use_pip     use pip to discover dependencies or not (parse metadata)
-    @return                 list of tuple (module, version, required by as a str)
-                            or dictionary  { module: (version, required by as a list) } if *collapse* is True
+    @param      module          unused, None
+    @param      use_cmd         use command line
+    @param      deep            dig into dependencies of dependencies
+    @param      collapse        only one row per module
+    @param      use_pip         use pip to discover dependencies or not (parse metadata)
+    @param      refresh_cache   refresh the cache (see below)
+    @return                     list of tuple (module, version, required by as a str)
+                                or dictionary  { module: (version, required by as a list) } if *collapse* is True
 
     The function which uses *use_pip=True* is not fully tested, it does not
-    return contraints (== 2.4).
+    return contraints (== 2.4). The function caches the results to avoid doing it again
+    during a second execution unless *refresh_cache* is True
     """
     if use_pip is None:
         use_pip = not sys.platform.startswith("win")
         
     if use_pip:
         global _get_module_dependencies_deps
-        if _get_module_dependencies_deps is None:
+        if _get_module_dependencies_deps is None or refresh_cache:
             from pip import get_installed_distributions
             temp = get_installed_distributions(local_only=False, skip=[])
             _get_module_dependencies_deps = dict(
@@ -561,7 +564,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         else:
             res.append((req.key, None, module))
     else:
-        meta = get_module_metadata(module, use_cmd)
+        meta = get_module_metadata(module, use_cmd, refresh_cache=refresh_cache)
         deps = [v for k, v in meta.items() if "Requires" in k]
         res = []
         for d in deps:
@@ -586,7 +589,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
             for r in res:
                 if r[0] not in done:
                     temp = get_module_dependencies(
-                        r[0], use_cmd=use_cmd, deep=deep, collapse=False, use_pip=use_pip)
+                        r[0], use_cmd=use_cmd, deep=deep, collapse=False, use_pip=use_pip, refresh_cache=refresh_cache)
                     for key in temp:
                         if key not in res:
                             res.append(key)
