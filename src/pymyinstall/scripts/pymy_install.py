@@ -27,6 +27,11 @@ def get_parser():
         default="build/update_modules",
         help='folder where modules will be downloaded')
     parser.add_argument(
+        '-d',
+        '--deps',
+        action='store_true', 
+        help='install a module or the modules with their dependencies')
+    parser.add_argument(
         'module',
         nargs='*',
         default="all",
@@ -36,13 +41,16 @@ def get_parser():
 
 def do_main(temp_folder="build/update_modules",
             skip_module=["ete", "dataspyre", "pycuda", "cubehelix"],
-            list_module=None):
+            list_module=None, deps=False):
     """
     calls function @see update_all but is meant to be added to scripts folder
 
     @param      temp_folder     folder where modules will be downloaded
     @param      skip_module     skip the module on this list
     @param      list_module     list of modules to update or None for all
+    @param      deps            install a module with its dependencies
+
+    If *deps* is True, *list_module* cannot be empty.
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -52,9 +60,15 @@ def do_main(temp_folder="build/update_modules",
         folder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(folder)
-        from pymyinstall.packaged import install_all
-    install_all(temp_folder=temp_folder, verbose=True,
-                skip_module=skip_module, list_module=list_module)
+        from pymyinstall.packaged import install_all, install_module_deps
+    if deps:
+        if list_module is None or len(list_module) == 0:
+            raise ValueError("deps is True, list_module cannot be empty, you must specify a module to install")
+        for name in list_module:
+            install_module_deps(name, temp_folder=temp_folder, verbose=True, deps=True)
+    else:
+        install_all(temp_folder=temp_folder, verbose=True,
+                    skip_module=skip_module, list_module=list_module)
 
 
 def main():
@@ -74,7 +88,7 @@ def main():
         list_module = None if res.module in [
             "all", "", None, []] else res.module
         do_main(temp_folder=res.folder, skip_module=skip_module,
-                list_module=list_module)
+                list_module=list_module, deps=res.deps)
 
 
 if __name__ == "__main__":

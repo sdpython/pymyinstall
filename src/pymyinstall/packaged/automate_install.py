@@ -286,7 +286,7 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         res = get_module_dependencies(name, refresh_cache=True, use_pip=True)
         if res is None:
             raise ImportError("unable to check dependencies of module {0}\ninstalled:\n{1}".format(
-                name, "\n".join(inst)))
+                name, "\n".join(installed)))
         list_m = [k for k, v in res.items()]
         inst = [k for k in list_m if not is_installed(k)]
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
