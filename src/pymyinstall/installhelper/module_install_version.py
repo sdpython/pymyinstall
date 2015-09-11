@@ -139,6 +139,16 @@ def get_module_version(module, use_cmd=False):
 
     _get_module_version_manual_memoize.update(res)
     return res
+    
+
+def is_installed(name):
+    """
+    tells if a module is installed or not
+    
+    @param      name        module name
+    @return                 boolean
+    """
+    return get_module_version(name) is not None
 
 
 _get_module_metadata_manual_memoize = {}
@@ -533,6 +543,8 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
     """
     if use_pip is None:
         use_pip = not sys.platform.startswith("win")
+        
+    raise Exception("**** {0}-{1}".format(use_pip, sys.platform))
 
     if use_pip:
         global _get_module_dependencies_deps
