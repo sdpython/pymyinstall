@@ -53,7 +53,7 @@ class TestModuleDependencies (unittest.TestCase):
         if len(res) < 3:
             from pip import get_installed_distributions
             pkgs = get_installed_distributions(
-                local_only=False, skip=[], use_pip=use_pip)
+                local_only=False, skip=[])
             req_map = dict((p.key, (p, p.requires())) for p in pkgs)
             mat = req_map.get(name, None)
             raise Exception(str(res) + "\n" +

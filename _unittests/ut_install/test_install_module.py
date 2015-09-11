@@ -39,6 +39,7 @@ except ImportError:
 
 
 from src.pymyinstall.installhelper.module_install import ModuleInstall
+from src.pymyinstall.installhelper.module_install import compare_version
 from src.pymyinstall.installhelper.module_install_version import get_module_version
 from pyquickhelper import fLOG
 
@@ -94,7 +95,7 @@ class TestInstallModule (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        assert ModuleInstall.compare_version("0.16.0", "0.16.2") == -1
+        assert compare_version("0.16.0", "0.16.2") == -1
 
     def test_installed_version(self):
         fLOG(
