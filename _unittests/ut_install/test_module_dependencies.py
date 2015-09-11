@@ -71,14 +71,16 @@ class TestModuleDependencies (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        self.common_function("ggplot")
+        if "travis" not in sys.executable:
+            self.common_function("ggplot")
 
     def test_dependencies_ggplot_pip(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        self.common_function("ggplot", use_pip=True)
+        if "travis" not in sys.executable:
+            self.common_function("ggplot", use_pip=True)
 
     def test_version_consensus(self):
         fLOG(
