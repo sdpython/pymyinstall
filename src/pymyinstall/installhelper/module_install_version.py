@@ -544,7 +544,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         if module not in _get_module_dependencies_deps:
             raise ValueError("module {0} was not installed".format(module))
         res = []
-        dist, req = _get_module_dependencies_deps[module] 
+        dist, req = _get_module_dependencies_deps[module]
         if isinstance(req, list):
             for r in req:
                 res.append((r.key, None, module))

@@ -14,7 +14,7 @@ from .win_exception import WinInstallDistributionError
 from ..packaged.automate_install import find_module_install
 from ..installhelper.install_venv_helper import run_cmd_path
 from ..packaged import all_fullset
-from ..installhelper.module_install import ModuleInstall
+from ..installhelper.module_install import ModuleInstall, run_cmd
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
@@ -138,6 +138,19 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
             if m.name in ["libpython", "tutormagic", "pymyinstall"]:
                 # nothing to import or failure
                 continue
+            elif m.mname == "theano":
+                # we need to check that TDM-GCC is installed
+                cmd = "g++ --help"
+                out, err = run_cmd(cmd, wait=True, do_not_log=True)
+                if err is not None and len(err) > 0:
+                    fLOG("{0}/{1}: failed (g++)".format(i, len(module_list)), m)
+                    res.append((False, m, out, err))
+                    continue
+                if "Usage: g++ [options] file..." not in out:
+                    fLOG("{0}/{1}: failed (g+++)".format(i, len(module_list)), m)
+                    res.append((False, m, out, err))
+                    continue
+
             sc = "import " + m.ImportName
             out, err = run_cmd_path(python_path, sc, fLOG=noLOG)
             suc = analyze_error_success(m, err)
