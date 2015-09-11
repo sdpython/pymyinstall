@@ -544,12 +544,12 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         if module not in _get_module_dependencies_deps:
             raise ValueError("module {0} was not installed".format(module))
         res = []
-        for req in _get_module_dependencies_deps[module]:
-            if isinstance(req, list):
-                for r in req:
-                    res.append((r.key, None, module))
-            else:
-                res.append((req.key, None, module))
+        dist, req = _get_module_dependencies_deps[module] 
+        if isinstance(req, list):
+            for r in req:
+                res.append((r.key, None, module))
+        else:
+            res.append((req.key, None, module))
     else:
         meta = get_module_metadata(module, use_cmd)
         deps = [v for k, v in meta.items() if "Requires" in k]
