@@ -1,0 +1,35 @@
+#-*- coding: utf-8 -*-
+"""
+@file
+@brief Defines a set of modules to try
+"""
+import sys
+from ..installhelper.module_install import ModuleInstall
+
+
+def follow_set():
+    """
+    modules to follow
+    """
+    mod = [
+        ModuleInstall(
+            "langdetect", "pip", usage="WEB",
+            purpose="Language detection library ported from Google's language-detection."),
+        ModuleInstall(
+            "justext", "pip", usage="WEB",
+            purpose="Program jusText is a tool for removing boilerplate content, such as navigation links, headers, and footers from HTML pages. It is designed to preserve mainly text containing full sentences and it is therefore well suited for creating linguistic resources such as Web corpora."),
+        ModuleInstall(
+            "tldextract", "pip", usage="WEB",
+            purpose="Accurately separate the TLD from the registered domain and subdomains of a URL, using the Public Suffix List."),
+        ModuleInstall(
+            "cchardet", "wheel_xd", usage="WEB",
+            purpose="Universal encoding detector. This library is faster than chardet."),
+        ModuleInstall(
+            "aiohttp", "wheel_xd", usage="WEB",
+            purpose="http client/server for asyncio"),
+        ModuleInstall(
+            "sky", "pip", usage="WEB",
+            purpose="sky is a web scraping framework, implemented with the latest python versions in mind (3.4+). It uses the asynchronous asyncio framework, as well as many popular modules and extensions."),
+    ]
+
+    return [_ for _ in mod if _ is not None]
