@@ -177,25 +177,25 @@ if len(sys.argv) == 1 and "--help" in sys.argv:
     pyquickhelper.process_standard_options_for_setup_help()
 
 if not r:
-    
+
     if sys.version_info[0] >= 3:
-        entry_points={
+        entry_points = {
             'console_scripts': [
                 'pymy_update3 = pymyinstall.scripts.pymy_update:main',
                 'pymy_install3 = pymyinstall.scripts.pymy_install:main',
             ]}
         if sys.platform.startswith("win"):
-            entry_points['console_scripts'].extend( [
+            entry_points['console_scripts'].extend([
                 'pymy_update = pymyinstall.scripts.pymy_update:main',
                 'pymy_install = pymyinstall.scripts.pymy_install:main',
-                ])
+            ])
     else:
-        entry_points={
+        entry_points = {
             'console_scripts': [
                 'pymy_update = pymyinstall.scripts.pymy_update:main',
                 'pymy_install = pymyinstall.scripts.pymy_install:main',
             ]}
-            
+
     setup(
         name=project_var_name,
         version='%s%s' % (sversion, subversion),

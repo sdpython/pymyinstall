@@ -46,6 +46,8 @@ def extended_set():
         ModuleInstall(
             'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
         ModuleInstall(
+            'cyordereddict', 'wheel', purpose="Cython implementation of Python's collections.OrderedDict"),
+        ModuleInstall(
             'toolz', 'wheel', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries.", usage="DATA/ML"),
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
@@ -316,6 +318,8 @@ def extended_set():
                       purpose="Google Maps API client http://python-gmaps.readthedocs.org"),
         ModuleInstall("keyring", "pip",
                       purpose="Store and access your passwords safely."),
+        ModuleInstall("holoviews", "pip", usage="VIZ",
+                      purpose=""),
     ]
 
     return [_ for _ in mod if _ is not None]

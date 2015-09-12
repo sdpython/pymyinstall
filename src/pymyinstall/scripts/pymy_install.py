@@ -29,7 +29,7 @@ def get_parser():
     parser.add_argument(
         '-d',
         '--deps',
-        action='store_true', 
+        action='store_true',
         help='install a module or the modules with their dependencies')
     parser.add_argument(
         'module',
@@ -63,9 +63,11 @@ def do_main(temp_folder="build/update_modules",
         from pymyinstall.packaged import install_all, install_module_deps
     if deps:
         if list_module is None or len(list_module) == 0:
-            raise ValueError("deps is True, list_module cannot be empty, you must specify a module to install")
+            raise ValueError(
+                "deps is True, list_module cannot be empty, you must specify a module to install")
         for name in list_module:
-            install_module_deps(name, temp_folder=temp_folder, verbose=True, deps=True)
+            install_module_deps(name, temp_folder=temp_folder,
+                                verbose=True, deps=True)
     else:
         install_all(temp_folder=temp_folder, verbose=True,
                     skip_module=skip_module, list_module=list_module)
