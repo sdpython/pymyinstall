@@ -38,7 +38,7 @@ def do_main(temp_folder="build/update_modules",
             skip_module=["ete", "dataspyre", "pycuda", "cubehelix"],
             list_module=None):
     """
-    calls function @see update_all but is meant to be added to scripts folder
+    calls function @see fn update_all but is meant to be added to scripts folder
 
     @param      temp_folder     folder where modules will be downloaded
     @param      skip_module     skip the module on this list
@@ -59,7 +59,7 @@ def do_main(temp_folder="build/update_modules",
 
 def main():
     """
-    calls function @see update_all but is meant to be added to scripts folder,
+    calls function @see fn update_all but is meant to be added to scripts folder,
     parse command line arguments
     """
     parser = get_parser()
