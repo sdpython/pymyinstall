@@ -221,6 +221,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     * The first run of Spyder after the installation usually fails (failure of python.exe).
       The second one succeeds. You should run Spyder from the installation setup before
       compiling the setup.
+      
+    .. index:: missing modules, vcomp110.dll, llvmlite, numba, blaze, issue, theano, xgboost
 
     **Known extra steps needed by some modules**
 
@@ -231,8 +233,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
       needs to be installed.
     * **theano** requires `TDM-GCC <http://tdm-gcc.tdragon.net/>`_,
       read `Installation of Theano on Windows <http://deeplearning.net/software/theano/install_windows.html>`_
-    * **xgboost** if DLL ``vcomp110.dll`` is missing, you should read
-      `Building xgboost on Windows for Python <http://www.xavierdupre.fr/blog/2015-08-23_nojs.html>`_
+    * **xgboost** if DLL ``vcomp110.dll`` is missing, you should read blog :ref:`blog_xgboost_install`
       to understand how to get it.
 
     @todo Use chocolatey to process installation.
