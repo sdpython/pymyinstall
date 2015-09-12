@@ -64,29 +64,6 @@ class TestInstallModule (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         assert compare_version("0.16.0", "0.16.2") == -1
 
-    def test_installed_version(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
-        mod = ModuleInstall("jinja2", "pip")
-        res = mod.is_installed()
-        if not res:
-            fLOG(mod)
-            fLOG(mod.get_installed_version())
-            for k, v in get_module_version(None).items():
-                if k[0] in ("j", "J"):
-                    fLOG("+++", k, v)
-            assert False
-
-        mod = ModuleInstall("pandas", "wheel")
-        res = mod.is_installed()
-        assert res
-        fLOG("****", mod.get_installed_version(), mod.get_pypi_version())
-        if mod.get_installed_version() != mod.get_pypi_version():
-            assert mod.has_update()
-
 
 if __name__ == "__main__":
     unittest.main()
