@@ -251,7 +251,7 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
     It the function fails, check the status of
     `Python Infrastructure <https://status.python.org/>`_.
     It can return errors::
-    
+
         ProtocolError: ProtocolError for pypi.python.org/pypi: 503 No healthy backends
     """
     global _get_pypi_version_memoize

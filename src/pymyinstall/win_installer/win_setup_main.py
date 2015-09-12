@@ -221,7 +221,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     * The first run of Spyder after the installation usually fails (failure of python.exe).
       The second one succeeds. You should run Spyder from the installation setup before
       compiling the setup.
-      
+
     .. index:: missing modules, vcomp110.dll, llvmlite, numba, blaze, issue, theano, xgboost
 
     **Known extra steps needed by some modules**
