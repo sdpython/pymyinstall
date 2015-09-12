@@ -248,6 +248,11 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
         ResourceWarning: unclosed <socket.socket fd=XXX, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('XXX.XXX.X...
 
     It should be fixed in Python > 3.4.
+    It the function fails, check the status of
+    `Python Infrastructure <https://status.python.org/>`_.
+    It can return errors::
+    
+        ProtocolError: ProtocolError for pypi.python.org/pypi: 503 No healthy backends
     """
     global _get_pypi_version_memoize
     key = module_name, full_list, url
