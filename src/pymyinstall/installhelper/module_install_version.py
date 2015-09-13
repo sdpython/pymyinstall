@@ -556,6 +556,8 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
     The function which uses *use_pip=True* is not fully tested, it does not
     return contraints (== 2.4). The function caches the results to avoid doing it again
     during a second execution unless *refresh_cache* is True
+
+    This function is not tested on Python 2.7.
     """
     if use_pip is None:
         use_pip = not sys.platform.startswith("win")

@@ -5,6 +5,7 @@
 import sys
 import os
 import unittest
+import warnings
 
 try:
     import src
@@ -64,6 +65,9 @@ class TestModuleDependencies (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+        if sys.version_info[0] == 2:
+            warnings.warn("test_dependencies_matplotlib: disable on Python 2.7")
+            return
         self.common_function("matplotlib")
 
     def test_dependencies_ggplot(self):
