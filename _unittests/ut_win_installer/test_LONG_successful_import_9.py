@@ -62,13 +62,15 @@ class TestLONGSuccessfulImport9(unittest.TestCase):
         res = import_every_module(
             sys.executable, None, fLOG=fLOG, start=50 * nb, end=50 * (nb + 1))
         nb = 0
+        nberr = 0
         for r in res:
             if not r[0]:
                 fLOG("---------------------------------")
                 fLOG("FAILED", r[1], "\nOUT\n", r[2], "\nERR\n", r[3])
+                nberr += 1
             else:
                 nb += 1
-        assert nb > 0
+        assert nb > 0 or nberr + nb == 0
 
 
 if __name__ == "__main__":

@@ -68,7 +68,7 @@ class TestLONGSuccessfulImport6(unittest.TestCase):
                 fLOG("FAILED", r[1], "\nOUT\n", r[2], "\nERR\n", r[3])
             else:
                 nb += 1
-        assert nb > 0
+        assert nb > 0 or nberr + nb == 0
 
 
 if __name__ == "__main__":
