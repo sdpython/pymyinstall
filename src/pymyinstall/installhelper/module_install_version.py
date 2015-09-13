@@ -5,7 +5,6 @@
 import sys
 import re
 import pip._vendor.pkg_resources
-from importlib import reload
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
@@ -13,6 +12,7 @@ if sys.version_info[0] == 2:
 else:
     import urllib.request as urllib_request
     import xmlrpc.client as xmlrpc_client
+    from importlib import reload
 
 from .install_cmd_helper import run_cmd, get_pip_program
 from .install_memoize import install_memoize

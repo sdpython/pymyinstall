@@ -48,7 +48,7 @@ def extended_set():
         ModuleInstall(
             'cyordereddict', 'wheel', purpose="Cython implementation of Python's collections.OrderedDict"),
         ModuleInstall(
-            'toolz', 'wheel', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries.", usage="DATA/ML"),
+            'toolz', 'pip', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries.", usage="DATA/ML"),
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
         ModuleInstall(
