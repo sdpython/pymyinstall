@@ -27,10 +27,13 @@ def get_parser():
         default="build/update_modules",
         help='folder where modules will be downloaded')
     parser.add_argument(
-        '-s',
         '--set',
         default="-",
         help='set of module to install, see documentation of function get_name_set to get a comprehensive list, this option is ignored if a module is specified on the command line')
+    parser.add_argument(
+        '--schedule',
+        action='store_true',
+        help='do not update the modules, returned the list scheduled to be updated')
     parser.add_argument(
         'module',
         nargs="*",
@@ -41,13 +44,14 @@ def get_parser():
 
 def do_main(temp_folder="build/update_modules",
             skip_module=["ete", "dataspyre", "pycuda", "cubehelix"],
-            list_module=None):
+            list_module=None, schedule_only=False):
     """
     calls function @see fn update_all but is meant to be added to scripts folder
 
     @param      temp_folder     folder where modules will be downloaded
     @param      skip_module     skip the module on this list
     @param      list_module     list of modules to update or None for all
+    @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -58,8 +62,13 @@ def do_main(temp_folder="build/update_modules",
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(folder)
         from pymyinstall.packaged import update_all
-    update_all(temp_folder=temp_folder, verbose=True,
-               skip_module=skip_module, list_module=list_module)
+    res = update_all(temp_folder=temp_folder, verbose=True,
+                     skip_module=skip_module, list_module=list_module,
+                     schedule_only=schedule_only)
+    if schedule_only:
+        print("SCHEDULED")
+        for r in res:
+            print(r)
 
 
 def main():
@@ -78,10 +87,10 @@ def main():
         skip_module = res.skip.split(",")
         list_module = None if res.module in [
             "all", "", None, []] else res.module
-        if list_module is None and args.set is not None and len(args.set) > 0:
-            list_module = args.set
+        if list_module is None and res.set is not None and len(res.set) > 0:
+            list_module = res.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
-                list_module=list_module)
+                list_module=list_module, schedule_only=res.schedule)
 
 
 if __name__ == "__main__":

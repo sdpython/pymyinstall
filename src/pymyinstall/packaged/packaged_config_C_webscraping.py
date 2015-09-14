@@ -3,7 +3,7 @@
 @file
 @brief Defines a set of modules to try
 """
-import sys
+
 from ..installhelper.module_install import ModuleInstall
 
 

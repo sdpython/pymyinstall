@@ -5,6 +5,7 @@
 import sys
 import re
 import pip._vendor.pkg_resources
+import warnings
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
@@ -254,6 +255,7 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
 
         ProtocolError: ProtocolError for pypi.python.org/pypi: 503 No healthy backends
     """
+
     global _get_pypi_version_memoize
     key = module_name, full_list, url
     if key in _get_pypi_version_memoize:
@@ -261,45 +263,57 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
     else:
 
         pypi = xmlrpc_client.ServerProxy(url)
+
+        def pypi_package_releases(module_name, b):
+            nbtry = 0
+            while nbtry < 2:
+                try:
+                    available = pypi.package_releases(module_name, True)
+                    return available
+                except TimeoutError as e:
+                    nbtry += 1
+                    warnings.warn(e)
+            return None
+
         tried = [module_name]
-        available = pypi.package_releases(module_name, True)
+        available = pypi_package_releases(module_name, True)
 
         if available is None or len(available) == 0:
             tried.append(module_name.capitalize())
-            available = pypi.package_releases(tried[-1], True)
+            available = pypi_package_releases(tried[-1], True)
 
         if available is None or len(available) == 0:
             tried.append(module_name.replace("-", "_"))
-            available = pypi.package_releases(tried[-1], True)
+            available = pypi_package_releases(tried[-1], True)
 
         if available is None or len(available) == 0:
             tried.append(module_name.replace("_", "-"))
-            available = pypi.package_releases(tried[-1], True)
+            available = pypi_package_releases(tried[-1], True)
 
         if available is None or len(available) == 0:
             tried.append(module_name.lower())
-            available = pypi.package_releases(tried[-1], True)
+            available = pypi_package_releases(tried[-1], True)
 
         if available is None or len(available) == 0:
             ml = module_name.lower()
             if ml == "markupsafe":
                 tried.append("MarkupSafe")
-                available = pypi.package_releases(tried[-1], True)
+                available = pypi_package_releases(tried[-1], True)
             elif ml == "flask-sqlalchemy":
                 tried.append("Flask-SQLAlchemy")
-                available = pypi.package_releases(tried[-1], True)
+                available = pypi_package_releases(tried[-1], True)
             elif ml == "apscheduler":
                 tried.append("APScheduler")
-                available = pypi.package_releases(tried[-1], True)
+                available = pypi_package_releases(tried[-1], True)
             elif ml == "datashape":
                 tried.append("DataShape")
-                available = pypi.package_releases(tried[-1], True)
+                available = pypi_package_releases(tried[-1], True)
             elif ml == "pycontracts":
                 tried.append("PyContracts")
-                available = pypi.package_releases(tried[-1], True)
+                available = pypi_package_releases(tried[-1], True)
             elif ml == "pybrain":
                 tried.append("PyBrain")
-                available = pypi.package_releases(tried[-1], True)
+                available = pypi_package_releases(tried[-1], True)
             elif ml == "jsanimation":  # github
                 tried.append("JSAnimation")
                 available = ["-"]

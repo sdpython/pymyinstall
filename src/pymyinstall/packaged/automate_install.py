@@ -80,18 +80,19 @@ def reorder_module_list(list_module):
 
 def update_all(temp_folder=".", fLOG=print, verbose=True,
                list_module=None, reorder=True,
-               skip_module=None):
+               skip_module=None, schedule_only=False):
     """
     update modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
     the function starts by updating pip.
 
-    @param  temp_folder     temporary folder
-    @param  verbose         more display
-    @param  list_module     None or of list of str or @see cl ModuleInstall or a name set
-    @param  fLOG            logging function
-    @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
-    @param  skip_module     module to skip (list of str)
+    @param      temp_folder     temporary folder
+    @param      verbose         more display
+    @param      list_module     None or of list of str or @see cl ModuleInstall or a name set
+    @param      fLOG            logging function
+    @param      reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
+    @param      skip_module     module to skip (list of str)
+    @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
@@ -117,8 +118,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         list_module = ensae_fullset()
     elif isinstance(list_module, str  # unicode#
                     ):
-        from .packaged_config import get_name_set
-        f = get_name_set(list_module)
+        from .packaged_config import get_package_set
+        f = get_package_set(list_module)
         list_module = f()
     else:
         list_module = [find_module_install(mod) if isinstance(
@@ -138,6 +139,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     modules = list_module
     again = []
     errors = []
+    schedule = []
     for mod in modules:
         if verbose:
             fLOG("check module: ", mod.name)
@@ -157,19 +159,25 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
         ver = mod.get_pypi_version()
         inst = mod.get_installed_version()
-        m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
-            .format(mod.name, inst, ver, mod.kind)
-        fLOG(m)
-        try:
-            b = mod.update(temp_folder=temp_folder, log=verbose)
-        except Exception as e:
-            b = False
-            m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
-                .format(mod.name, inst, ver, mod.kind, str(e))
+
+        schedule.append(mod)
+        if not schedule_only:
+            m = "    - updating module  {0} --- {1} --> {2} (kind={3})" \
+                .format(mod.name, inst, ver, mod.kind)
             fLOG(m)
-            errors.append((mod, e))
-        if b:
-            again.append(m)
+            try:
+                b = mod.update(temp_folder=temp_folder, log=verbose)
+            except Exception as e:
+                b = False
+                m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
+                    .format(mod.name, inst, ver, mod.kind, str(e))
+                fLOG(m)
+                errors.append((mod, e))
+            if b:
+                again.append(m)
+
+    if schedule_only:
+        return schedule
 
     if verbose:
         fLOG("")
@@ -184,7 +192,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
                 list_module=None, reorder=True, skip_module=None,
-                up_pip=True, skip_missing=False, deps=False):
+                up_pip=True, skip_missing=False, deps=False,
+                schedule_only=False):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -199,6 +208,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param      up_pip          upgrade pip (pip must not be in *skip_module*)
     @param      skip_missing    skip the checking of the missing dependencies
     @param      deps            install the dependencies of the installed modules
+    @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
@@ -219,8 +229,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         list_module = ensae_fullset()
     elif isinstance(list_module, str  # unicode#
                     ):
-        from .packaged_config import get_name_set
-        f = get_name_set(list_module)
+        from .packaged_config import get_package_set
+        f = get_package_set(list_module)
         list_module = f()
     else:
         list_module = [find_module_install(mod) if isinstance(
@@ -240,30 +250,37 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     again = []
     errors = []
     installed = []
+    schedule = []
     for mod in modules:
         if verbose:
             fLOG("check module: ", mod.name)
         if not mod.is_installed():
-            ver = mod.version
-            m = "    - installing module  {0} --- --> {1} (kind={2})" \
-                .format(mod.name, ver, mod.kind)
-            fLOG(m)
-            try:
-                b = mod.install(temp_folder=temp_folder, log=verbose)
-            except Exception as e:
-                b = False
-                m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
-                    .format(mod.name, '', ver, mod.kind, str(e))
+            schedule.append(mod)
+            if not schedule_only:
+                ver = mod.version
+                m = "    - installing module  {0} --- --> {1} (kind={2})" \
+                    .format(mod.name, ver, mod.kind)
                 fLOG(m)
-                errors.append((mod, e))
-            if b:
-                again.append(m)
-                installed.append(mod)
+                try:
+                    b = mod.install(temp_folder=temp_folder, log=verbose)
+                except Exception as e:
+                    b = False
+                    m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
+                        .format(mod.name, '', ver, mod.kind, str(e))
+                    fLOG(m)
+                    errors.append((mod, e))
+                if b:
+                    again.append(m)
+                    installed.append(mod)
+
+    if schedule_only:
+        return schedule
 
     if deps:
         fLOG("dependencies")
         for mod in installed:
-            install_module_deps(mod.name, temp_folder=temp_folder, fLOG=fLOG, verbose=verbose, deps=deps):
+            install_module_deps(mod.name, temp_folder=temp_folder,
+                                fLOG=fLOG, verbose=verbose, deps=deps)
 
     if verbose:
         fLOG("")

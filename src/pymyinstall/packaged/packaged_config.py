@@ -80,7 +80,7 @@ def get_package_set(name):
     if name not in _module_set_name:
         raise ValueError("unable to find set for {0}\navailable sets:\n{1}".format(
             name, "\n".join(sorted(_module_set_name.keys()))))
-    return _module_set_name
+    return _module_set_name[name]
 
 
 def name_sets_dataframe(module_set=None):
