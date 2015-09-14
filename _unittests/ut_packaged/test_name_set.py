@@ -67,7 +67,7 @@ class TestNameSet(unittest.TestCase):
         nb = 0
         for mod in r:
             l = get_package_set(mod["name"])
-            assert len(l) > 0
+            assert len(l()) > 0
             nb += 1
         assert nb > 0
 

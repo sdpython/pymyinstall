@@ -94,7 +94,7 @@ class TestScriptInstall(unittest.TestCase):
         assert "check module:  flake8" in out
 
         cmd = exe + " " + scriptu + " --schedule --set=minimal"
-        out, err = run_cmd(cmd, wait=True)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         assert "check module:  flake8" in out
 
 
