@@ -193,7 +193,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 def install_all(temp_folder=".", fLOG=print, verbose=True,
                 list_module=None, reorder=True, skip_module=None,
                 up_pip=True, skip_missing=False, deps=False,
-                schedule_only=False, deep_deps=False):
+                schedule_only=False, deep_deps=False,
+                _memory=None):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -210,11 +211,14 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param      deps            install the dependencies of the installed modules
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
     @param      deep_deps       check dependencies for dependencies
+    @param      _memory         stores installed packages, avoid going into an infinite loop
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
     See the function to get the list of possible name sets.
     """
+    if _memory is None:
+        _memory = {}
     deps = deps or deep_deps
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -254,6 +258,9 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     installed = []
     schedule = []
     for mod in modules:
+        if mod.name in _memory:
+            # already done
+            continue
         if verbose:
             fLOG("check module: ", mod.name)
         if not mod.is_installed():
@@ -274,6 +281,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 if b:
                     again.append(m)
                     installed.append(mod)
+        _memory[mod.name] = True
 
     if schedule_only:
         return schedule
@@ -282,7 +290,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         fLOG("dependencies for ", len(installed))
         for mod in installed:
             inst = install_module_deps(mod.name, temp_folder=temp_folder,
-                                fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps)
+                                       fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
+                                       _memory=_memory)
             again.extend(inst)
 
     if verbose:
@@ -303,7 +312,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             warnings.warn(mes)
 
 
-def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True, deep_deps=False):
+def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True, deep_deps=False, _memory=None):
     """
     install a module with its dependencies,
     if a module is already installed, it installs the missing dependencies
@@ -314,24 +323,30 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
     @param      verbose         more display
     @param      deps            add dependencies
     @param      deep_deps       check dependencies for dependencies
+    @param      _memory         stores installed packages, avoid going into an infinite loop
     @return                     list of installed modules
 
     The function does not handle properly contraints on versions.
     It checks in the registered list of modules if *name* is present.
     If it is the case, it uses it, otherwise, it uses *pip*.
     """
+    if _memory is None:
+        _memory = {}
     deps = deps or deep_deps
     installed = []
     if not is_installed(name):
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=[name], reorder=True, up_pip=False,
-                    skip_missing=True)
+                    skip_missing=True, _memory=_memory)
         installed.append(name)
 
     stack = [name]
     while len(stack) > 0:
         name = stack[-1]
         del stack[-1]
+        if name in _memory:
+            # already done, avoid loops on
+            continue
         res = get_module_dependencies(name, refresh_cache=True, use_pip=True)
         if res is None:
             raise ImportError("unable to check dependencies of module {0}\ninstalled:\n{1}".format(
@@ -341,8 +356,10 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         fLOG("installation of ", inst)
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=inst, reorder=True, up_pip=False,
-                    skip_missing=True, deep_deps=deep_deps)
+                    skip_missing=True, deep_deps=deep_deps, _memory=_memory)
         stack.extend(inst)
         installed.extend(inst)
+        for i in inst:
+            _memory[i] = True
 
     return list(sorted(set(installed)))

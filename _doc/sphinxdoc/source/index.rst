@@ -66,7 +66,7 @@ Both scripts can be used to install a subset of modules::
     pymy_install --set=minimum
 
 
-setup
+Setup
 -----
 
 The module also includes a function 
@@ -75,7 +75,8 @@ which creates a setup with Python and R which modules and packages for a datasci
 This function gives extra informations about module difficult to install
 such as `theano <http://deeplearning.net/software/theano/>`_.
 
-Source of the packages:
+Source of the packages
+----------------------
 
 * `PyPI <https://pypi.python.org/pypi>`_: pure python packages
 * `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_: packages with C++

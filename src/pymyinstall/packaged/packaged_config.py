@@ -142,3 +142,54 @@ def all_fullset():
         scraping_set()
 
     return base
+
+
+def classifiers2string(l):
+    """
+    shorten the list of classifiers into a string
+
+    @param      l       list
+    @return             string
+
+    Example::
+
+        ['Development Status :: 4 - Beta', 'Programming Language :: Python',
+         'Programming Language :: Python :: 2', 'Programming Language :: Python :: 2.7',
+         'Programming Language :: Python :: 3', 'Programming Language :: Python :: 3.3',
+         'Programming Language :: Python :: 3.4', 'License :: OSI Approved :: Apache Software License']
+    """
+    if l is None:
+        return ""
+    res = []
+    for cl in sorted(set(l)):
+        if cl == "Programming Language :: Python":
+            s = "Python"
+        else:
+            s = cl.replace("Programming Language :: Python :: ", "")
+            s = s.replace("License :: ", "")
+            s = s.replace("OSI Approved :: ", "OSI Approved ")
+            s = s.replace("Development Status :: ", "")
+            s = s.replace("Operating System :: Microsoft :: ", "")
+            s = s.replace("Operating System :: ", "")
+            s = s.replace("Implementation :: ", "")
+            s = s.replace("Programming Language :: ", "")
+            s = s.replace("Environment :: ", "")
+            s = s.replace("POSIX :: ", "")
+            s = s.replace("BSD :: ", "")
+        if s == "3 :: Only":
+            s = "py3"
+        elif s == "2 :: Only":
+            s = "py2"
+        elif s == "MacOS :: MacOS X":
+            s = "MacOS/X"
+        elif s == "POSIX :: Linux":
+            s = "Linux"
+        elif s == "POSIX :: BSD :: FreeBSD":
+            s = "FreeBSD"
+        elif s == "X11 Applications :: Qt":
+            s = "Qt"
+        elif s.startswith("Windows"):
+            s = "Windows"
+        if "Framework" not in s and "Topic" not in s and "Intended Audience" not in s and "Natural Language" not in s:
+            res.append(s)
+    return ", ".join(res)
