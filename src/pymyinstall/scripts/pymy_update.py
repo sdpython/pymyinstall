@@ -27,6 +27,11 @@ def get_parser():
         default="build/update_modules",
         help='folder where modules will be downloaded')
     parser.add_argument(
+        '-s',
+        '--set',
+        default="-",
+        help='set of module to install, see documentation of function get_name_set to get a comprehensive list, this option is ignored if a module is specified on the command line')
+    parser.add_argument(
         'module',
         nargs="*",
         default="all",
@@ -73,6 +78,8 @@ def main():
         skip_module = res.skip.split(",")
         list_module = None if res.module in [
             "all", "", None, []] else res.module
+        if list_module is None and args.set is not None and len(args.set) > 0:
+            list_module = args.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module)
 

@@ -66,7 +66,8 @@ class TestModuleDependencies (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         if sys.version_info[0] == 2:
-            warnings.warn("test_dependencies_matplotlib: disable on Python 2.7")
+            warnings.warn(
+                "test_dependencies_matplotlib: disable on Python 2.7")
             return
         self.common_function("matplotlib")
 

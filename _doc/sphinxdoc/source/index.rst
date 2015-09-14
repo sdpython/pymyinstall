@@ -61,9 +61,26 @@ To update modules::
     pymy_update
     
 If some modules fail, they can be skipped by using option ``--skip=<modules comma separated>``.
+Both scripts can be used to install a subset of modules::
+
+    pymy_install --set=minimum
+
+
+setup
+-----
+
 The module also includes a function 
 :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
 which creates a setup with Python and R which modules and packages for a datascientist.
+This function gives extra informations about module difficult to install
+such as `theano <http://deeplearning.net/software/theano/>`_.
+
+Source of the packages:
+
+* `PyPI <https://pypi.python.org/pypi>`_: pure python packages
+* `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_: packages with C++
+* `xavierdupre.fr <http://www.xavierdupre.fr/>`_: custom build (xgboost, ...)
+
 
 Installation
 ------------
@@ -71,39 +88,6 @@ Installation
 ``pip install pymyinstall``
 
 
-
-Functionalities
----------------
-
-- help installing module from GitHub, pip and setup
-- install other common tools or editors
-- provides a list of modules to install to use Python to manipulate data (IPython, pandas, scikit-learn...)
-- function to build a setup with Python, R and useful packages like `WinPython <https://winpython.github.io/>`_,
-  see :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
-
-
-It is better to use it outside the interpreter::
-
-    python -c "from pymyinstall.packaged import ensae_fullset;list(mod.install() for mod in ensae_fullset())"
-    
-Or on Linux, you can also run::
-
-    python -c "from pymyinstall import build_requirements;from pymyinstall.packaged import ensae_fullset;print(build_requirements(ensae_fullset()))" > requirements_teachings.txt
-    pip install -r requirements_teachings.txt
-
-To install a single package::
-
-    from pymyinstall import ModuleInstall
-    ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
-    
-.. index:: pymy_install, pymy_update    
-
-
-Source of the packages:
-
-* `PyPI <https://pypi.python.org/pypi>`_: pure python packages
-* `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_: packages with C++
-* `xavierdupre.fr <http://www.xavierdupre.fr/>`_: custom build (xgboost, ...)
 
 
 Quick start

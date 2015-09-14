@@ -10,7 +10,7 @@ def teachings_set():
     """
     .. index:: ENSAE, teachings
 
-    Modules implemented for my teachings.
+    modules implemented for my teachings
     """
     mod = [
         ModuleInstall(

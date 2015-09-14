@@ -7,9 +7,9 @@ import sys
 from ..installhelper.module_install import ModuleInstall
 
 
-def follow_set():
+def scraping_set():
     """
-    modules to follow
+    modules which help scraping the web
     """
     mod = [
         ModuleInstall(

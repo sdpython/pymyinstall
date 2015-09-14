@@ -8,7 +8,7 @@ import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
 from ..installhelper.module_dependencies import missing_dependencies
-from .packaged_set import all_fullset
+from .packaged_config import all_fullset
 
 
 def _build_reverse_index():
@@ -88,10 +88,14 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
     @param  temp_folder     temporary folder
     @param  verbose         more display
-    @param  list_module     None or of list of str or @see cl ModuleInstall
+    @param  list_module     None or of list of str or @see cl ModuleInstall or a name set
     @param  fLOG            logging function
     @param  reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
     @param  skip_module     module to skip (list of str)
+
+    *list_module* can be a set of modules of a name set.
+    Name sets can be accesses by function @see fn get_package_set.
+    See the function to get the list of possible name sets.
 
     .. versionchanged:: 1.3
         Catch an exception while updating modules and walk through the end of the list.
@@ -111,6 +115,11 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     if list_module is None:
         from ..packaged import ensae_fullset
         list_module = ensae_fullset()
+    elif isinstance(list_module, str  # unicode#
+                    ):
+        from .packaged_config import get_name_set
+        f = get_name_set(list_module)
+        list_module = f()
     else:
         list_module = [find_module_install(mod) if isinstance(
             mod, str) else mod for mod in list_module]
@@ -175,7 +184,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
                 list_module=None, reorder=True, skip_module=None,
-                up_pip=True, skip_missing=False):
+                up_pip=True, skip_missing=False, deps=False):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -183,12 +192,17 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
     @param      temp_folder     temporary folder
     @param      verbose         more display
-    @param      list_module     None or of list of str or @see cl ModuleInstall
+    @param      list_module     None or of list of str or @see cl ModuleInstall or a name set
     @param      fLOG            logging function
     @param      reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
     @param      skip_module     module to skip (list of str)
     @param      up_pip          upgrade pip (pip must not be in *skip_module*)
     @param      skip_missing    skip the checking of the missing dependencies
+    @param      deps            install the dependencies of the installed modules
+
+    *list_module* can be a set of modules of a name set.
+    Name sets can be accesses by function @see fn get_package_set.
+    See the function to get the list of possible name sets.
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -203,6 +217,11 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     if list_module is None:
         from ..packaged import ensae_fullset
         list_module = ensae_fullset()
+    elif isinstance(list_module, str  # unicode#
+                    ):
+        from .packaged_config import get_name_set
+        f = get_name_set(list_module)
+        list_module = f()
     else:
         list_module = [find_module_install(mod) if isinstance(
             mod, str) else mod for mod in list_module]
@@ -220,6 +239,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     modules = list_module
     again = []
     errors = []
+    installed = []
     for mod in modules:
         if verbose:
             fLOG("check module: ", mod.name)
@@ -238,6 +258,12 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 errors.append((mod, e))
             if b:
                 again.append(m)
+                installed.append(mod)
+
+    if deps:
+        fLOG("dependencies")
+        for mod in installed:
+            install_module_deps(mod.name, temp_folder=temp_folder, fLOG=fLOG, verbose=verbose, deps=deps):
 
     if verbose:
         fLOG("")
@@ -259,7 +285,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
 def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True):
     """
-    install a module with its dependencies
+    install a module with its dependencies,
+    if a module is already installed, it installs the missing dependencies
 
     @param      module          module name
     @param      temp_folder     where to download
@@ -277,8 +304,8 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=[name], reorder=True, up_pip=False,
                     skip_missing=True)
-        installed.append(name)
 
+    installed.append(name)
     stack = [name]
     while len(stack) > 0:
         name = stack[-1]

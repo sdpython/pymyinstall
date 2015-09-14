@@ -188,12 +188,12 @@ def extended_set():
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
-            "libpython", "wheel", purpose="needed for theano (C++ compilation)"),
+            "libpython", "wheel", purpose="needed for theano (C++ compilation), compilation of libpython with mingw"),
         ModuleInstall(
             "Theano", "wheel", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
         ModuleInstall('pymc', 'wheel',
                       purpose="Monte Carlo computation", usage="DATA/ML"),
-        ModuleInstall('pymc3', 'github', 'pymc-devs',
+        ModuleInstall('pymc3', 'github', 'pymc-devs', web="https://github.com/pymc-devs/pymc3",
                       purpose="Monte Carlo computation (Python 3 only)", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall('pysterior', 'pip',
                       purpose="pysterior is a machine learning library for Python which aims to make Bayesian parametric regression and classification models accessible and easy to use. The library allows users to construct supervised learning models using an intuitive interface similar to that used by scikit-learn.", usage="DATA/ML") if sys.version_info[0] >= 3 else None,

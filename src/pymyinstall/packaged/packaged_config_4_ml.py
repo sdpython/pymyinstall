@@ -9,7 +9,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def ml_set():
     """
-    other name for @see fn ensae_set
+    modules introduced by students or needed for student projects
     """
     return ensae_set()
 
@@ -18,7 +18,7 @@ def ensae_set():
     """
     .. index:: ENSAE
 
-    Modules introduced by students and some others added after some reading.
+    modules introduced by students or needed for student projects
     """
     mod = [
         ModuleInstall(
@@ -256,29 +256,29 @@ def ensae_set():
         # purpose="Turn your Python and Javascript code into DOT flowcharts"),
 
         # azure part
-        ModuleInstall("azure_nspkg", "pip", usage="AZURE", mname="azure.mgmt",
+        ModuleInstall("azure-nspkg", "pip", usage="AZURE", mname="azure.mgmt",
                       purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
-        ModuleInstall("azure_common", "pip", usage="AZURE", mname="azure.common",
+        ModuleInstall("azure-common", "pip", usage="AZURE", mname="azure.common",
                       purpose="Microsoft Azure Client Library for Python (Common)"),
-        ModuleInstall("azure_mgmt_nspkg", "pip", usage="AZURE", mname="azure.mgmt.common",
+        ModuleInstall("azure-mgmt-nspkg", "pip", usage="AZURE", mname="azure.mgmt.common",
                       purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
-        ModuleInstall("azure_mgmt_common", "pip", usage="AZURE", mname="azure.mgmt.common",
+        ModuleInstall("azure-mgmt-common", "pip", usage="AZURE", mname="azure.mgmt.common",
                       purpose="Microsoft Azure Resource Management Client Library for Python (Common)"),
-        ModuleInstall("azure_mgmt_compute", "pip", usage="AZURE", mname="azure.mgmt.compute",
+        ModuleInstall("azure-mgmt-compute", "pip", usage="AZURE", mname="azure.mgmt.compute",
                       purpose="Microsoft Azure Compute Resource Management Client Library for Python"),
-        ModuleInstall("azure_mgmt_network", "pip", usage="AZURE", mname="azure.mgmt.network",
+        ModuleInstall("azure-mgmt-network", "pip", usage="AZURE", mname="azure.mgmt.network",
                       purpose="Microsoft Azure Network Resource Management Client Library for Python"),
-        ModuleInstall("azure_mgmt_resource", "pip", usage="AZURE", mname="azure.mgmt.resource",
+        ModuleInstall("azure-mgmt-resource", "pip", usage="AZURE", mname="azure.mgmt.resource",
                       purpose=""),
-        ModuleInstall("azure_mgmt_storage", "pip", usage="AZURE", mname="azure.mgmt.storage",
+        ModuleInstall("azure-mgmt-storage", "pip", usage="AZURE", mname="azure.mgmt.storage",
                       purpose="Microsoft Azure Storage Resource Management Client Library for Python"),
-        ModuleInstall("azure_mgmt", "pip", usage="AZURE", mname="azure.mgmt",
+        ModuleInstall("azure-mgmt", "pip", usage="AZURE", mname="azure.mgmt",
                       purpose="Microsoft Azure Resource Management Client Libraries for Python"),
-        ModuleInstall("azure_servicebus", "pip", usage="AZURE", mname="azure.servicebus",
+        ModuleInstall("azure-servicebus", "pip", usage="AZURE", mname="azure.servicebus",
                       purpose="Microsoft Azure Service Bus Client Library for Python"),
-        ModuleInstall("azure_storage", "pip", usage="AZURE", mname="azure.storage",
+        ModuleInstall("azure-storage", "pip", usage="AZURE", mname="azure.storage",
                       purpose="Microsoft Azure Storage Client Library for Python"),
-        ModuleInstall("azure_servicemanagement_legacy", "pip", usage="AZURE", mname="azure.servicemanagement",
+        ModuleInstall("azure-servicemanagement-legacy", "pip", usage="AZURE", mname="azure.servicemanagement",
                       purpose="Microsoft Azure Legacy Service Management Client Library for Python"),
         ModuleInstall(
             "azure", "pip", purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE"),

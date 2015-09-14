@@ -9,7 +9,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def iot_set():
     """
-    list of sphinx themes
+    list of sphinx themes and others helpers for sphinx
     """
     mod = [
         ModuleInstall('homeassistant', 'pip',

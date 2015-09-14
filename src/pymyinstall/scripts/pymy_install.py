@@ -32,6 +32,11 @@ def get_parser():
         action='store_true',
         help='install a module or the modules with their dependencies')
     parser.add_argument(
+        '-s',
+        '--set',
+        default="-",
+        help='set of module to install, see documentation of function get_name_set to get a comprehensive list, this option is ignored if a module is specified on the command line')
+    parser.add_argument(
         'module',
         nargs='*',
         default="all",
@@ -55,22 +60,14 @@ def do_main(temp_folder="build/update_modules",
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
     try:
-        from pymyinstall.packaged import install_all, install_module_deps
+        from pymyinstall.packaged import install_all
     except ImportError:
         folder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(folder)
-        from pymyinstall.packaged import install_all, install_module_deps
-    if deps:
-        if list_module is None or len(list_module) == 0:
-            raise ValueError(
-                "deps is True, list_module cannot be empty, you must specify a module to install")
-        for name in list_module:
-            install_module_deps(name, temp_folder=temp_folder,
-                                verbose=True, deps=True)
-    else:
-        install_all(temp_folder=temp_folder, verbose=True,
-                    skip_module=skip_module, list_module=list_module)
+        from pymyinstall.packaged import install_all
+    install_all(temp_folder=temp_folder, verbose=True,
+                skip_module=skip_module, list_module=list_module, deps=deps)
 
 
 def main():
@@ -89,6 +86,8 @@ def main():
         skip_module = res.skip.split(",")
         list_module = None if res.module in [
             "all", "", None, []] else res.module
+        if list_module is None and args.set is not None and len(args.set) > 0:
+            list_module = args.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module, deps=res.deps)
 
