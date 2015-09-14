@@ -32,6 +32,10 @@ def get_parser():
         action='store_true',
         help='install a module or the modules with their dependencies')
     parser.add_argument(
+        '--deep-deps',
+        action='store_true',
+        help='install a module or the modules with their dependencies, check dependencies of dependencies are installed')
+    parser.add_argument(
         '--set',
         default="-",
         help='set of module to install, see documentation of function get_name_set to get a comprehensive list, this option is ignored if a module is specified on the command line')
@@ -49,7 +53,8 @@ def get_parser():
 
 def do_main(temp_folder="build/update_modules",
             skip_module=["ete", "dataspyre", "pycuda", "cubehelix"],
-            list_module=None, deps=False, schedule_only=False):
+            list_module=None, deps=False, schedule_only=False,
+            deep_deps=False):
     """
     calls function @see fn install_all but is meant to be added to scripts folder
 
@@ -58,6 +63,7 @@ def do_main(temp_folder="build/update_modules",
     @param      list_module     list of modules to update or None for all
     @param      deps            install a module with its dependencies
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
+    @param      deep_deps       check dependencies for dependencies
 
     If *deps* is True, *list_module* cannot be empty.
     """
@@ -72,7 +78,8 @@ def do_main(temp_folder="build/update_modules",
         from pymyinstall.packaged import install_all
     res = install_all(temp_folder=temp_folder, verbose=True,
                       skip_module=skip_module, list_module=list_module, deps=deps,
-                      schedule_only=schedule_only)
+                      schedule_only=schedule_only,
+                      deep_deps=deep_deps)
     if schedule_only:
         print("SCHEDULED")
         for r in res:
@@ -98,7 +105,8 @@ def main():
         if list_module is None and res.set is not None and len(res.set) > 0:
             list_module = res.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
-                list_module=list_module, deps=res.deps, schedule_only=res.schedule)
+                list_module=list_module, deps=res.deps, schedule_only=res.schedule,
+                deep_deps=res.deep_deps)
 
 
 if __name__ == "__main__":

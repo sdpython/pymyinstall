@@ -69,7 +69,7 @@ def get_package_set(name):
     .. runpython::
         :rst:
 
-        from pymyinstall.packaged.packaged_config import name_sets2rst
+        from pymyinstall.packaged.packaged_config import name_sets_dataframe
         from pyquickhelper import df2rst
         import pandas
         r = name_sets_dataframe()

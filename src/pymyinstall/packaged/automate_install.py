@@ -193,7 +193,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
 def install_all(temp_folder=".", fLOG=print, verbose=True,
                 list_module=None, reorder=True, skip_module=None,
                 up_pip=True, skip_missing=False, deps=False,
-                schedule_only=False):
+                schedule_only=False, deep_deps=False):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -209,11 +209,13 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param      skip_missing    skip the checking of the missing dependencies
     @param      deps            install the dependencies of the installed modules
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
+    @param      deep_deps       check dependencies for dependencies
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
     See the function to get the list of possible name sets.
     """
+    deps = deps or deep_deps
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
     if not has_pip():
@@ -277,10 +279,11 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         return schedule
 
     if deps:
-        fLOG("dependencies")
+        fLOG("dependencies for ", len(installed))
         for mod in installed:
-            install_module_deps(mod.name, temp_folder=temp_folder,
-                                fLOG=fLOG, verbose=verbose, deps=deps)
+            inst = install_module_deps(mod.name, temp_folder=temp_folder,
+                                fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps)
+            again.extend(inst)
 
     if verbose:
         fLOG("")
@@ -300,7 +303,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             warnings.warn(mes)
 
 
-def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True):
+def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True, deep_deps=False):
     """
     install a module with its dependencies,
     if a module is already installed, it installs the missing dependencies
@@ -310,19 +313,21 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
     @param      fLOG            logging function
     @param      verbose         more display
     @param      deps            add dependencies
+    @param      deep_deps       check dependencies for dependencies
     @return                     list of installed modules
 
     The function does not handle properly contraints on versions.
     It checks in the registered list of modules if *name* is present.
     If it is the case, it uses it, otherwise, it uses *pip*.
     """
+    deps = deps or deep_deps
     installed = []
     if not is_installed(name):
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=[name], reorder=True, up_pip=False,
                     skip_missing=True)
+        installed.append(name)
 
-    installed.append(name)
     stack = [name]
     while len(stack) > 0:
         name = stack[-1]
@@ -332,10 +337,11 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
             raise ImportError("unable to check dependencies of module {0}\ninstalled:\n{1}".format(
                 name, "\n".join(installed)))
         list_m = [k for k, v in res.items()]
-        inst = [k for k in list_m if not is_installed(k)]
+        inst = [k for k in list_m if deep_deps or not is_installed(k)]
+        fLOG("installation of ", inst)
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=inst, reorder=True, up_pip=False,
-                    skip_missing=True)
+                    skip_missing=True, deep_deps=deep_deps)
         stack.extend(inst)
         installed.extend(inst)
 
