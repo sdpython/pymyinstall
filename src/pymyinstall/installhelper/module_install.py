@@ -1089,6 +1089,10 @@ class ModuleInstall:
                     "python.exe"))
             if len(options) > 0:
                 cmd += " " + " ".join(*options)
+
+            if not deps:
+                cmd += ' --no-deps'
+
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
             os.chdir(cwd)
