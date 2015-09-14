@@ -69,7 +69,7 @@ class TestPatch(unittest.TestCase):
 
         if not os.path.exists(data):
             warnings.warn(
-                "pyquickhelper forgots to copy this folder for python 2.7")
+                "pyquickhelper forgot to copy this folder for python 2.7")
             raise FileNotFoundError(data)
         synchronize_folder(data, dest)
 
