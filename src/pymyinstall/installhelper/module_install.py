@@ -270,7 +270,9 @@ class ModuleInstall:
 
         @todo get the content of a folder and take the latest or install a pipy server
         """
+        sver = "%d%d" % sys.version_info[:2]
         ext = "exe" if not wheel else "whl"
+
         if self.name == "pycrypto":
             p = platform.architecture()[0]
             vers = "{0}.{1}".format(*(sys.version_info[:2]))
@@ -281,45 +283,49 @@ class ModuleInstall:
             if ext == "exe":
                 exe = "pycrypto-2.6.1.{0}-py{1}.{2}".format(p, vers, ext)
             elif ext == "whl":
-                exe = "pycrypto-2.6.1-cp34-none-win_amd64.whl"
+                exe = "pycrypto-2.6.1-cp%s-none-win_amd64.whl" % sver
             else:
                 raise Exception("unexpected extension: " +
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+
         elif self.name == "gevent":
             if ext == "whl":
                 if platform.architecture()[0] == "64bit":
-                    exe = "gevent-1.1b3-cp34-none-win_amd64.whl"
+                    exe = "gevent-1.1b3-cp%s-none-win_amd64.whl" % sver
                 else:
-                    exe = "gevent-1.1b3-cp34-none-win32.whl"
+                    exe = "gevent-1.1b3-cp%s-none-win32.whl" % sver
             else:
                 raise Exception("unexpected extension: " +
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+
         elif self.name == "dpark":
             if ext == "whl":
                 if platform.architecture()[0] == "64bit":
-                    exe = "DPark-0.1-cp34-none-win_amd64.whl"
+                    exe = "DPark-0.1-cp%s-none-win_amd64.whl" % sver
                 else:
-                    exe = "DPark-0.1-cp34-none-win32.whl"
+                    exe = "DPark-0.1-cp%s-none-win32.whl" % sver
             else:
                 raise Exception("unexpected extension: " +
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+
         elif self.name == "tifffile":
             if ext == "whl":
                 if platform.architecture()[0] == "64bit":
-                    exe = "tifffile-0.7.0-cp34-none-win_amd64.whl"
+                    exe = "tifffile-0.7.0-cp%s-none-win_amd64.whl" % sver
                 else:
-                    exe = "tifffile-0.7.0-cp34-none-win32.whl"
+                    exe = "tifffile-0.7.0-cp%s-none-win32.whl" % sver
             else:
                 raise Exception("unexpected extension: " +
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+
         elif self.name == "xgboost":
             if ext == "whl":
                 exe = "xgboost-0.4-py3-none-any.whl"
@@ -328,6 +334,7 @@ class ModuleInstall:
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+
         elif self.name == "skdata":
             if ext == "whl":
                 exe = "skdata-0.0.4-py3-none-any.whl"
@@ -336,6 +343,7 @@ class ModuleInstall:
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+
         elif self.name == "JSAnimation":
             if ext == "whl":
                 exe = "JSAnimation-0.1.tar.gz"
@@ -344,6 +352,31 @@ class ModuleInstall:
                                 ext + " for module " + file_save)
             url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
             return url, exe
+
+        elif self.name == "cchardet":
+            if ext == "whl":
+                if platform.architecture()[0] == "64bit":
+                    exe = "cchardet-1.0.0-cp%s-none-win_amd64.whl" % sver
+                else:
+                    exe = "cchardet-1.0.0-cp%s-none-win32.whl" % sver
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
+
+        elif self.name == "aiohttp":
+            if ext == "whl":
+                if platform.architecture()[0] == "64bit":
+                    exe = "aiohttp-0.18.0a0-cp%s-none-win_amd64.whl" % sver
+                else:
+                    exe = "aiohttp-0.18.0a0-cp%s-none-win32.whl" % sver
+            else:
+                raise Exception("unexpected extension: " +
+                                ext + " for module " + file_save)
+            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
+            return url, exe
+
         else:
             raise ImportError(
                 "unable to get this module {0} from this location {1}".format(
@@ -1090,8 +1123,10 @@ class ModuleInstall:
             if len(options) > 0:
                 cmd += " " + " ".join(*options)
 
-            if not deps:
-                cmd += ' --no-deps'
+            if deps:
+                # it will not work
+                # cmd += ' --no-deps'
+                pass
 
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)

@@ -193,7 +193,7 @@ def extended_set():
             "Theano", "wheel", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
         ModuleInstall('pymc', 'wheel',
                       purpose="Monte Carlo computation", usage="DATA/ML"),
-        ModuleInstall('pymc3', 'github', 'pymc-devs', web="https://github.com/pymc-devs/pymc3",
+        ModuleInstall('pymc', 'wheel', web="https://github.com/pymc-devs/pymc3",
                       purpose="Monte Carlo computation (Python 3 only)", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall('pysterior', 'pip',
                       purpose="pysterior is a machine learning library for Python which aims to make Bayesian parametric regression and classification models accessible and easy to use. The library allows users to construct supervised learning models using an intuitive interface similar to that used by scikit-learn.", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
@@ -318,8 +318,10 @@ def extended_set():
                       purpose="Google Maps API client http://python-gmaps.readthedocs.org"),
         ModuleInstall("keyring", "pip",
                       purpose="Store and access your passwords safely."),
+        ModuleInstall("param", "pip",
+                      purpose="Declarative Python programming using Parameters."),
         ModuleInstall("holoviews", "pip", usage="VIZ",
-                      purpose=""),
+                      purpose="Composable, declarative data structures for building complex visualizations easily."),
     ]
 
     return [_ for _ in mod if _ is not None]

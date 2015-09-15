@@ -12,10 +12,6 @@ def iot_set():
     list of sphinx themes and others helpers for sphinx
     """
     mod = [
-        ModuleInstall('homeassistant', 'pip',
-                      purpose="Home Assistant is a home automation platform running on Python 3. The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control.",
-                      web="https://github.com/balloob/home-assistant/",
-                      usage="IoT"),
         ModuleInstall(
             'phue', 'pip', purpose="A Philips Hue Python library", usage="IoT"),
         ModuleInstall('ledcontroller', 'pip',
@@ -53,14 +49,14 @@ def iot_set():
         ModuleInstall('python-forecastio', 'pip', usage="IoT"),
         ModuleInstall('pyserial', 'pip', mname="serial", usage="IoT"),
         ModuleInstall('PyMata', 'pip', usage="IoT"),
-        ModuleInstall('pyRFXtrx', 'github', 'Danielhiversen'),
-        ModuleInstall('pymysensors', 'github', 'theolind'),
+        ModuleInstall('pyRFXtrx', 'github', 'Danielhiversen', mname="RFXtrx"),
+        ModuleInstall('pymysensors', 'github', 'theolind', mname="mysensors"),
         ModuleInstall('pynetgear', 'pip', usage="IoT"),
         ModuleInstall('netdisco', 'pip', usage="IoT"),
         ModuleInstall('pywemo', 'pip', usage="IoT"),
-        ModuleInstall('python-wink', 'github', 'balloob'),
+        ModuleInstall('python-wink', 'github', 'balloob', mname="pywink"),
         ModuleInstall('slacker', 'pip'),
-        ModuleInstall('temper-python', 'github', 'rkabadi'),
+        ModuleInstall('temperusb', 'pip'),
         ModuleInstall('pyedimax', 'github', 'rkabadi'),
 
         # Uncomment for Raspberry Pi
@@ -69,9 +65,13 @@ def iot_set():
         # ModuleInstall('Adafruit_Python_DHT', 'github', 'mala-zaba', purpose="Adafruit temperature/humidity sensor", usage="IoT"),
 
         ModuleInstall('paho-mqtt', 'pip', usage="IoT"),
-        ModuleInstall('pymodbus', 'github', 'bashwork', usage='IoT'),
+        # ModuleInstall('pymodbus', 'github', 'bashwork', usage='IoT'),
         ModuleInstall('python-verisure', 'github',
                       'persandstrom', usage='IoT'),
 
+        ModuleInstall('homeassistant', 'pip',
+                      purpose="Home Assistant is a home automation platform running on Python 3. The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control.",
+                      web="https://github.com/balloob/home-assistant/",
+                      usage="IoT"),
     ]
     return [_ for _ in mod if _ is not None]

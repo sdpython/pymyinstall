@@ -125,4 +125,5 @@ missing_module_licenses = {
     "future": "MIT",
     "python-gmaps": "BSD",
     "libpython": "Python",
+    "pyowm": "MIT",
 }

@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import sys
 import os
 import datetime
@@ -18,6 +19,7 @@ sys.path.insert(
             "src")))
 
 from pyquickhelper.helpgen.default_conf import set_sphinx_variables
+import pymyinstall
 
 set_sphinx_variables(__file__,
                      "pymyinstall",

@@ -187,7 +187,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         if len(errors) > 0:
             fLOG("failed modules")
             for m in errors:
-                fLOG("  ", m)
+                fLOG("  ", m[0], m[1])
 
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
@@ -231,8 +231,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         skip_module = []
 
     if list_module is None:
-        from ..packaged import ensae_fullset
-        list_module = ensae_fullset()
+        from ..packaged import all_fullset
+        list_module = all_fullset()
     elif isinstance(list_module, str  # unicode#
                     ):
         from .packaged_config import get_package_set
@@ -302,7 +302,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         if len(errors) > 0:
             fLOG("failed modules")
             for m in errors:
-                fLOG("  ", m)
+                fLOG("  ", m[0], m[1])
 
     if not skip_missing:
         miss = missing_dependencies()
