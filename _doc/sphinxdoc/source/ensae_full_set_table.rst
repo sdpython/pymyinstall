@@ -16,7 +16,7 @@ defined in pymyinstall as a table.
     from pymyinstall.packaged import all_fullset, classifiers2string
     from pyquickhelper import df2rst
     import pandas
-    mod = ensae_fullset()
+    mod = all_fullset()
     mod.sort()
     df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
     df = df[["usage", "rst_link", "kind", "version", "license", "purpose", "classifier"]]

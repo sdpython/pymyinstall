@@ -12,7 +12,7 @@ from .install_custom import download_page, download_file
 
 
 def install_python(
-        temp_folder=".", fLOG=print, install=True, force_download=False, version="3.4.3"):
+        temp_folder=".", fLOG=print, install=True, force_download=False, version=None):
     """
     Install `python <http://www.python.org/>`_.
     It does not do it a second time if it is already installed.
@@ -21,15 +21,13 @@ def install_python(
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
     @param      force_download  force the downloading of python
-    @param      version         version to download (by default 3.4.3)
+    @param      version         version to download (by default the current version of Python)
     @return                     temporary file
 
-    The version is fixed to 3.4.3. and amd64.
+    The version is fixed to the current version of Python and amd64.
     """
     if version is None:
-        version = "3.4.3"
-    if version != "3.4.3":
-        raise ValueError("cannot specify a version other than 3.4.3")
+        version = "%s.%s.%s" % sys.version_info[:3]
     link = "https://www.python.org/downloads/release/python-%s/" % version.replace(
         ".", "")
     page = download_page(link)
