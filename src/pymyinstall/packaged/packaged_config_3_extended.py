@@ -29,19 +29,12 @@ def extended_set():
             "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
         ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
                       usage="DATA/ML"),
-        ModuleInstall(
-            'werkzeug', 'pip', purpose="The Swiss Army knife of Python web development"),
-        ModuleInstall('itsdangerous', 'pip',
-                      purpose="Various helpers to pass trusted data to untrusted environments and back."),
-        ModuleInstall('simplejson', 'wheel', purpose="json parser"),
         ModuleInstall('python-pptx', 'pip', mname="pptx",
                       purpose="read/write PowerPoint presentation"),
         ModuleInstall(
             'python-docx', 'pip', mname="docx", purpose="read/write Word document"),
         ModuleInstall('flask', 'pip', purpose="python server",
                       usage="NETWORK"),
-        ModuleInstall('flask-sqlalchemy', 'pip',
-                      mname='flask.ext.sqlalchemy', usage="NETWORK"),
         # ModuleInstall('flasksphinx', 'pip', purpose="serves Sphinx
         # documentation through a Flask server"), # issue with Python 3
         ModuleInstall(

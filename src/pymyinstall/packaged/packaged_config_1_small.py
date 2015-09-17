@@ -238,6 +238,15 @@ def small_set():
         #
         # 2015-06-05
         #
+        ModuleInstall("greenlet", "wheel",
+                      purpose="Greenlet allows lightweight in-process concurrent programming."),
+        ModuleInstall(
+            'werkzeug', 'pip', purpose="The Swiss Army knife of Python web development"),
+        ModuleInstall('itsdangerous', 'pip',
+                      purpose="Various helpers to pass trusted data to untrusted environments and back."),
+        ModuleInstall('simplejson', 'wheel', purpose="json parser"),
+        ModuleInstall('flask-sqlalchemy', 'pip',
+                      mname='flask.ext.sqlalchemy', usage="NETWORK"),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
         ModuleInstall(
