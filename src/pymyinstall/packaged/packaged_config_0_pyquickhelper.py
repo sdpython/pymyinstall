@@ -167,6 +167,8 @@ def pyquickhelper_set():
         ModuleInstall("sphinxjp.themes.revealjs", "pip",
                       purpose="slides based on revealjs, needed to convert notebook into slides"),
         ModuleInstall(
+            "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
+        ModuleInstall(
             "python-jenkins", "pip", mname="jenkins", purpose="interact with Jenkins"),
         ModuleInstall("wild_sphinx_theme", "pip",
                       purpose="sphinx theme", usage="SPHINX"),
