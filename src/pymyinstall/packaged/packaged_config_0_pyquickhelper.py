@@ -160,6 +160,10 @@ def pyquickhelper_set():
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
+        ModuleInstall('snowballstemmer', 'pip',
+                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball algorithms, needed by sphinx-rtd-theme."),
+        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
+                      purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip",
                       purpose="slides based on revealjs, needed to convert notebook into slides"),
         ModuleInstall(

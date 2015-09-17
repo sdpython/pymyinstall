@@ -248,6 +248,10 @@ def small_set():
             'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
         ModuleInstall(
             'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
+        ModuleInstall('snowballstemmer', 'pip',
+                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball algorithms, needed by sphinx-rtd-theme."),
+        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
+                      purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip",
                       purpose="slides based on revealjs, needed to convert notebook into slides"),
         ModuleInstall("feedparser", "wheel", purpose="parse RSS streams"),
