@@ -43,7 +43,7 @@ except ImportError:
 
 
 from pyquickhelper import fLOG, df2rst
-from src.pymyinstall.packaged import all_fullset, classifiers2string
+from src.pymyinstall.packaged import all_set, classifiers2string
 
 
 class TestDocumentation(unittest.TestCase):
@@ -54,7 +54,7 @@ class TestDocumentation(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mod = all_fullset()
+        mod = all_set()
         mod.sort()
         df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
         df = df[["usage", "rst_link", "kind", "version",

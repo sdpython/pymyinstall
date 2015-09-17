@@ -17,14 +17,6 @@ def pyquickhelper_set():
 
     """
     mod = [
-        # ModuleInstall("setuptools",     "wheel"),        # removed with 3.4
-        # ModuleInstall("pip",            "wheel"),            # removed with 3.4
-        #
-        # issue with 3.0.3 because of line: raise type(self._exception),
-        # self._exception, self._traceback, weird because the same exists in
-        # folder lib
-        ModuleInstall(
-            "pyprind", "pip", purpose="Python Progress Indicator Utility"),
         ModuleInstall("futures", "pip", version="2.2.0"),
         ModuleInstall(
             "virtualenv", "pip", purpose="creatre virtual environments"),

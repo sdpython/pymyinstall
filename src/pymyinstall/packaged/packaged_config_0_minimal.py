@@ -15,10 +15,6 @@ def minimal_set():
     """
     mod = [
         ModuleInstall(
-            "pyprind", "pip", purpose="Python Progress Indicator Utility"),
-        ModuleInstall(
-            "pipwin", "pip", purpose="pip on Windows") if sys.platform.startswith("win") else None,
-        ModuleInstall(
             "pipdeptree", "pip", purpose="get packages dependencies"),
         ModuleInstall(
             "virtualenv", "pip", purpose="create virtual environments"),
@@ -39,12 +35,6 @@ def minimal_set():
         ModuleInstall('markupsafe', 'pip', purpose="interpret markdown"),
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),
-        ModuleInstall("astroid", "pip",
-                      purpose="script syntax analysis (for pylint)"),
-        ModuleInstall("logilab-common", "pip",
-                      purpose="collection of low-level Python packages and modules used by Logilab projects (for pylint)"),
-        ModuleInstall(
-            "pylint", "pip", purpose="A abstract syntax tree for Python with inference support."),
     ]
 
     if sys.platform.startswith("win"):
