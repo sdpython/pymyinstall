@@ -245,6 +245,8 @@ def small_set():
         ModuleInstall('itsdangerous', 'pip',
                       purpose="Various helpers to pass trusted data to untrusted environments and back."),
         ModuleInstall('simplejson', 'wheel', purpose="json parser"),
+        ModuleInstall('flask', 'pip', purpose="python server",
+                      usage="NETWORK"),
         ModuleInstall('flask-sqlalchemy', 'pip',
                       mname='flask.ext.sqlalchemy', usage="NETWORK"),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',

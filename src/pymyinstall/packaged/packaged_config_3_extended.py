@@ -33,8 +33,6 @@ def extended_set():
                       purpose="read/write PowerPoint presentation"),
         ModuleInstall(
             'python-docx', 'pip', mname="docx", purpose="read/write Word document"),
-        ModuleInstall('flask', 'pip', purpose="python server",
-                      usage="NETWORK"),
         # ModuleInstall('flasksphinx', 'pip', purpose="serves Sphinx
         # documentation through a Flask server"), # issue with Python 3
         ModuleInstall(
