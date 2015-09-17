@@ -3,10 +3,14 @@
 @brief Various function to install various python module from various location.
 """
 from __future__ import print_function
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
+from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
+from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version
+from .missing_license import missing_module_licenses
+from .module_install_specific_version import get_exewheel_url_link_xd
 
 import sys
 import re
-import platform
 import os
 import time
 import importlib
@@ -25,12 +29,6 @@ else:
     import urllib.error as urllib_error
     import importlib.util
     import xmlrpc.client as xmlrpc_client
-
-from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
-from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
-from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version
-from .missing_license import missing_module_licenses
-from .module_install_specific_version import get_exewheel_url_link_xd
 
 
 class ModuleInstall:

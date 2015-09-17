@@ -2,14 +2,13 @@
 @file
 @brief Functions get_page_wheel
 """
+from .install_memoize import install_memoize
 import sys
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
 else:
     import urllib.request as urllib_request
-
-from .install_memoize import install_memoize
 
 
 @install_memoize

@@ -103,7 +103,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
         python_path = os.path.dirname(python_path)
 
     if module_list is None:
-        module_list = all_fullset()
+        module_list = all_set()
 
     def tomod(m):
         if isinstance(m, ModuleInstall):

@@ -23,11 +23,16 @@ def extended_set():
     """
     mod = [
         ModuleInstall(
+            "simplepam", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)",
+            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+        ModuleInstall(
+            "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
+        ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
+                      usage="DATA/ML"),
+        ModuleInstall(
             'werkzeug', 'pip', purpose="The Swiss Army knife of Python web development"),
         ModuleInstall('itsdangerous', 'pip',
                       purpose="Various helpers to pass trusted data to untrusted environments and back."),
-        ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy',
-                      purpose="model SQL queries as objects", usage="SQL"),
         ModuleInstall('simplejson', 'wheel', purpose="json parser"),
         ModuleInstall('python-pptx', 'pip', mname="pptx",
                       purpose="read/write PowerPoint presentation"),
@@ -151,8 +156,6 @@ def extended_set():
         #
         # ModuleInstall("pattern", "pip", purpose="Web mining module for Python, with tools for scraping, natural language processing, machine learning, network analysis and visualization.") #only works on Python 2.7
         #
-        ModuleInstall(
-            "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
         #
         # 2015-02-05
         #

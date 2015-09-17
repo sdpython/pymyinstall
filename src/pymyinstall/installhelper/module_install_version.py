@@ -2,6 +2,10 @@
 @file
 @brief Functions to get module version, license, dependencies
 """
+from .install_cmd_helper import run_cmd, get_pip_program
+from .install_memoize import install_memoize
+from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError
+
 import sys
 import re
 import pip._vendor.pkg_resources
@@ -14,10 +18,6 @@ else:
     import urllib.request as urllib_request
     import xmlrpc.client as xmlrpc_client
     from importlib import reload
-
-from .install_cmd_helper import run_cmd, get_pip_program
-from .install_memoize import install_memoize
-from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError
 
 
 annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",

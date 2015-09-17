@@ -31,11 +31,42 @@ def ensae_set():
             "amqp", "pip", purpose="Low-level AMQP client for Python (fork of amqplib) (for celery)"),
         ModuleInstall(
             "celery", "pip", purpose="Celery is an asynchronous task queue/job queue based on distributed message passing."),
+
+        ModuleInstall('Versio', 'pip', mname="versio",
+                      purpose="localshop dependency, manages versions"),
+        ModuleInstall('django-celery', 'pip', mname="djcelery",
+                      purpose="localshop dependency, Old django celery integration project."),
+        ModuleInstall('django-configurations', 'pip', mname="configurations",
+                      purpose="localshop dependency, A helper for organizing Django settings."),
+        ModuleInstall('django-environ', 'pip', mname="environ",
+                      purpose="localshop dependency, Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application."),
+        ModuleInstall('django-model-utils', 'pip', mname="model_utils",
+                      purpose="localshop dependency, Django model mixins and utilities."),
+        ModuleInstall('django-storages', 'pip', mname="storages",
+                      purpose="localshop dependency, django-storages is a collection of custom storage backends for Django."),
+        ModuleInstall('django-userena', 'pip', mname="userena",
+                      purpose="localshop dependency, Accounts for Django made beautifully simple"),
+        ModuleInstall('django-uuidfield', 'pip', mname="uuidfield",
+                      purpose="localshop dependency, UUIDField in Django"),
+        ModuleInstall('django-guardian', 'pip', mname="guardian",
+                      purpose="localshop dependency, Implementation of per object permissions for Django 1.2 or later."),
+        ModuleInstall('django', 'pip',
+                      purpose="Django"),
+        ModuleInstall(
+            'gunicorn', 'pip', purpose="localshop dependency, WSGI HTTP Server for UNIX"),
+        ModuleInstall(
+            'netaddr', 'pip', purpose="Pythonic manipulation of IPv4, IPv6, CIDR, EUI and MAC network addresses"),
+        ModuleInstall('easy_thumbnails', 'pip',
+                      purpose="Easy thumbnails for Django"),
+        ModuleInstall('html2text', 'pip',
+                      purpose="Turn HTML into equivalent Markdown-structured text."),
+
+        ModuleInstall('localshop', 'pip',
+                      purpose="run a local pypi server"),
+
         ModuleInstall(
             "tweepy", "pip", purpose="Python wrapper for the twitter API"),
         #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
-        ModuleInstall(
-            "django", "pip", purpose="web application, most famous module about it, the only when to build a scalable website", usage="NETWORK"),
         ModuleInstall(
             "mutagenx", "pip", purpose="ead and write audio tags for many formats in Python 3"),
         ModuleInstall("django-audiotracks", "pip",
@@ -317,6 +348,8 @@ def ensae_set():
         ])
 
     if sys.platform.startswith("win"):
+        ModuleInstall(
+            "xlwings", "pip", purpose="reads/writes Excel files", usage="WINDOWS") if sys.platform.startswith("win") else None,
         mod.append(ModuleInstall("VideoCapture", "wheel",
                                  purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))
         mod.append(ModuleInstall("comtypes", "pip",

@@ -4,6 +4,7 @@
 @brief Various functions to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
 from __future__ import print_function
+from .install_memoize import install_memoize2
 
 import os
 import sys
@@ -15,9 +16,6 @@ else:
     import urllib.request as urllib_request
     import urllib.error as urllib_error
     import http.client as http_client
-
-from .module_install import ModuleInstall
-from .install_memoize import install_memoize2
 
 
 @install_memoize2
@@ -101,6 +99,7 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
         import requests
     except ImportError:
         fLOG("installing module requests")
+        from .module_install import ModuleInstall
         ModuleInstall("requests", fLOG=fLOG).install(temp_folder=temp_folder)
         import requests
 

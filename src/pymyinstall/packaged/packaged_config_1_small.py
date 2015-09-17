@@ -59,8 +59,6 @@ def small_set():
         ModuleInstall("winshell", "pip", purpose="Windows shell functions",
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
-            "xlwings", "pip", purpose="reads/writes Excel files", usage="WINDOWS") if sys.platform.startswith("win") else None,
-        ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
         #
         ModuleInstall(
@@ -81,12 +79,9 @@ def small_set():
         ModuleInstall("matplotlib", "wheel",
                       purpose="most used plotting library", usage="VIZ"),
         ModuleInstall(
-            "gr", "wheel",
-            purpose="GR is a universal framework for cross-platform visualization applications (issues on Linux and Anaconda)",
-            usage="VIZ"),
-
-        ModuleInstall(
             "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra", usage="DATA/ML"),
+        ModuleInstall(
+            "patsy", "pip", purpose="A Python package for describing statistical models and for building design matrices.", usage="DATA/ML"),
         ModuleInstall(
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
@@ -115,35 +110,6 @@ def small_set():
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
 
-        ModuleInstall('Versio', 'pip', mname="versio",
-                      purpose="localshop dependency, manages versions"),
-        ModuleInstall('django-celery', 'pip', mname="djcelery",
-                      purpose="localshop dependency, Old django celery integration project."),
-        ModuleInstall('django-configurations', 'pip', mname="configurations",
-                      purpose="localshop dependency, A helper for organizing Django settings."),
-        ModuleInstall('django-environ', 'pip', mname="environ",
-                      purpose="localshop dependency, Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application."),
-        ModuleInstall('django-model-utils', 'pip', mname="model_utils",
-                      purpose="localshop dependency, Django model mixins and utilities."),
-        ModuleInstall('django-storages', 'pip', mname="storages",
-                      purpose="localshop dependency, django-storages is a collection of custom storage backends for Django."),
-        ModuleInstall('django-userena', 'pip', mname="userena",
-                      purpose="localshop dependency, Accounts for Django made beautifully simple"),
-        ModuleInstall('django-uuidfield', 'pip', mname="uuidfield",
-                      purpose="localshop dependency, UUIDField in Django"),
-        ModuleInstall('django-guardian', 'pip', mname="guardian",
-                      purpose="localshop dependency, Implementation of per object permissions for Django 1.2 or later."),
-        ModuleInstall(
-            'gunicorn', 'pip', purpose="localshop dependency, WSGI HTTP Server for UNIX"),
-        ModuleInstall(
-            'netaddr', 'pip', purpose="Pythonic manipulation of IPv4, IPv6, CIDR, EUI and MAC network addresses"),
-        ModuleInstall('easy_thumbnails', 'pip',
-                      purpose="Easy thumbnails for Django"),
-        ModuleInstall('html2text', 'pip',
-                      purpose="Turn HTML into equivalent Markdown-structured text."),
-
-        ModuleInstall('localshop', 'pip',
-                      purpose="run a local pypi server"),
         # flake8, pep8
         ModuleInstall(
             "pep8", "pip", version="1.5.7", purpose="official guidelines on Python style"),
@@ -220,11 +186,8 @@ def small_set():
             "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "metakernel", "pip", purpose="more magic commands for Jupyter", usage="JUPYTER"),
-        ModuleInstall(
-            "simplepam", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)",
-            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
-        ModuleInstall(
-            "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
+        ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy',
+                      purpose="model SQL queries as objects", usage="SQL"),
         ModuleInstall(
             "ipystata", "pip", purpose="Jupyter kernel for Stata",
             usage="JUPYTER/PY2") if sys.version_info[0] == 2 else None,
@@ -283,13 +246,13 @@ def small_set():
             'pystache', 'pip', purpose="Mustache for Python (for bokeh)"),
         ModuleInstall(
             'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
-        ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
-                      usage="DATA/ML"),
         ModuleInstall(
             'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip",
                       purpose="slides based on revealjs, needed to convert notebook into slides"),
         ModuleInstall("feedparser", "wheel", purpose="parse RSS streams"),
+        ModuleInstall(
+            "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
         ModuleInstall(
             "python-jenkins", "pip", mname="jenkins", purpose="interact with Jenkins"),
         #
