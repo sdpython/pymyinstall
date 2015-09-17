@@ -1,0 +1,23 @@
+
+
+.. blogpost::
+    :title: I tried to build pywin32 for Python 3.5
+    :keywords: build, pywin32, Visual Studio 2015
+    :date: 2015-09-17
+    :categories: install, modules, windows
+    
+    So I installed 
+    `Microsoft Visual Studio Community 2015 <https://www.visualstudio.com/fr-fr/downloads/download-visual-studio-vs.aspx>`_,
+    `Windows SDK <https://dev.windows.com/en-us/downloads/windows-10-sdk>`_.
+    I think some files changed positions so I played a little bit. I created folder
+    ``C:\Program Files (x86)\Windows Kits\custom`` where I copied
+    ``Windows Kits\8.1\Include\um`` into ``custom\include``
+    and ``Windows Kits\8.1\Lib\winv6.3\um\x64`` into ``custom\lib``.
+    I modified the file ``setup.py`` from pywin32 and
+    I tried to build (``python setup.py build``).
+    I ended up with this error::
+
+        win32/src/win32wnet/PyNetresource.cpp(120): error C2440: 'initialisation' : unable to convert from 'int (__cdecl *)(PyObject *,PyObject *)' to 'PyAsyncMethods *'
+        
+    Which will probably disappear in a couple of months
+    but I'm still curious about what went wrong.

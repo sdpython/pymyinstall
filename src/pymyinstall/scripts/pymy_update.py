@@ -86,8 +86,8 @@ def main():
     if res is not None:
         skip_module = res.skip.split(",")
         list_module = None if res.module in [
-            "all", "", None, []] else res.module
-        if list_module is None and res.set is not None and len(res.set) > 0:
+            "all", "", "-", None, []] else res.module
+        if list_module is None and res.set is not None and len(res.set) > 0 and res.set != "-":
             list_module = res.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module, schedule_only=res.schedule)

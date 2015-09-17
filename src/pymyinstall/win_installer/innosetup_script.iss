@@ -16,6 +16,7 @@
 #define MyAppRStudioURL "https://www.rstudio.com/"
 #define MyAppPyCharmURL "https://www.jetbrains.com/pycharm/"
 #define MyAppVS2015 "https://www.microsoft.com/en-us/download/details.aspx?id=48145"
+#define MyAppSDK1081 "https://dev.windows.com/en-US/downloads/windows-10-sdk"
 
 
 [Setup]
@@ -61,6 +62,7 @@ Name: "{app}\Installer\Tortoise Git"; IconFilename: "{app}\tools\icons\tortoiseg
 Name: "{app}\Installer\RSudio"; IconFilename: "{app}\tools\icons\rstudio.ico"; Filename: "{#MyAppRStudioURL}"
 Name: "{app}\Installer\PyCharm"; IconFilename: "{app}\tools\icons\pycharm.ico"; Filename: "{#MyAppPyCharmURL}"
 Name: "{app}\Installer\Visual C++ Redistributable for Visual Studio 2015"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppVS2015}"
+Name: "{app}\Installer\SDK for Windows 8.1 / 10"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppSDK81}"
 ; editors
 Name: "{app}\Scite"; IconFilename: "{app}\tools\icons\Scite.ico"; Filename: "{app}\config\scite.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 Name: "{app}\SQLiteSpy"; IconFilename: "{app}\tools\icons\sqlitespy.ico"; Filename: "{app}\config\sqlitespy.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"

@@ -86,7 +86,7 @@
         
     To complete the installation::
 
-        sudo -H pymy_install
+        sudo -H pymy_install3
         
     It is quite long. Finally, I tried to update packages to the latest::
     
@@ -94,7 +94,7 @@
         
     Some packages were removed (see below)::
     
-        sudo -H pymy_install --skip=rpy2,dynd,pygame,python-igraph,basemap,autopy3,llvmpy,llvmlite,liblinear,mlpy,pygit2,xgboost,psycopg2,pymssql,mysqlclient,django-audiotracks,opencv_python,PyAudio,la,NLopt,pycuda,pymvpa2,pyodbc,pypmc,PyX,libsvm,JSAnimation,heatmap,cgal_bindings,skdata
+        sudo -H pymy_install3 --skip=rpy2,dynd,pygame,python-igraph,basemap,autopy3,llvmpy,llvmlite,liblinear,mlpy,pygit2,xgboost,psycopg2,pymssql,mysqlclient,django-audiotracks,opencv_python,PyAudio,la,NLopt,pycuda,pymvpa2,pyodbc,pypmc,PyX,libsvm,JSAnimation,heatmap,cgal_bindings,skdata
         
     Finally, to update the installed modules::
     
@@ -118,7 +118,7 @@
         * llvmlite: compilation error
         * numba: depends on llvmlite
         * pygame: not available with pip install
-        * kivy-garden: bug with pymy_install, manual install: ``sudo pip3.4 install kivy-garden``
+        * kivy-garden: bug with pymy_install3, manual install: ``sudo pip3.4 install kivy-garden``
         * python-igraph: link error
         * autopy3: missing dependency (X11)
         * liblinear: compilation error

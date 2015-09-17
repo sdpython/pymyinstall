@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
+import warnings
 from distutils.core import setup
 from setuptools import find_packages
 
@@ -77,8 +78,9 @@ def is_local():
        "write_version" in sys.argv:
         try:
             import_pyquickhelper()
-        except ImportError:
-            return False
+        except ImportError as e:
+            warnings.warn(str(e))
+            raise e
         return True
     else:
         return False
@@ -210,6 +212,6 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
-        install_requires=["pip>=7.1"],
+        install_requires=["pip>=7.1", "pipdeptree"],
         entry_points=entry_points
     )

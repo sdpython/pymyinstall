@@ -27,8 +27,10 @@ def minimal_set():
         ModuleInstall("wheel", "pip", purpose="to play with wheel"),
         ModuleInstall("pep8", "pip", version="1.5.7",
                       purpose="official guidelines for Python syntax"),
-        ModuleInstall(
-            "autopep8", "pip", purpose="to make a script follow pep8"),
+        ModuleInstall("autopep8", "pip", purpose="apply pep8 on a script") if sys.version_info[
+            :2] <= (3, 4) else None,
+        ModuleInstall("autopep8", "github", "hhatto",
+                      purpose="apply pep8 on a script") if sys.version_info[:2] > (3, 4) else None,
         ModuleInstall(
             "mccabe", "pip", purpose="This module provides a plugin for flake8, the Python code checker."),
         ModuleInstall(
@@ -47,7 +49,8 @@ def minimal_set():
 
     if sys.platform.startswith("win"):
         mod.append(ModuleInstall(
-            "pywin32", "wheel", mname="win32com", purpose="Python extensions for Windows"))
+            "pywin32", "wheel" if sys.version_info[:2] <= (3, 4) else "exe_xd",
+            mname="win32com", purpose="Python extensions for Windows"))
         mod.append(ModuleInstall(
             "winshell", "pip", purpose="light wrapper around the Windows shell functionality"))
         mod.append(

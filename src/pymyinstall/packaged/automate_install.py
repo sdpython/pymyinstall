@@ -8,7 +8,7 @@ import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
 from ..installhelper.module_dependencies import missing_dependencies
-from .packaged_config import all_fullset
+from .packaged_config import all_set
 
 
 def _build_reverse_index():
@@ -16,7 +16,7 @@ def _build_reverse_index():
     builds a reverse index of the module,
     """
     res = {}
-    mods = all_fullset()
+    mods = all_set()
     for m in mods:
         res[m.name] = m
         if m.mname is not None:
@@ -68,7 +68,7 @@ def reorder_module_list(list_module):
     """
     inset = {m.name: m for m in list_module}
     res = []
-    for mod in all_fullset():
+    for mod in all_set():
         if mod.name in inset and inset[mod.name] is not None:
             res.append(mod.copy(version=inset[mod.name].version))
             inset[mod.name] = None
@@ -216,6 +216,15 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
     See the function to get the list of possible name sets.
+
+    About *name set*, the function can install a set of modules but these set of modules have dependencies:
+
+    * @see fn extended_set, @see fn sphinx_theme_set requires @see fn small_set
+    * @see fn ml_set, @see fn ensae_set, @see fn teachings_set, @see fn iot_set, @see fn scraping_set
+      requires @see fn small_set and @see fn extended_set
+
+    If you want to install a specific module with its dependencies, I suggest
+    to use option *deep_deps*.
     """
     if _memory is None:
         _memory = {}
@@ -231,8 +240,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         skip_module = []
 
     if list_module is None:
-        from ..packaged import all_fullset
-        list_module = all_fullset()
+        from ..packaged import all_set
+        list_module = all_set()
     elif isinstance(list_module, str  # unicode#
                     ):
         from .packaged_config import get_package_set

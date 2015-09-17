@@ -30,6 +30,7 @@ from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_pr
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
 from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version
 from .missing_license import missing_module_licenses
+from .module_install_specific_version import get_exewheel_url_link_xd
 
 
 class ModuleInstall:
@@ -267,121 +268,8 @@ class ModuleInstall:
         @param      file_save   for debug purposes
         @param      wheel       returns the wheel file or the exe file
         @return                 url, exe name
-
-        @todo get the content of a folder and take the latest or install a pipy server
         """
-        sver = "%d%d" % sys.version_info[:2]
-        ext = "exe" if not wheel else "whl"
-
-        if self.name == "pycrypto":
-            p = platform.architecture()[0]
-            vers = "{0}.{1}".format(*(sys.version_info[:2]))
-            if p == "64bit":
-                p = "win-amd64"
-            else:
-                p = "win32"
-            if ext == "exe":
-                exe = "pycrypto-2.6.1.{0}-py{1}.{2}".format(p, vers, ext)
-            elif ext == "whl":
-                exe = "pycrypto-2.6.1-cp%s-none-win_amd64.whl" % sver
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "gevent":
-            if ext == "whl":
-                if platform.architecture()[0] == "64bit":
-                    exe = "gevent-1.1b3-cp%s-none-win_amd64.whl" % sver
-                else:
-                    exe = "gevent-1.1b3-cp%s-none-win32.whl" % sver
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "dpark":
-            if ext == "whl":
-                if platform.architecture()[0] == "64bit":
-                    exe = "DPark-0.1-cp%s-none-win_amd64.whl" % sver
-                else:
-                    exe = "DPark-0.1-cp%s-none-win32.whl" % sver
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "tifffile":
-            if ext == "whl":
-                if platform.architecture()[0] == "64bit":
-                    exe = "tifffile-0.7.0-cp%s-none-win_amd64.whl" % sver
-                else:
-                    exe = "tifffile-0.7.0-cp%s-none-win32.whl" % sver
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "xgboost":
-            if ext == "whl":
-                exe = "xgboost-0.4-py3-none-any.whl"
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "skdata":
-            if ext == "whl":
-                exe = "skdata-0.0.4-py3-none-any.whl"
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "JSAnimation":
-            if ext == "whl":
-                exe = "JSAnimation-0.1.tar.gz"
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "cchardet":
-            if ext == "whl":
-                if platform.architecture()[0] == "64bit":
-                    exe = "cchardet-1.0.0-cp%s-none-win_amd64.whl" % sver
-                else:
-                    exe = "cchardet-1.0.0-cp%s-none-win32.whl" % sver
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        elif self.name == "aiohttp":
-            if ext == "whl":
-                if platform.architecture()[0] == "64bit":
-                    exe = "aiohttp-0.18.0a0-cp%s-none-win_amd64.whl" % sver
-                else:
-                    exe = "aiohttp-0.18.0a0-cp%s-none-win32.whl" % sver
-            else:
-                raise Exception("unexpected extension: " +
-                                ext + " for module " + file_save)
-            url = "{0}/{1}".format(ModuleInstall.exeLocationXd, exe)
-            return url, exe
-
-        else:
-            raise ImportError(
-                "unable to get this module {0} from this location {1}".format(
-                    self.name,
-                    "exe_xd or wheel_xd"))
+        return get_exewheel_url_link_xd(self.name, file_save, wheel, ModuleInstall.exeLocationXd)
 
     _page_cache_html = os.path.join(
         os.path.abspath(os.path.split(__file__)[0]), "page.html")
@@ -1038,6 +926,8 @@ class ModuleInstall:
                     opts = [_ for _ in options]
                     if len(opts):
                         cmd += " " + " ".join(opts)
+                if not deps:
+                    cmd += ' --no-deps'
                 out, err = run_cmd(
                     cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
                 if "No distributions matching the version" in out:

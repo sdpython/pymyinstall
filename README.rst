@@ -106,6 +106,7 @@ Versions
     * **add:** putty was added to the setup
     * **add:** TDM-GCC was added to the setup (for theano)
     * **add:** function *install_module_deps* installs a module with its dependencies
+    * **add:** the setup works with Python 3.5
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup

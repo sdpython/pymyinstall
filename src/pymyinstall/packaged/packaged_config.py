@@ -6,6 +6,7 @@
 
 """
 from .packaged_config_0_minimal import minimal_set
+from .packaged_config_0_pyquickhelper import pyquickhelper_set
 from .packaged_config_1_small import small_set
 from .packaged_config_2_sphinx import sphinx_theme_set
 from .packaged_config_3_extended import extended_set
@@ -13,6 +14,38 @@ from .packaged_config_4_ml import ml_set, ensae_set
 from .packaged_config_A_teachings import teachings_set
 from .packaged_config_B_iot import iot_set
 from .packaged_config_C_webscraping import scraping_set
+
+
+def ensae_fullset():
+    """
+    .. index:: ENSAE
+
+    Installation of all possible modules for my teachings at the ENSAE.
+    This list is described at :ref:`l-ensae_fullset-table`.
+    """
+    base = small_set() +  \
+        sphinx_theme_set() + \
+        extended_set() + \
+        ensae_set() + \
+        teachings_set()
+
+    return base
+
+
+def all_set():
+    """
+    Installation of all possible modules register in this module.
+    Some if the list is described at :ref:`l-ensae_fullset-table`.
+    """
+    base = small_set() +  \
+        sphinx_theme_set() + \
+        extended_set() + \
+        ensae_set() + \
+        teachings_set() + \
+        iot_set() + \
+        scraping_set()
+
+    return base
 
 
 def _function_set_name(f):
@@ -52,6 +85,8 @@ _modules_set = [minimal_set,
                 teachings_set,
                 iot_set,
                 scraping_set,
+                all_set,
+                pyquickhelper_set,
                 ]
 
 _module_set_name = _build_set_correspondance(_modules_set)
@@ -78,8 +113,10 @@ def get_package_set(name):
         print(df2rst(df))
     """
     if name not in _module_set_name:
+        keys = [_.replace("_set", "") for _ in _module_set_name.keys()]
+        keys = list(sorted(set(keys)))
         raise ValueError("unable to find set for {0}\navailable sets:\n{1}".format(
-            name, "\n".join(sorted(_module_set_name.keys()))))
+            name, "\n".join(keys)))
     return _module_set_name[name]
 
 
@@ -110,38 +147,6 @@ def name_sets_dataframe(module_set=None):
     so = [(_["name"], _) for _ in res]
     so.sort()
     return [_[1] for _ in so]
-
-
-def ensae_fullset():
-    """
-    .. index:: ENSAE
-
-    Installation of all possible modules for my teachings at the ENSAE.
-    This list is described at :ref:`l-ensae_fullset-table`.
-    """
-    base = small_set() +  \
-        sphinx_theme_set() + \
-        extended_set() + \
-        ensae_set() + \
-        teachings_set()
-
-    return base
-
-
-def all_fullset():
-    """
-    Installation of all possible modules register in this module.
-    Some if the list is described at :ref:`l-ensae_fullset-table`.
-    """
-    base = small_set() +  \
-        sphinx_theme_set() + \
-        extended_set() + \
-        ensae_set() + \
-        teachings_set() + \
-        iot_set() + \
-        scraping_set()
-
-    return base
 
 
 def classifiers2string(l):

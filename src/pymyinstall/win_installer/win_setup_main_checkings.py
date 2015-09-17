@@ -13,7 +13,7 @@ import sys
 from .win_exception import WinInstallDistributionError
 from ..packaged.automate_install import find_module_install
 from ..installhelper.install_venv_helper import run_cmd_path
-from ..packaged import all_fullset
+from ..packaged import all_set
 from ..installhelper.module_install import ModuleInstall, run_cmd
 
 if sys.version_info[0] == 2:
