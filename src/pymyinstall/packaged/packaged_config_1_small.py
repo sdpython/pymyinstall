@@ -48,7 +48,6 @@ def small_set():
         ModuleInstall("husl", "pip", purpose="Python implementation of HUSL"),
         ModuleInstall(
             "pipdeptree", "pip", purpose="displays module dependencies as a tree"),
-        #
         ModuleInstall("openpyxl", "pip", version="1.8.6",
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
@@ -60,14 +59,12 @@ def small_set():
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
-        #
         ModuleInstall(
             "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts."),
         ModuleInstall(
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
             "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz", usage="NETWORK"),
-        #
         ModuleInstall(
             "pycparser", "wheel", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
         ModuleInstall("Cython", "wheel", mname="cython",
@@ -86,7 +83,6 @@ def small_set():
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
             "networkx", "wheel", purpose="graph libraries, basic drawing", usage="VIZ"),
-        # small config
         ModuleInstall(
             "graphviz", "pip", purpose="wrapper for graphviz (most famous tool to draw graphs", usage="VIZ"),
         ModuleInstall(
@@ -94,7 +90,6 @@ def small_set():
         ModuleInstall(
             "mistune", "pip", purpose="The fastest markdown parser in pure Python with renderer features, inspired by marked."),
         ModuleInstall("wheel", "pip", purpose="handle wheels"),
-        # sphinx
         ModuleInstall(
             "alabaster", "wheel", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
         ModuleInstall(
@@ -109,8 +104,6 @@ def small_set():
             'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
-
-        # flake8, pep8
         ModuleInstall(
             "pep8", "pip", version="1.5.7", purpose="official guidelines on Python style"),
         ModuleInstall("autopep8", "pip", purpose="apply pep8 on a script") if sys.version_info[
@@ -122,8 +115,6 @@ def small_set():
         ModuleInstall("pyflakes", "pip", purpose="verify pep8 on a script"),
         ModuleInstall("flake8", "pip", purpose="verify pep8 on a script"),
         ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
-        #
-        #
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
@@ -195,14 +186,14 @@ def small_set():
             "jupyter-pip", "pip", mname="jupyterpip", purpose="Allows Jupyter notebook extension writers to make their extension pip installable!", usage="JUPYTER"),
         # end of ipython
         #
-        ModuleInstall(
-            "mpld3", "pip", purpose="mpld3 project brings together Matplotlib and D3js."),
-        #
+        ModuleInstall("mpld3", "pip", usage="VIZ",
+                      purpose="mpld3 project brings together Matplotlib and D3js."),
         ModuleInstall("typecheck-decorator", "pip", mname="typecheck",
                       purpose="verifies decorators at running time"),
         ModuleInstall(
             "decorator", "pip", purpose="Better living through Python with decorators"),
-        #
+        ModuleInstall("requests-cache", "pip",
+                      purpose="Persistent cache for requests library"),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         #ModuleInstall("PyQt",           "wheel", mname="PyQt4", usage="GUI"),
         ModuleInstall(
@@ -215,29 +206,20 @@ def small_set():
             "pylint", "pip", purpose="statistics on Python script style"),  #
         ModuleInstall(
             "spyder", "wheel", mname="spyderlib", purpose="scientific IDE"),
-        #
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall("goslate", "pip", version="1.4",
                       purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
-        # XML to JSON
         ModuleInstall(
             "xmltodict", "pip", purpose="Makes working with XML feel like you are working with JSON"),
-        # shell to plain
         ModuleInstall(
             "ansiconv", "pip", purpose="A Python module for converting ANSI coded text and converts it to either plain text or HTML."),
-        # shell to HTML
         ModuleInstall(
             "ansi2html", "pip", purpose="Convert text with ANSI color codes to HTML"),
-        #
-        # node.js
         ModuleInstall(
             "nodeenv", "pip", purpose="Node.js virtual environment builder"),
-        #
-        # 2015-06-05
-        #
         ModuleInstall("greenlet", "wheel",
                       purpose="Greenlet allows lightweight in-process concurrent programming."),
         ModuleInstall(
@@ -270,9 +252,6 @@ def small_set():
             "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
         ModuleInstall(
             "python-jenkins", "pip", mname="jenkins", purpose="interact with Jenkins"),
-        #
-        # 2015-06-15
-        #
         ModuleInstall(
             'envoy', 'pip', purpose="Simple API for running external processes."),
         ModuleInstall('Logbook', 'wheel', mname='logbook',
@@ -281,9 +260,6 @@ def small_set():
             'pkginfo', 'pip', purpose="Query metadatdata from sdists / bdists / installed packages."),
         ModuleInstall("multipledispatch", "pip",
                       purpose="A relatively sane approach to multiple dispatch in Python."),
-        #
-        # 2015-07
-        #
         ModuleInstall("future", "pip",
                       purpose="Clean single-source support for Python 3 and 2"),
         ModuleInstall("pyprofiler", "pip",
@@ -292,6 +268,8 @@ def small_set():
                       purpose="mock is a library for testing in Python. It allows you to replace parts of your system under test with mock objects and make assertions about how they have been used."),
         ModuleInstall("multimethods", "pip",
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
+        ModuleInstall("appdirs", "pip",
+                      usage="A small Python module for determining appropriate platform-specific dirs"),
     ]
 
     return [_ for _ in mod if _ is not None]

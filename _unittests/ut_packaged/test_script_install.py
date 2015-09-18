@@ -65,11 +65,13 @@ class TestScriptInstall(unittest.TestCase):
 
         cmd = exe + " " + script + " --help"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
-        assert "usage: pymy_install.py" in out
+        if "usage: pymy_install.py" not in out:
+            raise Exception(out)
 
         cmd = exe + " " + scriptu + " --help"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
-        assert "usage: pymy_update.py" in out
+        if "usage: pymy_update.py" not in out:
+            raise Exception(out)
 
     def test_script_schedule(self):
         fLOG(
@@ -91,11 +93,13 @@ class TestScriptInstall(unittest.TestCase):
         fLOG(out)
         fLOG("---")
         fLOG(err)
-        assert "check module:  flake8" in out
+        if "check module:  flake8" not in out:
+            raise Exception(out)
 
         cmd = exe + " " + scriptu + " --schedule --set=minimal"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
-        assert "check module:  flake8" in out
+        if "check module:  flake8" not in out:
+            raise Exception(out)
 
 
 if __name__ == "__main__":

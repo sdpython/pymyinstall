@@ -284,6 +284,21 @@ def ensae_set():
         # ModuleInstall("code2flow", "pip",
         # purpose="Turn your Python and Javascript code into DOT flowcharts"),
 
+        # biokit
+        ModuleInstall("colormap", "pip", usage="VIZ",
+                      purpose="Utilities to ease manipulation of matplotlib colormaps and color codecs (e.g., hex2rgb)"),
+        ModuleInstall("easydev", "pip",
+                      purpose="Common utilities to ease the development of Python packages"),
+        ModuleInstall("suds-jurko", "pip", mname="suds",
+                      purpose="Lightweight SOAP client (Jurko's fork)"),
+        ModuleInstall("wrapt", "pip",
+                      purpose="A Python module for decorators, wrappers and monkey patching."),
+        ModuleInstall("bioservices", "pip",
+                      purpose="Access to Biological Web Services from Python"),
+        ModuleInstall(
+            "biokit", "wheel", purpose="Access to Biological Web Services from Python", usage="VIZ"),
+
+
         # azure part
         ModuleInstall("azure-nspkg", "pip", usage="AZURE", mname="azure.mgmt",
                       purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
@@ -331,8 +346,9 @@ def ensae_set():
 
     if sys.version_info[0] == 2:
         mod.extend([
-            ModuleInstall("protobuf-py3", "pip", mname="google.protobuf",
-                          purpose="Protocol Buffers are Google’s data interchange format (for dpark)"),
+            # ModuleInstall("protobuf-py3", "pip", mname="google.protobuf",
+            # purpose="Protocol Buffers are Google’s data interchange format
+            # (for dpark)"),
             ModuleInstall("mesos.interface", "pip",
                           purpose="Mesos interfaces (for dpark)"),
             ModuleInstall("pymesos", "pip",

@@ -42,7 +42,7 @@ except ImportError:
 
 
 from src.pymyinstall import ModuleInstall
-from src.pymyinstall.packaged import ensae_fullset
+from src.pymyinstall.packaged import all_set
 from pyquickhelper import fLOG
 
 
@@ -74,8 +74,12 @@ class TestDownloadAll (unittest.TestCase):
                 # os.remove(os.path.join(temp,_))
                 pass
 
-        pack = ensae_fullset()
+        pack = all_set()
         assert len(pack) > 0
+
+        if sys.version_info[0] == 2:
+            # we skip that test on python 2
+            return
 
         for m in pack[1:]:
             if m.kind != "pip":

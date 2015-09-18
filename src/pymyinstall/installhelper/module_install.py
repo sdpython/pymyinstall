@@ -560,12 +560,6 @@ class ModuleInstall:
                     kind,
                     self.name))
 
-    def Install(self, *l, **p):
-        """
-        @see me install
-        """
-        self.install(*l, **p)
-
     def get_pypi_version(self, url='http://pypi.python.org/pypi'):
         """
         returns the version of a package on pypi
@@ -794,8 +788,14 @@ class ModuleInstall:
             else:
                 cmd += " --cache-dir={0}".format(temp_folder)
 
+            if self.name == "kivy-garden":
+                memo = sys.argv
+                sys.argv = []
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+            if self.name == "kivy-garden":
+                sys.argv = memo
+
             if "No distributions matching the version" in out:
                 raise InstallError(
                     "unable to install with pip " +

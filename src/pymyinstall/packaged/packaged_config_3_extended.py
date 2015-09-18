@@ -26,6 +26,8 @@ def extended_set():
             "simplepam", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)",
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
         ModuleInstall(
+            "simplepam", "pip", purpose="An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)", usage="JUPYTER"),
+        ModuleInstall(
             "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
         ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
                       usage="DATA/ML"),
@@ -41,6 +43,8 @@ def extended_set():
             'odo', 'wheel', purpose="usually used with blaze, handles dataframe in various type of containers", usage="DATA/ML"),
         ModuleInstall(
             'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
+        ModuleInstall(
+            'ordereddict', 'pip', purpose="Python's collections.OrderedDict"),
         ModuleInstall(
             'cyordereddict', 'wheel', purpose="Cython implementation of Python's collections.OrderedDict"),
         ModuleInstall(
@@ -68,7 +72,7 @@ def extended_set():
         ModuleInstall(
             'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
         ModuleInstall(
-            'cvxopt', 'wheel', purpose="linear, quadratique optimization", usage="DATA/ML"),
+            'cvxopt', 'wheel', purpose="linear, quadratique optimization", usage="OPTIM"),
         ModuleInstall(
             'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation", usage="DATA/ML"),
         ModuleInstall('fastcluster', 'wheel',
@@ -97,6 +101,8 @@ def extended_set():
                       purpose="High performance graph data structures and algorithms (issue on Linux and Anaconda)"),
         ModuleInstall(
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
+        ModuleInstall('python-daemon', 'pip', mname="daemon",
+                      purpose="Library to implement a well-behaved Unix daemon process (for luigi)"),
         ModuleInstall('cached_property', 'pip',
                       purpose="A decorator for caching properties in classes (for luigi)"),
         ModuleInstall('luigi', 'pip',
@@ -157,16 +163,17 @@ def extended_set():
                       purpose="big float (issue with Linux and Anaconda)"),
         # convex optimization, depends on CVXOPT
         ModuleInstall(
-            "scs", "wheel", purpose="Solves convex cone programs via operator splitting."),
+            "scs", "wheel", purpose="Solves convex cone programs via operator splitting.", usage="OPTIM"),
         ModuleInstall(
-            "ecos", "wheel", purpose="ECOS is a numerical software for solving convex second-order cone programs (SOCPs)"),
+            "ecos", "wheel", purpose="ECOS is a numerical software for solving convex second-order cone programs (SOCPs)", usage="OPTIM"),
         ModuleInstall(
-            "cvxpy", "pip", purpose="linear, quadratic optimization, depends on cvxopt"),
+            "CVXcanon", "wheel_xd", purpose="A low-level library to perform the matrix building step in cvxpy, a convex optimization modeling software.", usage="OPTIM"),
+        ModuleInstall(
+            "cvxpy", "pip", purpose="linear, quadratic optimization, depends on cvxopt", usage="OPTIM"),
         # better large list
         ModuleInstall(
             "blist", "wheel", purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
         # to install packages with conda
-        ModuleInstall("conda", "pip", purpose="package management tool"),
         ModuleInstall("libLAS", "wheel", mname="liblas",
                       purpose="libLAS is a C/C++ library for reading and writing the very common LAS LiDAR format."),
         ModuleInstall(
@@ -218,7 +225,6 @@ def extended_set():
         ModuleInstall("glueviz", "wheel", mname="glue",
                       purpose="ploting, Multidimensional data visualzation across files", usage="DATA/ML"),
         #
-        # javascript graphs
         ModuleInstall("pandas-highcharts", "pip", mname="pandas_highcharts",
                       purpose="plotting in javascript and pandas", usage="VIZ"),
         #
