@@ -142,7 +142,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     schedule = []
     for mod in modules:
         if verbose:
-            fLOG("check module: ", mod.name)
+            fLOG("[loopu] check module: ", mod.name)
 
         is_installed = mod.is_installed()
         if not is_installed:
@@ -167,7 +167,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
             fLOG(m)
             try:
                 b = mod.update(temp_folder=temp_folder, log=verbose)
-            except Exception as e:
+            except (SystemExit, Exception) as e:
                 b = False
                 m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
                     .format(mod.name, inst, ver, mod.kind, str(e))
@@ -271,7 +271,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             # already done
             continue
         if verbose:
-            fLOG("check module: ", mod.name)
+            fLOG("[loopi] check module: ", mod.name)
         if not mod.is_installed():
             schedule.append(mod)
             if not schedule_only:
@@ -281,7 +281,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 fLOG(m)
                 try:
                     b = mod.install(temp_folder=temp_folder, log=verbose)
-                except Exception as e:
+                except (SystemExit, Exception) as e:
                     b = False
                     m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
                         .format(mod.name, '', ver, mod.kind, str(e))
