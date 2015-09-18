@@ -131,13 +131,19 @@ install.packages(c('actuar',
 #
 # Install Bigmemory packages from r-forge page
 #
-install.packages("bigmemory", repos="http://R-Forge.R-project.org")
-install.packages("bigmemory.sri", repos="http://R-Forge.R-project.org")
-install.packages("biganalytics", repos="http://R-Forge.R-project.org")
-install.packages("bigalgebra", repos="http://R-Forge.R-project.org")
-install.packages("bigkmeans", repos="http://R-Forge.R-project.org")
-install.packages("bigrf", repos="http://R-Forge.R-project.org")
-install.packages("bigtabulate", repos="http://R-Forge.R-project.org")
+# This part is commented out because rpy2 requires 3.2.x and bigmemory binaries are only available
+# for R 3.1.3 (2015/09/18).
+ 
+
+# install.packages("bigmemory", repos="http://R-Forge.R-project.org")
+
+# install.packages("bigmemory.sri", repos="http://R-Forge.R-project.org")
+# install.packages("biganalytics", repos="http://R-Forge.R-project.org")
+# install.packages("bigalgebra", repos="http://R-Forge.R-project.org")
+# install.packages("bigkmeans", repos="http://R-Forge.R-project.org")
+# install.packages("bigrf", repos="http://R-Forge.R-project.org")
+# install.packages("bigtabulate", repos="http://R-Forge.R-project.org")
 
 # Install Boost Header and biglm package from CRAN
-install.packages(c("BH","biglm"))
+
+# install.packages(c("BH","biglm"))
