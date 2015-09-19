@@ -19,3 +19,4 @@
     class `EntryPoint <https://github.com/pypa/pip/blob/develop/pip/_vendor/pkg_resources/__init__.py>`_
     defined in `pip <https://pypi.python.org/pypi/pip>`_ does not have method
     `__lt__ <http://programmers.stackexchange.com/questions/151069/sorting-using-a-custom-definition-of-and-in-python>`_.
+    It is just a warning. The module was installed.

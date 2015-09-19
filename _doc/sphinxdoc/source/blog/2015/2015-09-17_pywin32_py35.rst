@@ -19,5 +19,5 @@
 
         win32/src/win32wnet/PyNetresource.cpp(120): error C2440: 'initialisation' : unable to convert from 'int (__cdecl *)(PyObject *,PyObject *)' to 'PyAsyncMethods *'
         
-    Which will probably disappear in a couple of months
+    Which will probably disappear in a couple of months when the code is updated
     but I'm still curious about what went wrong.

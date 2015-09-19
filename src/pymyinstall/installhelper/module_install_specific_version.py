@@ -6,6 +6,13 @@ import sys
 import platform
 
 
+class UnavailableCustomBuildError(Exception):
+    """
+    raise when a module does not have a custom build
+    """
+    pass
+
+
 def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=None):
     """
     for windows, get the url of the setup using a webpage
@@ -21,8 +28,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
 
     if name == "pywin32":
         if ext == "whl":
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         else:
             if platform.architecture()[0] == "64bit":
                 exe = "pywin32-219.win-amd64-py%s.exe" % sverp
@@ -43,8 +50,21 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
         elif ext == "whl":
             exe = "pycrypto-2.6.1-cp%s-none-win_amd64.whl" % sver
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
+        url = "{0}/{1}".format(exeLocationXd, exe)
+        return url, exe
+
+    elif name == "CVXcanon":
+        if ext == "whl":
+            if platform.architecture()[0] == "64bit":
+                exe = "CVXcanon-0.0.18-py3-none-any.whl"
+            else:
+                raise UnavailableCustomBuildError(
+                    "CVXcanon is unavailable for 32bit")
+        else:
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -55,8 +75,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
             else:
                 exe = "gevent-1.1b3-cp%s-none-win32.whl" % sver
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -67,8 +87,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
             else:
                 exe = "DPark-0.1-cp%s-none-win32.whl" % sver
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -79,8 +99,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
             else:
                 exe = "tifffile-0.7.0-cp%s-none-win32.whl" % sver
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -88,8 +108,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
         if ext == "whl":
             exe = "xgboost-0.4-py3-none-any.whl"
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -97,8 +117,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
         if ext == "whl":
             exe = "skdata-0.0.4-py3-none-any.whl"
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -106,8 +126,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
         if ext == "whl":
             exe = "JSAnimation-0.1.tar.gz"
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -118,8 +138,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
             else:
                 exe = "cchardet-1.0.0-cp%s-none-win32.whl" % sver
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
@@ -130,8 +150,8 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
             else:
                 exe = "aiohttp-0.18.0a0-cp%s-none-win32.whl" % sver
         else:
-            raise Exception("unexpected extension: " +
-                            ext + " for module " + file_save)
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 

@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 @brief Change Jupyter configuration

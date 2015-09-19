@@ -1,0 +1,27 @@
+
+
+.. blogpost::
+    :title: Building wheel for CVXcanon on Windows
+    :keywords: install, wheel, CVxcanon
+    :date: 2015-09-12
+    :categories: install, modules, windows
+
+    I tried to run the command ``python setup.py bdist_wheel``
+    but it failed with the following error message::
+    
+        Checking .pth file support in build\bdist.win-amd64\wheel\CVXcanon-0.0.18.data\..\
+        c:\Python34_x64\pythonw.exe -E -c pass
+        TEST FAILED: build\bdist.win-amd64\wheel\CVXcanon-0.0.18.data\..\ does NOT support .pth files
+        error: bad install directory or PYTHONPATH
+
+        You are attempting to install a package to a directory that is not
+        on PYTHONPATH and which Python does not read ".pth" files from.  The
+        installation directory you specified (via --install-dir, --prefix, or
+        the distutils default setting) was:
+
+            build\bdist.win-amd64\wheel\CVXcanon-0.0.18.data\..\    
+
+    So before giving up, I tried ``python setup.py install``
+    which worked... So I decided the build a very simple 
+    wheel with the compiled files extracted from the 
+    ``site-packages`` directory.
