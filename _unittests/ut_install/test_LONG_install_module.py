@@ -86,7 +86,7 @@ class TestInstallModule (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         mod = ModuleInstall("jinja2", "pip")
-        res = mod.is_installed()
+        res = mod.is_installed_version()
         if not res:
             fLOG(mod)
             fLOG(mod.get_installed_version())
@@ -96,7 +96,7 @@ class TestInstallModule (unittest.TestCase):
             assert False
 
         mod = ModuleInstall("pandas", "wheel")
-        res = mod.is_installed()
+        res = mod.is_installed_version()
         assert res
         fLOG("****", mod.get_installed_version(), mod.get_pypi_version())
         if mod.get_installed_version() != mod.get_pypi_version():
