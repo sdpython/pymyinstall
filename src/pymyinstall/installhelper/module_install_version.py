@@ -407,10 +407,10 @@ def compare_version(num, vers):
     else:
         if len(num) < len(vers):
             num = num + (0,) * (len(vers) - len(num))
-            return ModuleInstall.compare_version(num, vers)
+            return compare_version(num, vers)
         else:
             vers = vers + (0,) * (len(num) - len(vers))
-            return ModuleInstall.compare_version(num, vers)
+            return compare_version(num, vers)
 
 
 def version_consensus(v1, v2):
