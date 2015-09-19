@@ -20,15 +20,15 @@
     Python 3.4.0 is already installed so I did not need to do that
     but I needed the latest pip::
     
-        sudo install apt-get python3-pip --fix-missing
-        sudo python -m pip install -U pip
+        sudo apt-get install python3-pip --fix-missing
+        sudo python3 -m pip install -U pip
         
     Sometimes, pip reverts to its original version. If this happens,
     you can remove its folder and install it again::
 
         sudo rm -f -r /usr/lib/python3/dist-packages/pip
         sudo apt-get install python3-pip
-        sudo pip install --upgrade pip    
+        sudo pip3 install --upgrade pip    
         
     `GCC <https://en.wikipedia.org/wiki/GNU_Compiler_Collection>`_ was not installed.
     I followed the instructions described at
