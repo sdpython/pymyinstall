@@ -13,10 +13,10 @@ defined in pymyinstall as a table.
     :showcode:
     :rst:
     
-    from pymyinstall.packaged import all_fullset, classifiers2string
+    from pymyinstall.packaged import all_set, classifiers2string
     from pyquickhelper import df2rst
     import pandas
-    mod = all_fullset()
+    mod = all_set()
     mod.sort()
     df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
     df = df[["usage", "rst_link", "kind", "version", "license", "purpose", "classifier"]]
