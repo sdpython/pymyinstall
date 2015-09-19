@@ -13,6 +13,9 @@ def scraping_set():
     """
     mod = [
         ModuleInstall(
+            "distribute", "pip", 
+            purpose="distribute legacy wrapper (just for sky)"),
+        ModuleInstall(
             "langdetect", "pip", usage="WEB",
             purpose="Language detection library ported from Google's language-detection."),
         ModuleInstall(
@@ -24,6 +27,9 @@ def scraping_set():
         ModuleInstall(
             "cchardet", "wheel_xd", usage="WEB",
             purpose="Universal encoding detector. This library is faster than chardet."),
+        ModuleInstall(
+            "chardet", "pip", usage="WEB",
+            purpose="Universal encoding detector."),
         ModuleInstall(
             "aiohttp", "wheel_xd", usage="WEB",
             purpose="http client/server for asyncio"),

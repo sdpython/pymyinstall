@@ -133,7 +133,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
             continue
         if end != -1 and i >= end:
             break
-        if m.is_installed():
+        if m.is_installed_version():
 
             if m.name in ["libpython", "tutormagic", "pymyinstall"]:
                 # nothing to import or failure
