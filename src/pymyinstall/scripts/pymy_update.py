@@ -84,7 +84,8 @@ def main():
         res = None
 
     if res is not None:
-        skip_module = res.skip.split(",")
+        skip_module = None if res.skip in [
+            "", "-", None, []] else res.skip.split(",")
         list_module = None if res.module in [
             "all", "", "-", None, []] else res.module
         if list_module is None and res.set is not None and len(res.set) > 0 and res.set != "-":

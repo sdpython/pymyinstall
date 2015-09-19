@@ -113,8 +113,13 @@ def ensae_set():
         ModuleInstall(
             "pytool", "pip", purpose="A collection of tools for Python"),
         ModuleInstall(
-            "pycuda", "wheel", purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python.",
-            usage="GPU"),
+            "py", "pip", purpose="library with cross-python path, ini-parsing, io, code, log facilities"),
+        ModuleInstall(
+            "pytools", "pip", purpose="A collection of tools for Python"),
+        ModuleInstall(
+            "pytest", "pip", purpose="pytest allows you to use the standard python assert for verifying expectations and values in Python tests."),
+        ModuleInstall("pycuda", "wheel", usage="GPU",
+                      purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python."),
         # ModuleInstall("scikits.cuda", "pip", mname="skcuda"), # no stable
         # version
         ModuleInstall(
@@ -295,8 +300,8 @@ def ensae_set():
                       purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall("bioservices", "pip",
                       purpose="Access to Biological Web Services from Python"),
-        ModuleInstall(
-            "biokit", "wheel", purpose="Access to Biological Web Services from Python", usage="VIZ"),
+        ModuleInstall("biokit", "github", "biokit", usage="VIZ",
+                      purpose="Access to Biological Web Services from Python"),
 
 
         # azure part

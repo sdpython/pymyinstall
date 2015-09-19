@@ -19,7 +19,7 @@ def get_parser():
     parser.add_argument(
         '-s',
         '--skip',
-        default="ete,dataspyre,pycuda,cubehelix",
+        default="",  # "ete,dataspyre,pycuda,cubehelix",
         help='list of modules to skip (not to be updated) separated by a comma')
     parser.add_argument(
         '-f',
@@ -52,7 +52,7 @@ def get_parser():
 
 
 def do_main(temp_folder="build/update_modules",
-            skip_module=["ete", "dataspyre", "pycuda", "cubehelix"],
+            skip_module=None,  # ["ete", "dataspyre", "pycuda", "cubehelix"],
             list_module=None, deps=False, schedule_only=False,
             deep_deps=False):
     """
@@ -99,7 +99,8 @@ def main():
         res = None
 
     if res is not None:
-        skip_module = res.skip.split(",")
+        skip_module = None if res.skip in [
+            "", "-", None, []] else res.skip.split(",")
         list_module = None if res.module in [
             "all", "", "-", None, []] else res.module
         if list_module is None and res.set is not None and len(res.set) > 0 and res.set != "-":

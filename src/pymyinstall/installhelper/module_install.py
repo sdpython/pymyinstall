@@ -234,7 +234,7 @@ class ModuleInstall:
         else:
             return self.name
 
-    def IsInstalled(self):
+    def is_installed_local(self):
         """
         checks if a module is installed
         """
@@ -683,7 +683,7 @@ class ModuleInstall:
                 return v
         return None
 
-    def is_installed(self):
+    def is_installed_version(self):
         """
         tells if a module is installed
 
@@ -757,7 +757,7 @@ class ModuleInstall:
                 warnings.warn(str(e))
                 # we try the regular way now
 
-        if not force and self.IsInstalled():
+        if not force and self.is_installed_version():
             return True
 
         deps = deps if self.deps is None else self.deps
@@ -1078,14 +1078,14 @@ class ModuleInstall:
 
         # at this stage, there is a bug, for some executable, the execution
         # takes longer than expected
-        # if not self.IsInstalled() :
+        # if not self.is_installed_version() :
         #    raise Exception("unable to install module: {0}, str:{1}".format(self.name, self))
 
         if ret is not None and ret and self.script is not None:
             if sys.platform.startswith("win"):
                 # here, we have to wait until the script is installed
                 ti = 0
-                while not self.IsInstalled():
+                while not self.is_installed_local():
                     time.sleep(0.5)
                     ti += 0.5
                     if ti > 60:
@@ -1140,7 +1140,7 @@ class ModuleInstall:
         if ModuleInstall.is_annoying(self.name):
             return False
 
-        if not self.is_installed():
+        if not self.is_installed_version():
             raise MissingInstalledPackageException(self.name)
 
         if not force and not self.has_update():
