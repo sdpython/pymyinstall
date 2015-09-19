@@ -229,6 +229,18 @@ def extended_set():
                       purpose="plotting in javascript and pandas", usage="VIZ"),
         #
         ModuleInstall(
+            "chest", "pip",
+            purpose="Simple on-disk dictionary"),
+        ModuleInstall(
+            "heapdict", "pip",
+            purpose="a heap with decrease-key and increase-key operations"),
+        ModuleInstall(
+            "partd", "pip",
+            purpose="Appendable key-value storage"),
+        ModuleInstall(
+            "locket", "pip",
+            purpose="File-based locks for Python for Linux and Windows"),
+        ModuleInstall(
             "dill", "pip", purpose="serialize all of python (almost), Dill extends python's \"pickle\" module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
         # parallel computation
         ModuleInstall(

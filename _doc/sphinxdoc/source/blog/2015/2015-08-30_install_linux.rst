@@ -46,10 +46,10 @@
     This is needed when a package includes C++ code which needs to be compiled.
     That's why some C++ libraries are required::
 
-        sudo apt-get install libhdf5-dev libatlas-dev libatlas3gf-base llvm libgeos-dev freeglut3-dev libnetcdf-dev
-        sudo apt-get install libgmp-dev libgmp3-dev libcpl-dev libmpc-dev
-        sudo apt-get install binutils libproj-dev gdal-bin libgeoip1 libgdal-dev
-        sudo apt-get install libmpfr-dev llvm-dev git libopencv-dev libsvm-dev libxml++ curl gmpc-dev libcurlpp-dev
+        sudo apt-get -y install libhdf5-dev libatlas-dev libatlas3gf-base llvm libgeos-dev freeglut3-dev libnetcdf-dev
+        sudo apt-get -y install libgmp-dev libgmp3-dev libcpl-dev libmpc-dev
+        sudo apt-get -y install binutils libproj-dev gdal-bin libgeoip1 libgdal-dev
+        sudo apt-get -y install libmpfr-dev llvm-dev git libopencv-dev libsvm-dev libxml++ curl gmpc-dev libcurlpp-dev
 
     To get a minimal Gnome installation (takes some time), I don't know if
     it is mandatory::
@@ -59,20 +59,20 @@
     Some modules are already available through `apt-get <http://doc.ubuntu-fr.org/apt-get>`_
     (check `Ubuntu packages <http://packages.ubuntu.com/search?suite=default&section=all&arch=any&keywords=python3-f&searchon=names>`_)::
     
-        sudo apt-get install python3-dev python3-numpy python3-matplotlib python3-scipy python3-pandas python3-zmq python3-lxml python3-pyside 
-        sudo apt-get install python3-gmpy2 python3-ecdsa python3-pillow python3-h5py python3-six python3-skimage
-        sudo apt-get install python3-kivy
-        sudo apt-get install python3-babel python3-bitarray python3-bs4
-        sudo apt-get install python3-cffi python3-cherrypy3 python3-cloud-sptheme python3-colorama python3-coverage
-        sudo apt-get install python3-dateutil python3-docutils python3-feedparser
-        sudo apt-get install python3-flake8 python3-flask python3-gdal python3-geopy python3-gmpy2 python3-html5lib
-        sudo apt-get install python3-itsdangerous python3-jedi python3-jinja2 python3-kdtree python3-keyring python3-logbook
-        sudo apt-get install python3-mako python3-marisa python3-markdown python3-mccabe
-        sudo apt-get install python3-numexpr python3-oauthlib
-        sudo apt-get install python3-openssl python3-patsy python3-reportlab python3-requests python3-rply
-        sudo apt-get install python3-shapely python3-simplejson
-        sudo apt-get install python3-sphinx python3-sql python3-sqlparse python3-stemmer python3-tk python3-tornado python3-tz
-        sudo apt-get install python3-urllib3 python3-xlib python3-yaml
+        sudo apt-get -y install python3-dev python3-numpy python3-matplotlib python3-scipy python3-pandas python3-zmq python3-lxml python3-pyside 
+        sudo apt-get -y install python3-gmpy2 python3-ecdsa python3-pillow python3-h5py python3-six python3-skimage
+        sudo apt-get -y install python3-kivy
+        sudo apt-get -y install python3-babel python3-bitarray python3-bs4
+        sudo apt-get -y install python3-cffi python3-cherrypy3 python3-cloud-sptheme python3-colorama python3-coverage
+        sudo apt-get -y install python3-dateutil python3-docutils python3-feedparser
+        sudo apt-get -y install python3-flake8 python3-flask python3-gdal python3-geopy python3-gmpy2 python3-html5lib
+        sudo apt-get -y install python3-itsdangerous python3-jedi python3-jinja2 python3-kdtree python3-keyring python3-logbook
+        sudo apt-get -y install python3-mako python3-marisa python3-markdown python3-mccabe
+        sudo apt-get -y install python3-numexpr python3-oauthlib
+        sudo apt-get -y install python3-openssl python3-patsy python3-reportlab python3-requests python3-rply
+        sudo apt-get -y install python3-shapely python3-simplejson
+        sudo apt-get -y install python3-sphinx python3-sql python3-sqlparse python3-stemmer python3-tk python3-tornado python3-tz
+        sudo apt-get -y install python3-urllib3 python3-xlib python3-yaml
         
     Not the latest packages are available so they might be installed and compiled again.  
     It should get some others C++ dependencies and save some time later.
@@ -148,5 +148,9 @@
     Finally, some tools (requires more than 1 Gb)::
     
         sudo apt-get install pandoc i7z i7z-gui scite java-common sqlitebrowser latex-cjk-all texlive-latex-base texlive-latex-recommended texlive-latex-extra mono-complete
+        
+    To get numpy and scipy depedencies, the following command is enough::
+    
+        sudo apt-get build-dep python3-numpy python3-scipy
     
         

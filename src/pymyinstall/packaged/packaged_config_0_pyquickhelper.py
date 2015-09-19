@@ -11,7 +11,7 @@ def pyquickhelper_set():
     """
     returns a list of modules needed to use
     `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/index.html>`_ and its extensions for notebooks,
-    documentation. It is a subset of @see fn small_set.
+    documentation.
 
     @return             a list of modules to install
 
