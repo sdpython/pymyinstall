@@ -33,5 +33,6 @@
     This library must be available in one the path in environment variable ``PATH``
     or be in the same folder as ``python.exe``.
     
-    .. [ftbl1]  `OpenMP <https://en.wikipedia.org/wiki/OpenMP>`_
-                is an API that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran (Wikipedia).
+    .. [#ftbl1] `OpenMP <https://en.wikipedia.org/wiki/OpenMP>`_
+                is an API that supports multi-platform shared 
+                memory multiprocessing programming in C, C++, and Fortran (Wikipedia).

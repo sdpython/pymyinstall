@@ -99,18 +99,7 @@ def get_package_set(name):
     @param      name        set name
     @return                 list of modules
 
-    List of available sets:
-
-    .. runpython::
-        :rst:
-
-        from pymyinstall.packaged.packaged_config import name_sets_dataframe
-        from pyquickhelper import df2rst
-        import pandas
-        r = name_sets_dataframe()
-        df = pandas.DataFrame(r)
-        df = df[["name", "description"]]
-        print(df2rst(df))
+    See :ref:`l-name-set-table` to get the list of available sets.
     """
     if name not in _module_set_name:
         keys = [_.replace("_set", "") for _ in _module_set_name.keys()]

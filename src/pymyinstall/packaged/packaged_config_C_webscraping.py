@@ -13,7 +13,7 @@ def scraping_set():
     """
     mod = [
         ModuleInstall(
-            "distribute", "pip", 
+            "distribute", "pip",
             purpose="distribute legacy wrapper (just for sky)"),
         ModuleInstall(
             "langdetect", "pip", usage="WEB",
