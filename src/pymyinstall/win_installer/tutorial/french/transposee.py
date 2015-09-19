@@ -29,7 +29,7 @@ if False:
 ###################
 
 # changer False en True pour exécuter le code qui suit
-if True:
+if False:
     # données extraites depuis http://www.les-calories.com/calories-a.html
 
     # on récupère le contenu du répertoire

@@ -13,14 +13,19 @@ defined in pymyinstall as a table.
     :showcode:
     :rst:
     
-    from pymyinstall.packaged import all_set, classifiers2string
+    from pymyinstall.packaged import all_set
     from pyquickhelper import df2rst
     import pandas
     mod = all_set()
     mod.sort()
     df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
     df = df[["usage", "rst_link", "kind", "version", "license", "purpose", "classifier"]]
-    df["classifier"] = df.apply(lambda row: classifiers2string(row["classifier"]), axis=1)
+    def modifier(row):
+        # for some reason, the function is recognized
+        # if not imported in the loop
+        from pymyinstall.packaged.packaged_config import classifiers2string
+        return classifiers2string(row["classifier"])
+    df["classifier"] = df.apply(modifier, axis=1)
     df.columns=["usage", "name", "kind", "version", "license", "purpose", "classifier"]
     print(df2rst(df))
 
