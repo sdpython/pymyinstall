@@ -20,7 +20,7 @@ if sys.version_info[0] == 2:
     FileNotFoundError = Exception
 
 
-def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=False):
+def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=False, module_list=None):
     """
     checks a distribution was properly executed
 
@@ -28,6 +28,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
     @param      tools_path      path for tools
     @param      fLOG            logging function
     @param      skip_import     skip the validation of every installed module (for unit test purposes)
+    @param      module_list     module list to check
 
     The function raises @see cl WinInstallDistributionError if an issue is detected.
 
@@ -66,7 +67,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
     ################################
     if not skip_import:
         res = import_every_module(
-            python_path, None, only_installed=True, fLOG=fLOG)
+            python_path, module_list, only_installed=True, fLOG=fLOG)
         mes = []
         for r in res:
             if not r[0]:
@@ -114,10 +115,12 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
 
     def noLOG(*l, **p):
         pass
-        
+
     def is_errored_line(line):
         if ".py" in line:
             if "UserWarning:" in line:
+                return False
+            if "FutureWarning:" in line:
                 return False
             return True
         return False
@@ -132,12 +135,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
         if "kivy" in mod.name.lower():
             if "error" not in err.lower():
                 return True
-                
-        if mod.name in {"simplepam", "ordereddict"
-                }:
-            # these modules should not be used
-            return False
-            
+
         if err is not None:
             lines = err.split("\n")
             for line in lines:
@@ -181,7 +179,8 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                 fLOG("{0}/{1}: success".format(i, len(module_list)), m)
             else:
                 fLOG("{0}/{1}: failed ".format(i, len(module_list)), m)
-                err = [ (" - ERR: " if is_errored_line(line) else " - OK:  ") + line for line in err.split("\n") ]
+                err = [(" - ERR: " if is_errored_line(line)
+                        else " - OK:  ") + line for line in err.split("\n")]
                 err = "\n".join(err)
             res.append((suc, m, out, err))
     return res

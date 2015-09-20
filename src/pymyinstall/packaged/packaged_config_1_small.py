@@ -110,6 +110,8 @@ def small_set():
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
+            "pandas-datareader", "pip", purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
+        ModuleInstall(
             "netCDF4", "wheel", mname="netCDF4", purpose="xray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
         ModuleInstall(
             "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),

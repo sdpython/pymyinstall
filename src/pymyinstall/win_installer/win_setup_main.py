@@ -499,7 +499,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         #########
         # checking
         #########
-        distribution_checkings(folders["python"], folders["tools"], fLOG=fLOG)
+        distribution_checkings(folders["python"], folders[
+                               "tools"], fLOG=fLOG, module_list=module_list)
 
     ########
     # tutorial

@@ -288,18 +288,19 @@ def ensae_set():
         # purpose="Turn your Python and Javascript code into DOT flowcharts"),
 
         # biokit
+        ModuleInstall("wrapt", "wheel",
+                      purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall("colormap", "pip", usage="VIZ",
                       purpose="Utilities to ease manipulation of matplotlib colormaps and color codecs (e.g., hex2rgb)"),
         ModuleInstall("easydev", "pip",
                       purpose="Common utilities to ease the development of Python packages"),
         ModuleInstall("suds-jurko", "pip", mname="suds",
                       purpose="Lightweight SOAP client (Jurko's fork)"),
-        ModuleInstall("wrapt", "wheel",
-                      purpose="A Python module for decorators, wrappers and monkey patching."),
-        ModuleInstall("bioservices", "pip",
-                      purpose="Access to Biological Web Services from Python"),
-        ModuleInstall("biokit", "github", "biokit", usage="VIZ",
-                      purpose="Access to Biological Web Services from Python"),
+        # bugged and still uses ordereddict
+        # ModuleInstall("bioservices", "pip",
+        #              purpose="Access to Biological Web Services from Python"),
+        # ModuleInstall("biokit", "github", "biokit", usage="VIZ",
+        # purpose="Access to Biological Web Services from Python"),
 
 
         # azure part

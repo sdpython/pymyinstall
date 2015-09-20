@@ -90,7 +90,7 @@ def extended_set():
         ModuleInstall(
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
         ModuleInstall('python-daemon', 'pip', mname="daemon",
-                      purpose="Library to implement a well-behaved Unix daemon process (for luigi)"),
+                      purpose="Library to implement a well-behaved Unix daemon process (for luigi)") if not sys.platform.startswith("win") else None,
         ModuleInstall('cached_property', 'pip',
                       purpose="A decorator for caching properties in classes (for luigi)"),
         ModuleInstall('luigi', 'pip',
@@ -156,8 +156,8 @@ def extended_set():
             "ecos", "wheel", purpose="ECOS is a numerical software for solving convex second-order cone programs (SOCPs)", usage="OPTIM"),
         ModuleInstall(
             "CVXcanon", "wheel_xd", purpose="A low-level library to perform the matrix building step in cvxpy, a convex optimization modeling software.", usage="OPTIM"),
-        ModuleInstall(
-            "cvxpy", "pip", purpose="linear, quadratic optimization, depends on cvxopt", usage="OPTIM"),
+        ModuleInstall("cvxpy", "github", "sdpython", usage="OPTIM",
+                      purpose="linear, quadratic optimization, depends on cvxopt"),
         # better large list
         ModuleInstall(
             "blist", "wheel", purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
@@ -182,7 +182,9 @@ def extended_set():
             "Theano", "wheel", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
         ModuleInstall('pymc', 'wheel',
                       purpose="Monte Carlo computation", usage="DATA/ML"),
-        ModuleInstall('pymc', 'wheel', web="https://github.com/pymc-devs/pymc3",
+        ModuleInstall('pymc', 'wheel', web="https://github.com/pymc-devs/pymc",
+                      purpose="Monte Carlo computation", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
+        ModuleInstall('pymc3', 'github', "pymc-devs", web="https://github.com/pymc-devs/pymc3",
                       purpose="Monte Carlo computation (Python 3 only)", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall('pysterior', 'pip',
                       purpose="pysterior is a machine learning library for Python which aims to make Bayesian parametric regression and classification models accessible and easy to use. The library allows users to construct supervised learning models using an intuitive interface similar to that used by scikit-learn.", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
@@ -229,7 +231,7 @@ def extended_set():
             "locket", "pip",
             purpose="File-based locks for Python for Linux and Windows"),
         ModuleInstall(
-            "dill", "pip", purpose="serialize all of python (almost), Dill extends python's \"pickle\" module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
+            "dill", "pip", purpose="serialize all of python (almost), Dill extends python's pickle module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
         # parallel computation
         ModuleInstall(
             "dask", "pip", purpose="parallization of operations with dataframe", usage="DATA/ML"),

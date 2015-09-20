@@ -3,7 +3,7 @@
 .. blogpost::
     :title: Warning with Mako
     :keywords: Mako, warning, issue
-    :date: 2015-09-17
+    :date: 2015-09-19
     :categories: install, modules, issue
     
     The installation of `Mako <http://www.makotemplates.org/>`_

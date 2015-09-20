@@ -1,0 +1,13 @@
+
+
+.. blogpost::
+    :title: Install cvxpy on Windows
+    :keywords: cvxpy, Windows
+    :date: 2015-09-20
+    :categories: install, modules, issue
+    
+    After I installed `CVXcanon <https://github.com/cvxgrp/CVXcanon>`_ (see previous blog), 
+    I went through an issue
+    ``canonInterface`` is not found.
+    I corrected with the following modification:
+    `change import instruction to use CVXcanon explicitely  <https://github.com/sdpython/cvxpy/commit/11fe2bff21cbafcb694cab1265f111e6f9314ac4>`_.
