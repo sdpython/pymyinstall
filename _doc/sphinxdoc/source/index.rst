@@ -44,13 +44,13 @@ The module installs two batch files. The first one
 ``pymy_install`` installes necessary modules to do machine learning.
 To get help on both::
 
-    pymy_update --help
-    pymy_install --help
+    pymy_update3 --help
+    pymy_install3 --help
     
 For example, to install packages for a datascientist::
 
     pip install pymyinstall
-    pymy_install
+    pymy_install3
     
 The module will download and install many modules (see :ref:`l-ensae_fullset-table`).
 It includes *numpy*, *scikit-learn*, *jupyter*, *pandas* and many others.
@@ -58,12 +58,12 @@ If it fails for any reason - lost connexion -, run again the function with the s
 parameter. If it fails again, you can skip the modules by filling the parameter ``skip``.
 To update modules::
 
-    pymy_update
+    pymy_update3
     
 If some modules fail, they can be skipped by using option ``--skip=<modules comma separated>``.
 Both scripts can be used to install a subset of modules::
 
-    pymy_install --set=minimum
+    pymy_install3 --set=minimum
 
 
 Setup
@@ -99,6 +99,7 @@ Quick start
     
     all_example
     all_notebooks
+    name_set_table
     ensae_full_set_table    
     
 Indices and tables

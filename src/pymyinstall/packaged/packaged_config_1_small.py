@@ -269,7 +269,7 @@ def small_set():
         ModuleInstall("multimethods", "pip",
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
         ModuleInstall("appdirs", "pip",
-                      usage="A small Python module for determining appropriate platform-specific dirs"),
+                      purpose="A small Python module for determining appropriate platform-specific dirs"),
     ]
 
     return [_ for _ in mod if _ is not None]

@@ -98,7 +98,7 @@
         
     Finally, to update the installed modules::
     
-        sudo -H pymy_update
+        sudo -H pymy_update3
         
     This command fails for a couple of libraries installed using ``apt-get python3-``. 
     Some dependencies are still missing from the list mentioned above.
