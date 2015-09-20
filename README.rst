@@ -69,11 +69,11 @@ to continue.
 If you are not on Anaconda or a distribution which knows how to update modules, you can run
 from the scripts folder::
 
-    pymy_update
+    pymy_update3
     
-If you want to install a list of module for datascientist::
+If you want to install a list of modules for datascientist::
 
-    pymy_install
+    pymy_install3
     
 ``--help`` gives the usage.
 
@@ -95,7 +95,7 @@ Source of the packages:
 Versions
 --------
 
-* **1.1 - 2015/??/??/**
+* **1.1 - 2015/??/??**
     * **fix:** module dynd is only available on Python 3, remove it for Python 2.7
     * **fix:** fix function *create_win_batches* (batch script ipython were missing, batch to update all installed packages)
     * **change:** the function *update_all* continues if an update fails (catches excptions)
@@ -107,6 +107,7 @@ Versions
     * **add:** TDM-GCC was added to the setup (for theano)
     * **add:** function *install_module_deps* installs a module with its dependencies
     * **add:** the setup works with Python 3.5
+    * **change:** improve modules set definition ``pymy_install3 --set=<module_set>``
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup

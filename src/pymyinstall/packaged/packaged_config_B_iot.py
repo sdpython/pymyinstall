@@ -9,7 +9,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def iot_set():
     """
-    list of sphinx themes and others helpers for sphinx
+    list of sphinx themes and others helpers for sphinx, it requires the modules in set *small*
     """
     mod = [
         ModuleInstall(

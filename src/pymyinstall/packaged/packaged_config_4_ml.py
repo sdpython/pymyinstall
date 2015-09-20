@@ -16,9 +16,7 @@ def ml_set():
 
 def ensae_set():
     """
-    .. index:: ENSAE
-
-    modules introduced by students or needed for student projects
+    modules introduced by students or needed for student projects, it requires the modules in set *extended*
     """
     mod = [
         ModuleInstall(

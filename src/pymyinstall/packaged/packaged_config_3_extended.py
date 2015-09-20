@@ -10,7 +10,7 @@ from .config_helper import is_64bit
 
 def extended_set():
     """
-    list of modules to install, an rich set, to work with data and more
+    list of modules to install, an rich set, to work with data and more, it requires the modules in set *small*
     """
     mod = [
         ModuleInstall(

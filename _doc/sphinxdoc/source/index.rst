@@ -64,6 +64,8 @@ If some modules fail, they can be skipped by using option ``--skip=<modules comm
 Both scripts can be used to install a subset of modules::
 
     pymy_install3 --set=minimum
+    
+Modules sets are described at :ref:`l-name-set-table`.
 
 
 Setup

@@ -65,10 +65,11 @@ class TestInstallWithDeps(unittest.TestCase):
         if __name__ != "__main__":
             warnings.warn("does not work well from a virtual environment")
             return
-            
+
         if sys.version_info[0] == 2:
             # using nose so previous test is true
-            warnings.warn("does not work well from a virtual environment (Python 2.7)")
+            warnings.warn(
+                "does not work well from a virtual environment (Python 2.7)")
             return
 
         out = create_virtual_env(temp, fLOG=fLOG)

@@ -9,7 +9,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def sphinx_theme_set():
     """
-    list of sphinx themes
+    list of sphinx themes, it requires the modules in set *small*
     """
     mod = [
         ModuleInstall('snowballstemmer', 'pip',

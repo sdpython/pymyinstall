@@ -9,7 +9,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def scraping_set():
     """
-    modules which help scraping the web
+    modules which help scraping the web, it requires the modules in set *small*
     """
     mod = [
         ModuleInstall(

@@ -8,7 +8,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def teachings_set():
     """
-    modules implemented for my teachings
+    modules implemented for my teachings, it requires the modules in set *ml*
     """
     mod = [
         ModuleInstall(
