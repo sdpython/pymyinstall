@@ -56,7 +56,8 @@ class TestSuccessfulCustom(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        subset = ["seaborn"]
+        subset = ["seaborn"] if "travis" not in sys.executable else [
+            "matplotlib"]
         res = import_every_module(
             sys.executable, subset, fLOG=fLOG)
         nb = 0

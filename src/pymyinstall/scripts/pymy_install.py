@@ -32,6 +32,10 @@ def get_parser():
         action='store_true',
         help='install a module or the modules with their dependencies')
     parser.add_argument(
+        '--check',
+        default="",
+        help='check every installed module by importing them, all others options are ignored, the value can be null, a module name or a list comma separated, two integers semi-colon separated 1:end')
+    parser.add_argument(
         '--deep-deps',
         action='store_true',
         help='install a module or the modules with their dependencies, check dependencies of dependencies are installed')
@@ -54,7 +58,7 @@ def get_parser():
 def do_main(temp_folder="build/update_modules",
             skip_module=None,  # ["ete", "dataspyre", "pycuda", "cubehelix"],
             list_module=None, deps=False, schedule_only=False,
-            deep_deps=False):
+            deep_deps=False, checkings=None):
     """
     calls function @see fn install_all but is meant to be added to scripts folder
 
@@ -64,26 +68,66 @@ def do_main(temp_folder="build/update_modules",
     @param      deps            install a module with its dependencies
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
     @param      deep_deps       check dependencies for dependencies
+    @param      checkings       if True, run checkings, do not install anything, example of values
+                                ``""``, ``matplotlib``, ``100,end``.
 
     If *deps* is True, *list_module* cannot be empty.
     """
-    if not os.path.exists(temp_folder):
-        os.makedirs(temp_folder)
-    try:
-        from pymyinstall.packaged import install_all
-    except ImportError:
-        folder = os.path.normpath(os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), "..", ".."))
-        sys.path.append(folder)
-        from pymyinstall.packaged import install_all
-    res = install_all(temp_folder=temp_folder, verbose=True,
-                      skip_module=skip_module, list_module=list_module, deps=deps,
-                      schedule_only=schedule_only,
-                      deep_deps=deep_deps)
-    if schedule_only:
-        print("SCHEDULED")
-        for r in res:
-            print(r)
+    if checkings:
+        try:
+            from pymyinstall.win_installer import import_every_module
+        except ImportError:
+            folder = os.path.normpath(os.path.join(
+                os.path.abspath(os.path.dirname(__file__)), "..", ".."))
+            sys.path.append(folder)
+            from pymyinstall.win_installer import import_every_module
+
+            def to_int(s):
+                if "end" in s:
+                    return -1
+                try:
+                    return int(s)
+                except:
+                    return -1
+
+            if checkings in ("", "0,end", "0,-1"):
+                module_list = None
+                start = 0
+                end = -1
+            elif ":" in checkings:
+                module_list = None
+                spl = checkings.split(":")
+                if len(spl) == 2:
+                    start = to_int(spl[0])
+                    end = to_int(spl[1])
+                else:
+                    raise ValueError("unable to interpret: " + checkings)
+            else:
+                module_list = [_.strip() for _ in checkings.split(",")]
+                start = 0
+                end = -1
+
+            print("CHECKINGS {}:{} -- {}".format(start, end,
+                                                 "all" if module_list is None else ",".join(module_list)))
+            import_every_module(None, module_list, start=start, end=end)
+    else:
+        if not os.path.exists(temp_folder):
+            os.makedirs(temp_folder)
+        try:
+            from pymyinstall.packaged import install_all
+        except ImportError:
+            folder = os.path.normpath(os.path.join(
+                os.path.abspath(os.path.dirname(__file__)), "..", ".."))
+            sys.path.append(folder)
+            from pymyinstall.packaged import install_all
+        res = install_all(temp_folder=temp_folder, verbose=True,
+                          skip_module=skip_module, list_module=list_module, deps=deps,
+                          schedule_only=schedule_only,
+                          deep_deps=deep_deps)
+        if schedule_only:
+            print("SCHEDULED")
+            for r in res:
+                print(r)
 
 
 def main():
@@ -107,7 +151,7 @@ def main():
             list_module = res.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module, deps=res.deps, schedule_only=res.schedule,
-                deep_deps=res.deep_deps)
+                deep_deps=res.deep_deps, checkings=res.check)
 
 
 if __name__ == "__main__":

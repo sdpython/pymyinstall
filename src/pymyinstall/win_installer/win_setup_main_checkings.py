@@ -100,6 +100,8 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
     @param      end             end the list at *end* or -1 for all
     @return                     list of tuple (success, failing modules, output, error)
     """
+    if python_path is None:
+        python_path = os.path.dirname(sys.executable)
     if os.path.isfile(python_path):
         python_path = os.path.dirname(python_path)
 

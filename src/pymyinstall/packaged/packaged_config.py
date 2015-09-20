@@ -31,7 +31,7 @@ def ensae_fullset():
 
 def all_set():
     """
-    Installation of all possible modules register in this module.
+    Installation of all possible modules listed in this module.
     """
     base = small_set() +  \
         sphinx_theme_set() + \
