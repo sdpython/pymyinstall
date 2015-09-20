@@ -10,8 +10,6 @@ from ..installhelper.module_install import ModuleInstall
 def minimal_set():
     """
     list of modules to add to python to get a minimal python
-
-    @return             a list of modules to install
     """
     mod = [
         ModuleInstall(

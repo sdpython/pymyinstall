@@ -8,8 +8,6 @@ from ..installhelper.module_install import ModuleInstall
 
 def teachings_set():
     """
-    .. index:: ENSAE, teachings
-
     modules implemented for my teachings
     """
     mod = [

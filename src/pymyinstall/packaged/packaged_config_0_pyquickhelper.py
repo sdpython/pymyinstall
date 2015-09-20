@@ -9,12 +9,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def pyquickhelper_set():
     """
-    returns a list of modules needed to use
-    `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/index.html>`_ and its extensions for notebooks,
-    documentation.
-
-    @return             a list of modules to install
-
+    list of modules needed to run unit test of module *pyquickhelper*
     """
     mod = [
         ModuleInstall("futures", "pip", version="2.2.0"),

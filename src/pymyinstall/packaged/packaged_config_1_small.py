@@ -9,15 +9,7 @@ from ..installhelper.module_install import ModuleInstall
 
 def small_set():
     """
-    returns a list of modules to work with pandas, numpy, ipython, ...
-
-    @return             a list of modules to install
-
-    To install them:
-    @code
-    for _ in small_set() :
-        _.install(temp_folder="install")
-    @endcode
+    list of modules to work with pandas, numpy, ipython, ...
     """
     mod = [
         ModuleInstall("futures", "pip", version="2.2.0"),
