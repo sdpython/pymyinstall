@@ -14,12 +14,9 @@ def extended_set():
     """
     mod = [
         ModuleInstall(
-            "simplepam", "pip", purpose="required by jupyterhub, An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)",
-            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+            "pamela", "pip", purpose="An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)") if not sys.platform.startswith("win") else None,
         ModuleInstall(
-            "simplepam", "pip", purpose="An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)", usage="JUPYTER"),
-        ModuleInstall(
-            "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER"),
+            "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER") if not sys.platform.startswith("win") else None,
         ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
                       usage="DATA/ML"),
         ModuleInstall('python-pptx', 'pip', mname="pptx",
@@ -35,7 +32,7 @@ def extended_set():
         ModuleInstall(
             'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
         ModuleInstall(
-            'ordereddict', 'pip', purpose="Python's collections.OrderedDict"),
+            'ordereddict', 'pip', purpose="Python's collections.OrderedDict") if sys.version_info[0] == 2 else None,
         ModuleInstall(
             'cyordereddict', 'wheel', purpose="Cython implementation of Python's collections.OrderedDict"),
         ModuleInstall(

@@ -184,7 +184,7 @@ def small_set():
                       purpose="verifies decorators at running time"),
         ModuleInstall(
             "decorator", "pip", purpose="Better living through Python with decorators"),
-        ModuleInstall("requests-cache", "pip",
+        ModuleInstall("requests-cache", "pip", mname="requests_cache",
                       purpose="Persistent cache for requests library"),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         #ModuleInstall("PyQt",           "wheel", mname="PyQt4", usage="GUI"),

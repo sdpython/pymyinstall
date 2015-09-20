@@ -114,6 +114,13 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
 
     def noLOG(*l, **p):
         pass
+        
+    def is_errored_line(line):
+        if ".py" in line:
+            if "UserWarning:" in line:
+                return False
+            return True
+        return False
 
     def analyze_error_success(mod, err):
         if err is None or len(err) == 0:
@@ -125,6 +132,22 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
         if "kivy" in mod.name.lower():
             if "error" not in err.lower():
                 return True
+                
+        if mod.name in {"simplepam", "ordereddict"
+                }:
+            # these modules should not be used
+            return False
+            
+        if err is not None:
+            lines = err.split("\n")
+            for line in lines:
+                if ".py" in line:
+                    res = is_errored_line(lines)
+                    if res:
+                        return False
+                else:
+                    continue
+            return True
         return False
 
     res = []
@@ -158,5 +181,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                 fLOG("{0}/{1}: success".format(i, len(module_list)), m)
             else:
                 fLOG("{0}/{1}: failed ".format(i, len(module_list)), m)
+                err = [ (" - ERR: " if is_errored_line(line) else " - OK:  ") + line for line in err.split("\n") ]
+                err = "\n".join(err)
             res.append((suc, m, out, err))
     return res
