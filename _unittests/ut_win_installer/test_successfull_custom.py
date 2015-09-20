@@ -58,6 +58,7 @@ class TestSuccessfulCustom(unittest.TestCase):
 
         subset = ["seaborn"] if "travis" not in sys.executable else [
             "matplotlib"]
+        subset.extend("docutils pandas numpy".split())
         res = import_every_module(
             sys.executable, subset, fLOG=fLOG)
         nb = 0
