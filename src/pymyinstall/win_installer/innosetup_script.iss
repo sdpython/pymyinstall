@@ -66,7 +66,7 @@ Name: "{app}\Installer\Tortoise Git"; IconFilename: "{app}\tools\icons\tortoiseg
 Name: "{app}\Installer\RSudio"; IconFilename: "{app}\tools\icons\rstudio.ico"; Filename: "{#MyAppRStudioURL}"
 Name: "{app}\Installer\PyCharm"; IconFilename: "{app}\tools\icons\pycharm.ico"; Filename: "{#MyAppPyCharmURL}"
 Name: "{app}\Installer\Visual C++ Redistributable for Visual Studio 2015"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppVS2015}"
-Name: "{app}\Installer\SDK for Windows 8.1 / 10"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppSDK81}"
+Name: "{app}\Installer\SDK for Windows 8.1 / 10"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppSDK1081}"
 Name: "{app}\Installer\Cygwin"; IconFilename: "{app}\tools\icons\cygwin.ico"; Filename: "{#MyCygwin}"
 Name: "{app}\Installer\RTools"; IconFilename: "{app}\tools\icons\r.ico"; Filename: "{#MyRTools}"
 Name: "{app}\Installer\InkScape (for Sphinx)"; IconFilename: "{app}\tools\icons\inkscape.ico"; Filename: "{#MyInkScape}"
