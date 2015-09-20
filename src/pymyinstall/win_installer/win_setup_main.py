@@ -434,9 +434,9 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                 operations.append(("modify", o))
 
         ##########################
-        # Visual Studio, switch on 2013
+        # Visual Studio, switch on 2013 only for Python 3.4
         ##########################
-        if "vs" in selection:
+        if "vs" in selection and sys.version_info[:2] <= (3, 4):
             fLOG("--- switch_to_VS_compiler")
             op = switch_to_VS_compiler(folders["python"])
             for o in op:

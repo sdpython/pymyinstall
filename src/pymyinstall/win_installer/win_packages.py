@@ -57,7 +57,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     Install a package for another Python distribution than the current one.
 
     @param      python_path     location of python
-    @param      package         location of the package (.tar.gz or .whl)
+    @param      package         location of the package (.tar.gz, .whl, .tgz, .bz2)
     @param      verbose         display more information
     @param      deps            take dependencies into account or not
     @param      fLOG            logging function
@@ -209,7 +209,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     where package could be found in a folder
 
     @param      python_path     location of python
-    @param      package_folder  location of the package (.tar.gz or .whl)
+    @param      package_folder  location of the package (.tar.gz, .whl, .bz2, .tgz)
     @param      verbose         display more information
     @param      module_list     list of modules to install, if None, it tries to guess a good
                                 order to install downloaded packages
@@ -217,7 +217,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     @return                     operations ("pip", module) if installed, empty if already installed
     """
     files = os.listdir(package_folder)
-    files = [_ for _ in files if os.path.splitext(_)[-1] in {".gz", ".zip", ".whl"}
+    files = [_ for _ in files if os.path.splitext(_)[-1] in {".gz", ".zip", ".whl", ".bz2", ".tgz"}
              and _ not in {"Scite.zip", "scite.zip"}
              and not _.startswith("SQLiteSpy_")]
 
