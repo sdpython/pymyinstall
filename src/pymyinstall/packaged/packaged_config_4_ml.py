@@ -296,7 +296,7 @@ def ensae_set():
                       purpose="Common utilities to ease the development of Python packages"),
         ModuleInstall("suds-jurko", "pip", mname="suds",
                       purpose="Lightweight SOAP client (Jurko's fork)"),
-        ModuleInstall("wrapt", "pip",
+        ModuleInstall("wrapt", "wheel",
                       purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall("bioservices", "pip",
                       purpose="Access to Biological Web Services from Python"),
