@@ -109,28 +109,29 @@ def create_win_env(folders):
     @return                 operations (list of what was done)
     """
     tools = folders["tools"]
-    text = ["@echo off", "set CURRENT=%~dp0",
-            "set PYTHON_TOOLS=%CURRENT%..\\tools",
-            "set PYTHON_WINHOME=%CURRENT%..\\python",
-            "set PYTHON_WINSCRIPTS=%CURRENT%..\\python\\Scripts",
-            "set WORKSPACE=%CURRENT%..\\workspace",
-            "set PATH=%PYTHON_WINHOME%;%PYTHON_WINSCRIPTS%;%PATH%"]
+    text = ['@echo off', 
+            'set CURRENT=%~dp0',
+            'set PYTHON_TOOLS=%CURRENT%..\\tools',
+            'set PYTHON_WINHOME=%CURRENT%..\\python',
+            'set PYTHON_WINSCRIPTS=%CURRENT%..\\python\\Scripts',
+            'set WORKSPACE=%CURRENT%..\\workspace',
+            'set PATH=%PYTHON_WINHOME%;%PYTHON_WINSCRIPTS%;%PATH%']
     if os.path.exists(os.path.join(tools, "R")):
-        text.append("set R_HOME=%PYTHON_TOOLS%\\R")
-        text.append("set R_LIBS=%PYTHON_TOOLS%\\R\\library")
+        text.append('set R_HOME=%PYTHON_TOOLS%\\R')
+        text.append('set R_LIBS=%PYTHON_TOOLS%\\R\\library')
     if os.path.exists(os.path.join(tools, "Julia")):
-        text.append("set JULIA_HOME=%PYTHON_TOOLS%\\Julia")
-        text.append("set JULIA_PKGDIR=%PYTHON_TOOLS%\\Julia\\pkg")
+        text.append('set JULIA_HOME=%PYTHON_TOOLS%\\Julia')
+        text.append('set JULIA_PKGDIR=%PYTHON_TOOLS%\\Julia\\pkg')
     if os.path.exists(os.path.join(tools, "TDM")):
-        text.append("set PATH=%PATH%;%PYTHON_TOOLS%\\TDM\\bin")
+        text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\TDM\\bin')
     if os.path.exists(os.path.join(tools, "MinGW")):
-        text.append("set PATH=%PATH%;%PYTHON_TOOLS%\\MinGW\\bin")
+        text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\MinGW\\bin')
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "env.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_jupyter_console(folders):
@@ -140,12 +141,12 @@ def create_win_jupyter_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off",
-            "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set JUPYTERC=%PYTHON_WINSCRIPTS%\\jupyter-console.exe",
-            "set IPYTHONRC=%PYTHON_WINSCRIPTS%\\ipython.exe",
-            "%IPYTHONRC% console"]
+    text = ['@echo off',
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set JUPYTERC=%PYTHON_WINSCRIPTS%\\jupyter-console.exe',
+            'set IPYTHONRC=%PYTHON_WINSCRIPTS%\\ipython.exe',
+            '"%IPYTHONRC%" console']
     # command jupyter console does not work yet even if the documentation says
     # so
 
@@ -153,7 +154,7 @@ def create_win_jupyter_console(folders):
     name = os.path.join(folders["config"], "jupyter_console.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_jupyter_qtconsole(folders):
@@ -163,16 +164,17 @@ def create_win_jupyter_qtconsole(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set JUPYTERQTC=%PYTHON_WINSCRIPTS%\\jupyter-qtconsole.exe",
-            "start %JUPYTERQTC%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set JUPYTERQTC=%PYTHON_WINSCRIPTS%\\jupyter-qtconsole.exe',
+            'start "%JUPYTERQTC%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_qtconsole.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_jupyter_notebook(folders):
@@ -182,16 +184,17 @@ def create_win_jupyter_notebook(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set JUPYTERNB=%PYTHON_WINSCRIPTS%\\jupyter-notebook.exe",
-            "%JUPYTERNB% --notebook-dir=%WORKSPACE% --config=%CURRENT2%profile_win_profile\\ipython_kernel_config.py"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set JUPYTERNB=%PYTHON_WINSCRIPTS%\\jupyter-notebook.exe',
+            '"%JUPYTERNB%" "--notebook-dir=%WORKSPACE%" "--config=%CURRENT2%profile_win_profile\\ipython_kernel_config.py"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_notebook.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_rodeo(folders):
@@ -201,16 +204,17 @@ def create_win_rodeo(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set RODEO=%PYTHON_WINSCRIPTS%\\rodeo.exe",
-            "%RODEO% %WORKSPACE%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set RODEO=%PYTHON_WINSCRIPTS%\\rodeo.exe',
+            '"%RODEO%" "%WORKSPACE%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "rodeo.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_scite(folders):
@@ -220,16 +224,17 @@ def create_win_scite(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set SCITE=%PYTHON_TOOLS%\\Scite\\wscite\\scite.exe",
-            "start %SCITE% %1"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set SCITE=%PYTHON_TOOLS%\\Scite\\wscite\\scite.exe',
+            'start "%SCITE%" "%1"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "scite.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_putty(folders):
@@ -239,16 +244,17 @@ def create_win_putty(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set PUTTY=%PYTHON_TOOLS%\\Putty\\putty.exe",
-            "start %PUTTY%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call %CURRENT2%env.bat',
+            'set PUTTY=%PYTHON_TOOLS%\\Putty\\putty.exe',
+            '"start "%PUTTY%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "putty.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_sqllitespy(folders):
@@ -258,17 +264,18 @@ def create_win_sqllitespy(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set SQLITESPY=%PYTHON_TOOLS%\\SQLiteSpy\\SQLiteSpy.exe",
-            "cd %WORKSPACE%",
-            "start %SQLITESPY%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set SQLITESPY=%PYTHON_TOOLS%\\SQLiteSpy\\SQLiteSpy.exe',
+            'cd "%WORKSPACE%"',
+            'start "%SQLITESPY%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "sqlitespy.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_python_console(folders):
@@ -278,16 +285,17 @@ def create_win_python_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set PYTHON=%PYTHON_WINHOME%\\python.exe",
-            "%PYTHON%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set PYTHON=%PYTHON_WINHOME%\\python.exe',
+            '"%PYTHON%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "python_console.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_julia_console(folders):
@@ -297,16 +305,17 @@ def create_win_julia_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "rem call %CURRENT2%env.bat",
-            "set JULIA=%PYTHON_TOOLS%\\Julia\\bin\\julia.exe",
-            "%JULIA%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set JULIA=%PYTHON_TOOLS%\\Julia\\bin\\julia.exe',
+            '"%JULIA%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "julia_console.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_spyder(folders):
@@ -325,16 +334,17 @@ def create_win_spyder(folders):
 
         set QT_API=pyside
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set QT_API=pyside",
-            "%PYTHON_WINSCRIPTS%\\spyder.exe --workdir=%WORKSPACE%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set QT_API=pyside',
+            '"%PYTHON_WINSCRIPTS%\\spyder.exe" "--workdir=%WORKSPACE%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "spyder.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_r_console(folders):
@@ -344,16 +354,17 @@ def create_win_r_console(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set REXE=%PYTHON_TOOLS%\\R\\bin\\x64\\R.exe",
-            "%REXE%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set REXE=%PYTHON_TOOLS%\\R\\bin\\x64\\R.exe',
+            '"%REXE%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "r_console.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_r_gui(folders):
@@ -363,16 +374,17 @@ def create_win_r_gui(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            "set RGUI=%PYTHON_TOOLS%\\R\\bin\\x64\\Rgui.exe",
-            "start %RGUI%"]
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set RGUI=%PYTHON_TOOLS%\\R\\bin\\x64\\Rgui.exe',
+            'start "%RGUI%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "r_gui.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def win_install_kernels(folders, suffix=""):
@@ -383,15 +395,16 @@ def win_install_kernels(folders, suffix=""):
     @param      suffix      add a suffix
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            '%PYTHON_WINHOME%\\python -u -c "from pymyinstall.win_installer import inno_install_kernels;inno_install_kernels(\'CURRENT2\', \'%1\')"']
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            '"%PYTHON_WINHOME%\\pythonw.exe" -u -c "from pymyinstall.win_installer import inno_install_kernels;inno_install_kernels(\'CURRENT2\', \'%1\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "add_kernels.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def win_replace_shebang(folders, suffix=""):
@@ -402,8 +415,9 @@ def win_replace_shebang(folders, suffix=""):
     @param      suffix      add a suffix
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
             'if "%1"=="" (',
             '    set P1=EMPTY_STRING',
             ') ELSE (',
@@ -414,13 +428,13 @@ def win_replace_shebang(folders, suffix=""):
             ') ELSE (',
             '    set P2=%2',
             ')',
-            '%PYTHON_WINHOME%\\python -u -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', [\'\', \'P1\'], \'P2\')"']
+            '"%PYTHON_WINHOME%\\pythonw.exe" -u -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', [\'\', \'P1\'], \'P2\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "replace_shebang.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def win_check_installation(folders, suffix=""):
@@ -431,15 +445,16 @@ def win_check_installation(folders, suffix=""):
     @param      suffix      add a suffix (unused)
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            '%PYTHON_WINHOME%\\python -u -c "import sys;from pymyinstall.win_installer import import_every_module;import_every_module(sys.executable, None, fLOG=print)"']
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            '"%PYTHON_WINHOME%\\python.exe" -u -c "import sys;from pymyinstall.win_installer import import_every_module;import_every_module(sys.executable, None, fLOG=print)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "win_check_installation.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def create_win_rss(folders, suffix=""):
@@ -450,9 +465,10 @@ def create_win_rss(folders, suffix=""):
     @param      suffix      add a suffix
     @return                 operations (list of what was done)
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            '%PYTHON_WINHOME%\\python -u -c "from pyquickhelper import fLOG;from pyquickhelper.pycode.blog_helper import rss_update_run_server;fLOG(OutputPrint=True);rss_update_run_server(r\'%CURRENT2%rss_database.db3\', r\'%CURRENT2%rss_list.xml\')"']
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            '"%PYTHON_WINHOME%\\python.exe" -u -c "from pyquickhelper import fLOG;from pyquickhelper.pycode.blog_helper import rss_update_run_server;fLOG(OutputPrint=True);rss_update_run_server(r\'%CURRENT2%rss_database.db3\', r\'%CURRENT2%rss_list.xml\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_fetch_rss.bat")
@@ -471,13 +487,13 @@ def create_win_rss(folders, suffix=""):
                             htmlUrl="http://www.xavierdupre.fr/blog/xd_blog.html" />
                     </body>
                 </opml>
-                """.replace("                ", "")
+                """.replace('                ', "")
 
     rss_name = os.path.join(folders["config"], "rss_list.xml")
-    with open(rss_name, "w", encoding="utf8") as f:
+    with open(rss_name, 'w', encoding="utf8") as f:
         f.write(text)
 
-    return [("batch", name), ("rss", rss_name)]
+    return [('batch', name), ('rss', rss_name)]
 
 
 def create_win_glue(folders, suffix=""):
@@ -490,15 +506,16 @@ def create_win_glue(folders, suffix=""):
 
     .. versionadded:: 1.3
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            '%PYTHON_WINSCRIPTS%\\glue.exe %1']
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            '"%PYTHON_WINSCRIPTS%\\glue.exe" %1']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_glue.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def update_all_packages(folders, suffix=""):
@@ -512,15 +529,16 @@ def update_all_packages(folders, suffix=""):
     .. versionchanged:: 1.3
          Bug fix, update script to import function update_all (fails in 1.2).
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            '%PYTHON_WINHOME%\\python -u -c "from pymyinstall.packaged import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            '"%PYTHON_WINHOME%\\python.exe" -u -c "from pymyinstall.packaged import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_update_all_packages.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]
 
 
 def run_checkings(folders, suffix=""):
@@ -533,12 +551,13 @@ def run_checkings(folders, suffix=""):
 
     .. versionadded:: 1.3
     """
-    text = ["@echo off", "set CURRENT2=%~dp0",
-            "call %CURRENT2%env.bat",
-            '%PYTHON_WINHOME%\\python -u -c "from pymyinstall.win_installer import distribution_checkings;distribution_checkings(None, None)"']
+    text = ['@echo off', 
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            '"%PYTHON_WINHOME%\\python.exe" -u -c "from pymyinstall.win_installer import distribution_checkings;distribution_checkings(None, None)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_checkings.bat")
     with open(name, "w") as f:
         f.write(text)
-    return [("batch", name)]
+    return [('batch', name)]

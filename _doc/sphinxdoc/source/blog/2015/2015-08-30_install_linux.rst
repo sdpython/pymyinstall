@@ -149,7 +149,7 @@
     
         sudo apt-get install pandoc i7z i7z-gui scite java-common sqlitebrowser latex-cjk-all texlive-latex-base texlive-latex-recommended texlive-latex-extra mono-complete
         
-    To get numpy and scipy depedencies, the following command is enough::
+    To get numpy and scipy dependencies, the following command is enough::
     
         sudo apt-get build-dep python3-numpy python3-scipy
     

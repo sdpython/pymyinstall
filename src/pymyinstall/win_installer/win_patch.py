@@ -62,10 +62,12 @@ def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
 
         operations = []
         for prog in ["python.exe", "pythonw.exe"]:
-            shebangs = ["#!" + python_path + prog,
-                        "#!" + python_path.lower() + prog,
-                        "#!" + python_path[0].upper() + python_path[1:] + prog,
-                        "#!" + python_path[0].lower() + python_path[1:] + prog]
+            shebangs = ["#!" + python_path + prog]
+            if len(python_path) > 0:
+                shebangs.extend(["#!" + python_path.lower() + prog])
+            if len(python_path) > 1:
+                shebangs.extend(["#!" + python_path[0].upper() + python_path[1:] + prog,
+                                 "#!" + python_path[0].lower() + python_path[1:] + prog])
             bshebangs = [bytes(shebang, encoding="ascii")
                          for shebang in shebangs]
             into = "#!" + os.path.normpath(path_to_python + prog)
