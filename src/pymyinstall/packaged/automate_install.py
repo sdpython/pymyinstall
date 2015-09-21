@@ -279,29 +279,27 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 m = "    - installing module  {0} --- --> {1} (kind={2})" \
                     .format(mod.name, ver, mod.kind)
                 fLOG(m)
-                try:
-                    b = mod.install(temp_folder=temp_folder, log=verbose)
-                except (SystemExit, Exception) as e:
-                    b = False
-                    m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
-                        .format(mod.name, '', ver, mod.kind, str(e))
-                    fLOG(m)
-                    errors.append((mod, e))
-                if b:
-                    again.append(m)
-                    installed.append(mod)
+                if deps:
+                    fLOG("[loopi] check dependencies: ", mod.name)
+                    inst = install_module_deps(mod.name, temp_folder=temp_folder,
+                                               fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
+                                               _memory=_memory)
+                else:
+                    try:
+                        b = mod.install(temp_folder=temp_folder, log=verbose)
+                    except (SystemExit, Exception) as e:
+                        b = False
+                        m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
+                            .format(mod.name, '', ver, mod.kind, str(e))
+                        fLOG(m)
+                        errors.append((mod, e))
+                    if b:
+                        again.append(m)
+                        installed.append(mod)
         _memory[mod.name] = True
 
     if schedule_only:
         return schedule
-
-    if deps:
-        fLOG("dependencies for ", len(installed))
-        for mod in installed:
-            inst = install_module_deps(mod.name, temp_folder=temp_folder,
-                                       fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
-                                       _memory=_memory)
-            again.extend(inst)
 
     if verbose:
         fLOG("")
@@ -314,26 +312,35 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 fLOG("  ", m[0], m[1])
 
     if not skip_missing:
-        miss = missing_dependencies()
-        if len(miss) > 0:
-            mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
-                            for k, v in sorted(miss.items()))
-            warnings.warn(mes)
+        try:
+            import pipdeptree
+            cont = True
+        except ImportError:
+            warnings.warn(
+                "unable to check dependencies, pipdeptree is not installed")
+            cont = False
+        if cont:
+            miss = missing_dependencies()
+            if len(miss) > 0:
+                mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
+                                for k, v in sorted(miss.items()))
+                warnings.warn(mes)
 
 
-def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True, deep_deps=False, _memory=None):
+def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True,
+                        deep_deps=False, _memory=None):
     """
     install a module with its dependencies,
     if a module is already installed, it installs the missing dependencies
 
-    @param      module          module name
-    @param      temp_folder     where to download
-    @param      fLOG            logging function
-    @param      verbose         more display
-    @param      deps            add dependencies
-    @param      deep_deps       check dependencies for dependencies
-    @param      _memory         stores installed packages, avoid going into an infinite loop
-    @return                     list of installed modules
+    @param      module              module name
+    @param      temp_folder         where to download
+    @param      fLOG                logging function
+    @param      verbose             more display
+    @param      deps                add dependencies
+    @param      deep_deps           check dependencies for dependencies
+    @param      _memory             stores installed packages, avoid going into an infinite loop
+    @return                         list of installed modules
 
     The function does not handle properly contraints on versions.
     It checks in the registered list of modules if *name* is present.
@@ -343,10 +350,13 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         _memory = {}
     deps = deps or deep_deps
     installed = []
+    first_name = name
+    memory2 = {}
     if not is_installed(name):
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=[name], reorder=True, up_pip=False,
-                    skip_missing=True, _memory=_memory)
+                    skip_missing=True, _memory=memory2, deps=False,
+                    deep_deps=False)
         installed.append(name)
 
     stack = [name]
@@ -356,13 +366,17 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         if name in _memory:
             # already done, avoid loops on
             continue
+        if name == first_name:
+            _memory.update(memory2)
+
         res = get_module_dependencies(name, refresh_cache=True, use_pip=True)
         if res is None:
             raise ImportError("unable to check dependencies of module {0}\ninstalled:\n{1}".format(
                 name, "\n".join(installed)))
         list_m = [k for k, v in res.items()]
+        fLOG("[deps] [{}] requires".format(name), list_m)
         inst = [k for k in list_m if deep_deps or not is_installed(k)]
-        fLOG("installation of ", inst)
+        fLOG("[deps] installation of ", inst)
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=inst, reorder=True, up_pip=False,
                     skip_missing=True, deep_deps=deep_deps, _memory=_memory)

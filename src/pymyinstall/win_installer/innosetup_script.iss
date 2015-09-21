@@ -21,6 +21,7 @@
 #define MyRTools "https://cran.r-project.org/bin/windows/Rtools/"
 #define MyInkScape "https://inkscape.org/fr/"
 #define MyJenkins "https://jenkins-ci.org/"
+#define MyW10Runtime "http://www.microsoft.com/en-us/download/details.aspx?id=48234"
 
 
 [Setup]
@@ -66,11 +67,12 @@ Name: "{app}\Installer\Tortoise Git"; IconFilename: "{app}\tools\icons\tortoiseg
 Name: "{app}\Installer\RSudio"; IconFilename: "{app}\tools\icons\rstudio.ico"; Filename: "{#MyAppRStudioURL}"
 Name: "{app}\Installer\PyCharm"; IconFilename: "{app}\tools\icons\pycharm.ico"; Filename: "{#MyAppPyCharmURL}"
 Name: "{app}\Installer\Visual C++ Redistributable for Visual Studio 2015"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppVS2015}"
-Name: "{app}\Installer\SDK for Windows 8.1 / 10"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppSDK1081}"
+Name: "{app}\Installer\SDK for Windows 8.1-10"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyAppSDK1081}"
 Name: "{app}\Installer\Cygwin"; IconFilename: "{app}\tools\icons\cygwin.ico"; Filename: "{#MyCygwin}"
 Name: "{app}\Installer\RTools"; IconFilename: "{app}\tools\icons\r.ico"; Filename: "{#MyRTools}"
 Name: "{app}\Installer\InkScape (for Sphinx)"; IconFilename: "{app}\tools\icons\inkscape.ico"; Filename: "{#MyInkScape}"
 Name: "{app}\Installer\Jenkins"; IconFilename: "{app}\tools\icons\jenkins.ico"; Filename: "{#MyJenkins}"
+Name: "{app}\Installer\Windows 10 Universal C Runtime (for llvmlite, blaze, numba)"; IconFilename: "{app}\tools\icons\vs2015.ico"; Filename: "{#MyW10Runtime}"
 ; editors
 Name: "{app}\Scite"; IconFilename: "{app}\tools\icons\Scite.ico"; Filename: "{app}\config\scite.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"
 Name: "{app}\SQLiteSpy"; IconFilename: "{app}\tools\icons\sqlitespy.ico"; Filename: "{app}\config\sqlitespy.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"

@@ -175,6 +175,10 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                     continue
 
             sc = "import " + m.ImportName
+            if m.name == "cvxopt":
+                # see
+                # http://stackoverflow.com/questions/14778178/import-cvxopt-base-the-specified-module-could-not-be-found
+                sc += "import numpy;" + sc
             out, err = run_cmd_path(python_path, sc, fLOG=noLOG)
             suc = analyze_error_success(m, err)
             if suc:
