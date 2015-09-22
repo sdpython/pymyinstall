@@ -143,12 +143,13 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     return operations
 
 
-def _is_package_in_list(module_name, list_packages):
+def _is_package_in_list(module_name, list_packages, no_wheel=False):
     """
     determines of this package is the one for the given module_name
 
     @param      list_packages       list of packages names (list of wheel)
     @param      module_name         module name
+    @param      no_wheel            skip wheels
     @return                         package name
     """
     module_name = module_name.lower()
@@ -166,6 +167,8 @@ def _is_package_in_list(module_name, list_packages):
 
     for a in list_packages:
         al = a.lower()
+        if no_wheel and al.endswith(".whl"):
+            continue
         if module_name == "python" and ".msi" not in a:
             continue
         if "theme-" in al:

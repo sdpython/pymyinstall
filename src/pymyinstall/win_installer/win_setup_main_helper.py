@@ -91,8 +91,8 @@ def win_download(folder=None,
 
     available = os.listdir(folder)
 
-    def is_here(program):
-        b = _is_package_in_list(program, available)
+    def is_here(program, no_wheel=False):
+        b = _is_package_in_list(program, available, no_wheel=no_wheel)
         return b
 
     operations = []
@@ -176,7 +176,7 @@ def win_download(folder=None,
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("graphviz") and "graphviz" in selection:
+    if not is_here("graphviz", no_wheel=True) and "graphviz" in selection:
         if verbose:
             fLOG("download", "graphviz")
         r = install_graphviz(
@@ -246,6 +246,8 @@ def win_install(folders,
             name = "gcc"
         elif name.lower() == "tdm":
             name = "gcc"
+        elif name.lower() == "graphviz":
+            name = "dot"
         exp = name + ".exe"
 
         for root, dirnames, filenames in os.walk(loc):
