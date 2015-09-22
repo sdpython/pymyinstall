@@ -106,7 +106,7 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
 
     elif name == "xgboost":
         if ext == "whl":
-            exe = "xgboost-0.4-py3-none-any.whl"
+            exe = "xgboost-0.4-py%d-none-any.whl" % sys.version_info[0]
         else:
             raise UnavailableCustomBuildError("unexpected extension: " +
                                               ext + " for module " + file_save)
