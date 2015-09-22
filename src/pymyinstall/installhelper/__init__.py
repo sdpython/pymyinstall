@@ -12,6 +12,7 @@ from .install_custom_mingw import install_mingw
 from .install_custom_tdm_gcc import install_tdm_gcc
 from .install_custom_pandoc import install_pandoc
 from .install_custom_putty import install_putty
+from .install_custom_graphviz import install_graphviz
 from .install_custom_python import install_python
 from .install_custom_R import install_R
 from .install_custom_scite import install_scite, modify_scite_properties

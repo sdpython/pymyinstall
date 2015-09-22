@@ -139,7 +139,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     `7z <http://www.7-zip.org/>`_,
     `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_,
     `Scite <http://www.scintilla.org/SciTE.html>`_,
-    `MinGW <http://www.mingw.org/>`_.
+    `MinGW <http://www.mingw.org/>`_,
+    `Graphviz <http://www.graphviz.org/>`_.
 
     The function first downloads everything.
     It does not do it twice, so you can run the function again and directly go
@@ -250,11 +251,12 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     selection.add("scite")
     selection.add("putty")
     selection.add("sqlitespy")
+    selection.add("graphviz")
     selection.add("python")
     selection = set(_.lower() for _ in selection)
 
     _allowed = {"pandoc", "7z", "scite", "putty",
-                "sqlitespy", "scite", "python", "tdm", "vs", "r"}
+                "sqlitespy", "scite", "python", "tdm", "vs", "r", "graphviz"}
     for s in selection:
         s_ = s.split("==")[0]
         if s_ not in _allowed:

@@ -126,6 +126,8 @@ def create_win_env(folders):
         text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\TDM\\bin')
     if os.path.exists(os.path.join(tools, "MinGW")):
         text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\MinGW\\bin')
+    if os.path.exists(os.path.join(tools, "Graphviz")):
+        text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\Graphviz\\bin')
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "env.bat")

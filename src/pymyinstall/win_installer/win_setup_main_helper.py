@@ -20,6 +20,7 @@ from ..installhelper.install_custom_python import install_python
 from ..installhelper.install_custom_mingw import install_mingw
 from ..installhelper.install_custom_tdm_gcc import install_tdm_gcc
 from ..installhelper.install_custom_7z import install_7z
+from ..installhelper.install_custom_graphviz import install_graphviz
 from ..installhelper.install_custom_vs import install_vs
 from ..installhelper.install_custom import download_page
 from ..installhelper.link_shortcuts import add_shortcut
@@ -175,6 +176,14 @@ def win_download(folder=None,
         operations.append(("download", r))
         fLOG("done")
 
+    if not is_here("graphviz") and "graphviz" in selection:
+        if verbose:
+            fLOG("download", "graphviz")
+        r = install_graphviz(
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("graphviz", None))
+        operations.append(("download", r))
+        fLOG("done")
+
     if module_list is None:
         module_list = minimal_set()
 
@@ -198,7 +207,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty"],
+                    "Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty", "Graphviz"],
                 selection=None):
     """
     Install setups
