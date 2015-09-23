@@ -420,17 +420,7 @@ def win_replace_shebang(folders, suffix=""):
     text = ['@echo off',
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
-            'if "%1"=="" (',
-            '    set P1=EMPTY_STRING',
-            ') ELSE (',
-            '    set P1=%1',
-            ')',
-            'if "%2"=="" (',
-            '    set P2=%PYTHON_WINHOME%',
-            ') ELSE (',
-            '    set P2=%2',
-            ')',
-            '"%PYTHON_WINHOME%\\pythonw.exe" -u -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', [\'\', \'P1\'], \'P2\')"']
+            '"%PYTHON_WINHOME%\\pythonw.exe" -u -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', None)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "replace_shebang.bat")

@@ -97,4 +97,4 @@ Name: "{app}\UpdatePython"; IconFilename: "{app}\tools\icons\pymyinstall.ico"; F
 
 [Run]
 Filename: "{app}\config\add_kernels.bat"; Parameters:"ENSAE"; Description: "Configure Kernels"; 
-Filename: "{app}\config\replace_shebang.bat"; Description: "Fix distribution shebangs (not portable anymore)"; 
+Filename: "{app}\config\replace_shebang.bat"; Description: "Fix distribution shebangs"; 

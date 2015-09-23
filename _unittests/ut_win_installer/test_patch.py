@@ -74,7 +74,7 @@ class TestPatch(unittest.TestCase):
         synchronize_folder(data, dest)
 
         pp = "C:\\github\\pymyinstall\\dist\\win_python_setup\\python"
-        op = win_patch_paths(dest, pp, fLOG=fLOG)
+        op = win_patch_paths(dest, "", fLOG=fLOG)
         into = "#!python.exe"
         binto = bytes(into, encoding="ascii")
         assert len(op) > 0
@@ -83,11 +83,14 @@ class TestPatch(unittest.TestCase):
             with open(full, "rb") as f:
                 content = f.read()
             if binto not in content:
-                raise Exception(full)
+                raise Exception("file:{}\ncontent:\n{}".format(full, content))
             i += 1
         exp = 3
         if i != exp:
             raise Exception("i != " + str(exp) + "\n" + str(op))
+
+        op = win_patch_paths(dest, None, fLOG=fLOG)
+
 
 if __name__ == "__main__":
     unittest.main()

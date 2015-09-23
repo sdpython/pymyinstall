@@ -569,7 +569,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     fLOG(
         "--- patch paths, see http://www.clemens-sielaff.com/create-a-portable-python-with-pip-on-windows/")
     op = win_patch_paths(
-        os.path.join(folders["python"], "Scripts"), folders["python"], fLOG=fLOG)
+        os.path.join(folders["python"], "Scripts"), "", fLOG=fLOG)
     operations.extend(op)
     operations.append(("time", dtnow()))
 

@@ -15,126 +15,76 @@ class ShebangException(Exception):
     pass
 
 
-def win_patch_paths(folder, python_path, path_to_python="", fLOG=print):
+def win_patch_paths(folder, path_to_python="", fLOG=print):
     """
-    path are absolute when they are installed,
-    see `Create a portable Python with Pip on Windows <http://www.clemens-sielaff.com/create-a-portable-python-with-pip-on-windows/>`_
+    Paths are absolute when they are installed in all scripts *.exe*,
+    we replaced them either by an empty string (``path_to_python == ""``)
+    or the current folder.
 
     @param      folder          folder when to find the executable
-    @param      python_path     python path (string to replace)
     @param      path_to_python  new python path (replace by)
     @param      fLOG            logging function
     @return                     list of tuple ('exe or py', 'modified file')
 
-    The first three parameter can be environment variables.
+    See `Create a portable Python with Pip on Windows <http://www.clemens-sielaff.com/create-a-portable-python-with-pip-on-windows/>`_
+    The first three parameters can be environment variables.
     They will be replaced by their values.
     """
-    if isinstance(python_path, list):
-        operations = []
-        for pyt in python_path:
-            op = win_patch_paths(folder, pyt, path_to_python, fLOG)
-            operations.extend(op)
-        return operations
-    else:
-        if folder in os.environ:
-            folder = os.environ[folder]
-        if python_path in os.environ:
-            python_path = os.environ[python_path]
-            if python_path == "EMPTY_STRING":
-                python_path = ""
-        if path_to_python in os.environ:
-            path_to_python = os.environ[path_to_python]
+    if folder in os.environ:
+        folder = os.environ[folder]
+    if path_to_python not in (None, "") and path_to_python in os.environ:
+        path_to_python = os.environ[path_to_python]
+    if path_to_python is None:
+        exe = os.path.join(folder, "python.exe")
+        if os.path.exists(exe):
+            path_to_python = os.path.absapth(folder)
+        else:
+            exe = os.path.join(folder, "..", "python.exe")
+            path_to_python = os.path.normpath(
+                os.path.abspath(os.path.join(folder, "..")))
 
-        files = os.listdir(folder)
+    files = os.listdir(folder)
 
-        if len(python_path) > 0 and not python_path.endswith("\\"):
-            python_path += "\\"
-        if len(path_to_python) > 0 and not path_to_python.endswith("\\"):
-            path_to_python += "\\"
+    if len(path_to_python) > 0 and not path_to_python.endswith("\\"):
+        path_to_python += "\\"
 
-        pattern = "([#][!](([A-Za-z][:])?[/\\\\]?[-a-zA-Z0-9_.]+[/\\\\])*pythonw?[.]exe)"
-        reg_exe = re.compile(pattern, re.IGNORECASE)
-        breg_exe = re.compile(bytes(pattern, encoding="ascii"), re.IGNORECASE)
+    pattern = "([#][!]((([A-Za-z][:])?[/\\\\]?[-a-zA-Z0-9_.]+[/\\\\])*?)(pythonw?[.]exe))"
+    reg_exe = re.compile(pattern, re.IGNORECASE)
+    breg_exe = re.compile(bytes(pattern, encoding="ascii"), re.IGNORECASE)
+    g_path_to_python = path_to_python.replace("\\", "\\\\")
+    bg_path_to_python = bytes(g_path_to_python, encoding="ascii")
+    b1 = bytes("#!", encoding="ascii")
+    b2 = bytes("\\5", encoding="ascii")
 
-        all_she = set()
-        bintos = set()
-        memo_shebang = {}
+    operations = []
+    for file in files:
+        full = os.path.join(folder, file)
+        if os.path.isfile(full):
+            ext = os.path.splitext(full)[-1]
 
-        operations = []
-        for prog in ["python.exe", "pythonw.exe"]:
-            shebangs = ["#!" + python_path + prog]
-            if len(python_path) > 0:
-                shebangs.extend(["#!" + python_path.lower() + prog])
-            if len(python_path) > 1:
-                shebangs.extend(["#!" + python_path[0].upper() + python_path[1:] + prog,
-                                 "#!" + python_path[0].lower() + python_path[1:] + prog])
-            bshebangs = [bytes(shebang, encoding="ascii")
-                         for shebang in shebangs]
-            into = "#!" + os.path.normpath(path_to_python + prog)
-            binto = bytes(into, encoding="ascii")
-            bintos.add(into)
-            bintos.add(binto)
+            if ext in {".py", ""}:
+                with open(full, "r") as f:
+                    content = f.read()
+                new_content = reg_exe.sub(
+                    "#!" + g_path_to_python + "\\5", content)
+                if new_content != content:
+                    fLOG("update ", full)
+                    operations.append(("update", full))
+                    with open(full, "w") as f:
+                        f.write(new_content)
 
-            for shebang in shebangs:
-                fLOG("SHEBANG: replace {0} by {1}".format(shebang, into))
+            elif ext == ".exe":
+                with open(full, "rb") as f:
+                    content = f.read()
+                new_content = breg_exe.sub(
+                    b1 + bg_path_to_python + b2, content)
+                if new_content != content:
+                    fLOG("update ", full)
+                    operations.append(("update", full))
+                    with open(full, "wb") as f:
+                        f.write(new_content)
 
-            for file in files:
-                full = os.path.join(folder, file)
-                if os.path.isfile(full):
-                    ext = os.path.splitext(full)[-1]
+            else:
+                pass
 
-                    if ext in {".py", ""}:
-                        with open(full, "r") as f:
-                            content = f.read()
-                        fall = set(_[0] for _ in reg_exe.findall(content))
-                        if len(fall) > 0:
-                            for shebang in shebangs:
-                                if shebang in content:
-                                    content = content.replace(shebang, into)
-                                    fLOG("update ", full)
-                                    operations.append(("update", full))
-                                    with open(full, "w") as f:
-                                        f.write(content)
-                            fall2 = set(_[0] for _ in reg_exe.findall(content))
-                            if len(fall2) > 0:
-                                all_she.update(fall2)
-                                for a in fall2:
-                                    if a not in memo_shebang:
-                                        memo_shebang[a] = []
-                                    memo_shebang[a].append(full)
-
-                    elif ext == ".exe":
-                        with open(full, "rb") as f:
-                            content = f.read()
-                        fall = set(_[0] for _ in breg_exe.findall(content))
-                        if len(fall) > 0:
-                            for bshebang in bshebangs:
-                                if bshebang in content:
-                                    content = content.replace(bshebang, binto)
-                                    fLOG("update ", full)
-                                    operations.append(("update", full))
-                                    with open(full, "wb") as f:
-                                        f.write(content)
-                            fall2 = set(_[0]
-                                        for _ in breg_exe.findall(content))
-                            if len(fall2) > 0:
-                                all_she.update(fall2)
-                                for a in fall2:
-                                    if a not in memo_shebang:
-                                        memo_shebang[a] = []
-                                    memo_shebang[a].append(full)
-
-                    else:
-                        pass
-
-        for i, she in enumerate(all_she):
-            fLOG("  shebang ", i, ":", type(she), she)
-        for k, v in memo_shebang.items():
-            fLOG("  shebang", k, " in ", v)
-
-        intersection = bintos.intersection(all_she)
-        if len(intersection) == 0:
-            raise ShebangException("no expected shebang was found\nFOUND:\n{0}\nEXPECTED:\n{1}".format(
-                "\n".join(str(_) for _ in all_she), "\n".join(str(_) for _ in bintos)))
-
-        return operations
+    return operations
