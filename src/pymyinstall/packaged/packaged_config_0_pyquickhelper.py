@@ -109,6 +109,8 @@ def pyquickhelper_set():
         ModuleInstall(
             "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
+            "notedown", "pip", purpose="Convert markdown to IPython notebook.", usage="JUPYTER"),
+        ModuleInstall(
             "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
             "pexpect", "pip", purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.", usage="JUPYTER") if not sys.platform.startswith("win") else None,
