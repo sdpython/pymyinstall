@@ -181,6 +181,8 @@ def small_set():
             usage="JUPYTER/PY2") if sys.version_info[0] == 2 else None,
         ModuleInstall(
             "jupyter-pip", "pip", mname="jupyterpip", purpose="Allows Jupyter notebook extension writers to make their extension pip installable!", usage="JUPYTER"),
+        ModuleInstall("ipyparallel", "pip", usage="JUPYTER",
+                      purpose="Interactive Parallel Computing with IPython"),
         # end of ipython
         #
         ModuleInstall("mpld3", "pip", usage="VIZ",
