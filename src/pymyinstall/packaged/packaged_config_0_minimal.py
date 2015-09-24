@@ -25,9 +25,9 @@ def minimal_set():
              ]
 
     if sys.platform.startswith("win"):
-        mod.append("pywin32")
-        mod.append("winshell")
-        mod.append("pythonnet")
+        names.append("pywin32")
+        names.append("winshell")
+        names.append("pythonnet")
 
     from . import find_module_install
     return [find_module_install(_) for _ in names if _ is not None]
