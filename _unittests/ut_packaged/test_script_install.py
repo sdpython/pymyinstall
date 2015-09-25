@@ -93,13 +93,13 @@ class TestScriptInstall(unittest.TestCase):
         fLOG(out)
         fLOG("---")
         fLOG(err)
-        if "check module:  flake8" not in out:
-            raise Exception(out)
+        if "check module:  flake8" not in out and sys.version_info[0] > 2:
+            raise Exception(out + "\nERR:\n" + str(err))
 
         cmd = exe + " " + scriptu + " --schedule --set=minimal"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
-        if "check module:  flake8" not in out:
-            raise Exception(out)
+        if "check module:  flake8" not in out and sys.version_info[0] > 2:
+            raise Exception(out + "\nERR:\n" + str(err))
 
 
 if __name__ == "__main__":
