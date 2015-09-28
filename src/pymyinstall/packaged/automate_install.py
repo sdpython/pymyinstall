@@ -281,9 +281,9 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 fLOG(m)
                 if deps:
                     fLOG("[loopi] check dependencies: ", mod.name)
-                    inst = install_module_deps(mod.name, temp_folder=temp_folder,
-                                               fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
-                                               _memory=_memory)
+                    install_module_deps(mod.name, temp_folder=temp_folder,
+                                        fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
+                                        _memory=_memory)
                 else:
                     try:
                         b = mod.install(temp_folder=temp_folder, log=verbose)
@@ -324,7 +324,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             if len(miss) > 0:
                 mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
                                 for k, v in sorted(miss.items()))
-                warnings.warn(mes)
+                warnings.warn(pipdeptree.__file__ + "\n" + mes)
 
 
 def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True,

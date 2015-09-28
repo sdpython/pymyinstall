@@ -8,6 +8,7 @@ from .module_install_exceptions import MissingPackageOnPyPiException, MissingIns
 from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version
 from .missing_license import missing_module_licenses
 from .module_install_specific_version import get_exewheel_url_link_xd
+from .internet_settings import default_user_agent
 
 import sys
 import re
@@ -481,10 +482,14 @@ class ModuleInstall:
                     self.fLOG("downloading", whl)
                     req = urllib_request.Request(
                         url, headers={
-                            'User-agent': 'Mozilla/5.0'})
-                    u = urllib_request.urlopen(req)
-                    text = u.read()
-                    u.close()
+                            'User-agent': default_user_agent})
+                    try:
+                        u = urllib_request.urlopen(req)
+                        text = u.read()
+                        u.close()
+                    except urllib_error.HTTPError as e:
+                        raise DownloadError("unable to download {} from {}".format(
+                            os.path.split(whlname)[-1], url)) from e
 
                     if not os.path.exists(temp_folder):
                         os.makedirs(temp_folder)
@@ -505,7 +510,7 @@ class ModuleInstall:
                 try:
                     req = urllib_request.Request(
                         zipurl, headers={
-                            'User-agent': 'Mozilla/5.0'})
+                            'User-agent': default_user_agent})
                     u = urllib_request.urlopen(req)
                     text = u.read()
                     u.close()
@@ -540,7 +545,7 @@ class ModuleInstall:
                 self.fLOG("downloading", exe)
                 req = urllib_request.Request(
                     url, headers={
-                        'User-agent': 'Mozilla/5.0'})
+                        'User-agent': default_user_agent})
                 u = urllib_request.urlopen(req)
                 text = u.read()
                 u.close()

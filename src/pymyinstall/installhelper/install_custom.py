@@ -5,6 +5,7 @@
 """
 from __future__ import print_function
 from .install_memoize import install_memoize2
+from .internet_settings import default_user_agent
 
 import os
 import sys
@@ -30,7 +31,7 @@ def download_page(url, is406=False):
     .. versionchanged:: 1.1
         Parameter *is406* was added.
     """
-    agent = "Mozilla" if is406 else "Mozilla/5.0"
+    agent = "Mozilla" if is406 else default_user_agent
     try:
         req = urllib_request.Request(
             url, headers={
@@ -61,7 +62,7 @@ def download_file(url, outfile):
         req = urllib_request.Request(
             url,
             headers={
-                'User-agent': 'Mozilla/5.0'},
+                'User-agent': default_user_agent},
         )
         u = urllib_request.urlopen(req)
         text = u.read()

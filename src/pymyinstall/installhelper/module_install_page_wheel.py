@@ -3,6 +3,7 @@
 @brief Functions get_page_wheel
 """
 from .install_memoize import install_memoize
+from .internet_settings import default_user_agent
 import sys
 
 if sys.version_info[0] == 2:
@@ -22,7 +23,7 @@ def get_page_wheel(page):
     req = urllib_request.Request(
         page,
         headers={
-            'User-agent': 'Mozilla/5.0'})
+            'User-agent': default_user_agent})
     u = urllib_request.urlopen(req)
     text = u.read()
     u.close()

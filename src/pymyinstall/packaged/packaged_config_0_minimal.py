@@ -4,7 +4,6 @@
 @brief Defines a very small set of modules.
 """
 import sys
-from ..installhelper.module_install import ModuleInstall
 
 
 def minimal_set():

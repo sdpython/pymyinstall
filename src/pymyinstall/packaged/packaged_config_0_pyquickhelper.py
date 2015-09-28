@@ -4,7 +4,6 @@
 @brief Defines different a set of usual modules for Python.
 """
 import sys
-from ..installhelper.module_install import ModuleInstall
 
 
 def pyquickhelper_set():
