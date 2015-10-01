@@ -21,7 +21,7 @@ def win_patch_paths(folder, path_to_python="", fLOG=print):
     we replaced them either by an empty string (``path_to_python == ""``)
     or the current folder.
 
-    @param      folder          folder when to find the executable
+    @param      folder          folder where to find the executable
     @param      path_to_python  new python path (replace by)
     @param      fLOG            logging function
     @return                     list of tuple ('exe or py', 'modified file')
