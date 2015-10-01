@@ -51,7 +51,7 @@ def get_parser():
         '-t',
         '--task',
         default="install",
-        choices=['install', 'shebang']
+        choices=['install', 'shebang'],
         help='default task is install but the script can patch shebang in their current location (task=shebang)')
     parser.add_argument(
         'module',
@@ -175,7 +175,7 @@ def main():
             list_module = res.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module, deps=res.deps, schedule_only=res.schedule,
-                deep_deps=res.deep_deps, checkings=res.check, task=args.task)
+                deep_deps=res.deep_deps, checkings=res.check, task=res.task)
 
 
 if __name__ == "__main__":
