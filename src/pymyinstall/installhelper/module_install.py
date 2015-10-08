@@ -323,7 +323,8 @@ class ModuleInstall:
         if len(alls) == 0:
             keep = []
             for line in page.split("\n"):
-                if "networkx" in line:
+                lline = line.lower()
+                if self.name in lline or (self.name and self.mname in lline):
                     keep.append(line)
             raise Exception(
                 "module " +
@@ -343,6 +344,12 @@ class ModuleInstall:
             white = self.name.replace("-", "_")
             alls = [_[:end] for _ in alls if "unoptimized" not in _[ind] and "vanilla" not in _[ind] and
                     (_[ind].startswith(self.name + "-") or _[ind].startswith(white + "-"))]
+        elif self.name == "networkx":
+            # for this module, the page gives an older version in the latest position
+            # we create this patch but it should be replaced by getting
+            # the latest version
+            white = self.name.replace("-", "_")
+            alls = [_[:end] for _ in alls if "1.9.1" not in _[ind]]
         else:
             white = self.name.replace("-", "_")
             alls = [_[:end] for _ in alls if _[ind].startswith(
@@ -696,7 +703,7 @@ class ModuleInstall:
         """
         return self.get_installed_version() is not None
 
-    def get_installated_numeric_version(self):
+    def get_installed_numeric_version(self):
         """
         returns the version as number (not string)
 
@@ -715,7 +722,7 @@ class ModuleInstall:
         """
         if ModuleInstall.is_annoying(self.name):
             return False
-        vers = self.get_installated_numeric_version()
+        vers = self.get_installed_numeric_version()
         if self.version is None:
             pypi = self.get_pypi_numeric_version()
             return compare_version(pypi, vers) > 0
@@ -910,7 +917,7 @@ class ModuleInstall:
                     temp_folder=temp_folder,
                     force=force,
                     unzipFile=True)
-                vers = self.get_installated_numeric_version()
+                vers = self.get_installed_numeric_version()
                 ret = True
                 if vers is not None:
                     whlvers = numeric_version(get_wheel_version(whlname))

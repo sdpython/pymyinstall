@@ -38,7 +38,8 @@ def find_module_install(name):
     if '=' in name:
         spl = name.split('==')
         if len(spl) != 2:
-            raise ValueError("unable to interpret " + name)
+            raise ValueError(
+                "[find_module_install] unable to interpret " + name)
         name = spl[0]
         version = spl[1]
     else:
@@ -169,8 +170,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
                 b = mod.update(temp_folder=temp_folder, log=verbose)
             except (SystemExit, Exception) as e:
                 b = False
-                m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
-                    .format(mod.name, inst, ver, mod.kind, str(e))
+                m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
+                    .format(mod.name, inst, ver, mod.kind, str(e), type(e))
                 fLOG(m)
                 errors.append((mod, e))
             if b:
@@ -289,8 +290,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                         b = mod.install(temp_folder=temp_folder, log=verbose)
                     except (SystemExit, Exception) as e:
                         b = False
-                        m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4}" \
-                            .format(mod.name, '', ver, mod.kind, str(e))
+                        m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
+                            .format(mod.name, '', ver, mod.kind, str(e), type(e))
                         fLOG(m)
                         errors.append((mod, e))
                     if b:
