@@ -2,7 +2,7 @@
 @file
 @brief Functions to get module version, license, dependencies
 """
-from .install_cmd_helper import run_cmd, get_pip_program
+from .install_cmd_helper import run_cmd, get_pip_program, regex_wheel_version
 from .install_memoize import install_memoize
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError
 
@@ -10,6 +10,7 @@ import sys
 import re
 import pip._vendor.pkg_resources
 import warnings
+import functools
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
@@ -647,3 +648,33 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
     else:
         return [(name, version.strip('()') if version is not None else version, required)
                 for name, version, required in res]
+
+
+def choose_most_recent(list_name):
+    """
+    choose the most recent version for a list of module names
+
+    @param      list_name       list of names
+    @return                     most recent version or None if the input list is empty
+
+    In the following case, we would choose the first option::
+
+        numpy-1.10.0+mkl-cp34-none-win_amd64.whl
+        numpy-1.9.1.0+mkl-cp34-none-win_amd64.whl
+    """
+    if len(list_name) == 0:
+        return None
+    if isinstance(list_name[0], tuple):
+        list_name = [(_[-1], _) for _ in list_name]
+    else:
+        list_name = [(_, _) for _ in list_name]
+
+    version = re.compile(regex_wheel_version)
+    list_name = [(version.search(_[0]).groups()[0], _[0], _[1])
+                 for _ in list_name]
+
+    def cmp(el1, el2):
+        return compare_version(el1[0], el2[0])
+
+    list_name = list(sorted(list_name, key=functools.cmp_to_key(cmp)))
+    return list_name[-1][-1]

@@ -5,7 +5,7 @@
 from __future__ import print_function
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
-from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version
+from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
 from .missing_license import missing_module_licenses
 from .module_install_specific_version import get_exewheel_url_link_xd
 from .internet_settings import default_user_agent
@@ -344,12 +344,6 @@ class ModuleInstall:
             white = self.name.replace("-", "_")
             alls = [_[:end] for _ in alls if "unoptimized" not in _[ind] and "vanilla" not in _[ind] and
                     (_[ind].startswith(self.name + "-") or _[ind].startswith(white + "-"))]
-        elif self.name == "networkx":
-            # for this module, the page gives an older version in the latest position
-            # we create this patch but it should be replaced by getting
-            # the latest version
-            white = self.name.replace("-", "_")
-            alls = [_[:end] for _ in alls if "1.9.1" not in _[ind]]
         else:
             white = self.name.replace("-", "_")
             alls = [_[:end] for _ in alls if _[ind].startswith(
@@ -365,7 +359,8 @@ class ModuleInstall:
                             pattern +
                             "\nEX:\n" +
                             str(memoalls[0]))
-        link = alls[-1]
+
+        link = choose_most_recent(alls)
 
         # def dc(ml,mi):
         #        ot=""
@@ -1020,8 +1015,14 @@ class ModuleInstall:
                 sys.executable.replace(
                     "pythonw.exe",
                     "python.exe"))
-            if len(options) > 0:
-                cmd += " " + " ".join(*options)
+
+            def enumerate_filtered_option(options):
+                for o in options:
+                    if o not in ('--no-deps', '--upgrade'):
+                        yield o
+            filter_options = list(enumerate_filtered_option(options))
+            if len(filter_options) > 0:
+                cmd += " " + " ".join(filter_options)
 
             if deps:
                 # it will not work

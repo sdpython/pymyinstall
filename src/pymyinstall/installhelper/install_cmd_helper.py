@@ -14,6 +14,8 @@ import datetime
 import re
 from .module_install_exceptions import UpdatePipError, RunCmdError
 
+regex_wheel_version = "[-]([0-9]+[.][abc0-9]+([.][0-9abdevcr]+)?)([+]mkl)?([+]post[0-9]{1,2})?[-]"
+
 
 def python_version():
     """
@@ -574,7 +576,7 @@ def get_wheel_version(whlname):
     @param      whlname     file name
     @return                 string
     """
-    exp = re.compile("[-]([0-9]+[.][0-9]+([.][0-9abdevcr]+)?)([+]mkl)?[-]")
+    exp = re.compile(regex_wheel_version)
     find = exp.findall(whlname)
     if len(find) == 0:
         raise ValueError(

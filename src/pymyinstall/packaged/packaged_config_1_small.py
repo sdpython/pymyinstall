@@ -250,6 +250,8 @@ def small_set():
         ModuleInstall(
             "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
         ModuleInstall(
+            "multi-key-dict", "pip", mname="multi_key_dict", purpose="Multi key dictionary implementation"),
+        ModuleInstall(
             "python-jenkins", "pip", mname="jenkins", purpose="interact with Jenkins"),
         ModuleInstall(
             'envoy', 'pip', purpose="Simple API for running external processes."),

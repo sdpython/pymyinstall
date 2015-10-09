@@ -197,7 +197,7 @@ def extended_set():
         # for gensim
         ModuleInstall("bz2file", "pip", purpose="process bz2 files"),
         # for gensim
-        ModuleInstall("smart_open", "wheel",
+        ModuleInstall("smart_open", "pip",
                       purpose="Utils for streaming large files (S3, HDFS, gzip, bz2...), provides the same API for many format"),
         ModuleInstall("gensim", "wheel", purpose="genetic algorithm"),
         # ModuleInstall("pybrain", "pip"),   # some issues with the code
