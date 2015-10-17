@@ -14,6 +14,15 @@ def extended_set():
     """
     mod = [
         ModuleInstall(
+            "bitarray", "wheel",
+            purpose="efficient arrays of booleans -- C extension"),
+        ModuleInstall(
+            "blist", "wheel",
+            purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
+        ModuleInstall(
+            "Blz", "wheel", mname="blz",
+            purpose="blz: a compressed data container"),
+        ModuleInstall(
             "pamela", "pip", purpose="An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)") if not sys.platform.startswith("win") else None,
         ModuleInstall(
             "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER") if not sys.platform.startswith("win") else None,

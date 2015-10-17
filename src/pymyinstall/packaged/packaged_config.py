@@ -14,6 +14,7 @@ from .packaged_config_4_ml import ml_set, ensae_set
 from .packaged_config_A_teachings import teachings_set
 from .packaged_config_B_iot import iot_set
 from .packaged_config_C_webscraping import scraping_set
+from .packaged_config_1_anaconda import anaconda_set, anaconda_ext_set
 
 
 def ensae_fullset():
@@ -39,7 +40,8 @@ def all_set():
         ensae_set() + \
         teachings_set() + \
         iot_set() + \
-        scraping_set()
+        scraping_set() + \
+        anaconda_ext_set()
 
     return base
 
@@ -83,6 +85,7 @@ _modules_set = [minimal_set,
                 scraping_set,
                 all_set,
                 pyquickhelper_set,
+                anaconda_set,
                 ]
 
 _module_set_name = _build_set_correspondance(_modules_set)

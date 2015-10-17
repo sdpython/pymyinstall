@@ -273,6 +273,8 @@ def small_set():
                       purpose="A small Python module for determining appropriate platform-specific dirs"),
         ModuleInstall("qgrid", "pip", usage="VIZ",
                       purpose="A Pandas DataFrame viewer for IPython Notebook."),
+        ModuleInstall("ujson", "wheel",
+                      purpose="Ultra fast JSON encoder and decoder for Python"),
     ]
 
     return [_ for _ in mod if _ is not None]

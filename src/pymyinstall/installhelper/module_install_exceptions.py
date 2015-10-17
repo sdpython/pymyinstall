@@ -36,6 +36,14 @@ class MissingVersionOnPyPiException(Exception):
     pass
 
 
+class MissinReferenceException(Exception):
+
+    """
+    raised when a module is not referenced by this package
+    """
+    pass
+
+
 class InstallError(Exception):
     """
     raised when a package cannot be installed

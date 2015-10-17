@@ -6,7 +6,7 @@ from __future__ import print_function
 import os
 import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
-from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException
+from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException, MissinReferenceException
 from ..installhelper.module_dependencies import missing_dependencies
 from .packaged_config import all_set
 
@@ -21,20 +21,26 @@ def _build_reverse_index():
         res[m.name] = m
         if m.mname is not None:
             res[m.mname] = m
+        if m.name.lower() != m.name:
+            res[m.name.lower()] = m
     return res
 
 
 _reverse_module_index = _build_reverse_index()
 
 
-def find_module_install(name):
+def find_module_install(name, must_exist=False):
     """
     checks if there are specific instructions to run before installing module *name*,
     on Windows, some modules requires compilation, if not uses default option with *pip*
 
     @param      name        module name, the name can include a specific version number with '=='
+    @param      must_exist  if True, raise an exception if not found
     @return                 @see cl ModuleInstall
     """
+    if name in {"pip", "python"}:
+        return None
+
     if '=' in name:
         spl = name.split('==')
         if len(spl) != 2:
@@ -48,7 +54,17 @@ def find_module_install(name):
     if name in _reverse_module_index:
         mod = _reverse_module_index[name]
     else:
-        mod = ModuleInstall(name, "pip")
+        names = [name[0].upper() + name[1:],
+                 name.replace("-python", ""),
+                 name + "-python"]
+        for n in names:
+            if n in _reverse_module_index:
+                return _reverse_module_index[n]
+        if must_exist:
+            raise MissinReferenceException(
+                "unable to find reference for module {}".format(name))
+        else:
+            mod = ModuleInstall(name, "pip")
 
     if version is not None:
         mod.version = version
