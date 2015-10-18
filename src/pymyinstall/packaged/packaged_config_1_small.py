@@ -211,6 +211,7 @@ def small_set():
         ModuleInstall("goslate", "pip", version="1.4",
                       purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
+        ModuleInstall("dbf", "pip", purpose="access DBase format"),
         ModuleInstall(
             "xmltodict", "pip", purpose="Makes working with XML feel like you are working with JSON"),
         ModuleInstall(
@@ -230,6 +231,8 @@ def small_set():
                       usage="NETWORK"),
         ModuleInstall('flask-sqlalchemy', 'pip',
                       mname='flask.ext.sqlalchemy', usage="NETWORK"),
+        ModuleInstall('flask-login', 'pip',
+                      mname='flask.ext.login', usage="NETWORK"),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
         ModuleInstall(

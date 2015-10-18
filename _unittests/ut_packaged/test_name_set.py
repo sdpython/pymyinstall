@@ -71,5 +71,44 @@ class TestNameSet(unittest.TestCase):
             nb += 1
         assert nb > 0
 
+        """
+        to fix
+
+        mysql-connector-python
+        natsort
+        node-webkit
+        numpydoc
+        passlib
+        plac
+        pymysql
+        pyopengl-accelerate
+        pyopenssl
+        pyramid
+        pytables
+        pytest-cache
+        pytest-pep8
+        pywget
+        queuelib
+        rasterio
+        repoze.lru
+        runipy
+        semantic_version
+        snuggs
+        sockjs-tornado
+        sqlparse
+        stripe
+        translationstring
+        twisted
+        unidecode
+        unxutils
+        venusian
+        w3lib
+        webob
+        wtforms
+        xlwings
+        zlib
+
+        """
+
 if __name__ == "__main__":
     unittest.main()

@@ -184,6 +184,9 @@ def extended_set():
         ModuleInstall(
             "pymongo", "wheel", purpose="Python wrapper for MongoDB", usage="NoSQL"),
         ModuleInstall(
+            "psycopg", "wheel", mname="psycopg2",
+            purpose="psycopg2 - Python-PostgreSQL Database Adapter"),
+        ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
             "libpython", "wheel", purpose="needed for theano (C++ compilation), compilation of libpython with mingw"),
@@ -333,6 +336,8 @@ def extended_set():
                       purpose="Declarative Python programming using Parameters."),
         ModuleInstall("holoviews", "pip", usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
+        ModuleInstall("menuinst", "pip",
+                      purpose="cross platform menu item installation"),
     ]
 
     return [_ for _ in mod if _ is not None]

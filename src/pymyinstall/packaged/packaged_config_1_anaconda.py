@@ -57,7 +57,7 @@ def anaconda_set():
             btrees
             certifi
             cffi
-            chameleon
+            --chameleon
             chest
             chrpath Linux
             --click
@@ -92,7 +92,7 @@ def anaconda_set():
             docutils
             dynd-python
             ecdsa
-            ephem
+            --ephem
             --execnet
             --fastcache
             feedparser
@@ -144,7 +144,7 @@ def anaconda_set():
             llvmlite
             locket
             lockfile Linux Mac
-            logilab-common
+            --logilab-common
             lxml
             markdown
             markdown2
@@ -152,7 +152,7 @@ def anaconda_set():
             --mathjax
             matplotlib
             mccabe
-            mdp
+            --mdp
             --meld3
             menuinst Windows
             --mingw Windows
