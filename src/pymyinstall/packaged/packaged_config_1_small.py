@@ -56,6 +56,9 @@ def small_set():
         ModuleInstall(
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
+            "sockjs-tornado", "pip", mname="sockjs.tornado", usage="NETWORK",
+            purpose="SockJS-tornado is a Python server side counterpart of SockJS-client browser library running on top of Tornado framework."),
+        ModuleInstall(
             "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz", usage="NETWORK"),
         ModuleInstall(
             "pycparser", "wheel", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
@@ -133,6 +136,10 @@ def small_set():
             "nbformat", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
+        ModuleInstall("pandocfilters", "pip",
+                      purpose="Utilities for writing pandoc filters in python"),
+        ModuleInstall("pandoc-attributes", "pip", mname="pandocattributes",
+                      purpose="An Attribute class to be used with pandocfilters"),
         ModuleInstall(
             "notedown", "pip", purpose="Convert markdown to IPython notebook.", usage="JUPYTER"),
         ModuleInstall(
@@ -176,6 +183,8 @@ def small_set():
             "metakernel", "pip", purpose="more magic commands for Jupyter", usage="JUPYTER"),
         ModuleInstall('SQLAlchemy', 'wheel', mname='sqlalchemy',
                       purpose="model SQL queries as objects", usage="SQL"),
+        ModuleInstall('sqlparse', 'pip', usage="SQL",
+                      purpose="Non-validating SQL parser"),
         ModuleInstall(
             "ipystata", "pip", purpose="Jupyter kernel for Stata",
             usage="JUPYTER/PY2") if sys.version_info[0] == 2 else None,
@@ -278,6 +287,14 @@ def small_set():
                       purpose="A Pandas DataFrame viewer for IPython Notebook."),
         ModuleInstall("ujson", "wheel",
                       purpose="Ultra fast JSON encoder and decoder for Python"),
+        ModuleInstall("natsort", "pip", purpose="Sort lists naturally"),
+        ModuleInstall("wget", "pip", purpose="pure python download utility"),
+        ModuleInstall("queuelib", "pip",
+                      purpose="Collection of persistent (disk-based) queues"),
+        ModuleInstall("semantic_version", "pip",
+                      purpose="A library implementing the 'SemVer' scheme."),
+        ModuleInstall("unidecode", "pip",
+                      purpose="ASCII transliterations of Unicode text"),
     ]
 
     return [_ for _ in mod if _ is not None]

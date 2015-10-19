@@ -91,7 +91,7 @@ def missing_dependencies():
         v = [_ for _ in v if _ not in installed]
         v.sort()
         stack[k] = v
-        if v == ["pip"] or v == ["argparse"]:
+        if v == ["pip"] or v == ["argparse"] or v == ["distribute"] or v == ["pip", "pipdeptree"]:
             rem.append(k)
     for k in rem:
         del stack[k]

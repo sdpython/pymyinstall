@@ -57,6 +57,10 @@ def find_module_install(name, must_exist=False):
         names = [name[0].upper() + name[1:],
                  name.replace("-python", ""),
                  name + "-python"]
+        if name == "pytables":
+            names.append("tables")
+        elif name == "pyopengl-accelerate":
+            names.append("PyOpenGL_accelerate")
         for n in names:
             if n in _reverse_module_index:
                 return _reverse_module_index[n]

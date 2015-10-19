@@ -27,7 +27,7 @@ def anaconda_set():
     list of modules in Anaconda
     """
     names = """
-            abstract-rendering Linux Mac
+            --abstract-rendering Linux Mac
             affine
             alabaster
             ansi2html
@@ -37,7 +37,7 @@ def anaconda_set():
             --astropy
             azure
             babel
-            basemap Linux Mac
+            basemap
             bcolz
             beautifulsoup4
             --binstar
@@ -59,7 +59,7 @@ def anaconda_set():
             cffi
             --chameleon
             chest
-            chrpath Linux
+            --chrpath Linux
             --click
             --cligj
             --cloudpickle
@@ -73,11 +73,11 @@ def anaconda_set():
             --configobj
             coverage
             --cryptography
-            cssselect Linux Mac
+            --cssselect Linux Mac
             --csvkit
             --cubes
             --curl
-            cvxopt Linux Mac
+            cvxopt
             --cymem Linux Mac
             cython
             cytoolz
@@ -108,9 +108,9 @@ def anaconda_set():
             futures
             gdal
             gensim
-            geos Linux Mac
+            --geos
             greenlet
-            gunicorn Linux Mac
+            --gunicorn Linux Mac
             h5py
             --hdf5
             heapdict
@@ -125,7 +125,7 @@ def anaconda_set():
             jedi
             jinja2
             joblib
-            jpeg Linux Mac
+            --jpeg Linux Mac
             jsonschema
             --lancet-ioam
             --launcher Mac Windows
@@ -143,7 +143,7 @@ def anaconda_set():
             line_profiler
             llvmlite
             locket
-            lockfile Linux Mac
+            lockfile
             --logilab-common
             lxml
             markdown
@@ -154,7 +154,7 @@ def anaconda_set():
             mccabe
             --mdp
             --meld3
-            menuinst Windows
+            --menuinst Windows
             --mingw Windows
             mistune
             mock
@@ -162,48 +162,48 @@ def anaconda_set():
             msgpack-python
             multimethods
             multipledispatch
-            murmurhash Linux Mac
-            mysql-connector-python
-            nano Linux Mac
+            --murmurhash Linux Mac
+            --mysql-connector-python
+            --nano Linux Mac
             natsort
-            ncurses Linux Mac
+            --ncurses Linux Mac
             netcdf4
             networkx
             nltk
-            node-webkit Mac Windows
+            --node-webkit Mac Windows
             nose
             numba
             numexpr
             numpy
-            numpydoc
+            --numpydoc
             odo
             openpyxl
-            openssl Linux Mac
+            --openssl Linux Mac
             pandas
             param
             paramiko
             partd
             passlib
             --pastedeploy
-            patchelf Linux
+            --patchelf Linux
             patsy
             pep8
             persistent
-            pexpect Linux Mac
+            --pexpect Linux Mac
             pillow
             pip
             plac
             ply
-            preshed Linux Mac
+            --preshed Linux Mac
             psutil
-            psycopg2 Linux Mac
-            ptyprocess Linux Mac
+            psycopg2
+            --ptyprocess Linux Mac
             py
             pyasn1
             pycosat
             pycparser
             pycrypto
-            pycurl Linux Mac
+            --pycurl Linux Mac
             pyflakes
             pygments
             pylint
@@ -216,34 +216,34 @@ def anaconda_set():
             pyopenssl
             pyparsing
             --pyqt
-            pyramid
+            --pyramid
             pyreadline Windows
             pyserial
-            pysnmp Linux Mac
-            pystan Linux Mac
+            --pysnmp Linux Mac
+            --pystan Linux Mac
             pytables
             pytest
-            pytest-cache
-            pytest-pep8
-            python
+            --pytest-cache
+            --pytest-pep8
+            --python
             python-dateutil
             pytz
-            pywget
+            --pywget
             pywin32 Windows
             pyyaml
             pyzmq
             --qt Linux Mac
             quandl
             queuelib
-            rasterio
+            --rasterio
             readline Linux Mac
             --redis Linux Mac
             --redis-py Linux Mac
             --reportlab
-            repoze.lru
+            --repoze.lru
             requests
             rope
-            runipy
+            --runipy
             sas7bdat
             --scikit-bio Linux Mac
             scikit-image
@@ -252,53 +252,53 @@ def anaconda_set():
             seaborn
             semantic_version
             --setuptools
-            sh Linux Mac
-            shapely Linux Mac
-            sip Linux Mac
+            --sh Linux Mac
+            shapely
+            --sip Linux Mac
             six
             snowballstemmer
-            snuggs
+            --snuggs
             sockjs-tornado
-            spacy Linux Mac
+            --spacy
             sphinx
             sphinx_rtd_theme
             spyder
             sqlalchemy
-            sqlite Linux Mac
+            --sqlite Linux Mac
             sqlparse
             statsmodels
-            stripe
+            --stripe
             sympy
-            terminado Linux Mac
-            theano Linux
-            thinc Linux Mac
-            tk Linux Mac
+            terminado Linux
+            theano
+            --thinc
+            --tk Linux Mac
             toolz
             tornado
-            translationstring
-            twisted
+            --translationstring
+            --twisted
             ujson
             unidecode
-            unixodbc Linux
-            unxutils Windows
-            util-linux Linux
-            venusian
+            --unixodbc Linux
+            --unxutils Windows
+            --util-linux Linux
+            --venusian
             virtualenv
             vispy
             w3lib
-            webob
+            --webob
             werkzeug
             whoosh
-            wtforms
+            --wtforms
             xlrd
             xlsxwriter
-            xlwings Mac Windows
+            --xlwings
             xlwt
             xray
-            xz Linux Mac
-            yaml Linux Mac
-            zeromq Linux Mac
-            zlib
+            --xz Linux Mac
+            --yaml Linux Mac
+            --zeromq Linux Mac
+            --zlib
             --zope.deprecation
             zope.interface
             """

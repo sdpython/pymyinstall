@@ -20,7 +20,7 @@ def extended_set():
             "blist", "wheel",
             purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
         ModuleInstall(
-            "Blz", "wheel", mname="blz",
+            "blz", "wheel",
             purpose="blz: a compressed data container"),
         ModuleInstall(
             "pamela", "pip", purpose="An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)") if not sys.platform.startswith("win") else None,
@@ -189,6 +189,8 @@ def extended_set():
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
+            "PyOpenGL_accelerate", "pip", mname="OpenGL_accelerate", purpose="Acceleration code for PyOpenGL"),
+        ModuleInstall(
             "libpython", "wheel", purpose="needed for theano (C++ compilation), compilation of libpython with mingw"),
         ModuleInstall(
             "Theano", "wheel", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
@@ -211,6 +213,8 @@ def extended_set():
         # for gensim
         ModuleInstall("smart_open", "pip",
                       purpose="Utils for streaming large files (S3, HDFS, gzip, bz2...), provides the same API for many format"),
+        ModuleInstall("httpretty", "pip",
+                      purpose="HTTP client mock for Python"),
         ModuleInstall("gensim", "wheel", purpose="genetic algorithm"),
         # ModuleInstall("pybrain", "pip"),   # some issues with the code
         # (relative import are not well handled in version 0.3.3
@@ -287,6 +291,8 @@ def extended_set():
         # 2015-08
         #
         ModuleInstall(
+            "pysmi", "pip", purpose="SNMP SMI/MIB Parser (for pysnmp)"),
+        ModuleInstall(
             "pyasn1", "pip", purpose="ASN.1 types and codecs (for pysnmp)"),
         ModuleInstall(
             "pysnmp", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
@@ -317,6 +323,8 @@ def extended_set():
                       purpose="Psycopg is the most popular PostgreSQL adapter for the Python programming language.", usage="SQL"),
         ModuleInstall("pymssql", "wheel",
                       purpose="A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.", usage="SQL"),
+        ModuleInstall("pymysql", "pip",
+                      purpose="Pure-Python MySQL Driver", usage="SQL"),
         ModuleInstall("mysqlclient", "pip", mname="MySQLdb",
                       purpose="MySQL driver written in Python which does not depend on MySQL C client libraries and implements the DB API v2.0 specification (PEP-249).", usage="SQL"),
         ModuleInstall("line_profiler", "wheel",
@@ -336,8 +344,18 @@ def extended_set():
                       purpose="Declarative Python programming using Parameters."),
         ModuleInstall("holoviews", "pip", usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
-        ModuleInstall("menuinst", "pip",
-                      purpose="cross platform menu item installation"),
+        ModuleInstall("passlib", "pip",
+                      purpose="comprehensive password hashing framework supporting over 30 schemes"),
+        ModuleInstall("plac", "pip",
+                      purpose="The smartest command line arguments parser in the world"),
+        ModuleInstall("idna", "pip",
+                      purpose="Internationalized Domain Names in Applications (IDNA)"),
+        ModuleInstall("cryptography", "pip",
+                      purpose="cryptography is a package which provides cryptographic recipes and primitives to Python developers."),
+        ModuleInstall("pyopenssl", "pip",
+                      purpose="Python wrapper module around the OpenSSL library"),
+        ModuleInstall("w3lib", "pip",
+                      purpose="Library of web-related functions"),
     ]
 
     return [_ for _ in mod if _ is not None]

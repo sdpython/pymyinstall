@@ -72,7 +72,7 @@ def ensae_set():
         ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
         #ModuleInstall("Lasagne", "pip", mname="lasagne"),
         ModuleInstall(
-            "nltk", "wheel", purpose="NLP, natural language processing", usage="DATA/ML"),
+            "nltk", "wheel", purpose="NLP, natural language processing", usage="NLP"),
         ModuleInstall(
             "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, classification, translation, and more."),
         ModuleInstall(
@@ -228,6 +228,9 @@ def ensae_set():
                       purpose="2D planar geometry library for Python."),
         ModuleInstall("GDAL", "wheel", mname="osgeo",
                       purpose="GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundation."),
+        # ModuleInstall("rasterio", "wheel",
+        # purpose="Fast and direct raster I/O for use with Numpy and SciPy,
+        # Rasterio reads and writes geospatial raster datasets."),
         ModuleInstall("cgal_bindings", "wheel", mname="CGAL",
                       purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python.",
                       web="https://github.com/cgal/cgal-swig-bindings"),
@@ -251,6 +254,13 @@ def ensae_set():
         # ModuleInstall("vowpal_porpoise", "pip",
         #              purpose="Lightweight python wrapper for vowpal_wabbit.", purpose="DATA/ML"),
         # it requires to build vowpal_wabbit for Windows
+        # ModuleInstall("ua-parser", "pip", mname="ua_parser",
+        #              purpose="Python port of Browserscope's user agent parser"),
+        # ModuleInstall("user-agents", "pip", mname="user_agents",
+        # purpose="A library to identify devices (phones, tablets) and their
+        # capabilities by parsing (browser/HTTP) user agent strings"),
+        ModuleInstall("user-agent", "pip", mname="user_agent",
+                      purpose="A library to identify devices (phones, tablets) and their capabilities by parsing (browser/HTTP) user agent strings"),
         ModuleInstall("tinydb", "pip",
                       purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) It's written in pure Python and has no external requirements.", usage="noSQL"),
         ModuleInstall("urllib3", "pip",
@@ -346,6 +356,21 @@ def ensae_set():
                       purpose="Invoke is a Python task execution tool & library, drawing inspiration from various sources to arrive at a powerful & clean feature set."),
         ModuleInstall("msgpack-python", "pip", mname="msgpack",
                       purpose="MessagePack (de)serializer."),
+        ModuleInstall("cloudpickle", "pip",
+                      purpose="Extended pickling support for Python objects"),
+        ModuleInstall("cymem", "pip",
+                      purpose="Manage calls to calloc/free through Cython"),
+        ModuleInstall("murmurhash", "pip",
+                      purpose="Cython .pxd files for some of the MurmurHash 2 and 3 hash functions, with a slightly more Pythonic API. The only access to these functions is via Cython — I don’t see why they should be useful from pure Python."),
+        ModuleInstall("preshed", "pip",
+                      purpose="Cython hash table that trusts the keys are pre-hashed"),
+        ModuleInstall("text-unidecode", "pip", mname="text_unidecode",
+                      purpose="The most basic Text::Unidecode port"),
+        ModuleInstall("thinc", "pip", usage="OPTIM",
+                      purpose="Learn sparse linear models"),
+        ModuleInstall("spacy", "pip", usage="NLP",
+                      purpose="Industrial-strength NLP"),
+
     ]
 
     if sys.version_info[0] == 2:
@@ -372,6 +397,8 @@ def ensae_set():
                                  purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))
         mod.append(ModuleInstall("comtypes", "pip",
                                  purpose="Pure Python COM package"))
+        mod.append(ModuleInstall("jaraco.structures", "pip",
+                                 purpose="jaraco.structures"))
         mod.append(ModuleInstall("jaraco.util", "pip",
                                  purpose="General utility modules that supply commonly-used functionality"))
         mod.append(ModuleInstall("jaraco.video", "pip",
