@@ -36,6 +36,14 @@ class MissingVersionOnPyPiException(Exception):
     pass
 
 
+class MissingVersionWheelException(Exception):
+
+    """
+    raised when a version is missing as a wheel
+    """
+    pass
+
+
 class MissinReferenceException(Exception):
 
     """

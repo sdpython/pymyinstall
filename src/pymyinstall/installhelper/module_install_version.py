@@ -4,7 +4,7 @@
 """
 from .install_cmd_helper import run_cmd, get_pip_program, regex_wheel_version
 from .install_memoize import install_memoize
-from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError
+from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
 
 import sys
 import re
@@ -670,7 +670,15 @@ def choose_most_recent(list_name):
         list_name = [(_, _) for _ in list_name]
 
     version = re.compile(regex_wheel_version)
-    list_name = [(version.search(_[0]).groups()[0], _[0], _[1])
+
+    def search_regex(_):
+        resv = version.search(_[0])
+        if resv is None:
+            raise MissingVersionWheelException(
+                "unable to get version number for regex {}:\n{}".format(_, regex_wheel_version))
+        return resv
+
+    list_name = [(search_regex(_).groups()[0], _[0], _[1])
                  for _ in list_name]
 
     def cmp(el1, el2):
