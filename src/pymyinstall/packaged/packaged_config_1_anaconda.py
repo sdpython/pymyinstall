@@ -236,7 +236,7 @@ def anaconda_set():
             quandl
             queuelib
             --rasterio
-            readline Linux Mac
+            --readline Linux Mac  (should be gnureadline)
             --redis Linux Mac
             --redis-py Linux Mac
             --reportlab

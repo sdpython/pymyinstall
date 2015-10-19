@@ -629,6 +629,9 @@ class ModuleInstall:
         cap = self.name.replace("_", "-")
         if cap in vers:
             return vers[cap]
+        cap = self.name.lower().replace("_", "-")
+        if cap in vers:
+            return vers[cap]
         if self.mname is not None:
             if self.mname in vers:
                 return vers[self.mname]
