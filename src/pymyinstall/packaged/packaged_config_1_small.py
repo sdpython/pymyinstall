@@ -240,7 +240,7 @@ def small_set():
                       usage="NETWORK"),
         ModuleInstall('flask-sqlalchemy', 'pip',
                       mname='flask.ext.sqlalchemy', usage="NETWORK"),
-        ModuleInstall('flask-login', 'pip',
+        ModuleInstall('Flask-Login', 'pip',
                       mname='flask.ext.login', usage="NETWORK"),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),

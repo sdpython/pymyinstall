@@ -236,7 +236,7 @@ def ensae_set():
                       web="https://github.com/cgal/cgal-swig-bindings"),
         ModuleInstall("tifffile", "wheel_xd",
                       purpose="Read and write image data from and to TIFF files. (for pims)"),
-        ModuleInstall("pims", "pip",
+        ModuleInstall("PIMS", "pip", mname="pims",
                       purpose="Python Image Sequence (for trackpy)"),
         ModuleInstall("trackpy", "pip",
                       purpose="trackpy is a Python package for particle tracking in 2D, 3D, and higher dimensions.", usage="DATA/ML"),
