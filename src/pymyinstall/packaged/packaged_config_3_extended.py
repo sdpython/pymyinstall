@@ -352,7 +352,7 @@ def extended_set():
                       purpose="Internationalized Domain Names in Applications (IDNA)"),
         ModuleInstall("cryptography", "pip",
                       purpose="cryptography is a package which provides cryptographic recipes and primitives to Python developers."),
-        ModuleInstall("pyopenssl", "pip",
+        ModuleInstall("pyOpenSsl", "pip", mname="pyOpenSSL",
                       purpose="Python wrapper module around the OpenSSL library"),
         ModuleInstall("w3lib", "pip",
                       purpose="Library of web-related functions"),

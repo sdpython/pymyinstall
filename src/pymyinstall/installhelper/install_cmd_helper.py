@@ -13,8 +13,7 @@ import subprocess
 import datetime
 import re
 from .module_install_exceptions import UpdatePipError, RunCmdError
-
-regex_wheel_version = "[-]([0-9]+[.][abc0-9]+([.][0-9abdevcr]+)?)([+]mkl)?([+]cuda[0-9]{2,5})?([+]sdl[0-9])?([+]post[0-9]{1,2})?[-]"
+from .install_cmd_regex import regex_wheel_version
 
 
 def python_version():
