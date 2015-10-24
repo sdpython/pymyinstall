@@ -407,3 +407,58 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
             _memory[i] = True
 
     return list(sorted(set(installed)))
+
+
+def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
+                   reorder=True, skip_module=None,
+                   up_pip=True, skip_missing=False, deps=False,
+                   schedule_only=False, deep_deps=False,
+                   _memory=None):
+    """
+    install a module
+
+    @param      module_name     module to install
+    @param      temp_folder     temporary folder
+    @param      verbose         more display
+    @param      fLOG            logging function
+    @param      reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
+    @param      skip_module     module to skip (list of str)
+    @param      up_pip          upgrade pip (pip must not be in *skip_module*)
+    @param      skip_missing    skip the checking of the missing dependencies
+    @param      deps            install the dependencies of the installed modules
+    @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
+    @param      deep_deps       check dependencies for dependencies
+    @param      _memory         stores installed packages, avoid going into an infinite loop
+
+    .. versionadded:: 1.3
+    """
+    if not isinstance(module_name, list):
+        module_name = [module_name]
+    install_all(list_module=module_name, temp_folder=temp_folder, fLOG=fLOG,
+                verbose=verbose, reorder=reorder, skip_module=skip_module,
+                up_pip=up_pip, skip_missing=skip_missing, deps=deps,
+                schedule_only=schedule_only, deep_deps=deep_deps,
+                _memory=_memory)
+
+
+def update_module(module_name, temp_folder=".", fLOG=print, verbose=True,
+                  reorder=True,
+                  skip_module=None, schedule_only=False):
+    """
+    update modules in *list_module*
+    if None, this list will be returned by @see fn ensae_fullset,
+    the function starts by updating pip.
+
+    @param      module_name     module to update
+    @param      temp_folder     temporary folder
+    @param      verbose         more display
+    @param      fLOG            logging function
+    @param      reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
+    @param      skip_module     module to skip (list of str)
+    @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
+    """
+    if not isinstance(module_name, list):
+        module_name = [module_name]
+    update_all(list_module=module_name, temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
+               reorder=reorder,
+               skip_module=skip_module, schedule_only=schedule_only)
