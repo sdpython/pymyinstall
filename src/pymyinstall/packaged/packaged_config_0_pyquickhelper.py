@@ -89,6 +89,7 @@ def pyquickhelper_set():
         "pbr",
         "python-jenkins",
         "wild_sphinx_theme",
+        "multi_key_dict",
     ]
 
     from . import find_module_install
