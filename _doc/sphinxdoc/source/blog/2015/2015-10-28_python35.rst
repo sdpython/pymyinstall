@@ -1,0 +1,34 @@
+
+
+.. blogpost::
+    :title: Issues with Python 3.5
+    :keywords: issues, Python 3.5
+    :date: 2015-10-28
+    :categories: modules, issues
+    
+    I'm still trying to get a proper distribution of Python 3.5 on Windows.
+    I had a couple of issues so far. Most of them come from
+    some DLL which cannot be found.
+    
+    `pyzmq <https://github.com/zeromq/pyzmq>`_.
+    The version I got from 
+    `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyzmq>`_
+    did not work and I had to install the 
+    `PyPi version <https://pypi.python.org/pypi/pyzmq>`_ which
+    proposes versions for Windows.
+    
+    `pywin32 <https://pypi.python.org/pypi/pypiwin32>`_
+    is now available from 
+    `PyPi <https://pypi.python.org/pypi/pypiwin32>`_.
+    Some DLLs might have to be copied
+    from 
+    ``C:\Python35_x64\Lib\site-packages\pywin32_system32``
+    to ``C:\Python35_x64`` unless the first path is added to ``PATH``.
+    I don't do that because I have multiple versions of Python on the same machine.
+    
+    Some parts of matplotlib are still failing due to some issues
+    with DLLs. The following instructions fails::
+    
+        import matplotlib.colorbar
+        
+    I tried to follow some solutions from *stackoverflow* but it still fails for me.

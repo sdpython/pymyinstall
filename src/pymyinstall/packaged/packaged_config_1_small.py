@@ -44,7 +44,7 @@ def small_set():
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
         ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
-        ModuleInstall("pywin32", "wheel" if sys.version_info[:2] <= (3, 4) else "exe_xd",
+        ModuleInstall("pywin32", "pip",
                       mname="win32com", purpose="call Windows DLL",
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall("winshell", "pip", purpose="Windows shell functions",
