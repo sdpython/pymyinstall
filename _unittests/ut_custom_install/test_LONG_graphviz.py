@@ -1,5 +1,5 @@
 """
-@brief      test log(time=45s)
+@brief      test log(time=131s)
 """
 
 import sys
