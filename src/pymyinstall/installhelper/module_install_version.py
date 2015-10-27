@@ -673,6 +673,10 @@ def choose_most_recent(list_name):
 
     def search_regex(_):
         resv = version.search(_[0])
+        if resv is None and "pywin32" in _[0]:
+            version2 = re.compile(regex_wheel_version.replace(
+                "[0-9]+[.][abc0-9]+", "[0-9]{3}"))
+            resv = version2.search(_[0])
         if resv is None:
             raise MissingVersionWheelException(
                 "unable to get version number for regex {}:\n{}".format(_, regex_wheel_version))
