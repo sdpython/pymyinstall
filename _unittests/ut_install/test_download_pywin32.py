@@ -1,5 +1,5 @@
 """
-@brief      test log(time=20s)
+@brief      test log(time=14s)
 """
 
 import sys
@@ -52,8 +52,9 @@ class TestDownloadPyWin32 (unittest.TestCase):
         temp = get_temp_folder(__file__, "temp_download_pywin32")
 
         if sys.platform.startswith("win"):
-            m = find_module_install("pywin32")
+            m = find_module_install("pywin32", must_exist=True)
             fLOG(m)
+            fLOG(m.__module__)
             m.fLOG = fLOG
             whl = m.download(temp_folder=temp)
             assert os.path.exists(whl)

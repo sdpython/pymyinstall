@@ -61,6 +61,8 @@ def find_module_install(name, must_exist=False):
             names.append("tables")
         elif name == "pyopengl-accelerate":
             names.append("PyOpenGL_accelerate")
+        elif name == "pywin32":
+            names.append("pypiwin32")
         for n in names:
             if n in _reverse_module_index:
                 return _reverse_module_index[n]
