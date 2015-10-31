@@ -160,9 +160,13 @@ if is_local():
     pyquickhelper = import_pyquickhelper()
     r = pyquickhelper.process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
+        requirements=["pyquickhelper"], # not need for the regular setup, just for the documentation, unit tests
         additional_notebook_path=["pyquickhelper"],
         unittest_modules=["pyquickhelper"])
-
+    if not r and not ({"bdist_msi", "sdist",
+                       "bdist_wheel", "publish", "publish_doc", "register",
+                       "upload_docs", "bdist_wininst"} & set(sys.argv)):
+        raise Exception("unable to interpret command line: " + str(sys.argv))
     if "build_script" in sys.argv and sys.platform.startswith("win"):
         this = os.path.dirname(__file__)
         with open(os.path.join(this, "auto_setup_build_sphinx.bat"), "r") as f:
@@ -171,9 +175,6 @@ if is_local():
         content = content.replace("%pythonexe% -u setup.py build_sphinx", code)
         with open(os.path.join(this, "auto_update_modules.bat"), "w") as f:
             f.write(content)
-
-    if not r:
-        raise Exception("unable to interpret command line: " + str(sys.argv))
 else:
     r = False
 
