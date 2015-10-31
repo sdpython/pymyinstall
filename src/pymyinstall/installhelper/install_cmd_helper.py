@@ -15,6 +15,9 @@ import re
 from .module_install_exceptions import UpdatePipError, RunCmdError
 from .install_cmd_regex import regex_wheel_version
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def python_version():
     """
