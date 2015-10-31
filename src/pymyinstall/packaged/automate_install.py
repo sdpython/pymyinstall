@@ -38,6 +38,9 @@ def find_module_install(name, must_exist=False):
     @param      must_exist  if True, raise an exception if not found
     @return                 @see cl ModuleInstall
     """
+    if isinstance(name, ModuleInstall):
+        return name
+
     if name in {"pip", "python"}:
         return None
 
