@@ -172,6 +172,8 @@ if is_local():
         with open(os.path.join(this, "auto_update_modules.bat"), "w") as f:
             f.write(content)
 
+    if not r:
+        raise Exception("unable to interpret command line: " + str(sys.argv))
 else:
     r = False
 
