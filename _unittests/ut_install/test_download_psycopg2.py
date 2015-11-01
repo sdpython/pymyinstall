@@ -1,14 +1,10 @@
 """
-@brief      test log(time=2s)
-
-skip this test for regular run
+@brief      test log(time=20s)
 """
 
 import sys
 import os
 import unittest
-import re
-import pandas
 
 try:
     import src
@@ -42,25 +38,24 @@ except ImportError:
     import pyquickhelper
 
 
-from pyquickhelper import fLOG, df2rst
-from src.pymyinstall.packaged import anaconda_set
+from src.pymyinstall.packaged import find_module_install
+from pyquickhelper import fLOG, get_temp_folder
 
 
-class TestAnaconda(unittest.TestCase):
+class TestDownloadPyscopg2(unittest.TestCase):
 
-    def test_script_help(self):
+    def test_install_tables(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+        temp = get_temp_folder(__file__, "temp_download_psycopg2")
 
-        if sys.version_info[0] == 2:
-            # too long
-            return
-
-        res = anaconda_set()
-        fLOG(len(res))
-        assert len(res) > 0
+        if sys.platform.startswith("win"):
+            m = find_module_install("psycopg2")
+            m.fLOG = fLOG
+            whl = m.download(temp_folder=temp)
+            assert os.path.exists(whl)
 
 
 if __name__ == "__main__":

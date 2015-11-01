@@ -184,7 +184,7 @@ def extended_set():
         ModuleInstall(
             "pymongo", "wheel", purpose="Python wrapper for MongoDB", usage="NoSQL"),
         ModuleInstall(
-            "psycopg", "wheel", mname="psycopg2",
+            "psycopg2", "wheel", mname="psycopg2",
             purpose="psycopg2 - Python-PostgreSQL Database Adapter"),
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
@@ -325,7 +325,7 @@ def extended_set():
                       purpose="A simple database interface for Python that builds on top of FreeTDS to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server.", usage="SQL"),
         ModuleInstall("PyMySQL", "pip", mname="pymysql",
                       purpose="Pure-Python MySQL Driver", usage="SQL"),
-        ModuleInstall("mysqlclient", "pip", mname="MySQLdb",
+        ModuleInstall("mysqlclient", "wheel", mname="MySQLdb",
                       purpose="MySQL driver written in Python which does not depend on MySQL C client libraries and implements the DB API v2.0 specification (PEP-249).", usage="SQL"),
         ModuleInstall("line_profiler", "wheel",
                       purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof is a convenient script for running either line_profiler or the Python standard library's cProfile or profile modules, depending on what is available.",

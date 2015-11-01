@@ -3,7 +3,7 @@
 @brief Various function to install various python module from various location.
 """
 from __future__ import print_function
-from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
 from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
 from .missing_license import missing_module_licenses
@@ -757,11 +757,11 @@ class ModuleInstall:
             *deps* is overwritten by *self.deps* if not None
 
         .. versionchanged:: 1.1
-            On Anaconda (we assume Anaconda is in sys.executable), we try *conda* first
+            On Anaconda (based on function @see fn is_conda_distribution), we try *conda* first
             before switching to the regular way if it did not work.
             Exception were changed from ``Exception`` to ``InstallError``.
         """
-        if not force and force_kind is None and "anaconda" in sys.executable.lower():
+        if not force and force_kind is None and is_conda_distribution():
             try:
                 return self.install(force_kind="conda", force=True, temp_folder=temp_folder,
                                     log=log, options=options, deps=deps)

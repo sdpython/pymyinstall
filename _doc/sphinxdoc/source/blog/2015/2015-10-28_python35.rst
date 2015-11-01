@@ -32,3 +32,32 @@
         import matplotlib.colorbar
         
     I tried to follow some solutions from *stackoverflow* but it still fails for me.
+    One link `http://prod.openclassrooms.com/forum/sujet/matplotlib-sous-windows <http://prod.openclassrooms.com/forum/sujet/matplotlib-sous-windows>`_.
+    However, this error happened with version 1.4, it does not happen
+    with matplotlib **1.5**.
+    
+    Here is the list of packages not available yet (in a compiled version) 
+    on Python 3.5::
+    
+        aiohttp
+        cchardet
+        cgal_bindings
+        dynd
+        gevent
+        grequests
+        la
+        libpython
+        llvmpy
+        mysqlclient
+        opencv_python
+        PuLP
+        py2exe
+        pycrypto
+        pycurl
+        PySide
+        pygit2
+        rpy2
+        tifffile    
+        
+    `scandir <https://docs.python.org/3/library/os.html#os.scandir>`_ is now
+    part of the distribution.

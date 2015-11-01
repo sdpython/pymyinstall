@@ -587,3 +587,15 @@ def get_wheel_version(whlname):
         raise ValueError(
             "[get_wheel_version] unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))
     return find[0][0]
+
+
+def is_conda_distribution():
+    """
+    tells if it a conda distribution or not,
+    check the expression ``Continuum Analytics`` in ``sys.version``
+
+    @return         boolean
+
+    .. versionadded:: 1.1
+    """
+    return "Continuum Analytics" in sys.version

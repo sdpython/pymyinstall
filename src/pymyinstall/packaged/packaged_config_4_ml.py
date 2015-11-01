@@ -131,7 +131,7 @@ def ensae_set():
         ModuleInstall("PyX", "wheel", mname="pyx",
                       purpose="plotting", usage="VIZ"),
         ModuleInstall(
-            "scandir", "wheel", purpose="Better directory iterator and faster os.walk(), now in the Python 3.5 stdlib"),
+            "scandir", "wheel", purpose="Better directory iterator and faster os.walk(), now in the Python 3.5 stdlib") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
             "zs", "wheel", purpose="S is a compressed, read-only file format for efficiently distributing, querying, and archiving arbitrarily large record-oriented datasets."),
         # machine learning
