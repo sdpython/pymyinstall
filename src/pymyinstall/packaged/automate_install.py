@@ -338,19 +338,11 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 fLOG("  ", m[0], m[1])
 
     if not skip_missing:
-        try:
-            import pipdeptree
-            cont = True
-        except ImportError:
-            warnings.warn(
-                "unable to check dependencies, pipdeptree is not installed")
-            cont = False
-        if cont:
-            miss = missing_dependencies()
-            if len(miss) > 0:
-                mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
-                                for k, v in sorted(miss.items()))
-                warnings.warn(pipdeptree.__file__ + "\n" + mes)
+        miss = missing_dependencies()
+        if len(miss) > 0:
+            mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
+                            for k, v in sorted(miss.items()))
+            warnings.warn("missing dependencies\n" + mes)
 
 
 def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True,
