@@ -435,7 +435,10 @@ def get_pip_program(exe=None):
                 exe = os.path.normpath(os.path.join(os.path.dirname(
                     pip.__file__), "..", "..", "..", "..", "bin"))
                 pi = os.path.join(exe, "pip%d.%d" % (major, minor))
-
+                if not os.path.exists(pi):
+                    pi = os.path.join(exe, "pip")
+                    if not os.path.exists(pi):
+                        raise FileNotFoundError("unable to find pip: " + pi)
     return pi
 
 

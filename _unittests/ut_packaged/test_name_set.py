@@ -64,6 +64,10 @@ class TestNameSet(unittest.TestCase):
         fLOG(rst)
         assert len(rst) > 0
 
+        if sys.version_info[0] == 2:
+            # less tests on Python 2.7
+            return
+
         nb = 0
         for mod in r:
             l = get_package_set(mod["name"])
