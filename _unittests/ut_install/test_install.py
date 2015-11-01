@@ -58,6 +58,9 @@ class TestInstall (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+        if sys.version_info[0] == 2:
+            # disabled on python 2.7
+            return
         m = ModuleInstall("pip", "pip")
         assert m.install()
         m = ModuleInstall("pip", "exe")
