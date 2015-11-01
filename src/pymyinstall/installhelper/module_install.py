@@ -24,6 +24,8 @@ if sys.version_info[0] == 2:
     import urllib2 as urllib_error
     import xmlrpclib as xmlrpc_client
     from codecs import open
+    FileNotFoundError = Exception
+    PermissionError = Exception
 else:
     from urllib.parse import urlsplit
     import urllib.request as urllib_request

@@ -13,6 +13,7 @@ import warnings
 import functools
 
 if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
     import urllib2 as urllib_request
     import xmlrpclib as xmlrpc_client
 else:

@@ -332,7 +332,7 @@ def anaconda_set():
         if m is None:
             continue
         try:
-            mod = find_module_install(m, must_exist=True)
+            find_module_install(m, must_exist=True)
         except MissinReferenceException:
             errors.append(m)
 

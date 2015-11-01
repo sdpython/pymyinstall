@@ -5,6 +5,7 @@
 """
 from __future__ import print_function
 
+import sys
 import os
 import os.path as osp
 import subprocess
@@ -16,6 +17,9 @@ import glob
 import shutil
 
 from .win_helper import patch_shebang_line
+
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
 
 
 def is_program_installed(basename):

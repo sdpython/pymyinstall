@@ -3,7 +3,6 @@
 @file
 @brief Defines different a set of usual modules for Python.
 """
-import sys
 
 
 def ensae_teaching_cs_set():

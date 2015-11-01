@@ -9,6 +9,9 @@ import sys
 import os
 import shutil
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def import_pywin32():
     """

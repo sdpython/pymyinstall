@@ -2,8 +2,13 @@
 @file
 @brief Functions to prepare a setup on Windows, R functions
 """
+import sys
 import os
 from ..installhelper.install_cmd_helper import run_cmd
+
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 _script = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "R_install.r")

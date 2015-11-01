@@ -10,6 +10,9 @@ from .win_exception import WinInstallPackageException
 from ..installhelper.install_cmd_helper import run_cmd, get_pip_program
 from ..packaged import ensae_fullset
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def get_modules_version(python_path):
     """

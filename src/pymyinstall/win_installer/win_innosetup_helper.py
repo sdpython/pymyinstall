@@ -11,6 +11,7 @@ from .win_ipy_kernels import install_kernels
 
 if sys.version_info[0] == 2:
     from codecs import open
+    FileNotFoundError = Exception
 
 
 class InnoSetupException(Exception):

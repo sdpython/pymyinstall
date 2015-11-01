@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 @brief Various functions to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
@@ -10,6 +9,7 @@ from .internet_settings import default_user_agent
 import os
 import sys
 if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
     import urllib2 as urllib_request
     import urllib2 as urllib_error
     import httplib as http_client

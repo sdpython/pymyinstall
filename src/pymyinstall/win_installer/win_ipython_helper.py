@@ -10,6 +10,9 @@ import os
 from ..installhelper.install_cmd_helper import run_cmd
 from .win_exception import WinInstallException
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def ipython_create_profile(config_path, python_path, name="win_profile", fLOG=print):
     """

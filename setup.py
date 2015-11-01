@@ -160,7 +160,9 @@ if is_local():
     pyquickhelper = import_pyquickhelper()
     r = pyquickhelper.process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
-        requirements=["pyquickhelper"], # not need for the regular setup, just for the documentation, unit tests
+        # not need for the regular setup, just for the documentation, unit
+        # tests
+        requirements=["pyquickhelper"],
         additional_notebook_path=["pyquickhelper"],
         unittest_modules=["pyquickhelper"])
     if not r and not ({"bdist_msi", "sdist",

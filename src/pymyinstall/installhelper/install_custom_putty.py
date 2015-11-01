@@ -9,6 +9,9 @@ import os
 
 from .install_custom import download_page, download_file
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def IsPuttyInstalled(dest_folder):
     """

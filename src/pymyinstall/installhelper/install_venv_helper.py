@@ -8,6 +8,9 @@ import os
 import sys
 from .install_cmd_helper import run_cmd
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 class VirtualEnvError(Exception):
     """

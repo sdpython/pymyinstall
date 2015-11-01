@@ -10,6 +10,7 @@ from ..installhelper.install_cmd_helper import run_cmd
 
 if sys.version_info[0] == 2:
     from codecs import open
+    FileNotFoundError = Exception
 
 
 _script_install = os.path.join(

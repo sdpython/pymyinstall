@@ -7,6 +7,9 @@ import os
 import sys
 import platform
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def add_shortcut_to_desktop(file, name, description="", arguments="", icon=None, workdir=None):
     """

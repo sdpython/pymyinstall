@@ -37,6 +37,7 @@ from .win_setup_julia import julia_run_script, _script_install as _script_julia_
 
 if sys.version_info[0] == 2:
     from codecs import open
+    FileNotFoundError = Exception
 
 
 def dtnow():

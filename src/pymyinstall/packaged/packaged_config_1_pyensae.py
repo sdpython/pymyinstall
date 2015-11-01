@@ -3,7 +3,6 @@
 @file
 @brief Defines different a set of usual modules for Python.
 """
-import sys
 
 
 def pyensae_set():

@@ -8,6 +8,9 @@ import re
 
 from ..installhelper.link_shortcuts import add_shortcut_to_desktop, suffix
 
+if sys.version_info[0] == 2:
+    FileNotFoundError = Exception
+
 
 def noLOG(*l, **p):
     pass
