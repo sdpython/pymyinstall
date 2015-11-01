@@ -35,6 +35,13 @@
     
         ./conda install numpy pandas matplotlib jupyter
         
+    To install all the necessary modules for 
+    `pyensae <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_::
+    
+        ./pip install pymyinstall --upgrade
+        ./pymy_install3 --set=pyensae
+        ./pip install pyensae
+        
     And finally run jupyter::
     
         ./jupyter-console
