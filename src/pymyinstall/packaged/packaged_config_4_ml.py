@@ -83,6 +83,8 @@ def ensae_set():
         ModuleInstall("PyAudio", "wheel", mname="pyaudio",
                       purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. With PyAudio, you can easily use Python to play and record audio streams on a variety of platforms (e.g., GNU/Linux, Microsoft Windows, and Mac OS X)."),
         ModuleInstall(
+            "zope.exceptions", "pip", purpose="Zope exception"),
+        ModuleInstall(
             "zope.interface", "wheel", purpose="interfaces for python"),
         ModuleInstall(
             "persistent", "wheel", purpose="Objets persistants translucides"),

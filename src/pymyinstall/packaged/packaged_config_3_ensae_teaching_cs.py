@@ -36,6 +36,14 @@ def ensae_teaching_cs_set():
         "smopy",
         "toolz",
         "ujson",
+        #
+        "pyquickhelper",
+        "pyrsslocal"
+        "pymmails",
+        "pyensae",
+        "ensae_teaching_cs",
+        "code_beatrix",
+        "actuariat_python",
     ]
 
     from . import find_module_install

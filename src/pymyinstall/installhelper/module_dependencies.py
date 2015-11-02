@@ -25,7 +25,7 @@ def missing_dependencies():
 
     the function relis on module pipdeptree.
     """
-    skip = {"setuptools", "pip", "distribute"}
+    skip = {"setuptools", "pip", "distribute", "ordereddict"}
     tree = _main_pipdeptree()
     stack = {}
     for k, v in tree.items():
@@ -33,6 +33,11 @@ def missing_dependencies():
             dep = mod.key
             if dep in skip:
                 continue
+            if dep not in tree:
+                if "-" in dep:
+                    dep = dep.replace("-", "_")
+                elif "_" in dep:
+                    dep = dep.replace("_", "_")
             if dep not in tree:
                 if k not in stack:
                     stack[k] = []

@@ -95,6 +95,8 @@ def iot_set():
         ModuleInstall('python-wink', 'github', 'balloob', mname="pywink",
                       purpose="Python implementation of the Wink API"),
         ModuleInstall('slacker', 'pip', purpose="Slack API client"),
+        ModuleInstall(
+            'vincenty', 'pip', purpose="Calculate the geographical distance between 2 points with extreme accuracy."),
         ModuleInstall('pyusb', 'pip', usage="IoT",
                       purpose="Python USB access module"),
         ModuleInstall('temperusb', 'pip', usage="IoT",

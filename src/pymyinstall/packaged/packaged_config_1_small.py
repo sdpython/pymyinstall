@@ -5,6 +5,7 @@
 """
 import sys
 from ..installhelper.module_install import ModuleInstall
+from ..installhelper.install_cmd_helper import is_conda_distribution
 
 
 def small_set():
@@ -14,7 +15,7 @@ def small_set():
     mod = [
         ModuleInstall("futures", "pip", version="2.2.0"),
         ModuleInstall(
-            "virtualenv", "pip", purpose="creatre virtual environments"),
+            "virtualenv", "pip", purpose="creatre virtual environments") if not is_conda_distribution() else None,
         ModuleInstall(
             "six", "pip", purpose="helpers for python 2/3 conversion"),
         ModuleInstall("lxml", "wheel", purpose="xml parsers (C++)"),

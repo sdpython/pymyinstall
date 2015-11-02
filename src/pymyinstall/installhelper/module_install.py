@@ -808,9 +808,12 @@ class ModuleInstall:
             if self.name == "kivy-garden":
                 sys.argv = memo
 
+            success2 = "Requirement already up-to-date: " + self.name
+            uptodate = success2.replace("-", "_") in out.replace("-", "_")
+
             if "No distributions matching the version" in out:
                 raise InstallError(
-                    "unable to install with pip " +
+                    "(1) unable to install with pip " +
                     str(self) +
                     "\nCMD:\n" +
                     cmd +
@@ -820,11 +823,11 @@ class ModuleInstall:
                     err)
             elif "Testing of typecheck-decorator passed without failure." in out:
                 ret = True
-            elif "Successfully installed" not in out:
+            elif "Successfully installed" not in out and not uptodate:
                 if "error: Unable to find vcvarsall.bat" in out:
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
                     raise InstallError(
-                        "unable to install with pip " +
+                        "(2) unable to install with pip " +
                         str(self) +
                         "\nread:\n" +
                         url +
@@ -834,9 +837,9 @@ class ModuleInstall:
                         out +
                         "\nERR:\n" +
                         err)
-                if "Requirement already satisfied" not in out:
+                if "Requirement already satisfied" not in out and not uptodate:
                     raise InstallError(
-                        "unable to install with pip " +
+                        "(3) unable to install with pip " +
                         str(self) +
                         "\nCMD:\n" +
                         cmd +
@@ -845,7 +848,7 @@ class ModuleInstall:
                         "\nERR:\n" +
                         err)
             else:
-                ret = True
+                ret = not uptodate
 
         elif kind == "conda":
             if "--upgrade" in options:
@@ -869,7 +872,7 @@ class ModuleInstall:
             if "No distributions matching the version" in out or \
                "No packages found in current linux" in out:
                 raise InstallError(
-                    "unable to install with conda " +
+                    "(4) unable to install with conda " +
                     str(self) +
                     "\nCMD:\n" +
                     cmd +
@@ -883,7 +886,7 @@ class ModuleInstall:
                 if "error: Unable to find vcvarsall.bat" in out:
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
                     raise InstallError(
-                        "unable to install with conda " +
+                        "(5) unable to install with conda " +
                         str(self) +
                         "\nread:\n" +
                         url +
@@ -895,7 +898,7 @@ class ModuleInstall:
                         err)
                 if "Requirement already satisfied" not in out:
                     raise InstallError(
-                        "unable to install with conda " +
+                        "(6) unable to install with conda " +
                         str(self) +
                         "\nCMD:\n" +
                         cmd +
@@ -942,7 +945,7 @@ class ModuleInstall:
                     cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
                 if "No distributions matching the version" in out:
                     raise InstallError(
-                        "unable to install with wheel " +
+                        "(7) unable to install with wheel " +
                         str(self) +
                         "\nCMD:\n" +
                         cmd +
@@ -956,7 +959,7 @@ class ModuleInstall:
                     if "error: Unable to find vcvarsall.bat" in out:
                         url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
                         raise InstallError(
-                            "unable to install with wheel " +
+                            "(8) unable to install with wheel " +
                             str(self) +
                             "\nread:\n" +
                             url +
@@ -968,7 +971,7 @@ class ModuleInstall:
                             err)
                     if "Requirement already satisfied" not in out:
                         raise InstallError(
-                            "unable to install with wheel " +
+                            "(9) unable to install with wheel " +
                             str(self) +
                             "\nCMD:\n" +
                             cmd +
@@ -1003,7 +1006,7 @@ class ModuleInstall:
                 setu.sort()
                 if setu[0][0] == setu[1][0]:
                     raise InstallError(
-                        "more than one setup.py for module " +
+                        "(10) more than one setup.py for module " +
                         self.name +
                         "\n" +
                         "\n".join(
@@ -1040,7 +1043,7 @@ class ModuleInstall:
             if "Successfully installed" not in out and "install  C" not in out:
                 if "Finished processing dependencies" not in out:
                     raise InstallError(
-                        "unable to install with github " +
+                        "(11) unable to install with github " +
                         str(self) +
                         "\nOUT:\n" +
                         out +
@@ -1051,7 +1054,7 @@ class ModuleInstall:
                         "warning: ``Successfully installed`` or ``install  C`` not found")
                 if "Permission denied" in out:
                     raise PermissionError(
-                        "unable to install with github " +
+                        "(12) unable to install with github " +
                         str(self) +
                         "\nCMD:\n" +
                         cmd +
