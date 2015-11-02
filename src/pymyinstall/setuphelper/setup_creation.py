@@ -131,6 +131,9 @@ Versions
     * **new:** first version
 '''
 
+if sys.version_info[0] == 2:
+    from codecs import open
+
 
 def create_empty_folder_setup(fold, name, author=None, description=None, url=None, durl=None, version="0.1",
                               subversion="0"):
