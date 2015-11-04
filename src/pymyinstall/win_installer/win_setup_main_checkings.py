@@ -170,7 +170,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                     res.append((False, m, out, err))
                     continue
                 if "Usage: g++ [options] file..." not in out:
-                    fLOG("{0}/{1}: failed (g+++)".format(i, len(module_list)), m)
+                    fLOG("{0}/{1}: failed (g++)".format(i, len(module_list)), m)
                     res.append((False, m, out, err))
                     continue
 

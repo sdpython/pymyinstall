@@ -51,6 +51,9 @@ class TestCheckings(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
+        if sys.version_info[0] == 2:
+            # not maintained in Python 2.7
+            return
         distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
 
 
