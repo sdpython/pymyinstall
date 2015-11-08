@@ -138,8 +138,8 @@ def extended_set():
                       mname="antlr4", purpose="antlr4 runtime, grammar parser"),
         # ModuleInstall("unqlite",                    "pip"),   #
         # key/value store (NoSQL)
-        ModuleInstall("pycontracts", "pip", mname="contracts",
-                      purpose="PyContracts is a Python package that allows to declare constraints on function parameters and return values"),
+        ModuleInstall("pycontracts", "pip", mname="contracts", version="1.7.5",
+                      purpose="PyContracts is a Python package that allows to declare constraints on function parameters and return values, setup for version 1.7.7 is bugged"),
         #
         ModuleInstall(
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
