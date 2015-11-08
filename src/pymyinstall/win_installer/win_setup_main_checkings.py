@@ -42,11 +42,17 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
 
     if python_path is None:
         python_path = os.path.dirname(sys.executable)
+
+    # on Python 3.5, pip does not always exist
+    # in a virtual environment (probable bug)
     pip = os.path.join(python_path, "pip.exe")
-    if not os.path.exists(pip):
+    pep8 = os.path.join(python_path, "pep8.exe")
+    if not os.path.exists(pip) and not os.path.exists(pep8):
         scripts = os.path.join(python_path, "Scripts")
         files_to_check.extend(
-            ["rodeo.exe", "spyder.exe", "pip.exe", "autopep8.exe"])
+            ["rodeo.exe", "spyder.exe", "autopep8.exe"])
+        if sys.version_info[:2] != (3, 5):
+            files_to_check.append("pip.exe")
     else:
         scripts = python_path
 
