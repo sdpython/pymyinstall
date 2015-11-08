@@ -51,6 +51,7 @@ def pyquickhelper_set():
         "nbformat",
         "nbconvert",
         "nose",
+        "backports_abc",
         "notebook",
         "notedown",
         "numpy",

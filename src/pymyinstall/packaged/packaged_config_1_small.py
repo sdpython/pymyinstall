@@ -177,6 +177,9 @@ def small_set():
             "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets",
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
         ModuleInstall(
+            "backports_abc", "pip", purpose="A backport of recent additions to the 'collections.abc' module",
+            usage="JUPYTER"),            
+        ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="JUPYTER"),
