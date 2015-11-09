@@ -56,6 +56,10 @@ class TestPatch(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
+        if sys.version_info[0] == 2:
+            # not setup for python 2.7
+            return
+
         pattern = "([#][!](([A-Za-z][:])?[/\\\\]?[-a-zA-Z0-9_.]+[/\\\\])*pythonw?[.]exe)"
         reg_exe = re.compile(pattern, re.IGNORECASE)
         text = "#!C:\\github\\pymyinstall\\dist\\win_python_setup\\python\\python.exe"
