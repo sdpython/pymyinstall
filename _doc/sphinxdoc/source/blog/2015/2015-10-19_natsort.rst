@@ -16,7 +16,7 @@
         :showcode:
     
         a = ['a2', 'a9', 'a1', 'a4', 'a10']
-        list(sorted(a))
+        print(list(sorted(a)))
         
     `natsort <https://pypi.python.org/pypi/natsort>`_ does 
     something different with numbers:
@@ -26,7 +26,7 @@
     
         from natsort import natsorted
         a = ['a2', 'a9', 'a1', 'a4', 'a10']
-        natsorted(a)
+        print(natsorted(a))
 
     It is quite interesting when you to sort
     version numbers for a module.

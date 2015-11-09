@@ -1,5 +1,7 @@
 
 
+.. _l-blog-cvxopt-2015:
+
 .. blogpost::
     :title: import cvxopt fails
     :keywords: cvxopt, Windows
