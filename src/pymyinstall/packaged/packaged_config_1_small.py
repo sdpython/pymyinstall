@@ -178,7 +178,7 @@ def small_set():
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
         ModuleInstall(
             "backports_abc", "pip", purpose="A backport of recent additions to the 'collections.abc' module",
-            usage="JUPYTER"),            
+            usage="JUPYTER"),
         ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(

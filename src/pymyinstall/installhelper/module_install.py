@@ -270,14 +270,14 @@ class ModuleInstall:
         .. versionadded:: 1.3
         """
         exe = get_python_program()
-        cmd = exe + '-u -c "import {0}"'.format(self.ImportName)
-        out, err = run_cmd(cmd)
+        cmd = exe + ' -u -c "import {0}"'.format(self.ImportName)
+        out, err = run_cmd(cmd, fLOG=self.fLOG)
         if err:
             raise InstallError("cannot import module {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
                 self.ImportName, cmd, out, err))
         if self.name == "scipy":
             cmd = exe + '-u -c "import scipy.sparse"'
-            out, err = run_cmd(cmd)
+            out, err = run_cmd(cmd, fLOG=self.fLOG)
         return True
 
     def get_exewheel_url_link_xd(self, file_save=None, wheel=False):

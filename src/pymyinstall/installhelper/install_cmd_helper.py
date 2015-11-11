@@ -448,10 +448,14 @@ def get_python_program():
 
     .. versionadded:: 1.1
     """
-    pip = get_pip_programm()
+    pip = get_pip_program()
     dirname = os.path.dirname(pip)
     exe = os.path.join(
         dirname, "python.exe" if sys.platform.startswith("win") else "python")
+    if os.path.exists(exe):
+        return exe
+    exe = os.path.normpath(os.path.join(
+        dirname, "..", "python.exe" if sys.platform.startswith("win") else "python"))
     if os.path.exists(exe):
         return exe
     raise FileNotFoundError(exe)
