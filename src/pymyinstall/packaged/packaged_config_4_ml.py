@@ -269,7 +269,7 @@ def ensae_set():
                       purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) It's written in pure Python and has no external requirements.", usage="noSQL"),
         ModuleInstall("urllib3", "pip",
                       purpose="urllib2 extension"),
-        ModuleInstall("gevent", "wheel_xd",
+        ModuleInstall("gevent", "pip", version="1.1b6",
                       purpose="gevent is a coroutine-based Python networking library"),
         ModuleInstall("grequests", "pip",
                       purpose="GRequests allows you to use Requests with Gevent to make asynchronous HTTP Requests easily."),

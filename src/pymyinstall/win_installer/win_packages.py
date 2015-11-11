@@ -65,6 +65,9 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     @param      deps            take dependencies into account or not
     @param      fLOG            logging function
     @return                     operations ("pip", module) if installed, empty if already installed
+    
+    .. versionchanged:: 1.1
+        ``deps=False`` is the default for module zipline
     """
     if verbose:
         fLOG("*** INSTALL", package)
@@ -86,7 +89,8 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     cur = os.getcwd()
     if cur != python_path:
         os.chdir(python_path)
-    if deps is not None and not deps:
+    name = os.path.split(package)[-1]
+    if (deps is not None and not deps) or name.startswith("zipline"):
         cmd += " --no-deps"
 
     out, err = run_cmd(cmd, wait=True, fLOG=fLOG, do_not_log=True)
