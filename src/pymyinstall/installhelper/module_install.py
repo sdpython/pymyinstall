@@ -3,7 +3,7 @@
 @brief Various function to install various python module from various location.
 """
 from __future__ import print_function
-from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
 from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
 from .missing_license import missing_module_licenses
@@ -261,6 +261,24 @@ class ModuleInstall:
                     return False
         else:
             return os.path.exists(self.Script)
+
+    def is_installed_local_cmd(self):
+        """
+        Test the module by running a command line.
+        Does some others verifications for a specific modules such as scipy.
+
+        .. versionadded:: 1.3
+        """
+        exe = get_python_program()
+        cmd = exe + '-u -c "import {0}"'.format(self.ImportName)
+        out, err = run_cmd(cmd)
+        if err:
+            raise InstallError("cannot import module {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                self.ImportName, cmd, out, err))
+        if self.name == "scipy":
+            cmd = exe + '-u -c "import scipy.sparse"'
+            out, err = run_cmd(cmd)
+        return True
 
     def get_exewheel_url_link_xd(self, file_save=None, wheel=False):
         """
@@ -812,41 +830,21 @@ class ModuleInstall:
             uptodate = success2.replace("-", "_") in out.replace("-", "_")
 
             if "No distributions matching the version" in out:
-                raise InstallError(
-                    "(1) unable to install with pip " +
-                    str(self) +
-                    "\nCMD:\n" +
-                    cmd +
-                    "\nOUT:\n" +
-                    out +
-                    "\nERR:\n" +
-                    err)
+                mes = "(1) unable to install with pip {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                    str(self), cmd, out, err)
+                raise InstallError(mes)
             elif "Testing of typecheck-decorator passed without failure." in out:
                 ret = True
             elif "Successfully installed" not in out and not uptodate:
                 if "error: Unable to find vcvarsall.bat" in out:
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                    raise InstallError(
-                        "(2) unable to install with pip " +
-                        str(self) +
-                        "\nread:\n" +
-                        url +
-                        "\nCMD:\n" +
-                        cmd +
-                        "OUT:\n" +
-                        out +
-                        "\nERR:\n" +
-                        err)
+                    mes = "(2) unable to install with pip {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR:\n{4}".format(
+                        str(self), url, cmd, out, err)
+                    raise InstallError(mes)
                 if "Requirement already satisfied" not in out and not uptodate:
-                    raise InstallError(
-                        "(3) unable to install with pip " +
-                        str(self) +
-                        "\nCMD:\n" +
-                        cmd +
-                        "\nOUT:\n" +
-                        out +
-                        "\nERR:\n" +
-                        err)
+                    mes = "(3) unable to install with pip {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                        str(self), cmd, out, err)
+                    raise InstallError(mes)
             else:
                 ret = not uptodate
 
@@ -871,41 +869,21 @@ class ModuleInstall:
                 cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
             if "No distributions matching the version" in out or \
                "No packages found in current linux" in out:
-                raise InstallError(
-                    "(4) unable to install with conda " +
-                    str(self) +
-                    "\nCMD:\n" +
-                    cmd +
-                    "\nOUT:\n" +
-                    out +
-                    "\nERR:\n" +
-                    err)
+                mes = "(4) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                    str(self), cmd, out, err)
+                raise InstallError(mes)
             elif "Testing of typecheck-decorator passed without failure." in out:
                 ret = True
             elif "Successfully installed" not in out:
                 if "error: Unable to find vcvarsall.bat" in out:
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                    raise InstallError(
-                        "(5) unable to install with conda " +
-                        str(self) +
-                        "\nread:\n" +
-                        url +
-                        "\nCMD:\n" +
-                        cmd +
-                        "OUT:\n" +
-                        out +
-                        "\nERR:\n" +
-                        err)
+                    mes = "(5) unable to install with conda {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR:\n{4}".format(
+                        str(self), url, cmd, out, err)
+                    raise InstallError(mes)
                 if "Requirement already satisfied" not in out:
-                    raise InstallError(
-                        "(6) unable to install with conda " +
-                        str(self) +
-                        "\nCMD:\n" +
-                        cmd +
-                        "\nOUT:\n" +
-                        out +
-                        "\nERR:\n" +
-                        err)
+                    mes = "(6) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                        str(self), cmd, out, err)
+                    raise InstallError(mes)
             else:
                 ret = True
 
@@ -944,41 +922,21 @@ class ModuleInstall:
                 out, err = run_cmd(
                     cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
                 if "No distributions matching the version" in out:
-                    raise InstallError(
-                        "(7) unable to install with wheel " +
-                        str(self) +
-                        "\nCMD:\n" +
-                        cmd +
-                        "\nOUT:\n" +
-                        out +
-                        "\nERR:\n" +
-                        err)
+                    mes = "(7) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                        str(self), cmd, out, err)
+                    raise InstallError(mes)
                 elif "Testing of typecheck-decorator passed without failure." in out:
                     ret = True
                 elif "Successfully installed" not in out:
                     if "error: Unable to find vcvarsall.bat" in out:
                         url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                        raise InstallError(
-                            "(8) unable to install with wheel " +
-                            str(self) +
-                            "\nread:\n" +
-                            url +
-                            "\nCMD:\n" +
-                            cmd +
-                            "OUT:\n" +
-                            out +
-                            "\nERR:\n" +
-                            err)
+                        mes = "(8) unable to install with wheel {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR:\n{4}".format(
+                            str(self), url, cmd, out, err)
+                        raise InstallError(mes)
                     if "Requirement already satisfied" not in out:
-                        raise InstallError(
-                            "(9) unable to install with wheel " +
-                            str(self) +
-                            "\nCMD:\n" +
-                            cmd +
-                            "\nOUT:\n" +
-                            out +
-                            "\nERR:\n" +
-                            err)
+                        mes = "(9) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                            str(self), cmd, out, err)
+                        raise InstallError(mes)
                 else:
                     ret = True
 
@@ -1133,6 +1091,13 @@ class ModuleInstall:
                             f.write(cmd)
                             f.write("\n")
                             f.write(full)
+
+        if ret is not None and ret:
+            # we check the module was properly installed
+            if not self.is_installed_local_cmd():
+                raise InstallError(
+                    "** unable to install module {0}, unable to import it".format(self.name))
+
         return ret
 
     def update(self,
