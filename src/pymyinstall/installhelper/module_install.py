@@ -278,6 +278,13 @@ class ModuleInstall:
         if self.name == "scipy":
             cmd = exe + '-u -c "import scipy.sparse"'
             out, err = run_cmd(cmd, fLOG=self.fLOG)
+            if err:
+                if sys.platform.startswith("win") and sys.version_info[:2] >= (3, 5) and "DLL" in err:
+                    raise InstallError("scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                        self.ImportName, cmd, out, err))
+                else:
+                    raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                        self.ImportName, cmd, out, err))
         return True
 
     def get_exewheel_url_link_xd(self, file_save=None, wheel=False):

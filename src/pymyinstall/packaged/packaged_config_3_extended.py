@@ -260,7 +260,8 @@ def extended_set():
         ModuleInstall(
             "structures", "pip", purpose="User-friendly library for creating data structures."),
         ModuleInstall(
-            "py2exe", "wheel", purpose="convert a python program into an exe program") if sys.platform.startswith("win") else None,
+            "py2exe", "wheel" if sys.version_info[:2] < (3, 5) else "pip",
+            purpose="convert a python program into an exe program") if sys.platform.startswith("win") else None,
         ModuleInstall(
             "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
         ModuleInstall(
