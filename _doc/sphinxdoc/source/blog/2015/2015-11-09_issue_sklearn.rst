@@ -53,4 +53,7 @@
             from ._sparsetools import csr_tocsc, csr_tobsr, csr_count_blocks, \
         ImportError: DLL load failed: The specified procedure could not be found.    
 
-    I also tried this trick :ref:`l-blog-cvxopt-2015` but it failed too.
+    I tried this trick :ref:`l-blog-cvxopt-2015` but it failed too. It finally
+    installed 
+    `Visual Studio Community 2015 <https://www.visualstudio.com/fr-fr/products/visual-studio-community-vs.aspx>`_
+    and it worked.
