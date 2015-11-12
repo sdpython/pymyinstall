@@ -260,7 +260,7 @@ def extended_set():
         ModuleInstall(
             "structures", "pip", purpose="User-friendly library for creating data structures."),
         ModuleInstall(
-            "py2exe", "wheel" if sys.version_info[:2] < (3, 5) else "pip",
+            "py2exe", "wheel" if sys.version_info[:2] < (3, 5) else "pip", 
             purpose="convert a python program into an exe program") if sys.platform.startswith("win") else None,
         ModuleInstall(
             "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
@@ -331,7 +331,7 @@ def extended_set():
         ModuleInstall("line_profiler", "wheel",
                       purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof is a convenient script for running either line_profiler or the Python standard library's cProfile or profile modules, depending on what is available.",
                       usage="PROFILING"),
-        ModuleInstall("memory_profiler", "pip",
+        ModuleInstall("memory-profiler", "pip", mname="memory_profiler",
                       purpose="A module for monitoring memory usage of a python program", usage="PROFILING"),
         ModuleInstall("snakeviz", "pip",
                       purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
