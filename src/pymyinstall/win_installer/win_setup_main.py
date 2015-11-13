@@ -476,6 +476,11 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         operations.append(("pywin32", "dll"))
         fdll = os.path.join(
             python_path, "Lib", "site-packages", "pywin32_system32")
+        if not os.path.exists(fdll):
+            fdll = os.path.join(
+                python_path, "Lib", "site-packages", "pypiwin32_system32")
+        if not os.path.exists(fdll):
+            raise FileNotFoundError(fdll)
         for dll in os.listdir(fdll):
             full = os.path.join(fdll, dll)
             if os.path.isdir(full):
