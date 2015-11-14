@@ -55,6 +55,7 @@ def pyquickhelper_set():
         "notebook",
         "notedown",
         "numpy",
+        "onedrive-sdk-python",
         "openpyxl",
         "path.py",
         "pbr",

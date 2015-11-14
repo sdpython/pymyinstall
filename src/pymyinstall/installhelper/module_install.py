@@ -754,7 +754,7 @@ class ModuleInstall:
         else:
             num = numeric_version(self.version)
             return compare_version(num, vers) > 0
-            
+
     def _check_installation(self):
         """
         some modules uninstall and install modules with another version number,
@@ -763,7 +763,8 @@ class ModuleInstall:
         try:
             import numpy
             if compare_version(numpy.__version__, "1.10") < 0:
-                raise InstallError("numpy does not have a goof version number, it should be >= 1.10 not {0}".format(numpy.__version__))
+                raise InstallError(
+                    "numpy does not have a goof version number, it should be >= 1.10 not {0}".format(numpy.__version__))
         except ImportError as e:
             # not installed
             pass
@@ -1075,8 +1076,8 @@ class ModuleInstall:
                 "unknown kind: {0} for module {1}".format(
                     kind,
                     self.name))
-                    
-        if ret is not None and ret :
+
+        if ret is not None and ret:
             self._check_installation()
 
         # at this stage, there is a bug, for some executable, the execution

@@ -260,7 +260,7 @@ def extended_set():
         ModuleInstall(
             "structures", "pip", purpose="User-friendly library for creating data structures."),
         ModuleInstall(
-            "py2exe", "wheel" if sys.version_info[:2] < (3, 5) else "pip", 
+            "py2exe", "wheel" if sys.version_info[:2] < (3, 5) else "pip",
             purpose="convert a python program into an exe program") if sys.platform.startswith("win") else None,
         ModuleInstall(
             "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
@@ -357,6 +357,13 @@ def extended_set():
                       purpose="Python wrapper module around the OpenSSL library"),
         ModuleInstall("w3lib", "pip",
                       purpose="Library of web-related functions"),
+        # ModuleInstall('python-cloudfiles-hubic', 'github', "Gu1", mname="cloudfiles",
+        #                   web="https://github.com/Gu1/python-cloudfiles-hubic",
+        #              purpose="access to Hubic"),
+        ModuleInstall('onedrive-sdk-python', 'github', "OneDrive", mname="onedrivesdk",
+                      web="https://github.com/Gu1/python-cloudfiles-hubic/",
+                      purpose="access to OneDrive"),
+
     ]
 
     return [_ for _ in mod if _ is not None]
