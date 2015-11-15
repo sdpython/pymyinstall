@@ -44,7 +44,7 @@ def ensae_teaching_cs_set():
         "ensae_teaching_cs",
         "code_beatrix",
         "actuariat_python",
-        "ensae_projects",
+        #"ensae_projects",
     ]
 
     from . import find_module_install
