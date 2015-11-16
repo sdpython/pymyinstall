@@ -50,11 +50,13 @@ def install_putty(dest_folder=".", fLOG=print, install=True, version=None):
     url = "http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html"
     page = download_page(url)
 
-    reg = re.compile("<a href=\\\"(.*latest/x86/putty.exe)\\\">putty.exe</a>")
+    reg = re.compile(
+        "<a href=\\\"(.*latest/x86/putty.exe)\\\"><code>putty.exe</code></a>")
     find = reg.findall(page)
     if len(find) != 1:
-        raise Exception("unable to find the file to download at " +
-                        url + "\nfound: " + str(len(find)) + "\n" + "\n".join(find))
+        mes = "unable to find the file to download at {0}\nfound: {1}\npattern: {2}\nOUT:\n{3}".format(
+            url, len(find), reg.pattern, "\n".join(find))
+        raise Exception(mes)
 
     # should be something like http://www.scintilla.org/wscite356.zip
     newurl = find[0]

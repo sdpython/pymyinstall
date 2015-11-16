@@ -27,7 +27,7 @@ def teachings_set():
             "actuariat_python", "pip", purpose="teachings, insurance examples", usage="TEACH"),
         ModuleInstall("ensae_teaching_cs", "pip",
                       purpose="teachings, introduction to programmaing, machine learning, map/reduce", usage="TEACH"),
-        #ModuleInstall("ensae_projects", "pip",
+        # ModuleInstall("ensae_projects", "pip",
         #              purpose="single use code", usage="TEACH"),
     ]
     #
