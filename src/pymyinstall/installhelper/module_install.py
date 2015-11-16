@@ -765,7 +765,7 @@ class ModuleInstall:
             if compare_version(numpy.__version__, "1.10") < 0:
                 raise InstallError(
                     "numpy does not have a goof version number, it should be >= 1.10 not {0}".format(numpy.__version__))
-        except ImportError as e:
+        except ImportError:
             # not installed
             pass
         return True
