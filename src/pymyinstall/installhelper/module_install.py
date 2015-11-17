@@ -4,11 +4,12 @@
 """
 from __future__ import print_function
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
-from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError
+from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException
 from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
 from .missing_license import missing_module_licenses
 from .module_install_specific_version import get_exewheel_url_link_xd
 from .internet_settings import default_user_agent
+from .install_cmd_regex import regex_wheel_version
 
 import sys
 import re
@@ -103,6 +104,7 @@ class ModuleInstall:
         self.deps = deps
         self.purpose = purpose
         self.usage = usage
+        self.existing_version = None
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -369,6 +371,7 @@ class ModuleInstall:
                     for _ in alls if _[ind].startswith(self.name + "4")]
         elif self.name == "numpy":
             white = self.name.replace("-", "_")
+            alls = [_[:end] for _ in alls if "numpy" in _[ind]]
             alls = [_[:end] for _ in alls if "unoptimized" not in _[ind] and "vanilla" not in _[ind] and
                     (_[ind].startswith(self.name + "-") or _[ind].startswith(white + "-"))]
         else:
@@ -407,6 +410,7 @@ class ModuleInstall:
             return dl1(ml, mi)
 
         url = dl(eval(link[0]), link[1])
+        self.existing_version = self.extract_version(link[-1])
         return ModuleInstall.exeLocation + url, link[-1]
 
     def unzipfiles(self, zipf, whereTo):
@@ -418,6 +422,21 @@ class ModuleInstall:
         @return                 list of unzipped files
         """
         return unzip_files(zipf, whereTo, self.fLOG)
+
+    def extract_version(self, name):
+        """
+        extract the version from a filename
+
+        @param      name        filename
+        @return                 verions (str)
+        """
+        reg = re.compile(regex_wheel_version)
+        res = reg.search(name)
+        if res:
+            return res.groups()[0]
+        else:
+            raise MissingVersionWheelException(
+                "unable to extract version number from {0}".format(name))
 
     def download(
             self, temp_folder=".", force=False, unzipFile=True, file_save=None, deps=False):
@@ -509,6 +528,7 @@ class ModuleInstall:
                 if force or not exi:
 
                     self.fLOG("downloading", whl)
+                    self.existing_version = self.extract_version(whl)
                     req = urllib_request.Request(
                         url, headers={
                             'User-agent': default_user_agent})
