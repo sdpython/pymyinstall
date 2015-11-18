@@ -297,7 +297,10 @@ class ModuleInstall:
         @param      wheel       returns the wheel file or the exe file
         @return                 url, exe name
         """
-        return get_exewheel_url_link_xd(self.name, file_save, wheel, ModuleInstall.exeLocationXd)
+        res = get_exewheel_url_link_xd(
+            self.name, file_save, wheel, ModuleInstall.exeLocationXd)
+        self.existing_version = self.extract_version(res[-1])
+        return res
 
     _page_cache_html = os.path.join(
         os.path.abspath(os.path.split(__file__)[0]), "page.html")
@@ -411,7 +414,10 @@ class ModuleInstall:
 
         url = dl(eval(link[0]), link[1])
         self.existing_version = self.extract_version(link[-1])
-        return ModuleInstall.exeLocation + url, link[-1]
+        if self.name == "numpy" and compare_version(self.existing_version, "1.10.1") < 0:
+            return self.get_exewheel_url_link_xd(file_save=file_save, wheel=wheel)
+        else:
+            return ModuleInstall.exeLocation + url, link[-1]
 
     def unzipfiles(self, zipf, whereTo):
         """

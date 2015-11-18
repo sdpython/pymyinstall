@@ -113,6 +113,16 @@ def get_exewheel_url_link_xd(name, file_save=None, wheel=False, exeLocationXd=No
         url = "{0}/{1}".format(exeLocationXd, exe)
         return url, exe
 
+    elif name == "numpy":
+        if ext == "whl":
+            exe = "numpy-1.10.1+mkl-cp%d%d-none-win_amd64.whl" % sys.version_info[
+                :2]
+        else:
+            raise UnavailableCustomBuildError("unexpected extension: " +
+                                              ext + " for module " + file_save)
+        url = "{0}/{1}".format(exeLocationXd, exe)
+        return url, exe
+
     elif name == "skdata":
         if ext == "whl":
             exe = "skdata-0.0.4-py3-none-any.whl"
