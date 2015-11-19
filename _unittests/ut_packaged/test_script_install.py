@@ -55,11 +55,13 @@ class TestScriptInstall(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         script = os.path.join(os.path.dirname(os.path.abspath(
-            __file__)), "..", "..", "src", "pymyinstall", "scripts", "pymy_install.py")
-        assert os.path.exists(script)
+            __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_install.py")
+        if not os.path.exists(script):
+            raise Exception(script)
         scriptu = os.path.join(os.path.dirname(os.path.abspath(
-            __file__)), "..", "..", "src", "pymyinstall", "scripts", "pymy_update.py")
-        assert os.path.exists(script)
+            __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_update.py")
+        if not os.path.exists(script):
+            raise Exception(script)
 
         exe = sys.executable
 
@@ -80,10 +82,10 @@ class TestScriptInstall(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         script = os.path.join(os.path.dirname(os.path.abspath(
-            __file__)), "..", "..", "src", "pymyinstall", "scripts", "pymy_install.py")
+            __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_install.py")
         assert os.path.exists(script)
         scriptu = os.path.join(os.path.dirname(os.path.abspath(
-            __file__)), "..", "..", "src", "pymyinstall", "scripts", "pymy_update.py")
+            __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_update.py")
         assert os.path.exists(script)
 
         exe = sys.executable

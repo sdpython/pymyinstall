@@ -106,7 +106,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
         look = "Successfully installed " + name
         if look not in err:
             raise WinInstallPackageException(
-                "unable to install {0}, due to:\nCMD\n{3}\nOUT:\n{1}\nERR:\n{2}".format(package, out, err, cmd))
+                "unable to install {0}, due to:\nCMD\n{3}\nOUT:\n{1}\nERR:\n{2}\nNOT FOUND\n{4}".format(package, out, err, cmd, look))
 
     if "No distributions matching the version" in out:
         raise WinInstallPackageException(
