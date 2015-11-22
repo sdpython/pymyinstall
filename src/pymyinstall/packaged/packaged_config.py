@@ -17,6 +17,7 @@ from .packaged_config_4_ml import ml_set, ensae_set
 from .packaged_config_A_teachings import teachings_set
 from .packaged_config_B_iot import iot_set
 from .packaged_config_C_webscraping import scraping_set
+from .packaged_config_all_but_teachings import all_but_teachings_set
 
 
 def ensae_fullset():
@@ -61,6 +62,7 @@ _modules_set = [minimal_set,
                 pyensae_set,
                 anaconda_set,
                 ensae_teaching_cs_set,
+                all_but_teachings_set,
                 ]
 
 
