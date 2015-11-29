@@ -58,7 +58,7 @@ class TestDownloadNumpy (unittest.TestCase):
             if os.path.isfile(os.path.join(temp, _)):
                 os.remove(os.path.join(temp, _))
 
-        if sys.platform.startswith("win"):
+        if sys.platform.startswith("win") and sys.version_info[0] >= 3:
             m = ModuleInstall(
                 "numpy",
                 "wheel",
