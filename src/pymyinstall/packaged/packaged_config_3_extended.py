@@ -363,7 +363,8 @@ def extended_set():
         ModuleInstall('onedrive-sdk-python', 'github', "OneDrive", mname="onedrivesdk",
                       web="https://github.com/Gu1/python-cloudfiles-hubic/",
                       purpose="access to OneDrive"),
-
+        ModuleInstall('rlpy', 'pip', usage="DATA/ML",
+                      purpose="RLPy is a framework to conduct sequential decision making experiments. The current focus of this project lies on value-function-based reinforcement learning, specifically using linear function approximators."),
     ]
 
     return [_ for _ in mod if _ is not None]

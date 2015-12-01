@@ -36,6 +36,7 @@ def ensae_teaching_cs_set():
         "smopy",
         "toolz",
         "ujson",
+        "rlpy",
         #
         "pyquickhelper",
         "pyrsslocal"
