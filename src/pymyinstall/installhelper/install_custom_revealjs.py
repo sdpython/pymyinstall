@@ -50,11 +50,12 @@ def download_revealjs(
     filename = alls[0].split("/")[-1]
     filel = location.replace("releases", "") + "/archive/{0}".format(filename)
     outfile = os.path.join(temp_folder, "reveal.js." + filename)
-    fLOG("download ", filel, "to", outfile)
+    version = ".".join(filel.split("/")[-1].split(".")[:-1])
+    fLOG("download ", filel, "to", outfile, "version", version)
     local = download_file(filel, outfile)
     res = unzip_files(local, whereTo=unzip_to, fLOG=fLOG)
 
-    master = os.path.join(unzip_to, "reveal.js-master")
+    master = os.path.join(unzip_to, "reveal.js-%s" % version)
     if not os.path.exists(master):
         raise FileNotFoundError("unable to find: " + master)
     new_master = os.path.join(unzip_to, "reveal.js")
