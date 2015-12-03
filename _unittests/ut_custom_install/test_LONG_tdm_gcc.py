@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper import install_tdm_gcc
+from src.pymyinstall.installcustom import install_tdm_gcc
 from pyquickhelper import fLOG, get_temp_folder
 
 

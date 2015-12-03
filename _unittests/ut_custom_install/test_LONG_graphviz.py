@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper import install_graphviz
+from src.pymyinstall.installcustom import install_graphviz
 from pyquickhelper import fLOG
 
 

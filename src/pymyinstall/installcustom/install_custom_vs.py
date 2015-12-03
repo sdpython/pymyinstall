@@ -7,7 +7,7 @@ import sys
 import os
 
 from .install_custom import download_file
-from .install_cmd_helper import run_cmd
+from ..installhelper.install_cmd_helper import run_cmd
 
 
 def install_vs(dest_folder=".", fLOG=print, install=True, version=None):

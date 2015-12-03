@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper import install_putty
+from src.pymyinstall.installcustom import install_putty
 from pyquickhelper import fLOG
 
 

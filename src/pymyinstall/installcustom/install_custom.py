@@ -3,8 +3,8 @@
 @brief Various functions to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
 from __future__ import print_function
-from .install_memoize import install_memoize2
-from .internet_settings import default_user_agent
+from ..installhelper.install_memoize import install_memoize2
+from ..installhelper.internet_settings import default_user_agent
 
 import os
 import sys

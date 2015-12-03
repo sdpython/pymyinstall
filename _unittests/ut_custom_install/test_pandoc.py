@@ -40,7 +40,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper import install_pandoc
+from src.pymyinstall.installcustom import install_pandoc
 from pyquickhelper import fLOG
 
 

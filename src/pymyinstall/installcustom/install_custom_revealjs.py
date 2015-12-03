@@ -8,7 +8,7 @@ import os
 import sys
 
 from .install_custom import download_page, download_file
-from .install_cmd_helper import unzip_files
+from ..installhelper.install_cmd_helper import unzip_files
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception

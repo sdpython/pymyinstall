@@ -10,19 +10,19 @@ import sys
 import fnmatch
 import subprocess
 
-from ..installhelper.install_custom_pandoc import install_pandoc
-from ..installhelper.install_custom_R import install_R
-from ..installhelper.install_custom_julia import install_julia
-from ..installhelper.install_custom_scite import install_scite
-from ..installhelper.install_custom_putty import install_putty
-from ..installhelper.install_custom_sqlitespy import install_sqlitespy
-from ..installhelper.install_custom_python import install_python
-from ..installhelper.install_custom_mingw import install_mingw
-from ..installhelper.install_custom_tdm_gcc import install_tdm_gcc
-from ..installhelper.install_custom_7z import install_7z
-from ..installhelper.install_custom_graphviz import install_graphviz
-from ..installhelper.install_custom_vs import install_vs
-from ..installhelper.install_custom import download_page
+from ..installcustom.install_custom_pandoc import install_pandoc
+from ..installcustom.install_custom_R import install_R
+from ..installcustom.install_custom_julia import install_julia
+from ..installcustom.install_custom_scite import install_scite
+from ..installcustom.install_custom_putty import install_putty
+from ..installcustom.install_custom_sqlitespy import install_sqlitespy
+from ..installcustom.install_custom_python import install_python
+from ..installcustom.install_custom_mingw import install_mingw
+from ..installcustom.install_custom_tdm_gcc import install_tdm_gcc
+from ..installcustom.install_custom_7z import install_7z
+from ..installcustom.install_custom_graphviz import install_graphviz
+from ..installcustom.install_custom_vs import install_vs
+from ..installcustom.install_custom import download_page
 from ..installhelper.link_shortcuts import add_shortcut
 from ..packaged import minimal_set
 

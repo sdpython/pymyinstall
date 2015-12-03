@@ -7,7 +7,7 @@ import sys
 import re
 import os
 
-from .install_cmd_helper import run_cmd
+from ..installhelper.install_cmd_helper import run_cmd
 from .install_custom import download_page, download_file
 
 

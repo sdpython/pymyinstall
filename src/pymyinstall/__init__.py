@@ -44,9 +44,9 @@ def check(log=False):
 
 from .installhelper.install_cmd_helper import run_cmd, unzip_files
 from .installhelper.module_install import ModuleInstall
-from .installhelper.install_custom import download_from_sourceforge, download_file, download_page
+from .installcustom.install_custom import download_from_sourceforge, download_file, download_page
 from .installhelper.install_manual import get_install_list
 from .installhelper import get_module_version, get_pypi_version
-from .installhelper.install_custom_revealjs import download_revealjs
+from .installcustom.install_custom_revealjs import download_revealjs
 from .installhelper.requirements import build_requirements
 from .win_installer.win_setup_main import win_python_setup

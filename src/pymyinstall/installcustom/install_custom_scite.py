@@ -7,9 +7,9 @@ import sys
 import re
 import os
 
-from .install_cmd_helper import unzip_files
+from ..installhelper.install_cmd_helper import unzip_files
 from .install_custom import download_page, download_from_sourceforge, download_file
-from .link_shortcuts import add_shortcut_to_desktop, suffix
+from ..installhelper.link_shortcuts import add_shortcut_to_desktop, suffix
 
 if sys.version_info[0] == 2:
     from codecs import open
