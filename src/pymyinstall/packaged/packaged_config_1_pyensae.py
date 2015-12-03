@@ -16,13 +16,14 @@ def pyensae_set():
         "ansiconv",  # ssh
         "antlr4-python3-runtime",
         "azure",  # azure
-        "pandas_datareader",
         "colormap",
         "dbfread",
         "easydev",
         "ecdsa",  # paramiko
         "folium",  # maps
         "linkedin",
+        "networkx",
+        "pandas_datareader",
         "paramiko",  # ssh
         "pycrypto",  # paramiko
         "pyquickhelper",
