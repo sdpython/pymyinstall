@@ -16,6 +16,7 @@ def pyensae_set():
         "ansiconv",  # ssh
         "antlr4-python3-runtime",
         "azure",  # azure
+        "pandas_datareader",
         "colormap",
         "dbfread",
         "easydev",
