@@ -4,6 +4,7 @@
 """
 from __future__ import print_function
 
+from .install_custom_exceptions import ManualDownloadException
 from .install_custom import download_page
 from .install_custom_7z import install_7z
 from .install_custom_julia import install_julia
@@ -16,3 +17,5 @@ from .install_custom_python import install_python
 from .install_custom_R import install_R
 from .install_custom_scite import install_scite, modify_scite_properties
 from .install_custom_sqlitespy import install_sqlitespy
+from .install_custom_javajdk import install_javajdk
+from .install_custom_sbt import install_scala_sbt
