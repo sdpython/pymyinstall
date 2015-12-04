@@ -114,6 +114,8 @@ def small_set():
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
+            "requests_file", "pip", purpose="File transport adapter for Requests"),
+        ModuleInstall(
             "pandas-datareader", "pip", mname="pandas_datareader",
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
         ModuleInstall(

@@ -23,6 +23,7 @@ def pyensae_set():
         "folium",  # maps
         "linkedin",
         "networkx",
+        "requests_file",
         "pandas_datareader",
         "paramiko",  # ssh
         "pycrypto",  # paramiko
