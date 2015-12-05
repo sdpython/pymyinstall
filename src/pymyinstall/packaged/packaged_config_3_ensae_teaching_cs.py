@@ -37,6 +37,7 @@ def ensae_teaching_cs_set():
         "toolz",
         "ujson",
         "rlpy",
+        "wordcloud",
         #
         "pyquickhelper",
         "pyrsslocal"

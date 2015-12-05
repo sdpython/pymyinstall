@@ -365,6 +365,8 @@ def extended_set():
                       purpose="access to OneDrive"),
         ModuleInstall('rlpy', 'pip', usage="DATA/ML",
                       purpose="RLPy is a framework to conduct sequential decision making experiments. The current focus of this project lies on value-function-based reinforcement learning, specifically using linear function approximators."),
+        ModuleInstall('wordcloud', 'wheel', usage="VIZ",
+                      purpose="A little word cloud generator in Python."),
     ]
 
     return [_ for _ in mod if _ is not None]
