@@ -342,11 +342,6 @@ def get_pip_program(exe=None):
             - numpy [required: >=1.7.0, installed: 1.9.2]
         autopep8==1.1.1
           - pep8 [required: >=1.5.7, installed: 1.5.7]
-        dateutils==0.6.6
-          - argparse
-          - python-dateutil [installed: 2.4.2]
-            - six [required: >=1.5, installed: 1.9.0]
-          - pytz [installed: 2015.4]
         sphinxjp.themes.basicstrap==0.4.2
           - setuptools
           - Sphinx [installed: 1.3.1]
