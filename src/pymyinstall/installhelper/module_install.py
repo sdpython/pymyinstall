@@ -48,8 +48,8 @@ class ModuleInstall:
     """
 
     allowedKind = ["pip", "github", "exe", "exe_xd", "wheel", "wheel_xd"]
-    expKPage = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
-    expKPageWhl = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)]. title(.+)?.>(.+?-cp33-none-win32.whl)</a>"
+    expKPage = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
+    expKPageWhl = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?-cp33-none-win32.whl)</a>"
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
@@ -321,7 +321,7 @@ class ModuleInstall:
         if wheel:
             plat = "32" if plat == "win32" else "_amd64"
             pattern = ModuleInstall.expKPageWhl.replace("-cp33-none-win32.whl",
-                                                        "-((cp{1}{2})|(py3)|(py2[.]py3)|(py33[.]py34))-none-((win{0})|(any)).whl".format(plat, sys.version_info.major, sys.version_info.minor))
+                                                        "-((cp{1}{2})|(py3)|(py2[.]py3)|(py{1}{2}))-none-((win{0})|(any)).whl".format(plat, sys.version_info.major, sys.version_info.minor))
             ind = 3
         else:
             pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
@@ -356,7 +356,7 @@ class ModuleInstall:
             keep = []
             for line in page.split("\n"):
                 lline = line.lower()
-                if self.name in lline or (self.name and self.mname in lline):
+                if self.name in lline or (self.mname and self.mname in lline):
                     keep.append(line)
             raise Exception(
                 "module " +

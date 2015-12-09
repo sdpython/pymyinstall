@@ -64,6 +64,24 @@ class TestRegex (unittest.TestCase):
         else:
             assert False
 
+    def test_2(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        pattern = '''onclick=.javascript:dl[(]([,\[\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>''' + \
+                  '''(.+?-((cp34)|(py3)|(py2[.]py3)|(py34))-none-((win_amd64)|(any)).whl)</a>'''
+        raw = """<li><a href='javascript:;' onclick='javascript:dl([45,111,46,119,109,108,112,104,105,50,51,120,110,118,48,47,52,99,53,102,121,101],""" + \
+              """ "A7CD=&lt;@&lt;?5;450:2B2&#62;0A6:@0&lt;1&lt;E038&lt;:92375")' """ + \
+              """title='[1.4&#160;MB] [Nov 30, 2015]'>lxml-3.5.0-cp34-none-win_amd64.whl</a></li>"""
+        reg = re.compile(pattern)
+        r = reg.search(raw)
+        if r:
+            fLOG(r.groups())
+        else:
+            assert False
+
 
 if __name__ == "__main__":
     unittest.main()
