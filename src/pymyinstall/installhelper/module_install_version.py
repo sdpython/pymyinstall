@@ -45,6 +45,7 @@ def get_page_wheel(page):
     text = text.decode("utf8")
     text = text.replace("&quot;", "'")
     text = text.replace("&#8209;", "-")
+    text = text.replace("&#46;", ".")
     return text
 
 
