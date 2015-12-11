@@ -321,7 +321,7 @@ class ModuleInstall:
         if wheel:
             plat = "32" if plat == "win32" else "_amd64"
             pattern = ModuleInstall.expKPageWhl.replace("-cp33-none-win32.whl",
-                                                        "-((cp{1}{2})|(py3)|(py2[.]py3)|(py{1}{2}))-none-((win{0})|(any)).whl".format(plat, sys.version_info.major, sys.version_info.minor))
+                                                        "-((cp{1}{2})|(py3)|(py2[.]py3)|(py{1}{2}))(-none)?-((win{0})|(any))(.whl)?".format(plat, sys.version_info.major, sys.version_info.minor))
             ind = 3
         else:
             pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
@@ -407,7 +407,44 @@ class ModuleInstall:
             return ot
 
         def dl(ml, mi):
+            """
+            compressed::
+
+                if (top.location!=location) top.location.href=location.href;function dc(ml,mi){var ot="";for(var j=0;j<mi.length;j++)ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);document.write(ot);}function dl1(ml,mi){var ot="";for(var j=0;j<mi.length;j++)ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);location.href=ot;}function dl(ml,mi){mi=mi.replace('&lt;','<');mi=mi.replace('&#62;','>');mi=mi.replace('&#38;','&');setTimeout(function(){dl1(ml,mi)},1500);}
+
+            source::
+
+                <script type="text/javascript">
+                // <![CDATA[
+                if (top.location!=location)
+                    top.location.href=location.href;
+                function dc(ml,mi)
+                {
+                    var ot="";
+                    for(var j=0;j<mi.length;j++)
+                        ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);
+                    document.write(ot);
+                }
+                function dl1(ml,mi)
+                {
+                    var ot="";
+                    for(var j=0;j<mi.length;j++)
+                        ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);
+                        location.href=ot;
+                }
+                function dl(ml,mi)
+                {
+                    mi=mi.replace('&lt;','<');
+                    mi=mi.replace('&#62;','>');
+                    mi=mi.replace('&#38;','&');
+                    setTimeout(function(){dl1(ml,mi)},1500);
+                }
+                // ]]>
+                </script>
+            """
             mi = mi.replace('&lt;', '<')
+            mi = mi.replace('&#62;', '>')
+            mi = mi.replace('&#38;', '&')
             mi = mi.replace('&gt;', '>')
             mi = mi.replace('&amp;', '&')
             return dl1(ml, mi)
@@ -417,7 +454,10 @@ class ModuleInstall:
         if self.name == "numpy" and compare_version(self.existing_version, "1.10.1") < 0:
             return self.get_exewheel_url_link_xd(file_save=file_save, wheel=wheel)
         else:
-            return ModuleInstall.exeLocation + url, link[-1]
+            url, whl = ModuleInstall.exeLocation + url, link[-1]
+            if not whl.endswith(".whl"):
+                whl += ".whl"
+            return url, whl
 
     def unzipfiles(self, zipf, whereTo):
         """
@@ -534,6 +574,7 @@ class ModuleInstall:
                 if force or not exi:
 
                     self.fLOG("downloading", whl)
+                    self.fLOG("url", url)
                     self.existing_version = self.extract_version(whl)
                     req = urllib_request.Request(
                         url, headers={
