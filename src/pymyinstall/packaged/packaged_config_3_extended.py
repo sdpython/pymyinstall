@@ -20,7 +20,7 @@ def extended_set():
             "blist", "wheel",
             purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
         ModuleInstall(
-            "blz", "wheel",
+            "blz", "pip",
             purpose="blz: a compressed data container"),
         ModuleInstall(
             "pamela", "pip", purpose="An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)") if not sys.platform.startswith("win") else None,

@@ -44,7 +44,7 @@ from pyquickhelper import fLOG, get_temp_folder
 
 class TestDownloadBlaze (unittest.TestCase):
 
-    def test_install_tables(self):
+    def test_install_blaze(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -52,7 +52,7 @@ class TestDownloadBlaze (unittest.TestCase):
         temp = get_temp_folder(__file__, "temp_download_blaze")
 
         if sys.platform.startswith("win"):
-            m = ModuleInstall("blaze", "wheel", fLOG=fLOG)
+            m = ModuleInstall("blaze", "pip", fLOG=fLOG)
             whl = m.download(temp_folder=temp)
             assert os.path.exists(whl)
 
