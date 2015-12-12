@@ -24,6 +24,9 @@ README / Changes
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT
          
+.. image:: https://landscape.io/github/sdpython/pymyinstall/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/sdpython/pymyinstall/master
+   :alt: Code Health         
    
 **Links:**
     * `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_
