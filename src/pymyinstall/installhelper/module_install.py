@@ -5,7 +5,8 @@
 from __future__ import print_function
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException
-from .module_install_version import get_page_wheel, get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
+from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
+from .module_install_page_wheel import get_page_wheel
 from .missing_license import missing_module_licenses
 from .module_install_specific_version import get_exewheel_url_link_xd
 from .internet_settings import default_user_agent
@@ -395,61 +396,9 @@ class ModuleInstall:
 
         link = choose_most_recent(alls)
 
-        # def dc(ml,mi):
-        #        ot=""
-        #        for j in range(0,len(mi)) :
-        #            ot+= chr(ml[ord(mi[j])-48])
-        #        return ot
-        def dl1(ml, mi):
-            ot = ""
-            for j in range(0, len(mi)):
-                ot += chr(ml[ord(mi[j]) - 48])
-            return ot
+        from .module_install_page_wheel import _cg_dl1 as dl1, _cg_dl as dl
 
-        def dl(ml, mi):
-            """
-            compressed::
-
-                if (top.location!=location) top.location.href=location.href;function dc(ml,mi){var ot="";for(var j=0;j<mi.length;j++)ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);document.write(ot);}function dl1(ml,mi){var ot="";for(var j=0;j<mi.length;j++)ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);location.href=ot;}function dl(ml,mi){mi=mi.replace('&lt;','<');mi=mi.replace('&#62;','>');mi=mi.replace('&#38;','&');setTimeout(function(){dl1(ml,mi)},1500);}
-
-            source::
-
-                <script type="text/javascript">
-                // <![CDATA[
-                if (top.location!=location)
-                    top.location.href=location.href;
-                function dc(ml,mi)
-                {
-                    var ot="";
-                    for(var j=0;j<mi.length;j++)
-                        ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);
-                    document.write(ot);
-                }
-                function dl1(ml,mi)
-                {
-                    var ot="";
-                    for(var j=0;j<mi.length;j++)
-                        ot+=String.fromCharCode(ml[mi.charCodeAt(j)-48]);
-                        location.href=ot;
-                }
-                function dl(ml,mi)
-                {
-                    mi=mi.replace('&lt;','<');
-                    mi=mi.replace('&#62;','>');
-                    mi=mi.replace('&#38;','&');
-                    setTimeout(function(){dl1(ml,mi)},1500);
-                }
-                // ]]>
-                </script>
-            """
-            mi = mi.replace('&lt;', '<')
-            mi = mi.replace('&#62;', '>')
-            mi = mi.replace('&#38;', '&')
-            mi = mi.replace('&gt;', '>')
-            mi = mi.replace('&amp;', '&')
-            return dl1(ml, mi)
-
-        url = dl(eval(link[0]), link[1])
+        url = dl(eval(link[0]), link[1], fLOG=self.fLOG)
         self.existing_version = self.extract_version(link[-1])
         if self.name == "numpy" and compare_version(self.existing_version, "1.10.1") < 0:
             return self.get_exewheel_url_link_xd(file_save=file_save, wheel=wheel)
@@ -574,7 +523,7 @@ class ModuleInstall:
                 if force or not exi:
 
                     self.fLOG("downloading", whl)
-                    self.fLOG("url", url)
+                    # self.fLOG("url", url)
                     self.existing_version = self.extract_version(whl)
                     req = urllib_request.Request(
                         url, headers={

@@ -56,6 +56,7 @@ class TestDownloadPy2exe(unittest.TestCase):
             m.fLOG = fLOG
             whl = m.download(temp_folder=temp)
             assert os.path.exists(whl)
+            assert os.stat(whl).st_size > 1000
 
 
 if __name__ == "__main__":

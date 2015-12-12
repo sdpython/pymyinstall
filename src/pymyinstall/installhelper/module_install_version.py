@@ -27,29 +27,6 @@ annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",
                     "NLopt"}
 
 
-@install_memoize
-def get_page_wheel(page):
-    """
-    get the page
-
-    @param      page        location
-    @return                 page content
-    """
-    req = urllib_request.Request(
-        page,
-        headers={
-            'User-agent': 'Mozilla/5.0'})
-    u = urllib_request.urlopen(req)
-    text = u.read()
-    u.close()
-    text = text.decode("utf8")
-    text = text.replace("&quot;", "'")
-    text = text.replace("&#8209;", "-")
-    text = text.replace("&#46;", ".")
-    text = text.replace(" &middot; ", "-")
-    return text
-
-
 def call_get_installed_distributions(local_only=True,
                                      skip=None,
                                      include_editables=True,
