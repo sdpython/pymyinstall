@@ -8,6 +8,7 @@ import sys
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
+    from codecs import open
 else:
     import urllib.request as urllib_request
 
