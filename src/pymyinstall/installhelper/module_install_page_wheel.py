@@ -20,14 +20,57 @@ def get_page_wheel(page):
     @param      page        location
     @return                 page content
     """
-    req = urllib_request.Request(
-        page,
-        headers={
-            'User-agent': 'Mozilla/5.0'})
-    u = urllib_request.urlopen(req)
-    text = u.read()
-    u.close()
+    try:
+        import selenium
+        sele = True
+    except ImportError:
+        sele = False
+
+    if sele:
+        from selenium import webdriver
+        browser = webdriver.Firefox()
+        browser.get(page)
+        text = browser.page_source
+        browser.close()
+    else:
+        req = urllib_request.Request(
+            page,
+            headers={
+                'User-agent': 'Mozilla/5.0'})
+        u = urllib_request.urlopen(req)
+        text = u.read()
+        u.close()
+
     text = text.decode("utf8")
+    text = text.replace("&quot;", "'")
+    text = text.replace("&#8209;", "-")
+    text = text.replace("&#46;", ".")
+    text = text.replace(" &middot; ", "-")
+    text = text.replace("&ndash;", "-")
+    return text
+
+
+def save_page_wheel(filename, content):
+    """
+    cache a HTML page
+
+    @param      filename        filename
+    @param      content         content
+    @return                     filename
+    """
+    with open(filename, "w", encoding="utf8") as f:
+        f.write(content)
+
+
+def read_page_wheel(filename):
+    """
+    read a cached HTML page
+
+    @param      filename        filename
+    @return                     filename
+    """
+    with open(filename, "r", encoding="utf8") as f:
+        text = f.read()
     text = text.replace("&quot;", "'")
     text = text.replace("&#8209;", "-")
     text = text.replace("&#46;", ".")
@@ -84,5 +127,6 @@ def _cg_dl(ml, mi, fLOG=None):
         fLOG("decode", mi)
     mi = mi.replace('&lt;', '<')
     mi = mi.replace('&#62;', '>')
+    mi = mi.replace('&gt;', '>')
     mi = mi.replace('&#38;', '&')
     return _cg_dl1(ml, mi)

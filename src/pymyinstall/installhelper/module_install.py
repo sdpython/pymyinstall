@@ -6,7 +6,7 @@ from __future__ import print_function
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException
 from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
-from .module_install_page_wheel import get_page_wheel
+from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel
 from .missing_license import missing_module_licenses
 from .module_install_specific_version import get_exewheel_url_link_xd
 from .internet_settings import default_user_agent
@@ -342,13 +342,11 @@ class ModuleInstall:
                     exi = False
 
             if exi:
-                with open(page, "r", encoding="utf8") as f:
-                    text = f.read()
+                text = read_page_wheel(page)
                 self.cached_page = text
             else:
                 text = get_page_wheel(ModuleInstall.exeLocation)
-                with open(page, "w", encoding="utf8") as f:
-                    f.write(text)
+                save_page_wheel(page, rext)
                 self.cached_page = text
 
         page = self.cached_page

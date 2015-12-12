@@ -66,5 +66,10 @@ class TestPrivateFunctions(unittest.TestCase):
                 ";52B7B1E642F4CHDGD@C3&lt;H7C&#62;9&#62;AC15&#62;:=F?07D184", fLOG=fLOG)
         fLOG(dd)
 
+        dd = dl([52, 51, 97, 111, 118, 110, 99, 47, 95, 100, 109, 108, 104, 112, 119, 54, 46, 101, 120, 105, 53, 45, 106, 48, 56],
+                "4CBH0H&gt;F7;B:;E1@D@GE6=10E535AE&gt;C582:9?0@&gt;&lt;;", fLOG=fLOG)
+        fLOG(dd)
+
+
 if __name__ == "__main__":
     unittest.main()
