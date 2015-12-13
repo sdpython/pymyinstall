@@ -1,0 +1,48 @@
+
+
+.. blogpost::
+    :title: Install a package on Anaconda
+    :keywords: install
+    :date: 2015-12-13
+    :categories: install, modules, Anaconda
+    
+    Some packages are specifically compiled for 
+    `Anaconda <https://www.continuum.io/downloads>`_ distribution.
+    That's why it is better to install them with the command::
+    
+        conda install numpy
+        
+    When it does not not we can check if this package
+    is available somewhere else::
+    
+        anaconda search -t conda psycopg2
+        
+    Which gives something like::
+    
+        Name                      |  Version | Package Types   | Platforms
+        ------------------------- |   ------ | --------------- | ---------------
+        auto/psycopg2database     |    0.2.0 | conda           | linux-64
+                                             : http://jimmyg.org/work/code/psycopg2database/index.html
+        bencpeters/psycopg2       |    2.5.3 | conda           | linux-64, osx-64
+                                             : Python-PostgreSQL Database Adapter
+        chuongdo/psycopg2         |    2.5.3 | conda           | linux-64, osx-64
+                                             : Python-PostgreSQL Database Adapter
+        dan_blanchard/psycopg2    |    2.5.2 | conda           | linux-64
+                                             : http://initd.org/psycopg/
+        davidbgonzalez/psycopg2   |    2.5.4 | conda           | linux-64, osx-64
+                                             : None
+        deric/psycopg2            |    2.5.1 | conda           | linux-64
+                                             : None
+        jonrowland/psycopg2       |    2.5.2 | conda           | linux-64, win-64
+                                             : None
+        kabaka0/psycopg2          |    2.5.4 | conda           | linux-64
+                                             : Python-PostgreSQL Database Adapter
+        kevincal/psycopg2         |    2.5.1 | conda           | linux-64
+        trent/psycopg2            |    2.5.1 | conda           | osx-64
+                                             : None    
+                                             
+    The installation will work if a version is available for the desired operating system.
+    I was looking for Windows and it seems that it is not available. 
+    Otherwise, I could write::
+    
+        conda -c <location> <modulename>

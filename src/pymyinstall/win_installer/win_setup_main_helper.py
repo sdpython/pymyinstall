@@ -74,7 +74,7 @@ def win_download(folder=None,
                  module_list=None,
                  verbose=False,
                  fLOG=print,
-                 download_only=False,
+                 download_only=True,
                  selection=None):
     """
     The function downloads everything needed to prepare a setup.
@@ -82,10 +82,22 @@ def win_download(folder=None,
     @param      folder          where to prepare the python version (the user must replace None)
     @param      module_list     list of module to install (see @see fn minimal_set = default options)
     @param      fLOG            logging function
-    @param      download_only   only downloads
+    @param      download_only   only downloads (unused, True by default)
     @param      verbose         print more information
     @param      selection       selection of tools to install
     @return                     list of completed operations
+
+    List of available tools:
+        * scite
+        * putty
+        * mingw
+        * SQLiteSpy
+        * python
+        * R
+        * vs
+        * julia
+        * 7z
+        * graphviz
     """
     if selection is None:
         raise ValueError("selection must be specified")
