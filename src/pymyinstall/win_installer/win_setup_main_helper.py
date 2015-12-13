@@ -23,7 +23,11 @@ from ..installcustom.install_custom_7z import install_7z
 from ..installcustom.install_custom_graphviz import install_graphviz
 from ..installcustom.install_custom_vs import install_vs
 from ..installcustom.install_custom import download_page
+from ..installcustom.install_custom_javajdk import install_javajdk
+from ..installcustom.install_custom_jenkins import install_jenkins
+from ..installcustom.install_custom_git import install_git
 from ..installhelper.link_shortcuts import add_shortcut
+from ..installhelper import run_cmd
 from ..packaged import minimal_set
 
 from .win_packages import _is_package_in_list
@@ -84,7 +88,7 @@ def win_download(folder=None,
     @param      fLOG            logging function
     @param      download_only   only downloads (unused, True by default)
     @param      verbose         print more information
-    @param      selection       selection of tools to install
+    @param      selection       selection of tools to install (dictionary { toolname: version or None})
     @return                     list of completed operations
 
     List of available tools:
@@ -98,6 +102,10 @@ def win_download(folder=None,
         * julia
         * 7z
         * graphviz
+        * tdm
+        * jdk (java)
+        * jenkins
+        * git
     """
     if selection is None:
         raise ValueError("selection must be specified")
@@ -138,6 +146,13 @@ def win_download(folder=None,
         operations.append(("download", r))
         fLOG("done")
 
+    if not is_here("git") and "git" in selection:
+        fLOG("--- download", "git")
+        r = install_git(folder, fLOG=fLOG,
+                            install=False, version=selection.get("git", None))
+        operations.append(("download", r))
+        fLOG("done")
+
     if not is_here("SQLiteSpy") and "sqlitespy" in selection:
         fLOG("--- download", "sqllitespy")
         r = install_sqlitespy(temp_folder=folder, fLOG=fLOG,
@@ -145,7 +160,7 @@ def win_download(folder=None,
         operations.append(("download", r))
         fLOG("done")
 
-    if not is_here("python"):
+    if not is_here("python") and "python" in selection:
         fLOG("--- download", "python")
         r = install_python(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("python", None))
@@ -197,6 +212,21 @@ def win_download(folder=None,
         operations.append(("download", r))
         fLOG("done")
 
+    if not is_here("jdk", no_wheel=True) and "jdk" in selection:
+        if verbose:
+            fLOG("download", "java jdk")
+        r = install_javajdk(
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("java jdk", None))
+        operations.append(("download", r))
+        fLOG("done")
+
+    if not is_here("jenkins", no_wheel=True) and "jenkins" in selection:
+        if verbose:
+            fLOG("download", "jenkins")
+        r = install_jenkins(folder, fLOG=fLOG, install=False, version=selection.get("jenkins", None))
+        operations.append(("download", r))
+        fLOG("done")
+
     if module_list is None:
         module_list = minimal_set()
 
@@ -220,7 +250,7 @@ def win_install(folders,
                 verbose=False,
                 fLOG=print,
                 names=[
-                    "Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "VS", "Putty", "Graphviz"],
+                    "Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "Putty", "Graphviz"],
                 selection=None):
     """
     Install setups
@@ -235,6 +265,9 @@ def win_install(folders,
 
     The function installs every setup which starts by one of the string in *names*
     and whose extension is .exe, .msi or .zip.
+    
+    To install Python on Windows, 
+    see `Using Python on Windows <https://docs.python.org/3.5/using/windows.html>`_.
     """
     operations = []
     dfunc = {".zip": extract_archive, ".exe": extract_exe,
@@ -259,6 +292,8 @@ def win_install(folders,
             name = "gcc"
         elif name.lower() == "tdm":
             name = "gcc"
+        elif name.lower() == "jdk":
+            name = "java"
         elif name.lower() == "graphviz":
             name = "dot"
         exp = name + ".exe"
@@ -298,15 +333,23 @@ def win_install(folders,
             if 'tdm' in cand and 'gcc' in cand:
                 raise WinInstallException(
                     "TM must be manually installed from the setup\n{0}\nin\n{1}".format(full, loc))
-            ext = os.path.splitext(cand)[-1]
-            filename = os.path.split(cand)[-1]
-            func = dfunc.get(filename, dfunc[ext])
-
-            if ext == ".exe":
-                func(
-                    full, loc, verbose=verbose, fLOG=fLOG, szip=installed["7z"])
+            elif 'python' in cand:
+                options = [os.path.join(download_folder, cand), "/quiet", "InstallAllUsers=1", 
+                                "CompileAll=1", "TargetDir={0}".format(loc),
+                                "Include_debug=1", "Include_symbols=1", "SimpleInstall=1"]
+                cmd = " ".join(options)
+                fLOG("run ", cmd)
+                run_cmd(cmd, wait=True)
             else:
-                func(full, loc, verbose=verbose, fLOG=fLOG)
+                ext = os.path.splitext(cand)[-1]
+                filename = os.path.split(cand)[-1]
+                func = dfunc.get(filename, dfunc[ext])
+
+                if ext == ".exe":
+                    func(
+                        full, loc, verbose=verbose, fLOG=fLOG, szip=installed["7z"])
+                else:
+                    func(full, loc, verbose=verbose, fLOG=fLOG)
 
             operations.append(("install", cand))
             fLOG("done")

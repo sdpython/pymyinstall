@@ -17,3 +17,5 @@ from .install_custom_scite import install_scite, modify_scite_properties
 from .install_custom_sqlitespy import install_sqlitespy
 from .install_custom_javajdk import install_javajdk
 from .install_custom_sbt import install_scala_sbt
+from .install_custom_jenkins import install_jenkins
+from .install_custom_git import install_git

@@ -34,22 +34,21 @@ def install_python(
     if sys.platform.startswith("win"):
         o, b = python_version()
         if "32" in b:
-            reg = re.compile("href=\\\"(.*?[.]msi)\\\"")
+            reg = re.compile("href=\\\"(.*?[.]((msi)|(exe)))\\\"")
             alls = reg.findall(page)
             alls = [_ for _ in alls if "amd64" not in _]
         else:
-            reg = re.compile("href=\\\"(.*?amd64[.]msi)\\\"")
+            reg = re.compile("href=\\\"(.*?amd64[.]((msi)|(exe)))\\\"")
             alls = reg.findall(page)
         if len(alls) == 0:
             raise Exception(
-                "unable to find a link on a .exe file on page: " +
+                "unable to find a link on a .exe file on page: " + link + "\n" +
                 page)
 
-        url = alls[0]
+        url = alls[0][0]
         full = url.split("/")[-1]
         outfile = os.path.join(temp_folder, full)
-        fLOG("download ", url)
-        local = download_file(url, outfile)
+        local = download_file(url, outfile, fLOG=fLOG)
         if install:
             run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)
         return local

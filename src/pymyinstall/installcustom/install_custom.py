@@ -41,24 +41,29 @@ def download_page(url, is406=False):
         u.close()
     except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
+    except ConnectionResetError as e:
+        raise Exception("unable to get archive from: " + url) from e
 
     typstr = str  # unicode#
     return typstr(text, encoding="utf8")
 
 
-def download_file(url, outfile):
+def download_file(url, outfile, fLOG=None):
     """
     download a file from a url, the function does not download the file
     again if outfile already exists
 
     @param      url         url
     @param      outfile     outfile
+    @param      fLOG      logging function
     @return                 outfile
     """
     if os.path.exists(outfile):
         return outfile
 
     try:
+        if fLOG: 
+            fLOG("download", url)
         req = urllib_request.Request(
             url,
             headers={
@@ -100,7 +105,7 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
         import requests
     except ImportError:
         fLOG("installing module requests")
-        from .module_install import ModuleInstall
+        from ..installhelper.module_install import ModuleInstall
         ModuleInstall("requests", fLOG=fLOG).install(temp_folder=temp_folder)
         import requests
 

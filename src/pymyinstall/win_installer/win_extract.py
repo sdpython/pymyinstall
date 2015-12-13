@@ -100,8 +100,8 @@ def extract_exe(fname, targetdir=None, verbose=False, fLOG=print, szip="7z.exe")
         p.stdout.close()
         retcode = p.returncode
     if retcode != 0:
-        raise RuntimeError("Failed to extract %s (return code: %d),\nCMD: %s\nin %s"
-                           % (fname, retcode, str([extract] + args), targetdir))
+        raise RuntimeError("Failed to extract %s (return code: %d),\nCMD: %s\nCMD*: %s\nin %s"
+                           % (fname, retcode, str([extract] + args), " ".join([extract] + args), targetdir))
     return targetdir
 
 
