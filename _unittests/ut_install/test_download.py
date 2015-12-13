@@ -110,6 +110,8 @@ class TestDownload (unittest.TestCase):
                 fLOG=fLOG)
             whl = m.download(temp_folder=temp)
             assert os.path.exists(whl)
+            if os.stat(whl).st_size < 1000:
+                raise Exception("small file: " + whl)
 
 
 if __name__ == "__main__":

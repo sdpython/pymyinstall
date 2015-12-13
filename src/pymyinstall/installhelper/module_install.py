@@ -49,8 +49,8 @@ class ModuleInstall:
     """
 
     allowedKind = ["pip", "github", "exe", "exe_xd", "wheel", "wheel_xd"]
-    expKPage = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
-    expKPageWhl = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?-cp33-none-win32.whl)</a>"
+    expKPage = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([<>0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
+    expKPageWhl = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([<>0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?-cp33-none-win32.whl)</a>"
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
@@ -346,7 +346,7 @@ class ModuleInstall:
                 self.cached_page = text
             else:
                 text = get_page_wheel(ModuleInstall.exeLocation)
-                save_page_wheel(page, rext)
+                save_page_wheel(page, text)
                 self.cached_page = text
 
         page = self.cached_page

@@ -41,8 +41,8 @@ def get_page_wheel(page):
         u = urllib_request.urlopen(req)
         text = u.read()
         u.close()
+        text = text.decode("utf8")
 
-    text = text.decode("utf8")
     text = text.replace("&quot;", "'")
     text = text.replace("&#8209;", "-")
     text = text.replace("&#46;", ".")

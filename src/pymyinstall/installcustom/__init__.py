@@ -2,8 +2,6 @@
 @file
 @brief Shortuts
 """
-from __future__ import print_function
-
 from .install_custom_exceptions import ManualDownloadException
 from .install_custom import download_page
 from .install_custom_7z import install_7z
