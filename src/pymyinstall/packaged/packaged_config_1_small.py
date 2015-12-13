@@ -301,6 +301,8 @@ def small_set():
                       purpose="A library implementing the 'SemVer' scheme."),
         ModuleInstall("unidecode", "pip",
                       purpose="ASCII transliterations of Unicode text"),
+        ModuleInstall("sqlite_bro", "pip",
+                      purpose="GUI for SQLite"),
     ]
 
     return [_ for _ in mod if _ is not None]

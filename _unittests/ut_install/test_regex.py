@@ -67,7 +67,7 @@ class TestRegex (unittest.TestCase):
             if "heatmap" in l[0]:
                 fLOG(l)
         assert len(links) > 0
-        
+
         if not sys.platform.startswith("win"):
             return
 

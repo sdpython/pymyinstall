@@ -62,7 +62,7 @@ def download_file(url, outfile, fLOG=None):
         return outfile
 
     try:
-        if fLOG: 
+        if fLOG:
             fLOG("download", url)
         req = urllib_request.Request(
             url,

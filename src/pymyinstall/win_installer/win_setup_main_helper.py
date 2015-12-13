@@ -149,7 +149,7 @@ def win_download(folder=None,
     if not is_here("git") and "git" in selection:
         fLOG("--- download", "git")
         r = install_git(folder, fLOG=fLOG,
-                            install=False, version=selection.get("git", None))
+                        install=False, version=selection.get("git", None))
         operations.append(("download", r))
         fLOG("done")
 
@@ -223,7 +223,8 @@ def win_download(folder=None,
     if not is_here("jenkins", no_wheel=True) and "jenkins" in selection:
         if verbose:
             fLOG("download", "jenkins")
-        r = install_jenkins(folder, fLOG=fLOG, install=False, version=selection.get("jenkins", None))
+        r = install_jenkins(folder, fLOG=fLOG, install=False,
+                            version=selection.get("jenkins", None))
         operations.append(("download", r))
         fLOG("done")
 
@@ -265,8 +266,8 @@ def win_install(folders,
 
     The function installs every setup which starts by one of the string in *names*
     and whose extension is .exe, .msi or .zip.
-    
-    To install Python on Windows, 
+
+    To install Python on Windows,
     see `Using Python on Windows <https://docs.python.org/3.5/using/windows.html>`_.
     """
     operations = []
@@ -334,9 +335,9 @@ def win_install(folders,
                 raise WinInstallException(
                     "TM must be manually installed from the setup\n{0}\nin\n{1}".format(full, loc))
             elif 'python' in cand:
-                options = [os.path.join(download_folder, cand), "/quiet", "InstallAllUsers=1", 
-                                "CompileAll=1", "TargetDir={0}".format(loc),
-                                "Include_debug=1", "Include_symbols=1", "SimpleInstall=1"]
+                options = [os.path.join(download_folder, cand), "/quiet", "InstallAllUsers=1",
+                           "CompileAll=1", "TargetDir={0}".format(loc),
+                           "Include_debug=1", "Include_symbols=1", "SimpleInstall=1"]
                 cmd = " ".join(options)
                 fLOG("run ", cmd)
                 run_cmd(cmd, wait=True)
