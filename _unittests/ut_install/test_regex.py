@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 """
 @brief      test log(time=20s)
 """
@@ -39,11 +40,45 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.module_install import ModuleInstall
 from pyquickhelper import fLOG
+from src.pymyinstall.installhelper.module_install import ModuleInstall
+from src.pymyinstall.installhelper.module_install_page_wheel import extract_all_links, enumerate_links_module
+from src.pymyinstall.installhelper.install_cmd_helper import python_version
+
+if sys.version_info[0] == 2:
+    from codecs import open
 
 
 class TestRegex (unittest.TestCase):
+
+    def test_links(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        data = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), "data", "page1.html"))
+        with open(data, "r", encoding="utf8") as f:
+            content = f.read()
+
+        links = extract_all_links(content)
+        for l in links:
+            if "heatmap" in l[0]:
+                fLOG(l)
+        assert len(links) > 0
+
+        version = python_version()
+        fLOG(version)
+        plat = version[0] if version[0] == "win32" else version[1]
+        if version[1] == '64bit' and version[0] == 'win32':
+            plat = "amd64"
+        version = sys.version_info
+
+        ll = list(enumerate_links_module("heatmap", links, version, plat))
+        fLOG(ll)
+        if len(ll) != 1:
+            raise Exception(str(ll))
 
     def test_1(self):
         fLOG(

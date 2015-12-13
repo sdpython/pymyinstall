@@ -2,9 +2,11 @@
 @file
 @brief Functions get_page_wheel
 """
+
+from html.parser import HTMLParser
+import sys
 from .install_memoize import install_memoize
 from .internet_settings import default_user_agent
-import sys
 
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
@@ -33,16 +35,30 @@ def get_page_wheel(page):
         browser.get(page)
         text = browser.page_source
         browser.close()
+        regular = len(text) < 100000
     else:
+        regular = True
+
+    if regular:
         req = urllib_request.Request(
             page,
             headers={
-                'User-agent': 'Mozilla/5.0'})
+                'User-agent': default_user_agent})
         u = urllib_request.urlopen(req)
         text = u.read()
         u.close()
         text = text.decode("utf8")
 
+    return _clean_page_wheel(text)
+
+
+def _clean_page_wheel(text):
+    """
+    remove unexpected characters
+
+    @param      text        string
+    @return                 string
+    """
     text = text.replace("&quot;", "'")
     text = text.replace("&#8209;", "-")
     text = text.replace("&#46;", ".")
@@ -72,12 +88,7 @@ def read_page_wheel(filename):
     """
     with open(filename, "r", encoding="utf8") as f:
         text = f.read()
-    text = text.replace("&quot;", "'")
-    text = text.replace("&#8209;", "-")
-    text = text.replace("&#46;", ".")
-    text = text.replace(" &middot; ", "-")
-    text = text.replace("&ndash;", "-")
-    return text
+    return _clean_page_wheel(text)
 
 
 def _cg_dl1(ml, mi):
@@ -131,3 +142,94 @@ def _cg_dl(ml, mi, fLOG=None):
     mi = mi.replace('&gt;', '>')
     mi = mi.replace('&#38;', '&')
     return _cg_dl1(ml, mi)
+
+
+class HTMLParser4Links(HTMLParser):
+    """
+    extreact all links ni HTML page
+    """
+
+    def __init__(self):
+        """
+        constructor
+        """
+        HTMLParser.__init__(self)
+        self.links = []
+        self.current = None
+
+    def handle_starttag(self, tag, attrs):
+        """
+        enters a tag
+        """
+        if tag == "a":
+            self.current = ""
+            self.attrs = attrs
+
+    def handle_endtag(self, tag):
+        """
+        ends of a tag
+        """
+        if tag == "a":
+            if len(self.current) > 0:
+                self.links.append((self.current, self.attrs))
+            self.current = None
+
+    def handle_data(self, data):
+        """
+        stores data if a link
+        """
+        if self.current is not None:
+            self.current += data
+
+
+def extract_all_links(text):
+    """
+    parses HTML to extract all links
+
+    @param      text        HTML page
+    @return                 list of links
+    """
+    parser = HTMLParser4Links()
+    parser.feed(text)
+    return parser.links
+
+
+def enumerate_links_module(name, alls, version, plat):
+    """
+    selects the links for a specific module
+
+    @param      name        module name
+    @param      alls        all links from @see fn extract_all_links
+    @param      version     python version
+    @param      plat        platform
+    """
+    version = "%d%d" % version[:2]
+    lname = name.lower()
+    for a in alls:
+        n = a[0]
+        ln = n.lower()
+        if ln.startswith(lname) and plat in ln:
+            vers = ("cp" + version, "py" + version)
+            good = False
+            for v in vers:
+                if v in ln:
+                    good = True
+            if not good:
+                continue
+        else:
+            continue
+
+        js = None
+        for at, val in a[1]:
+            if at == "onclick":
+                js = val
+
+        if js:
+            b = "javascript:"
+            if js.startswith(b):
+                js = js[len(b):]
+                dl = _cg_dl
+                res = eval(js)
+            else:
+                res = None
+            yield n, js, res

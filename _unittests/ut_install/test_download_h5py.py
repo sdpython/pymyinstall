@@ -69,6 +69,7 @@ class TestDownloadh5py (unittest.TestCase):
                     temp,
                     "out_page.html"))
             assert os.path.exists(exe)
+            assert os.stat(exe).st_size > 1000
 
 if __name__ == "__main__":
     unittest.main()

@@ -92,3 +92,10 @@ class WrongVersionError(Exception):
     cannot interpret a version
     """
     pass
+
+
+class WrongWheelException(Exception):
+    """
+    raised when the downloaded wheel seems wrong
+    """
+    pass

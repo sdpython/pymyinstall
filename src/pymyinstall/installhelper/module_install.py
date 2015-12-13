@@ -4,9 +4,9 @@
 """
 from __future__ import print_function
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
-from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException
+from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException, WrongWheelException
 from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
-from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel
+from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel, enumerate_links_module, extract_all_links
 from .missing_license import missing_module_licenses
 from .module_install_specific_version import get_exewheel_url_link_xd
 from .internet_settings import default_user_agent
@@ -49,8 +49,6 @@ class ModuleInstall:
     """
 
     allowedKind = ["pip", "github", "exe", "exe_xd", "wheel", "wheel_xd"]
-    expKPage = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([<>0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?win32-py3.3.exe)</a>"
-    expKPageWhl = "onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([<>0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>(.+?-cp33-none-win32.whl)</a>"
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
@@ -314,22 +312,6 @@ class ModuleInstall:
         @param      wheel       returns the wheel file or the exe file
         @return                 url, exe name
         """
-        version = python_version()
-        plat = version[0] if version[0] == "win32" else version[1]
-        if version[1] == '64bit' and version[0] == 'win32':
-            plat = "amd64"
-
-        if wheel:
-            plat = "32" if plat == "win32" else "_amd64"
-            pattern = ModuleInstall.expKPageWhl.replace("-cp33-none-win32.whl",
-                                                        "-((cp{1}{2})|(py3)|(py2[.]py3)|(py{1}{2}))(-none)?-((win{0})|(any))(.whl)?".format(plat, sys.version_info.major, sys.version_info.minor))
-            ind = 3
-        else:
-            pattern = ModuleInstall.expKPage.replace("win32-py3.3.exe",
-                                                     "{0}-py{1}.{2}.exe".format(plat, sys.version_info.major, sys.version_info.minor))
-            ind = -1
-        expre = re.compile(pattern)
-
         if "cached_page" not in self.__dict__:
             page = ModuleInstall._page_cache_html
 
@@ -350,7 +332,7 @@ class ModuleInstall:
                 self.cached_page = text
 
         page = self.cached_page
-        alls = expre.findall(page)
+        alls = extract_all_links(page)
         if len(alls) == 0:
             keep = []
             for line in page.split("\n"):
@@ -363,25 +345,13 @@ class ModuleInstall:
                 ", unable to find regex with pattern: " +
                 pattern + "\nexample:\n" + "\n".join(keep))
 
-        if ind == -1:
-            ind = len(alls[0]) - 1
-        end = ind + 1
-        memoalls = alls
-
-        if self.name == "PyQt":
-            alls = [_[:end]
-                    for _ in alls if _[ind].startswith(self.name + "4")]
-        elif self.name == "numpy":
-            white = self.name.replace("-", "_")
-            alls = [_[:end] for _ in alls if "numpy" in _[ind]]
-            alls = [_[:end] for _ in alls if "unoptimized" not in _[ind] and "vanilla" not in _[ind] and
-                    (_[ind].startswith(self.name + "-") or _[ind].startswith(white + "-"))]
-        else:
-            white = self.name.replace("-", "_")
-            alls = [_[:end] for _ in alls if _[ind].startswith(
-                self.name + "-") or _[ind].startswith(white + "-")]
-
-        if len(alls) == 0:
+        version = python_version()
+        plat = version[0] if version[0] == "win32" else version[1]
+        if version[1] == '64bit' and version[0] == 'win32':
+            plat = "amd64"
+        links = list(enumerate_links_module(
+            self.name, alls, sys.version_info, plat))
+        if len(links) == 0:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
@@ -391,17 +361,28 @@ class ModuleInstall:
                             pattern +
                             "\nEX:\n" +
                             str(memoalls[0]))
+        links0 = links
 
-        link = choose_most_recent(alls)
+        if self.name == "PyQt":
+            links = [l for l in links if l[0].lower().startswith("pyqt4")]
+        elif self.name == "numpy":
+            links = [l for l in links if "unoptimized" not in l[
+                0].lower() and "vanilla" not in l[0].lower()]
 
-        from .module_install_page_wheel import _cg_dl1 as dl1, _cg_dl as dl
+        if len(links) == 0:
+            raise Exception("unable to find a single link for " +
+                            self.name +
+                            "\npattern:" +
+                            pattern +
+                            "\nEX:\n" +
+                            "\n".join(str(_) for _ in links0))
 
-        url = dl(eval(link[0]), link[1], fLOG=self.fLOG)
-        self.existing_version = self.extract_version(link[-1])
+        link = choose_most_recent(links)
+        self.existing_version = self.extract_version(link[0])
         if self.name == "numpy" and compare_version(self.existing_version, "1.10.1") < 0:
             return self.get_exewheel_url_link_xd(file_save=file_save, wheel=wheel)
         else:
-            url, whl = ModuleInstall.exeLocation + url, link[-1]
+            url, whl = ModuleInstall.exeLocation + link[2], link[0]
             if not whl.endswith(".whl"):
                 whl += ".whl"
             return url, whl
@@ -536,6 +517,10 @@ class ModuleInstall:
 
                     if not os.path.exists(temp_folder):
                         os.makedirs(temp_folder)
+
+                    if len(text) <= 1000:
+                        raise WrongWheelException("Size of downloaded wheel is too small: {0}\nurl={1}\nagent={2}".format(
+                            len(text), url, default_user_agent))
 
                     self.fLOG("writing", whl)
                     with open(whlname, "wb") as f:
