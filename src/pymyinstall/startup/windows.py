@@ -18,6 +18,7 @@ def windows_default_tools_list():
     """
     return ["7z", "scite", "putty", "mingw", "SQLiteSpy", "r", "vs", "julia", "graphviz", "tdm", "pandoc",
             "jdk", "jenkins",
+            "miktex", "inkscape",
             "git", "python"]
 
 

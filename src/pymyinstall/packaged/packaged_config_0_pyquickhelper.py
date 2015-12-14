@@ -82,6 +82,8 @@ def pyquickhelper_set():
         "six",
         "sphinx",
         'sphinxcontrib-images',
+        'sphinxcontrib-imagesvg',
+        'sphinxcontrib-jsdemo',
         'snowballstemmer',
         'sphinx-rtd-theme',
         "sphinxjp.themes.revealjs",
