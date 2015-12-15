@@ -21,4 +21,3 @@ from .install_custom_jenkins import install_jenkins
 from .install_custom_git import install_git
 from .install_custom_miktex import install_miktex
 from .install_custom_inkscape import install_inkscape
-

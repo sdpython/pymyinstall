@@ -146,14 +146,14 @@ def win_download(folder=None,
     if not is_here("miktex") and "miktex" in selection:
         fLOG("--- download", "miktex")
         r = install_miktex(dest_folder=folder, fLOG=fLOG,
-                          install=False, version=selection.get("miktex", None))
+                           install=False, version=selection.get("miktex", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("inkscape") and "inkscape" in selection:
         fLOG("--- download", "inkscape")
         r = install_inkscape(dest_folder=folder, fLOG=fLOG,
-                          install=False, version=selection.get("inkscape", None))
+                             install=False, version=selection.get("inkscape", None))
         operations.append(("download", r))
         fLOG("done")
 
@@ -358,17 +358,18 @@ def win_install(folders,
                 continue
                 # see http://stevedower.id.au/blog/the-python-3-5-installer/
                 temploc = os.path.join(download_folder, "python")
-                options = [os.path.join(download_folder, cand), "/quiet", "/layout", temploc]
+                options = [os.path.join(
+                    download_folder, cand), "/quiet", "/layout", temploc]
                 cmd = " ".join(options)
                 fLOG("run ", cmd)
                 out, err = run_cmd(cmd, wait=True)
                 fLOG("OUT:\n", out)
                 if err:
                     fLOG("OUT:\n", err)
-                options = [os.path.join(temploc, cand), 
-                                "TargetDir={0}".format(loc), "InstallAllUsers=1", 
-                                "AssociateFiles=0", "CompileAll=1", "Include_symbols=1",
-                                "SimpleInstall=1"]
+                options = [os.path.join(temploc, cand),
+                           "TargetDir={0}".format(loc), "InstallAllUsers=1",
+                           "AssociateFiles=0", "CompileAll=1", "Include_symbols=1",
+                           "SimpleInstall=1"]
                 cmd = " ".join(options)
                 fLOG("run ", cmd)
                 out, err = run_cmd(cmd, wait=True)

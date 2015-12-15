@@ -341,9 +341,7 @@ class ModuleInstall:
                     keep.append(line)
             raise Exception(
                 "module " +
-                self.name +
-                ", unable to find regex with pattern: " +
-                pattern + "\nexample:\n" + "\n".join(keep))
+                self.name + "\nexample:\n" + "\n".join(keep))
 
         version = python_version()
         plat = version[0] if version[0] == "win32" else version[1]
@@ -355,12 +353,7 @@ class ModuleInstall:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
-            raise Exception("unable to find a single link for " +
-                            self.name +
-                            "\npattern:" +
-                            pattern +
-                            "\nEX:\n" +
-                            str(memoalls[0]))
+            raise Exception("unable to find a single link for " + self.name)
         links0 = links
 
         if self.name == "PyQt":
@@ -372,8 +365,6 @@ class ModuleInstall:
         if len(links) == 0:
             raise Exception("unable to find a single link for " +
                             self.name +
-                            "\npattern:" +
-                            pattern +
                             "\nEX:\n" +
                             "\n".join(str(_) for _ in links0))
 

@@ -73,10 +73,10 @@ def windows_startup(destination, temp_folder, params=None, fLOG=print):
     op = win_download(temp_folder, fLOG=fLOG, selection=tools, module_list=[])
 
     # copy de SQLiteSpy, putty, Scite
-    names = ["Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc", 
+    names = ["Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc",
              "SQLiteSpy", "Putty", "Graphviz", "Jdk", "Jenkins", "Git",
              "MikTex", "InkScape",
-             "Python",]
+             "Python", ]
 
     fLOG("------ install", tools)
     folders = dict(tools=destination,
