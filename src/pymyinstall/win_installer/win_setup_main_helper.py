@@ -26,6 +26,8 @@ from ..installcustom.install_custom import download_page
 from ..installcustom.install_custom_javajdk import install_javajdk
 from ..installcustom.install_custom_jenkins import install_jenkins
 from ..installcustom.install_custom_git import install_git
+from ..installcustom.install_custom_miktex import install_miktex
+from ..installcustom.install_custom_inkscape import install_inkscape
 from ..installhelper.link_shortcuts import add_shortcut
 from ..installhelper import run_cmd
 from ..packaged import minimal_set
@@ -106,6 +108,8 @@ def win_download(folder=None,
         * jdk (java)
         * jenkins
         * git
+        * miktex
+        * inkscape
     """
     if selection is None:
         raise ValueError("selection must be specified")
@@ -136,6 +140,20 @@ def win_download(folder=None,
         fLOG("--- download", "mingw")
         r = install_mingw(dest_folder=folder, fLOG=fLOG,
                           install=False, version=selection.get("mingw", None))
+        operations.append(("download", r))
+        fLOG("done")
+
+    if not is_here("miktex") and "miktex" in selection:
+        fLOG("--- download", "miktex")
+        r = install_miktex(dest_folder=folder, fLOG=fLOG,
+                          install=False, version=selection.get("miktex", None))
+        operations.append(("download", r))
+        fLOG("done")
+
+    if not is_here("inkscape") and "inkscape" in selection:
+        fLOG("--- download", "inkscape")
+        r = install_inkscape(dest_folder=folder, fLOG=fLOG,
+                          install=False, version=selection.get("inkscape", None))
         operations.append(("download", r))
         fLOG("done")
 
@@ -268,7 +286,8 @@ def win_install(folders,
     and whose extension is .exe, .msi or .zip.
 
     To install Python on Windows,
-    see `Using Python on Windows <https://docs.python.org/3.5/using/windows.html>`_.
+    see `Using Python on Windows <https://docs.python.org/3.5/using/windows.html>`_,
+    and `What's coming for the Python 3.5 installer? <http://stevedower.id.au/blog/the-python-3-5-installer/>`_
     """
     operations = []
     dfunc = {".zip": extract_archive, ".exe": extract_exe,
@@ -280,7 +299,8 @@ def win_install(folders,
             return None
         lf = file.lower()
         for name in names:
-            if name.lower() in selection and lf.startswith(name.lower()):
+            lname = name.lower()
+            if name.lower() in selection and (lf.startswith(lname) or "-%s-" % lname in lf):
                 if name == "Python":
                     return folders["python"]
                 else:
@@ -335,12 +355,26 @@ def win_install(folders,
                 raise WinInstallException(
                     "TM must be manually installed from the setup\n{0}\nin\n{1}".format(full, loc))
             elif 'python' in cand:
-                options = [os.path.join(download_folder, cand), "/quiet", "InstallAllUsers=1",
-                           "CompileAll=1", "TargetDir={0}".format(loc),
-                           "Include_debug=1", "Include_symbols=1", "SimpleInstall=1"]
+                continue
+                # see http://stevedower.id.au/blog/the-python-3-5-installer/
+                temploc = os.path.join(download_folder, "python")
+                options = [os.path.join(download_folder, cand), "/quiet", "/layout", temploc]
                 cmd = " ".join(options)
                 fLOG("run ", cmd)
-                run_cmd(cmd, wait=True)
+                out, err = run_cmd(cmd, wait=True)
+                fLOG("OUT:\n", out)
+                if err:
+                    fLOG("OUT:\n", err)
+                options = [os.path.join(temploc, cand), 
+                                "TargetDir={0}".format(loc), "InstallAllUsers=1", 
+                                "AssociateFiles=0", "CompileAll=1", "Include_symbols=1",
+                                "SimpleInstall=1"]
+                cmd = " ".join(options)
+                fLOG("run ", cmd)
+                out, err = run_cmd(cmd, wait=True)
+                fLOG("OUT:\n", out)
+                if err:
+                    fLOG("OUT:\n", err)
             else:
                 ext = os.path.splitext(cand)[-1]
                 filename = os.path.split(cand)[-1]
