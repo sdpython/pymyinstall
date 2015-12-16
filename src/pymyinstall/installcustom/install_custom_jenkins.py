@@ -6,15 +6,10 @@
 """
 from __future__ import print_function
 import sys
-import re
 import os
 
 from ..installhelper.install_cmd_helper import unzip_files
-from .install_custom import download_page, download_from_sourceforge, download_file
-from ..installhelper.link_shortcuts import add_shortcut_to_desktop, suffix
-
-if sys.version_info[0] == 2:
-    from codecs import open
+from .install_custom import download_file
 
 
 def install_jenkins(dest_folder=".", fLOG=print, install=True, version=None):
@@ -43,7 +38,7 @@ def install_jenkins(dest_folder=".", fLOG=print, install=True, version=None):
         download_file(url, outfile)
 
     if install:
-        unzip_files(file, whereTo=dest_folder, fLOG=fLOG)
+        unzip_files(outfile, whereTo=dest_folder, fLOG=fLOG)
         return outfile
     else:
         return outfile

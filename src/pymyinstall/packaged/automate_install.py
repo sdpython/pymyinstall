@@ -8,6 +8,7 @@ import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException, MissinReferenceException
 from ..installhelper.module_dependencies import missing_dependencies
+from .packaged_exception import ModuleNotFoundError
 from .packaged_config import all_set
 
 
@@ -459,3 +460,36 @@ def update_module(module_name, temp_folder=".", fLOG=print, verbose=True,
     update_all(list_module=module_name, temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                reorder=reorder,
                skip_module=skip_module, schedule_only=schedule_only)
+
+
+def download_module(module_name,
+                    temp_folder=".", force=False,
+                    unzipFile=True, file_save=None, deps=False,
+                    fLOG=print):
+    """
+    download the module without installation
+
+    @param      temp_folder     destination
+    @param      force           force the installation even if already installed
+    @param      unzipFile       if it can be unzipped, it will be (for github, mostly)
+    @param      file_save       for debug purposes, do not change it unless you know what you are doing
+    @param      deps            download the dependencies too (only available for pip)
+    @return                     downloaded files
+    """
+    if not isinstance(module_name, list):
+        module_name = [module_name]
+
+    res = []
+    for mod in module_name:
+        if not isinstance(mod, ModuleInstall):
+            mod = find_module_install(mod, True)
+            if mod is None:
+                raise ModuleNotFoundError(
+                    "unable to find an objec for module: " + ", ".join(module_name))
+        k = mod.fLOG
+        mod.fLOG = fLOG
+        f = mod.download(temp_folder=temp_folder, force=force,
+                         unzipFile=unzipFile, file_save=file_save, deps=deps)
+        mod.fLOG = k
+        res.append(f)
+    return res

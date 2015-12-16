@@ -6,7 +6,7 @@ from __future__ import print_function
 import sys
 import os
 import re
-
+from ..installhelper.install_cmd_helper import run_cmd
 from .install_custom import download_page, download_file
 
 
@@ -44,7 +44,7 @@ def install_inkscape(dest_folder=".", fLOG=print, install=True, version=None):
             local = download_file(url, outfile)
         else:
             return outfile
-        if install and not bb:
+        if install:
             run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)
         return local
     else:

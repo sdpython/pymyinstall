@@ -3,7 +3,6 @@
 @brief Functions to get module version, license, dependencies
 """
 from .install_cmd_helper import run_cmd, get_pip_program, regex_wheel_version
-from .install_memoize import install_memoize
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
 
 import sys
@@ -14,10 +13,8 @@ import functools
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
-    import urllib2 as urllib_request
     import xmlrpclib as xmlrpc_client
 else:
-    import urllib.request as urllib_request
     import xmlrpc.client as xmlrpc_client
     from importlib import reload
 

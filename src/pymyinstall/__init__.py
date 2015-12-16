@@ -50,3 +50,4 @@ from .installhelper import get_module_version, get_pypi_version
 from .installcustom.install_custom_revealjs import download_revealjs
 from .installhelper.requirements import build_requirements
 from .win_installer.win_setup_main import win_python_setup
+from .packaged import install_module, update_module, download_module

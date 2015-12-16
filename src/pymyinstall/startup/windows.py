@@ -7,7 +7,6 @@
 import sys
 import os
 from ..win_installer.win_setup_main_helper import win_download, win_install
-from ..installcustom import install_7z
 
 
 def windows_default_tools_list():

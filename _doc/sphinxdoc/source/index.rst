@@ -70,7 +70,13 @@ Both scripts can be used to install a subset of modules::
 
     pymy_install3 --set=minimum
     
-Modules sets are described at :ref:`l-name-set-table`.
+Modules sets are described at :ref:`l-name-set-table`. Corresponding 
+functions exist::
+
+    from pymyinstall import download_module, install_module, update_module
+    download_module("numpy")
+    install_module("numpy")
+    update_module("numpy")
 
 
 Setup

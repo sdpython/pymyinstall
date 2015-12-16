@@ -83,6 +83,7 @@ Versions
     * **add:** the setup works with Python 3.5
     * **change:** improve modules set definition ``pymy_install3 --set=<module_set>``
     * **fix:** fix issues while update numpy and networkx, add module *qgrid*
+    * **add:** function *download_module*
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup

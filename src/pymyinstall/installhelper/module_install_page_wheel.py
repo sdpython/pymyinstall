@@ -30,8 +30,7 @@ def get_page_wheel(page):
         sele = False
 
     if sele:
-        from selenium import webdriver
-        browser = webdriver.Firefox()
+        browser = selenium.webdriver.Firefox()
         browser.get(page)
         text = browser.page_source
         browser.close()
