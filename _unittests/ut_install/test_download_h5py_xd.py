@@ -45,7 +45,7 @@ from src.pymyinstall.installhelper.module_install import ModuleInstall
 from pyquickhelper import fLOG
 
 
-class TestDownloadh5py (unittest.TestCase):
+class TestDownloadh5py_xd (unittest.TestCase):
 
     def test_install_h5py(self):
         fLOG(
@@ -53,7 +53,7 @@ class TestDownloadh5py (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold, "temp_download_h5py")
+        temp = os.path.join(fold, "temp_download_h5py_xd")
         if not os.path.exists(temp):
             os.mkdir(temp)
         for _ in os.listdir(temp):
@@ -62,7 +62,7 @@ class TestDownloadh5py (unittest.TestCase):
 
         if sys.platform.startswith("win"):
             fLOG("install", "h5py")
-            m = ModuleInstall("h5py", "wheel", mname="h5py", fLOG=fLOG)
+            m = ModuleInstall("h5py", "wheel_xd", mname="h5py", fLOG=fLOG)
             exe = m.download(
                 temp_folder=temp,
                 file_save=os.path.join(

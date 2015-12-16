@@ -8,7 +8,6 @@ from .module_install_exceptions import MissingPackageOnPyPiException, MissingIns
 from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
 from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel, enumerate_links_module, extract_all_links
 from .missing_license import missing_module_licenses
-from .module_install_specific_version import get_exewheel_url_link_xd
 from .internet_settings import default_user_agent
 from .install_cmd_regex import regex_wheel_version
 
@@ -51,6 +50,7 @@ class ModuleInstall:
     allowedKind = ["pip", "github", "exe", "exe_xd", "wheel", "wheel_xd"]
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd = "http://www.xavierdupre.fr/enseignement/setup/"
+    exeLocationXdPage = "http://www.xavierdupre.fr/enseignement/setup/index_modules_list.html"
     gitexe = r"C:\Program Files (x86)\Git"
 
     @staticmethod
@@ -288,6 +288,9 @@ class ModuleInstall:
                         self.ImportName, cmd, out, err))
         return True
 
+    _page_cache_html_xd = os.path.join(
+        os.path.abspath(os.path.split(__file__)[0]), "page_xd.html")
+
     def get_exewheel_url_link_xd(self, file_save=None, wheel=False):
         """
         for windows, get the url of the setup using a webpage
@@ -296,10 +299,72 @@ class ModuleInstall:
         @param      wheel       returns the wheel file or the exe file
         @return                 url, exe name
         """
-        res = get_exewheel_url_link_xd(
-            self.name, file_save, wheel, ModuleInstall.exeLocationXd)
-        self.existing_version = self.extract_version(res[-1])
-        return res
+        if "cached_page" not in self.__dict__:
+            page = ModuleInstall._page_cache_html_xd
+
+            exi = os.path.exists(page)
+            if exi:
+                dt = get_file_modification_date(page)
+                now = datetime.datetime.now()
+                df = now - dt
+                if df > datetime.timedelta(1):
+                    exi = False
+
+            if exi:
+                text = read_page_wheel(page)
+                self.cached_page_xd = text
+            else:
+                text = get_page_wheel(ModuleInstall.exeLocationXdPage)
+                save_page_wheel(page, text)
+                self.cached_page_xd = text
+
+        page = self.cached_page_xd
+        reg = re.compile('href=\\"(.*?)\\"')
+        alls = reg.findall(page)
+        if len(alls) == 0:
+            keep = []
+            for line in page.split("\n"):
+                lline = line.lower()
+                if self.name in lline or (self.mname and self.mname in lline):
+                    keep.append(line)
+            raise Exception(
+                "module " +
+                self.name + "\nexample:\n" + "\n".join(keep))
+
+        version = python_version()
+        plat = version[0] if version[0] == "win32" else version[1]
+        if version[1] == '64bit' and version[0] == 'win32':
+            plat = "amd64"
+        cp = "cp%d%d" % sys.version_info[:2]
+        links = [_ for _ in alls if "/" +
+                 self.name in _ and cp in _ and plat in _]
+        if len(links) == 0:
+            if file_save is not None:
+                with open(file_save, "w", encoding="utf8") as f:
+                    f.write(page)
+            raise Exception("unable to find a single link for " + self.name)
+
+        links = [(l.split("/")[-1], l) for l in links]
+        links0 = links
+
+        if self.name == "PyQt":
+            links = [l for l in links if l[0].lower().startswith("pyqt4")]
+        elif self.name == "numpy":
+            links = [l for l in links if "unoptimized" not in l[
+                0].lower() and "vanilla" not in l[0].lower()]
+
+        if len(links) == 0:
+            raise Exception("unable to find a single link for " +
+                            self.name +
+                            "\nEX:\n" +
+                            "\n".join(str(_) for _ in links0))
+
+        link = choose_most_recent(links)
+        self.existing_version = self.extract_version(link[0])
+        url, whl = link[1], link[0]
+        if not whl.endswith(".whl"):
+            whl += ".whl"
+        return url, whl
 
     _page_cache_html = os.path.join(
         os.path.abspath(os.path.split(__file__)[0]), "page.html")
@@ -370,13 +435,10 @@ class ModuleInstall:
 
         link = choose_most_recent(links)
         self.existing_version = self.extract_version(link[0])
-        if self.name == "numpy" and compare_version(self.existing_version, "1.10.1") < 0:
-            return self.get_exewheel_url_link_xd(file_save=file_save, wheel=wheel)
-        else:
-            url, whl = ModuleInstall.exeLocation + link[2], link[0]
-            if not whl.endswith(".whl"):
-                whl += ".whl"
-            return url, whl
+        url, whl = ModuleInstall.exeLocation + link[2], link[0]
+        if not whl.endswith(".whl"):
+            whl += ".whl"
+        return url, whl
 
     def unzipfiles(self, zipf, whereTo):
         """

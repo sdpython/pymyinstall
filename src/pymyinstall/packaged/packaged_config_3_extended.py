@@ -164,7 +164,7 @@ def extended_set():
         ModuleInstall(
             "ecos", "wheel", purpose="ECOS is a numerical software for solving convex second-order cone programs (SOCPs)", usage="OPTIM"),
         ModuleInstall(
-            "CVXcanon", "wheel_xd", purpose="A low-level library to perform the matrix building step in cvxpy, a convex optimization modeling software.", usage="OPTIM") if sys.version_info[:2] >= (3, 5) else None,
+            "CVXcanon", "wheel", purpose="A low-level library to perform the matrix building step in cvxpy, a convex optimization modeling software.", usage="OPTIM") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("cvxpy", "wheel", usage="OPTIM",
                       purpose="linear, quadratic optimization, depends on cvxopt") if sys.version_info[:2] >= (3, 5) else None,
         # better large list

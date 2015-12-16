@@ -16,20 +16,25 @@ else:
 
 
 @install_memoize
-def get_page_wheel(page):
+def get_page_wheel(page, sele=None):
     """
     get the page
 
     @param      page        location
+    @param      sele        use selenium or not or False to try
     @return                 page content
     """
-    try:
-        import selenium
-        sele = True
-    except ImportError:
+    if sele is None or sele:
+        try:
+            import selenium
+            sele = True
+        except ImportError:
+            sele = False
+    else:
         sele = False
 
     if sele:
+        import selenium.webdriver
         browser = selenium.webdriver.Firefox()
         browser.get(page)
         text = browser.page_source
