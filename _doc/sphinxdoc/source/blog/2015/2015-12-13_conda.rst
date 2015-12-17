@@ -46,3 +46,5 @@
     Otherwise, I could write::
     
         conda -c <location> <modulename>
+
+    See also `How to install a binstar package in Anaconda? <http://stackoverflow.com/questions/27030656/how-to-install-a-binstar-package-in-anaconda>`_.
