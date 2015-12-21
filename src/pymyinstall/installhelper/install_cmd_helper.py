@@ -11,7 +11,6 @@ import zipfile
 import time
 import subprocess
 import datetime
-import re
 from .module_install_exceptions import UpdatePipError, RunCmdError
 
 if sys.version_info[0] == 2:

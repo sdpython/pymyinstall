@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installhelper.install_cmd_helper import get_wheel_version
+from src.pymyinstall.installhelper.module_install_version import get_wheel_version
 from pyquickhelper import fLOG, get_temp_folder
 
 

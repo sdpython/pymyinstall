@@ -5,7 +5,6 @@
 from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
 from .install_cmd_regex import regex_wheel_version
-from .module_install_version import regex_wheel_version
 
 import sys
 import re
