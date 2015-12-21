@@ -53,6 +53,10 @@ class TestCompareVersion(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
+        if not sys.platform.startswith("win"):
+            # useful only on Windows
+            return
+
         mods = [mod for mod in all_set() if mod.kind in ("wheel",)]
         fLOG(len(mods))
         assert len(mods) > 0
