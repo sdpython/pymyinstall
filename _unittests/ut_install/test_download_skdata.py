@@ -47,7 +47,7 @@ from pyquickhelper import fLOG
 
 class TestDownloadSkData(unittest.TestCase):
 
-    def test_install_pycuda(self):
+    def test_install_skata(self):
         fLOG(
             __file__,
             self._testMethodName,
