@@ -68,7 +68,7 @@ class TestDownloadNumpy (unittest.TestCase):
             r = compare_version(m.existing_version, "1.10.1")
             assert r >= 0
             assert "unoptimized" not in name[0]
-            whl = m.download(temp_folder=temp)
+            whl = m.download(temp_folder=temp, source="2")
             fLOG(m.version)
             assert os.path.exists(whl)
             assert "unoptimized" not in whl

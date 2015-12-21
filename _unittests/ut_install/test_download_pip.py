@@ -68,7 +68,7 @@ class TestDownloadPip (unittest.TestCase):
         out = m.download(temp_folder=fold, deps=True)
         assert os.path.exists(out)
         assert "pyquickhelper" in out
-        out = m.download(temp_folder=fold)
+        out = m.download(temp_folder=fold, source="2")
         assert os.path.exists(out)
         assert "pyquickhelper" in out
 

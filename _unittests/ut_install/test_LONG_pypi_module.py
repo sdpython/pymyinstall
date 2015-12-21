@@ -65,7 +65,7 @@ class TestPyPiModule (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         mod = ModuleInstall(
-            'ipython', 'wheel', mname='IPython')
+            'ipython', 'wheel', mname='IPython', source="2")
         try:
             vers = mod.get_pypi_version()
         except MissingVersionOnPyPiException:

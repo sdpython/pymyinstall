@@ -67,7 +67,7 @@ class TestDownloadlxml (unittest.TestCase):
                 temp_folder=temp,
                 file_save=os.path.join(
                     temp,
-                    "out_page.html"))
+                    "out_page.html"), source="2")
             assert os.path.exists(exe)
             assert os.stat(exe).st_size > 100000
 

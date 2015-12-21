@@ -16,7 +16,7 @@ else:
 
 
 @install_memoize
-def get_page_wheel(page, sele=None):
+def get_page_wheel(page, sele=False):
     """
     get the page
 
@@ -233,7 +233,8 @@ def enumerate_links_module(name, alls, version, plat):
             if js.startswith(b):
                 js = js[len(b):]
                 dl = _cg_dl
-                res = eval(js)
+                if dl is not None:
+                    res = eval(js)
             else:
                 res = None
             yield n, js, res

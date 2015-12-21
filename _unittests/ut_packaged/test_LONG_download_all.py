@@ -85,7 +85,7 @@ class TestDownloadAll (unittest.TestCase):
             if m.kind != "pip":
                 fLOG(m.name)
                 m.fLOG = fLOG
-                m.download(temp_folder=temp)
+                m.download(temp_folder=temp, source="2")
 
 
 if __name__ == "__main__":

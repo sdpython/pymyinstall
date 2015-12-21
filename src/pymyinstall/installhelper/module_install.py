@@ -47,10 +47,9 @@ class ModuleInstall:
     @endexample
     """
 
-    allowedKind = ["pip", "github", "exe", "exe_xd", "wheel", "wheel_xd"]
+    allowedKind = ["pip", "github", "exe", "exe2", "wheel", "wheel2"]
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
-    exeLocationXd = "http://www.xavierdupre.fr/enseignement/setup/"
-    exeLocationXdPage = "http://www.xavierdupre.fr/enseignement/setup/index_modules_list.html"
+    exeLocationXd_Default = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
 
     @staticmethod
@@ -288,19 +287,27 @@ class ModuleInstall:
                         self.ImportName, cmd, out, err))
         return True
 
-    _page_cache_html_xd = os.path.join(
-        os.path.abspath(os.path.split(__file__)[0]), "page_xd.html")
+    _page_cache_html2 = os.path.join(
+        os.path.abspath(os.path.split(__file__)[0]), "page2.html")
 
-    def get_exewheel_url_link_xd(self, file_save=None, wheel=False):
+    def get_exewheel_url_link2(self, file_save=None, wheel=False, source=None):
         """
         for windows, get the url of the setup using a webpage
 
         @param      file_save   for debug purposes
         @param      wheel       returns the wheel file or the exe file
+        @param      source      source of the wheels (ex: ``2`` or ``http://...``)
         @return                 url, exe name
+
+        .. versionchanged:: 1.1
+            Parameter *source* was added.
         """
+        if source is None or source == "2":
+            source = ModuleInstall.exeLocationXd_Default
+        source_page = source.rstrip("/") + "/index_modules_list.html"
+
         if "cached_page" not in self.__dict__:
-            page = ModuleInstall._page_cache_html_xd
+            page = ModuleInstall._page_cache_html2
 
             exi = os.path.exists(page)
             if exi:
@@ -312,13 +319,13 @@ class ModuleInstall:
 
             if exi:
                 text = read_page_wheel(page)
-                self.cached_page_xd = text
+                self.cached_page2 = text
             else:
-                text = get_page_wheel(ModuleInstall.exeLocationXdPage)
+                text = get_page_wheel(source_page)
                 save_page_wheel(page, text)
-                self.cached_page_xd = text
+                self.cached_page2 = text
 
-        page = self.cached_page_xd
+        page = self.cached_page2
         reg = re.compile('href=\\"(.*?)\\"')
         alls = reg.findall(page)
         if len(alls) == 0:
@@ -466,7 +473,7 @@ class ModuleInstall:
                 "unable to extract version number from {0}".format(name))
 
     def download(
-            self, temp_folder=".", force=False, unzipFile=True, file_save=None, deps=False):
+            self, temp_folder=".", force=False, unzipFile=True, file_save=None, deps=False, source=None):
         """
         download the module without installation
 
@@ -475,6 +482,8 @@ class ModuleInstall:
         @param      unzipFile       if it can be unzipped, it will be (for github, mostly)
         @param      file_save       for debug purposes, do not change it unless you know what you are doing
         @param      deps            download the dependencies too (only available for pip)
+        @param      source          overwrite source of the download, only for wheel packages,
+                                    see @see me get_exewheel_url_link2
         @return                     downloaded files
 
         .. versionchanged:: 0.9
@@ -482,6 +491,9 @@ class ModuleInstall:
 
         .. versionchanged:: 1.0
             *deps* is overwritten by *self.deps* if not None
+
+        .. versionchanged:: 1.1
+            Parameter *source* was added.
         """
         kind = self.kind
 
@@ -537,7 +549,9 @@ class ModuleInstall:
                     "\nERR:\n" +
                     err)
 
-        elif kind in ("wheel", "wheel_xd"):
+        elif kind in ("wheel", "wheel2"):
+            if source is not None:
+                kind = "wheel2"
             ver = python_version()
             if ver[0] != "win32":
                 # nothing to download, you should use pip
@@ -547,8 +561,8 @@ class ModuleInstall:
                     url, whl = self.get_exewheel_url_link(
                         file_save=file_save, wheel=True)
                 else:
-                    url, whl = self.get_exewheel_url_link_xd(
-                        file_save=file_save, wheel=True)
+                    url, whl = self.get_exewheel_url_link2(
+                        file_save=file_save, wheel=True, source=source)
                 whlname = os.path.join(temp_folder, whl)
 
                 exi = os.path.exists(whlname)
@@ -613,15 +627,17 @@ class ModuleInstall:
             else:
                 return outfile
 
-        elif kind in ("exe", "exe_xd"):
+        elif kind in ("exe", "exe2"):
+            if source is not None:
+                kind = "exe2"
             ver = python_version()
             if ver[0] != "win32":
                 raise Exception(
                     "this option is not available on other systems than Windows, version={0}".format(ver))
             else:
                 url, exe = self.get_exewheel_url_link(
-                    file_save=file_save) if kind == "exe" else self.get_exewheel_url_link_xd(
-                    file_save=file_save)
+                    file_save=file_save) if kind == "exe" else self.get_exewheel_url_link2(
+                    file_save=file_save, source=source)
 
                 self.fLOG("downloading", exe)
                 req = urllib_request.Request(
@@ -828,7 +844,8 @@ class ModuleInstall:
                 temp_folder=".",
                 log=False,
                 options=None,
-                deps=False):
+                deps=False,
+                source=None):
         """
         install the package
 
@@ -838,6 +855,8 @@ class ModuleInstall:
         @param      log             display logs or not
         @param      options         other options to add to the command line (see below) in a list
         @param      deps            install the dependencies too (only available for pip)
+        @param      source          overwrite the source of the wheels,
+                                    see @see me get_exewheel_url_link2
         @return                     boolean
 
         The options mentioned in parameter ``options``
@@ -852,6 +871,7 @@ class ModuleInstall:
             On Anaconda (based on function @see fn is_conda_distribution), we try *conda* first
             before switching to the regular way if it did not work.
             Exception were changed from ``Exception`` to ``InstallError``.
+            Parameter *source* was added.
         """
         if not force and force_kind is None and is_conda_distribution():
             try:
@@ -961,7 +981,7 @@ class ModuleInstall:
             else:
                 ret = True
 
-        elif kind in ("wheel", "wheel_xd"):
+        elif kind in ("wheel", "wheel2"):
             ver = python_version()
             if ver[0] != "win32":
                 ret = self.install("pip")
@@ -971,7 +991,8 @@ class ModuleInstall:
                 whlname = self.download(
                     temp_folder=temp_folder,
                     force=force,
-                    unzipFile=True)
+                    unzipFile=True,
+                    source=source)
                 vers = self.get_installed_numeric_version()
                 ret = True
                 if vers is not None:
@@ -1104,13 +1125,14 @@ class ModuleInstall:
                 exename = self.download(
                     temp_folder=temp_folder,
                     force=force,
-                    unzipFile=True)
+                    unzipFile=True,
+                    source=source)
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
                     exename + " /s /qn /SILENT", wait=True, do_not_log=not log, fLOG=self.fLOG)
                 ret = len(err) == 0
 
-        elif kind == "exe_xd":
+        elif kind == "exe2":
             ver = python_version()
             if ver[0] != "win32":
                 ret = self.install("pip")
@@ -1118,7 +1140,8 @@ class ModuleInstall:
                 exename = self.download(
                     temp_folder=temp_folder,
                     force=force,
-                    unzipFile=True)
+                    unzipFile=True,
+                    source=source)
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
                     exename + " /s /qn", wait=True, do_not_log=not log, fLOG=self.fLOG)
@@ -1183,7 +1206,8 @@ class ModuleInstall:
                temp_folder=".",
                log=False,
                options=None,
-               deps=False):
+               deps=False,
+               source=None):
         """
         update the package if necessary, we use ``pip install <module_name> --upgrade --no-deps``,
 
@@ -1193,12 +1217,16 @@ class ModuleInstall:
         @param      log             display logs or not
         @param      options         others options to add to the command line (see below) an a list
         @param      deps            download the dependencies too (only available for pip)
+        @param      source          overwrite the source of the wheel, see @see me get_exewheel_url_link2
         @return                     boolean
 
         The options mentioned in parameter ``options``
         are described here: `pip install <http://www.pip-installer.org/en/latest/usage.html>`_
         or `setup.py options <http://docs.python.org/3.4/install/>`_ if you
         installing a module from github.
+
+        .. versionchanged:: 1.1
+            Parameter *source* was added.
         """
         if ModuleInstall.is_annoying(self.name):
             return False
@@ -1218,5 +1246,5 @@ class ModuleInstall:
                     options.append(opt)
 
         res = self.install(force_kind=force_kind, force=True,
-                           temp_folder=temp_folder, log=log, options=options)
+                           temp_folder=temp_folder, log=log, options=options, source=source)
         return res

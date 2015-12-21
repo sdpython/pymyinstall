@@ -84,6 +84,7 @@ Versions
     * **change:** improve modules set definition ``pymy_install3 --set=<module_set>``
     * **fix:** fix issues while update numpy and networkx, add module *qgrid*
     * **add:** function *download_module*
+    * **add:** another source for the wheels can be specified
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup

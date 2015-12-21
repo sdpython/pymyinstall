@@ -60,16 +60,16 @@ class TestUpdateModule (unittest.TestCase):
 
             try:
                 mod = ModuleInstall("joblib", "pip", fLOG=fLOG)
-                mod.update(temp_folder=temp)
+                mod.update(temp_folder=temp, source="2")
             except MissingInstalledPackageException:
                 # not installed
                 pass
 
             mod = ModuleInstall("pandas", "wheel", fLOG=fLOG)
-            mod.update(temp_folder=temp)
+            mod.update(temp_folder=temp, source="2")
 
             mod = ModuleInstall("xlrd", "pip", fLOG=fLOG)
-            mod.update(temp_folder=temp)
+            mod.update(temp_folder=temp, source="2")
 
 
 if __name__ == "__main__":

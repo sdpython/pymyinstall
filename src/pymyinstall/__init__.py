@@ -42,6 +42,24 @@ def check(log=False):
     """
     return True
 
+
+def is_travis_or_appveyor():
+    """
+    tells if is a travis environment or appveyor
+
+    :return:        travis, appveyor or None
+
+    .. versionadded:: 1.1
+    """
+    import sys
+    if "travis" in sys.executable:
+        return "travis"
+    import os
+    if os.environ["USERNAME"] == "appveyor":
+        return "appveyor"
+    return None
+
+
 from .installhelper.install_cmd_helper import run_cmd, unzip_files
 from .installhelper.module_install import ModuleInstall
 from .installcustom.install_custom import download_from_sourceforge, download_file, download_page

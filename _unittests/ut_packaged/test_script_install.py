@@ -90,7 +90,7 @@ class TestScriptInstall(unittest.TestCase):
 
         exe = sys.executable
 
-        cmd = exe + " " + script + " --schedule --set=minimal"
+        cmd = exe + " " + script + " --schedule --set=minimal --source=2"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         fLOG(out)
         fLOG("---")
@@ -98,7 +98,7 @@ class TestScriptInstall(unittest.TestCase):
         if "check module:  flake8" not in out and sys.version_info[0] > 2:
             raise Exception(out + "\nERR:\n" + str(err))
 
-        cmd = exe + " " + scriptu + " --schedule --set=minimal"
+        cmd = exe + " " + scriptu + " --schedule --set=minimal --source=2"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if "check module:  flake8" not in out and sys.version_info[0] > 2:
             raise Exception(out + "\nERR:\n" + str(err))

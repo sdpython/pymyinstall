@@ -68,7 +68,7 @@ class TestDownload2 (unittest.TestCase):
 
         if sys.platform.startswith("win"):
             m = ModuleInstall("Kivy", "wheel", mname="kivy", fLOG=fLOG)
-            whl = m.download(temp_folder=temp)
+            whl = m.download(temp_folder=temp, source="2")
             assert os.path.exists(whl)
 
 

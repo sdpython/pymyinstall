@@ -58,6 +58,10 @@ def get_parser():
         nargs='*',
         default="all",
         help='update only the list of modules included in this list or all modules if not specified or equal to all')
+    parser.add_argument(
+        '--source',
+        default="",
+        help='overwrite the source of the wheels')
     return parser
 
 
@@ -65,7 +69,7 @@ def do_main(temp_folder="build/update_modules",
             skip_module=None,  # ["ete", "dataspyre", "pycuda", "cubehelix"],
             list_module=None, deps=False, schedule_only=False,
             deep_deps=False, checkings=None,
-            task="install"):
+            task="install", source=None):
     """
     calls function @see fn install_all but is meant to be added to scripts folder
 
@@ -76,12 +80,28 @@ def do_main(temp_folder="build/update_modules",
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
     @param      deep_deps       check dependencies for dependencies
     @param      checkings       if True, run checkings, do not install anything, example of values
-    @param      task            install or shebang
-                                ``""``, ``matplotlib``, ``100,end``.
+    @param      task            *install* or *shebang* or *download*
+                                ``""``, ``matplotlib``, ``100,end``,
+                                option *download* is equivalent to *checkings*
+    @param      source          overwrite the source of the wheel
 
     If *deps* is True, *list_module* cannot be empty.
+
+    .. versionchanged:: 1.1
+        Parameter *source* was added.
     """
-    if task == "install":
+    try:
+        from pymyinstall import is_travis_or_appveyor
+    except ImportError:
+        folder = os.path.normpath(os.path.join(
+            os.path.abspath(os.path.dirname(__file__)), "..", ".."))
+        sys.path.append(folder)
+        from pymyinstall import is_travis_or_appveyor
+    if is_travis_or_appveyor() and source is None:
+        source = "2"
+
+    if task in ("install", "download"):
+        checkings = checkings or task == "download"
         if checkings:
             try:
                 from pymyinstall.win_installer import import_every_module
@@ -132,7 +152,7 @@ def do_main(temp_folder="build/update_modules",
             res = install_all(temp_folder=temp_folder, verbose=True,
                               skip_module=skip_module, list_module=list_module, deps=deps,
                               schedule_only=schedule_only,
-                              deep_deps=deep_deps)
+                              deep_deps=deep_deps, source=source)
             if schedule_only:
                 print("SCHEDULED")
                 for r in res:
@@ -175,7 +195,8 @@ def main():
             list_module = res.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module, deps=res.deps, schedule_only=res.schedule,
-                deep_deps=res.deep_deps, checkings=res.check, task=res.task)
+                deep_deps=res.deep_deps, checkings=res.check, task=res.task,
+                source=res.source if res.source else None)
 
 
 if __name__ == "__main__":

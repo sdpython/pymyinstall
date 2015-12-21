@@ -53,7 +53,7 @@ class TestDownloadBlaze (unittest.TestCase):
 
         if sys.platform.startswith("win"):
             m = ModuleInstall("blaze", "pip", fLOG=fLOG)
-            whl = m.download(temp_folder=temp)
+            whl = m.download(temp_folder=temp, source="2")
             assert os.path.exists(whl)
 
 

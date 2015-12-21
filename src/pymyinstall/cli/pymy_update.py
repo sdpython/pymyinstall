@@ -31,6 +31,10 @@ def get_parser():
         default="-",
         help='set of module to install, see documentation of function get_name_set to get a comprehensive list, this option is ignored if a module is specified on the command line')
     parser.add_argument(
+        '--source',
+        default="",
+        help='overwrite the source of the wheels')
+    parser.add_argument(
         '--schedule',
         action='store_true',
         help='do not update the modules, returned the list scheduled to be updated')
@@ -44,7 +48,7 @@ def get_parser():
 
 def do_main(temp_folder="build/update_modules",
             skip_module=["ete", "dataspyre", "pycuda", "cubehelix"],
-            list_module=None, schedule_only=False):
+            list_module=None, schedule_only=False, source=None):
     """
     calls function @see fn update_all but is meant to be added to scripts folder
 
@@ -52,7 +56,18 @@ def do_main(temp_folder="build/update_modules",
     @param      skip_module     skip the module on this list
     @param      list_module     list of modules to update or None for all
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
+    @param      source          overwrite the source of the wheels
     """
+    try:
+        from pymyinstall import is_travis_or_appveyor
+    except ImportError:
+        folder = os.path.normpath(os.path.join(
+            os.path.abspath(os.path.dirname(__file__)), "..", ".."))
+        sys.path.append(folder)
+        from pymyinstall import is_travis_or_appveyor
+    if is_travis_or_appveyor() and source is None:
+        source = "2"
+
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
     try:
@@ -64,7 +79,7 @@ def do_main(temp_folder="build/update_modules",
         from pymyinstall.packaged import update_all
     res = update_all(temp_folder=temp_folder, verbose=True,
                      skip_module=skip_module, list_module=list_module,
-                     schedule_only=schedule_only)
+                     schedule_only=schedule_only, source=source)
     if schedule_only:
         print("SCHEDULED")
         for r in res:
@@ -91,7 +106,8 @@ def main():
         if list_module is None and res.set is not None and len(res.set) > 0 and res.set != "-":
             list_module = res.set
         do_main(temp_folder=res.folder, skip_module=skip_module,
-                list_module=list_module, schedule_only=res.schedule)
+                list_module=list_module, schedule_only=res.schedule,
+                source=res.source if res.source else None)
 
 
 if __name__ == "__main__":

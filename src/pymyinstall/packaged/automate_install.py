@@ -107,7 +107,8 @@ def reorder_module_list(list_module):
 
 def update_all(temp_folder=".", fLOG=print, verbose=True,
                list_module=None, reorder=True,
-               skip_module=None, schedule_only=False):
+               skip_module=None, schedule_only=False,
+               source=None):
     """
     update modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -120,15 +121,17 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     @param      reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
     @param      skip_module     module to skip (list of str)
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
+    @param      source          overwrite the wheels location, see @see me get_exewheel_url_link2
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
     See the function to get the list of possible name sets.
 
-    .. versionchanged:: 1.3
+    .. versionchanged:: 1.1
         Catch an exception while updating modules and walk through the end of the list.
         The function should be run a second time to make sure an exception remains.
         It can be due to python keeping in memory an updated module.
+        Parameter *source* was added.
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -193,7 +196,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
                 .format(mod.name, inst, ver, mod.kind)
             fLOG(m)
             try:
-                b = mod.update(temp_folder=temp_folder, log=verbose)
+                b = mod.update(temp_folder=temp_folder,
+                               log=verbose, source=source)
             except (SystemExit, Exception) as e:
                 b = False
                 m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
@@ -221,7 +225,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 list_module=None, reorder=True, skip_module=None,
                 up_pip=True, skip_missing=False, deps=False,
                 schedule_only=False, deep_deps=False,
-                _memory=None):
+                _memory=None, source=None):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -239,6 +243,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
     @param      deep_deps       check dependencies for dependencies
     @param      _memory         stores installed packages, avoid going into an infinite loop
+    @param      source          overwrite the location of the wheels, see @see me get_exewheel_url_link2
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
@@ -252,6 +257,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
     If you want to install a specific module with its dependencies, I suggest
     to use option *deep_deps*.
+
+    .. versionadded:: 1.1
     """
     if _memory is None:
         _memory = {}
@@ -310,10 +317,11 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                     fLOG("[loopi] check dependencies: ", mod.name)
                     install_module_deps(mod.name, temp_folder=temp_folder,
                                         fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
-                                        _memory=_memory)
+                                        _memory=_memory, source=source)
                 else:
                     try:
-                        b = mod.install(temp_folder=temp_folder, log=verbose)
+                        b = mod.install(temp_folder=temp_folder,
+                                        log=verbose, source=source)
                     except (SystemExit, Exception) as e:
                         b = False
                         m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
@@ -347,7 +355,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
 
 def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True,
-                        deep_deps=False, _memory=None):
+                        deep_deps=False, _memory=None, source=None):
     """
     install a module with its dependencies,
     if a module is already installed, it installs the missing dependencies
@@ -359,11 +367,14 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
     @param      deps                add dependencies
     @param      deep_deps           check dependencies for dependencies
     @param      _memory             stores installed packages, avoid going into an infinite loop
+    @param      source              overwrite the wheels location, see @see me get_exewheel_url_link2
     @return                         list of installed modules
 
     The function does not handle properly contraints on versions.
     It checks in the registered list of modules if *name* is present.
     If it is the case, it uses it, otherwise, it uses *pip*.
+
+    .. versionadded:: 1.1
     """
     if _memory is None:
         _memory = {}
@@ -375,7 +386,7 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=[name], reorder=True, up_pip=False,
                     skip_missing=True, _memory=memory2, deps=False,
-                    deep_deps=False)
+                    deep_deps=False, source=source)
         installed.append(name)
 
     stack = [name]
@@ -398,7 +409,8 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         fLOG("[deps] installation of ", inst)
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=inst, reorder=True, up_pip=False,
-                    skip_missing=True, deep_deps=deep_deps, _memory=_memory)
+                    skip_missing=True, deep_deps=deep_deps,
+                    _memory=_memory, source=source)
         stack.extend(inst)
         installed.extend(inst)
         for i in inst:
@@ -411,7 +423,7 @@ def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
                    reorder=True, skip_module=None,
                    up_pip=True, skip_missing=False, deps=False,
                    schedule_only=False, deep_deps=False,
-                   _memory=None):
+                   _memory=None, source=None):
     """
     install a module
 
@@ -427,8 +439,9 @@ def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
     @param      deep_deps       check dependencies for dependencies
     @param      _memory         stores installed packages, avoid going into an infinite loop
+    @param      source          overwrite the wheels location, see @see me get_exewheel_url_link2
 
-    .. versionadded:: 1.3
+    .. versionadded:: 1.1
     """
     if not isinstance(module_name, list):
         module_name = [module_name]
@@ -436,12 +449,12 @@ def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
                 verbose=verbose, reorder=reorder, skip_module=skip_module,
                 up_pip=up_pip, skip_missing=skip_missing, deps=deps,
                 schedule_only=schedule_only, deep_deps=deep_deps,
-                _memory=_memory)
+                _memory=_memory, source=source)
 
 
 def update_module(module_name, temp_folder=".", fLOG=print, verbose=True,
-                  reorder=True,
-                  skip_module=None, schedule_only=False):
+                  reorder=True, skip_module=None, schedule_only=False,
+                  source=None):
     """
     update modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -454,18 +467,19 @@ def update_module(module_name, temp_folder=".", fLOG=print, verbose=True,
     @param      reorder         reorder the modules to update first modules with less dependencies (as much as as possible)
     @param      skip_module     module to skip (list of str)
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
+    @param      source          overwrite the wheels location, see @see me get_exewheel_url_link2
     """
     if not isinstance(module_name, list):
         module_name = [module_name]
     update_all(list_module=module_name, temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
-               reorder=reorder,
-               skip_module=skip_module, schedule_only=schedule_only)
+               reorder=reorder, skip_module=skip_module, schedule_only=schedule_only,
+               source=source)
 
 
 def download_module(module_name,
                     temp_folder=".", force=False,
                     unzipFile=True, file_save=None, deps=False,
-                    fLOG=print):
+                    source=None, fLOG=print):
     """
     download the module without installation
 
@@ -474,6 +488,7 @@ def download_module(module_name,
     @param      unzipFile       if it can be unzipped, it will be (for github, mostly)
     @param      file_save       for debug purposes, do not change it unless you know what you are doing
     @param      deps            download the dependencies too (only available for pip)
+    @param      source          overwrite the wheels location, see @see me get_exewheel_url_link2
     @return                     downloaded files
     """
     if not isinstance(module_name, list):
@@ -489,7 +504,7 @@ def download_module(module_name,
         k = mod.fLOG
         mod.fLOG = fLOG
         f = mod.download(temp_folder=temp_folder, force=force,
-                         unzipFile=unzipFile, file_save=file_save, deps=deps)
+                         unzipFile=unzipFile, file_save=file_save, deps=deps, source=source)
         mod.fLOG = k
         res.append(f)
     return res

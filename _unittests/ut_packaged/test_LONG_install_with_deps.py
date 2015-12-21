@@ -79,7 +79,7 @@ class TestInstallWithDeps(unittest.TestCase):
         script = ["import sys",
                   "sys.path.append('{0}')".format(src),
                   "from pymyinstall.packaged import install_module_deps",
-                  "install_module_deps('imbox', temp_folder='{0}')".format(
+                  "install_module_deps('imbox', temp_folder='{0}', source='2')".format(
                       temp),
                   ]
 

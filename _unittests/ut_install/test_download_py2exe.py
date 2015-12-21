@@ -54,7 +54,7 @@ class TestDownloadPy2exe(unittest.TestCase):
         if sys.platform.startswith("win"):
             m = find_module_install("py2exe")
             m.fLOG = fLOG
-            whl = m.download(temp_folder=temp)
+            whl = m.download(temp_folder=temp, source="2")
             assert os.path.exists(whl)
             assert os.stat(whl).st_size > 1000
 
