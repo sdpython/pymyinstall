@@ -209,10 +209,12 @@ def enumerate_links_module(name, alls, version, plat):
     """
     version = "%d%d" % version[:2]
     lname = name.lower()
+    lname_ = lname.replace("-", "_") + "-"
+    lname += "-"
     for a in alls:
         n = a[0]
         ln = n.lower()
-        if ln.startswith(lname) and plat in ln:
+        if (ln.startswith(lname) or ln.startswith(lname_)) and plat in ln:
             vers = ("cp" + version, "py" + version)
             good = False
             for v in vers:

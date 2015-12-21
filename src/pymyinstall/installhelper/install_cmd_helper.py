@@ -13,7 +13,6 @@ import subprocess
 import datetime
 import re
 from .module_install_exceptions import UpdatePipError, RunCmdError
-from .install_cmd_regex import regex_wheel_version
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
@@ -585,25 +584,6 @@ def has_pip():
         return pip is not None
     except ImportError:
         return False
-
-
-def get_wheel_version(whlname):
-    """
-    extract the version from a wheel file,
-    return ``2.6.0`` for ``rpy2-2.6.0-cp34-none-win_amd64.whl``
-
-    @param      whlname     file name
-    @return                 string
-    """
-    exp = re.compile(regex_wheel_version)
-    find = exp.findall(whlname)
-    if len(find) == 0:
-        raise ValueError(
-            "[get_wheel_version] unable to extract version of {0} (pattern: {1})".format(whlname, exp.pattern))
-    if len(find) > 1:
-        raise ValueError(
-            "[get_wheel_version] unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))
-    return find[0][0]
 
 
 def is_conda_distribution():

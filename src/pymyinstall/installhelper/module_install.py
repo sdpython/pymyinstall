@@ -3,9 +3,9 @@
 @brief Various function to install various python module from various location.
 """
 from __future__ import print_function
-from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_wheel_version, get_conda_program, is_conda_distribution
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_conda_program, is_conda_distribution
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException, WrongWheelException
-from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent
+from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent, get_wheel_version
 from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel, enumerate_links_module, extract_all_links
 from .missing_license import missing_module_licenses
 from .internet_settings import default_user_agent
@@ -306,7 +306,7 @@ class ModuleInstall:
             source = ModuleInstall.exeLocationXd_Default
         source_page = source.rstrip("/") + "/index_modules_list.html"
 
-        if "cached_page" not in self.__dict__:
+        if "cached_page2" not in self.__dict__:
             page = ModuleInstall._page_cache_html2
 
             exi = os.path.exists(page)
@@ -345,6 +345,10 @@ class ModuleInstall:
         cp = "cp%d%d" % sys.version_info[:2]
         links = [_ for _ in alls if "/" +
                  self.name in _ and cp in _ and plat in _]
+        if len(links) == 0 and "-" in self.name:
+            name_ = self.name.replace("-", "_")
+            links = [_ for _ in alls if "/" +
+                     name_ in _ and cp in _ and plat in _]
         if len(links) == 0:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:

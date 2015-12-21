@@ -110,6 +110,8 @@ def anaconda_set():
             gensim
             --geos
             greenlet
+            guidata
+            guiqwt
             --gunicorn Linux Mac
             h5py
             --hdf5
@@ -215,7 +217,7 @@ def anaconda_set():
             pyopengl-accelerate
             pyopenssl
             pyparsing
-            --pyqt
+            PyQt4
             --pyramid
             pyreadline Windows
             pyserial
@@ -227,6 +229,7 @@ def anaconda_set():
             --pytest-pep8
             --python
             python-dateutil
+            pythonqwt
             pytz
             --pywget
             pywin32 Windows

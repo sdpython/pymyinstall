@@ -2,8 +2,10 @@
 @file
 @brief Functions to get module version, license, dependencies
 """
-from .install_cmd_helper import run_cmd, get_pip_program, regex_wheel_version
+from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
+from .install_cmd_regex import regex_wheel_version
+from .module_install_version import regex_wheel_version
 
 import sys
 import re
@@ -667,3 +669,22 @@ def choose_most_recent(list_name):
 
     list_name = list(sorted(list_name, key=functools.cmp_to_key(cmp)))
     return list_name[-1][-1]
+
+
+def get_wheel_version(whlname):
+    """
+    extract the version from a wheel file,
+    return ``2.6.0`` for ``rpy2-2.6.0-cp34-none-win_amd64.whl``
+
+    @param      whlname     file name
+    @return                 string
+    """
+    exp = re.compile(regex_wheel_version)
+    find = exp.findall(whlname)
+    if len(find) == 0:
+        raise ValueError(
+            "[get_wheel_version] unable to extract version of {0} (pattern: {1})".format(whlname, exp.pattern))
+    if len(find) > 1:
+        raise ValueError(
+            "[get_wheel_version] unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))
+    return find[0][0]

@@ -62,7 +62,7 @@ def small_set():
         ModuleInstall(
             "pyzmq", "pip", mname="zmq", purpose="python librairies for Omz (pipy distributes the binaries)", usage="NETWORK"),
         ModuleInstall(
-            "pycparser", "wheel", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
+            "pycparser", "pip", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
         ModuleInstall("Cython", "wheel", mname="cython",
                       purpose="pseudo C++ in python"),
         ModuleInstall("numpy", "wheel",
@@ -78,7 +78,7 @@ def small_set():
         ModuleInstall(
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
-            "networkx", "wheel", purpose="graph libraries, basic drawing", usage="VIZ"),
+            "networkx", "pip", purpose="graph libraries, basic drawing", usage="VIZ"),
         ModuleInstall(
             "graphviz", "pip", purpose="wrapper for graphviz (most famous tool to draw graphs", usage="VIZ"),
         ModuleInstall(
@@ -87,7 +87,7 @@ def small_set():
             "mistune", "pip", purpose="The fastest markdown parser in pure Python with renderer features, inspired by marked."),
         ModuleInstall("wheel", "pip", purpose="handle wheels"),
         ModuleInstall(
-            "alabaster", "wheel", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
+            "alabaster", "pip", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
         ModuleInstall(
             "babel", "pip", version="1.3", mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
         ModuleInstall(
@@ -121,7 +121,7 @@ def small_set():
         ModuleInstall(
             "netCDF4", "wheel", mname="netCDF4", purpose="xray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
         ModuleInstall(
-            "xray", "wheel", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
+            "xray", "pip", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
         ModuleInstall(
             "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
         ModuleInstall(
@@ -209,7 +209,7 @@ def small_set():
         ModuleInstall("requests-cache", "pip", mname="requests_cache",
                       purpose="Persistent cache for requests library"),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
-        #ModuleInstall("PyQt",           "wheel", mname="PyQt4", usage="GUI"),
+        ModuleInstall("PyQt4", "wheel", mname="pyqt", usage="GUI"),
         ModuleInstall(
             "PySide", "wheel", purpose="open source version of PyQt (issue on Linux and Anaconda)", usage="GUI"),
         ModuleInstall(
@@ -219,7 +219,13 @@ def small_set():
         ModuleInstall(
             "pylint", "pip", purpose="statistics on Python script style"),  #
         ModuleInstall(
-            "spyder", "wheel", mname="spyderlib", purpose="scientific IDE"),
+            "guidata", "pip", purpose="Automatic graphical user interfaces generation for easy dataset editing and display (Spyder)"),
+        ModuleInstall(
+            "pythonqwt", "pip", purpose="Qt plotting widgets (Spyder)"),
+        ModuleInstall(
+            "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
+        ModuleInstall(
+            "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
@@ -264,7 +270,7 @@ def small_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip",
                       purpose="slides based on revealjs, needed to convert notebook into slides"),
-        ModuleInstall("feedparser", "wheel", purpose="parse RSS streams"),
+        ModuleInstall("feedparser", "pip", purpose="parse RSS streams"),
         ModuleInstall(
             "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),
         ModuleInstall(

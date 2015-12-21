@@ -37,7 +37,7 @@ def extended_set():
         ModuleInstall(
             'cffi', 'wheel', purpose="Foreign Function Interface for Python calling C code."),
         ModuleInstall(
-            'odo', 'wheel', purpose="usually used with blaze, handles dataframe in various type of containers", usage="DATA/ML"),
+            'odo', 'pip', purpose="usually used with blaze, handles dataframe in various type of containers", usage="DATA/ML"),
         ModuleInstall(
             'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
         ModuleInstall(
@@ -60,7 +60,7 @@ def extended_set():
         ModuleInstall(
             'llvmlite', 'wheel', purpose="lightweight wrapper around basic LLVM functionality, check issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll"),
         ModuleInstall(
-            'blaze', 'wheel', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets, check issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll",
+            'blaze', 'pip', purpose="separate expression from computation (works with iterators), used with odo, avoids doing everything in memory, handle better large datasets, check issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll",
             usage="DATA/ML"),
         ModuleInstall(
             'numba', 'wheel', purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
@@ -193,7 +193,7 @@ def extended_set():
         ModuleInstall(
             "libpython", "wheel", purpose="needed for theano (C++ compilation), compilation of libpython with mingw"),
         ModuleInstall(
-            "Theano", "wheel", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
+            "Theano", "pip", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
         ModuleInstall('pymc', 'wheel',
                       purpose="Monte Carlo computation", usage="DATA/ML"),
         ModuleInstall('pymc', 'wheel', web="https://github.com/pymc-devs/pymc",
@@ -228,7 +228,7 @@ def extended_set():
         ModuleInstall(
             "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas, bcolz and more."),
         #
-        ModuleInstall("glueviz", "wheel", mname="glue",
+        ModuleInstall("glueviz", "pip", mname="glue",
                       purpose="ploting, Multidimensional data visualzation across files", usage="DATA/ML"),
         #
         ModuleInstall("pandas-highcharts", "pip", mname="pandas_highcharts",

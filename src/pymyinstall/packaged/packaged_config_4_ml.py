@@ -72,7 +72,7 @@ def ensae_set():
         ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
         #ModuleInstall("Lasagne", "pip", mname="lasagne"),
         ModuleInstall(
-            "nltk", "wheel", purpose="NLP, natural language processing", usage="NLP"),
+            "nltk", "pip", purpose="NLP, natural language processing", usage="NLP"),
         ModuleInstall(
             "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, classification, translation, and more."),
         ModuleInstall(
@@ -108,7 +108,7 @@ def ensae_set():
         ModuleInstall(
             "NLopt", "wheel", mname="nlopt", purpose="linear, quadratic optimization",
             web="http://ab-initio.mit.edu/wiki/index.php/NLopt", usage="DATA/ML"),
-        ModuleInstall("Pmw", "wheel", mname="Pmw",
+        ModuleInstall("Pmw", "pip", mname="Pmw",
                       purpose="Pmw is a toolkit for building high-level compound widgets in Python using the Tkinter module."),
         ModuleInstall(
             "appdirs", "pip", purpose="for pytool, A small Python module for determining appropriate + platform-specific dirs, e.g. a 'user data dir'."),
@@ -200,7 +200,7 @@ def ensae_set():
         #
         # pydata
         #
-        ModuleInstall("CherryPy", "wheel", mname="cherrypy",
+        ModuleInstall("CherryPy", "pip", mname="cherrypy",
                       purpose="create web application, needed by Spyre"),
         ModuleInstall("dataspyre", "pip", mname="spyre",
                       purpose="create simple web application to visualize data", usage="VIZ"),

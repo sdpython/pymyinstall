@@ -99,3 +99,10 @@ class WrongWheelException(Exception):
     raised when the downloaded wheel seems wrong
     """
     pass
+
+
+class UnavailableCustomBuildError(Exception):
+    """
+    raise when a module does not have a custom build
+    """
+    pass
