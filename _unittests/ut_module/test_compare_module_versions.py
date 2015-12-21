@@ -75,8 +75,9 @@ class TestCompareVersion(unittest.TestCase):
             cmp = compare_version(v1, v2)
             if cmp != 0:
                 fLOG("---", i, v1, v2, mod.name)
+                diff.append(mod)
 
-        self.assertEqual(len(diff), 0)
+        assert len(diff) <= 5
 
 
 if __name__ == "__main__":
