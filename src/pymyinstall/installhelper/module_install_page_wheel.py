@@ -157,7 +157,7 @@ class HTMLParser4Links(HTMLParser):
         """
         constructor
         """
-        HTMLParser.__init__(self)
+        HTMLParser.__init__(self, convert_charrefs=True)
         self.links = []
         self.current = None
 
