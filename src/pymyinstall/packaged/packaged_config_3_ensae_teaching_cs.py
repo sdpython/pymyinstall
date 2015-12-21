@@ -13,6 +13,7 @@ def ensae_teaching_cs_set():
     names = pyensae_set()
     names += [
         "basemap",
+        "bayespy",
         "bokeh",
         "cartopy",
         "cvxopt",
@@ -22,6 +23,7 @@ def ensae_teaching_cs_set():
         "django",
         "ggplot",
         "graphviz",
+        "h5py",
         "ipyparallel",
         "keyring",
         "mpld3",

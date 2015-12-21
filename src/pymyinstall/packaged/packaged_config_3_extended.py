@@ -143,8 +143,8 @@ def extended_set():
         #
         ModuleInstall(
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
-        ModuleInstall("pycrypto", "wheel_xd", mname="Crypto",
-                      purpose="Cryptographic modules for Python (not available on x64 and Python 3)") if sys.version_info[0] >= 3 and is_64bit() else None,
+        ModuleInstall("pycryptodome", "pip", mname="Crypto",
+                      purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
         ModuleInstall("paramiko", "pip",
                       purpose="SSH2 protocol library", usage="NETWORK"),
         #
@@ -307,7 +307,7 @@ def extended_set():
         ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
-            "xgboost", "wheel_xd", purpose="Parallelized Stochastic Gradient Descent (only available on Python 3 and x64)", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
+            "xgboost", "wheel2", purpose="Parallelized Stochastic Gradient Descent (only available on Python 3 and x64)", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
         ModuleInstall("pygling", "pip",
                       purpose="to build makefile with python") if sys.version_info[0] == 2 else None,
         ModuleInstall("cuda4py", "pip",

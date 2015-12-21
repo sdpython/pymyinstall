@@ -26,7 +26,7 @@ def pyensae_set():
         "requests_file",
         "pandas_datareader",
         "paramiko",  # ssh
-        "pycrypto",  # paramiko
+        "pycryptodrome",  # paramiko
         "pyquickhelper",
         "qgrid",  # magic command
         "scipy",

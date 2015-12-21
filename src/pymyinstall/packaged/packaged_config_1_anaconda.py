@@ -202,7 +202,7 @@ def anaconda_set():
             pyasn1
             pycosat
             pycparser
-            pycrypto
+            pycryptodome
             --pycurl Linux Mac
             pyflakes
             pygments

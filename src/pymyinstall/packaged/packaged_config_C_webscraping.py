@@ -25,13 +25,13 @@ def scraping_set():
             "tldextract", "pip", usage="WEB",
             purpose="Accurately separate the TLD from the registered domain and subdomains of a URL, using the Public Suffix List."),
         ModuleInstall(
-            "cchardet", "wheel_xd", usage="WEB",
+            "cchardet", "wheel", usage="WEB",
             purpose="Universal encoding detector. This library is faster than chardet."),
         ModuleInstall(
             "chardet", "pip", usage="WEB",
             purpose="Universal encoding detector."),
         ModuleInstall(
-            "aiohttp", "wheel_xd", usage="WEB",
+            "aiohttp", "wheel", usage="WEB",
             purpose="http client/server for asyncio"),
         ModuleInstall(
             "sky", "pip", usage="WEB",

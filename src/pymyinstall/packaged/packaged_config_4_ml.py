@@ -195,7 +195,7 @@ def ensae_set():
         ModuleInstall("PuLP", "wheel", mname="pulp",
                       purpose="linear, quadratique optimization with constraints", usage="DATA/ML"),
         # for pyensae unit test
-        ModuleInstall("JSAnimation", "wheel_xd",
+        ModuleInstall("JSAnimation", "wheel2",
                       purpose="provides javascript script to display differences between two files", usage="JUPYTER"),
         #
         # pydata
@@ -239,7 +239,7 @@ def ensae_set():
         ModuleInstall("cgal_bindings", "wheel", mname="CGAL",
                       purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python.",
                       web="https://github.com/cgal/cgal-swig-bindings"),
-        ModuleInstall("tifffile", "wheel_xd",
+        ModuleInstall("tifffile", "wheel",
                       purpose="Read and write image data from and to TIFF files. (for pims)"),
         ModuleInstall("slicerator", "pip",
                       purpose="A lazy-loading, fancy-sliceable iterable."),
@@ -254,7 +254,7 @@ def ensae_set():
         # this module is not on pypi and the py3k version is in a separate folder
         # i don't want to write too much specific code for it
         # i compile it into a wheel
-        ModuleInstall("skdata", "wheel_xd",
+        ModuleInstall("skdata", "wheel2",
                       purpose="Data Sets for Machine Learning in Python", usage="DATA"),
         ModuleInstall("hebel", "pip",
                       purpose="GPU-Accelerated Deep Learning Library in Python", usage="DATA/ML"),
@@ -393,8 +393,10 @@ def ensae_set():
                           purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
             ModuleInstall("streamparse", "pip",
                           purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
-            ModuleInstall("dpark", "wheel_xd",
-                          purpose="DPark is a Python clone of Spark, MapReduce(R) alike computing framework supporting iterative computation., see https://github.com/douban/dpark", usage="DATA/ML"),
+            # ModuleInstall("dpark", "wheel2",
+            # purpose="DPark is a Python clone of Spark, MapReduce(R) alike
+            # computing framework supporting iterative computation., see
+            # https://github.com/douban/dpark", usage="DATA/ML"),
         ])
 
     if sys.platform.startswith("win"):
