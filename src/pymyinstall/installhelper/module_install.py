@@ -343,12 +343,13 @@ class ModuleInstall:
         if version[1] == '64bit' and version[0] == 'win32':
             plat = "amd64"
         cp = "cp%d%d" % sys.version_info[:2]
+        pyn = "py%d" % sys.version_info[0]
         links = [_ for _ in alls if "/" +
-                 self.name in _ and cp in _ and plat in _]
+                 self.name in _ and (pyn in _ or cp in _) and plat in _]
         if len(links) == 0 and "-" in self.name:
             name_ = self.name.replace("-", "_")
             links = [_ for _ in alls if "/" +
-                     name_ in _ and cp in _ and plat in _]
+                     name_ in _ and (pyn in _ or cp in _) and plat in _]
         if len(links) == 0:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:

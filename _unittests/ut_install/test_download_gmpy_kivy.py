@@ -55,7 +55,7 @@ class TestDownload2 (unittest.TestCase):
 
         if sys.platform.startswith("win"):
             m = ModuleInstall("gmpy2", "wheel", fLOG=fLOG)
-            whl = m.download(temp_folder=temp)
+            whl = m.download(temp_folder=temp, source="2")
             assert os.path.exists(whl)
 
     def test_install_kivy(self):
