@@ -62,7 +62,7 @@ class TestDownloadh5py_xd (unittest.TestCase):
 
         if sys.platform.startswith("win"):
             fLOG("install", "h5py")
-            m = ModuleInstall("h5py", "wheel_xd", mname="h5py", fLOG=fLOG)
+            m = ModuleInstall("h5py", "wheel2", mname="h5py", fLOG=fLOG)
             exe = m.download(
                 temp_folder=temp,
                 file_save=os.path.join(

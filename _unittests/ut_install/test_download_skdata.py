@@ -62,7 +62,7 @@ class TestDownloadSkData(unittest.TestCase):
 
         if sys.platform.startswith("win"):
             fLOG("install", "h5py")
-            m = ModuleInstall("skdata", "wheel_xd", fLOG=fLOG)
+            m = ModuleInstall("skdata", "wheel2", fLOG=fLOG)
             exe = m.download(
                 temp_folder=temp,
                 file_save=os.path.join(
