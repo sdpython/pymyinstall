@@ -70,7 +70,6 @@ def ensae_set():
         ModuleInstall("django-audiotracks", "pip",
                       mname="audiotracks", purpose="read audio with django"),
         ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
-        #ModuleInstall("Lasagne", "pip", mname="lasagne"),
         ModuleInstall(
             "nltk", "pip", purpose="NLP, natural language processing", usage="NLP"),
         ModuleInstall(
@@ -378,6 +377,19 @@ def ensae_set():
         ModuleInstall("spacy", "pip", usage="NLP",
                       purpose="Industrial-strength NLP") if sys.version_info[:2] >= (3, 5) else None,
 
+        #
+        #  2015-12
+        #
+        ModuleInstall("picklable-itertools", "pip", mname="picklable_itertools",
+                      purpose="A reimplementation of the Python standard library's itertools, in Python, using picklable iterator objects. (fuel)"),
+        ModuleInstall("progressbar2", "pip", usage="VIZ",
+                      purpose="Text progress bar library for Python. (fuel)"),
+        ModuleInstall("fuel", "pip", usage="DATA/VIZ",
+                      purpose="Fuel is a data pipeline framework which provides your machine learning models with the data they need."),
+        ModuleInstall("Lasagne", "pip", mname="lasagne", usage="DEEP LEARNING",
+                      purpose="Lasagne is a lightweight library to build and train neural networks in Theano."),
+        ModuleInstall("blocks", "pip", mname="lasagne",
+                      purpose="Blocks is a framework that helps you build neural network models on top of Theano."),
     ]
 
     if sys.version_info[0] == 2:
