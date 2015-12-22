@@ -158,7 +158,10 @@ class HTMLParser4Links(HTMLParser):
         """
         constructor
         """
-        HTMLParser.__init__(self, convert_charrefs=True)
+        if sys.version_info[0] == 2:
+            HTMLParser.__init__(self)
+        else:
+            HTMLParser.__init__(self, convert_charrefs=True)
         self.links = []
         self.current = None
 
