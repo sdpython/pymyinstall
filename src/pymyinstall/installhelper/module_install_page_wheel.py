@@ -3,7 +3,6 @@
 @brief Functions get_page_wheel
 """
 
-from html.parser import HTMLParser
 import sys
 from .install_memoize import install_memoize
 from .internet_settings import default_user_agent
@@ -11,8 +10,10 @@ from .internet_settings import default_user_agent
 if sys.version_info[0] == 2:
     import urllib2 as urllib_request
     from codecs import open
+    from HTMLParser import HTMLParser
 else:
     import urllib.request as urllib_request
+    from html.parser import HTMLParser
 
 
 @install_memoize
