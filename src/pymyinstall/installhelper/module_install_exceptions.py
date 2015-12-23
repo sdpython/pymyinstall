@@ -44,6 +44,14 @@ class MissingVersionWheelException(Exception):
     pass
 
 
+class MissingWheelException(Exception):
+
+    """
+    raised when a wheel is missing
+    """
+    pass
+
+
 class MissinReferenceException(Exception):
 
     """

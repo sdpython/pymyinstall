@@ -4,7 +4,7 @@
 """
 from __future__ import print_function
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_conda_program, is_conda_distribution
-from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException, WrongWheelException
+from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException, WrongWheelException, MissingWheelException
 from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent, get_wheel_version
 from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel, enumerate_links_module, extract_all_links
 from .missing_license import missing_module_licenses
@@ -433,7 +433,7 @@ class ModuleInstall:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
-            raise Exception("unable to find a single link for " + self.name)
+            raise MissingWheelException("unable to find a single link for " + self.name)
         links0 = links
 
         if self.name == "PyQt":

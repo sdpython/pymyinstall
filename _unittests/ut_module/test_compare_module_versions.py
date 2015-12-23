@@ -43,6 +43,7 @@ except ImportError:
 from pyquickhelper import fLOG
 from src.pymyinstall.packaged import all_set
 from src.pymyinstall.installhelper import get_wheel_version, compare_version
+from src.pymyinstall.installhelper.module_install_exceptions import MissingWheelException
 
 
 class TestCompareVersion(unittest.TestCase):
@@ -65,8 +66,17 @@ class TestCompareVersion(unittest.TestCase):
         for i, mod in enumerate(mods[0:]):
             if i % 10 == 0:
                 fLOG(i, mod)
-            url1 = mod.get_exewheel_url_link(wheel=True)
-            url2 = mod.get_exewheel_url_link2(wheel=True, source="2")
+            try:
+                url1 = mod.get_exewheel_url_link(wheel=True)
+            except MissingWheelException:
+                url1 = None
+            try:
+                url2 = mod.get_exewheel_url_link2(wheel=True, source="2")
+            except MissingWheelException:
+                url2 = None
+            if url1 is None and url2 is None:
+                fLOG("missing package on both sides", mod)
+                continue
             # fLOG(i, url1, url2)
             n1 = url1[-1]
             n2 = url2[-1]
