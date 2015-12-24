@@ -57,8 +57,8 @@ class TestModuleDependencies (unittest.TestCase):
                 local_only=False, skip=[])
             req_map = dict((p.key, (p, p.requires())) for p in pkgs)
             mat = req_map.get(name, None)
-            raise Exception(str(res) + "\n" +
-                            str(get_module_metadata(name)) + "\n" + str(mat))
+            raise Exception("len(res)={0}\nres={1}\ndata={2}\nmat={3}".format(len(res),
+                                                                              res, get_module_metadata(name), mat))
 
     def test_dependencies_matplotlib(self):
         fLOG(

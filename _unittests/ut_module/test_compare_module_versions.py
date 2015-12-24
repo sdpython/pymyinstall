@@ -64,6 +64,10 @@ class TestCompareVersion(unittest.TestCase):
 
         diff = []
         for i, mod in enumerate(mods[0:]):
+            if mod.name in ["PySide"]:
+                # skipping modules not available
+                continue
+
             if i % 10 == 0:
                 fLOG(i, mod)
             try:

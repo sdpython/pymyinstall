@@ -433,7 +433,8 @@ class ModuleInstall:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
-            raise MissingWheelException("unable to find a single link for " + self.name)
+            raise MissingWheelException(
+                "unable to find a single link for " + self.name)
         links0 = links
 
         if self.name == "PyQt":

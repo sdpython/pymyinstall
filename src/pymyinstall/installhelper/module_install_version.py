@@ -615,13 +615,15 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                 final[name] = (version, [required])
             else:
                 ex = final[name][1]
-                ex.append(required)
-                try:
-                    v = version_consensus(final[name][0], version)
-                except WrongVersionError as e:
-                    raise WrongVersionError("unable to reconcile versions:\n{0}\n{1}".format(
-                        ex, str((name, version, required)))) from e
-                final[name] = (v, ex)
+                if required not in ex:
+                    ex.append(required)
+                    try:
+                        v = version_consensus(final[name][0], version)
+                    except WrongVersionError as e:
+                        raise WrongVersionError("unable to reconcile versions:\n{0}\n{1}".format(
+                            ex, str((name, version, required)))) from e
+                    final[name] = (v, ex)
+        final = {k: (v[0], list(sorted(v[1]))) for k, v in final.items()}
         return final
     else:
         return [(name, version.strip('()') if version is not None else version, required)

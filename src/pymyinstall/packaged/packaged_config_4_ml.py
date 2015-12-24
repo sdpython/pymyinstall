@@ -390,10 +390,10 @@ def ensae_set():
                       purpose="Lasagne is a lightweight library to build and train neural networks in Theano."),
         ModuleInstall("blocks", "pip", mname="lasagne",
                       purpose="Blocks is a framework that helps you build neural network models on top of Theano."),
-        ModuleInstall("gatspy", "pip", 
+        ModuleInstall("gatspy", "pip",
                       purpose="General tools for Astronomical Time Series in Python"),
-        ModuleInstall("supersmoother", "pip", 
-                      purpose="This is an efficient implementation of Friedman's SuperSmoother [1] algorithm in pure Python. It makes use of numpy for fast numerical computation."),                      
+        ModuleInstall("supersmoother", "pip",
+                      purpose="This is an efficient implementation of Friedman's SuperSmoother [1] algorithm in pure Python. It makes use of numpy for fast numerical computation."),
     ]
 
     if sys.version_info[0] == 2:
