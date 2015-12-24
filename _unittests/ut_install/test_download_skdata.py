@@ -55,7 +55,7 @@ class TestDownloadSkData(unittest.TestCase):
 
         if sys.version_info[0] == 2:
             # skdata is not available (yet)
-            continue
+            return
 
         fold = os.path.abspath(os.path.split(__file__)[0])
         temp = os.path.join(fold, "temp_download_skdata")
