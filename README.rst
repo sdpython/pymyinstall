@@ -26,7 +26,13 @@ README / Changes
          
 .. image:: https://landscape.io/github/sdpython/pymyinstall/master/landscape.svg?style=flat
    :target: https://landscape.io/github/sdpython/pymyinstall/master
-   :alt: Code Health         
+   :alt: Code Health  
+
+.. image:: https://requires.io/github/sdpython/pymyinstall/requirements.svg?branch=master
+     :target: https://requires.io/github/sdpython/pymyinstall/requirements/?branch=master
+     :alt: Requirements Status   
+    
+
    
 **Links:**
     * `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_

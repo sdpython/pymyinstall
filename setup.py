@@ -9,7 +9,6 @@ from setuptools import find_packages
 # settings
 #########
 
-
 project_var_name = "pymyinstall"
 sversion = "1.1"
 versionPython = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
@@ -20,14 +19,13 @@ readme = 'README.rst'
 KEYWORDS = project_var_name + ', installation, Xavier Dupré'
 DESCRIPTION = """Easy installation of modules for data scientists"""
 CLASSIFIERS = [
-    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: %d' % sys.version_info[0],
     'Intended Audience :: Developers',
     'Topic :: Scientific/Engineering',
     'Topic :: Education',
     'License :: OSI Approved :: MIT License',
     'Development Status :: 5 - Production/Stable'
 ]
-
 
 #######
 # data
@@ -44,7 +42,6 @@ package_data = {
 ############
 # functions
 ############
-
 
 def is_local():
     file = os.path.abspath(__file__).replace("\\", "/").lower()

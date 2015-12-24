@@ -29,6 +29,10 @@ pymyinstall documentation
    :target: https://landscape.io/github/sdpython/pymyinstall/master
    :alt: Code Health         
 
+.. image:: https://requires.io/github/sdpython/pymyinstall/requirements.svg?branch=master
+     :target: https://requires.io/github/sdpython/pymyinstall/requirements/?branch=master
+     :alt: Requirements Status   
+    
    
 **Links:** `pypi <https://pypi.python.org/pypi/pymyinstall/>`_,
 `github <https://github.com/sdpython/pymyinstall/>`_,
