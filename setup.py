@@ -43,6 +43,7 @@ package_data = {
 # functions
 ############
 
+
 def is_local():
     file = os.path.abspath(__file__).replace("\\", "/").lower()
     if "/temp/" in file and "pip-" in file:
