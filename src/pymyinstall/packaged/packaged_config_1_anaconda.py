@@ -286,7 +286,7 @@ def anaconda_set():
             --unxutils Windows
             --util-linux Linux
             --venusian
-            virtualenv
+            --virtualenv
             vispy
             w3lib
             --webob
