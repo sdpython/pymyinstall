@@ -587,11 +587,12 @@ def has_pip():
 
 def is_conda_distribution():
     """
-    tells if it a conda distribution or not,
-    check the expression ``Continuum Analytics`` in ``sys.version``
+    tells if it is a conda distribution or not,
+    check the presence of ``Continuum Analytics`` 
+    or ``|Anaconda`` in ``sys.version``.
 
     @return         boolean
 
     .. versionadded:: 1.1
     """
-    return "Continuum Analytics" in sys.version
+    return "Continuum Analytics" in sys.version or "|Anaconda" in sys.version
