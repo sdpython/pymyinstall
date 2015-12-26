@@ -39,6 +39,10 @@ def install_jenkins(dest_folder=".", fLOG=print, install=True, version=None):
 
     if install:
         unzip_files(outfile, whereTo=dest_folder, fLOG=fLOG)
+        z = os.path.join(dest_folder, "jenkins.zip")
+        if not os.path.exists(z):
+            raise FileNotFoundError(z)
+        unzip_files(z, whereTo=dest_folder, fLOG=fLOG)
         return outfile
     else:
         return outfile

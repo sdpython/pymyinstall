@@ -1,10 +1,13 @@
 """
-@brief      test log(time=45s)
+@brief      test log(time=20s)
+
+skip this test for regular run
 """
 
 import sys
 import os
 import unittest
+import re
 
 try:
     import src
@@ -38,30 +41,27 @@ except ImportError:
     import pyquickhelper
 
 
-from src.pymyinstall.installcustom import install_jenkins
-from pyquickhelper import fLOG, get_temp_folder
+from src.pymyinstall.installcustom import install_python
+from pyquickhelper import fLOG
 
 
-class TestJenkins(unittest.TestCase):
+class TestDownloadPython (unittest.TestCase):
 
-    def test_install_jenkins(self):
+    def test_install_python(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-
-        if sys.version_info[0] == 2:
-            return
-
-        temp = get_temp_folder(__file__, "temp_jenkins")
+        fold = os.path.abspath(os.path.split(__file__)[0])
+        temp = os.path.join(fold, "temp_python")
+        if not os.path.exists(temp):
+            os.mkdir(temp)
+        for _ in os.listdir(temp):
+            if os.path.isfile(os.path.join(temp, _)):
+                os.remove(os.path.join(temp, _))
 
         if sys.platform.startswith("win"):
-            r = install_jenkins(temp, fLOG=fLOG, install=True)
-            fLOG(r)
-            exe = os.path.abspath(r)
-            z = os.path.join(temp, "jenkins.zip")
-            assert os.path.exists(z)
-
+            local = install_python(install=True, temp_folder=temp, fLOG=fLOG)
 
 if __name__ == "__main__":
     unittest.main()
