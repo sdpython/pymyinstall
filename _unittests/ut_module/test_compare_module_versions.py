@@ -58,7 +58,7 @@ class TestCompareVersion(unittest.TestCase):
             # useful only on Windows
             return
 
-        if not sys.version_info[0] == 2:
+        if sys.version_info[0] == 2:
             # not maintaining for Python 2.7
             return
 
