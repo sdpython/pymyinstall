@@ -15,6 +15,7 @@ import functools
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
     import xmlrpclib as xmlrpc_client
+    TimeoutError = Exception
 else:
     import xmlrpc.client as xmlrpc_client
     from importlib import reload
