@@ -67,6 +67,7 @@ def pyquickhelper_set():
         "psutil",
         "ptyprocess" if not sys.platform.startswith("win") else None,
         "pycparser",
+        "pycryptodome",
         "pyflakes",
         "pygments",
         "pyparsing",
