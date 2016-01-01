@@ -33,6 +33,8 @@ def small_set():
                       purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree."),
         ModuleInstall(
             "coverage", "pip", purpose="measure the coverage of unit tests"),
+        ModuleInstall(
+            "codecov", "pip", purpose="submit coverage report to codecov"),
         ModuleInstall("nose", "pip", purpose="run unit tests"),
         ModuleInstall(
             "pytz", "pip", purpose="World timezone definitions, modern and historical"),

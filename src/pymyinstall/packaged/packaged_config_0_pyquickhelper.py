@@ -15,6 +15,7 @@ def pyquickhelper_set():
         "autopep8",
         "babel",
         "certifi",
+        "codecov",
         "colorama",
         "coverage",
         "Cython",
