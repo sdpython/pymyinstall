@@ -320,7 +320,6 @@ def get_pip_program(exe=None):
     get pip executable + fix an issue with PANDOC
 
     @param      exe             path to python executable
-    @param      pandoc_path     if None, call @see fn find_pandoc_path
     @return                     pip executable
 
     @FAQ(How can I check the dependencies?)
@@ -459,7 +458,6 @@ def get_conda_program(exe=None):
     get conda executable + fix an issue with PANDOC
 
     @param      exe             path to python executable
-    @param      pandoc_path     if None, call @see fn find_pandoc_path
     @return                     conda executable
     """
     tried = []
