@@ -32,7 +32,9 @@ README / Changes
      :target: https://requires.io/github/sdpython/pymyinstall/requirements/?branch=master
      :alt: Requirements Status   
     
-
+.. image:: https://codecov.io/github/codecov/pymyinstall/coverage.svg?branch=master
+    :target: https://codecov.io/github/codecov/pymyinstall?branch=master
+    
    
 **Links:**
     * `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_
@@ -75,7 +77,7 @@ Source of the packages:
 Versions
 --------
 
-* **1.1 - 2015/??/??**
+* **1.1 - 2016/??/??**
     * **fix:** module dynd is only available on Python 3, remove it for Python 2.7
     * **fix:** fix function *create_win_batches* (batch script ipython were missing, batch to update all installed packages)
     * **change:** the function *update_all* continues if an update fails (catches excptions)
