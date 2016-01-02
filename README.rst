@@ -32,8 +32,8 @@ README / Changes
      :target: https://requires.io/github/sdpython/pymyinstall/requirements/?branch=master
      :alt: Requirements Status   
     
-.. image:: https://codecov.io/github/codecov/pymyinstall/coverage.svg?branch=master
-    :target: https://codecov.io/github/codecov/pymyinstall?branch=master
+.. image:: https://codecov.io/github/sdpython/pymyinstall/coverage.svg?branch=master
+    :target: https://codecov.io/github/sdpython/pymyinstall?branch=master
     
    
 **Links:**
