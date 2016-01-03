@@ -70,7 +70,8 @@ class ModuleInstall:
                  deps=None,
                  purpose=None,
                  usage=None,
-                 web=None):
+                 web=None,
+                 source=None):
         """
         constructor
 
@@ -87,6 +88,11 @@ class ModuleInstall:
         @param      purpose         purpose of the module
         @param      usage           main usage for the module
         @param      web             website for the module, if None, default to pipy
+        @param      source          to overwrite parameter *source* of methods
+                                    @see me download, @see me install or @see me update.
+
+        .. versionchanged:: 1.1
+            Parameter *source* was added.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -103,6 +109,7 @@ class ModuleInstall:
         self.purpose = purpose
         self.usage = usage
         self.existing_version = None
+        self.source = source
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -502,8 +509,10 @@ class ModuleInstall:
             *deps* is overwritten by *self.deps* if not None
 
         .. versionchanged:: 1.1
-            Parameter *source* was added.
+            Parameter *source* was added, if None, it is overwritten by *self.source*.
         """
+        if source is None:
+            source = self.source
         kind = self.kind
 
         deps = deps if self.deps is None else self.deps
@@ -880,8 +889,10 @@ class ModuleInstall:
             On Anaconda (based on function @see fn is_conda_distribution), we try *conda* first
             before switching to the regular way if it did not work.
             Exception were changed from ``Exception`` to ``InstallError``.
-            Parameter *source* was added.
+            Parameter *source* was added, if None, it is overwritten by *self.source*.
         """
+        if source is None:
+            source = self.source
         if not force and force_kind is None and is_conda_distribution():
             try:
                 return self.install(force_kind="conda", force=True, temp_folder=temp_folder,
@@ -1235,8 +1246,10 @@ class ModuleInstall:
         installing a module from github.
 
         .. versionchanged:: 1.1
-            Parameter *source* was added.
+            Parameter *source* was added, if None, it is overwritten by *self.source*.
         """
+        if source is None:
+            source = self.source
         if ModuleInstall.is_annoying(self.name):
             return False
 

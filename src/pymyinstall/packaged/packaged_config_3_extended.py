@@ -369,4 +369,9 @@ def extended_set():
                       purpose="A little word cloud generator in Python."),
     ]
 
+    if sys.platform.startswith("win"):
+        mod.append(ModuleInstall('pythonnet', 'wheel',
+                                 mname="clr", source="2" if sys.version_info[:2] >= (3, 5) else None,
+                                 purpose="Python binding for C#"))
+
     return [_ for _ in mod if _ is not None]
