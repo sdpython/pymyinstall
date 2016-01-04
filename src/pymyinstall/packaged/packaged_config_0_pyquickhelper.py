@@ -93,6 +93,7 @@ def pyquickhelper_set():
         "tornado",
         "traitlets",
         "virtualenv",
+        "xlrd",
         "wheel",
         "wild_sphinx_theme",
         "winshell" if sys.platform.startswith("win") else None,
