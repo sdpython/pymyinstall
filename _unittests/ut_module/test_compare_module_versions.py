@@ -94,7 +94,8 @@ class TestCompareVersion(unittest.TestCase):
             cmp = compare_version(v1, v2)
             if cmp != 0:
                 fLOG("---", i, v1, v2, mod.name)
-                diff.append(mod)
+                if not ("rc1" in v1 or "rc1" in v2):
+                    diff.append(mod)
 
         assert len(diff) <= 5
 
