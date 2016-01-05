@@ -4,7 +4,7 @@
     :title: Issues with Python 3.5
     :keywords: issues, Python 3.5
     :date: 2015-10-28
-    :categories: modules, issues
+    :categories: modules, issue
     
     I'm still trying to get a proper distribution of Python 3.5 on Windows.
     I had a couple of issues so far. Most of them come from
