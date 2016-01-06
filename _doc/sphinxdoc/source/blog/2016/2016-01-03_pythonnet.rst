@@ -2,7 +2,7 @@
 
 .. blogpost::
     :title: pythonnet for Python 3.5
-    :keywords: pythonnet, .net, C#, python
+    :keywords: pythonnet, .net, C#, python, issue
     :date: 2016-01-03
     :categories: install, modules, pythonnet
     
@@ -48,5 +48,24 @@
         from clr import IntPtr_long
         ar = IntPtr_long(array.__array_interface__['data'][0])
     
-    Pythonnet was compiled with for Python 3.5 with Visual Studio 2015.
-    If it fails, you might need to install it.
+    Pythonnet was compiled with for Python 3.5 with Visual Studio 2015 (Free Community Edition).
+    However you might face the following error::
+    
+        Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'file:///<apath>\Python.Runtime.dll' or one of its dependencies. 
+        Operation is not supported. (Exception from HRESULT: 0x80131515) ---> System.NotSupportedException: An attempt was made to load an assembly 
+        from a network location which would have caused the assembly to be sandboxed in previous versions of the .NET Framework. 
+        This release of the .NET Framework does not enable CAS policy by default, so this load may be dangerous. 
+        If this load is not intended to sandbox the assembly, please enable the loadFromRemoteSources switch. See http://go.microsoft.com/fwlink/?LinkId=155569 for more information.
+           --- End of inner exception stack trace ---
+           at System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+           at System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+           at System.Reflection.RuntimeAssembly.InternalLoadFrom(String assemblyFile, Evidence securityEvidence, Byte[] hashValue, AssemblyHashAlgorithm hashAlgorithm, Boolean forIntrospection, Boolean suppressSecurityChecks, StackCrawlMark& stackMark)
+           at System.Reflection.Assembly.LoadFrom(String assemblyFile)
+           at clrModule.PyInit_clr()
+           
+    In that case, I suggest to get the source and to compile them with Visual Studio 2015
+    on your machine, it should import the missing DLL which I'm still trying to find out.
+    The DLL was compiled on an Azure Virtual Machine. You might have to recompile
+    it on your own machine.
+    
+    
