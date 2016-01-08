@@ -18,9 +18,9 @@
     
     The module does not seem to be maintained an a regular basis.
     So I tried to make some changes to make it work for Python 3.5:
-    `pythonnet-2.1.1-cp35-none-win_amd64.whl <https://github.com/sdpython/pythonnet/releases>`_.
+    `pythonnet-2.1.1-cp35-none-win_amd64.whl <https://github.com/sdpython/pythonnet3/releases>`_.
     The source are available at: 
-    `sdpython/pythonnet <https://github.com/sdpython/pythonnet>`_.
+    `sdpython/pythonnet3 <https://github.com/sdpython/pythonnet3>`_.
     Some changes were needed to replicate the changes in Python API
     introduced by Python 3.5. The Python API and its duplication in C#
     on Pythonnet side must match otherwise some unexpected error will happen.
