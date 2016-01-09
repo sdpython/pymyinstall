@@ -1,8 +1,8 @@
 
-.. _blog_xgboost_install:
+.. _blog_xgboost_install35:
 
 .. blogpost::
-    :title: Build xgboost on Python 3.5
+    :title: Build xgboost for Python 3.5
     :keywords: install, xgboost, vcomp110.dll, OpenMP
     :date: 2015-11-12
     :categories: install, modules, windows
@@ -10,8 +10,8 @@
     This is a process I followed to build `xgboost <https://github.com/dmlc/xgboost>`_ 0.4 
     on Python 3.5
     This is also what you should follow to get missing dependency such as 
-    ``vcomp110.dll`` (which comes from `OpenMP in Visual C++ <https://msdn.microsoft.com/library/tt15eb9t.aspx>`_
-    [#ftbl1]_). The following process is only available for Python 3.4 64 bit:
+    ``vcomp110.dll`` (which comes from `OpenMP in Visual C++ <https://msdn.microsoft.com/library/tt15eb9t.aspx>`_). 
+    The following process is only available for Python 3.4 64 bit:
 
     * Install `Visual Studio Community Edition (C++) <https://www.microsoft.com/france/visual-studio/>`_.
       The link points to an image *.iso*.
@@ -27,3 +27,10 @@
     * Go to the python folder and type ``python setup.py bdist_wheel`` to build the file *.whl*.
     
     This wheel can be installed on any Python 3.5 64 bits installation.
+    You can compare with :ref:`instructions for Python 3.4 <blog_xgboost_install>`.
+
+    *About* 
+    
+    `OpenMP <https://en.wikipedia.org/wiki/OpenMP>`_
+    is an API that supports multi-platform shared 
+    memory multiprocessing programming in C, C++, and Fortran (Wikipedia).

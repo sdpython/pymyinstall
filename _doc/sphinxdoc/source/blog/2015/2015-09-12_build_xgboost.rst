@@ -2,7 +2,7 @@
 .. _blog_xgboost_install:
 
 .. blogpost::
-    :title: Build xgboost
+    :title: Build xgboost for Python 3.4
     :keywords: install, xgboost, vcomp110.dll, OpenMP
     :date: 2015-09-12
     :categories: install, modules, windows
@@ -10,8 +10,8 @@
     This is a process I followed to build `xgboost <https://github.com/dmlc/xgboost>`_ 0.4 (which I also described
     at `Building xgboost on Windows for Python <http://www.xavierdupre.fr/blog/2015-08-23_nojs.html>`_).
     This is also what you should follow to get missing dependency such as 
-    ``vcomp110.dll`` (which comes from `OpenMP in Visual C++ <https://msdn.microsoft.com/library/tt15eb9t.aspx>`_
-    [#ftbl1]_). The following process is only available for Python 3.4 64 bit:
+    ``vcomp110.dll`` (which comes from `OpenMP in Visual C++ <https://msdn.microsoft.com/library/tt15eb9t.aspx>`_). 
+    The following process is only available for Python 3.4 64 bit:
 
     * Install `Microsoft Windows SDK for Windows 7 and .NET Framework 4 <http://www.microsoft.com/en-us/download/details.aspx?id=8279>`_.
       It has to be done to make Visual Studio Express 2010 build for x64. It must be done first if you have
@@ -33,6 +33,8 @@
     This library must be available in one the path in environment variable ``PATH``
     or be in the same folder as ``python.exe``.
     
-    .. [#ftbl1] `OpenMP <https://en.wikipedia.org/wiki/OpenMP>`_
-                is an API that supports multi-platform shared 
-                memory multiprocessing programming in C, C++, and Fortran (Wikipedia).
+    *About* 
+    
+    `OpenMP <https://en.wikipedia.org/wiki/OpenMP>`_
+    is an API that supports multi-platform shared 
+    memory multiprocessing programming in C, C++, and Fortran (Wikipedia).
