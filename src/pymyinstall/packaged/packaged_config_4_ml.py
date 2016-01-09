@@ -362,8 +362,6 @@ def ensae_set():
                       purpose="Invoke is a Python task execution tool & library, drawing inspiration from various sources to arrive at a powerful & clean feature set."),
         ModuleInstall("msgpack-python", "pip", mname="msgpack",
                       purpose="MessagePack (de)serializer."),
-        ModuleInstall("cloudpickle", "pip",
-                      purpose="Extended pickling support for Python objects") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("cymem", "pip",
                       purpose="Manage calls to calloc/free through Cython") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("murmurhash", "pip",

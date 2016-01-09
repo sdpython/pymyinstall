@@ -248,6 +248,8 @@ def extended_set():
             purpose="File-based locks for Python for Linux and Windows"),
         ModuleInstall(
             "dill", "pip", purpose="serialize all of python (almost), Dill extends python's pickle module for serializing and de-serializing python objects to the majority of the built-in python types."),  # for dask
+        ModuleInstall("cloudpickle", "pip",
+                      purpose="Extended pickling support for Python objects") if sys.version_info[:2] >= (3, 5) else None,
         # parallel computation
         ModuleInstall(
             "dask", "pip", purpose="parallization of operations with dataframe", usage="DATA/ML"),
