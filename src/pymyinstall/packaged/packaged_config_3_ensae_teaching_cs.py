@@ -14,8 +14,10 @@ def ensae_teaching_cs_set():
     names += [
         "basemap",
         "bayespy",
+        "beautifulsoup4",
         "bokeh",
         "cartopy",
+        "cloudpickle",
         "cvxopt",
         "cython",
         "cytoolz",
