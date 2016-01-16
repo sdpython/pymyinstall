@@ -16,6 +16,18 @@ def pyensae_set():
         "ansiconv",  # ssh
         "antlr4-python3-runtime",
         "azure",  # azure
+        "azure-nspkg",
+        "azure-mgmt-nspkg",
+        "azure-common",
+        "azure-mgmt-common",
+        "azure-mgmt-compute",
+        "azure-mgmt-network",
+        "azure-mgmt-resource",
+        "azure-mgmt-storage",
+        "azure-mgmt",
+        "azure-servicebus",
+        "azure-storage",
+        "azure-servicemanagement-legacy",
         "colormap",
         "dbfread",
         "easydev",
