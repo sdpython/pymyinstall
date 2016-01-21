@@ -26,9 +26,7 @@ def _setup_hook():
     does nothing
     """
     # we clean the cache
-    import os
-    if os.path.exists(ModuleInstall._page_cache_html):
-        os.remove(ModuleInstall._page_cache_html)
+    ModuleInstall.clear_cache()
 
 
 def check(log=False):

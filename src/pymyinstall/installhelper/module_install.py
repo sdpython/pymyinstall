@@ -202,6 +202,8 @@ class ModuleInstall:
         """
         if os.path.exists(ModuleInstall._page_cache_html):
             os.remove(ModuleInstall._page_cache_html)
+        if os.path.exists(ModuleInstall._page_cache_html2):
+            os.remove(ModuleInstall._page_cache_html2)
 
     @property
     def Purpose(self):
