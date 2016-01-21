@@ -565,8 +565,14 @@ def update_pip(python_path=None, fLOG=print):
                     raise UpdatePipError(
                         "unable to update pip with get_pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
         else:
-            raise UpdatePipError(
-                "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+            lines = err.split("\n")
+            keep = []
+            for line in lines:
+                if not line.startswith(" ") and "RuntimeWarning: Config variable" not in line:
+                    keep.append(line)
+            if len(keep) > 0:
+                raise UpdatePipError(
+                    "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
     return out
 
 

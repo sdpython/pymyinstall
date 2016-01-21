@@ -62,7 +62,7 @@ def small_set():
             "sockjs-tornado", "pip", mname="sockjs.tornado", usage="NETWORK",
             purpose="SockJS-tornado is a Python server side counterpart of SockJS-client browser library running on top of Tornado framework."),
         ModuleInstall(
-            "pyzmq", "pip", mname="zmq", purpose="python librairies for Omz (pipy distributes the binaries)", usage="NETWORK"),
+            "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz (pipy distributes the binaries)", usage="NETWORK"),
         ModuleInstall(
             "pycparser", "pip", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
         ModuleInstall("Cython", "wheel", mname="cython",
