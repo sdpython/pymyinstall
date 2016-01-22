@@ -28,7 +28,7 @@ def IsSQLiteSpyInstalled(dest_folder):
 
 def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
     """
-    Install `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_.
+    Install `SQLiteSpy <http://www.yunqa.de/delphi/products/sqlitespy/index>`_.
     It does not do it a second time if it is already installed.
 
     @param      temp_folder     where to download the setup
@@ -42,10 +42,10 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
     if IsSQLiteSpyInstalled(temp_folder):
         return os.path.join(temp_folder, "SQLiteSpy.exe")
 
-    link = "http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index"
+    link = "http://www.yunqa.de/delphi/products/sqlitespy/index"
     page = download_page(link)
     if sys.platform.startswith("win"):
-        reg = re.compile("href=\\\"(/delphi/lib/exe.*?[.]zip)\\\"")
+        reg = re.compile("href=[\\\"'](http://www.yunqa.de/delphi/downloads/SQLiteSpy.*?[.]zip)[\\\"']")
         alls = reg.findall(page)
         if len(alls) == 0:
             raise Exception(
@@ -53,7 +53,7 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
                 page)
 
         file = alls[0].replace("&amp;", "&")
-        full = "http://www.yunqa.de{0}".format(file)
+        full = file
         version = file.split("_")[-1].replace(".zip", "")
         fLOG("SQLiteSpy, version ", version)
         outfile = os.path.join(
