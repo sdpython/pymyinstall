@@ -66,6 +66,8 @@
     In that case, I suggest to get the source and to compile them with Visual Studio 2015
     on your machine, it should import the missing DLL which I'm still trying to find out.
     The DLL was compiled on an Azure Virtual Machine. You might have to recompile
-    it on your own machine.
+    it on your own machine. The changes needed for Python 3.5 / 3.4 are highlighted in
+    the following commit `update source code for Python 3.5, from fkarb/pythonnet + sdpython/py… <https://github.com/sdpython/pythonnet/commit/ecac2cab0f7ba8f1c10e6c7af712d0931c79a79e>`_
+    and `update project <https://github.com/sdpython/pythonnet/commit/5484084d9732a3e72ca65874a9735a89f9cc048a>`_.
     
     
