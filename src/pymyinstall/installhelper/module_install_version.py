@@ -4,7 +4,7 @@
 """
 from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
-from .install_cmd_regex import regex_wheel_version
+from .install_cmd_regex import regex_wheel_version, regex_wheel_version2
 
 import sys
 import re
@@ -651,6 +651,7 @@ def choose_most_recent(list_name):
         list_name = [(_, _) for _ in list_name]
 
     version = re.compile(regex_wheel_version)
+    version4 = re.compile(regex_wheel_version2)
 
     def search_regex(_):
         resv = version.search(_[0])
@@ -659,8 +660,10 @@ def choose_most_recent(list_name):
                 "[0-9]+[.][abc0-9]+", "[0-9]{3}"))
             resv = version2.search(_[0])
         if resv is None:
+            resv = version4.search(_[0])
+        if resv is None:
             raise MissingVersionWheelException(
-                "unable to get version number for regex {}:\n{}".format(_, regex_wheel_version))
+                "unable to get version number for regex {}:\n{}\n{}".format(_, regex_wheel_version, regex_wheel_version2))
         return resv
 
     list_name = [(search_regex(_).groups()[0], _[0], _[1])
@@ -683,6 +686,9 @@ def get_wheel_version(whlname):
     """
     exp = re.compile(regex_wheel_version)
     find = exp.findall(whlname)
+    if len(find) == 0:
+        exp = re.compile(regex_wheel_version2)
+        find = exp.findall(whlname)
     if len(find) == 0:
         raise ValueError(
             "[get_wheel_version] unable to extract version of {0} (pattern: {1})".format(whlname, exp.pattern))

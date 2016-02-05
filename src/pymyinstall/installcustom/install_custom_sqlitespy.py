@@ -45,7 +45,8 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
     link = "http://www.yunqa.de/delphi/products/sqlitespy/index"
     page = download_page(link)
     if sys.platform.startswith("win"):
-        reg = re.compile("href=[\\\"'](http://www.yunqa.de/delphi/downloads/SQLiteSpy.*?[.]zip)[\\\"']")
+        reg = re.compile(
+            "href=[\\\"'](http://www.yunqa.de/delphi/downloads/SQLiteSpy.*?[.]zip)[\\\"']")
         alls = reg.findall(page)
         if len(alls) == 0:
             raise Exception(
