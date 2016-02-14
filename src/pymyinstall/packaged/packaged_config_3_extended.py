@@ -118,6 +118,8 @@ def extended_set():
         ModuleInstall(
             'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python", usage="VIZ"),
         ModuleInstall(
+            'osmapi', 'pip', purpose="Python wrapper for the OSM API", usage="VIZ"),
+        ModuleInstall(
             'geopy', 'pip', purpose="Python Geocoding Toolbox", usage="VIZ"),
         ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
                       purpose="maps extension for matplotlib", usage="VIZ"),
