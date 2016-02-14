@@ -37,12 +37,10 @@ README / Changes
     
    
 **Links:**
-    * `pypi/pymyinstall <https://pypi.python.org/pypi/pymyinstall/>`_
-    * `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_
-    * `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
-    * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_
-    * `Travis <https://travis-ci.org/sdpython/pymyinstall>`_
-    * `Blog <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/blog/main_0000.html#ap-main-0>`_
+
+* `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_
+* `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
+* `Blog <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/blog/main_0000.html#ap-main-0>`_
 
 
 Description
