@@ -207,9 +207,12 @@ def extended_set():
         ModuleInstall(
             "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide", usage="GUI"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
-        # for gensim
-        ModuleInstall(
-            "boto", "pip", purpose="A Python interface to Amazon Web Services", usage="NETWORK"),
+        # for gensim and distributed
+        ModuleInstall("jmespath", "pip", purpose="JSON Matching Expressions"),
+        ModuleInstall("botocore", "pip", usage="AWS",
+                      purpose="A low-level interface to a growing number of Amazon Web Services. The botocore package is the foundation for the AWS CLI as well as boto3."),
+        ModuleInstall("boto3", "pip", usage="AWS",
+                      purpose="A Python interface to Amazon Web Services"),
         # for gensim
         ModuleInstall("bz2file", "pip", purpose="process bz2 files"),
         # for gensim
@@ -376,21 +379,27 @@ def extended_set():
         # linear function approximators (only Python 2.7)."),
         ModuleInstall('wordcloud', 'wheel', usage="VIZ",
                       purpose="A little word cloud generator in Python."),
-                      
-        #mezzanine 
+
+        # distributed
+        ModuleInstall('tblib', 'pip',
+                      purpose="Traceback fiddling library. For now allows you to pickle tracebacks and raise exceptions with pickled tracebacks in different processes. This allows better error handling when running code over multiple processes (imagine multiprocessing, billiard, futures, celery etc)"),
+        ModuleInstall('distributed', 'pip',
+                      purpose="Distributed is a lightweight library for distributed computing in Python. It extends both the concurrent.futures and dask APIs to moderate sized clusters. Distributed provides data-local computation by keeping data on worker nodes, running computations where data lives, and by managing complex data dependencies between tasks."),
+
+        # mezzanine
         ModuleInstall(
             "chardet", "pip", usage="WEB",
             purpose="Universal encoding detector."),
         ModuleInstall("bleach", "pip", usage="WEB",
-            purpose="An easy whitelist-based HTML-sanitizing tool."),
+                      purpose="An easy whitelist-based HTML-sanitizing tool."),
         ModuleInstall("grappelli_safe", "pip", usage="WEB",
-            purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency for the Mezzanine CMS for Django."),
+                      purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency for the Mezzanine CMS for Django."),
         ModuleInstall("filebrowser_safe", "pip", usage="WEB",
-            purpose="A snapshot of the filebrowser_3 branch of django-filebrowser, packaged as a dependency for the Mezzanine CMS for Django."),
+                      purpose="A snapshot of the filebrowser_3 branch of django-filebrowser, packaged as a dependency for the Mezzanine CMS for Django."),
         ModuleInstall("django-contrib-comments", "pip", usage="WEB", mname="django_comments",
-            purpose="Django used to include a comments framework; since Django 1.6 it’s been separated to a separate project. This is that project."),
+                      purpose="Django used to include a comments framework; since Django 1.6 it’s been separated to a separate project. This is that project."),
         ModuleInstall("mezzanine", "pip", usage="WEB",
-            purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),        
+                      purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),
     ]
 
     if sys.platform.startswith("win"):

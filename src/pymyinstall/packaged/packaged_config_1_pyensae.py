@@ -33,7 +33,7 @@ def pyensae_set():
         "easydev",
         "ecdsa",  # paramiko
         "folium",  # maps
-        "osmapi", # maps
+        "osmapi",  # maps
         "linkedin",
         "networkx",
         "requests_file",
