@@ -28,9 +28,6 @@ def scraping_set():
             "cchardet", "wheel", usage="WEB",
             purpose="Universal encoding detector. This library is faster than chardet."),
         ModuleInstall(
-            "chardet", "pip", usage="WEB",
-            purpose="Universal encoding detector."),
-        ModuleInstall(
             "aiohttp", "wheel", usage="WEB",
             purpose="http client/server for asyncio"),
         ModuleInstall(

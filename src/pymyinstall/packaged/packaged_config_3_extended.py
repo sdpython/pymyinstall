@@ -255,6 +255,8 @@ def extended_set():
         # parallel computation
         ModuleInstall(
             "dask", "pip", purpose="parallization of operations with dataframe", usage="DATA/ML"),
+        ModuleInstall(
+            "scoop", "pip", purpose="SCOOP (Scalable COncurrent Operations in Python) is a distributed task module allowing concurrent parallel programming on various environments, from heterogeneous grids to supercomputers", usage="DATA/ML"),
         #
         ModuleInstall(
             "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
@@ -374,6 +376,21 @@ def extended_set():
         # linear function approximators (only Python 2.7)."),
         ModuleInstall('wordcloud', 'wheel', usage="VIZ",
                       purpose="A little word cloud generator in Python."),
+                      
+        #mezzanine 
+        ModuleInstall(
+            "chardet", "pip", usage="WEB",
+            purpose="Universal encoding detector."),
+        ModuleInstall("bleach", "pip", usage="WEB",
+            purpose="An easy whitelist-based HTML-sanitizing tool."),
+        ModuleInstall("grappelli_safe", "pip", usage="WEB",
+            purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency for the Mezzanine CMS for Django."),
+        ModuleInstall("filebrowser_safe", "pip", usage="WEB",
+            purpose="A snapshot of the filebrowser_3 branch of django-filebrowser, packaged as a dependency for the Mezzanine CMS for Django."),
+        ModuleInstall("django-contrib-comments", "pip", usage="WEB", mname="django_comments",
+            purpose="Django used to include a comments framework; since Django 1.6 it’s been separated to a separate project. This is that project."),
+        ModuleInstall("mezzanine", "pip", usage="WEB",
+            purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),        
     ]
 
     if sys.platform.startswith("win"):
