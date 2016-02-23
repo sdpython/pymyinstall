@@ -52,7 +52,7 @@ class MissingWheelException(Exception):
     pass
 
 
-class MissinReferenceException(Exception):
+class MissingReferenceException(Exception):
 
     """
     raised when a module is not referenced by this package

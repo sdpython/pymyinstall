@@ -19,4 +19,8 @@
     
         conda remove --features mkl
         
+    And::
+    
+        conda uninstall mkl
+        
     It seems to work.

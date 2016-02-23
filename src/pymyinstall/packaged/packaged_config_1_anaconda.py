@@ -5,7 +5,7 @@
 """
 import sys
 from ..installhelper.module_install import ModuleInstall
-from ..installhelper.module_install_exceptions import MissinReferenceException
+from ..installhelper.module_install_exceptions import MissingReferenceException
 
 
 def anaconda_ext_set():
@@ -51,7 +51,7 @@ def anaconda_set():
             blz
             bokeh
             --boost
-            boto
+            boto3
             bottleneck
             --bsdiff4
             btrees
@@ -336,14 +336,14 @@ def anaconda_set():
             continue
         try:
             find_module_install(m, must_exist=True)
-        except MissinReferenceException:
+        except MissingReferenceException:
             errors.append(m)
 
     if len(errors) > 0:
         from . import all_set
         sl = "\n".join(errors)
         sl2 = "\n".join(sorted(_.name for _ in all_set()))
-        raise MissinReferenceException(
+        raise MissingReferenceException(
             "no reference for:\n{0}\n-----------\nAVAILABLE\n-----------\n{1}".format(sl, sl2))
 
     return [find_module_install(_) for _ in names if _ is not None]

@@ -6,7 +6,7 @@ from __future__ import print_function
 import os
 import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
-from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException, MissinReferenceException
+from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException, MissingReferenceException
 from ..installhelper.module_dependencies import missing_dependencies
 from .packaged_exception import ModuleNotFoundError
 from .packaged_config import all_set
@@ -71,7 +71,7 @@ def find_module_install(name, must_exist=False):
             if n in _reverse_module_index:
                 return _reverse_module_index[n]
         if must_exist:
-            raise MissinReferenceException(
+            raise MissingReferenceException(
                 "unable to find reference for module {}".format(name))
         else:
             mod = ModuleInstall(name, "pip")
