@@ -43,7 +43,7 @@ def small_set():
         ModuleInstall("husl", "pip", purpose="Python implementation of HUSL"),
         ModuleInstall(
             "pipdeptree", "pip", purpose="displays module dependencies as a tree"),
-        ModuleInstall("openpyxl", "pip", version="1.8.6",
+        ModuleInstall("openpyxl", "pip", # version="1.8.6",
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
         ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
