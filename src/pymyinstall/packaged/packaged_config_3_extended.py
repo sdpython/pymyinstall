@@ -145,8 +145,12 @@ def extended_set():
         #
         ModuleInstall(
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
-        ModuleInstall("pycryptodome", "pip", mname="Crypto",
+        ModuleInstall("pycrypto", "wheel2", mname="Crypto",
                       purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
+        ModuleInstall("pycryptodomex", "pip", mname="Cryptodome",
+                      purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
+        ModuleInstall("xxhash", "pip",
+                      purpose="xxHash is an Extremely fast Hash algorithm, running at RAM speed limits."),
         ModuleInstall("paramiko", "pip",
                       purpose="SSH2 protocol library", usage="NETWORK"),
         #

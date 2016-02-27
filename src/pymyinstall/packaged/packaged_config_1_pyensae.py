@@ -39,7 +39,7 @@ def pyensae_set():
         "requests_file",
         "pandas_datareader",
         "paramiko",  # ssh
-        "pycryptodrome",  # paramiko
+        "pycrypto",  # paramiko, cannot be replaced by pycryptodome
         "pyquickhelper",
         "qgrid",  # magic command
         "scipy",

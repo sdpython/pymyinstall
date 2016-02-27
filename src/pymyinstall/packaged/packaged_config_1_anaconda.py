@@ -179,6 +179,7 @@ def anaconda_set():
             numpy
             --numpydoc
             odo
+            jdcal
             openpyxl
             --openssl Linux Mac
             pandas
@@ -204,7 +205,8 @@ def anaconda_set():
             pyasn1
             pycosat
             pycparser
-            pycryptodome
+            pycrypto
+            pycryptodomex
             --pycurl Linux Mac
             pyflakes
             pygments
