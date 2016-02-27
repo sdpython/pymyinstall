@@ -31,7 +31,9 @@
     `pycrypto-2.7a1-cp35-none-win_amd64.whl <http://www.xavierdupre.fr/enseignement/setup/pycrypto-2.7a1-cp35-none-win_amd64.whl>`_.
     I took it from `avosirenfal/pycrypto <https://github.com/avosirenfal/pycrypto>`_
     which was recently updated and made the following changes
-    `fix setup.py and a C header to build pycrypto on Windows for Python 3.5 <https://github.com/sdpython/pycrypto/commit/9dbff17ba6f27ede3c2aad3cfd1b264fbc0eb5d4>`_.
+    `fix setup.py and a C header to build pycrypto on Windows for Python 3.5 <https://github.com/sdpython/pycrypto/commit/9dbff17ba6f27ede3c2aad3cfd1b264fbc0eb5d4>`_
+    and some others
+    `disable a test not present in pycrypto 2.6.1 <https://github.com/sdpython/pycrypto/commit/f2c53a24006ff45e69bf0a00b7c3701df18c9763>`_.
     I did not use `GMP <https://gmplib.org/>`_ or `MPIR <http://mpir.org/>`_. 
     Maybe next time.
     
