@@ -173,7 +173,8 @@ def get_module_metadata(module, use_cmd=False, refresh_cache=False):
         for line in lines:
             if sys.version_info[0] == 2:
                 typstr = str  # unicode#
-                line = typstr(line, encoding="utf8", errors="ignore")
+                if not isinstance(line, typstr):
+                    line = typstr(line, encoding="utf8", errors="ignore")
             try:
                 spl = line.split(":")
             except UnicodeDecodeError:
