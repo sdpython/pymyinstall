@@ -655,7 +655,10 @@ def choose_most_recent(list_name):
     version4 = re.compile(regex_wheel_version2)
 
     def search_regex(_):
-        resv = version.search(_[0])
+        try:
+            resv = version.search(_[0])
+        except TypeError as e:
+            raise TypeError("unable to parse '{0}'".format(_)) from e
         if resv is None and "pywin32" in _[0]:
             version2 = re.compile(regex_wheel_version.replace(
                 "[0-9]+[.][abc0-9]+", "[0-9]{3}"))

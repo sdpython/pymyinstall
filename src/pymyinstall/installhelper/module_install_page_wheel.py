@@ -179,7 +179,8 @@ class HTMLParser4Links(HTMLParser):
         """
         if tag == "a":
             if len(self.current) > 0:
-                self.links.append((self.current, self.attrs))
+                app = (self.current, self.attrs)
+                self.links.append(app)
             self.current = None
 
     def handle_data(self, data):
@@ -232,7 +233,7 @@ def enumerate_links_module(name, alls, version, plat):
         js = None
         for at, val in a[1]:
             if at == "onclick":
-                js = val
+                js = val.lstrip()
 
         if js:
             b = "javascript:"
@@ -241,6 +242,8 @@ def enumerate_links_module(name, alls, version, plat):
                 dl = _cg_dl
                 if dl is not None:
                     res = eval(js)
+                else:
+                    res = None
             else:
                 res = None
             yield n, js, res
