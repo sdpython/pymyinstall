@@ -295,9 +295,6 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
             elif ml == "pybrain":
                 tried.append("PyBrain")
                 available = pypi_package_releases(tried[-1], True)
-            elif ml == "jsanimation":  # github
-                tried.append("JSAnimation")
-                available = ["-"]
             elif module_name in annoying_modules:
                 raise AnnoyingPackageException(module_name)
 
