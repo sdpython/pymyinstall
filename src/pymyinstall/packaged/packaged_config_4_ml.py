@@ -193,9 +193,6 @@ def ensae_set():
         # http://blog.yhathq.com/posts/decision-making-under-uncertainty.html
         ModuleInstall("PuLP", "wheel", mname="pulp",
                       purpose="linear, quadratique optimization with constraints", usage="DATA/ML"),
-        # for pyensae unit test
-        ModuleInstall("JSAnimation", "wheel2",
-                      purpose="provides javascript script to display differences between two files", usage="JUPYTER"),
         #
         # pydata
         #
