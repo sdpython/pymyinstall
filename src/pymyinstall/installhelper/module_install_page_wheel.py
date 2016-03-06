@@ -178,7 +178,7 @@ class HTMLParser4Links(HTMLParser):
         ends of a tag
         """
         if tag == "a":
-            if len(self.current) > 0:
+            if self.current is not None and len(self.current) > 0:
                 app = (self.current, self.attrs)
                 self.links.append(app)
             self.current = None
