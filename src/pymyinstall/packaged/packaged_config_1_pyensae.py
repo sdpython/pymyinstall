@@ -28,6 +28,8 @@ def pyensae_set():
         "azure-servicebus",
         "azure-storage",
         "azure-servicemanagement-legacy",
+        "azure-storage",
+        "azureml",
         "colormap",
         "dbfread",
         "easydev",
