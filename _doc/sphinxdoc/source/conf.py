@@ -23,7 +23,7 @@ from pyquickhelper.helpgen.default_conf import set_sphinx_variables
 set_sphinx_variables(__file__,
                      "pymyinstall",
                      "Xavier Dupré",
-                     2015,
+                     2016,
                      "readable",
                      sphinx_readable_theme.get_html_theme_path(),
                      locals(),
