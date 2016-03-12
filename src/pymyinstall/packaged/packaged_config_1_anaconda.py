@@ -299,7 +299,7 @@ def anaconda_set():
             xlsxwriter
             --xlwings
             xlwt
-            xray
+            xarray
             --xz Linux Mac
             --yaml Linux Mac
             --zeromq Linux Mac

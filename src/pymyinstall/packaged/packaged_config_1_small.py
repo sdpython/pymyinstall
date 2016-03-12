@@ -123,9 +123,9 @@ def small_set():
             "pandas-datareader", "pip", mname="pandas_datareader",
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
         ModuleInstall(
-            "netCDF4", "wheel", mname="netCDF4", purpose="xray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
+            "netCDF4", "wheel", mname="netCDF4", purpose="xarray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
         ModuleInstall(
-            "xray", "pip", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
+            "xarray", "pip", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
         ModuleInstall(
             "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
         ModuleInstall(
