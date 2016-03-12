@@ -120,6 +120,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         * `MinGW <http://www.mingw.org/>`_
         * `TDM-GCC <http://tdm-gcc.tdragon.net/>`_
         * `VS <https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx>`_
+        * `Java JDK <http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html>`_
 
     By default, only R is included. Julia requires too much work.
     The command line does not always end. The building of the package
@@ -261,7 +262,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
 
     _allowed = {"pandoc", "7z", "scite", "putty",
                 "sqlitespy", "scite", "python", "tdm", "vs", "r", "graphviz",
-                "jenkins"}
+                "jenkins", "jdk"}
     for s in selection:
         s_ = s.split("==")[0]
         if s_ not in _allowed:

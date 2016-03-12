@@ -394,8 +394,6 @@ def ensae_set():
 
     if sys.version_info[0] == 2:
         mod.extend([
-            # ModuleInstall("protobuf-py3", "pip", mname="google.protobuf",
-            # purpose="Protocol Buffers are Google’s data interchange format
             # (for dpark)"),
             ModuleInstall("mesos.interface", "pip",
                           purpose="Mesos interfaces (for dpark)"),

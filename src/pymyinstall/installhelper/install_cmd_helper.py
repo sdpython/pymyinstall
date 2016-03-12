@@ -393,7 +393,7 @@ def get_pip_program(exe=None):
                                 pi = os.path.join(exe, "Scripts", "pip3.5.exe")
                                 tried.append(pi)
                                 raise FileNotFoundError(
-                                    "tried (1):\n" + "\n".join(tried) + "---- try ---\npython -m pip install -U pip --force")
+                                    "tried (1):\n" + "\n".join(tried) + "\n---- try ---\npython -m pip install -U pip --force")
         else:
             pi = os.path.join(exe, "pip.exe")
             tried.append(pi)
@@ -412,7 +412,7 @@ def get_pip_program(exe=None):
                             tried.append(pi)
                             if not os.path.exists(pi):
                                 raise FileNotFoundError(
-                                    "tried (2):\n" + "\n".join(tried) + "---- try ---\npython -m pip install -U pip --force")
+                                    "tried (2):\n" + "\n".join(tried) + "\n---- try ---\npython -m pip install -U pip --force")
     else:
         if sys.version_info[0] == 2:
             if exe is None:

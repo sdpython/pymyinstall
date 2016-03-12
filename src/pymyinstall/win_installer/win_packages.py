@@ -69,6 +69,10 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     .. versionchanged:: 1.1
         ``deps=False`` is the default for module zipline
     """
+    thename = os.path.split(package)[-1]
+    if thename == "jenkins.zip":
+        # jenkins.zip is not a python package
+        return []
     if verbose:
         fLOG("*** INSTALL", package)
     operations = []

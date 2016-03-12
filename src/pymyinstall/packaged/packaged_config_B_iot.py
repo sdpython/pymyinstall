@@ -21,10 +21,8 @@ def iot_set():
                       purpose="enum/enum34 compatibility package"),
         ModuleInstall('netifaces', 'pip',
                       purpose="Portable network interface information."),
-        ModuleInstall('protobuf-py3', 'pip', mname="google.protobuf",
-                      purpose="Protocol Buffers 2.5.0 with support for Python 3"),
-        ModuleInstall(
-            'zeroconf', 'pip', purpose="Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)"),
+        ModuleInstall('zeroconf', 'pip',
+                      purpose="Multicast DNS Service Discovery for Python, originally by Paul Scott-Murphy."),
         ModuleInstall(
             'protobuf', 'pip', purpose="Protocol Buffers are Google’s data interchange format"),
         ModuleInstall('pychromecast', 'pip',
@@ -84,8 +82,8 @@ def iot_set():
                       purpose="A Python Protocol Abstraction Library For Arduino Firmata"),
         ModuleInstall('pyRFXtrx', 'github', 'Danielhiversen', mname="RFXtrx",
                       purpose="A Python library to communicate with the RFXtrx family of devices"),
-        ModuleInstall('pymysensors', 'github', 'theolind', mname="mysensors",
-                      purpose="Python API for talking to a MySensors gateway"),
+        # ModuleInstall('pymysensors', 'github', 'theolind', mname="mysensors",
+        # purpose="Python API for talking to a MySensors gateway"),
         ModuleInstall('pynetgear', 'pip', usage="IoT",
                       purpose="Access Netgear routers using their SOAP API"),
         ModuleInstall('netdisco', 'pip', usage="IoT",
