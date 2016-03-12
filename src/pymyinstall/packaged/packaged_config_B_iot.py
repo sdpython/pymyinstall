@@ -80,7 +80,7 @@ def iot_set():
                       usage="IoT", purpose="Python Serial Port Extension"),
         ModuleInstall('PyMata', 'pip', usage="IoT",
                       purpose="A Python Protocol Abstraction Library For Arduino Firmata"),
-        ModuleInstall('pyRFXtrx', 'github', 'Danielhiversen', mname="RFXtrx",
+        ModuleInstall('pyRFXtrx', 'pip', mname="RFXtrx",
                       purpose="A Python library to communicate with the RFXtrx family of devices"),
         # ModuleInstall('pymysensors', 'github', 'theolind', mname="mysensors",
         # purpose="Python API for talking to a MySensors gateway"),
@@ -90,7 +90,7 @@ def iot_set():
                       purpose="Discover devices on your local network"),
         ModuleInstall('pywemo', 'pip', usage="IoT",
                       purpose="Access WeMo switches using their SOAP API"),
-        ModuleInstall('python-wink', 'github', 'balloob', mname="pywink",
+        ModuleInstall('python-wink', 'pip', mname="pywink",
                       purpose="Python implementation of the Wink API"),
         ModuleInstall('slacker', 'pip', purpose="Slack API client"),
         ModuleInstall(

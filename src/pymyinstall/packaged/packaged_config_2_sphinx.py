@@ -48,7 +48,7 @@ def sphinx_theme_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinxcontrib-lunrsearch", "pip", mname="sphinxcontrib.lunrsearch",
                       purpose="simple autocompletion for the sphinx documentation", usage="SPHINX"),
-        ModuleInstall("sphinxcontrib-imagesvg", "pip", mname="sphinxcontrib.imagrsvg",
+        ModuleInstall("sphinxcontrib-imagesvg", "pip", mname="sphinxcontrib.imagesvg",
                       purpose="support svg in Sphinx", usage="SPHINX"),
         ModuleInstall("sphinxcontrib-jsdemo", "pip", mname="sphinxcontrib.jsdemo",
                       purpose="to demo HTML or Javascript in Sphinx documentation", usage="SPHINX"),
