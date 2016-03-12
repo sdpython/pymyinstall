@@ -41,6 +41,8 @@ def download_page(url, is406=False):
         u.close()
     except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
+    except urllib_error.URLError as e:
+        raise Exception("unable to get archive from: " + url) from e
     except ConnectionResetError as e:
         raise Exception("unable to get archive from: " + url) from e
 
@@ -73,6 +75,8 @@ def download_file(url, outfile, fLOG=None):
         text = u.read()
         u.close()
     except urllib_error.HTTPError as e:
+        raise Exception("unable to get archive from: " + url) from e
+    except urllib_error.URLError as e:
         raise Exception("unable to get archive from: " + url) from e
     except http_client.IncompleteRead as ee:
         raise Exception("unable to complete reading from: " + url) from ee

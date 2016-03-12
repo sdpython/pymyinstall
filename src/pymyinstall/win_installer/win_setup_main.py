@@ -88,7 +88,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                      last_function=None,
                      r_packages=True,
                      julia_packages=True,
-                     tutorial=None
+                     tutorial=None,
+                     source=None
                      ):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
@@ -110,6 +111,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     @param      documentation   add documentation
     @param      tutorial        list of folders to copy in ``workspace/tutorial``,
                                 it can refer to internal tutorials (see folder ``win_installer/tutorial``)
+    @param      source          source of python packages (see @see cl ModuleInstall)
     @return                     list of completed operations
 
     The available tools to install must be chose among:
@@ -254,10 +256,12 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     selection.add("sqlitespy")
     selection.add("graphviz")
     selection.add("python")
+    selection.add("jenkins")
     selection = set(_.lower() for _ in selection)
 
     _allowed = {"pandoc", "7z", "scite", "putty",
-                "sqlitespy", "scite", "python", "tdm", "vs", "r", "graphviz"}
+                "sqlitespy", "scite", "python", "tdm", "vs", "r", "graphviz",
+                "jenkins"}
     for s in selection:
         s_ = s.split("==")[0]
         if s_ not in _allowed:
@@ -332,7 +336,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                       module_list=module_list,
                       verbose=verbose,
                       fLOG=fLOG,
-                      selection=selection)
+                      selection=selection,
+                      source=source)
     operations.extend(op)
     operations.append(("time", dtnow()))
 
@@ -358,6 +363,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         # install setups
         #############
         fLOG("--- installation of python and tools")
+        fLOG("--- you might have to it yourself for R, Julia")
         op, installed = win_install(
             folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG,
             selection=selection)
@@ -553,15 +559,16 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     ##################
     # check there is no missing modules
     ##################
-    scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies();print('\\n'.join('{0} misses {1}'.format(k,v) for k,v in sorted(r.items())))"
-    cmd = '{0} -c "{1}"'.format(os.path.join(
-        folders["python"], "python.exe"), scr)
-    fLOG("--- run dependencies")
-    fLOG("CMD:", cmd)
-    out, err = run_cmd(cmd, wait=True)
-    if len(err) > 0:
-        raise WinInstallMissingDependency(err)
-    fLOG(out)
+    if not download_only:
+        scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies();print('\\n'.join('{0} misses {1}'.format(k,v) for k,v in sorted(r.items())))"
+        cmd = '{0} -c "{1}"'.format(os.path.join(
+            folders["python"], "python.exe"), scr)
+        fLOG("--- run dependencies")
+        fLOG("CMD:", cmd)
+        out, err = run_cmd(cmd, wait=True)
+        if len(err) > 0:
+            raise WinInstallMissingDependency(err)
+        fLOG(out)
 
     miss = missing_dependencies()
     if len(miss) > 0:
@@ -572,39 +579,42 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     ##################
     # patch exe in scripts
     ##################
-    fLOG(
-        "--- patch paths, see http://www.clemens-sielaff.com/create-a-portable-python-with-pip-on-windows/")
-    op = win_patch_paths(
-        os.path.join(folders["python"], "Scripts"), "", fLOG=fLOG)
-    operations.extend(op)
-    operations.append(("time", dtnow()))
+    if not download_only:
+        fLOG(
+            "--- patch paths, see http://www.clemens-sielaff.com/create-a-portable-python-with-pip-on-windows/")
+        op = win_patch_paths(
+            os.path.join(folders["python"], "Scripts"), "", fLOG=fLOG)
+        operations.extend(op)
+        operations.append(("time", dtnow()))
 
     #################
     # print the list of modules (python)
     #################
-    fLOG("--- pip freeze")
-    mods = get_modules_version(folders["python"])
-    fLOG("nb modules: {0}".format(len(mods)))
-    if len(mods) == 0:
-        raise ValueError(
-            "unable to get module list from folder " + folders["python"])
-    with open(os.path.join(folders["config"], "installed.python.packages.txt"), "w") as f:
-        for a, b in sorted(mods.items()):
-            f.write("{0}\t{1}\n".format(a, b))
+    if not download_only:
+        fLOG("--- pip freeze")
+        mods = get_modules_version(folders["python"])
+        fLOG("nb modules: {0}".format(len(mods)))
+        if len(mods) == 0:
+            raise ValueError(
+                "unable to get module list from folder " + folders["python"])
+        with open(os.path.join(folders["config"], "installed.python.packages.txt"), "w") as f:
+            for a, b in sorted(mods.items()):
+                f.write("{0}\t{1}\n".format(a, b))
 
     #################
     # print the list of modules (R)
     #################
-    r_path = os.path.join(folders["tools"], "R")
-    r_lib = os.path.join(r_path, "library")
-    if os.path.exists(r_lib):
-        fLOG("--- list R packages")
-        packs = os.listdir(r_lib)
-        with open(os.path.join(folders["config"], "installed.R.packages.txt"), "w") as f:
-            for pack in sorted(packs):
-                desc = get_package_description(r_path, pack)
-                vers = desc.get("Version", "unknown")
-                f.write("{0}\t{1}\n".format(pack, vers))
+    if not download_only:
+        r_path = os.path.join(folders["tools"], "R")
+        r_lib = os.path.join(r_path, "library")
+        if os.path.exists(r_lib):
+            fLOG("--- list R packages")
+            packs = os.listdir(r_lib)
+            with open(os.path.join(folders["config"], "installed.R.packages.txt"), "w") as f:
+                for pack in sorted(packs):
+                    desc = get_package_description(r_path, pack)
+                    vers = desc.get("Version", "unknown")
+                    f.write("{0}\t{1}\n".format(pack, vers))
 
     if not no_setup:
 

@@ -331,15 +331,16 @@ def create_win_spyder(folders):
 
     This installation uses `PySide <https://pypi.python.org/pypi/PySide/1.2.2>`_
     instead of `PyQt <https://www.riverbankcomputing.com/software/pyqt/intro>`_.
-    The environment variable ``QT_API`` needs to be set to ``pyside`` before
-    running Spyder.
+    The environment variable ``QT_API`` could to be set to ``pyside`` before
+    running Spyder but PySide does not seem to be under active development.
+    To set PySide as the default viewer for Spyder, you should set::
 
         set QT_API=pyside
     """
     text = ['@echo off',
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
-            'set QT_API=pyside',
+            'rem set QT_API=pyside',
             '"%PYTHON_WINSCRIPTS%\\spyder.exe" "--workdir=%WORKSPACE%"']
 
     text = "\n".join(text)

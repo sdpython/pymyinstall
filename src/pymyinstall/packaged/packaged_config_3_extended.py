@@ -20,7 +20,7 @@ def extended_set():
             "blist", "wheel",
             purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
         ModuleInstall(
-            "blz", "pip",
+            "blz", "wheel",
             purpose="blz: a compressed data container"),
         ModuleInstall(
             "pamela", "pip", purpose="An interface to the Pluggable Authentication Modules (PAM) library on linux, written in pure python (using ctypes)") if not sys.platform.startswith("win") else None,
@@ -56,7 +56,7 @@ def extended_set():
         ModuleInstall('gmpy2', 'wheel',
                       purpose="big real numbers (issue on Linux and Anaconda)"),
         ModuleInstall('llvmpy', 'wheel', mname='llvm',
-                      purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools, not maintained anymore, use llvmlite instead"),
+                      purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools, not maintained anymore, use llvmlite instead") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
             'llvmlite', 'wheel', purpose="lightweight wrapper around basic LLVM functionality, check issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll"),
         ModuleInstall(
@@ -197,7 +197,8 @@ def extended_set():
         ModuleInstall(
             "PyOpenGL_accelerate", "pip", mname="OpenGL_accelerate", purpose="Acceleration code for PyOpenGL"),
         ModuleInstall(
-            "libpython", "wheel", purpose="needed for theano (C++ compilation), compilation of libpython with mingw"),
+            "libpython", "wheel",
+            purpose="needed for theano (C++ compilation), compilation of libpython with mingw") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
             "Theano", "pip", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
         ModuleInstall('pymc', 'wheel',
@@ -273,8 +274,8 @@ def extended_set():
         ModuleInstall(
             "structures", "pip", purpose="User-friendly library for creating data structures."),
         ModuleInstall(
-            "py2exe", "wheel" if sys.version_info[:2] < (3, 5) else "pip",
-            purpose="convert a python program into an exe program") if sys.platform.startswith("win") else None,
+            "py2exe", "wheel",
+            purpose="convert a python program into an exe program") if sys.platform.startswith("win") and sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
             "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
         ModuleInstall(

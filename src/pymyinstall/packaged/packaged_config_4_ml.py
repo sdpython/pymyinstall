@@ -96,7 +96,8 @@ def ensae_set():
         ModuleInstall(
             "Bottleneck", "wheel", mname="bottleneck", purpose="Fast NumPy array functions written in Cython, needed by la"),
         ModuleInstall(
-            "la", "wheel", purpose="Label the rows, columns, any dimension, of your NumPy arrays."),
+            "la", "wheel",
+            purpose="Label the rows, columns, any dimension, of your NumPy arrays."),
         ModuleInstall(
             "mahotas", "wheel", purpose="Mahotas: Computer Vision Library", usage="VIZ"),
         ModuleInstall("nitime", "wheel",
@@ -234,7 +235,7 @@ def ensae_set():
         # Rasterio reads and writes geospatial raster datasets."),
         ModuleInstall("cgal_bindings", "wheel", mname="CGAL",
                       purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python.",
-                      web="https://github.com/cgal/cgal-swig-bindings"),
+                      web="https://github.com/cgal/cgal-swig-bindings") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall("tifffile", "wheel",
                       purpose="Read and write image data from and to TIFF files. (for pims)"),
         ModuleInstall("slicerator", "pip",
@@ -383,7 +384,7 @@ def ensae_set():
                       purpose="Fuel is a data pipeline framework which provides your machine learning models with the data they need."),
         ModuleInstall("Lasagne", "pip", mname="lasagne", usage="DEEP LEARNING",
                       purpose="Lasagne is a lightweight library to build and train neural networks in Theano."),
-        ModuleInstall("blocks", "pip", mname="lasagne",
+        ModuleInstall("blocks", "github", "mila-udem",
                       purpose="Blocks is a framework that helps you build neural network models on top of Theano."),
         ModuleInstall("gatspy", "pip",
                       purpose="General tools for Astronomical Time Series in Python"),

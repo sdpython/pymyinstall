@@ -3,7 +3,7 @@ print(sys.executable)
 import platform
 print(platform.architecture())
 sys.path.append("src")
-print("----")
+print("----", sys.version_info)
 from pymyinstall import win_python_setup
 from pymyinstall.packaged import all_set, minimal_set
 
@@ -18,13 +18,15 @@ if False:
 if True:
     list_modules = all_set()
     win_python_setup(module_list=list_modules, verbose=True,
-                     download_only=True,
+                     download_only=False,
                      no_setup=True,
-                     selection={"R", "VS"})
+                     selection={"R", "VS", "jenkins"},
+                     source="2")
 
-if False:
+else:
     win_python_setup(module_list=minimal_set(), verbose=True,
                      download_only=False,
                      no_setup=True,
                      selection={},
-                     notebooks=[])
+                     notebooks=[],
+                     source="2")

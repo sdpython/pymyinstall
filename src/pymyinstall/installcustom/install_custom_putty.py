@@ -62,7 +62,11 @@ def install_putty(dest_folder=".", fLOG=print, install=True, version=None):
     newurl = find[0]
     outfile = os.path.join(dest_folder, "putty.exe")
     if not os.path.exists(outfile):
-        download_file(newurl, outfile)
+        try:
+            download_file(newurl, outfile)
+        except Exception as e:
+            raise Exception("unable to download\n{0}\nto{1}".format(
+                newurl, outfile)) from e
 
         if not os.path.exists(outfile):
             raise FileNotFoundError(outfile)

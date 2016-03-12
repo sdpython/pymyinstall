@@ -1,4 +1,5 @@
 
+.. _l-blog-pymy-2015-10-28:
 
 .. blogpost::
     :title: Issues with Python 3.5
@@ -39,25 +40,31 @@
     Here is the list of packages not available yet (in a compiled version) 
     on Python 3.5::
     
-        aiohttp
-        cchardet
+        aiohttp*
+        cchardet*
         cgal_bindings
-        dynd
-        gevent
-        grequests
-        la
+        dynd*
+        gevent*
+        grequests*
+        la*
         libpython
         llvmpy
-        mysqlclient
-        opencv_python
-        PuLP
+        mysqlclient*
+        opencv_python*
+        PuLP*
         py2exe
-        pycrypto
-        pycurl
+        pycrypto*
+        pycurl*
         PySide
-        pygit2
-        rpy2
-        tifffile    
+        pygit2*
+        rpy2*
+        tifffile* 
         
     `scandir <https://docs.python.org/3/library/os.html#os.scandir>`_ is now
     part of the distribution.
+    
+    **2016/03/12** changes, some packages are now available on Python 3.5 (marked with ``*``),
+    modules were disabled with::
+    
+        ModuleInstall(...) if sys.version_info[:2] <= (3, 4) else None
+        

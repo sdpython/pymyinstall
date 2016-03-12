@@ -15,6 +15,7 @@ import fnmatch
 # import winreg
 import glob
 import shutil
+from ..installcustom.install_custom_python import unzip7_files
 
 from .win_helper import patch_shebang_line
 
@@ -119,6 +120,9 @@ def extract_archive(fname, targetdir=None, verbose=False, fLOG=print):
     """
     if osp.splitext(fname)[1] in ('.zip', '.exe'):
         obj = zipfile.ZipFile(fname, mode="r")
+    elif osp.splitext(fname)[1] in ('.7z'):
+        unzip7_files(fname, fLOG=fLOG, dest=targetdir)
+        return targetdir
     elif fname.endswith('.tar.gz'):
         obj = tarfile.open(fname, mode='r:gz')
     else:

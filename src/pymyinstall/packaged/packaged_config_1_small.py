@@ -214,8 +214,12 @@ def small_set():
                       purpose="Persistent cache for requests library"),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall("PyQt4", "wheel", mname="pyqt", usage="GUI"),
+        ModuleInstall("qtpy", "pip", usage="GUI",
+                      purpose="single interface for QtPy4, 5, PySide"),
         ModuleInstall(
-            "PySide", "wheel", purpose="open source version of PyQt (issue on Linux and Anaconda)", usage="GUI"),
+            "PySide", "wheel",
+            purpose="open source version of PyQt (issue on Linux and Anaconda)",
+            usage="GUI") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
         ModuleInstall(
@@ -266,6 +270,8 @@ def small_set():
             'pystache', 'pip', purpose="Mustache for Python (for bokeh)"),
         ModuleInstall(
             'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
+        ModuleInstall(
+            'bqplot', 'pip', purpose="interactive graphs, zoomable, d3.js for notebooks", usage="VIZ"),
         ModuleInstall(
             'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
         ModuleInstall('snowballstemmer', 'pip',

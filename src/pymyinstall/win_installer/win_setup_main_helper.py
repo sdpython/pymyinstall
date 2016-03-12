@@ -81,7 +81,8 @@ def win_download(folder=None,
                  verbose=False,
                  fLOG=print,
                  download_only=True,
-                 selection=None):
+                 selection=None,
+                 source=None):
     """
     The function downloads everything needed to prepare a setup.
 
@@ -91,6 +92,7 @@ def win_download(folder=None,
     @param      download_only   only downloads (unused, True by default)
     @param      verbose         print more information
     @param      selection       selection of tools to install (dictionary { toolname: version or None})
+    @param      source          source of python packages (see @see cl ModuleInstall)
     @return                     list of completed operations
 
     List of available tools:
@@ -123,84 +125,96 @@ def win_download(folder=None,
     operations = []
 
     if not is_here("scite") and "scite" in selection:
-        fLOG("--- download", "scite")
+        if verbose:
+            fLOG("--- download", "scite")
         r = install_scite(dest_folder=folder, fLOG=fLOG,
                           install=False, version=selection.get("scite", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("putty") and "putty" in selection:
-        fLOG("--- download", "putty")
+        if verbose:
+            fLOG("--- download", "putty")
         r = install_putty(dest_folder=folder, fLOG=fLOG,
                           install=False, version=selection.get("putty", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("mingw") and "mingw" in selection:
-        fLOG("--- download", "mingw")
+        if verbose:
+            fLOG("--- download", "mingw")
         r = install_mingw(dest_folder=folder, fLOG=fLOG,
                           install=False, version=selection.get("mingw", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("miktex") and "miktex" in selection:
-        fLOG("--- download", "miktex")
+        if verbose:
+            fLOG("--- download", "miktex")
         r = install_miktex(dest_folder=folder, fLOG=fLOG,
                            install=False, version=selection.get("miktex", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("inkscape") and "inkscape" in selection:
-        fLOG("--- download", "inkscape")
+        if verbose:
+            fLOG("--- download", "inkscape")
         r = install_inkscape(dest_folder=folder, fLOG=fLOG,
                              install=False, version=selection.get("inkscape", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("tdm") and "tdm" in selection:
-        fLOG("--- download", "tdm")
+        if verbose:
+            fLOG("--- download", "tdm")
         r = install_tdm_gcc(dest_folder=folder, fLOG=fLOG,
                             install=False, version=selection.get("tdm", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("git") and "git" in selection:
-        fLOG("--- download", "git")
+        if verbose:
+            fLOG("--- download", "git")
         r = install_git(folder, fLOG=fLOG,
                         install=False, version=selection.get("git", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("SQLiteSpy") and "sqlitespy" in selection:
-        fLOG("--- download", "sqllitespy")
+        if verbose:
+            fLOG("--- download", "sqllitespy")
         r = install_sqlitespy(temp_folder=folder, fLOG=fLOG,
                               install=False, version=selection.get("sqlitespy", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("python") and "python" in selection:
-        fLOG("--- download", "python")
+        if verbose:
+            fLOG("--- download", "python")
         r = install_python(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("python", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("R-") and "r" in selection:
-        fLOG("--- download", "R")
+        if verbose:
+            fLOG("--- download", "R")
         r = install_R(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("r", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("vs") and "vs" in selection:
-        fLOG("--- download", "Visual Studio Express")
+        if verbose:
+            fLOG("--- download", "Visual Studio Express")
         r = install_vs(folder, fLOG=fLOG, install=False,
                        version=selection.get("vs", None))
         operations.append(("download", r))
         fLOG("done")
 
     if not is_here("julia") and "julia" in selection:
-        fLOG("--- download", "julia")
+        if verbose:
+            fLOG("--- download", "julia")
         r = install_julia(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("julia", None))
         operations.append(("download", r))
@@ -208,7 +222,7 @@ def win_download(folder=None,
 
     if not is_here("pandoc") and "pandoc" in selection:
         if verbose:
-            fLOG("download", "pandoc")
+            fLOG("--- download", "pandoc")
         r = install_pandoc(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("pandoc", None))
         operations.append(("download", r))
@@ -216,7 +230,7 @@ def win_download(folder=None,
 
     if not is_here("7z") and "7z" in selection:
         if verbose:
-            fLOG("download", "7z")
+            fLOG("--- download", "7z")
         r = install_7z(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("7z", None))
         operations.append(("download", r))
@@ -224,7 +238,7 @@ def win_download(folder=None,
 
     if not is_here("graphviz", no_wheel=True) and "graphviz" in selection:
         if verbose:
-            fLOG("download", "graphviz")
+            fLOG("--- download", "graphviz")
         r = install_graphviz(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("graphviz", None))
         operations.append(("download", r))
@@ -232,7 +246,7 @@ def win_download(folder=None,
 
     if not is_here("jdk", no_wheel=True) and "jdk" in selection:
         if verbose:
-            fLOG("download", "java jdk")
+            fLOG("--- download", "java jdk")
         r = install_javajdk(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("java jdk", None))
         operations.append(("download", r))
@@ -240,7 +254,7 @@ def win_download(folder=None,
 
     if not is_here("jenkins", no_wheel=True) and "jenkins" in selection:
         if verbose:
-            fLOG("download", "jenkins")
+            fLOG("--- download", "jenkins")
         r = install_jenkins(folder, fLOG=fLOG, install=False,
                             version=selection.get("jenkins", None))
         operations.append(("download", r))
@@ -254,7 +268,7 @@ def win_download(folder=None,
             continue
         if verbose:
             fLOG("download module", mod.name)
-        res = mod.download(temp_folder=folder)
+        res = mod.download(temp_folder=folder, source=source)
         if isinstance(res, list):
             for r in res:
                 operations.append(("download", r))
@@ -283,7 +297,7 @@ def win_install(folders,
     @return                     list of completed operations, executable (to make shortcuts)
 
     The function installs every setup which starts by one of the string in *names*
-    and whose extension is .exe, .msi or .zip.
+    and whose extension is .exe, .msi, .zip, .7z.
 
     To install Python on Windows,
     see `Using Python on Windows <https://docs.python.org/3.5/using/windows.html>`_,
@@ -291,11 +305,12 @@ def win_install(folders,
     """
     operations = []
     dfunc = {".zip": extract_archive, ".exe": extract_exe,
-             ".msi": extract_msi, "putty.exe": extract_copy}
+             ".msi": extract_msi, "putty.exe": extract_copy,
+             ".7z": extract_archive}
 
     def location(file):
         ext = os.path.splitext(file)[-1]
-        if ext not in [".msi", ".exe", ".zip"]:
+        if ext not in [".msi", ".exe", ".zip", ".7z"]:
             return None
         lf = file.lower()
         for name in names:
