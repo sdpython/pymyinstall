@@ -46,6 +46,7 @@ def pyensae_set():
         "qgrid",  # magic command
         "scipy",
         "scikit-learn",
+        "urllib3",
     ]
 
     from . import find_module_install
