@@ -50,7 +50,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
     if not os.path.exists(pip) and not os.path.exists(pep8):
         scripts = os.path.join(python_path, "Scripts")
         files_to_check.extend(
-            ["rodeo.exe", "spyder.exe", "autopep8.exe"])
+            ["rodeo.exe", "spyder.bat", "autopep8.exe"])
         if sys.version_info[:2] != (3, 5):
             files_to_check.append("pip.exe")
     else:
@@ -77,7 +77,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
         mes = []
         for r in res:
             if not r[0]:
-                m = "FAILED {0}\nOUT\n{1}\nERR\n{2}".format(
+                m = "------\nFAILED {0}\nOUT\n{1}\nERR\n{2}".format(
                     r[1].name, r[2], r[3])
                 mes.append(m)
         if len(mes) > 0:
@@ -161,22 +161,26 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
         if i < start:
             continue
         if end != -1 and i >= end:
+            fLOG("{0}/{1}: end".format(i, len(module_list) - start))
             break
         if m.is_installed_version():
 
-            if m.name in ["libpython", "tutormagic", "pymyinstall"]:
+            if m.name in ["libpython", "tutormagic", "pymyinstall", "distribute"]:
                 # nothing to import or failure
+                fLOG("{0}/{1}: skipped".format(i, len(module_list) - start), m)
                 continue
             elif m.mname == "theano":
                 # we need to check that TDM-GCC is installed
                 cmd = "g++ --help"
                 out, err = run_cmd(cmd, wait=True, do_not_log=True)
                 if err is not None and len(err) > 0:
-                    fLOG("{0}/{1}: failed (g++)".format(i, len(module_list)), m)
+                    fLOG("{0}/{1}: failed (g++)".format(i,
+                                                        len(module_list) - start), m)
                     res.append((False, m, out, err))
                     continue
                 if "Usage: g++ [options] file..." not in out:
-                    fLOG("{0}/{1}: failed (g++)".format(i, len(module_list)), m)
+                    fLOG("{0}/{1}: failed (g++)".format(i,
+                                                        len(module_list) - start), m)
                     res.append((False, m, out, err))
                     continue
 
@@ -191,13 +195,17 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                 sc += sc + ";import scipy.stats"
             out, err = run_cmd_path(python_path, sc, fLOG=noLOG)
             suc = analyze_error_success(m, err)
-            nextm = module_list[i+1] if i < len(module_list) else ""
+            nextm = module_list[i + 1] if i + 1 < len(module_list) else ""
             if suc:
-                fLOG("{0}/{1}: success".format(i, len(module_list)), m, "-->", nextm)
+                fLOG("{0}/{1}: success".format(i,
+                                               len(module_list) - start), m, "-->", nextm)
             else:
-                fLOG("{0}/{1}: failed ".format(i, len(module_list)), m, "-->", nextm)
+                fLOG("{0}/{1}: failed ".format(i,
+                                               len(module_list) - start), m, "-->", nextm)
+                if m.name == "paramiko":
+                    err = "You might have to install manually pycrypto.\nPlease read http://www.xavierdupre.fr/app/pymyinstall/helpsphinx//blog/2016/2016-02-27_pycrypto_paramiko.html" + err
                 err = [(" - ERR: " if is_errored_line(line)
-                        else " - OK:  ") + line for line in err.split("\n")]
+                        else " - OK:  ") + line.rstrip("\n\r") for line in err.split("\n")]
                 err = "\n".join(err)
             res.append((suc, m, out, err))
     return res

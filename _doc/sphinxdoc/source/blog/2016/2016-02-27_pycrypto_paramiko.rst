@@ -28,7 +28,7 @@
     which does not overwrite folder *Crypto* anymore. The last issue I had was
     to find a wheel for *pycrypto* for Python 3.5 on Windows.
     I did not find it so I made it: 
-    `pycrypto-2.7a1-cp35-none-win_amd64.whl <http://www.xavierdupre.fr/enseignement/setup/pycrypto-2.7a1-cp35-none-win_amd64.whl>`_.
+    `pycrypto-2.7a2-cp35-none-win_amd64.whl <http://www.xavierdupre.fr/enseignement/setup/pycrypto-2.7a2-cp35-none-win_amd64.whl>`_.
     I took it from `avosirenfal/pycrypto <https://github.com/avosirenfal/pycrypto>`_
     which was recently updated and made the following changes
     `fix setup.py and a C header to build pycrypto on Windows for Python 3.5 <https://github.com/sdpython/pycrypto/commit/9dbff17ba6f27ede3c2aad3cfd1b264fbc0eb5d4>`_
