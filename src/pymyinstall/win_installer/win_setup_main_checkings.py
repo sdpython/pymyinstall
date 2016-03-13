@@ -191,10 +191,11 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                 sc += sc + ";import scipy.stats"
             out, err = run_cmd_path(python_path, sc, fLOG=noLOG)
             suc = analyze_error_success(m, err)
+            nextm = module_list[i+1] if i < len(module_list) else ""
             if suc:
-                fLOG("{0}/{1}: success".format(i, len(module_list)), m)
+                fLOG("{0}/{1}: success".format(i, len(module_list)), m, "-->", nextm)
             else:
-                fLOG("{0}/{1}: failed ".format(i, len(module_list)), m)
+                fLOG("{0}/{1}: failed ".format(i, len(module_list)), m, "-->", nextm)
                 err = [(" - ERR: " if is_errored_line(line)
                         else " - OK:  ") + line for line in err.split("\n")]
                 err = "\n".join(err)
