@@ -3,7 +3,7 @@
 @file
 @brief Run some checkings about the distribution
 
-.. versionadded:: 1.3
+.. versionadded:: 1.1
 """
 from __future__ import print_function
 
@@ -34,7 +34,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
 
     If *python_path* is None, it is replace by ``os.path.dirname(sys.executable)``.
 
-    .. versionadded:: 1.3
+    .. versionadded:: 1.1
     """
     exceptions = []
     files_to_check = ["jupyter-console.exe", "jupyter-qtconsole.exe",

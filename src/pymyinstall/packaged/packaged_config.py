@@ -73,7 +73,7 @@ def _function_set_name(f):
     @param      f       function
     @return             name
 
-    .. versionadded:: 1.3
+    .. versionadded:: 1.1
     """
     name = f.__name__
     return name.split(".")[-1]

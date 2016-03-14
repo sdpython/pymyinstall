@@ -276,7 +276,7 @@ class ModuleInstall:
         Test the module by running a command line.
         Does some others verifications for a specific modules such as scipy.
 
-        .. versionadded:: 1.3
+        .. versionadded:: 1.1
         """
         exe = get_python_program()
         cmd = exe + ' -u -c "import {0}"'.format(self.ImportName)

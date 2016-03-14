@@ -23,7 +23,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     @param      module_list list of python modules to install, to know which script to install or not
     @return                 operations (list of what was done)
 
-    .. versionchanged:: 1.3
+    .. versionchanged:: 1.1
         Add batch file for glue and to run some checkings.
     """
     if selection is None:
@@ -128,6 +128,8 @@ def create_win_env(folders):
         text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\MinGW\\bin')
     if os.path.exists(os.path.join(tools, "Graphviz")):
         text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\Graphviz\\bin')
+    if os.path.exists(os.path.join(tools, "JDK")):
+        text.append('set PATH=%PATH%;%PYTHON_TOOLS%\\JDK\\bin')
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "env.bat")
@@ -147,8 +149,7 @@ def create_win_jupyter_console(folders):
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
             'set JUPYTERC=%PYTHON_WINSCRIPTS%\\jupyter-console.exe',
-            'set IPYTHONRC=%PYTHON_WINSCRIPTS%\\ipython.exe',
-            '"%IPYTHONRC%" console']
+            '"%JUPYTERC%" console']
     # command jupyter console does not work yet even if the documentation says
     # so
 
@@ -341,7 +342,7 @@ def create_win_spyder(folders):
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
             'rem set QT_API=pyside',
-            '"%PYTHON_WINSCRIPTS%\\spyder.exe" "--workdir=%WORKSPACE%"']
+            '"%PYTHON_WINSCRIPTS%\\spyder.bat" "--workdir=%WORKSPACE%"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "spyder.bat")
@@ -497,7 +498,7 @@ def create_win_glue(folders, suffix=""):
     @param      suffix      add a suffix
     @return                 operations (list of what was done)
 
-    .. versionadded:: 1.3
+    .. versionadded:: 1.1
     """
     text = ['@echo off',
             'set CURRENT2=%~dp0',
@@ -519,7 +520,7 @@ def update_all_packages(folders, suffix=""):
     @param      suffix      add a suffix
     @return                 operations (list of what was done)
 
-    .. versionchanged:: 1.3
+    .. versionchanged:: 1.1
          Bug fix, update script to import function update_all (fails in 1.2).
     """
     text = ['@echo off',
@@ -542,7 +543,7 @@ def run_checkings(folders, suffix=""):
     @param      suffix      add a suffix
     @return                 operations (list of what was done)
 
-    .. versionadded:: 1.3
+    .. versionadded:: 1.1
     """
     text = ['@echo off',
             'set CURRENT2=%~dp0',
