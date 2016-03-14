@@ -31,6 +31,8 @@
 
     *About* 
     
-    `OpenMP <https://en.wikipedia.org/wiki/OpenMP>`_
-    is an API that supports multi-platform shared 
-    memory multiprocessing programming in C, C++, and Fortran (Wikipedia).
+    * `OpenMP <https://en.wikipedia.org/wiki/OpenMP>`_
+      is an API that supports multi-platform shared 
+      memory multiprocessing programming in C, C++, and Fortran (Wikipedia).
+    * `XGBoost: A Scalable Tree Boosting System <http://arxiv.org/pdf/1603.02754v1.pdf>`_, paper by
+      Tianqi Chen, Carlos Guestrin
