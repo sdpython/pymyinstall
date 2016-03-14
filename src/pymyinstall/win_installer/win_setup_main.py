@@ -599,7 +599,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             raise ValueError(
                 "unable to get module list from folder " + folders["python"])
         with open(os.path.join(folders["config"], "installed.python.packages.txt"), "w") as f:
-            for a, b in sorted(mods.items()):
+            mods = [(a.lower(), a, b) for a, b in mods.items()]
+            for la, a, b in sorted(mods.items()):
                 f.write("{0}\t{1}\n".format(a, b))
 
     #################
@@ -612,7 +613,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             fLOG("--- list R packages")
             packs = os.listdir(r_lib)
             with open(os.path.join(folders["config"], "installed.R.packages.txt"), "w") as f:
-                for pack in sorted(packs):
+                packs_ = [(p.lower(), p) for p in packs]
+                for lp, pack in sorted(packs_):
                     desc = get_package_description(r_path, pack)
                     vers = desc.get("Version", "unknown")
                     f.write("{0}\t{1}\n".format(pack, vers))
