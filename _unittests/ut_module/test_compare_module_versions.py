@@ -87,14 +87,14 @@ class TestCompareVersion(unittest.TestCase):
                 fLOG("missing package on both sides", mod)
                 continue
             # fLOG(i, url1, url2)
-            n1 = url1[-1]
-            n2 = url2[-1]
-            v1 = get_wheel_version(n1)
-            v2 = get_wheel_version(n2)
-            cmp = compare_version(v1, v2)
+            n1 = url1[-1] if url1 is not None else None
+            n2 = url2[-1] if url2 is not None else None
+            v1 = get_wheel_version(n1) if n1 is not None else None
+            v2 = get_wheel_version(n2) if n2 is not None else None
+            cmp = compare_version(v1, v2) if v1 is not None and v2 is not None else -2
             if cmp != 0:
                 fLOG("---", i, v1, v2, mod.name)
-                if not ("rc1" in v1 or "rc1" in v2):
+                if v1 is not None and v2 is not None and not ("rc1" in v1 or "rc1" in v2):
                     diff.append(mod)
 
         assert len(diff) <= 5

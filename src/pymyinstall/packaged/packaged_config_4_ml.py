@@ -390,6 +390,36 @@ def ensae_set():
                       purpose="General tools for Astronomical Time Series in Python"),
         ModuleInstall("supersmoother", "pip",
                       purpose="This is an efficient implementation of Friedman's SuperSmoother [1] algorithm in pure Python. It makes use of numpy for fast numerical computation."),
+
+        #
+        # 2016-03
+        #
+        ModuleInstall("prettytable", "pip",
+                      purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
+        ModuleInstall("skll", "pip", usage="ML",
+                      purpose="SciKit-Learn Laboratory makes it easier to run machinelearning experiments with scikit-learn."),
+        ModuleInstall("sklearn_pandas", "pip", usage="ML",
+                      purpose="This module provides a bridge between Scikit-Learn's machine learning methods and pandas-style Data Frames."),
+        ModuleInstall("pystruct", "wheel", usage="ML", source="2",
+                      purpose="Learning Structured Prediction in Python"),
+        ModuleInstall("py-earth", "wheel", mname="pyearth", usage="ML", source="2",
+                      purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of scikit-learn."),
+        # ModuleInstall("seqlearn", "wheel", usage="ML", source="2",
+        #              purpose=""),
+        ModuleInstall("hmmlearn", "wheel", usage="ML",
+                      purpose="Hidden Markov Models in Python, with scikit-learn like API"),
+        ModuleInstall("gplearn", "pip", usage="ML",
+                      purpose="gplearn implements Genetic Programming in Python, with a scikit-learn inspired and compatible API."),
+        ModuleInstall("gdbn", "pip", usage="ML",
+                      purpose="This package contains python code for pre-trained deep neural networks"),
+        ModuleInstall("gnumpy", "pip",
+                      purpose="Gnumpy: an easy way to use GPU boards in Python"),
+        ModuleInstall("nolearn", "pip", usage="ML",
+                      purpose="nolearn contains a number of wrappers and abstractions around existing neural network libraries, most notably Lasagne, along with a few machine learning utility modules. All code is written to be compatible with scikit-learn."),
+        ModuleInstall("mlxtend", "pip", usage="ML",
+                      purpose="A library consisting of useful tools and extensions for the day-to-day data science tasks."),
+        ModuleInstall("sacred", "pip", usage="ML",
+                      purpose="Facilitates automated and reproducible experimental research"),
     ]
 
     if sys.version_info[0] == 2:
@@ -399,8 +429,6 @@ def ensae_set():
                           purpose="Mesos interfaces (for dpark)"),
             ModuleInstall("pymesos", "pip",
                           purpose="Mesos interfaces (for dpark)"),
-            ModuleInstall("prettytable", "pip",
-                          purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
             ModuleInstall("streamparse", "pip",
                           purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
             # ModuleInstall("dpark", "wheel2",
