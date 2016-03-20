@@ -25,6 +25,8 @@
     
     * `pystruct <https://pystruct.github.io/>`_: 
       learning Structured Prediction in Python.
+    * `seqlearn <https://github.com/larsmans/seqlearn>`_: 
+      sequence classification toolkit for Python. It is designed to extend scikit-learn and offer as similar as possible an API.
     * `py-earth <https://github.com/jcrudy/py-earth>`_: 
       a Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of scikit-learn.
     * `hmmlearn <https://github.com/hmmlearn/hmmlearn>`_: 
