@@ -20,7 +20,9 @@ def scraping_set():
             purpose="Language detection library ported from Google's language-detection."),
         ModuleInstall(
             "justext", "pip", usage="WEB",
-            purpose="Program jusText is a tool for removing boilerplate content, such as navigation links, headers, and footers from HTML pages. It is designed to preserve mainly text containing full sentences and it is therefore well suited for creating linguistic resources such as Web corpora."),
+            purpose="Program jusText is a tool for removing boilerplate content, such as navigation links, headers, " +
+            "and footers from HTML pages. It is designed to preserve mainly text containing full " +
+            "sentences and it is therefore well suited for creating linguistic resources such as Web corpora."),
         ModuleInstall(
             "tldextract", "pip", usage="WEB",
             purpose="Accurately separate the TLD from the registered domain and subdomains of a URL, using the Public Suffix List."),
@@ -32,7 +34,8 @@ def scraping_set():
             purpose="http client/server for asyncio"),
         ModuleInstall(
             "sky", "pip", usage="WEB",
-            purpose="sky is a web scraping framework, implemented with the latest python versions in mind (3.4+). It uses the asynchronous asyncio framework, as well as many popular modules and extensions."),
+            purpose="sky is a web scraping framework, implemented with the latest python versions in mind (3.4+). It uses the asynchronous asyncio framework, " +
+            "as well as many popular modules and extensions."),
     ]
 
     return [_ for _ in mod if _ is not None]

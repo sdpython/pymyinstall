@@ -29,7 +29,8 @@ def get_parser():
     parser.add_argument(
         '--set',
         default="-",
-        help='set of module to install, see documentation of function get_name_set to get a comprehensive list, this option is ignored if a module is specified on the command line')
+        help='set of module to install, see documentation of function get_name_set to get a comprehensive list, ' +
+             'this option is ignored if a module is specified on the command line')
     parser.add_argument(
         '--source',
         default="",

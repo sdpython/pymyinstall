@@ -114,7 +114,8 @@ def iot_set():
                       'persandstrom', usage='IoT', purpose="A python module for reading and changing status of verisure devices through mypages."),
 
         ModuleInstall('homeassistant', 'pip',
-                      purpose="Home Assistant is a home automation platform running on Python 3. The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control.",
+                      purpose="Home Assistant is a home automation platform running on Python 3. " +
+                      "The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control.",
                       web="https://github.com/balloob/home-assistant/",
                       usage="IoT"),
     ]

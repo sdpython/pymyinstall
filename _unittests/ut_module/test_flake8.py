@@ -67,7 +67,8 @@ class TestFlake8(unittest.TestCase):
                          "'skip__' imported but unused",
                          "'skip___' imported but unused",
                          ],
-                   extended=[("fLOG", _extended_refectoring)])
+                   extended=[("fLOG", _extended_refectoring)],
+                   max_line_length=320)
 
 
 if __name__ == "__main__":

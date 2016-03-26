@@ -3,7 +3,8 @@
 @brief Functions to get module version, license, dependencies
 """
 from .install_cmd_helper import run_cmd, get_pip_program
-from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException, ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
+from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
+from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
 from .install_cmd_regex import regex_wheel_version, regex_wheel_version2
 
 import sys

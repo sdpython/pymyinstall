@@ -90,7 +90,8 @@ class TestCompareVersion(unittest.TestCase):
             n2 = url2[-1] if url2 is not None else None
             v1 = get_wheel_version(n1) if n1 is not None else None
             v2 = get_wheel_version(n2) if n2 is not None else None
-            cmp = compare_version(v1, v2) if v1 is not None and v2 is not None else -2
+            cmp = compare_version(
+                v1, v2) if v1 is not None and v2 is not None else -2
             if cmp != 0:
                 fLOG("---", i, v1, v2, mod.name)
                 if v1 is not None and v2 is not None and not ("rc1" in v1 or "rc1" in v2):

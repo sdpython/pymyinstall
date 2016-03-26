@@ -37,7 +37,8 @@ def ensae_set():
         ModuleInstall('django-configurations', 'pip', mname="configurations",
                       purpose="localshop dependency, A helper for organizing Django settings."),
         ModuleInstall('django-environ', 'pip', mname="environ",
-                      purpose="localshop dependency, Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application."),
+                      purpose="localshop dependency, Django-environ allows you to utilize 12factor " +
+                      "inspired environment variables to configure your Django application."),
         ModuleInstall('django-model-utils', 'pip', mname="model_utils",
                       purpose="localshop dependency, Django model mixins and utilities."),
         ModuleInstall('django-storages', 'pip', mname="storages",
@@ -73,14 +74,19 @@ def ensae_set():
         ModuleInstall(
             "nltk", "pip", purpose="NLP, natural language processing", usage="NLP"),
         ModuleInstall(
-            "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, classification, translation, and more."),
-        ModuleInstall(
-            "dev", "pip", purpose="Header files, a static library and development tools for building Python modules, extending the Python interpreter or embedding Python in applications."),
+            "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for " +
+            "diving into common natural language processing (NLP) tasks such as part-of-speech tagging, " +
+            "noun phrase extraction, sentiment analysis, classification, translation, and more."),
+        ModuleInstall("dev", "pip",
+                      purpose="Header files, a static library and development tools for building Python modules, " +
+                      "extending the Python interpreter or embedding Python in applications."),
         ModuleInstall(
             "opencv_python", "wheel", mname="cv2", purpose="OpenVC wrapper",
             web="https://opencv-python-tutroals.readthedocs.org/en/latest/"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio",
-                      purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. With PyAudio, you can easily use Python to play and record audio streams on a variety of platforms (e.g., GNU/Linux, Microsoft Windows, and Mac OS X)."),
+                      purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. " +
+                      "With PyAudio, you can easily use Python to play and record audio " +
+                      "streams on a variety of platforms (e.g., GNU/Linux, Microsoft Windows, and Mac OS X)."),
         ModuleInstall(
             "zope.interface", "wheel", purpose="interfaces for python"),
         ModuleInstall(
@@ -88,8 +94,9 @@ def ensae_set():
         ModuleInstall(
             "persistent", "wheel", purpose="Objets persistants translucides"),
         # requires zope.interface, persistents
-        ModuleInstall(
-            "BTrees", "wheel", purpose="This package contains a set of persistent object containers built around a modified BTree data structure.", usage="ALGO"),
+        ModuleInstall("BTrees", "wheel", usage="ALGO",
+                      purpose="This package contains a set of persistent object containers built around a modified " +
+                      "BTree data structure."),
         ModuleInstall(
             "datrie", "wheel", purpose="Fast, efficiently stored Trie for Python.", usage="ALGO"),
         # ModuleInstall("pysparse", "pip"), #does not work
@@ -135,9 +142,11 @@ def ensae_set():
         ModuleInstall("PyX", "wheel", mname="pyx",
                       purpose="plotting", usage="VIZ"),
         ModuleInstall(
-            "scandir", "wheel", purpose="Better directory iterator and faster os.walk(), now in the Python 3.5 stdlib") if sys.version_info[:2] <= (3, 4) else None,
+            "scandir", "wheel", purpose="Better directory iterator and faster os.walk(), " +
+            "now in the Python 3.5 stdlib") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
-            "zs", "wheel", purpose="S is a compressed, read-only file format for efficiently distributing, querying, and archiving arbitrarily large record-oriented datasets."),
+            "zs", "wheel", purpose="S is a compressed, read-only file format for efficiently distributing, " +
+            "querying, and archiving arbitrarily large record-oriented datasets."),
         # machine learning
         ModuleInstall(
             "joblib", "pip", purpose="distribute jobs, parallelization"),
@@ -173,7 +182,8 @@ def ensae_set():
         #
         ModuleInstall(
             "zipline", "github", "quantopian",
-            purpose="Zipline is a Pythonic algorithmic trading library. The system is fundamentally event-driven and a close approximation of how live-trading systems operate.") if sys.version_info[:2] >= (3, 5) else None,  # finance
+            purpose="Zipline is a Pythonic algorithmic trading library. The system is fundamentally event-driven and a close approximation of how " +
+            "live-trading systems operate.") if sys.version_info[:2] >= (3, 5) else None,  # finance
         ModuleInstall("vincent", "pip", purpose="plotting",
                       usage="VIZ"),  # graph
         # graph, pygal_maps_world only accepts the latest version
@@ -223,18 +233,21 @@ def ensae_set():
         ModuleInstall(
             "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
         ModuleInstall(
-            "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets and designed to efficiently and easily cope with extremely large amounts of data."),
+            "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets " +
+            "and designed to efficiently and easily cope with extremely large amounts of data."),
         ModuleInstall(
             "heatmap", "wheel", purpose="draw heatmap", usage="VIZ"),
         ModuleInstall("planar", "wheel",
                       purpose="2D planar geometry library for Python."),
         ModuleInstall("GDAL", "wheel", mname="osgeo",
-                      purpose="GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundation."),
+                      purpose="GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style " +
+                      "Open Source license by the Open Source Geospatial Foundation."),
         # ModuleInstall("rasterio", "wheel",
         # purpose="Fast and direct raster I/O for use with Numpy and SciPy,
         # Rasterio reads and writes geospatial raster datasets."),
         ModuleInstall("cgal_bindings", "wheel", mname="CGAL",
-                      purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, in languages other than C++, as for example Java and Python.",
+                      purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, " +
+                      "in languages other than C++, as for example Java and Python.",
                       web="https://github.com/cgal/cgal-swig-bindings") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall("tifffile", "wheel",
                       purpose="Read and write image data from and to TIFF files. (for pims)"),
@@ -245,7 +258,8 @@ def ensae_set():
         ModuleInstall("trackpy", "pip",
                       purpose="trackpy is a Python package for particle tracking in 2D, 3D, and higher dimensions.", usage="DATA/ML"),
         ModuleInstall("triangle", "wheel",
-                      purpose="Python Triangle is a python wrapper around Jonathan Richard Shewchuk's two-dimensional quality mesh generator and delaunay triangulator library."),
+                      purpose="Python Triangle is a python wrapper around Jonathan Richard Shewchuk's " +
+                      "two-dimensional quality mesh generator and delaunay triangulator library."),
         ModuleInstall("redis", "pip",
                       purpose="Python client for Redis key-value store"),
         # this module is not on pypi and the py3k version is in a separate folder
@@ -266,7 +280,8 @@ def ensae_set():
         ModuleInstall("user-agent", "pip", mname="user_agent",
                       purpose="A library to identify devices (phones, tablets) and their capabilities by parsing (browser/HTTP) user agent strings"),
         ModuleInstall("tinydb", "pip",
-                      purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) It's written in pure Python and has no external requirements.", usage="noSQL"),
+                      purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) " +
+                      "It's written in pure Python and has no external requirements.", usage="noSQL"),
         ModuleInstall("urllib3", "pip",
                       purpose="urllib2 extension"),
         ModuleInstall("gevent", "pip", version="1.1b6",
@@ -355,15 +370,19 @@ def ensae_set():
         ModuleInstall("lz4", "wheel",
                       purpose="LZ4 Bindings for Python (for dpark)"),
         ModuleInstall("fabric", "pip",
-                      purpose="Fabric is a Python library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks."),
+                      purpose="Fabric is a Python library and command-line tool for streamlining " +
+                      "the use of SSH for application deployment or systems administration tasks."),
         ModuleInstall("invoke", "pip",
-                      purpose="Invoke is a Python task execution tool & library, drawing inspiration from various sources to arrive at a powerful & clean feature set."),
+                      purpose="Invoke is a Python task execution tool & library, drawing inspiration " +
+                      "from various sources to arrive at a powerful & clean feature set."),
         ModuleInstall("msgpack-python", "pip", mname="msgpack",
                       purpose="MessagePack (de)serializer."),
         ModuleInstall("cymem", "pip",
                       purpose="Manage calls to calloc/free through Cython") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("murmurhash", "pip",
-                      purpose="Cython .pxd files for some of the MurmurHash 2 and 3 hash functions, with a slightly more Pythonic API. The only access to these functions is via Cython — I don’t see why they should be useful from pure Python.") if sys.version_info[:2] >= (3, 5) else None,
+                      purpose="Cython .pxd files for some of the MurmurHash 2 and 3 hash functions, with a slightly more Pythonic API. " +
+                      "The only access to these functions is via Cython — I don’t see why they should be " +
+                      "useful from pure Python.") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("preshed", "pip",
                       purpose="Cython hash table that trusts the keys are pre-hashed") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("text-unidecode", "pip", mname="text_unidecode",
@@ -389,7 +408,8 @@ def ensae_set():
         ModuleInstall("gatspy", "pip",
                       purpose="General tools for Astronomical Time Series in Python"),
         ModuleInstall("supersmoother", "pip",
-                      purpose="This is an efficient implementation of Friedman's SuperSmoother [1] algorithm in pure Python. It makes use of numpy for fast numerical computation."),
+                      purpose="This is an efficient implementation of Friedman's SuperSmoother [1] algorithm in pure Python. " +
+                      "It makes use of numpy for fast numerical computation."),
 
         #
         # 2016-03
@@ -415,7 +435,9 @@ def ensae_set():
         ModuleInstall("gnumpy", "pip",
                       purpose="Gnumpy: an easy way to use GPU boards in Python"),
         ModuleInstall("nolearn", "pip", usage="ML",
-                      purpose="nolearn contains a number of wrappers and abstractions around existing neural network libraries, most notably Lasagne, along with a few machine learning utility modules. All code is written to be compatible with scikit-learn."),
+                      purpose="nolearn contains a number of wrappers and abstractions " +
+                      "around existing neural network libraries, most notably Lasagne, along with a " +
+                      "few machine learning utility modules. All code is written to be compatible with scikit-learn."),
         ModuleInstall("mlxtend", "pip", usage="ML",
                       purpose="A library consisting of useful tools and extensions for the day-to-day data science tasks."),
         ModuleInstall("sacred", "pip", usage="ML",

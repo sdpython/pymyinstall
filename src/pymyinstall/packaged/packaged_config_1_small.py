@@ -30,7 +30,8 @@ def small_set():
         ModuleInstall(
             "html5lib", "pip", purpose="pure-python library for parsing HTML"),
         ModuleInstall("beautifulsoup4", "pip", mname="bs4",
-                      purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree."),
+                      purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for " +
+                      "iterating, searching, and modifying the parse tree."),
         ModuleInstall(
             "coverage", "pip", purpose="measure the coverage of unit tests"),
         ModuleInstall(
@@ -57,7 +58,8 @@ def small_set():
         ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
         ModuleInstall(
-            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts."),
+            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
+            "of SSL certificates while verifying the identity of TLS hosts."),
         ModuleInstall(
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
@@ -66,7 +68,9 @@ def small_set():
         ModuleInstall(
             "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz (pipy distributes the binaries)", usage="NETWORK"),
         ModuleInstall(
-            "pycparser", "pip", purpose="pycparser is a complete parser of the C language, written in pure Python using the PLY parsing library. It parses C code into an AST and can serve as a front-end for C compilers or analysis tools."),
+            "pycparser", "pip", purpose="pycparser is a complete parser of the C language, written in pure " +
+            "Python using the PLY parsing library. It parses C code into " +
+            "an AST and can serve as a front-end for C compilers or analysis tools."),
         ModuleInstall("Cython", "wheel", mname="cython",
                       purpose="pseudo C++ in python"),
         ModuleInstall("numpy", "wheel",
@@ -151,8 +155,9 @@ def small_set():
             "notedown", "pip", purpose="Convert markdown to IPython notebook.", usage="JUPYTER"),
         ModuleInstall(
             "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
-        ModuleInstall(
-            "pexpect", "pip", purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.", usage="JUPYTER") if not sys.platform.startswith("win") else None,
+        ModuleInstall("pexpect", "pip",
+                      purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.",
+                      usage="JUPYTER") if not sys.platform.startswith("win") else None,
         ModuleInstall(
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
@@ -198,8 +203,9 @@ def small_set():
         ModuleInstall(
             "ipystata", "pip", purpose="Jupyter kernel for Stata",
             usage="JUPYTER/PY2") if sys.version_info[0] == 2 else None,
-        ModuleInstall(
-            "jupyter-pip", "pip", mname="jupyterpip", purpose="Allows Jupyter notebook extension writers to make their extension pip installable!", usage="JUPYTER"),
+        ModuleInstall("jupyter-pip", "pip", mname="jupyterpip",
+                      purpose="Allows Jupyter notebook extension writers to make their extension pip installable!",
+                      usage="JUPYTER"),
         ModuleInstall("ipyparallel", "pip", usage="JUPYTER",
                       purpose="Interactive Parallel Computing with IPython"),
         # end of ipython
@@ -221,7 +227,8 @@ def small_set():
             purpose="open source version of PyQt (issue on Linux and Anaconda)",
             usage="GUI") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
-            "psutil", "wheel", purpose="cross-platform library for retrieving information onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
+            "psutil", "wheel", purpose="cross-platform library for retrieving information " +
+            "onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
         ModuleInstall(
             "rope_py3k", "pip", mname="rope", purpose="refactoring library") if sys.version_info[0] >= 3 else None,  #
         ModuleInstall(
@@ -275,7 +282,8 @@ def small_set():
         ModuleInstall(
             'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
         ModuleInstall('snowballstemmer', 'pip',
-                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball algorithms, needed by sphinx-rtd-theme."),
+                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball " +
+                      "algorithms, needed by sphinx-rtd-theme."),
         ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinxjp.themes.revealjs", "pip",
@@ -300,7 +308,8 @@ def small_set():
         ModuleInstall("pyprofiler", "pip",
                       purpose="profiler", usage="PROFILING"),
         ModuleInstall("mock", "pip",
-                      purpose="mock is a library for testing in Python. It allows you to replace parts of your system under test with mock objects and make assertions about how they have been used."),
+                      purpose="mock is a library for testing in Python. It allows you to replace parts of your system " +
+                      "under test with mock objects and make assertions about how they have been used."),
         ModuleInstall("multimethods", "pip",
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
         ModuleInstall("appdirs", "pip",

@@ -422,7 +422,8 @@ def win_replace_shebang(folders, suffix=""):
     text = ['@echo off',
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
-            '"%PYTHON_WINHOME%\\pythonw.exe" -u -c "import os;from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', None)"']
+            '"%PYTHON_WINHOME%\\pythonw.exe" -u -c "import os;' +
+            'from pymyinstall.win_installer import win_patch_paths;win_patch_paths(\'PYTHON_WINSCRIPTS\', None)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "replace_shebang.bat")
@@ -442,7 +443,8 @@ def win_check_installation(folders, suffix=""):
     text = ['@echo off',
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
-            '"%PYTHON_WINHOME%\\python.exe" -u -c "import sys;from pymyinstall.win_installer import import_every_module;import_every_module(sys.executable, None, fLOG=print)"']
+            '"%PYTHON_WINHOME%\\python.exe" -u -c "import sys;from pymyinstall.win_installer import import_every_module;' +
+            'import_every_module(sys.executable, None, fLOG=print)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "win_check_installation.bat")
@@ -462,7 +464,9 @@ def create_win_rss(folders, suffix=""):
     text = ['@echo off',
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
-            '"%PYTHON_WINHOME%\\python.exe" -u -c "from pyquickhelper.loghelper import fLOG;from pyquickhelper.pycode.blog_helper import rss_update_run_server;fLOG(OutputPrint=True);rss_update_run_server(r\'%CURRENT2%rss_database.db3\', r\'%CURRENT2%rss_list.xml\')"']
+            '"%PYTHON_WINHOME%\\python.exe" -u -c "from pyquickhelper.loghelper import fLOG;' +
+            'from pyquickhelper.pycode.blog_helper import rss_update_run_server;fLOG(OutputPrint=True);' +
+            'rss_update_run_server(r\'%CURRENT2%rss_database.db3\', r\'%CURRENT2%rss_list.xml\')"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_fetch_rss.bat")
@@ -526,7 +530,8 @@ def update_all_packages(folders, suffix=""):
     text = ['@echo off',
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
-            '"%PYTHON_WINHOME%\\python.exe" -u -c "from pymyinstall.packaged import update_all;update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
+            '"%PYTHON_WINHOME%\\python.exe" -u -c "from pymyinstall.packaged import update_all;' +
+            'update_all(temp_folder=\'%WORKSPACE%/update_modules\', verbose=True)"']
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_update_all_packages.bat")

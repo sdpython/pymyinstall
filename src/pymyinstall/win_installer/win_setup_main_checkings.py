@@ -203,7 +203,9 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                 fLOG("{0}/{1}: failed ".format(i,
                                                len(module_list) - start), m, "-->", nextm)
                 if m.name == "paramiko":
-                    err = "You might have to install manually pycrypto.\nPlease read http://www.xavierdupre.fr/app/pymyinstall/helpsphinx//blog/2016/2016-02-27_pycrypto_paramiko.html" + err
+                    err = "You might have to install manually pycrypto.\n" + \
+                          "Please read http://www.xavierdupre.fr/app/pymyinstall/helpsphinx//blog/2016/2016-02-27_pycrypto_paramiko.html" + \
+                          err
                 err = [(" - ERR: " if is_errored_line(line)
                         else " - OK:  ") + line.rstrip("\n\r") for line in err.split("\n")]
                 err = "\n".join(err)

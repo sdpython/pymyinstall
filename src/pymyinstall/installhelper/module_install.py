@@ -3,9 +3,12 @@
 @brief Various function to install various python module from various location.
 """
 from __future__ import print_function
-from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program, get_python_program, get_file_modification_date, get_conda_program, is_conda_distribution
-from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError, DownloadError, MissingVersionWheelException, WrongWheelException, MissingWheelException
-from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata, numeric_version, compare_version, choose_most_recent, get_wheel_version
+from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program
+from .install_cmd_helper import get_python_program, get_file_modification_date, get_conda_program, is_conda_distribution
+from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError
+from .module_install_exceptions import DownloadError, MissingVersionWheelException, WrongWheelException, MissingWheelException
+from .module_install_version import get_pypi_version, get_module_version, annoying_modules, get_module_metadata
+from .module_install_version import numeric_version, compare_version, choose_most_recent, get_wheel_version
 from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel, enumerate_links_module, extract_all_links
 from .missing_license import missing_module_licenses
 from .internet_settings import default_user_agent
@@ -289,7 +292,8 @@ class ModuleInstall:
             out, err = run_cmd(cmd, fLOG=self.fLOG)
             if err:
                 if sys.platform.startswith("win") and sys.version_info[:2] >= (3, 5) and "DLL" in err:
-                    raise InstallError("scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                    mes = "scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}"
+                    raise InstallError(mes.format(
                         self.ImportName, cmd, out, err))
                 else:
                     raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(

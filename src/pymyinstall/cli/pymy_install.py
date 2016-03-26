@@ -34,7 +34,8 @@ def get_parser():
     parser.add_argument(
         '--check',
         default="",
-        help='check every installed module by importing them, all others options are ignored, the value can be null, a module name or a list comma separated, two integers semi-colon separated 1:end')
+        help='check every installed module by importing them, all others options are ignored, ' +
+             'the value can be null, a module name or a list comma separated, two integers semi-colon separated 1:end')
     parser.add_argument(
         '--deep-deps',
         action='store_true',
@@ -42,7 +43,8 @@ def get_parser():
     parser.add_argument(
         '--set',
         default="-",
-        help='set of module to install, see documentation of function get_name_set to get a comprehensive list, this option is ignored if a module is specified on the command line')
+        help='set of module to install, see documentation of function get_name_set to get a comprehensive list, ' +
+             'this option is ignored if a module is specified on the command line')
     parser.add_argument(
         '--schedule',
         action='store_true',
