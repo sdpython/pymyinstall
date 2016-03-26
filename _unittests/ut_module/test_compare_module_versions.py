@@ -67,8 +67,7 @@ class TestCompareVersion(unittest.TestCase):
 
         diff = []
         for i, mod in enumerate(mods[0:]):
-            if mod.name in ["PySide", "dynd", "llvmpy", "pygit2", "libpython",
-                            "mysqlclient", "PuLP", "cgal_bindings"]:
+            if mod.name in ["PySide", "cgal_bindings"]:
                 # skipping modules not available
                 continue
 
