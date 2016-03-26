@@ -20,7 +20,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,12 +35,13 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
 from src.pymyinstall.installhelper.module_install import ModuleInstall, get_pypi_version
 from src.pymyinstall.installhelper.module_install_exceptions import MissingInstalledPackageException
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 
 
 class TestUpdateModule (unittest.TestCase):

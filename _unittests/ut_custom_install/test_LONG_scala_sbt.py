@@ -20,7 +20,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,11 +35,11 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
 from src.pymyinstall.installcustom import install_scala_sbt, ManualDownloadException
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 
 
 class TestScalaSbt(unittest.TestCase):

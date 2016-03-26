@@ -21,7 +21,6 @@ def copy_tutorial(name, destination):
     """
     from pyquickhelper.filehelper import synchronize_folder
     if os.path.exists(name):
-        folder = name
         dest = os.path.join(destination, name)
     else:
         this = os.path.abspath(os.path.dirname(__file__))
@@ -29,7 +28,6 @@ def copy_tutorial(name, destination):
         if not os.path.exists(fold):
             raise FileNotFoundError(
                 "unable to find tutorial {0}\n{1} not here".format(name, fold))
-        folder = fold
         spl = os.path.split(fold)
         dest = os.path.join(destination, spl[-1])
 

@@ -20,7 +20,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,13 +35,12 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from src.pymyinstall.installhelper.module_install import ModuleInstall
 from src.pymyinstall import build_requirements
 from src.pymyinstall.packaged import small_set, sphinx_theme_set, extended_set, ensae_set, teachings_set
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
 
 
 class TestRequirements (unittest.TestCase):
@@ -67,7 +66,7 @@ class TestRequirements (unittest.TestCase):
         mod_list = small_set() + sphinx_theme_set() + extended_set() + \
             ensae_set() + teachings_set()
         mod_list.sort()
-        res = build_requirements(mod_list)
+        build_requirements(mod_list)
         k = [_.usage for _ in mod_list if _.usage is not None]
         k2 = list(sorted(_.usage for _ in mod_list if _.usage is not None))
         fLOG(k)

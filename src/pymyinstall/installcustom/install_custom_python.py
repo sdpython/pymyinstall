@@ -124,7 +124,7 @@ def install_python(
             outfile = os.path.join(temp_folder, full)
             local = download_file(url, outfile, fLOG=fLOG)
             if install:
-                zip7_files(local, temp_folder, fLOG=fLOG)
+                unzip7_files(local, temp_folder, fLOG=fLOG)
             return local
     else:
         raise NotImplementedError("not available on platform " + sys.platform)

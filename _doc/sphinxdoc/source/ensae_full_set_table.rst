@@ -19,13 +19,14 @@ defined in pymyinstall as a table.
     mod = all_set()
     mod.sort()
     df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
-    df = df[["usage", "rst_link", "kind", "version", "license", "purpose", "classifier"]]
+    df = df[["rst_link", "usage", "kind", "version", "license", "purpose", "classifier"]]
     def modifier(row):
         # for some reason, the function is recognized
         # if not imported in the loop
         from pymyinstall.packaged.packaged_config import classifiers2string
         return classifiers2string(row["classifier"])
     df["classifier"] = df.apply(modifier, axis=1)
+    df = df.sort_values("rst_link")
     df.columns=["usage", "name", "kind", "version", "license", "purpose", "classifier"]
     print(df2rst(df))
 

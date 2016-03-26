@@ -7,7 +7,7 @@ skip this test for regular run
 import sys
 import os
 import unittest
-import re
+
 
 try:
     import src
@@ -23,7 +23,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -38,11 +38,11 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
 from src.pymyinstall.installcustom import install_python
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 
 
 class TestDownloadPython (unittest.TestCase):
@@ -61,7 +61,7 @@ class TestDownloadPython (unittest.TestCase):
                 os.remove(os.path.join(temp, _))
 
         if sys.platform.startswith("win"):
-            local = install_python(install=True, temp_folder=temp, fLOG=fLOG)
+            install_python(install=True, temp_folder=temp, fLOG=fLOG)
 
 if __name__ == "__main__":
     unittest.main()

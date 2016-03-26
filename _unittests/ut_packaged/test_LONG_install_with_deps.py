@@ -5,10 +5,7 @@
 import sys
 import os
 import unittest
-import re
-import shutil
 import warnings
-import pandas
 
 try:
     import src
@@ -24,7 +21,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -39,9 +36,10 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pymyinstall.installhelper.install_venv_helper import create_virtual_env, run_venv_script
 
 if sys.version_info[0] == 2:
@@ -57,9 +55,9 @@ class TestInstallWithDeps(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         fold = os.path.dirname(os.path.abspath(__file__))
-        src = os.path.normpath(os.path.abspath(
+        src_ = os.path.normpath(os.path.abspath(
             os.path.join(fold, "..", "..", "src")))
-        assert os.path.exists(src)
+        assert os.path.exists(src_)
         temp = get_temp_folder(__file__, "temp_venv_install_deps")
 
         if __name__ != "__main__":
@@ -73,11 +71,11 @@ class TestInstallWithDeps(unittest.TestCase):
             return
 
         out = create_virtual_env(temp, fLOG=fLOG)
-        src = src.replace("\\", "/")
+        src_ = src_.replace("\\", "/")
         temp = temp.replace("\\", "/")
 
         script = ["import sys",
-                  "sys.path.append('{0}')".format(src),
+                  "sys.path.append('{0}')".format(src_),
                   "from pymyinstall.packaged import install_module_deps",
                   "install_module_deps('imbox', temp_folder='{0}', source='2')".format(
                       temp),

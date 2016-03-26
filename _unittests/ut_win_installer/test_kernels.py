@@ -20,7 +20,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,10 +35,11 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pymyinstall.win_installer.win_ipy_kernels import add_kernel_jupyter, python_kernel
 
 if sys.version_info[0] == 2:

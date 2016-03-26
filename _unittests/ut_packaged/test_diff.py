@@ -7,7 +7,6 @@ skip this test for regular run
 import sys
 import os
 import unittest
-import re
 
 try:
     import src
@@ -23,7 +22,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -38,12 +37,11 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from src.pymyinstall import ModuleInstall
-from src.pymyinstall.packaged import small_set, extended_set, ensae_set, ensae_fullset
-from pyquickhelper import fLOG
+from src.pymyinstall.packaged import small_set, extended_set, ensae_fullset
+from pyquickhelper.loghelper import fLOG
 
 
 class TestDifference(unittest.TestCase):
@@ -69,7 +67,7 @@ class TestDifference(unittest.TestCase):
                 fLOG("ModuleInstall('{0}', '{1}', mname='{2}'),".format(
                     mod.name, mod.kind, mod.mname))
 
-    def test_diff(self):
+    def test_diff2(self):
         fLOG(
             __file__,
             self._testMethodName,

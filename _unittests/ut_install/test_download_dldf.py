@@ -7,7 +7,6 @@ skip this test for regular run
 import sys
 import os
 import unittest
-import re
 
 try:
     import src
@@ -23,7 +22,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -38,11 +37,11 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from src.pymyinstall.installhelper.module_install_page_wheel import _cg_dl1 as dl1, _cg_dl as dl
-from pyquickhelper import fLOG
+from src.pymyinstall.installhelper.module_install_page_wheel import _cg_dl as dl
+from pyquickhelper.loghelper import fLOG
 
 
 class TestPrivateFunctions(unittest.TestCase):

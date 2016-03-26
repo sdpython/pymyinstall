@@ -21,7 +21,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,10 +36,10 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
 from src.pymyinstall.installhelper import get_module_dependencies, get_module_metadata, version_consensus
 from src.pymyinstall.installhelper.module_install_exceptions import WrongVersionError
 from src.pymyinstall.installhelper.install_cmd_helper import is_conda_distribution

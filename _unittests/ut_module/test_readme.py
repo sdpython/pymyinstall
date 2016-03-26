@@ -5,10 +5,7 @@
 import sys
 import os
 import unittest
-import re
-import shutil
 import warnings
-import pandas
 
 try:
     import src
@@ -24,7 +21,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -39,9 +36,10 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pymyinstall.installhelper.install_venv_helper import create_virtual_env, run_venv_script
 
 if sys.version_info[0] == 2:
@@ -68,7 +66,7 @@ class TestReadme(unittest.TestCase):
             warnings.warn("does not work well from a virtual environment")
             return
 
-        out = create_virtual_env(temp, fLOG=fLOG, packages=["docutils==0.8"])
+        create_virtual_env(temp, fLOG=fLOG, packages=["docutils==0.8"])
         outfile = os.path.join(temp, "conv_readme.html")
 
         script = ["from docutils import core",
@@ -95,7 +93,7 @@ class TestReadme(unittest.TestCase):
         with open(file_script, "w") as f:
             f.write("\n".join(script))
 
-        out = run_venv_script(temp, file_script, fLOG=fLOG, file=True)
+        run_venv_script(temp, file_script, fLOG=fLOG, file=True)
         with open(outfile, "r", encoding="utf8") as h:
             content = h.read()
 

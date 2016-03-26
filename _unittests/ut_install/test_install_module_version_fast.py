@@ -5,7 +5,7 @@
 import sys
 import os
 import unittest
-import pandas
+
 
 try:
     import src
@@ -21,7 +21,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,12 +36,11 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from pyquickhelper import fLOG, df2rst
+from pyquickhelper.loghelper import fLOG
 from src.pymyinstall.installhelper.module_install_version import choose_most_recent
-from src.pymyinstall.packaged import ensae_fullset
 
 
 class TestInstallModuleVersionFast(unittest.TestCase):

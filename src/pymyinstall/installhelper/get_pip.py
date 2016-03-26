@@ -84,6 +84,7 @@ def bootstrap(tmpdir=None):
 
     # Wrapper to provide default certificate with the lowest priority
     class CertInstallCommand(InstallCommand):
+
         def parse_args(self, args):
             # If cert isn't specified in config or environment, we provide our
             # own certificate through defaults.

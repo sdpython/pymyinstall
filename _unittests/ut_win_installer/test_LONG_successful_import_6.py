@@ -5,8 +5,6 @@
 import sys
 import os
 import unittest
-import re
-import warnings
 
 try:
     import src
@@ -22,7 +20,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -37,10 +35,10 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from pyquickhelper import fLOG, get_temp_folder, synchronize_folder
+from pyquickhelper.loghelper import fLOG
 from src.pymyinstall.win_installer import import_every_module
 
 
@@ -68,7 +66,7 @@ class TestLONGSuccessfulImport6(unittest.TestCase):
                 fLOG("FAILED", r[1], "\nOUT\n", r[2], "\nERR\n", r[3])
             else:
                 nb += 1
-        assert nb > 0 or nberr + nb == 0
+        assert nb > 0
 
 
 if __name__ == "__main__":

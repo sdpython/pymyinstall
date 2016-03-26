@@ -20,7 +20,7 @@ except ImportError:
     import src
 
 try:
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,11 +35,12 @@ except ImportError:
         sys.path.append(path)
     if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
         sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
 from src.pymyinstall.installcustom import install_jenkins
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 
 
 class TestJenkins(unittest.TestCase):
@@ -58,7 +59,6 @@ class TestJenkins(unittest.TestCase):
         if sys.platform.startswith("win"):
             r = install_jenkins(temp, fLOG=fLOG, install=True)
             fLOG(r)
-            exe = os.path.abspath(r)
             z = os.path.join(temp, "jenkins.zip")
             assert os.path.exists(z)
 
