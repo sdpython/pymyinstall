@@ -26,8 +26,8 @@ defined in pymyinstall as a table.
         from pymyinstall.packaged.packaged_config import classifiers2string
         return classifiers2string(row["classifier"])
     df["classifier"] = df.apply(modifier, axis=1)
-    df = df.sort_values("name")
     df.columns=["usage", "name", "kind", "version", "license", "purpose", "classifier"]
+    df = df.sort_values("name")
     print(df2rst(df))
 
 
