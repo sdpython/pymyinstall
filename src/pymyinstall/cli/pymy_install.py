@@ -14,16 +14,19 @@ def get_parser():
     """
     defines the way to parse the magic command ``%head``
     """
+    typstr = str  # unicode#
     parser = argparse.ArgumentParser(
         description='update modules, consider wheels when the module includes C++ files')
     parser.add_argument(
         '-s',
         '--skip',
         default="",  # "ete,dataspyre,pycuda,cubehelix",
+        type=typstr,
         help='list of modules to skip (not to be updated) separated by a comma')
     parser.add_argument(
         '-f',
         '--folder',
+        type=typstr,
         default="build/update_modules",
         help='folder where modules will be downloaded')
     parser.add_argument(
@@ -43,6 +46,7 @@ def get_parser():
     parser.add_argument(
         '--set',
         default="-",
+        type=typstr,
         help='set of module to install, see documentation of function get_name_set to get a comprehensive list, ' +
              'this option is ignored if a module is specified on the command line')
     parser.add_argument(
@@ -61,6 +65,7 @@ def get_parser():
         '-t',
         '--task',
         default="install",
+        type=typstr,
         choices=['install', 'shebang'],
         help='default task is install but the script can patch shebang in their current location (task=shebang)')
     parser.add_argument(
@@ -71,6 +76,7 @@ def get_parser():
     parser.add_argument(
         '--source',
         default="",
+        type=typstr,
         help='overwrite the source of the wheels')
     return parser
 

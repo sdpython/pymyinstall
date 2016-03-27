@@ -258,3 +258,4 @@ _doc/notebooks/best_boston.pkl
 _doc/notebooks/profile_example.*
 src/pymyinstall/installhelper/page_xd.html
 src/pymyinstall/installhelper/page2.html
+pymyinstall-*/*
