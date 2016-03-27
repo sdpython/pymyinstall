@@ -46,6 +46,8 @@ def small_set():
             "pipdeptree", "pip", purpose="displays module dependencies as a tree"),
         ModuleInstall("jdcal", "pip",
                       purpose="Julian dates from proleptic Gregorian and Julian calendars."),
+        ModuleInstall('et_xmlfile', "pip",
+                      purpose="et_xmlfile is a low memory library for creating large XML files (for openpyxl)."),
         ModuleInstall("openpyxl", "pip",  # version="1.8.6",
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
@@ -212,6 +214,8 @@ def small_set():
         #
         ModuleInstall("mpld3", "pip", usage="VIZ",
                       purpose="mpld3 project brings together Matplotlib and D3js."),
+        ModuleInstall("typing", "pip", purpose="Type Hints for Python") if sys.version_info[
+            :2] < (3, 5) else None,
         ModuleInstall("typecheck-decorator", "pip", mname="typecheck",
                       purpose="verifies decorators at running time"),
         ModuleInstall(
@@ -269,6 +273,8 @@ def small_set():
                       mname='flask.ext.sqlalchemy', usage="NETWORK"),
         ModuleInstall('Flask-Login', 'pip',
                       mname='flask.ext.login', usage="NETWORK"),
+        ModuleInstall("Flask-Cors", "pip", mname="flask_cors",
+                      purpose="A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible."),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
         ModuleInstall(

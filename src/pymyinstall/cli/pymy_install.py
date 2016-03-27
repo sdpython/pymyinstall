@@ -50,6 +50,14 @@ def get_parser():
         action='store_true',
         help='do not install the modules, returned the list scheduled to be installed')
     parser.add_argument(
+        '--force',
+        action='store_true',
+        help='install or download even the module is already installed')
+    parser.add_argument(
+        '--download',
+        action='store_true',
+        help='do not install the modules but download them')
+    parser.add_argument(
         '-t',
         '--task',
         default="install",
@@ -71,7 +79,8 @@ def do_main(temp_folder="build/update_modules",
             skip_module=None,  # ["ete", "dataspyre", "pycuda", "cubehelix"],
             list_module=None, deps=False, schedule_only=False,
             deep_deps=False, checkings=None,
-            task="install", source=None):
+            task="install", source=None, download_only=False,
+            force=False):
     """
     calls function @see fn install_all but is meant to be added to scripts folder
 
@@ -86,11 +95,13 @@ def do_main(temp_folder="build/update_modules",
                                 ``""``, ``matplotlib``, ``100,end``,
                                 option *download* is equivalent to *checkings*
     @param      source          overwrite the source of the wheel
+    @param      download_only   only download the modules, no installation
+    @param      force           force the download or the installation
 
     If *deps* is True, *list_module* cannot be empty.
 
     .. versionchanged:: 1.1
-        Parameter *source* was added.
+        Parameters *source*, *force* were added.
     """
     try:
         from pymyinstall import is_travis_or_appveyor
@@ -154,7 +165,8 @@ def do_main(temp_folder="build/update_modules",
             res = install_all(temp_folder=temp_folder, verbose=True,
                               skip_module=skip_module, list_module=list_module, deps=deps,
                               schedule_only=schedule_only,
-                              deep_deps=deep_deps, source=source)
+                              deep_deps=deep_deps, source=source,
+                              download_only=download_only, force=force)
             if schedule_only:
                 print("SCHEDULED")
                 for r in res:
@@ -198,7 +210,8 @@ def main():
         do_main(temp_folder=res.folder, skip_module=skip_module,
                 list_module=list_module, deps=res.deps, schedule_only=res.schedule,
                 deep_deps=res.deep_deps, checkings=res.check, task=res.task,
-                source=res.source if res.source else None)
+                source=res.source if res.source else None,
+                download_only=res.download, force=res.force)
 
 
 if __name__ == "__main__":

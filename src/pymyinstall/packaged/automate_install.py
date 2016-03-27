@@ -108,7 +108,7 @@ def reorder_module_list(list_module):
 def update_all(temp_folder=".", fLOG=print, verbose=True,
                list_module=None, reorder=True,
                skip_module=None, schedule_only=False,
-               source=None):
+               source=None, download_only=False):
     """
     update modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -122,6 +122,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     @param      skip_module     module to skip (list of str)
     @param      schedule_only   if True, the function returns the list of modules scheduled to be installed
     @param      source          overwrite the wheels location, see @see me get_exewheel_url_link2
+    @param      download_only   only downloads the module, no installation
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
@@ -131,7 +132,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         Catch an exception while updating modules and walk through the end of the list.
         The function should be run a second time to make sure an exception remains.
         It can be due to python keeping in memory an updated module.
-        Parameter *source* was added.
+        Parameters *source*, *download_only* were added.
     """
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
@@ -196,8 +197,11 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
                 .format(mod.name, inst, ver, mod.kind)
             fLOG(m)
             try:
-                b = mod.update(temp_folder=temp_folder,
-                               log=verbose, source=source)
+                if download_only:
+                    b = mod.download(temp_folder=temp_folder, source=source)
+                else:
+                    b = mod.update(temp_folder=temp_folder,
+                                   log=verbose, source=source)
             except (SystemExit, Exception) as e:
                 b = False
                 m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
@@ -225,7 +229,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 list_module=None, reorder=True, skip_module=None,
                 up_pip=True, skip_missing=False, deps=False,
                 schedule_only=False, deep_deps=False,
-                _memory=None, source=None):
+                _memory=None, source=None, download_only=False,
+                force=False):
     """
     install modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
@@ -244,6 +249,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param      deep_deps       check dependencies for dependencies
     @param      _memory         stores installed packages, avoid going into an infinite loop
     @param      source          overwrite the location of the wheels, see @see me get_exewheel_url_link2
+    @param      download_only   only downloads the module, no installation
+    @param      force           force the installation or the download
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
@@ -306,7 +313,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             continue
         if verbose:
             fLOG("[loopi] check module: ", mod.name)
-        if not mod.is_installed_version():
+        if force or not mod.is_installed_version():
             schedule.append(mod)
             if not schedule_only:
                 ver = mod.version
@@ -317,11 +324,16 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                     fLOG("[loopi] check dependencies: ", mod.name)
                     install_module_deps(mod.name, temp_folder=temp_folder,
                                         fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
-                                        _memory=_memory, source=source)
+                                        _memory=_memory, source=source, download_only=download_only,
+                                        force=force)
                 else:
                     try:
-                        b = mod.install(temp_folder=temp_folder,
-                                        log=verbose, source=source)
+                        if download_only:
+                            b = mod.download(
+                                temp_folder=temp_folder, source=source)
+                        else:
+                            b = mod.install(temp_folder=temp_folder,
+                                            log=verbose, source=source)
                     except (SystemExit, Exception) as e:
                         b = False
                         m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
@@ -338,7 +350,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
     if verbose:
         fLOG("")
-        fLOG("installed modules")
+        fLOG("downloaded modules" if download_only else "installed modules")
         for m in again:
             fLOG("  ", m)
         if len(errors) > 0:
@@ -355,7 +367,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
 
 def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True,
-                        deep_deps=False, _memory=None, source=None):
+                        deep_deps=False, _memory=None, source=None,
+                        download_only=False, force=False):
     """
     install a module with its dependencies,
     if a module is already installed, it installs the missing dependencies
@@ -368,6 +381,8 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
     @param      deep_deps           check dependencies for dependencies
     @param      _memory             stores installed packages, avoid going into an infinite loop
     @param      source              overwrite the wheels location, see @see me get_exewheel_url_link2
+    @param      download_only       only downloads the module, no installation
+    @param      force               force the download or the update
     @return                         list of installed modules
 
     The function does not handle properly contraints on versions.
@@ -386,7 +401,8 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=[name], reorder=True, up_pip=False,
                     skip_missing=True, _memory=memory2, deps=False,
-                    deep_deps=False, source=source)
+                    deep_deps=False, source=source, download_only=download_only,
+                    force=force)
         installed.append(name)
 
     stack = [name]
@@ -410,7 +426,7 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
         install_all(temp_folder=temp_folder, fLOG=fLOG, verbose=verbose,
                     list_module=inst, reorder=True, up_pip=False,
                     skip_missing=True, deep_deps=deep_deps,
-                    _memory=_memory, source=source)
+                    _memory=_memory, source=source, download_only=download_only)
         stack.extend(inst)
         installed.extend(inst)
         for i in inst:
@@ -423,7 +439,8 @@ def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
                    reorder=True, skip_module=None,
                    up_pip=True, skip_missing=False, deps=False,
                    schedule_only=False, deep_deps=False,
-                   _memory=None, source=None):
+                   _memory=None, source=None, download_only=False,
+                   force=False):
     """
     install a module
 
@@ -440,6 +457,8 @@ def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
     @param      deep_deps       check dependencies for dependencies
     @param      _memory         stores installed packages, avoid going into an infinite loop
     @param      source          overwrite the wheels location, see @see me get_exewheel_url_link2
+    @param      download_only   only downloads the module, no installation
+    @param      force           force the download or the install
 
     .. versionadded:: 1.1
     """
@@ -449,7 +468,8 @@ def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
                 verbose=verbose, reorder=reorder, skip_module=skip_module,
                 up_pip=up_pip, skip_missing=skip_missing, deps=deps,
                 schedule_only=schedule_only, deep_deps=deep_deps,
-                _memory=_memory, source=source)
+                _memory=_memory, source=source, download_only=download_only,
+                force=force)
 
 
 def update_module(module_name, temp_folder=".", fLOG=print, verbose=True,

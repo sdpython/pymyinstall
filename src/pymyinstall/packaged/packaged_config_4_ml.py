@@ -180,6 +180,7 @@ def ensae_set():
         #
         #
         #
+        # ModuleInstall("contextlib2", "pip", purpose="Backports and enhancements for the contextlib module"),
         ModuleInstall(
             "zipline", "github", "quantopian",
             purpose="Zipline is a Pythonic algorithmic trading library. The system is fundamentally event-driven and a close approximation of how " +
@@ -442,6 +443,8 @@ def ensae_set():
                       purpose="A library consisting of useful tools and extensions for the day-to-day data science tasks."),
         ModuleInstall("sacred", "pip", usage="ML",
                       purpose="Facilitates automated and reproducible experimental research"),
+        ModuleInstall("astropy", "wheel",
+                      purpose="Community-developed python astronomy tools"),
     ]
 
     if sys.version_info[0] == 2:
