@@ -14,7 +14,7 @@ defined in pymyinstall as a table.
     :rst:
     
     from pymyinstall.packaged import all_set
-    from pyquickhelper import df2rst
+    from pyquickhelper.pandashelper import df2rst
     import pandas
     mod = all_set()
     mod.sort()
@@ -26,7 +26,7 @@ defined in pymyinstall as a table.
         from pymyinstall.packaged.packaged_config import classifiers2string
         return classifiers2string(row["classifier"])
     df["classifier"] = df.apply(modifier, axis=1)
-    df = df.sort_values("rst_link")
+    df = df.sort_values("name")
     df.columns=["usage", "name", "kind", "version", "license", "purpose", "classifier"]
     print(df2rst(df))
 
