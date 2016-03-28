@@ -25,6 +25,7 @@ def pyquickhelper_set():
         "flake8",
         "futures",
         "husl",
+        "imagesize",
         "ipython",
         "ipykernel",
         "ipystata" if sys.version_info[0] == 2 else None,

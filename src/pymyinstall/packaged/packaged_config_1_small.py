@@ -107,6 +107,8 @@ def small_set():
         ModuleInstall(
             "sphinx", "pip", purpose="documentation generation based on RST", usage="SPHINX"),
         ModuleInstall(
+            'imagesize', 'pip', usage="SPHINX", purpose="Getting image size from png/jpeg/jpeg2000/gif file"),
+        ModuleInstall(
             'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),

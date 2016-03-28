@@ -121,6 +121,7 @@ def anaconda_set():
             --icu Linux Mac
             --idna
             --iopro
+            imagesize
             ipython
             itsdangerous
             --jdcal
