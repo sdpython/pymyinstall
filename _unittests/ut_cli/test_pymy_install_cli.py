@@ -79,7 +79,8 @@ class TestPyMyInstallCli(unittest.TestCase):
         fLOG(err.replace("\r", "").replace("\n\n", "\n"))
         assert "downloaded modules" in out
         content = os.listdir(temp)
-        self.assertEqual(len(content), 2)
+        if len(content) != 2:
+            raise Exception("{0} != 2\nOUT:\n{1}\nERR:\n{2}".format(len(content), out, err))
 
 
 if __name__ == "__main__":
