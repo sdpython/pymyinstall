@@ -322,7 +322,7 @@ def small_set():
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
         ModuleInstall("appdirs", "pip",
                       purpose="A small Python module for determining appropriate platform-specific dirs"),
-        ModuleInstall("qgrid", "github", "quantopian", usage="VIZ",
+        ModuleInstall("qgrid", "pip", usage="VIZ",
                       purpose="A Pandas DataFrame viewer for IPython Notebook."),
         ModuleInstall("ujson", "wheel",
                       purpose="Ultra fast JSON encoder and decoder for Python"),
