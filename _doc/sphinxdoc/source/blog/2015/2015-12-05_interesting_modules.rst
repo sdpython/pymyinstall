@@ -11,7 +11,7 @@
     * `gvar <http://pythonhosted.org/gvar/>`_: functionalities about gaussian random variables
     * `hmmlearn <http://hmmlearn.github.io/hmmlearn/>`_: 
       `Hidden Markov Models <https://en.wikipedia.org/wiki/Hidden_Markov_model>`_, see also
-      `seqlearn <http://larsmans.github.io/seqlearn/>`_
+      `seqlearn <http://larsmans.github.io/seqlearn/>`_ (added in 2016/03)
     * `menpo <http://www.menpo.org/>`_: functionalities for images, rotation, homothetic transformation,
       landmark detection
     * `minepy <http://minepy.sourceforge.net/>`_: Maximal Information-based Nonparametric Exploration,
