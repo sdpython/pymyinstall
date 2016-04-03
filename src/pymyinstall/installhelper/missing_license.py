@@ -177,7 +177,7 @@ missing_module_licenses = {
     "xxhash": "BSD",
     "zope.exceptions": "Zope Public License",
     "w3lib": "BSD",
-    "astropy", "BSD",
+    "astropy": "BSD",
     "backports_abc": "Python Software Foundation License",
     "boto3": "Apache Software License ",
     "botocore": "Apache Software License ",
