@@ -80,7 +80,8 @@ class TestPyMyInstallCli(unittest.TestCase):
         assert "downloaded modules" in out
         content = os.listdir(temp)
         if len(content) != 2:
-            raise Exception("{0} != 2\nOUT:\n{1}\nERR:\n{2}".format(len(content), out, err))
+            raise Exception("{0} != 2\nOUT:\n{1}\nERR:\n{2}".format(
+                len(content), out, err))
 
 
 if __name__ == "__main__":
