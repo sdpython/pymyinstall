@@ -44,7 +44,7 @@ from src.pymyinstall.installcustom import install_pandoc
 from pyquickhelper.loghelper import fLOG
 
 
-class TestPandoc (unittest.TestCase):
+class TestLONGPandoc (unittest.TestCase):
 
     def test_install_pandoc(self):
         fLOG(
