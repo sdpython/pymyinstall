@@ -49,6 +49,7 @@ def ensae_teaching_cs_set():
         "statsmodels",
         "toolz",
         "ujson",
+        "xarray",
         "wordcloud",
         #
         "pyquickhelper",
