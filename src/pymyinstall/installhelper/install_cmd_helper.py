@@ -372,28 +372,26 @@ def get_pip_program(exe=None):
     tried = []
     if exe is None:
         exe = os.path.dirname(sys.executable)
+    major, minor = sys.version_info[0:2]
     if sys.platform.startswith("win"):
         if not exe.endswith("Scripts"):
             pi = os.path.join(exe, "Scripts", "pip.exe")
             tried.append(pi)
             if not os.path.exists(pi):
-                pi = os.path.join(exe, "Scripts", "pip3.exe")
+                pi = os.path.join(exe, "Scripts", "pip%d.exe" % major)
                 tried.append(pi)
                 if not os.path.exists(pi):
                     # Anaconda is different
                     pi = os.path.join(exe, "Scripts", "pip.exe")
                     tried.append(pi)
                     if not os.path.exists(pi):
-                        pi = os.path.join(exe, "Scripts", "pip3.exe")
+                        pi = os.path.join(exe, "Scripts", "pip%d.exe" % major)
                         tried.append(pi)
                         if not os.path.exists(pi):
-                            pi = os.path.join(exe, "Scripts", "pip3.4.exe")
+                            pi = os.path.join(exe, "Scripts", "pip%d.%d.exe" % (major, minor))
                             tried.append(pi)
-                            if not os.path.exists(pi):
-                                pi = os.path.join(exe, "Scripts", "pip3.5.exe")
-                                tried.append(pi)
-                                raise FileNotFoundError(
-                                    "tried (1):\n" + "\n".join(tried) + "\n---- try ---\npython -m pip install -U pip --force")
+                            raise FileNotFoundError(
+                                "tried (1):\n" + "\n".join(tried) + "\n---- try ---\npython -m pip install -U pip --force")
         else:
             pi = os.path.join(exe, "pip.exe")
             tried.append(pi)
@@ -402,17 +400,14 @@ def get_pip_program(exe=None):
                 pi = os.path.join(exe, "pip.exe")
                 tried.append(pi)
                 if not os.path.exists(pi):
-                    pi = os.path.join(exe, "pip3.exe")
+                    pi = os.path.join(exe, "pip%d.exe" % major)
                     tried.append(pi)
                     if not os.path.exists(pi):
-                        pi = os.path.join(exe, "pip3.4.exe")
+                        pi = os.path.join(exe, "pip%d.%d.exe" % (major, minor))
                         tried.append(pi)
                         if not os.path.exists(pi):
-                            pi = os.path.join(exe, "pip3.5.exe")
-                            tried.append(pi)
-                            if not os.path.exists(pi):
-                                raise FileNotFoundError(
-                                    "tried (2):\n" + "\n".join(tried) + "\n---- try ---\npython -m pip install -U pip --force")
+                            raise FileNotFoundError(
+                                "tried (2):\n" + "\n".join(tried) + "\n---- try ---\npython -m pip install -U pip --force")
     else:
         if sys.version_info[0] == 2:
             if exe is None:
