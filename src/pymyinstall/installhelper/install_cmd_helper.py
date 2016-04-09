@@ -374,7 +374,7 @@ def get_pip_program(exe=None):
         exe = os.path.dirname(sys.executable)
     major, minor = sys.version_info[0:2]
     if sys.platform.startswith("win"):
-        if not exe.endswith("Scripts"):
+        if not exe.lower().endswith("scripts"):
             pi = os.path.join(exe, "Scripts", "pip.exe")
             tried.append(pi)
             if not os.path.exists(pi):
@@ -464,7 +464,7 @@ def get_conda_program(exe=None):
     if exe is None:
         exe = os.path.dirname(sys.executable)
     if sys.platform.startswith("win"):
-        if not exe.endswith("Scripts"):
+        if not exe.lower().endswith("scripts"):
             pi = os.path.join(exe, "Scripts", "conda.exe")
             tried.append(pi)
             if not os.path.exists(pi):
