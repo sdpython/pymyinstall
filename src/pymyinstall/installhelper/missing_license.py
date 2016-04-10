@@ -193,4 +193,8 @@ missing_module_licenses = {
     "sphinxjp.themes.gopher": "MIT",
     "sphinxjp.themes.htmlslide": "MIT",
     "zerovm-sphinx-theme": "Apache License 2.0",
+    "xarray": "Apache Software License",
+    "typing": "PSF",
+    "sklearn_pandas": "~MIT",
+    "skll": "BSD",
 }
