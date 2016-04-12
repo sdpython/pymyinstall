@@ -388,7 +388,8 @@ def get_pip_program(exe=None):
                         pi = os.path.join(exe, "Scripts", "pip%d.exe" % major)
                         tried.append(pi)
                         if not os.path.exists(pi):
-                            pi = os.path.join(exe, "Scripts", "pip%d.%d.exe" % (major, minor))
+                            pi = os.path.join(
+                                exe, "Scripts", "pip%d.%d.exe" % (major, minor))
                             tried.append(pi)
                             raise FileNotFoundError(
                                 "tried (1):\n" + "\n".join(tried) + "\n---- try ---\npython -m pip install -U pip --force")

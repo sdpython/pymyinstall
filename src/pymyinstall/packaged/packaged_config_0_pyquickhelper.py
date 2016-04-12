@@ -22,6 +22,7 @@ def pyquickhelper_set():
         "cycler",
         "decorator",
         "docutils",
+        "entrypoints",
         "flake8",
         "futures",
         "husl",
