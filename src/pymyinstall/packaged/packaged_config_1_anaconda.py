@@ -37,6 +37,7 @@ def anaconda_set():
             --astropy
             azure
             babel
+            backports
             basemap
             bcolz
             beautifulsoup4

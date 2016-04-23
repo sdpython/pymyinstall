@@ -197,6 +197,9 @@ def small_set():
             "backports_abc", "pip", purpose="A backport of recent additions to the 'collections.abc' module",
             usage="JUPYTER"),
         ModuleInstall(
+            "backports", "pip", purpose="Namespace for backported Python features",
+            usage="JUPYTER"),
+        ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="JUPYTER"),

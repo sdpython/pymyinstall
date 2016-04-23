@@ -14,6 +14,7 @@ def pyquickhelper_set():
         "alabaster",
         "autopep8",
         "babel",
+        "backports",
         "certifi",
         "codecov",
         "colorama",
