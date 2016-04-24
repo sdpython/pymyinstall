@@ -200,7 +200,7 @@ def small_set():
             "widgetsnbextension", "pip", purpose="Interactive HTML widgets for Jupyter notebooks.",
             usage="JUPYTER"),
         ModuleInstall(
-            "backports.shutil-get-terminal-size", "pip", purpose="",
+            "backports.shutil-get-terminal-size", "pip", mname="backports", purpose="needed for Jupyter",
             usage="JUPYTER"),
         ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),

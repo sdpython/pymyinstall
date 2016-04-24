@@ -14,7 +14,7 @@ def pyquickhelper_set():
         "alabaster",
         "autopep8",
         "babel",
-        "backports",
+        "backports.shutil-get-terminal-size",
         "certifi",
         "codecov",
         "colorama",

@@ -37,7 +37,7 @@ def anaconda_set():
             --astropy
             azure
             babel
-            backports
+            backports.shutil-get-terminal-size
             basemap
             bcolz
             beautifulsoup4
