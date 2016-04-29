@@ -136,6 +136,23 @@ class TestRegex (unittest.TestCase):
         else:
             assert False
 
+    def test_4(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        pattern = "[-]([0-9]+[.][abc0-9]+([.][0-9])?([.][0-9abdevcr]+)?)([+][a-z]+)?" + \
+                  "([+]cuda[0-9]{2,5})?([+]sdl[0-9])?([+]numpy[0-9]{1,2})?([+.]post[0-9]{1,2})?([.][0-9])?[-]"
+        raw = """<li><a href='javascript:;' onclick='&nbsp;javascript:dl([111,86,99,110,98,105,57,52,54,109,100,102,53,116,104,106,45,112,88,119,51,97,95,46,67,50,108,48,47], """ + \
+              """"=&#62;7?43;6LH1B2E303@KGKGIDG7@2AD&lt;@2AD&lt;9@C53FE9:87GC&#62;J")' title='[165&#160;KB] [Apr 21, 2016]'>CVXcanon-0.0.23.4-cp35-cp35m-win_amd64.whl</a></li>"""
+        reg = re.compile(pattern)
+        r = reg.search(raw)
+        if r:
+            fLOG(r.groups())
+        else:
+            assert False
+
 
 if __name__ == "__main__":
     unittest.main()
