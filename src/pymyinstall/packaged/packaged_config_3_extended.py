@@ -392,7 +392,7 @@ def extended_set():
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
         ModuleInstall("plotly", "pip", usage="VIZ",
                       purpose="Plotly's Python graphing library makes interactive, publication-quality graphs online. Examples of how to make line plots, " +
-                              "scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, " + \
+                              "scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, " +
                               "polar charts and bubble charts."),
         ModuleInstall("ligthning-python", "pip", mname="lightning", usage="VIZ",
                       purpose="Python client for the lightning API"),
