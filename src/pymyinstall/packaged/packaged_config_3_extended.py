@@ -448,6 +448,8 @@ def extended_set():
                       "been separated to a separate project. This is that project."),
         ModuleInstall("mezzanine", "pip", usage="WEB",
                       purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),
+        # pdf
+        ModuleInstall("pyPdf", "github", "sdpython", purpose="read PDF"),
     ]
 
     if sys.platform.startswith("win"):
