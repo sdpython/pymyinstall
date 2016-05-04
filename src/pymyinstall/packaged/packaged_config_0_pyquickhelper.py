@@ -98,6 +98,7 @@ def pyquickhelper_set():
         "terminado" if not sys.platform.startswith("win") else None,
         "tornado",
         "traitlets",
+        "uvloop",
         "virtualenv",
         "xlrd",
         "wheel",

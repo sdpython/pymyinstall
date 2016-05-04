@@ -31,6 +31,7 @@ def ensae_teaching_cs_set():
         "keyring",
         "locket",
         "mpld3",
+        "natgrid",
         "networkx",
         "partd",
         "picklable-itertools",

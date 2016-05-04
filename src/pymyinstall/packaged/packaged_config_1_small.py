@@ -344,6 +344,8 @@ def small_set():
                       purpose="ASCII transliterations of Unicode text"),
         ModuleInstall("sqlite_bro", "pip",
                       purpose="GUI for SQLite"),
+        ModuleInstall("uvloop", "pip", purpose="Fast implementation of asyncio event loop on top of libuv") if sys.version_info[
+            :2] > (3, 5) else None,
     ]
 
     return [_ for _ in mod if _ is not None]

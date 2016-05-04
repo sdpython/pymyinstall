@@ -14,6 +14,9 @@ def extended_set():
     """
     mod = [
         ModuleInstall(
+            "natgrid", "github", "matplotlib", mname="matplotlib.mlab",
+            purpose="Python interface to NCAR natgrid library (for matplotlib)"),
+        ModuleInstall(
             "py", "pip", purpose="library with cross-python path, ini-parsing, io, code, log facilities"),
         ModuleInstall("pytest", "pip",
                       purpose="pytest: simple powerful testing with Python"),
