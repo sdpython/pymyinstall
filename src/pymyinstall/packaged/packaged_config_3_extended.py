@@ -100,6 +100,8 @@ def extended_set():
         ModuleInstall(
             'selenium', 'pip', purpose="Python wrapper for Selenium", usage="NETWORK"),
         ModuleInstall(
+            'splinter', 'pip', purpose="browser abstraction for web acceptance testing", usage="NETWORK"),
+        ModuleInstall(
             'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         ModuleInstall(
             'pygame', 'wheel', purpose="GUI, interface for games (needs to be installed from www.pygame.org on Linux)", usage="GUI"),
