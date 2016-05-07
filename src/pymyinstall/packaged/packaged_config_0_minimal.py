@@ -28,5 +28,5 @@ def minimal_set():
         names.append("winshell")
         names.append("pythonnet")
 
-    from . import find_module_install
+    from .automate_install import find_module_install
     return [find_module_install(_) for _ in names if _ is not None]

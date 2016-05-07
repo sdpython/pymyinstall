@@ -333,7 +333,7 @@ def anaconda_set():
 
     names = [filter(_) for _ in names]
 
-    from . import find_module_install
+    from .automate_install import find_module_install
     errors = []
     for m in names:
         if m is None:

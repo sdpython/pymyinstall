@@ -63,5 +63,5 @@ def ensae_teaching_cs_set():
         #"ensae_projects",
     ]
 
-    from . import find_module_install
+    from .automate_install import find_module_install
     return [find_module_install(_) for _ in names if _ is not None]

@@ -106,5 +106,5 @@ def pyquickhelper_set():
         "winshell" if sys.platform.startswith("win") else None,
     ]
 
-    from . import find_module_install
+    from .automate_install import find_module_install
     return [find_module_install(_) for _ in names if _ is not None]
