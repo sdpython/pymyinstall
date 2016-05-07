@@ -344,7 +344,7 @@ def anaconda_set():
             errors.append(m)
 
     if len(errors) > 0:
-        from . import all_set
+        from .packaged_config import all_set
         sl = "\n".join(errors)
         sl2 = "\n".join(sorted(_.name for _ in all_set()))
         raise MissingReferenceException(
