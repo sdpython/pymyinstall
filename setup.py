@@ -95,7 +95,8 @@ def import_pyquickhelper():
                     os.path.join(
                         os.path.dirname(__file__),
                         "..",
-                        "pyquickhelper",
+                        "pyquickhelper" if sys.version_info[
+                            0] >= 3 else "py27_pyquickhelper_27",
                         "src"))))
         try:
             import pyquickhelper
@@ -165,6 +166,7 @@ if is_local():
         # tests
         requirements=["pyquickhelper"],
         additional_notebook_path=["pyquickhelper"],
+        additional_local_path=["pyquickhelper"],
         unittest_modules=["pyquickhelper"], fLOG=logging_function,
         covtoken=("b67b3051-8c5d-460b-b2fa-51d81ab7008c", "'jenkins' in outfile"))
     if not r and not ({"bdist_msi", "sdist",
