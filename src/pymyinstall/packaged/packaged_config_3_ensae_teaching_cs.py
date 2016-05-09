@@ -52,6 +52,7 @@ def ensae_teaching_cs_set():
         "ujson",
         "xarray",
         "wordcloud",
+        "yaml",
         #
         "pyquickhelper",
         "pyrsslocal",
