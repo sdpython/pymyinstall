@@ -15,6 +15,7 @@ from .packaged_config_3_extended import extended_set
 from .packaged_config_3_ensae_teaching_cs import ensae_teaching_cs_set
 from .packaged_config_4_ml import ml_set, ensae_set
 from .packaged_config_A_teachings import teachings_set
+from .packaged_config_A_orange import orange_set
 from .packaged_config_B_iot import iot_set
 from .packaged_config_C_webscraping import scraping_set
 from .packaged_config_all_but_teachings import all_but_teachings_set
@@ -28,7 +29,8 @@ def ensae_fullset():
         sphinx_theme_set() + \
         extended_set() + \
         ensae_set() + \
-        teachings_set()
+        teachings_set() + \
+        orange_set()
 
     return base
 
@@ -63,6 +65,7 @@ _modules_set = [minimal_set,
                 anaconda_set,
                 ensae_teaching_cs_set,
                 all_but_teachings_set,
+                orange_set
                 ]
 
 

@@ -77,20 +77,10 @@ def architecture():
 
 def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                      download_folder="build/win_python_setup_" + architecture(),
-                     module_list=None,
-                     verbose=False,
-                     fLOG=print,
-                     download_only=False,
-                     no_setup=False,
-                     notebooks=None,
-                     selection={"R", "mingw", "tdm"},
-                     documentation=True,
-                     last_function=None,
-                     r_packages=True,
-                     julia_packages=True,
-                     tutorial=None,
-                     source=None
-                     ):
+                     module_list=None, verbose=False, fLOG=print, download_only=False,
+                     no_setup=False, notebooks=None, selection={"R", "mingw", "tdm"},
+                     documentation=True, last_function=None, r_packages=True,
+                     julia_packages=True, tutorial=None, source=None):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
     inspired from WinPython but more easier to tweak I hope.

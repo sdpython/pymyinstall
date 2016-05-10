@@ -36,9 +36,12 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     has_spyder = False
     has_rss = False
     has_glue = False
+    has_orange = False
     for mod in module_list:
         if mod.name == "jupyter":
             has_jupyter = True
+        if mod.name == "Orange":
+            has_orange = True
         if mod.name == "rodeo":
             has_rodeo = True
         if mod.name == "spyder":
@@ -68,6 +71,9 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
 
     if has_rodeo:
         list_functions.append(create_win_rodeo)
+
+    if has_orange:
+        list_functions.append(create_win_orange)
 
     if has_spyder:
         list_functions.append(create_win_spyder)
@@ -155,6 +161,28 @@ def create_win_jupyter_console(folders):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_console.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [('batch', name)]
+
+
+def create_win_orange(folders):
+    """
+    create a batch file to start orange
+
+    @param      folders     see @see fn create_win_batches
+    @return                 operations (list of what was done)
+    """
+    text = ['@echo off',
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            'set ORANGE=%PYTHON_WINSCRIPTS%\\orange-canvas.exe',
+            '"%ORANGE%" console']
+    # command jupyter console does not work yet even if the documentation says
+    # so
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "orange_canvas.bat")
     with open(name, "w") as f:
         f.write(text)
     return [('batch', name)]
