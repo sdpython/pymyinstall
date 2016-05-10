@@ -24,7 +24,7 @@ def teachings_set():
             "orange3", "github", "biolab", mname="Orange", custom=["build", "install"],
             usage="ORANGE", purpose="Orange is a component-based data mining software. It includes a range of data visualization, exploration, " +
             "preprocessing and modeling techniques. It can be used through a nice and intuitive user interface or, for more advanced users, " +
-            "as a module for the Python programming language.")
+            "as a module for the Python programming language."),
         ModuleInstall(
             "orange3-text", "pip", mname="orangecontrib.text", usage="ORANGE",
             purpose="Orange3 Text extends Orange3, a data mining software package, with common functionality for text mining. " +
