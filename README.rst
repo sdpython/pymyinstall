@@ -91,6 +91,7 @@ Versions
     * **fix:** fix issues while update numpy and networkx, add module *qgrid*
     * **add:** function *download_module*
     * **add:** another source for the wheels can be specified
+    * **add:** add module Orange
 
 * **1.0.418 - 2015/08/15**
     * **new:** function win_python_setup
