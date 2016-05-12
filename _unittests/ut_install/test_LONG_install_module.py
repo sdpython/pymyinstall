@@ -43,7 +43,7 @@ from src.pymyinstall.installhelper.module_install_version import get_module_vers
 from pyquickhelper.loghelper import fLOG
 
 
-class TestInstallModule (unittest.TestCase):
+class TestLONGInstallModule (unittest.TestCase):
 
     def test_pypi_version(self):
         fLOG(

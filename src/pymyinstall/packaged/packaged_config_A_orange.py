@@ -6,7 +6,7 @@
 from ..installhelper.module_install import ModuleInstall
 
 
-def teachings_set():
+def orange_set():
     """
     modules implemented for Orange, it requires the modules in set *ml*
     """
@@ -15,7 +15,8 @@ def teachings_set():
             "bottlecheck", "pip", purpose="Bottlechest is a fork of bottleneck specialized for use in Orange", usage="ORANGE"),
         ModuleInstall(
             "setuptools-git", "pip", mname="setuptools_git",
-            purpose="This is a plugin for setuptools that enables git integration. Once installed, Setuptools can be told to include in a package distribution all the files tracked by git. " +
+            purpose="This is a plugin for setuptools that enables git integration. Once installed, Setuptools " +
+            "can be told to include in a package distribution all the files tracked by git. " +
             "This is an alternative to explicit inclusion specifications with MANIFEST.in."),
         ModuleInstall(
             "scikit-fusion", "pip", mname="skfusion",
@@ -33,7 +34,8 @@ def teachings_set():
             "All features can be combined with powerful data mining techniques from the Orange data mining framework."),
         ModuleInstall(
             "orange3-associate", "pip", mname="orangecontrib.associate", usage="ORANGE",
-            purpose="This module implements FP-growth [1] frequent pattern mining algorithm with bucketing optimization [2] for conditional databases of few items."),
+            purpose="This module implements FP-growth [1] frequent pattern mining algorithm with bucketing " +
+            "optimization [2] for conditional databases of few items."),
         ModuleInstall(
             "orange3-datafusion", "pip", mname="orangecontrib.datafusion", usage="ORANGE",
             purpose="This is a data fusion add-on for [Orange3](http://orange.biolab.si). Add-on wraps scikit-fusion, " +

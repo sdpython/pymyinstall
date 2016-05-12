@@ -62,19 +62,9 @@ class ModuleInstall:
         """
         return module_name in annoying_modules
 
-    def __init__(self, name,
-                 kind="pip",
-                 gitrepo=None,
-                 mname=None,
-                 fLOG=print,
-                 version=None,
-                 script=None,
-                 index_url=None,
-                 deps=None,
-                 purpose=None,
-                 usage=None,
-                 web=None,
-                 source=None):
+    def __init__(self, name, kind="pip", gitrepo=None, mname=None, fLOG=print,
+                 version=None, script=None, index_url=None, deps=None,
+                 purpose=None, usage=None, web=None, source=None, custom=None):
         """
         constructor
 
@@ -93,9 +83,12 @@ class ModuleInstall:
         @param      web             website for the module, if None, default to pipy
         @param      source          to overwrite parameter *source* of methods
                                     @see me download, @see me install or @see me update.
+        @param      custom          custom instructions to install, usually
+                                    ``['build', 'install']`` to run
+                                    ``setup.py build`` and ``setup.py install``
 
         .. versionchanged:: 1.1
-            Parameter *source* was added.
+            Parameters *source*, *custom* were added.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -113,6 +106,7 @@ class ModuleInstall:
         self.usage = usage
         self.existing_version = None
         self.source = source
+        self.custom = custom
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -499,8 +493,8 @@ class ModuleInstall:
                 raise MissingVersionWheelException(
                     "unable to extract version number from {0}".format(name))
 
-    def download(
-            self, temp_folder=".", force=False, unzipFile=True, file_save=None, deps=False, source=None):
+    def download(self, temp_folder=".", force=False, unzipFile=True,
+                 file_save=None, deps=False, source=None):
         """
         download the module without installation
 
@@ -867,14 +861,9 @@ class ModuleInstall:
             pass
         return True
 
-    def install(self,
-                force_kind=None,
-                force=False,
-                temp_folder=".",
-                log=False,
-                options=None,
-                deps=False,
-                source=None):
+    def install(self, force_kind=None, force=False, temp_folder=".",
+                log=False, options=None, deps=False, source=None,
+                custom=None):
         """
         install the package
 
@@ -886,6 +875,7 @@ class ModuleInstall:
         @param      deps            install the dependencies too (only available for pip)
         @param      source          overwrite the source of the wheels,
                                     see @see me get_exewheel_url_link2
+        @param      custom          overwrite parameters in ``self.custom``
         @return                     boolean
 
         The options mentioned in parameter ``options``
@@ -901,6 +891,7 @@ class ModuleInstall:
             before switching to the regular way if it did not work.
             Exception were changed from ``Exception`` to ``InstallError``.
             Parameter *source* was added, if None, it is overwritten by *self.source*.
+            Parameter *custom* was added, it works the same as *source*.
         """
         if source is None:
             source = self.source
@@ -924,8 +915,12 @@ class ModuleInstall:
         add = (" with " + kind) if kind != self.kind else ""
         self.fLOG("installation of " + str(self) + add)
         ret = None
+        custom = custom or self.custom
 
         if kind == "pip":
+            if custom is not None:
+                raise NotImplementedError(
+                    "custom must be None not '{0}' when kind is '{1}'".format(custom, kind))
             pp = get_pip_program()
             cmd = pp + " install {0}".format(self.name)
             if self.version is not None:
@@ -974,6 +969,9 @@ class ModuleInstall:
                 ret = not uptodate
 
         elif kind == "conda":
+            if custom is not None:
+                raise NotImplementedError(
+                    "custom must be None not '{0}' when kind is '{1}'".format(custom, kind))
             if "--upgrade" in options:
                 options = [_ for _ in options if _ != "--upgrade"]
                 command = "update"
@@ -1013,6 +1011,9 @@ class ModuleInstall:
                 ret = True
 
         elif kind in ("wheel", "wheel2"):
+            if custom is not None:
+                raise NotImplementedError(
+                    "custom must be None not '{0}' when kind is '{1}'".format(custom, kind))
             ver = python_version()
             if ver[0] != "win32":
                 ret = self.install("pip")
@@ -1076,10 +1077,8 @@ class ModuleInstall:
             # git://github.com/{0}/{1}-python.git#egg={1}".format(self.gitrepo,
             # self.name)
 
-            files = self.download(
-                temp_folder=temp_folder,
-                force=force,
-                unzipFile=True)
+            files = self.download(temp_folder=temp_folder,
+                                  force=force, unzipFile=True)
             setu = [_ for _ in files if _.endswith("setup.py")]
             if len(setu) == 0:
                 raise Exception(
@@ -1103,27 +1102,43 @@ class ModuleInstall:
             self.fLOG("install ", setu[0])
             cwd = os.getcwd()
             os.chdir(os.path.split(setu)[0])
-            cmd = "{0} setup.py install".format(
-                sys.executable.replace(
-                    "pythonw.exe",
-                    "python.exe"))
+            if custom is None:
+                custom = ["install"]
+            cmds = []
+            for command in custom:
+                cmd1 = "{0} setup.py {1}".format(
+                    sys.executable.replace("pythonw.exe", "python.exe"),
+                    command)
+                cmds.append(cmd1)
 
             def enumerate_filtered_option(options):
                 for o in options:
                     if o not in ('--no-deps', '--upgrade'):
                         yield o
+
             filter_options = list(enumerate_filtered_option(options))
             if len(filter_options) > 0:
-                cmd += " " + " ".join(filter_options)
+                cmds[-1] += " " + " ".join(filter_options)
 
             if deps:
                 # it will not work
                 # cmd += ' --no-deps'
                 pass
 
-            out, err = run_cmd(
-                cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+            outs = ""
+            errs = ""
+            for cmd in cmds:
+                out, err = run_cmd(
+                    cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+                if len(outs) > 0:
+                    outs += "\n"
+                if len(errs) > 0:
+                    errs += "\n"
+                outs += out
+                errs += err
             os.chdir(cwd)
+
+            out, err = outs, errs
             if "Successfully installed" not in out and "install  C" not in out:
                 if "Finished processing dependencies" not in out:
                     raise InstallError(
@@ -1149,6 +1164,9 @@ class ModuleInstall:
             ret = True
 
         elif kind == "exe":
+            if custom is not None:
+                raise NotImplementedError(
+                    "custom must be None not '{0}' when kind is '{1}'".format(custom, kind))
             ver = python_version()
             if ver[0] != "win32":
                 ret = self.install("pip")
@@ -1164,6 +1182,9 @@ class ModuleInstall:
                 ret = len(err) == 0
 
         elif kind == "exe2":
+            if custom is not None:
+                raise NotImplementedError(
+                    "custom must be None not '{0}' when kind is '{1}'".format(custom, kind))
             ver = python_version()
             if ver[0] != "win32":
                 ret = self.install("pip")

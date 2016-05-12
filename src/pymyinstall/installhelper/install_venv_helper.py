@@ -178,7 +178,7 @@ def run_venv_script(venv, script, fLOG=print, file=False, is_cmd=False):
     else:
         exe = os.path.join(venv, "bin", "python")
     if is_cmd:
-        cmd = " ".join([exe] + script)
+        cmd = " ".join([exe, script])
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if len(err) > 0:
             raise VirtualEnvError(
@@ -204,7 +204,7 @@ def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False):
     run a script knowing python path, it does not raise an exception.
 
     @param      python_path     python path
-    @param      script          script as a string (not a file)
+    @param      script          script as a string (not a file) or command line if *is_cmd* is True
     @param      fLOG            logging function
     @param      file            is script a file or a string to execute
     @param      is_cmd          if True, script is a command line to run (as a list) for python executable
