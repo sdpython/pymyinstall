@@ -445,6 +445,11 @@ def ensae_set():
                       purpose="Facilitates automated and reproducible experimental research"),
         ModuleInstall("astropy", "wheel",
                       purpose="Community-developed python astronomy tools"),
+        # h2o
+        ModuleInstall("future", "pip",
+                      purpose="Clean single-source support for Python 3 and 2 (h2o)"),
+        ModuleInstall("h2o", "pip", usage="ML",
+                      purpose="H2O, Fast Scalable Machine Learning, for python"),
     ]
 
     if sys.version_info[0] == 2:

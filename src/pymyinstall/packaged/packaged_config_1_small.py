@@ -346,6 +346,8 @@ def small_set():
                       purpose="GUI for SQLite"),
         ModuleInstall("uvloop", "pip", purpose="Fast implementation of asyncio event loop on top of libuv") if sys.version_info[
             :2] > (3, 5) else None,
+        ModuleInstall("tabulate", "pip",
+                      purpose="Pretty-print tabular data"),
     ]
 
     return [_ for _ in mod if _ is not None]

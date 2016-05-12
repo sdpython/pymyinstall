@@ -53,7 +53,8 @@ class TestInstallBuildInstall(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         # module
-        ModuleInstall("multi_key_dict", "github", "formiaczek", custom=["build", "install"])
+        ModuleInstall("multi_key_dict", "github", "formiaczek",
+                      custom=["build", "install"])
 
         if __name__ != "__main__":
             warnings.warn("does not work well from a virtual environment")

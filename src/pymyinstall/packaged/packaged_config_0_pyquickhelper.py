@@ -95,6 +95,7 @@ def pyquickhelper_set():
         'snowballstemmer',
         'sphinx-rtd-theme',
         "sphinxjp.themes.revealjs",
+        'tabulate',
         "terminado" if not sys.platform.startswith("win") else None,
         "tornado",
         "traitlets",
