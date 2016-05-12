@@ -9,7 +9,7 @@ from .install_cmd_regex import regex_wheel_version, regex_wheel_version2
 
 import sys
 import re
-import pip._vendor.pkg_resources
+# import pip._vendor.pkg_resources
 import warnings
 import functools
 
@@ -19,7 +19,7 @@ if sys.version_info[0] == 2:
     TimeoutError = Exception
 else:
     import xmlrpc.client as xmlrpc_client
-    from importlib import reload
+    # from importlib import reload
 
 
 annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",
