@@ -526,16 +526,16 @@ class ModuleInstall:
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
             # we use pip install <package> --download=temp_folder
             pp = get_pip_program()
-            cmd = pp + ' install {0}'.format(self.name)
+            cmd = pp + ' download {0}'.format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if " " in temp_folder:
                 raise FileNotFoundError(
                     "no space allowed in folders: [" + temp_folder + "]")
             if deps:
-                cmd += ' --download={0}'.format(temp_folder)
+                cmd += ' --dest={0}'.format(temp_folder)
             else:
-                cmd += ' --download={0} --no-deps'.format(temp_folder)
+                cmd += ' --dest={0} --no-deps'.format(temp_folder)
             if self.index_url is not None:
                 slash = '' if self.index_url.endswith('/') else '/'
                 cmd += ' --no-cache-dir --index={0}{1}simple/'.format(
