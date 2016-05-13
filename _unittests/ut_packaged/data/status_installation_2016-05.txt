@@ -1,0 +1,1165 @@
+Installing collected packages: pip
+Installing collected packages: futures
+Installing collected packages: virtualenv
+Installing collected packages: six
+Installing collected packages: lxml
+Installing collected packages: MarkupSafe, Jinja2
+Installing collected packages: Mako
+Installing collected packages: Pygments
+Installing collected packages: pyparsing
+Installing collected packages: python-dateutil
+Installing collected packages: html5lib
+Installing collected packages: beautifulsoup4
+Installing collected packages: coverage
+Installing collected packages: requests, codecov
+Installing collected packages: nose
+Installing collected packages: pytz
+Installing collected packages: pyreadline
+Installing collected packages: husl
+Installing collected packages: pipdeptree
+Installing collected packages: jdcal
+Installing collected packages: et-xmlfile
+Installing collected packages: openpyxl
+Installing collected packages: xlrd
+Installing collected packages: xlwt
+Installing collected packages: pypiwin32
+Installing collected packages: winshell
+Installing collected packages: XlsxWriter
+Installing collected packages: certifi
+Installing collected packages: tornado
+Installing collected packages: sockjs-tornado
+Installing collected packages: pyzmq
+Installing collected packages: pycparser
+Installing collected packages: Cython
+Installing collected packages: numpy
+Installing collected packages: cycler
+Installing collected packages: matplotlib
+Installing collected packages: scipy
+Installing collected packages: patsy
+Installing collected packages: statsmodels
+Installing collected packages: decorator, networkx
+Installing collected packages: jsonschema
+Installing collected packages: mistune
+Installing collected packages: wheel
+Installing collected packages: alabaster
+Building wheels for collected packages: Babel
+Installing collected packages: Babel
+Installing collected packages: colorama
+Installing collected packages: docutils
+Installing collected packages: snowballstemmer, imagesize, Sphinx
+Installing collected packages: sphinxcontrib-images
+Installing collected packages: pypiserver
+Installing collected packages: pep8
+Installing collected packages: mccabe
+Installing collected packages: pyflakes
+Installing collected packages: pyflakes, flake8
+Installing collected packages: pandas
+Building wheels for collected packages: requests-file
+Installing collected packages: requests-file, pandas-datareader
+Installing collected packages: netCDF4
+Installing collected packages: xarray
+Installing collected packages: bcolz
+Installing collected packages: scikit-learn
+Building wheels for collected packages: simplegeneric
+Installing collected packages: backports.shutil-get-terminal-size, setuptools, ipython-genutils, traitlets, simplegeneric, pickleshare, ipython
+Installing collected packages: jupyter-core, jupyter-client, ipykernel, jupyter-console, nbformat, entrypoints, nbconvert, notebook, widgetsnbextension, ipywidgets, qtconsole, jupyter
+Building wheels for collected packages: pandocfilters
+Installing collected packages: pandocfilters
+Building wheels for collected packages: pandoc-attributes
+Installing collected packages: pandoc-attributes
+Installing collected packages: notedown
+Installing collected packages: path.py
+Installing collected packages: backports-abc
+Installing collected packages: metakernel
+Installing collected packages: SQLAlchemy
+Building wheels for collected packages: sqlparse
+Installing collected packages: sqlparse
+Building wheels for collected packages: jupyter-pip
+Installing collected packages: jupyter-pip
+Installing collected packages: ipyparallel
+Building wheels for collected packages: mpld3
+Installing collected packages: mpld3
+Building wheels for collected packages: typecheck-decorator, typing
+Installing collected packages: typing, typecheck-decorator
+Installing collected packages: requests-cache
+Installing collected packages: PyQt4
+Installing collected packages: QtPy
+Installing collected packages: psutil
+Building wheels for collected packages: rope-py3k
+Installing collected packages: rope-py3k
+Building wheels for collected packages: wrapt
+Installing collected packages: wrapt, lazy-object-proxy, astroid, pylint
+Installing collected packages: guidata
+Installing collected packages: PythonQwt
+Installing collected packages: Pillow, guiqwt
+Building wheels for collected packages: spyder
+Installing collected packages: spyder
+Installing collected packages: brewer2mpl
+Installing collected packages: ggplot
+Building wheels for collected packages: goslate
+Installing collected packages: goslate
+Installing collected packages: dbfread
+Building wheels for collected packages: dbf
+Installing collected packages: dbf
+Building wheels for collected packages: xmltodict
+Installing collected packages: xmltodict
+Building wheels for collected packages: ansiconv
+Installing collected packages: ansiconv
+Building wheels for collected packages: ansi2html
+Installing collected packages: ansi2html
+Building wheels for collected packages: nodeenv
+Installing collected packages: nodeenv
+Installing collected packages: greenlet
+Installing collected packages: Werkzeug
+Building wheels for collected packages: itsdangerous
+Installing collected packages: itsdangerous
+Installing collected packages: simplejson
+Building wheels for collected packages: Flask
+Installing collected packages: Flask
+Building wheels for collected packages: Flask-SQLAlchemy
+Installing collected packages: Flask-SQLAlchemy
+Building wheels for collected packages: Flask-Login
+Installing collected packages: Flask-Login
+Building wheels for collected packages: Flask-Cors
+Installing collected packages: Flask-Cors
+Installing collected packages: PyYAML
+Building wheels for collected packages: Markdown
+Installing collected packages: Markdown
+Building wheels for collected packages: pystache
+Installing collected packages: pystache
+Building wheels for collected packages: bokeh
+Installing collected packages: bokeh
+Installing collected packages: bqplot
+Building wheels for collected packages: seaborn
+Installing collected packages: seaborn
+Installing collected packages: sphinx-rtd-theme
+Installing collected packages: sphinxjp.themes.revealjs
+Building wheels for collected packages: feedparser
+Installing collected packages: feedparser
+Installing collected packages: pbr
+Building wheels for collected packages: multi-key-dict
+Installing collected packages: multi-key-dict
+Building wheels for collected packages: python-jenkins
+Installing collected packages: python-jenkins
+Installing collected packages: envoy
+Installing collected packages: Logbook
+Building wheels for collected packages: pkginfo
+Installing collected packages: pkginfo
+Building wheels for collected packages: multipledispatch
+Installing collected packages: multipledispatch
+Installing collected packages: future
+Building wheels for collected packages: pyprofiler
+Installing collected packages: pyprofiler
+Installing collected packages: mock
+Building wheels for collected packages: multimethods
+Installing collected packages: multimethods
+Installing collected packages: appdirs
+Installing collected packages: ujson
+Installing collected packages: natsort
+Building wheels for collected packages: wget
+Installing collected packages: wget
+Installing collected packages: queuelib
+Installing collected packages: semantic-version
+Building wheels for collected packages: Unidecode
+Installing collected packages: Unidecode
+Installing collected packages: sqlite-bro
+Installing collected packages: tabulate
+Installing collected packages: sphinxjp.themes.basicstrap
+Building wheels for collected packages: solar-theme
+Installing collected packages: solar-theme
+Installing collected packages: cloud-sptheme
+Building wheels for collected packages: sphinx-readable-theme
+Installing collected packages: sphinx-readable-theme
+Building wheels for collected packages: hachibee-sphinx-theme
+Installing collected packages: hachibee-sphinx-theme
+Building wheels for collected packages: wild-sphinx-theme
+Installing collected packages: wild-sphinx-theme
+Building wheels for collected packages: sphinx-bootstrap-theme
+Installing collected packages: sphinx-bootstrap-theme
+Building wheels for collected packages: sphinxjp.themes.sphinxjp
+Installing collected packages: sphinxjp.themes.sphinxjp
+Installing collected packages: sphinx-py3doc-enhanced-theme
+Building wheels for collected packages: epfl-sphinx-theme
+Installing collected packages: epfl-sphinx-theme
+Building wheels for collected packages: sphinx-better-theme
+Installing collected packages: sphinx-better-theme
+Building wheels for collected packages: guzzle-sphinx-theme
+Installing collected packages: guzzle-sphinx-theme
+Building wheels for collected packages: itcase-sphinx-theme
+Installing collected packages: itcase-sphinx-theme
+Building wheels for collected packages: sphinxtrap
+Installing collected packages: sphinxtrap
+Installing collected packages: sphinxcontrib-lunrsearch
+Installing collected packages: sphinxcontrib-imagesvg
+Building wheels for collected packages: sphinxcontrib-jsdemo
+Installing collected packages: sphinxcontrib-jsdemo
+Building wheels for collected packages: zerovm-sphinx-theme
+Installing collected packages: zerovm-sphinx-theme
+Building wheels for collected packages: sphinx-corlab-theme
+Installing collected packages: sphinx-corlab-theme
+Building wheels for collected packages: sphinxjp.themes.htmlslide, sphinxjp.themecore
+Installing collected packages: sphinxjp.themecore, sphinxjp.themes.htmlslide
+Installing collected packages: sphinxjp.themes.gopher
+Building wheels for collected packages: sphinx-docs-theme, Fabric, pycrypto
+Installing collected packages: pycrypto, ecdsa, paramiko, Fabric, sphinx-docs-theme
+Building wheels for collected packages: sphinx-gallery
+Installing collected packages: sphinx-gallery
+Installing collected packages: py
+Installing collected packages: pytest
+Installing collected packages: bitarray
+Installing collected packages: blist
+Installing collected packages: blz
+Installing collected packages: rpy2
+Building wheels for collected packages: python-pptx
+Installing collected packages: python-pptx
+Building wheels for collected packages: python-docx
+Installing collected packages: python-docx
+Installing collected packages: cffi
+Building wheels for collected packages: odo, datashape, toolz
+Installing collected packages: datashape, toolz, odo
+Installing collected packages: cytoolz
+Installing collected packages: cyordereddict
+Installing collected packages: dynd
+Building wheels for collected packages: sympy, mpmath
+Installing collected packages: mpmath, sympy
+Installing collected packages: gmpy2
+Installing collected packages: llvmlite
+Building wheels for collected packages: blaze
+Installing collected packages: blaze
+Installing collected packages: numba
+Installing collected packages: dask, scikit-image
+Installing collected packages: cvxopt
+Installing collected packages: PyWavelets
+Installing collected packages: fastcluster
+Installing collected packages: pycosat
+Building wheels for collected packages: pyshp
+Installing collected packages: pyshp
+Installing collected packages: Shapely
+Building wheels for collected packages: vispy
+Installing collected packages: vispy
+Installing collected packages: selenium
+Installing collected packages: splinter
+Installing collected packages: pygame
+Building wheels for collected packages: Kivy-Garden
+Installing collected packages: Kivy-Garden, Kivy
+Installing collected packages: py4j
+Installing collected packages: python-igraph
+Installing collected packages: lockfile
+Installing collected packages: cached-property
+Building wheels for collected packages: luigi
+Installing collected packages: python-daemon, luigi
+Installing collected packages: setproctitle
+Building wheels for collected packages: ply
+Installing collected packages: ply
+Building wheels for collected packages: thriftpy
+Installing collected packages: thriftpy
+Building wheels for collected packages: smopy
+Installing collected packages: smopy
+Building wheels for collected packages: folium
+Installing collected packages: folium
+Building wheels for collected packages: osmapi
+Installing collected packages: osmapi
+Installing collected packages: geopy
+Installing collected packages: basemap
+Installing collected packages: pyproj
+Installing collected packages: Cartopy
+Building wheels for collected packages: python-linkedin, oauthlib
+Installing collected packages: oauthlib, requests-oauthlib, python-linkedin
+Building wheels for collected packages: antlr4-python3-runtime
+Installing collected packages: antlr4-python3-runtime
+Building wheels for collected packages: PyContracts
+Installing collected packages: PyContracts
+Installing collected packages: pycryptodomex
+Building wheels for collected packages: xxhash
+Installing collected packages: xxhash
+Installing collected packages: autopy3
+Installing collected packages: bigfloat
+Installing collected packages: scs
+Installing collected packages: ecos
+Installing collected packages: CVXcanon
+Building wheels for collected packages: cvxpy, multiprocess, dill
+Installing collected packages: dill, multiprocess, cvxpy
+Installing collected packages: libLAS
+Installing collected packages: liblinear
+Installing collected packages: marisa-trie
+Installing collected packages: mlpy
+Installing collected packages: pygit2
+Installing collected packages: pymongo
+Installing collected packages: psycopg2
+Building wheels for collected packages: PyOpenGL-accelerate
+Installing collected packages: PyOpenGL-accelerate
+Building wheels for collected packages: Theano
+Installing collected packages: Theano
+Installing collected packages: pymc
+Building wheels for collected packages: pysterior
+Installing collected packages: pysterior
+Building wheels for collected packages: pyqtgraph
+Installing collected packages: pyqtgraph
+Building wheels for collected packages: deap
+Installing collected packages: deap
+Installing collected packages: jmespath
+Installing collected packages: botocore
+Installing collected packages: boto3
+Building wheels for collected packages: bz2file
+Installing collected packages: bz2file
+Building wheels for collected packages: smart-open, httpretty
+Installing collected packages: boto, httpretty, requests, smart-open
+Installing collected packages: gensim
+Installing collected packages: h5py
+Building wheels for collected packages: Keras
+Installing collected packages: Keras
+Building wheels for collected packages: bayespy
+Installing collected packages: bayespy
+Installing collected packages: numexpr
+Building wheels for collected packages: glueviz, astropy
+Installing collected packages: astropy, glueviz
+Building wheels for collected packages: pandas-highcharts
+Installing collected packages: pandas-highcharts
+Building wheels for collected packages: chest, heapdict
+Installing collected packages: heapdict, chest
+Building wheels for collected packages: locket
+Installing collected packages: locket, partd
+Installing collected packages: cloudpickle
+Building wheels for collected packages: scoop
+Installing collected packages: argparse, scoop
+Installing collected packages: jedi
+Building wheels for collected packages: docopt
+Installing collected packages: docopt
+Building wheels for collected packages: markdown2
+Installing collected packages: markdown2
+Building wheels for collected packages: structures
+Installing collected packages: structures
+Building wheels for collected packages: rodeo
+Installing collected packages: rodeo
+Building wheels for collected packages: tzlocal
+Installing collected packages: tzlocal
+Installing collected packages: APScheduler
+Building wheels for collected packages: PyExecJS
+Installing collected packages: PyExecJS
+Building wheels for collected packages: PyReact
+Installing collected packages: PyReact
+Building wheels for collected packages: pyxley
+Installing collected packages: pyxley
+Installing collected packages: pysmi
+Installing collected packages: pyasn1
+Installing collected packages: pysnmp
+Installing collected packages: imageio
+Installing collected packages: tqdm
+Building wheels for collected packages: moviepy
+Installing collected packages: moviepy
+Installing collected packages: xgboost
+Building wheels for collected packages: cuda4py
+Installing collected packages: cuda4py
+Installing collected packages: Whoosh
+Building wheels for collected packages: pymatbridge
+Installing collected packages: pymatbridge
+Installing collected packages: scilab2py
+Installing collected packages: pymssql
+Installing collected packages: PyMySQL
+Installing collected packages: mysqlclient
+Installing collected packages: line-profiler
+Building wheels for collected packages: memory-profiler
+Installing collected packages: memory-profiler
+Installing collected packages: snakeviz
+Installing collected packages: python-gmaps
+Building wheels for collected packages: pywin32-ctypes
+Installing collected packages: pywin32-ctypes, keyring
+Building wheels for collected packages: param
+Installing collected packages: param
+Building wheels for collected packages: holoviews
+Installing collected packages: holoviews
+Installing collected packages: plotly
+Building wheels for collected packages: lightning-python
+Installing collected packages: lightning-python
+Installing collected packages: passlib
+Building wheels for collected packages: plac
+Installing collected packages: plac
+Installing collected packages: idna
+Installing collected packages: cryptography
+Installing collected packages: pyOpenSSL
+Installing collected packages: w3lib
+Installing collected packages: wordcloud
+Installing collected packages: tblib
+Building wheels for collected packages: msgpack-python, click
+Installing collected packages: s3fs, msgpack-python, click, distributed
+Building wheels for collected packages: chardet
+Installing collected packages: chardet
+Installing collected packages: bleach
+Installing collected packages: grappelli-safe
+Installing collected packages: filebrowser-safe
+Installing collected packages: Django, django-contrib-comments
+Installing collected packages: Mezzanine
+Installing collected packages: pythonnet
+Building wheels for collected packages: billiard
+Installing collected packages: billiard
+Building wheels for collected packages: anyjson
+Installing collected packages: anyjson, amqp, kombu
+Installing collected packages: celery
+Building wheels for collected packages: Versio
+Installing collected packages: Versio
+Building wheels for collected packages: django-celery
+Installing collected packages: django-celery
+Installing collected packages: django-configurations
+Building wheels for collected packages: django-environ
+Installing collected packages: django-environ
+Building wheels for collected packages: django-model-utils
+Installing collected packages: django-model-utils
+Installing collected packages: django-storages
+Building wheels for collected packages: html2text, django-guardian
+Installing collected packages: html2text, django-guardian, easy-thumbnails, django-userena
+Building wheels for collected packages: django-uuidfield
+Installing collected packages: django-uuidfield
+Installing collected packages: gunicorn
+Installing collected packages: netaddr
+Building wheels for collected packages: localshop, Pillow, django-celery, django-model-utils, django-userena, django-storages, django-environ, docutils, netaddr, Versio
+Installing collected packages: Django, Pillow, kombu, celery, django-celery, django-model-utils, django-userena, django-storages, django-configurations, django-environ, docutils, gunicorn, netaddr, requests, Versio, localshop
+Installing collected packages: tweepy
+Building wheels for collected packages: mutagenx
+Installing collected packages: mutagenx
+Building wheels for collected packages: django-audiotracks, mutagenx
+Installing collected packages: mutagenx, django-audiotracks
+Building wheels for collected packages: ndg-httpsclient, more-itertools, inflection
+Installing collected packages: ndg-httpsclient, requests, more-itertools, inflection, Quandl
+Building wheels for collected packages: nltk
+Installing collected packages: nltk
+Installing collected packages: textblob
+Building wheels for collected packages: dev
+Installing collected packages: dev
+Installing collected packages: opencv-python
+Installing collected packages: PyAudio
+Installing collected packages: zope.interface
+Building wheels for collected packages: zope.exceptions
+Installing collected packages: zope.exceptions
+Installing collected packages: persistent
+Installing collected packages: BTrees
+Installing collected packages: datrie
+Installing collected packages: Bottleneck
+Installing collected packages: la
+Installing collected packages: mahotas
+Installing collected packages: nitime
+Installing collected packages: milk
+Installing collected packages: minepy
+Installing collected packages: NLopt
+Building wheels for collected packages: Pmw
+Installing collected packages: Pmw
+Building wheels for collected packages: pytool
+Installing collected packages: pytool
+Building wheels for collected packages: pytools
+Installing collected packages: pytools
+Installing collected packages: pycuda
+Installing collected packages: pylzma
+Installing collected packages: pymvpa2
+Installing collected packages: pyodbc
+Installing collected packages: pypmc
+Installing collected packages: PyX
+Installing collected packages: zs
+Installing collected packages: joblib
+Building wheels for collected packages: tutormagic
+Installing collected packages: tutormagic
+Building wheels for collected packages: nbupload
+Installing collected packages: nbupload
+Installing collected packages: libsvm
+Building wheels for collected packages: abcpmc
+Installing collected packages: abcpmc
+Building wheels for collected packages: vincent
+Installing collected packages: vincent
+Installing collected packages: pygal
+Building wheels for collected packages: pygal-maps-world
+Installing collected packages: pygal-maps-world
+Building wheels for collected packages: sas7bdat
+Installing collected packages: sas7bdat
+Installing collected packages: PuLP
+Installing collected packages: CherryPy
+Building wheels for collected packages: DataSpyre
+Installing collected packages: DataSpyre
+Installing collected packages: colorspacious
+Installing collected packages: viscm
+Building wheels for collected packages: lifelines
+Installing collected packages: lifelines
+Building wheels for collected packages: Nuitka
+Installing collected packages: Nuitka
+Installing collected packages: blosc
+Installing collected packages: tables
+Installing collected packages: heatmap
+Installing collected packages: planar
+Installing collected packages: GDAL
+Installing collected packages: tifffile
+Building wheels for collected packages: slicerator
+Installing collected packages: slicerator
+Building wheels for collected packages: PIMS
+Installing collected packages: PIMS
+Building wheels for collected packages: trackpy
+Installing collected packages: trackpy
+Installing collected packages: triangle
+Installing collected packages: redis
+Installing collected packages: skdata
+Building wheels for collected packages: Hebel
+Installing collected packages: Hebel
+Building wheels for collected packages: user-agent
+Installing collected packages: user-agent
+Building wheels for collected packages: tinydb
+Installing collected packages: tinydb
+Installing collected packages: urllib3
+Installing collected packages: gevent
+Building wheels for collected packages: grequests
+Installing collected packages: grequests
+Installing collected packages: pycurl
+Building wheels for collected packages: pytils
+Installing collected packages: pytils
+Building wheels for collected packages: selection, weblib
+Installing collected packages: weblib, selection
+Building wheels for collected packages: grab
+Installing collected packages: grab
+Building wheels for collected packages: imbox
+Installing collected packages: imbox
+Building wheels for collected packages: neural-python
+Installing collected packages: neural-python
+Building wheels for collected packages: cssselect
+Installing collected packages: cssselect
+Building wheels for collected packages: jieba
+Installing collected packages: jieba
+Building wheels for collected packages: untangle
+Installing collected packages: untangle
+Building wheels for collected packages: colormap
+Installing collected packages: colormap
+Building wheels for collected packages: easydev
+Installing collected packages: easydev
+Building wheels for collected packages: suds-jurko
+Installing collected packages: suds-jurko
+Installing collected packages: azure-nspkg
+Installing collected packages: azure-common
+Installing collected packages: azure-mgmt-nspkg
+Installing collected packages: azure-mgmt-common
+Installing collected packages: azure-mgmt-compute
+Installing collected packages: azure-mgmt-network
+Installing collected packages: azure-mgmt-resource
+Installing collected packages: azure-mgmt-storage
+Building wheels for collected packages: azure-mgmt
+Installing collected packages: azure-mgmt
+Installing collected packages: azure-servicebus
+Installing collected packages: azure-storage
+Installing collected packages: azure-servicemanagement-legacy
+Installing collected packages: azureml
+Building wheels for collected packages: azure-batch-apps
+Installing collected packages: azure-batch-apps
+Installing collected packages: lz4
+Installing collected packages: invoke
+Installing collected packages: cymem
+Installing collected packages: murmurhash
+Installing collected packages: preshed
+Installing collected packages: text-unidecode
+Installing collected packages: thinc
+Building wheels for collected packages: semver
+Installing collected packages: semver, sputnik, spacy
+Building wheels for collected packages: picklable-itertools
+Installing collected packages: picklable-itertools
+Installing collected packages: progressbar2
+Building wheels for collected packages: fuel
+Installing collected packages: fuel
+Building wheels for collected packages: Lasagne
+Installing collected packages: Lasagne
+Building wheels for collected packages: gatspy
+Installing collected packages: gatspy
+Building wheels for collected packages: supersmoother
+Installing collected packages: supersmoother
+Building wheels for collected packages: prettytable
+Installing collected packages: prettytable
+Building wheels for collected packages: skll
+Installing collected packages: skll
+Installing collected packages: sklearn-pandas
+Building wheels for collected packages: ad3
+Installing collected packages: ad3, pystruct
+Building wheels for collected packages: ad3
+Installing collected packages: ad3, pystruct
+-----------
+Successfully uninstalled pip-7.1.2
+Successfully installed pip-8.1.2
+Successfully installed futures-2.2.0
+Successfully installed virtualenv-15.0.1
+Successfully installed six-1.10.0
+Successfully installed lxml-3.6.0
+Successfully installed Jinja2-2.8 MarkupSafe-0.23
+Successfully installed Mako-1.0.4
+Successfully installed Pygments-2.1.3
+Successfully installed pyparsing-2.1.3
+Successfully installed python-dateutil-2.5.3
+Successfully installed html5lib-0.9999999
+Successfully installed beautifulsoup4-4.4.1
+Successfully installed coverage-4.0.3
+Successfully installed codecov-2.0.3 requests-2.10.0
+Successfully installed nose-1.3.7
+Successfully installed pytz-2016.4
+Successfully installed pyreadline-2.1
+Successfully installed husl-4.0.3
+Successfully installed pipdeptree-0.6.0
+Successfully installed jdcal-1.2
+Successfully installed et-xmlfile-1.0.1
+Successfully installed openpyxl-2.3.5
+Successfully installed xlrd-0.9.4
+Successfully installed xlwt-1.0.0
+Successfully installed pypiwin32-219
+Successfully installed winshell-0.6
+Successfully installed XlsxWriter-0.8.6
+Successfully installed certifi-2016.2.28
+Successfully installed tornado-4.3
+Successfully installed sockjs-tornado-1.0.3
+Successfully installed pyzmq-15.2.0
+Successfully installed pycparser-2.14
+Successfully installed Cython-0.24
+Successfully installed numpy-1.11.0
+Successfully installed cycler-0.10.0
+Successfully installed matplotlib-1.5.1
+Successfully installed scipy-0.17.1
+Successfully installed patsy-0.4.1
+Successfully installed statsmodels-0.6.1
+Successfully installed decorator-4.0.9 networkx-1.11
+Successfully installed jsonschema-2.5.1
+Successfully installed mistune-0.7.2
+Successfully installed wheel-0.29.0
+Successfully installed alabaster-0.7.8
+Successfully built Babel
+Successfully installed Babel-1.3
+Successfully installed colorama-0.3.7
+Successfully installed docutils-0.12
+Successfully installed Sphinx-1.4.1 imagesize-0.7.1 snowballstemmer-1.2.1
+Successfully installed sphinxcontrib-images-0.7.0
+Successfully installed pypiserver-1.1.10
+Successfully installed pep8-1.5.7
+Successfully installed mccabe-0.4.0
+Successfully installed pyflakes-1.2.3
+Successfully uninstalled pyflakes-1.2.3
+Successfully installed flake8-2.5.4 pyflakes-1.0.0
+Successfully installed pandas-0.18.1
+Successfully built requests-file
+Successfully installed pandas-datareader-0.2.1 requests-file-1.4
+Successfully installed netCDF4-1.2.4
+Successfully installed xarray-0.7.2
+Successfully installed bcolz-1.0.0
+Successfully installed scikit-learn-0.17.1
+Successfully built simplegeneric
+Successfully uninstalled setuptools-18.2
+Successfully installed backports.shutil-get-terminal-size-1.0.0 ipython-4.2.0 ipython-genutils-0.1.0 pickleshare-0.7.2 setuptools-21.0.0 simplegeneric-0.8.1 traitlets-4.2.1
+Successfully installed entrypoints-0.2.1 ipykernel-4.3.1 ipywidgets-5.1.3 jupyter-1.0.0 jupyter-client-4.2.2 jupyter-console-4.1.1 jupyter-core-4.1.0 nbconvert-4.2.0 nbformat-4.0.1 notebook-4.2.0 qtconsole-4.2.1 widgetsnbextension-1.2.2
+Successfully built pandocfilters
+Successfully installed pandocfilters-1.3.0
+Successfully built pandoc-attributes
+Successfully installed pandoc-attributes-0.1.7
+Successfully installed notedown-1.5.0
+Successfully installed path.py-8.2.1
+Successfully installed backports-abc-0.4
+Successfully installed metakernel-0.12.6
+Successfully installed SQLAlchemy-1.0.12
+Successfully built sqlparse
+Successfully installed sqlparse-0.1.19
+Successfully built jupyter-pip
+Successfully installed jupyter-pip-0.3
+Successfully installed ipyparallel-5.0.1
+Successfully built mpld3
+Successfully installed mpld3-0.2
+Successfully built typecheck-decorator typing
+Successfully installed typecheck-decorator-1.3 typing-3.5.1.0
+Successfully installed requests-cache-0.4.12
+Successfully installed PyQt4-4.11.4
+Successfully installed QtPy-1.0.1
+Successfully installed psutil-4.1.0
+Successfully built rope-py3k
+Successfully installed rope-py3k-0.9.4.post1
+Successfully built wrapt
+Successfully installed astroid-1.4.5 lazy-object-proxy-1.2.2 pylint-1.5.5 wrapt-1.10.8
+Successfully installed guidata-1.7.5
+Successfully installed PythonQwt-0.5.5
+Successfully installed Pillow-3.2.0 guiqwt-3.0.2
+Successfully built spyder
+Successfully installed spyder-2.3.9
+Successfully installed brewer2mpl-1.4.1
+Successfully installed ggplot-0.6.8
+Successfully built goslate
+Successfully installed goslate-1.4.0
+Successfully installed dbfread-2.0.5
+Successfully built dbf
+Successfully installed dbf-0.96.5
+Successfully built xmltodict
+Successfully installed xmltodict-0.10.1
+Successfully built ansiconv
+Successfully installed ansiconv-1.0.0
+Successfully built ansi2html
+Successfully installed ansi2html-1.1.1
+Successfully built nodeenv
+Successfully installed nodeenv-0.13.6
+Successfully installed greenlet-0.4.9
+Successfully installed Werkzeug-0.11.9
+Successfully built itsdangerous
+Successfully installed itsdangerous-0.24
+Successfully installed simplejson-3.8.2
+Successfully built Flask
+Successfully installed Flask-0.10.1
+Successfully built Flask-SQLAlchemy
+Successfully installed Flask-SQLAlchemy-2.1
+Successfully built Flask-Login
+Successfully installed Flask-Login-0.3.2
+Successfully built Flask-Cors
+Successfully installed Flask-Cors-2.1.2
+Successfully installed PyYAML-3.11
+Successfully built Markdown
+Successfully installed Markdown-2.6.6
+Successfully built pystache
+Successfully installed pystache-0.5.4
+Successfully built bokeh
+Successfully installed bokeh-0.11.1
+Successfully installed bqplot-0.6.1
+Successfully built seaborn
+Successfully installed seaborn-0.7.0
+Successfully installed sphinx-rtd-theme-0.1.9
+Successfully installed sphinxjp.themes.revealjs-0.3.0
+Successfully built feedparser
+Successfully installed feedparser-5.2.1
+Successfully installed pbr-1.9.1
+Successfully built multi-key-dict
+Successfully installed multi-key-dict-2.0.3
+Successfully built python-jenkins
+Successfully installed python-jenkins-0.4.12
+Successfully installed envoy-0.0.3
+Successfully installed Logbook-0.12.5
+Successfully built pkginfo
+Successfully installed pkginfo-1.2.1
+Successfully built multipledispatch
+Successfully installed multipledispatch-0.4.8
+Successfully installed future-0.15.2
+Successfully built pyprofiler
+Successfully installed pyprofiler-65
+Successfully installed mock-2.0.0
+Successfully built multimethods
+Successfully installed multimethods-1.0.0
+Successfully installed appdirs-1.4.0
+Successfully installed ujson-1.35
+Successfully installed natsort-5.0.0
+Successfully built wget
+Successfully installed wget-3.2
+Successfully installed queuelib-1.4.2
+Successfully installed semantic-version-2.5.0
+Successfully built Unidecode
+Successfully installed Unidecode-0.4.19
+Successfully installed sqlite-bro-0.8.11
+Successfully installed tabulate-0.7.5
+Successfully installed sphinxjp.themes.basicstrap-0.4.3
+Successfully built solar-theme
+Successfully installed solar-theme-1.3.2
+Successfully installed cloud-sptheme-1.7.1
+Successfully built sphinx-readable-theme
+Successfully installed sphinx-readable-theme-1.3.0
+Successfully built hachibee-sphinx-theme
+Successfully installed hachibee-sphinx-theme-0.2.5
+Successfully built wild-sphinx-theme
+Successfully installed wild-sphinx-theme-1.0.0
+Successfully built sphinx-bootstrap-theme
+Successfully installed sphinx-bootstrap-theme-0.4.9
+Successfully built sphinxjp.themes.sphinxjp
+Successfully installed sphinxjp.themes.sphinxjp-0.3.1
+Successfully installed sphinx-py3doc-enhanced-theme-2.3.2
+Successfully built epfl-sphinx-theme
+Successfully installed epfl-sphinx-theme-1.1.1
+Successfully built sphinx-better-theme
+Successfully installed sphinx-better-theme-0.13
+Successfully built guzzle-sphinx-theme
+Successfully installed guzzle-sphinx-theme-0.7.11
+Successfully built itcase-sphinx-theme
+Successfully installed itcase-sphinx-theme-0.2.0
+Successfully built sphinxtrap
+Successfully installed sphinxtrap-0.2.3
+Successfully installed sphinxcontrib-lunrsearch-0.2
+Successfully installed sphinxcontrib-imagesvg-0.1
+Successfully built sphinxcontrib-jsdemo
+Successfully installed sphinxcontrib-jsdemo-0.1.4
+Successfully built zerovm-sphinx-theme
+Successfully installed zerovm-sphinx-theme-1.1
+Successfully built sphinx-corlab-theme
+Successfully installed sphinx-corlab-theme-0.1.3
+Successfully built sphinxjp.themes.htmlslide sphinxjp.themecore
+Successfully installed sphinxjp.themecore-0.2.0 sphinxjp.themes.htmlslide-0.1.4
+Successfully installed sphinxjp.themes.gopher-0.1.0
+Successfully built sphinx-docs-theme Fabric pycrypto
+Successfully installed Fabric-1.11.1 ecdsa-0.13 paramiko-1.17.0 pycrypto-2.6.1 sphinx-docs-theme-0.1.2
+Successfully built sphinx-gallery
+Successfully installed sphinx-gallery-0.1.2
+Successfully installed py-1.4.31
+Successfully installed pytest-2.9.1
+Successfully installed bitarray-0.8.1
+Successfully installed blist-1.3.6
+Successfully installed blz-0.6.2
+Successfully installed rpy2-2.7.8
+Successfully built python-pptx
+Successfully installed python-pptx-0.5.8
+Successfully built python-docx
+Successfully installed python-docx-0.8.5
+Successfully installed cffi-1.6.0
+Successfully built odo datashape toolz
+Successfully installed datashape-0.5.2 odo-0.5.0 toolz-0.7.4
+Successfully installed cytoolz-0.7.5
+Successfully installed cyordereddict-1.0.0
+Successfully installed dynd-0.7.1
+Successfully built sympy mpmath
+Successfully installed mpmath-0.19 sympy-1.0
+Successfully installed gmpy2-2.0.7
+Successfully installed llvmlite-0.10.0
+Successfully built blaze
+Successfully installed blaze-0.10.1
+Successfully installed numba-0.25.0
+Successfully installed dask-0.9.0 scikit-image-0.12.3
+Successfully installed cvxopt-1.1.7
+Successfully installed PyWavelets-0.4.0
+Successfully installed fastcluster-1.1.20
+Successfully installed pycosat-0.6.1
+Successfully built pyshp
+Successfully installed pyshp-1.2.3
+Successfully installed Shapely-1.5.15
+Successfully built vispy
+Successfully installed vispy-0.4.0
+Successfully installed selenium-2.53.2
+Successfully installed splinter-0.7.3
+Successfully installed pygame-1.9.2a0
+Successfully built Kivy-Garden
+Successfully installed Kivy-1.9.1 Kivy-Garden-0.1.4
+Successfully installed py4j-0.10.1
+Successfully installed python-igraph-0.7.1.post6
+Successfully installed lockfile-0.12.2
+Successfully installed cached-property-1.3.0
+Successfully built luigi
+Successfully installed luigi-2.1.1 python-daemon-2.1.1
+Successfully installed setproctitle-1.1.10
+Successfully built ply
+Successfully installed ply-3.8
+Successfully built thriftpy
+Successfully installed thriftpy-0.3.8
+Successfully built smopy
+Successfully installed smopy-0.0.3
+Successfully built folium
+Successfully installed folium-0.2.1
+Successfully built osmapi
+Successfully installed osmapi-0.6.2
+Successfully installed geopy-1.11.0
+Successfully installed basemap-1.0.8
+Successfully installed pyproj-1.9.5
+Successfully installed Cartopy-0.14.2
+Successfully built python-linkedin oauthlib
+Successfully installed oauthlib-1.1.1 python-linkedin-4.1 requests-oauthlib-0.6.1
+Successfully built antlr4-python3-runtime
+Successfully installed antlr4-python3-runtime-4.5.3
+Successfully built PyContracts
+Successfully installed PyContracts-1.7.6
+Successfully installed pycryptodomex-3.4.2
+Successfully built xxhash
+Successfully installed xxhash-0.5.0
+Successfully installed autopy3-0.51.1
+Successfully installed bigfloat-0.3.0
+Successfully installed scs-1.2.6
+Successfully installed ecos-2.0.4
+Successfully installed CVXcanon-0.0.23
+Successfully built cvxpy multiprocess dill
+Successfully installed cvxpy-0.4.0 dill-0.2.5 multiprocess-0.70.4
+Successfully installed libLAS-1.8.0
+Successfully installed liblinear-2.1
+Successfully installed marisa-trie-0.7.2
+Successfully installed mlpy-3.5.0
+Successfully installed pygit2-0.24.0
+Successfully installed pymongo-3.2.2
+Successfully installed psycopg2-2.6.1
+Successfully built PyOpenGL-accelerate
+Successfully installed PyOpenGL-accelerate-3.1.0
+Successfully built Theano
+Successfully installed Theano-0.8.2
+Successfully installed pymc-2.3.6
+Successfully built pysterior
+Successfully installed pysterior-0.1.5
+Successfully built pyqtgraph
+Successfully installed pyqtgraph-0.9.10
+Successfully built deap
+Successfully installed deap-1.0.2
+Successfully installed jmespath-0.9.0
+Successfully installed botocore-1.4.18
+Successfully installed boto3-1.3.1
+Successfully built bz2file
+Successfully installed bz2file-0.98
+Successfully built smart-open httpretty
+Successfully uninstalled requests-2.10.0
+Successfully installed boto-2.40.0 httpretty-0.8.10 requests-2.8.1 smart-open-1.3.2
+Successfully installed gensim-0.12.4
+Successfully installed h5py-2.6.0
+Successfully built Keras
+Successfully installed Keras-1.0.2
+Successfully built bayespy
+Successfully installed bayespy-0.5.0
+Successfully installed numexpr-2.5.2
+Successfully built glueviz astropy
+Successfully installed astropy-1.1.2 glueviz-0.7.3
+Successfully built pandas-highcharts
+Successfully installed pandas-highcharts-0.5.2
+Successfully built chest heapdict
+Successfully installed chest-0.2.3 heapdict-1.0.0
+Successfully built locket
+Successfully installed locket-0.2.0 partd-0.3.3
+Successfully installed cloudpickle-0.2.1
+Successfully built scoop
+Successfully installed argparse-1.4.0 scoop-0.7.1.1
+Successfully installed jedi-0.9.0
+Successfully built docopt
+Successfully installed docopt-0.6.2
+Successfully built markdown2
+Successfully installed markdown2-2.3.1
+Successfully built structures
+Successfully installed structures-2.0.2
+Successfully built rodeo
+Successfully installed rodeo-0.4.4
+Successfully built tzlocal
+Successfully installed tzlocal-1.2.2
+Successfully installed APScheduler-3.1.0
+Successfully built PyExecJS
+Successfully installed PyExecJS-1.4.0
+Successfully built PyReact
+Successfully installed PyReact-0.6.0
+Successfully built pyxley
+Successfully installed pyxley-0.0.9
+Successfully installed pysmi-0.0.7
+Successfully installed pyasn1-0.1.9
+Successfully installed pysnmp-4.3.2
+Successfully installed imageio-1.5
+Successfully installed tqdm-4.5.0
+Successfully built moviepy
+Successfully installed moviepy-0.2.2.11
+Successfully installed xgboost-0.4a30
+Successfully built cuda4py
+Successfully installed cuda4py-1.3.6
+Successfully installed Whoosh-2.7.4
+Successfully built pymatbridge
+Successfully installed pymatbridge-0.5.2
+Successfully installed scilab2py-0.6
+Successfully installed pymssql-2.1.2
+Successfully installed PyMySQL-0.7.2
+Successfully installed mysqlclient-1.3.7
+Successfully installed line-profiler-1.0
+Successfully built memory-profiler
+Successfully installed memory-profiler-0.41
+Successfully installed snakeviz-0.4.1
+Successfully installed python-gmaps-0.3.1
+Successfully built pywin32-ctypes
+Successfully installed keyring-9.0 pywin32-ctypes-0.0.1
+Successfully built param
+Successfully installed param-1.3.2
+Successfully built holoviews
+Successfully installed holoviews-1.5.0
+Successfully installed plotly-1.9.10
+Successfully built lightning-python
+Successfully installed lightning-python-1.2.1
+Successfully installed passlib-1.6.5
+Successfully built plac
+Successfully installed plac-0.9.1
+Successfully installed idna-2.1
+Successfully installed cryptography-1.3.2
+Successfully installed pyOpenSSL-16.0.0
+Successfully installed w3lib-1.14.2
+Successfully installed wordcloud-1.2.1
+Successfully installed tblib-1.3.0
+Successfully built msgpack-python click
+Successfully installed click-6.6 distributed-1.10.1 msgpack-python-0.4.7 s3fs-0.0.4
+Successfully built chardet
+Successfully installed chardet-2.3.0
+Successfully installed bleach-1.4.2
+Successfully installed grappelli-safe-0.4.2
+Successfully installed filebrowser-safe-0.4.3
+Successfully installed Django-1.9.6 django-contrib-comments-1.7.1
+Successfully installed Mezzanine-4.1.0
+Successfully installed pythonnet-2.1.1
+Successfully built billiard
+Successfully installed billiard-3.3.0.23
+Successfully built anyjson
+Successfully installed amqp-1.4.9 anyjson-0.3.3 kombu-3.0.35
+Successfully installed celery-3.1.23
+Successfully built Versio
+Successfully installed Versio-0.3.0
+Successfully built django-celery
+Successfully installed django-celery-3.1.17
+Successfully installed django-configurations-1.0
+Successfully built django-environ
+Successfully installed django-environ-0.4.0
+Successfully built django-model-utils
+Successfully installed django-model-utils-2.5
+Successfully installed django-storages-1.4.1
+Successfully built html2text django-guardian
+Successfully installed django-guardian-1.4.1 django-userena-2.0.1 easy-thumbnails-2.3 html2text-2014.12.29
+Successfully built django-uuidfield
+Successfully installed django-uuidfield-0.5.0
+Successfully installed gunicorn-19.5.0
+Successfully installed netaddr-0.7.18
+Successfully built localshop Pillow django-celery django-model-utils django-userena django-storages django-environ docutils netaddr Versio
+Successfully uninstalled Django-1.9.6
+Successfully uninstalled Pillow-3.2.0
+Successfully uninstalled kombu-3.0.35
+Successfully uninstalled celery-3.1.23
+Successfully uninstalled django-celery-3.1.17
+Successfully uninstalled django-model-utils-2.5
+Successfully uninstalled django-userena-2.0.1
+Successfully uninstalled django-storages-1.4.1
+Successfully uninstalled django-configurations-1.0
+Successfully uninstalled django-environ-0.4.0
+Successfully uninstalled docutils-0.12
+Successfully uninstalled gunicorn-19.5.0
+Successfully uninstalled netaddr-0.7.18
+Successfully uninstalled requests-2.8.1
+Successfully uninstalled Versio-0.3.0
+Successfully installed Django-1.7.1 Pillow-2.6.1 Versio-0.2.1 celery-3.1.17 django-celery-3.1.16 django-configurations-0.8 django-environ-0.3.0 django-model-utils-2.2 django-storages-1.1.8 django-userena-1.3.1 docutils-0.11 gunicorn-19.1.1 kombu-3.0.24 localshop-0.9.3 netaddr-0.7.12 requests-2.5.1
+Successfully installed tweepy-3.5.0
+Successfully built mutagenx
+Successfully installed mutagenx-1.24
+Successfully built django-audiotracks mutagenx
+Successfully uninstalled mutagenx-1.24
+Successfully installed django-audiotracks-0.2.4 mutagenx-1.22
+Successfully built ndg-httpsclient more-itertools inflection
+Successfully uninstalled requests-2.5.1
+Successfully installed Quandl-3.0.0 inflection-0.3.1 more-itertools-2.2 ndg-httpsclient-0.4.0 requests-2.10.0
+Successfully built nltk
+Successfully installed nltk-3.2.1
+Successfully installed textblob-0.11.1
+Successfully built dev
+Successfully installed dev-0.4.0
+Successfully installed opencv-python-3.1.0
+Successfully installed PyAudio-0.2.9
+Successfully installed zope.interface-4.1.2
+Successfully built zope.exceptions
+Successfully installed zope.exceptions-4.0.8
+Successfully installed persistent-4.2.0
+Successfully installed BTrees-4.3.0
+Successfully installed datrie-0.7.1
+Successfully installed Bottleneck-1.0.0
+Successfully installed la-0.7.0.dev0
+Successfully installed mahotas-1.4.1
+Successfully installed nitime-0.6
+Successfully installed milk-0.6.1
+Successfully installed minepy-1.1.0
+Successfully installed NLopt-2.4.2
+Successfully built Pmw
+Successfully installed Pmw-2.0.1
+Successfully built pytool
+Successfully installed pytool-3.4.1
+Successfully built pytools
+Successfully installed pytools-2016.1
+Successfully installed pycuda-2016.1
+Successfully installed pylzma-0.4.8
+Successfully installed pymvpa2-2.4.3
+Successfully installed pyodbc-3.0.10
+Successfully installed pypmc-1.0
+Successfully installed PyX-0.14.1
+Successfully installed zs-0.10.0
+Successfully installed joblib-0.9.4
+Successfully built tutormagic
+Successfully installed tutormagic-0.1.0
+Successfully built nbupload
+Successfully installed nbupload-0.0.3
+Successfully installed libsvm-3.21
+Successfully built abcpmc
+Successfully installed abcpmc-0.1.2
+Successfully built vincent
+Successfully installed vincent-0.4.4
+Successfully installed pygal-2.2.2
+Successfully built pygal-maps-world
+Successfully installed pygal-maps-world-1.0.2
+Successfully built sas7bdat
+Successfully installed sas7bdat-2.0.7
+Successfully installed PuLP-1.6.1
+Successfully installed CherryPy-5.4.0
+Successfully built DataSpyre
+Successfully installed DataSpyre-0.2.1
+Successfully installed colorspacious-1.0.0
+Successfully installed viscm-0.7
+Successfully built lifelines
+Successfully installed lifelines-0.9.1.0
+Successfully built Nuitka
+Successfully installed Nuitka-0.5.20
+Successfully installed blosc-1.3.2
+Successfully installed tables-3.2.2
+Successfully installed heatmap-2.2.1
+Successfully installed planar-0.4
+Successfully installed GDAL-2.0.2
+Successfully installed tifffile-2016.4.19
+Successfully built slicerator
+Successfully installed slicerator-0.9.7
+Successfully built PIMS
+Successfully installed PIMS-0.3.3
+Successfully built trackpy
+Successfully installed trackpy-0.3.0
+Successfully installed triangle-20160203
+Successfully installed redis-2.10.5
+Successfully installed skdata-0.0.4
+Successfully built Hebel
+Successfully installed Hebel-0.2.1
+Successfully built user-agent
+Successfully installed user-agent-0.1.4
+Successfully built tinydb
+Successfully installed tinydb-3.2.0
+Successfully installed urllib3-1.15.1
+Successfully installed gevent-1.1b6
+Successfully built grequests
+Successfully installed grequests-0.3.0
+Successfully installed pycurl-7.43.0
+Successfully built pytils
+Successfully installed pytils-0.3
+Successfully built selection weblib
+Successfully installed selection-0.0.11 weblib-0.1.20
+Successfully built grab
+Successfully installed grab-0.6.30
+Successfully built imbox
+Successfully installed imbox-0.8
+Successfully built neural-python
+Successfully installed neural-python-0.0.7
+Successfully built cssselect
+Successfully installed cssselect-0.9.1
+Successfully built jieba
+Successfully installed jieba-0.38
+Successfully built untangle
+Successfully installed untangle-1.1.0
+Successfully built colormap
+Successfully installed colormap-0.9.8
+Successfully built easydev
+Successfully installed easydev-0.9.19
+Successfully built suds-jurko
+Successfully installed suds-jurko-0.6
+Successfully installed azure-nspkg-1.0.0
+Successfully installed azure-common-1.1.3
+Successfully installed azure-mgmt-nspkg-1.0.0
+Successfully installed azure-mgmt-common-0.20.0
+Successfully installed azure-mgmt-compute-0.20.1
+Successfully installed azure-mgmt-network-0.20.1
+Successfully installed azure-mgmt-resource-0.20.1
+Successfully installed azure-mgmt-storage-0.20.0
+Successfully built azure-mgmt
+Successfully installed azure-mgmt-0.20.2
+Successfully installed azure-servicebus-0.20.1
+Successfully installed azure-storage-0.32.0
+Successfully installed azure-servicemanagement-legacy-0.20.3
+Successfully installed azureml-0.2.7
+Successfully built azure-batch-apps
+Successfully installed azure-batch-apps-0.5.2
+Successfully installed lz4-0.8.2
+Successfully installed invoke-0.12.2
+Successfully installed cymem-1.31.2
+Successfully installed murmurhash-0.26.4
+Successfully installed preshed-0.46.4
+Successfully installed text-unidecode-1.0
+Successfully installed thinc-5.0.8
+Successfully built semver
+Successfully installed semver-2.4.1 spacy-0.101.0 sputnik-0.9.3
+Successfully built picklable-itertools
+Successfully installed picklable-itertools-0.1.1
+Successfully installed progressbar2-3.6.2
+Successfully built fuel
+Successfully installed fuel-0.1.1
+Successfully built Lasagne
+Successfully installed Lasagne-0.1
+Successfully built gatspy
+Successfully installed gatspy-0.3
+Successfully built supersmoother
+Successfully installed supersmoother-0.3.2
+Successfully built prettytable
+Successfully installed prettytable-0.7.2
+Successfully built skll
+Successfully installed skll-1.2
+Successfully installed sklearn-pandas-1.1.0
+Successfully installed C:\github\ensae_teaching_cs\build\win_python_setup_64bit\pystruct-0.2.5-cp35-cp35m
