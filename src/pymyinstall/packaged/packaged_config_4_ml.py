@@ -421,6 +421,8 @@ def ensae_set():
                       purpose="SciKit-Learn Laboratory makes it easier to run machinelearning experiments with scikit-learn."),
         ModuleInstall("sklearn_pandas", "pip", usage="ML",
                       purpose="This module provides a bridge between Scikit-Learn's machine learning methods and pandas-style Data Frames."),
+        ModuleInstall("AD3", "github", "andre-martins", usage="ML", mname="ad3",
+                      purpose="AD3 (approximate MAP decoder with Alternating Direction Dual Decomposition)"),
         ModuleInstall("pystruct", "wheel", usage="ML", source="2",
                       purpose="Learning Structured Prediction in Python"),
         ModuleInstall("py-earth", "wheel", mname="pyearth", usage="ML", source="2",

@@ -52,7 +52,7 @@ def call_get_installed_distributions(local_only=True,
     """
     if use_cmd:
         raise NotImplementedError("use_cmd should be False")
-    #we disable this line, it fails on travis
+    # we disable this line, it fails on travis
     # reload(pip._vendor.pkg_resources)
     if skip is None:
         from pip.compat import stdlib_pkgs
