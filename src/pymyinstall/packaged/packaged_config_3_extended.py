@@ -217,7 +217,7 @@ def extended_set():
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
-            "PyOpenGL_accelerate", "pip", mname="OpenGL_accelerate", purpose="Acceleration code for PyOpenGL"),
+            "PyOpenGL_accelerate", "wheel", mname="OpenGL_accelerate", purpose="Acceleration code for PyOpenGL"),
         ModuleInstall(
             "libpython", "wheel",
             purpose="needed for theano (C++ compilation), compilation of libpython with mingw") if sys.version_info[:2] <= (3, 4) else None,

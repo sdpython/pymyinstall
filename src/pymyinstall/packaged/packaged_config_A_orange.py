@@ -36,20 +36,23 @@ def orange_set():
             "orange3-associate", "pip", mname="orangecontrib.associate", usage="ORANGE",
             purpose="This module implements FP-growth [1] frequent pattern mining algorithm with bucketing " +
             "optimization [2] for conditional databases of few items."),
-        ModuleInstall(
-            "orange3-datafusion", "pip", mname="orangecontrib.datafusion", usage="ORANGE",
-            purpose="This is a data fusion add-on for [Orange3](http://orange.biolab.si). Add-on wraps scikit-fusion, " +
-            "a Python library for data fusion, and implements a set of widgets for loading of the data, definition of data fusion schema, " +
-            "collective matrix factorization and exploration of latent factors."),
+        # has a dependency on Orange (Python 2)
+        # ModuleInstall(
+        #     "orange3-datafusion", "pip", mname="orangecontrib.datafusion", usage="ORANGE",
+        #     purpose="This is a data fusion add-on for [Orange3](http://orange.biolab.si). Add-on wraps scikit-fusion, " +
+        #     "a Python library for data fusion, and implements a set of widgets for loading of the data, definition of data fusion schema, " +
+        #     "collective matrix factorization and exploration of latent factors."),
         ModuleInstall(
             "orange3-network", "github", "biolab", mname="orangecontrib.network", custom=["build", "install"], usage="ORANGE",
             purpose="Orange Network is an add-on for Orange data mining software package. It provides network visualization and analysis tools."),
-        ModuleInstall(
-            "orange3-prototypes", "pip", mname="orangecontrib.prototypes", usage="ORANGE",
-            purpose="Prototype Orange widgets. Only for the brave."),
-        ModuleInstall(
-            "orange3-spark", "pip", mname="orangecontrib.spark", usage="ORANGE",
-            purpose="A set of widgets for Orange data mining suite to work with Apache Spark ML API."),
+        # weird
+        # ModuleInstall(
+        #     "orange3-prototypes", "pip", mname="orangecontrib.prototypes", usage="ORANGE",
+        #     purpose="Prototype Orange widgets. Only for the brave."),
+        # weird
+        # ModuleInstall(
+        #     "orange3-spark", "pip", mname="orangecontrib.spark", usage="ORANGE",
+        #    purpose="A set of widgets for Orange data mining suite to work with Apache Spark ML API."),
     ]
     #
     return [_ for _ in mod if _ is not None]
