@@ -67,7 +67,7 @@ class TestCompareVersion(unittest.TestCase):
 
         diff = []
         for i, mod in enumerate(mods[0:]):
-            if mod.name in ["PySide", "cgal_bindings"]:
+            if mod.name in ["PySide", "cgal_bindings", "ad3"]:
                 # skipping modules not available
                 continue
 
