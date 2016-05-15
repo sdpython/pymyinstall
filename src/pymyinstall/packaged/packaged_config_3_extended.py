@@ -456,6 +456,15 @@ def extended_set():
         # pdf
         ModuleInstall("pyPdf", "github", "sdpython",
                       branch="trunk", purpose="read PDF"),
+        # 2016-05
+        ModuleInstall("pydub", "pip", usage="MUSIC",
+                      purpose="Pydub lets you do stuff to audio in a way that isn't stupid."),
+        ModuleInstall("cobble", "pip", purpose="Cobble is a Python library that allows easy creation of data objects, " +
+                      "including implementations of common methods such as __eq__ and __repr__."),
+        ModuleInstall("parsimonious", "pip",
+                      purpose="(Soon to be) the fastest pure-Python PEG parser I could muster"),
+        ModuleInstall(
+            "mammoth", "pip", purpose="Convert Word documents from docx to simple and clean HTML and Markdown"),
     ]
 
     if sys.platform.startswith("win"):
