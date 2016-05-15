@@ -454,7 +454,8 @@ def extended_set():
         ModuleInstall("mezzanine", "pip", usage="WEB",
                       purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),
         # pdf
-        ModuleInstall("pyPdf", "github", "sdpython", purpose="read PDF"),
+        ModuleInstall("pyPdf", "github", "sdpython",
+                      branch="trunk", purpose="read PDF"),
     ]
 
     if sys.platform.startswith("win"):

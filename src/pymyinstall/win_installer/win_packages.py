@@ -195,13 +195,14 @@ def _is_package_in_list(module_name, list_packages, no_wheel=False):
     return None
 
 
-def is_package_installed(python_path, module_name):
+def is_package_installed(python_path, module_name, installed_packages=None):
     """
     not very accurate but it should speed up the process
 
-    @param      python_path     python path
-    @param      module_name     module name (import name)
-    @return                     boolean
+    @param      python_path         python path
+    @param      module_name         module name (import name)
+    @param      installed_packages  list of installed packages (can be None)
+    @return                         boolean
     """
     if isinstance(module_name, str  # unicode#
                   ):
@@ -209,6 +210,8 @@ def is_package_installed(python_path, module_name):
     modules = get_modules_version(python_path)
     for name in module_name:
         if name in modules:
+            return True
+        if installed_packages is not None and name in installed_packages:
             return True
         pymy = os.path.join(python_path, "lib", "site-packages", name)
         r = os.path.exists(pymy)
@@ -243,13 +246,17 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
         full_list = ensae_fullset()
     else:
         full_list = module_list
+
+    # existing list
+    installed_packages = get_modules_version(python_path)
+
     for mod in full_list:
         a = _is_package_in_list(mod.name + "-", files)
         if a is None:
             continue
         if a not in done:
             mname = mod.mname if mod.mname is not None else mod.name
-            if not is_package_installed(python_path, [mod.name, mname]):
+            if not is_package_installed(python_path, [mod.name, mname], installed_packages):
                 full = os.path.join(package_folder, a)
                 try:
                     op = win_install_package_other_python(

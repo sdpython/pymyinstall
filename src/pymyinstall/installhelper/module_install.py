@@ -64,7 +64,8 @@ class ModuleInstall:
 
     def __init__(self, name, kind="pip", gitrepo=None, mname=None, fLOG=print,
                  version=None, script=None, index_url=None, deps=None,
-                 purpose=None, usage=None, web=None, source=None, custom=None):
+                 purpose=None, usage=None, web=None, source=None, custom=None,
+                 branch="master"):
         """
         constructor
 
@@ -86,9 +87,10 @@ class ModuleInstall:
         @param      custom          custom instructions to install, usually
                                     ``['build', 'install']`` to run
                                     ``setup.py build`` and ``setup.py install``
+        @param      branch          only necessary for install process with github
 
         .. versionchanged:: 1.1
-            Parameters *source*, *custom* were added.
+            Parameters *source*, *custom*, *branch* were added.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -107,6 +109,7 @@ class ModuleInstall:
         self.existing_version = None
         self.source = source
         self.custom = custom
+        self.branch = branch
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -621,9 +624,8 @@ class ModuleInstall:
         elif kind == "github":
             outfile = os.path.join(temp_folder, self.name + ".zip")
             if force or not os.path.exists(outfile):
-                zipurl = "https://github.com/{1}/{0}/archive/master.zip".format(
-                    self.name,
-                    self.gitrepo)
+                zipurl = "https://github.com/{1}/{0}/archive/{2}.zip".format(
+                    self.name, self.gitrepo, self.branch)
                 self.fLOG("downloading", zipurl)
                 try:
                     req = urllib_request.Request(

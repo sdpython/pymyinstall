@@ -114,10 +114,7 @@ def small_set():
                       purpose="run a local pypi server"),
         ModuleInstall(
             "pep8", "pip", version="1.5.7", purpose="official guidelines on Python style"),
-        ModuleInstall("autopep8", "pip", purpose="apply pep8 on a script") if sys.version_info[
-            :2] <= (3, 4) else None,
-        ModuleInstall("autopep8", "github", "hhatto",
-                      purpose="apply pep8 on a script") if sys.version_info[:2] > (3, 4) else None,
+        ModuleInstall("autopep8", "pip", purpose="apply pep8 on a script"),
         ModuleInstall(
             "mccabe", "pip", purpose="This module provides a plugin for flake8, the Python code checker."),
         ModuleInstall("pyflakes", "pip", purpose="verify pep8 on a script"),

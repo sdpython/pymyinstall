@@ -52,7 +52,8 @@ def orange_set():
         # weird
         # ModuleInstall(
         #     "orange3-spark", "pip", mname="orangecontrib.spark", usage="ORANGE",
-        #    purpose="A set of widgets for Orange data mining suite to work with Apache Spark ML API."),
+        # purpose="A set of widgets for Orange data mining suite to work with
+        # Apache Spark ML API."),
     ]
     #
     return [_ for _ in mod if _ is not None]

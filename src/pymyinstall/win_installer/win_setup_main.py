@@ -591,7 +591,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                 "unable to get module list from folder " + folders["python"])
         with open(os.path.join(folders["config"], "installed.python.packages.txt"), "w") as f:
             mods = [(a.lower(), a, b) for a, b in mods.items()]
-            for la, a, b in sorted(mods.items()):
+            for la, a, b in sorted(mods):
                 f.write("{0}\t{1}\n".format(a, b))
 
     #################
