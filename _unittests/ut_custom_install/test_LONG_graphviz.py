@@ -45,7 +45,7 @@ from pyquickhelper.pycode import get_temp_folder
 
 class TestGraphviz(unittest.TestCase):
 
-    def _test_install_graphviz(self):
+    def test_install_graphviz(self):
         fLOG(
             __file__,
             self._testMethodName,
