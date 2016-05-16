@@ -66,7 +66,7 @@ def get_parser():
         '--task',
         default="install",
         type=typstr,
-        choices=['install', 'shebang'],
+        choices=['install', 'shebang', 'download', 'tool', 'tool_download'],
         help='default task is install but the script can patch shebang in their current location (task=shebang)')
     parser.add_argument(
         'module',
@@ -112,9 +112,9 @@ def do_main(temp_folder="build/update_modules",
     try:
         from pymyinstall import is_travis_or_appveyor
     except ImportError:
-        folder = os.path.normpath(os.path.join(
+        pfolder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
-        sys.path.append(folder)
+        sys.path.append(pfolder)
         from pymyinstall import is_travis_or_appveyor
     if is_travis_or_appveyor() and source is None:
         source = "2"
@@ -125,9 +125,9 @@ def do_main(temp_folder="build/update_modules",
             try:
                 from pymyinstall.win_installer import import_every_module
             except ImportError:
-                folder = os.path.normpath(os.path.join(
+                pfolder = os.path.normpath(os.path.join(
                     os.path.abspath(os.path.dirname(__file__)), "..", ".."))
-                sys.path.append(folder)
+                sys.path.append(pfolder)
                 from pymyinstall.win_installer import import_every_module
 
                 def to_int(s):
@@ -182,14 +182,32 @@ def do_main(temp_folder="build/update_modules",
             from pymyinstall.win_installer import win_patch_paths
             from pymyinstall.installhelper import get_pip_program
         except ImportError:
-            folder = os.path.normpath(os.path.join(
+            pfolder = os.path.normpath(os.path.join(
                 os.path.abspath(os.path.dirname(__file__)), "..", ".."))
-            sys.path.append(folder)
+            sys.path.append(pfolder)
             from pymyinstall.win_installer import win_patch_paths
             from pymyinstall.installhelper import get_pip_program
         pip = get_pip_program()
         folder = os.path.dirname(os.path.abspath(pip))
-        win_patch_paths(folder, None, fLOG=print)
+        win_patch_paths(temp_folder, None, fLOG=print)
+    elif task in ("tool", "tool_download"):
+        try:
+            from pymyinstall.installcustom import install_graphviz
+        except ImportError:
+            pfolder = os.path.normpath(os.path.join(
+                os.path.abspath(os.path.dirname(__file__)), "..", ".."))
+            sys.path.append(pfolder)
+            from pymyinstall.installcustom import install_graphviz
+        if list_module is None:
+            raise ValueError("A tool must be precised, list cannot be empty.")
+        else:
+            low = [_.lower() for _ in list_module]
+            for tool in low:
+                if tool == "graphviz":
+                    install_graphviz(temp_folder, install=task ==
+                                     "tool", fLOG=print, source=source)
+                else:
+                    raise NameError("unable to install '{0}'".format(tool))
     else:
         raise ValueError("unable to interpret task: " + task)
 

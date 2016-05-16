@@ -67,9 +67,9 @@ def do_main(temp_folder="build/update_modules",
     try:
         from pymyinstall import is_travis_or_appveyor
     except ImportError:
-        folder = os.path.normpath(os.path.join(
+        pfolder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
-        sys.path.append(folder)
+        sys.path.append(pfolder)
         from pymyinstall import is_travis_or_appveyor
     if is_travis_or_appveyor() and source is None:
         source = "2"
@@ -79,9 +79,9 @@ def do_main(temp_folder="build/update_modules",
     try:
         from pymyinstall.packaged import update_all
     except ImportError:
-        folder = os.path.normpath(os.path.join(
+        pfolder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
-        sys.path.append(folder)
+        sys.path.append(pfolder)
         from pymyinstall.packaged import update_all
     res = update_all(temp_folder=temp_folder, verbose=True,
                      skip_module=skip_module, list_module=list_module,
