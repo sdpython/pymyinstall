@@ -53,18 +53,9 @@ def split_cmp_command(cmd, remove_quotes=True):
         return cmd
 
 
-def run_cmd(cmd,
-            sin="",
-            shell=False,
-            wait=False,
-            log_error=True,
-            secure=None,
-            stop_waiting_if=None,
-            do_not_log=False,
-            encerror="ignore",
-            encoding="utf8",
-            cwd=None,
-            fLOG=print):
+def run_cmd(cmd, sin="", shell=False, wait=False, log_error=True,
+            secure=None, stop_waiting_if=None, do_not_log=False,
+            encerror="ignore", encoding="utf8", cwd=None, fLOG=print):
     """
     run a command line and wait for the result
     @param      cmd                 command line
@@ -179,20 +170,15 @@ def run_cmd(cmd,
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
         try:
-            proc = subprocess.Popen(cmd,
-                                    shell=shell,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
-                                    startupinfo=startupinfo,
-                                    cwd=cwd)
+            proc = subprocess.Popen(cmd, shell=shell,
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    startupinfo=startupinfo, cwd=cwd)
         except FileNotFoundError as e:
             raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e
     else:
         try:
-            proc = subprocess.Popen(split_cmp_command(cmd),
-                                    shell=shell,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
+            proc = subprocess.Popen(split_cmp_command(cmd), shell=shell,
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                     cwd=cwd)
         except FileNotFoundError as e:
             raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e

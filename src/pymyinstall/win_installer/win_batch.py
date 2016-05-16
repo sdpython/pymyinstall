@@ -40,7 +40,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     for mod in module_list:
         if mod.name == "jupyter":
             has_jupyter = True
-        if mod.name == "Orange":
+        if mod.name == "orange3":
             has_orange = True
         if mod.name == "rodeo":
             has_rodeo = True
@@ -177,7 +177,7 @@ def create_win_orange(folders):
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
             'set ORANGE=%PYTHON_WINSCRIPTS%\\orange-canvas.exe',
-            '"%ORANGE%" console']
+            '"%ORANGE%"']
     # command jupyter console does not work yet even if the documentation says
     # so
 
