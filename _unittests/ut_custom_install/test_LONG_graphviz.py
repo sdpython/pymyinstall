@@ -40,11 +40,12 @@ except ImportError:
 
 from src.pymyinstall.installcustom import install_graphviz
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 
 
 class TestGraphviz(unittest.TestCase):
 
-    def test_install_graphviz(self):
+    def _test_install_graphviz(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -63,8 +64,26 @@ class TestGraphviz(unittest.TestCase):
                 os.remove(f)
 
         if sys.platform.startswith("win"):
-            r = install_graphviz(temp, fLOG=fLOG, install=False)
+            r = install_graphviz(temp, fLOG=fLOG, install=False, source="2")
             exe = os.path.abspath(r)
+            assert os.path.exists(exe)
+
+    def test_install_graphviz_zip(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        if sys.version_info[0] == 2:
+            return
+
+        temp = get_temp_folder(__file__, "temp_graphviz_zip")
+
+        if sys.platform.startswith("win"):
+            r = install_graphviz(temp, fLOG=fLOG, install=True, source="zip")
+            exe = os.path.abspath(r)
+            assert os.path.exists(exe)
+            exe = os.path.join(temp, "Graphviz", "bin", "dot.exe")
             assert os.path.exists(exe)
 
 
