@@ -103,6 +103,7 @@ def pyquickhelper_set():
         "virtualenv",
         "xlrd",
         "wheel",
+        "widgetsnbextension",
         "wild_sphinx_theme",
         "winshell" if sys.platform.startswith("win") else None,
     ]
