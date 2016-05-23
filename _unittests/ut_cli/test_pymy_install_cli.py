@@ -77,7 +77,8 @@ class TestPyMyInstallCli(unittest.TestCase):
         fLOG(out.replace("\r", "").replace("\n\n", "\n"))
         fLOG("-----")
         fLOG(err.replace("\r", "").replace("\n\n", "\n"))
-        assert "downloaded modules" in out
+        if "downloaded modules" not in out:
+            raise Exception(out)
         content = os.listdir(temp)
         if len(content) != 2:
             raise Exception("{0} != 2\nOUT:\n{1}\nERR:\n{2}".format(
