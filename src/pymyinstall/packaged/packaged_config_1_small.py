@@ -345,6 +345,8 @@ def small_set():
             :2] > (3, 5) else None,
         ModuleInstall("tabulate", "pip",
                       purpose="Pretty-print tabular data"),
+        ModuleInstall("httpie", "pip",
+                      purpose="HTTPie - a CLI, cURL-like tool for humans"),
     ]
 
     return [_ for _ in mod if _ is not None]
