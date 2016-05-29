@@ -245,85 +245,85 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
         available = _get_pypi_version_memoize[key]
     else:
 
-        pypi = xmlrpc_client.ServerProxy(url)
+        with xmlrpc_client.ServerProxy(url) as pypi:
 
-        def pypi_package_releases(module_name, b):
-            nbtry = 0
-            while nbtry < 2:
-                try:
-                    available = pypi.package_releases(module_name, True)
-                    return available
-                except TimeoutError as e:
-                    nbtry += 1
-                    warnings.warn(e)
-            return None
+            def pypi_package_releases(module_name, b):
+                nbtry = 0
+                while nbtry < 2:
+                    try:
+                        available = pypi.package_releases(module_name, True)
+                        return available
+                    except TimeoutError as e:
+                        nbtry += 1
+                        warnings.warn(e)
+                return None
 
-        tried = [module_name]
-        available = pypi_package_releases(module_name, True)
+            tried = [module_name]
+            available = pypi_package_releases(module_name, True)
+
+            if available is None or len(available) == 0:
+                tried.append(module_name.capitalize())
+                available = pypi_package_releases(tried[-1], True)
+
+            if available is None or len(available) == 0:
+                tried.append(module_name.replace("-", "_"))
+                available = pypi_package_releases(tried[-1], True)
+
+            if available is None or len(available) == 0:
+                tried.append(module_name.replace("_", "-"))
+                available = pypi_package_releases(tried[-1], True)
+
+            if available is None or len(available) == 0:
+                tried.append(module_name.lower())
+                available = pypi_package_releases(tried[-1], True)
+
+            if available is None or len(available) == 0:
+                ml = module_name.lower()
+                if ml == "markupsafe":
+                    tried.append("MarkupSafe")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "flask-sqlalchemy":
+                    tried.append("Flask-SQLAlchemy")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "apscheduler":
+                    tried.append("APScheduler")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "datashape":
+                    tried.append("DataShape")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "pycontracts":
+                    tried.append("PyContracts")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "pybrain":
+                    tried.append("PyBrain")
+                    available = pypi_package_releases(tried[-1], True)
+                elif module_name in annoying_modules:
+                    raise AnnoyingPackageException(module_name)
+
+            # this raises a warning about an opened connection
+            # see documentation of the function
+            # del pypi
 
         if available is None or len(available) == 0:
-            tried.append(module_name.capitalize())
-            available = pypi_package_releases(tried[-1], True)
+            raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
 
-        if available is None or len(available) == 0:
-            tried.append(module_name.replace("-", "_"))
-            available = pypi_package_releases(tried[-1], True)
+        if full_list:
+            _get_pypi_version_memoize[key] = available
+            return available
 
-        if available is None or len(available) == 0:
-            tried.append(module_name.replace("_", "-"))
-            available = pypi_package_releases(tried[-1], True)
-
-        if available is None or len(available) == 0:
-            tried.append(module_name.lower())
-            available = pypi_package_releases(tried[-1], True)
-
-        if available is None or len(available) == 0:
-            ml = module_name.lower()
-            if ml == "markupsafe":
-                tried.append("MarkupSafe")
-                available = pypi_package_releases(tried[-1], True)
-            elif ml == "flask-sqlalchemy":
-                tried.append("Flask-SQLAlchemy")
-                available = pypi_package_releases(tried[-1], True)
-            elif ml == "apscheduler":
-                tried.append("APScheduler")
-                available = pypi_package_releases(tried[-1], True)
-            elif ml == "datashape":
-                tried.append("DataShape")
-                available = pypi_package_releases(tried[-1], True)
-            elif ml == "pycontracts":
-                tried.append("PyContracts")
-                available = pypi_package_releases(tried[-1], True)
-            elif ml == "pybrain":
-                tried.append("PyBrain")
-                available = pypi_package_releases(tried[-1], True)
-            elif module_name in annoying_modules:
-                raise AnnoyingPackageException(module_name)
-
-        # this raises a warning about an opened connection
-        # see documentation of the function
-        # del pypi
-
-    if available is None or len(available) == 0:
-        raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
-
-    if full_list:
-        _get_pypi_version_memoize[key] = available
-        return available
-
-    for a in available:
-        spl = a.split(".")
-        if len(spl) in (2, 3):
-            last = spl[-1]
-            if "a" not in last and "b" not in last and "dev" not in last:
+        for a in available:
+            spl = a.split(".")
+            if len(spl) in (2, 3):
+                last = spl[-1]
+                if "a" not in last and "b" not in last and "dev" not in last:
+                    _get_pypi_version_memoize[key] = available
+                    return a
+            else:
                 _get_pypi_version_memoize[key] = available
                 return a
-        else:
-            _get_pypi_version_memoize[key] = available
-            return a
 
-    raise MissingVersionOnPyPiException(
-        "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
+        raise MissingVersionOnPyPiException(
+            "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
 
 
 def numeric_version(vers):
