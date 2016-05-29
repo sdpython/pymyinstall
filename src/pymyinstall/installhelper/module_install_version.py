@@ -341,13 +341,13 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
 
         tried = [module_name]
 
-        if sys.version_info[0] <= (3, 4):
+        if sys.version_info[:2] <= (3, 4):
             # the client does not an implemented of __exit__ for version <= 3.4
             pypi = xmlrpc_client.ServerProxy(url)
-            available = _inside_loop_(pypi, module_name)
+            available = _inside_loop_(pypi, module_name, tried)
         else:
             with xmlrpc_client.ServerProxy(url) as pypi:
-                available = _inside_loop_(pypi, module_name)
+                available = _inside_loop_(pypi, module_name, tried)
 
         if available is None or len(available) == 0:
             raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
