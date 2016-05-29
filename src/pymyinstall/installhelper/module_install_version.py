@@ -245,20 +245,19 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
         available = _get_pypi_version_memoize[key]
     else:
 
-        with xmlrpc_client.ServerProxy(url) as pypi:
+        def pypi_package_releases(module_name, b):
+            nbtry = 0
+            while nbtry < 2:
+                try:
+                    available = pypi.package_releases(module_name, True)
+                    return available
+                except TimeoutError as e:
+                    nbtry += 1
+                    warnings.warn(e)
+            return None
 
-            def pypi_package_releases(module_name, b):
-                nbtry = 0
-                while nbtry < 2:
-                    try:
-                        available = pypi.package_releases(module_name, True)
-                        return available
-                    except TimeoutError as e:
-                        nbtry += 1
-                        warnings.warn(e)
-                return None
+        def _inside_loop_(pypi, module_name, tried):
 
-            tried = [module_name]
             available = pypi_package_releases(module_name, True)
 
             if available is None or len(available) == 0:
@@ -337,6 +336,18 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
             # this raises a warning about an opened connection
             # see documentation of the function
             # del pypi
+
+            return available
+
+        tried = [module_name]
+
+        if sys.version_info[0] <= (3, 4):
+            # the client does not an implemented of __exit__ for version <= 3.4
+            pypi = xmlrpc_client.ServerProxy(url)
+            available = _inside_loop_(pypi, module_name)
+        else:
+            with xmlrpc_client.ServerProxy(url) as pypi:
+                available = _inside_loop_(pypi, module_name)
 
         if available is None or len(available) == 0:
             raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
