@@ -262,20 +262,28 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
             available = pypi_package_releases(module_name, True)
 
             if available is None or len(available) == 0:
-                tried.append(module_name.capitalize())
-                available = pypi_package_releases(tried[-1], True)
+                ntry = module_name.capitalize()
+                if ntry not in tried:
+                    tried.append(ntry)
+                    available = pypi_package_releases(tried[-1], True)
 
             if available is None or len(available) == 0:
-                tried.append(module_name.replace("-", "_"))
-                available = pypi_package_releases(tried[-1], True)
+                ntry = module_name.replace("-", "_")
+                if ntry not in tried:
+                    tried.append(ntry)
+                    available = pypi_package_releases(tried[-1], True)
 
             if available is None or len(available) == 0:
-                tried.append(module_name.replace("_", "-"))
-                available = pypi_package_releases(tried[-1], True)
+                ntry = module_name.replace("_", "-")
+                if ntry not in tried:
+                    tried.append(ntry)
+                    available = pypi_package_releases(tried[-1], True)
 
             if available is None or len(available) == 0:
-                tried.append(module_name.lower())
-                available = pypi_package_releases(tried[-1], True)
+                ntry = module_name.lower()
+                if ntry not in tried:
+                    tried.append(ntry)
+                    available = pypi_package_releases(tried[-1], True)
 
             if available is None or len(available) == 0:
                 ml = module_name.lower()
@@ -296,6 +304,32 @@ def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/p
                     available = pypi_package_releases(tried[-1], True)
                 elif ml == "pybrain":
                     tried.append("PyBrain")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "pyexecjs":
+                    tried.append("PyExecJS")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "dataspyre":
+                    tried.append("DataSpyre")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "heapdict":
+                    tried.append("HeapDict")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "pyreact":
+                    tried.append("PyReact")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "qtpy":
+                    tried.append("QtPy")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "pythonqwt":
+                    tried.append("PythonQwt")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml == "onedrive-sdk-python":
+                    tried.append("onedrivesdk")
+                    available = pypi_package_releases(tried[-1], True)
+                elif ml.startswith("orange3-"):
+                    s = ml.split("-")[1]
+                    ntry = "Orange3-" + s[0].upper() + s[1:]
+                    tried.append(ntry)
                     available = pypi_package_releases(tried[-1], True)
                 elif module_name in annoying_modules:
                     raise AnnoyingPackageException(module_name)

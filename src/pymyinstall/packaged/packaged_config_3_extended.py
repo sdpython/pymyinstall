@@ -320,8 +320,11 @@ def extended_set():
         #
         # July 2015
         #
-        ModuleInstall("ete", "github", "jhcepas", mname="ete3",
-                      web="https://github.com/jhcepas/ete/tree/3.0",
+        # ModuleInstall("ete", "github", "jhcepas", mname="ete3",
+        #               web="http://etetoolkit.org/",
+        #               purpose="tree visualisation", usage="VIZ"),  # graph visualization
+        ModuleInstall("ete3", "pip",
+                      web="http://etetoolkit.org/",
                       purpose="tree visualisation", usage="VIZ"),  # graph visualization
         # visualisation
         ModuleInstall(

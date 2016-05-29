@@ -46,6 +46,23 @@ from pyquickhelper.loghelper import fLOG
 
 class TestAllPyPiModule (unittest.TestCase):
 
+    def test_pipy_version(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        if sys.version_info[0] == 2:
+            return
+
+        subset = {"cubehelix", "dataspyre", "ete3", "heapdict", "libpython", "natgrid", "onedrive-sdk-python",
+                  "orange3", "orange3-associate", "orange3-network", "orange3-text",
+                  "py-earth", "pyexecjs", "pymc3", "pyreact", "pythonqwt", "qtpy", "xgboost"}
+
+        mods = ensae_fullset()
+        mods = [_ for _ in mods if _.name in subset]
+        self._pipy_version(mods, nbmax=8)
+
     def test_all_pipy_version(self):
         fLOG(
             __file__,
@@ -56,6 +73,9 @@ class TestAllPyPiModule (unittest.TestCase):
             return
 
         mods = ensae_fullset()
+        self._pipy_version(mods)
+
+    def _pipy_version(self, mods, nbmax=15):
         error = []
         annoying = []
         for mod in mods:
@@ -63,21 +83,21 @@ class TestAllPyPiModule (unittest.TestCase):
                 v = mod.get_pypi_version()
                 fLOG(mod.name, " --> ", v)
                 if v is None:
-                    error.append((mod.name, "None"))
-            except MissingPackageOnPyPiException:
-                error.append((mod.name, "pipy"))
-            except MissingVersionOnPyPiException:
-                error.append((mod.name, "version"))
-            except AnnoyingPackageException:
-                annoying.append(mod.name)
+                    error.append((mod.name, "None", None))
+            except MissingPackageOnPyPiException as e:
+                error.append((mod.name, "pipy", e))
+            except MissingVersionOnPyPiException as ee:
+                error.append((mod.name, "version", ee))
+            except AnnoyingPackageException as eee:
+                annoying.append((mod.name, "?", eee))
 
-        if len(error) > 15:
+        if len(error) > nbmax:
             # we accept some errors
             # joblib seems to give errors from time to time
             # multipledispatch
             # ipython --> jupyter (transitionning)
             raise MissingPackageOnPyPiException("Two many errors\n" +
-                                                "\n".join("{0}:{1}".format(a, b) for a, b in sorted(error)))
+                                                "\n".join("{0}:{1}\n   {2}".format(a, b, c) for a, b, c in sorted(error)))
 
         if len(annoying) > 0:
             fLOG("Annoying\n", "\n".join(annoying))
