@@ -65,12 +65,14 @@ class TestLONGInstallModule (unittest.TestCase):
         mod = ModuleInstall("pandas", "wheel")
         fLOG(mod)
         vers = mod.get_pypi_version()
-        assert vers >= "0.16.1"
+        if vers < "0.16.1":
+            raise Exception(vers)
 
         mod = ModuleInstall("openpyxl", "pip", version="1.8.6")
         fLOG(mod)
         vers = mod.get_pypi_version()
-        assert vers >= "0.16.1"
+        if vers < "0.16.1":
+            raise Exception(vers)
 
         update = mod.has_update()
         if update:
