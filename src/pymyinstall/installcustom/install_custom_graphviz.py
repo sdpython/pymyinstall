@@ -57,6 +57,7 @@ def install_graphviz(temp_folder=".", fLOG=print, install=True,
         local = download_file(url, outfile)
         if install:
             if source == "zip":
+                fLOG("dest ", os.path.abspath(temp_folder))
                 unzip_files(local, temp_folder, fLOG=fLOG)
             else:
                 run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)
