@@ -390,6 +390,10 @@ def extended_set():
                       purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
         ModuleInstall("mpmath", "pip",
                       purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
+        ModuleInstall("google-api-python-client", "pip", mname="googleapiclient",
+                      purpose="The Google API Client for Python is a client library for accessing the Plus, Moderator, and many other Google APIs."),
+        ModuleInstall("googlemaps", "pip",
+                      purpose="Python client library for Google Maps API Web Services"),
         ModuleInstall("python-gmaps", "pip", mname="gmaps",
                       purpose="Google Maps API client http://python-gmaps.readthedocs.org"),
         ModuleInstall("keyring", "pip",
@@ -429,6 +433,8 @@ def extended_set():
         # linear function approximators (only Python 2.7)."),
         ModuleInstall('wordcloud', 'wheel', usage="VIZ",
                       purpose="A little word cloud generator in Python."),
+        ModuleInstall('pytagcloud', 'pip',
+                      purpose="Create beautiful tag clouds as images or HTML"),
 
         # distributed
         ModuleInstall('tblib', 'pip',
