@@ -430,7 +430,7 @@ def ensae_set():
                       purpose="Learning Structured Prediction in Python"),
         ModuleInstall("py-earth", "wheel", mname="pyearth", usage="ML", source="2",
                       purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of scikit-learn."),
-        ModuleInstall("seqlearn", "wheel", usage="ML", source="2",
+        ModuleInstall("seqlearn", "wheel", usage="ML",
                       purpose="sequence classification toolkit for Python"),
         ModuleInstall("hmmlearn", "wheel", usage="ML",
                       purpose="Hidden Markov Models in Python, with scikit-learn like API"),
@@ -455,6 +455,13 @@ def ensae_set():
                       purpose="Clean single-source support for Python 3 and 2 (h2o)"),
         ModuleInstall("h2o", "pip", usage="ML",
                       purpose="H2O, Fast Scalable Machine Learning, for python"),
+        #
+        # June 2016
+        #
+        ModuleInstall("HDDM", "wheel", mname="hddm", usage="ML",
+                      purpose="HDDM is a python module that implements Hierarchical Bayesian estimation of Drift Diffusion Models."),
+        ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
+                      purpose="large-scale linear classification, regression and ranking"),
     ]
 
     if sys.version_info[0] == 2:
