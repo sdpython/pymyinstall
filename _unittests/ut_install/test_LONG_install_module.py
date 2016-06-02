@@ -68,11 +68,11 @@ class TestLONGInstallModule (unittest.TestCase):
         if vers < "0.16.1":
             raise Exception(vers)
 
-        mod = ModuleInstall("openpyxl", "pip", version="1.8.6")
+        mod = ModuleInstall("openpyxl", "pip", version="2.3.5")
         fLOG(mod)
         vers = mod.get_pypi_version()
-        if vers < "0.16.1":
-            raise Exception(vers)
+        if vers < "2.3.5":
+            raise Exception("{0}: {1}".format(mod.name, vers))
 
         update = mod.has_update()
         if update:
