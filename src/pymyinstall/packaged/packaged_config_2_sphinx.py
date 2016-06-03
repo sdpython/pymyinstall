@@ -19,6 +19,8 @@ def sphinx_theme_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
             'sphinxjp.themes.basicstrap', 'pip', purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall('sphinxjp.themecore', 'pip',
+                      purpose="A sphinx theme plugin extension.", usage="SPHINX"),
         ModuleInstall('solar_theme', 'pip',
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall('cloud_sptheme', 'pip',
