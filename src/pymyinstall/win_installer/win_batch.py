@@ -37,6 +37,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
     has_rss = False
     has_glue = False
     has_orange = False
+    has_sqlite_bro = False
     for mod in module_list:
         if mod.name == "jupyter":
             has_jupyter = True
@@ -50,6 +51,8 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
             has_rss = True
         if mod.name == "glueviz":
             has_glue = True
+        if mod.name == "sqlite_bro":
+            has_sqlite_bro = True
 
     list_functions = [create_win_env,
                       create_win_scite,
@@ -80,6 +83,9 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
 
     if has_rss:
         list_functions.append(create_win_rss)
+
+    if has_sqlite_bro:
+        list_functions.append(create_win_sqlite_bro)
 
     if has_glue:
         list_functions.append(create_win_glue)
@@ -539,6 +545,28 @@ def create_win_glue(folders, suffix=""):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "run_glue.bat")
+    with open(name, "w") as f:
+        f.write(text)
+    return [('batch', name)]
+
+
+def create_win_sqlite_bro(folders, suffix=""):
+    """
+    create a batch file to start SqliteBro
+
+    @param      folders     see @see fn create_win_batches
+    @param      suffix      add a suffix
+    @return                 operations (list of what was done)
+
+    .. versionadded:: 1.1
+    """
+    text = ['@echo off',
+            'set CURRENT2=%~dp0',
+            'call "%CURRENT2%env.bat"',
+            '"%PYTHON_WINSCRIPTS%\\sqlite_bro.exe" %1']
+
+    text = "\n".join(text)
+    name = os.path.join(folders["config"], "sqlite_bro.bat")
     with open(name, "w") as f:
         f.write(text)
     return [('batch', name)]

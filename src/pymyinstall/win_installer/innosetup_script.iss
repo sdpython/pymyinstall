@@ -89,6 +89,7 @@ Name: "{app}\Python Console"; IconFilename: "{app}\tools\icons\python.ico"; File
 Name: "{app}\Rodeo"; IconFilename: "{app}\tools\icons\yhat.ico"; Filename: "{app}\config\rodeo.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
 Name: "{app}\Spyder"; IconFilename: "{app}\tools\icons\spyder.ico"; Filename: "{app}\config\spyder.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
 Name: "{app}\Orange3"; IconFilename: "{app}\tools\icons\orange.ico"; Filename: "{app}\config\orange_canvas.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
+Name: "{app}\SqliteBro"; IconFilename: "{app}\tools\icons\sqlitebro.ico"; Filename: "{app}\config\sqlitebro.bat"; IconIndex: 0; WorkingDir: "{app}\workspace"; Parameters: "{app}\workspace"
 ; rss
 Name: "{app}\RSS"; IconFilename: "{app}\tools\icons\pyrsslocal.ico"; Filename: "{app}\config\run_fetch_rss.bat"; IconIndex: 0; WorkingDir: "{app}\config"; Parameters: "{app}\config"
 ; putty

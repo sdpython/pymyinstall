@@ -23,7 +23,7 @@ from .win_setup_main_helper import dtnow, copy_icons, win_download, win_install,
 from .win_setup_main_helper import win_download_notebooks, win_install_julia_step, win_install_r_step
 from .win_packages import win_install_packages_other_python, get_modules_version
 from .win_extract import clean_msi
-from .win_ipython_helper import ipython_create_profile, ipython_update_profile
+from .win_ipython_helper import ipython_create_profile, ipython_update_profile, install_jupyter_extension
 from .win_setup_r import get_package_description
 from .win_exception import WinInstallMissingDependency
 from .tutorial import copy_tutorial
@@ -427,16 +427,16 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         ##########################
         # mingw, add file distutils.cfg
         ##########################
-        if "mingw" in selection:
+        if "mingw" in selection and "vs" not in selection:
             fLOG("--- switch_to_mingw_compiler")
             op = switch_to_mingw_compiler(folders["python"])
             for o in op:
                 operations.append(("modify", o))
 
         ##########################
-        # Visual Studio, switch on 2013 only for Python 3.4, VS 2015 for Python 3.5
+        # Visual Studio, VS 2015 for Python 3.5
         ##########################
-        if "vs" in selection and sys.version_info[:2] <= (3, 4):
+        if "vs" in selection:
             fLOG("--- switch_to_VS_compiler")
             op = switch_to_VS_compiler(folders["python"])
             for o in op:
@@ -464,6 +464,15 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             fLOG("--- update jupyter profile")
             operations.append(("jupyter", "update profile"))
             ipython_update_profile(ipath)
+            operations.append(("time", dtnow()))
+
+        ######################
+        # update ipython profile
+        ######################
+        if has_jupyter:
+            fLOG("--- install jupyter extension")
+            operations.append(("jupyter", "update install jupyter extension"))
+            install_jupyter_extension(folders["python"])
             operations.append(("time", dtnow()))
 
         ######################

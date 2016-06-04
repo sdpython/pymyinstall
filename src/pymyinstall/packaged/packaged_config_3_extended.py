@@ -474,6 +474,28 @@ def extended_set():
                       purpose="(Soon to be) the fastest pure-Python PEG parser I could muster"),
         ModuleInstall(
             "mammoth", "pip", purpose="Convert Word documents from docx to simple and clean HTML and Markdown"),
+        #
+        # 2016-06
+        #
+        # ModuleInstall("ipython-sql", "pip", purpose="RDBMS access via IPython", usgae="JUPYTER"),
+        ModuleInstall("julia", "pip",
+                      purpose="Julia/Python bridge with IPython support", usage="DATA/ML"),
+        ModuleInstall("lazy-object-proxy", "pip", mname="lazy_object_proxy",
+                      purpose="A fast and thorough lazy object proxy"),
+        ModuleInstall("mpmath", "pip", usage="OPTIM",
+                      purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
+        ModuleInstall("oct2py", "pip",
+                      purpose="Python to GNU Octave bridge --> run m-files from python.", usage="DATA/ML"),
+        ModuleInstall("pg8000", "pip",
+                      purpose="A Pure-Python PostgreSQL", usage="SQL"),
+        ModuleInstall("PyMeta3", "pip", mname="pymeta",
+                      purpose="Pattern-matching language based on OMeta for Python 3 and 2"),
+        ModuleInstall("ViTables", "pip", mname="vitables",
+                      purpose="A viewer for PyTables package"),
+        ModuleInstall("db.py", "pip", mname="db.tables",
+                      purpose="db.py is an easier way to interact with your databases. It makes it easier to explore tables, columns, views, etc. " + \
+                      "It puts the emphasis on user interaction, information display, and providing easy to use helper functions."),
+        # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
     ]
 
     if sys.platform.startswith("win"):

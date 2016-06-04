@@ -67,5 +67,7 @@ def sphinx_theme_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinx-gallery", "pip", mname="sphinx_gallery",
                       purpose="sphinx gallery", usage="SPHINX"),
+        ModuleInstall("docrepr", "pip",
+                      purpose="docrepr renders Python docstrings in HTML", usage="SPHINX"),
     ]
     return [_ for _ in mod if _ is not None]
