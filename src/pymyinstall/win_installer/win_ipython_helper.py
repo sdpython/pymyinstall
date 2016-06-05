@@ -71,7 +71,9 @@ def install_jupyter_extension():
     install jupyter extension
     """
     pip = get_pip_program()
-    cmd = "{0} install https://github.com/ipython-contrib/IPython-notebook-extensions/archive/master.zip --user".format(pip)
+    cmd = "{0} install https://github.com/ipython-contrib/IPython-notebook-extensions/archive/master.zip --user".format(
+        pip)
     out, err = run_cmd(cmd)
     if err:
-        raise WinInstallException("unable to install jupyter extension\nOUT:{0}\nERR{1}".format(out, err))
+        raise WinInstallException(
+            "unable to install jupyter extension\nOUT:{0}\nERR{1}".format(out, err))

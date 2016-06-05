@@ -322,7 +322,7 @@ def extended_set():
         #
         # ModuleInstall("ete", "github", "jhcepas", mname="ete3",
         #               web="http://etetoolkit.org/",
-        #               purpose="tree visualisation", usage="VIZ"),  # graph visualization
+        # purpose="tree visualisation", usage="VIZ"),  # graph visualization
         ModuleInstall("ete3", "pip",
                       web="http://etetoolkit.org/",
                       purpose="tree visualisation", usage="VIZ"),  # graph visualization
