@@ -150,6 +150,8 @@ def small_set():
             "entrypoints", "pip", purpose="Discover and load entry points from installed packages.", usage="JUPYTER"),
         ModuleInstall(
             "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
+        ModuleInstall(
+            "nbpresent", "pip", purpose="Next generation slides from Jupyter Notebooks", usage="JUPYTER"),
         ModuleInstall("pandocfilters", "pip",
                       purpose="Utilities for writing pandoc filters in python"),
         ModuleInstall("pandoc-attributes", "pip", mname="pandocattributes",

@@ -495,7 +495,28 @@ def extended_set():
         ModuleInstall("db.py", "pip", mname="db.tables",
                       purpose="db.py is an easier way to interact with your databases. It makes it easier to explore tables, columns, views, etc. " + \
                       "It puts the emphasis on user interaction, information display, and providing easy to use helper functions."),
+        ModuleInstall("chalmers", "pip",
+                      purpose="Chalmers is an application that allows its users to monitor and control a number of processes on any " + \
+                      "operating system (Posix and Win32 included)"),
+        ModuleInstall("datashader", "wheel", usage="VIZ", source="2",
+                      purpose="Datashader is a graphics pipeline system for creating meaningful representations " + \
+                      "of large amounts of data.") if sys.version_info[:2] >= (3, 5) else None,
+        ModuleInstall("dnspython", "pip", usage="WEB",
+                      purpose="dnspython is a DNS toolkit for Python. It supports almost all record types. It can be used for queries, " + \
+                      "zone transfers, and dynamic updates. It supports TSIG authenticated messages and EDNS0."),
+        ModuleInstall("gdata", "pip", usage="GOOGLE",
+                      purpose="Python client library for Google data APIs"),
+        ModuleInstall("grin", "pip", usage="CLI",
+                      purpose="A grep program configured the way I like it."),
+        ModuleInstall("idna", "pip", usage="WEB",
+                      purpose="A library to support the Internationalised Domain Names in Applications (IDNA) protocol as specified in RFC 5891. " + \
+                      "This version of the protocol is often referred to as 'IDNA2008'."),
+        ModuleInstall("ldap3", "pip", usage="WEB",
+                      purpose="ldap3 is a strictly RFC 4510 conforming LDAP V3 pure Python client library."),
+        ModuleInstall("mpi4py", "pip",
+                      purpose="MPI for Python"),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
+        # enable?
     ]
 
     if sys.platform.startswith("win"):
