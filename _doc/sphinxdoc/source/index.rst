@@ -17,10 +17,6 @@ pymyinstall documentation
     :alt: PYPI Package
     :target: https://pypi.python.org/pypi/pymyinstall
 
-.. image:: http://img.shields.io/github/issues/sdpython/pymyinstall.png
-    :alt: GitHub Issues
-    :target: https://github.com/sdpython/pymyinstall/issues
-    
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT  
@@ -35,6 +31,14 @@ pymyinstall documentation
     
 .. image:: https://codecov.io/github/sdpython/pymyinstall/coverage.svg?branch=master
     :target: https://codecov.io/github/sdpython/pymyinstall?branch=master
+    
+.. image:: http://img.shields.io/github/issues/sdpython/pymyinstall.png
+    :alt: GitHub Issues
+    :target: https://github.com/sdpython/pymyinstall/issues
+    
+.. image:: https://badge.waffle.io/sdpython/pymyinstall.png?label=ready&title=Ready
+    :alt: Waffle
+    :target: https://waffle.io/sdpython/pymyinstall        
    
    
 **Links:** `pypi <https://pypi.python.org/pypi/pymyinstall/>`_,
@@ -43,7 +47,8 @@ pymyinstall documentation
 `wheel <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_,
 `travis <https://travis-ci.org/sdpython/pymyinstalls>`_,
 :ref:`l-README`,
-:ref:`blog <ap-main-0>`
+:ref:`blog <ap-main-0>`,
+:ref:`l-issues-todolist`
 
 
 

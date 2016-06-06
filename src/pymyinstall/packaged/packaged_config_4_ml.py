@@ -463,17 +463,17 @@ def ensae_set():
         ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
                       purpose="large-scale linear classification, regression and ranking"),
         ModuleInstall("biopython", "pip", usage="BIO",
-                      purpose="The Biopython Project is an international association of developers of freely available Python tools for " + \
+                      purpose="The Biopython Project is an international association of developers of freely available Python tools for " +
                       "computational molecular biology."),
         ModuleInstall("cubes", "pip",
-                      purpose="Cubes is a light-weight Python framework and set of tools for development of reporting and analytical applications, " + \
+                      purpose="Cubes is a light-weight Python framework and set of tools for development of reporting and analytical applications, " +
                       "Online Analytical Processing (OLAP), multidimensional analysis and browsing of aggregated data. It is part of Data Brewery."),
         ModuleInstall("MDP", "pip", usage="ML",
                       purpose="Python data processing framework."),
         ModuleInstall("pyamg", "wheel", usage="OPTIM",
                       purpose="PyAMG is a library of Algebraic Multigrid (AMG) solvers with a convenient Python interface."),
         ModuleInstall("pysal", "pip", usage="MATHS",
-                      purpose="PySAL is an open source library of spatial analysis functions written in Python intended " + \
+                      purpose="PySAL is an open source library of spatial analysis functions written in Python intended " +
                       "to support the development of high level applications."),
     ]
 

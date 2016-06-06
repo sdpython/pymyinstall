@@ -33,11 +33,15 @@ def install_graphviz(temp_folder=".", fLOG=print, install=True,
             full = "graphviz-2.38.msi"
             url += full
             outfile = os.path.join(temp_folder, full)
+            if not os.path.exists(temp_folder):
+                os.makedirs(temp_folder)
         elif source == "zip":
             url = "http://www.xavierdupre.fr/enseignement/setup/"
             full = "Graphviz.zip"
             url += full
             outfile = os.path.join(temp_folder, full)
+            if not os.path.exists(temp_folder):
+                os.makedirs(temp_folder)
         else:
             link = "http://www.graphviz.org/Download_windows.php"
             repl = "http://www.graphviz.org"
