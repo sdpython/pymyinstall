@@ -225,7 +225,7 @@ def ensae_set():
         ModuleInstall("cubehelix", "github", "jradavenport",
                       purpose="a full implementation of Dave Green's cubehelix colormap for Python",
                       web="https://github.com/jradavenport/cubehelix"),
-        ModuleInstall("lifelines", "pip", purpose="survival analysis"),
+        ModuleInstall("lifelines", "pip", purpose="survival analysis", usage="OPTIM"),
         # ModuleInstall("pysnptools", "pip", purpose="operation on DNA sequences"), # only available on Python 2.7
         #
         # 2015-07
