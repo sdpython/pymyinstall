@@ -515,6 +515,8 @@ def extended_set():
                       purpose="ldap3 is a strictly RFC 4510 conforming LDAP V3 pure Python client library."),
         ModuleInstall("mpi4py", "pip",
                       purpose="MPI for Python"),
+        ModuleInstall("python-mss", "pip", mname="mms",
+                      purpose="An ultra fast cross-platform multiple screenshots module in pure python using ctypes"),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
     ]
