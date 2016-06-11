@@ -66,6 +66,7 @@ def ensae_teaching_cs_set():
         "ensae_teaching_cs",
         "code_beatrix",
         "actuariat_python",
+        "jupytalk",
         #"ensae_projects",
     ]
 
