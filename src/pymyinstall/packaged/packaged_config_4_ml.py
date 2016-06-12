@@ -462,7 +462,10 @@ def ensae_set():
                       purpose="HDDM is a python module that implements Hierarchical Bayesian estimation of Drift Diffusion Models."),
         ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
                       purpose="large-scale linear classification, regression and ranking"),
-        ModuleInstall("biopython", "pip", usage="BIO",
+        ModuleInstall("reportlab", "wheel",
+                      purpose="This is the ReportLab PDF Toolkit. It allows rapid creation of rich PDF documents, and also creation of " +
+                      "charts in a variety of bitmap and vector formats."),
+        ModuleInstall("biopython", "wheel", usage="BIO",
                       purpose="The Biopython Project is an international association of developers of freely available Python tools for " +
                       "computational molecular biology."),
         ModuleInstall("cubes", "pip",
