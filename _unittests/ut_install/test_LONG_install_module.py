@@ -62,6 +62,10 @@ class TestLONGInstallModule (unittest.TestCase):
         update = mod.has_update()
         fLOG("scikit-learn", update)
 
+        if sys.version_info[0] == 2:
+            # we don't test it for Python 2.7
+            return
+
         mod = ModuleInstall("pandas", "wheel")
         fLOG(mod)
         vers = mod.get_pypi_version()
