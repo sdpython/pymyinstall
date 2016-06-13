@@ -524,6 +524,17 @@ def extended_set():
                       purpose="a cross-platform windowing and multimedia library for Python"),
         ModuleInstall("geoplotlib", "pip", usage="VIZ",
                       purpose="geoplotlib is a python toolbox for visualizing geographical data and making maps"),
+        ModuleInstall("leather", "pip", usage="VIZ",
+                      purpose="Leather is the Python charting library for those who need charts now and don’t care if they’re perfect."),
+        ModuleInstall("pythreejs", "pip", usage="VIZ",
+                      purpose="A Python / ThreeJS bridge utilizing the Jupyter widget infrastructure."),
+        ModuleInstall("missingno", "pip", usage="VIZ",
+                      purpose="Messy datasets? Missing values? missingno provides a small toolset of flexible and easy-to-use " + \
+                      "missing data visualizations and utilities that allows you to get a quick visual summary of the completeness " + \
+                      "(or lack thereof) of your dataset."),
+        ModuleInstall("vega", "pip", usage="VIZ",
+                      purpose="Python/Jupyter notebook module for Vega, and Vega-Lite, Polestar, and Voyager. Notebooks " + \
+                      "with embedded visualizations can be viewed on github and nbviewer."),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
     ]
