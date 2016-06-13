@@ -517,6 +517,13 @@ def extended_set():
                       purpose="MPI for Python"),
         ModuleInstall("python-mss", "pip", mname="mms",
                       purpose="An ultra fast cross-platform multiple screenshots module in pure python using ctypes"),
+        #
+        # June 2016
+        #
+        ModuleInstall("pyglet", "pip", usage="GUI",
+                      purpose="a cross-platform windowing and multimedia library for Python"),
+        ModuleInstall("geoplotlib", "pip", usage="VIZ",
+                      purpose="geoplotlib is a python toolbox for visualizing geographical data and making maps"),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
     ]
