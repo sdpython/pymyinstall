@@ -352,6 +352,8 @@ def small_set():
                       purpose="Pretty-print tabular data"),
         ModuleInstall("httpie", "pip",
                       purpose="HTTPie - a CLI, cURL-like tool for humans"),
+        ModuleInstall("version-information", "pip", mname="version_information",
+                      purpose="Version information"),
     ]
 
     return [_ for _ in mod if _ is not None]

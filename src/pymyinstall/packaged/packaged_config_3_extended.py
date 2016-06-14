@@ -535,6 +535,10 @@ def extended_set():
         ModuleInstall("vega", "pip", usage="VIZ",
                       purpose="Python/Jupyter notebook module for Vega, and Vega-Lite, Polestar, and Voyager. Notebooks " +
                       "with embedded visualizations can be viewed on github and nbviewer."),
+        ModuleInstall("pydy", "pip",
+                      purpose="Multibody Dynamics with Python"),
+        ModuleInstall("vispy", "pip",
+                      purpose="isPy: interactive scientific visualization in Python"),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
     ]
