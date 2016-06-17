@@ -72,6 +72,7 @@ def pyquickhelper_set():
         "pipdeptree",
         "psutil",
         "ptyprocess" if not sys.platform.startswith("win") else None,
+        "pycodestyle",
         "pycparser",
         "pycrypto",
         "pycryptodomex",

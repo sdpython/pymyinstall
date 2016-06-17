@@ -113,7 +113,9 @@ def small_set():
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
         ModuleInstall(
-            "pep8", "pip", version="1.5.7", purpose="official guidelines on Python style"),
+            "pycodestyle", "pip", purpose="Python style guide checker"),
+        ModuleInstall(
+            "pep8", "pip", purpose="official guidelines on Python style"),
         ModuleInstall("autopep8", "pip", purpose="apply pep8 on a script"),
         ModuleInstall(
             "mccabe", "pip", purpose="This module provides a plugin for flake8, the Python code checker."),
