@@ -204,7 +204,7 @@ def get_module_metadata(module, use_cmd=False, refresh_cache=False):
 def _get_pypi_version_memoize_op(f):
     memo = {}
 
-    def helper(module_name, full_list=False, url="http://pypi.python.org/pypi"):
+    def helper(module_name, full_list=False, url="https://pypi.python.org/pypi"):
         key = module_name, full_list, url
         if key not in memo:
             memo[key] = f(module_name, full_list, url)
@@ -214,7 +214,7 @@ def _get_pypi_version_memoize_op(f):
 _get_pypi_version_memoize = {}
 
 
-def get_pypi_version(module_name, full_list=False, url="http://pypi.python.org/pypi"):
+def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/pypi"):
     """
     returns the version of a package on pypi,
     we skip alpha, beta or dev version

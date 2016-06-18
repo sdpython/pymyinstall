@@ -687,7 +687,7 @@ class ModuleInstall:
                     kind,
                     self.name))
 
-    def get_pypi_version(self, url='http://pypi.python.org/pypi'):
+    def get_pypi_version(self, url='https://pypi.python.org/pypi'):
         """
         returns the version of a package on pypi
 
@@ -697,7 +697,7 @@ class ModuleInstall:
         See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
         `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
         """
-        if url == 'http://pypi.python.org/pypi':
+        if url == 'https://pypi.python.org/pypi':
             # we use a function which caches the result
             return get_pypi_version(self.name)
         else:
