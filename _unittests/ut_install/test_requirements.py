@@ -54,8 +54,12 @@ class TestRequirements (unittest.TestCase):
         mod_list = small_set() + sphinx_theme_set() + extended_set() + \
             ensae_set() + teachings_set()
         res = build_requirements(mod_list)
-        # fLOG(res)
-        assert "pep8==1.5.7" in res
+        lines = res.split("\n")
+        fLOG(len(lines))
+        for i, line in enumerate(lines):
+            fLOG(i, line)
+        assert 'pep8' in res
+        assert len(lines) >= 550
 
     def test_sort(self):
         fLOG(

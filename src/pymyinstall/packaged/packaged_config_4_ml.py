@@ -225,7 +225,8 @@ def ensae_set():
         ModuleInstall("cubehelix", "github", "jradavenport",
                       purpose="a full implementation of Dave Green's cubehelix colormap for Python",
                       web="https://github.com/jradavenport/cubehelix"),
-        ModuleInstall("lifelines", "pip", purpose="survival analysis", usage="OPTIM"),
+        ModuleInstall("lifelines", "pip",
+                      purpose="survival analysis", usage="OPTIM"),
         # ModuleInstall("pysnptools", "pip", purpose="operation on DNA sequences"), # only available on Python 2.7
         #
         # 2015-07
@@ -288,7 +289,7 @@ def ensae_set():
                       "It's written in pure Python and has no external requirements.", usage="noSQL"),
         ModuleInstall("urllib3", "pip",
                       purpose="urllib2 extension"),
-        ModuleInstall("gevent", "pip", version="1.1b6",
+        ModuleInstall("gevent", "pip",
                       purpose="gevent is a coroutine-based Python networking library"),
         ModuleInstall("grequests", "pip",
                       purpose="GRequests allows you to use Requests with Gevent to make asynchronous HTTP Requests easily."),

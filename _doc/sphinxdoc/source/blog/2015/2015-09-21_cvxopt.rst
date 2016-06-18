@@ -1,12 +1,12 @@
 
 
-.. _l-blog-cvxopt-2015:
 
 .. blogpost::
     :title: import cvxopt fails
     :keywords: cvxopt, Windows
     :date: 2015-09-21
     :categories: import, modules, issue
+    :lid: l-blog-cvxopt-2015
     
     The instruction ``import cvxopt`` sometimes fails 
     with the following error::

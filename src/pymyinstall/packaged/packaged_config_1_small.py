@@ -13,7 +13,8 @@ def small_set():
     list of modules to work with pandas, numpy, ipython, ...
     """
     mod = [
-        ModuleInstall("futures", "pip", version="2.2.0"),
+        ModuleInstall("futures", "pip", mname="concurrent.futures",
+                      purpose="Backport of the concurrent.futures package from Python 3.2"),
         ModuleInstall(
             "virtualenv", "pip", purpose="creatre virtual environments") if not is_conda_distribution() else None,
         ModuleInstall(
@@ -48,7 +49,7 @@ def small_set():
                       purpose="Julian dates from proleptic Gregorian and Julian calendars."),
         ModuleInstall('et_xmlfile', "pip",
                       purpose="et_xmlfile is a low memory library for creating large XML files (for openpyxl)."),
-        ModuleInstall("openpyxl", "pip",  # version="1.8.6",
+        ModuleInstall("openpyxl", "pip",
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
         ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
@@ -98,8 +99,8 @@ def small_set():
         ModuleInstall("wheel", "pip", purpose="handle wheels"),
         ModuleInstall(
             "alabaster", "pip", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
-        ModuleInstall(
-            "babel", "pip", version="1.3", mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
+        ModuleInstall("babel", "pip",  # version="1.3",
+                      mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
         ModuleInstall(
             "colorama", "pip", purpose="Cross-platform colored terminal text.", usage="SPHINX"),
         ModuleInstall("docutils", "pip",
@@ -262,7 +263,7 @@ def small_set():
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
-        ModuleInstall("goslate", "pip", version="1.4",
+        ModuleInstall("goslate", "pip",  # version="1.4",
                       purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
         ModuleInstall("dbf", "pip", purpose="access DBase format"),

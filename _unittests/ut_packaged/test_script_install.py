@@ -101,6 +101,32 @@ class TestScriptInstall(unittest.TestCase):
         if "check module:  flake8" not in out and sys.version_info[0] > 2:
             raise Exception(out + "\nERR:\n" + str(err))
 
+    def test_pypi(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        if sys.version_info[0] == 2:
+            return
+        import xmlrpc.client as xmlrpc_client
+        module_name = "version_information"
+        url = 'https://pypi.python.org/pypi'
+        functions = []
+        with xmlrpc_client.ServerProxy(url) as pypi:
+            for f in pypi.system.listMethods():
+                fLOG(f)
+                sig = pypi.system.methodSignature(f)
+                fLOG("    ", sig)
+                h = pypi.system.methodHelp(f)
+                fLOG("    ", h)
+                functions.append(f)
+                if len(functions) > 1:
+                    break
+            available = pypi.package_releases(module_name, True)
+            fLOG(available)
+        assert len(functions) > 1
+
 
 if __name__ == "__main__":
     unittest.main()

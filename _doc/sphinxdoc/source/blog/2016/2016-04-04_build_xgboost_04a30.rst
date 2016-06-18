@@ -1,11 +1,11 @@
 
-.. _blog_xgboost_install3504a30:
 
 .. blogpost::
     :title: Build xgboost 0.4a30 for Python 3.4 and 3.5
     :keywords: install, xgboost, vcomp110.dll, OpenMP
     :date: 2016-04-04
     :categories: install, modules, windows
+    :lid: blog_xgboost_install3504a30
     
     `xgboost <https://github.com/dmlc/xgboost>`_ does not support the Windows
     compilation anymore so I had to look for a way to compile *xgboost* for Windows.
