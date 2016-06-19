@@ -29,6 +29,8 @@ def teachings_set():
                       purpose="teachings, introduction to programming, machine learning, map/reduce", usage="TEACH"),
         ModuleInstall("jupytalk", "pip",
                       purpose="materials for presentations", usage="TEACH"),
+        ModuleInstall("mlstatpy", "pip",
+                      purpose="materials for presentations", usage="TEACH"),
         # ModuleInstall("ensae_projects", "pip",
         #              purpose="single use code", usage="TEACH"),
     ]
