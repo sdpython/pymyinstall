@@ -539,6 +539,8 @@ def extended_set():
                       purpose="Multibody Dynamics with Python"),
         ModuleInstall("vispy", "pip",
                       purpose="isPy: interactive scientific visualization in Python"),
+        ModuleInstall("apache-libcloud", "pip", mname="libcloud",
+                      purpose="A standard Python library that abstracts away differences among multiple cloud provider APIs."),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
     ]
