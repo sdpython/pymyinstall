@@ -38,8 +38,6 @@ def sphinx_theme_set():
         ModuleInstall(
             "sphinx_py3doc_enhanced_theme", "pip", purpose="sphinx theme", usage="SPHINX") if sys.version_info[0] >= 3 else None,
         ModuleInstall(
-            "epfl-sphinx-theme", "pip", mname="epfl_theme", purpose="sphinx theme", usage="SPHINX"),
-        ModuleInstall(
             "sphinx-better-theme", "pip", mname="better", purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("guzzle_sphinx_theme", "pip",
                       purpose="sphinx theme", usage="SPHINX"),

@@ -120,8 +120,6 @@ def ensae_set():
         ModuleInstall("Pmw", "pip", mname="Pmw",
                       purpose="Pmw is a toolkit for building high-level compound widgets in Python using the Tkinter module."),
         ModuleInstall(
-            "appdirs", "pip", purpose="for pytool, A small Python module for determining appropriate + platform-specific dirs, e.g. a 'user data dir'."),
-        ModuleInstall(
             "pytool", "pip", purpose="A collection of tools for Python"),
         ModuleInstall(
             "py", "pip", purpose="library with cross-python path, ini-parsing, io, code, log facilities"),

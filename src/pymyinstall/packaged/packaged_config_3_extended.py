@@ -195,9 +195,6 @@ def extended_set():
             "a convex optimization modeling software.", usage="OPTIM") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("cvxpy", "pip", usage="OPTIM",
                       purpose="linear, quadratic optimization, depends on cvxopt") if sys.version_info[:2] >= (3, 5) else None,
-        # better large list
-        ModuleInstall(
-            "blist", "wheel", purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
         # to install packages with conda
         ModuleInstall("libLAS", "wheel", mname="liblas",
                       purpose="libLAS is a C/C++ library for reading and writing the very common LAS LiDAR format."),
