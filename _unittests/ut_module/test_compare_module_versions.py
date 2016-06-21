@@ -96,7 +96,7 @@ class TestCompareVersion(unittest.TestCase):
                 if v1 is not None and v2 is not None and not ("rc1" in v1 or "rc1" in v2):
                     diff.append(mod)
 
-        assert len(diff) <= 5
+        assert len(diff) <= 10
 
 
 if __name__ == "__main__":
