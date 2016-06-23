@@ -83,6 +83,9 @@ def small_set():
         ModuleInstall("matplotlib", "wheel",
                       purpose="most used plotting library", usage="VIZ"),
         ModuleInstall(
+            "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
+        ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
+        ModuleInstall(
             "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra", usage="DATA/ML"),
         ModuleInstall(
             "patsy", "pip", purpose="A Python package for describing statistical models and for building design matrices.", usage="DATA/ML"),
@@ -260,9 +263,6 @@ def small_set():
             "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
         ModuleInstall(
             "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
-        ModuleInstall(
-            "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
-        ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall("goslate", "pip",  # version="1.4",
                       purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
