@@ -84,6 +84,8 @@ def small_set():
                       purpose="most used plotting library", usage="VIZ"),
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
+        ModuleInstall(
+            'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall(
             "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra", usage="DATA/ML"),

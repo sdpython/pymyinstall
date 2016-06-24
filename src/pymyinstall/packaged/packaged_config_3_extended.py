@@ -82,8 +82,6 @@ def extended_set():
         ModuleInstall('scikit-image', 'wheel', mname='skimage',
                       purpose="scikit-image is a collection of algorithms for image processing."),
         ModuleInstall(
-            'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
-        ModuleInstall(
             'cvxopt', 'wheel', purpose="linear, quadratique optimization", usage="OPTIM"),
         ModuleInstall(
             'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation", usage="DATA/ML"),

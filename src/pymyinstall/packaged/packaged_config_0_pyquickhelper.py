@@ -66,6 +66,7 @@ def pyquickhelper_set():
         "pbr",
         "pandas",
         "pandoc_attributes",
+        "patsy",
         "pep8",
         "pexpect" if not sys.platform.startswith("win") else None,
         "pickleshare",
