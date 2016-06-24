@@ -106,7 +106,7 @@ def anaconda_set():
             --freeglut Linux
             --freetype Linux Mac
             future
-            futures
+            --futures
             gdal
             gensim
             --geos

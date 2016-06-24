@@ -25,7 +25,6 @@ def pyquickhelper_set():
         "docutils",
         "entrypoints",
         "flake8",
-        "futures",
         "husl",
         "imagesize",
         "ipython",

@@ -13,8 +13,10 @@ def small_set():
     list of modules to work with pandas, numpy, ipython, ...
     """
     mod = [
-        ModuleInstall("futures", "pip", mname="concurrent.futures",
-                      purpose="Backport of the concurrent.futures package from Python 3.2"),
+        # issues with this modules in a virtual environment raise a, b, c instead or raise (a, b, c)
+        # ModuleInstall("futures", "pip", mname="concurrent.futures",
+        # purpose="Backport of the concurrent.futures package from Python
+        # 3.2"),
         ModuleInstall(
             "virtualenv", "pip", purpose="creatre virtual environments") if not is_conda_distribution() else None,
         ModuleInstall(
