@@ -25,7 +25,6 @@ def ensae_teaching_cs_set():
         "django",
         "fuel",
         "ggplot",
-        "goslate",
         "graphviz",
         "h5py",
         "ipyparallel",

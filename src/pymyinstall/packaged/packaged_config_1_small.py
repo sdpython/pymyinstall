@@ -267,8 +267,9 @@ def small_set():
             "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
         ModuleInstall(
             "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
-        ModuleInstall("goslate", "pip",  # version="1.4",
-                      purpose="calls google translate"),
+        # remove goslate from the list to avoid installing futures which appears as a dependency
+        # ModuleInstall("goslate", "pip",  # version="1.4",
+        #               purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
         ModuleInstall("dbf", "pip", purpose="access DBase format"),
         ModuleInstall(
