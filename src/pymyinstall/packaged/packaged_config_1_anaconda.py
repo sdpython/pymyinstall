@@ -97,7 +97,7 @@ def anaconda_set():
             --execnet
             --fastcache
             feedparser
-            --fiona
+            fiona
             flake8
             flask
             flask-login
