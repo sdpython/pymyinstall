@@ -536,7 +536,7 @@ def extended_set():
                       purpose="isPy: interactive scientific visualization in Python"),
         ModuleInstall("apache-libcloud", "pip", mname="libcloud",
                       purpose="A standard Python library that abstracts away differences among multiple cloud provider APIs."),
-        ModuleInstall("fiona", "wheel", usgae="GEO",
+        ModuleInstall("fiona", "wheel", usage="GEO",
                       purpose="Fiona is OGR’s neat, nimble, no-nonsense API for Python programmers."),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
