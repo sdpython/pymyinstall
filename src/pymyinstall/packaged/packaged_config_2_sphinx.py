@@ -71,7 +71,5 @@ def sphinx_theme_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinx_theme_pd", "pip", mname="sphinx_theme_pd",
                       purpose="sphinx theme", usage="SPHINX"),
-        ModuleInstall("sphinx_latex", "pip", mname="sphinx_latex",
-                      purpose="latex extension", usage="SPHINX"),
     ]
     return [_ for _ in mod if _ is not None]
