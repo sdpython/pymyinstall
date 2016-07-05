@@ -236,7 +236,7 @@ def anaconda_set():
             pythonqwt
             pytz
             --pywget
-            pywin32 Windows
+            pypiwin32 Windows
             pyyaml
             pyzmq
             --qt Linux Mac

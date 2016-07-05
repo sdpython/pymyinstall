@@ -485,11 +485,13 @@ def extended_set():
                       purpose="A Pure-Python PostgreSQL", usage="SQL"),
         ModuleInstall("PyMeta3", "pip", mname="pymeta",
                       purpose="Pattern-matching language based on OMeta for Python 3 and 2"),
-        ModuleInstall("ViTables", "pip", mname="vitables",
-                      purpose="A viewer for PyTables package"),
+        # ModuleInstall("ViTables", "pip", mname="vitables",
+        #               purpose="A viewer for PyTables package"),
         ModuleInstall("db.py", "pip", mname="db.tables",
                       purpose="db.py is an easier way to interact with your databases. It makes it easier to explore tables, columns, views, etc. " +
                       "It puts the emphasis on user interaction, information display, and providing easy to use helper functions."),
+        ModuleInstall("clyent", "pip",
+                      purpose="Command line client Library for windows and posix"),
         ModuleInstall("chalmers", "pip",
                       purpose="Chalmers is an application that allows its users to monitor and control a number of processes on any " +
                       "operating system (Posix and Win32 included)"),

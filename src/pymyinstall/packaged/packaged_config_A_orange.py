@@ -42,9 +42,16 @@ def orange_set():
         #     purpose="This is a data fusion add-on for [Orange3](http://orange.biolab.si). Add-on wraps scikit-fusion, " +
         #     "a Python library for data fusion, and implements a set of widgets for loading of the data, definition of data fusion schema, " +
         #     "collective matrix factorization and exploration of latent factors."),
+        # ModuleInstall(
+        #     "orange3-network", "github", "biolab", mname="orangecontrib.network", custom=["build", "install"], usage="ORANGE",
+        # purpose="Orange Network is an add-on for Orange data mining software
+        # package. It provides network visualization and analysis tools."),
         ModuleInstall(
-            "orange3-network", "github", "biolab", mname="orangecontrib.network", custom=["build", "install"], usage="ORANGE",
+            "Orange3-Network", "pip", mname="orangecontrib.network", usage="ORANGE",
             purpose="Orange Network is an add-on for Orange data mining software package. It provides network visualization and analysis tools."),
+        ModuleInstall(
+            "Orange3-ImageAnalytics", "pip", mname="orangecontrib.imageanalytics", usage="ORANGE",
+            purpose="Orange3 add-on for image data mining."),
         # weird
         # ModuleInstall(
         #     "orange3-prototypes", "pip", mname="orangecontrib.prototypes", usage="ORANGE",

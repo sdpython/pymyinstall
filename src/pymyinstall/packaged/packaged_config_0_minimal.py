@@ -24,7 +24,7 @@ def minimal_set():
              ]
 
     if sys.platform.startswith("win"):
-        names.append("pywin32")
+        names.append("pypiwin32")
         names.append("winshell")
         names.append("pythonnet")
 

@@ -88,7 +88,6 @@ def small_set():
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall(
             'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
-        ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall(
             "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra", usage="DATA/ML"),
         ModuleInstall(
@@ -104,6 +103,7 @@ def small_set():
         ModuleInstall(
             "mistune", "pip", purpose="The fastest markdown parser in pure Python with renderer features, inspired by marked."),
         ModuleInstall("wheel", "pip", purpose="handle wheels"),
+        ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall(
             "alabaster", "pip", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
         ModuleInstall("babel", "pip",  # version="1.3",

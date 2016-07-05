@@ -22,16 +22,22 @@ def ensae_set():
         ModuleInstall(
             "billiard", "pip", purpose="Python multiprocessing fork with improvements and bugfixes (for celery)"),
         ModuleInstall(
-            "kombu", "pip", purpose="Messaging library for Python (for celery)"),
+            "amqp", "pip", purpose="Low-level AMQP client for Python (fork of amqplib) (for celery)"),
         ModuleInstall(
             "anyjson", "pip", purpose="Wraps the best available JSON implementation available in a common interface (for celery)"),
         ModuleInstall(
-            "amqp", "pip", purpose="Low-level AMQP client for Python (fork of amqplib) (for celery)"),
+            "kombu", "pip", purpose="Messaging library for Python (for celery)"),
         ModuleInstall(
             "celery", "pip", purpose="Celery is an asynchronous task queue/job queue based on distributed message passing."),
 
+        ModuleInstall('html2text', 'pip',
+                      purpose="Turn HTML into equivalent Markdown-structured text."),
+        ModuleInstall('easy-thumbnails', 'pip', mname="easy_thumbnails",
+                      purpose="Easy thumbnails for Django"),
         ModuleInstall('Versio', 'pip', mname="versio",
                       purpose="localshop dependency, manages versions"),
+        ModuleInstall('django', 'pip',
+                      purpose="Django"),
         ModuleInstall('django-celery', 'pip', mname="djcelery",
                       purpose="localshop dependency, Old django celery integration project."),
         ModuleInstall('django-configurations', 'pip', mname="configurations",
@@ -43,25 +49,19 @@ def ensae_set():
                       purpose="localshop dependency, Django model mixins and utilities."),
         ModuleInstall('django-storages', 'pip', mname="storages",
                       purpose="localshop dependency, django-storages is a collection of custom storage backends for Django."),
+        ModuleInstall('django-guardian', 'pip', mname="guardian",
+                      purpose="localshop dependency, Implementation of per object permissions for Django 1.2 or later."),
         ModuleInstall('django-userena', 'pip', mname="userena",
                       purpose="localshop dependency, Accounts for Django made beautifully simple"),
         ModuleInstall('django-uuidfield', 'pip', mname="uuidfield",
                       purpose="localshop dependency, UUIDField in Django"),
-        ModuleInstall('django-guardian', 'pip', mname="guardian",
-                      purpose="localshop dependency, Implementation of per object permissions for Django 1.2 or later."),
-        ModuleInstall('django', 'pip',
-                      purpose="Django"),
         ModuleInstall(
             'gunicorn', 'pip', purpose="localshop dependency, WSGI HTTP Server for UNIX"),
         ModuleInstall(
             'netaddr', 'pip', purpose="Pythonic manipulation of IPv4, IPv6, CIDR, EUI and MAC network addresses"),
-        ModuleInstall('easy_thumbnails', 'pip',
-                      purpose="Easy thumbnails for Django"),
-        ModuleInstall('html2text', 'pip',
-                      purpose="Turn HTML into equivalent Markdown-structured text."),
-
-        ModuleInstall('localshop', 'pip',
-                      purpose="run a local pypi server"),
+        # ModuleInstall('localshop', 'pip',
+        # purpose="run a local pypi server (install it in virtual env as it
+        # overwrites many versions)"),
 
         ModuleInstall(
             "tweepy", "pip", purpose="Python wrapper for the twitter API"),
@@ -166,10 +166,6 @@ def ensae_set():
         # Bayesian ABC
         ModuleInstall("abcpmc", "pip", purpose="Monte Carlo and ABC methods"),
         # ModuleInstall("cosmoabc", "pip"), # Bayesian ABC, only python 2.7
-        #
-        # ModuleInstall("kabuki", "wheel"),    # requires pymc 2.3.3 not 2.3.4, why?
-        # ModuleInstall("HDDM", "wheel", mname="hddm"),  # Bayesian, does not
-        # work, it expects to have pymc with some optimization
         #
         # ModuleInstall("pyjs", "pip"), # needs manual installation
         # ModuleInstall("pyjs", "github", "pyjs"), #does not work really
@@ -419,6 +415,8 @@ def ensae_set():
         #
         ModuleInstall("prettytable", "pip",
                       purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
+        ModuleInstall("ruamel.yaml", "pip",
+                      purpose="uamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"),
         ModuleInstall("skll", "pip", usage="ML",
                       purpose="SciKit-Learn Laboratory makes it easier to run machinelearning experiments with scikit-learn."),
         ModuleInstall("sklearn_pandas", "pip", usage="ML",
@@ -457,6 +455,8 @@ def ensae_set():
         #
         # June 2016
         #
+        ModuleInstall("kabuki", "pip", usage="ML",
+                      purpose="kabuki is a python toolbox that allows easy creation of hierarchical bayesian models for the cognitive sciences."),
         ModuleInstall("HDDM", "wheel", mname="hddm", usage="ML",
                       purpose="HDDM is a python module that implements Hierarchical Bayesian estimation of Drift Diffusion Models."),
         ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
@@ -467,6 +467,11 @@ def ensae_set():
         ModuleInstall("biopython", "wheel", usage="BIO",
                       purpose="The Biopython Project is an international association of developers of freely available Python tools for " +
                       "computational molecular biology."),
+        ModuleInstall("grako", "wheel",
+                      purpose="Grako (for grammar compiler) is a tool that takes grammars in a variation of EBNF " +
+                      "as input, and outputs memoizing (Packrat) PEG parsers in Python."),
+        ModuleInstall("expressions", "pip",
+                      purpose="Arithmetic expression parser library. Embed customized expression evaluation into your application or library."),
         ModuleInstall("cubes", "pip",
                       purpose="Cubes is a light-weight Python framework and set of tools for development of reporting and analytical applications, " +
                       "Online Analytical Processing (OLAP), multidimensional analysis and browsing of aggregated data. It is part of Data Brewery."),

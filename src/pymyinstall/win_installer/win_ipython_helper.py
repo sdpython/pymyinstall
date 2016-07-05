@@ -66,14 +66,24 @@ def ipython_update_profile(profile_path):
         f.write("\n" + content + "\n")
 
 
-def install_jupyter_extension():
+def install_jupyter_extension(python_path):
     """
     install jupyter extension
+
+    @param  python_path     python path
+    @return                 out, err
     """
-    pip = get_pip_program()
+    if sys.platform.startswith("win"):
+        pip = os.path.join(python_path, "Scripts", "pip.exe")
+        if not os.path.exists(pip):
+            pip = get_pip_program(exe=python_path)
+    else:
+        pip = get_pip_program(exe=python_path)
+
     cmd = "{0} install https://github.com/ipython-contrib/IPython-notebook-extensions/archive/master.zip --user".format(
         pip)
     out, err = run_cmd(cmd)
     if err:
         raise WinInstallException(
             "unable to install jupyter extension\nOUT:{0}\nERR{1}".format(out, err))
+    return out, err

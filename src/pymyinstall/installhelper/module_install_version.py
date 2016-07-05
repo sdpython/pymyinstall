@@ -703,7 +703,7 @@ def choose_most_recent(list_name):
             resv = version.search(_[0])
         except TypeError as e:
             raise TypeError("unable to parse '{0}'".format(_)) from e
-        if resv is None and "pywin32" in _[0]:
+        if resv is None and ("pywin32" in _[0] or "pypiwin32" in _[0]):
             version2 = re.compile(regex_wheel_version.replace(
                 "[0-9]+[.][abc0-9]+", "[0-9]{3}"))
             resv = version2.search(_[0])
