@@ -467,7 +467,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             operations.append(("time", dtnow()))
 
         ######################
-        # update ipython profile
+        # update jupyter extension
         ######################
         if has_jupyter:
             fLOG("--- install jupyter extension")

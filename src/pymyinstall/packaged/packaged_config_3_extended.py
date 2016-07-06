@@ -14,7 +14,7 @@ def extended_set():
     """
     mod = [
         ModuleInstall(
-            "natgrid", "wheel", mname="matplotlib.natgrid",
+            "natgrid", "wheel", mname="mpl_toolkits.natgrid",
             purpose="Python interface to NCAR natgrid library (for matplotlib)"),
         ModuleInstall(
             "py", "pip", purpose="library with cross-python path, ini-parsing, io, code, log facilities"),
@@ -163,6 +163,9 @@ def extended_set():
         #
         ModuleInstall(
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
+        ModuleInstall("winrandom", "wheel2", mname="winrandom",
+                      purpose="This module gives direct access to Windows Cryptographic API CryptGetRandom() function, " +
+                      "which is cryptographically strong pseudo-random number generator (PRNG) on Windows:"),
         ModuleInstall("pycrypto", "wheel2", mname="Crypto",
                       purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
         ModuleInstall("pycryptodomex", "pip", mname="Cryptodome",

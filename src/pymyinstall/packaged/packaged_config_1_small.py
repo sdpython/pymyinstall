@@ -245,7 +245,7 @@ def small_set():
         ModuleInstall("requests-cache", "pip", mname="requests_cache",
                       purpose="Persistent cache for requests library"),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
-        ModuleInstall("PyQt4", "wheel", mname="pyqt", usage="GUI"),
+        ModuleInstall("PyQt4", "wheel", mname="PyQt4", usage="GUI"),
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
         ModuleInstall(
