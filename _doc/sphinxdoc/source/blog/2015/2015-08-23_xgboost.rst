@@ -6,7 +6,7 @@
     :title: Build module xgboost
     :keywords: xgboost
     :date: 2015-08-23
-    :categories: modules
+    :categories: module
 
     `xgboost <https://github.com/dmlc/xgboost>`_
     is now on 

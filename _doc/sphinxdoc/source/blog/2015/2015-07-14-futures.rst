@@ -6,7 +6,7 @@
     :title: Modules futures, concurrent
     :keywords: futures, concurrent, issue
     :date: 2015-07-14
-    :categories: modules
+    :categories: module
 
     On the way to build a setup for my student,
     I went through an issue with the packages 

@@ -6,7 +6,7 @@
     :title: Issue with module babel
     :keywords: babel, sphinx, exception, issue
     :date: 2015-08-17
-    :categories: sphinx, modules
+    :categories: sphinx, module
 
     I went through the following issue with the latest version
     of `babel <https://pypi.python.org/pypi/Babel>`_ (2.0). 

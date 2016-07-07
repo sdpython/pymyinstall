@@ -4,7 +4,7 @@
     :title: Pycrypto on Python 3.5
     :keywords: install, pycrypto
     :date: 2015-11-25
-    :categories: install, modules, windows
+    :categories: install, module, windows
 
     Fortunately, somebody already did that
     and it is available here:

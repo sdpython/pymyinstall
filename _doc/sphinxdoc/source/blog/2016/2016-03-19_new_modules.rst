@@ -4,7 +4,7 @@
     :title: Nice extensions to scikit-learn
     :keywords: mlxtend, gnumpy, scacredn nolearn, pystruct
     :date: 2016-03-19
-    :categories: modules
+    :categories: module
     
     Some projects mentioned at
     `Related Projects (to scikit-learn) <http://scikit-learn.org/stable/related_projects.html>`_:

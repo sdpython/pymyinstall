@@ -4,7 +4,7 @@
     :title: Install Python 3.4 with packages for a Data Scientist on Linux
     :keywords: install, linux, ubuntu, azure
     :date: 2015-08-30
-    :categories: install, modules, linux
+    :categories: install, module, linux
 
     I tested the python installation on Linux from scratch
     (= without Anaconda). I used a distribution 

@@ -4,7 +4,7 @@
     :title: Warning with Mako
     :keywords: Mako, warning, issue
     :date: 2015-09-19
-    :categories: install, modules, issue
+    :categories: install, module, issue
     
     The installation of `Mako <http://www.makotemplates.org/>`_
     generates the following error::

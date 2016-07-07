@@ -4,7 +4,7 @@
     :title: Issues with Python 3.5
     :keywords: issues, Python 3.5
     :date: 2015-10-28
-    :categories: modules, issue
+    :categories: module, issue
     :lid: l-blog-pymy-2015-10-28
     
     I'm still trying to get a proper distribution of Python 3.5 on Windows.

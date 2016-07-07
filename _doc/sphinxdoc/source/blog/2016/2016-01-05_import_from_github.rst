@@ -4,7 +4,7 @@
     :title: Directly import from Github
     :keywords: github, import
     :date: 2016-01-05
-    :categories: install, modules
+    :categories: install, module
     
     If you want to do something like::
     

@@ -4,7 +4,7 @@
     :title: New modules after a year of teachings
     :keywords: ENSAE, javascript
     :date: 2015-06-06
-    :categories: teachings, modules
+    :categories: teachings, module
     
     My students used modules I did not know about.
     I added them to function

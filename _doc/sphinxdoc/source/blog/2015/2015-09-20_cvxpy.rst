@@ -4,7 +4,7 @@
     :title: Install cvxpy on Windows
     :keywords: cvxpy, Windows
     :date: 2015-09-20
-    :categories: install, modules, issue
+    :categories: install, module, issue
     
     After I installed `CVXcanon <https://github.com/cvxgrp/CVXcanon>`_ (see previous blog), 
     I went through an issue

@@ -4,7 +4,7 @@
     :title: Cannot import DLL
     :keywords: numpy, scipy, scikit-learn, DLL
     :date: 2015-10-01
-    :categories: import, modules, issue
+    :categories: import, module, issue
     
     I just tried::
     

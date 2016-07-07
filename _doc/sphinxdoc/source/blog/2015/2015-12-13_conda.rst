@@ -4,7 +4,7 @@
     :title: Install a package on Anaconda
     :keywords: install
     :date: 2015-12-13
-    :categories: install, modules, Anaconda
+    :categories: install, module, Anaconda
     
     Some packages are specifically compiled for 
     `Anaconda <https://www.continuum.io/downloads>`_ distribution.

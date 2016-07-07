@@ -4,7 +4,7 @@
     :title: Module xray was renamed into xarray
     :keywords: arrays, xray, xarray
     :date: 2016-03-12
-    :categories: setup.py
+    :categories: module
     
     Module *xray* was renamed into
     `xarray <http://xarray.pydata.org/en/stable/index.html>`_.

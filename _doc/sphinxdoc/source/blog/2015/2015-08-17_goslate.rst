@@ -6,7 +6,7 @@
     :title: Issue with module goslate 1.5
     :keywords: goslate, encoding, issue
     :date: 2015-08-17
-    :categories: modules
+    :categories: module
 
     I had issues installing 
     `goslate <https://pypi.python.org/pypi/goslate>`_ 1.5.

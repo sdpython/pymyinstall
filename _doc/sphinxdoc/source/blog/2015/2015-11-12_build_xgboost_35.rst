@@ -4,7 +4,7 @@
     :title: Build xgboost for Python 3.5
     :keywords: install, xgboost, vcomp110.dll, OpenMP
     :date: 2015-11-12
-    :categories: install, modules, windows
+    :categories: build, module, windows
     :lid: blog_xgboost_install35
 
     This is a process I followed to build `xgboost <https://github.com/dmlc/xgboost>`_ 0.4 

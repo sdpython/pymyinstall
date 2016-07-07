@@ -4,7 +4,7 @@
     :title: PyCrypto and pycryptodome
     :keywords: pycrypto, pycryptodome
     :date: 2015-12-21
-    :categories: install, modules
+    :categories: install, module
     
     `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_ is not longer maintained,
     it should be replaced by `pycryptodome <https://pypi.python.org/pypi/pycryptodome/>`_.

@@ -4,7 +4,7 @@
     :title: A few interested modules not included in this one
     :keywords: install, wordcloud, ORM, images, cluster, HMM
     :date: 2015-12-05
-    :categories: install, modules
+    :categories: install, module
     
     The following might be included in a near future.
 

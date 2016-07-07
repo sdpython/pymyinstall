@@ -4,7 +4,7 @@
     :title: pythonnet for Python 3.5
     :keywords: pythonnet, .net, C#, python, issue
     :date: 2016-01-03
-    :categories: install, modules, pythonnet
+    :categories: install, module, pythonnet
     
     People usually install modules from
     `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/#pythonnet>`_

@@ -4,7 +4,7 @@
     :title: Wordcloud to draw clouds of words
     :keywords: install, wordcloud
     :date: 2015-12-05
-    :categories: install, modules
+    :categories: install, module
     
     `wordcloud <https://github.com/amueller/word_cloud>`_
     is a nice module to draw `tag clouds <https://en.wikipedia.org/wiki/Tag_cloud>`_

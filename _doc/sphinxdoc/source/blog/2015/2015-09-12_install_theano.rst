@@ -4,7 +4,7 @@
     :title: Install Theano on Linux
     :keywords: install, theano, tdm-g++
     :date: 2015-09-12
-    :categories: install, modules, windows
+    :categories: install, module, windows
 
     The module `theano <http://deeplearning.net/software/theano/>`_ 
     involves some C++ and requires a compiler.

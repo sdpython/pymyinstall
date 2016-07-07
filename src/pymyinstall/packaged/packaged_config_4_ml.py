@@ -464,7 +464,7 @@ def ensae_set():
         ModuleInstall("reportlab", "wheel",
                       purpose="This is the ReportLab PDF Toolkit. It allows rapid creation of rich PDF documents, and also creation of " +
                       "charts in a variety of bitmap and vector formats."),
-        ModuleInstall("biopython", "wheel", usage="BIO",
+        ModuleInstall("biopython", "wheel", mname="Bio", usage="BIO",
                       purpose="The Biopython Project is an international association of developers of freely available Python tools for " +
                       "computational molecular biology."),
         ModuleInstall("grako", "wheel",

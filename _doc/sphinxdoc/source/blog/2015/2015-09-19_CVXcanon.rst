@@ -4,7 +4,7 @@
     :title: Building wheel for CVXcanon on Windows
     :keywords: install, wheel, CVxcanon
     :date: 2015-09-12
-    :categories: install, modules, windows
+    :categories: install, module, windows
 
     I tried to run the command ``python setup.py bdist_wheel``
     but it failed with the following error message::
