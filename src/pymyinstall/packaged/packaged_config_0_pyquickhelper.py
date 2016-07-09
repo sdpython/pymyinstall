@@ -15,6 +15,7 @@ def pyquickhelper_set():
         "autopep8",
         "babel",
         "backports.shutil-get-terminal-size",
+        "brewer2mpl",
         "certifi",
         "codecov",
         "colorama",
