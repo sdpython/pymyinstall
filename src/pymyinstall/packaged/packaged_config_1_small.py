@@ -147,6 +147,10 @@ def small_set():
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
         # ipython
         ModuleInstall(
+            "wcwidth", "pip", purpose="Measures number of Terminal column cells of wide-character codes", usage="JUPYTER"),
+        ModuleInstall(
+            "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
+        ModuleInstall(
             "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
             "jupyter", "pip", purpose="Jupyter", usage="JUPYTER"),
