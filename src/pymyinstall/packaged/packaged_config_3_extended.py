@@ -211,7 +211,7 @@ def extended_set():
             "pymongo", "wheel", purpose="Python wrapper for MongoDB", usage="NoSQL"),
         ModuleInstall(
             "psycopg2", "wheel", mname="psycopg2",
-            purpose="psycopg2 - Python-PostgreSQL Database Adapter"),
+            purpose="Python-PostgreSQL Database Adapter"),
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
@@ -366,8 +366,6 @@ def extended_set():
         # ModuleInstall("scilab_kernel", "pip",
         #              purpose="A Scilab kernel for IPython", usage="JUPYTER"),
         # does not work
-        ModuleInstall("psycopg2", "wheel",
-                      purpose="Psycopg is the most popular PostgreSQL adapter for the Python programming language.", usage="SQL"),
         ModuleInstall("pymssql", "wheel", usage="SQL",
                       purpose="A simple database interface for Python that builds on top of FreeTDS " +
                       "to provide a Python DB-API (PEP-249) interface to Microsoft SQL Server."),
