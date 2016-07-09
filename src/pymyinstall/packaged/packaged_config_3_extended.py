@@ -541,6 +541,8 @@ def extended_set():
                       purpose="A standard Python library that abstracts away differences among multiple cloud provider APIs."),
         ModuleInstall("Fiona", "wheel", usage="GEO", mname="fiona",
                       purpose="Fiona is OGR’s neat, nimble, no-nonsense API for Python programmers."),
+        ModuleInstall("brythonmagic", "pip",
+                      purpose="Magics to use brython in Jupyter notebook."),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
     ]
