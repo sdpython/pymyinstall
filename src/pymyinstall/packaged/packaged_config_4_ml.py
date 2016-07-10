@@ -190,6 +190,12 @@ def ensae_set():
             "pygal", "pip", "Kozea", purpose="plotting (javascript)", usage="VIZ"),
         ModuleInstall(
             "pygal_maps_world", "pip", purpose="extension to pygal (maps)", usage="VIZ"),  # graph
+        ModuleInstall(
+            "pygal_maps_fr", "pip", purpose="French maps for pygal", usage="VIZ"),  # graph
+        ModuleInstall(
+            "pygal_maps_ch", "pip", purpose="Swiss canton map for pygal", usage="VIZ"),  # graph
+        ModuleInstall(
+            "pygal_sphinx_directives", "pip", purpose="Pygal sphinx integration", usage="SPHINX"),  # graph
         #
         # 2015-06-30
         #
