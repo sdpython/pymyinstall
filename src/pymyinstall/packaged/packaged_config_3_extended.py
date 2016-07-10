@@ -402,6 +402,10 @@ def extended_set():
                       purpose="Plotly's Python graphing library makes interactive, publication-quality graphs online. Examples of how to make line plots, " +
                               "scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, " +
                               "polar charts and bubble charts."),
+        ModuleInstall("colorlover", "pip", usage="VIZ",
+                      purpose="Color scales for IPython notebook"),
+        ModuleInstall("cufflinks", "pip", usage="VIZ",
+                      purpose="Productivity Tools for Plotly + Pandas"),
         ModuleInstall("lightning-python", "pip", mname="lightning", usage="VIZ",
                       purpose="Python client for the lightning API"),
         ModuleInstall("passlib", "pip",
