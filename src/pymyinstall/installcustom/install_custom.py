@@ -130,3 +130,23 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
         f.write(text)
 
     return outfile
+
+
+def where_in_path(name):
+    """
+    Look for a file in current directory and in every path in PATH
+
+    @param      name        name of the file to look for
+    @return                 None if not found, the absolute filename otherwise
+    """
+    if os.path.exists(name):
+        return os.path.abspath(name)
+    else:
+        path = os.environ["PATH"]
+        if path:
+            spl = path.split(";")
+            for p in spl:
+                new_name = os.path.join(p, name)
+                if os.path.exists(new_name):
+                    return new_name
+    return None
