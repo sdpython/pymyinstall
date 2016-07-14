@@ -46,7 +46,7 @@ def install_chromedriver(dest_folder=".", fLOG=print, install=True, version=None
 
     outfile = os.path.join(dest_folder, name)
     fLOG("chromedriver, download from ", url)
-    file = download_file(url, outfile, fLOG=fLOG)
+    download_file(url, outfile, fLOG=fLOG)
 
     if install:
         return unzip_files(outfile, whereTo=dest_folder, fLOG=fLOG)
