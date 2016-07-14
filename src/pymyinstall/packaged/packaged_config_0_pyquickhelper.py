@@ -13,6 +13,7 @@ def pyquickhelper_set():
     names = [
         "alabaster",
         "autopep8",
+        "autopy3",
         "babel",
         "backports.shutil-get-terminal-size",
         "brewer2mpl",
