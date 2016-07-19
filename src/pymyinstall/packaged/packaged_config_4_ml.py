@@ -488,6 +488,15 @@ def ensae_set():
         ModuleInstall("pysal", "pip", usage="MATHS",
                       purpose="PySAL is an open source library of spatial analysis functions written in Python intended " +
                       "to support the development of high level applications."),
+        #
+        # July 2016
+        #
+        ModuleInstall("hyperopt", "github", "hyperopt", usage="ML",
+                      purpose="Hyperopt is a Python library for serial and parallel optimization over awkwardsearch spaces, " +
+                      "which may include real-valued, discrete, and conditional dimensions."),
+        ModuleInstall("mlxtend", "pip", usage="ML",
+                      purpose="Mlxtend (machine learning extensions) " +
+                      "is a Python library of useful tools for the day-to-day data science tasks."),
     ]
 
     if sys.version_info[0] == 2:
