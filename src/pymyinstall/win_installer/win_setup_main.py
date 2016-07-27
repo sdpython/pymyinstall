@@ -179,21 +179,22 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     to tell the step has completed once. You can remove this file
     to do it again.
 
-    @example(Prepare a standalone distribution)
-    The function downloads everything. The installation of tools
-    is still manual. Package installation is automated.
+    .. exref::
+        :title: Prepare a standalone distribution)
 
-    ::
+        The function downloads everything. The installation of tools
+        is still manual. Package installation is automated.
 
-        from pymyinstall import win_python_setup
-        from pymyinstall.packaged import ensae_fullset
-        list_modules = ensae_fullset()
-        win_python_setup(module_list=list_modules,
-                         verbose=False,
-                         download_only=False)
+        ::
 
-    This works only for Windows.
-    @endexample
+            from pymyinstall import win_python_setup
+            from pymyinstall.packaged import ensae_fullset
+            list_modules = ensae_fullset()
+            win_python_setup(module_list=list_modules,
+                            verbose=False,
+                            download_only=False)
+
+        This works only for Windows.
 
     @warning The Julia installation might be stuck after the installation or the build.
              In that case, the script python should be stopped by *stopping the Julia

@@ -40,13 +40,15 @@ def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=
     @param      version             version to install (unused)
     @return                         temporary file
 
-    @example(install SciTE)
-    The function downloads the latest version of SciTE.
-    It also changes some settings for Python (no tabs, Courier New as a police).
-    @code
-    install_scite("my_folder_for_scite")
-    @endcode
-    @endexample
+    .. exref::
+        :title: install SciTE
+
+        The function downloads the latest version of SciTE.
+        It also changes some settings for Python (no tabs, Courier New as a police).
+
+        ::
+
+²           install_scite("my_folder_for_scite")
 
     .. versionchanged:: 1.1
         Parameter *change_python_path* was added.

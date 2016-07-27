@@ -122,10 +122,13 @@ Quick start
 .. toctree::
     :maxdepth: 1
     
-    all_example
+    i_ex
+    i_faq
     all_notebooks
     name_set_table
     ensae_full_set_table    
+    completed_todoextlist
+    issues_todoextlist
     
 Indices and tables
 ------------------
@@ -133,9 +136,9 @@ Indices and tables
 +----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
 | :ref:`l-modules`     |  :ref:`l-functions` | :ref:`l-classes`    | :ref:`l-methods`   | :ref:`l-staticmethods` | :ref:`l-properties`                            |
 +----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
-| :ref:`modindex`      |  :ref:`l-example`   | :ref:`search`       | :ref:`l-license`   | :ref:`l-changes`       | :ref:`l-README`                                |
+| :ref:`modindex`      |  :ref:`l-example2`  | :ref:`search`       | :ref:`l-license`   | :ref:`l-changes`       | :ref:`l-README`                                |
 +----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
-| :ref:`genindex`      |  :ref:`l-FAQ`       | :ref:`l-notebooks`  |                    | :ref:`l-statcode`      | `Unit Test Coverage <coverage/index.html>`_    |
+| :ref:`genindex`      |  :ref:`l-FAQ2`      | :ref:`l-notebooks`  |                    | :ref:`l-statcode`      | `Unit Test Coverage <coverage/index.html>`_    |
 +----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
 
 

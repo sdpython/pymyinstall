@@ -2,6 +2,14 @@
 """
 @file
 @brief Functions to prepare a setup on Windows
+
+.. todoext::
+    :title: enables js extension on jupyter
+    :tag: enhancement
+
+    Run something like::
+
+        jupyter nbextension enable --py --sys-prefix widgetsnbextension
 """
 from __future__ import print_function
 import sys

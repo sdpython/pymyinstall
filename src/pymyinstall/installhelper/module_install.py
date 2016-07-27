@@ -43,11 +43,12 @@ class ModuleInstall:
     """
     defines the necessary information for a module
 
-    @example(Installation from GitHub)
-    @code
-    ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
-    @endcode
-    @endexample
+    .. exref::
+            :title: Installation from GitHub)
+
+        ::
+
+            ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
     """
 
     allowedKind = ["pip", "github", "exe", "exe2", "wheel", "wheel2"]

@@ -75,78 +75,77 @@ def run_cmd(cmd, sin="", shell=False, wait=False, log_error=True,
     @return                         content of stdout, stderr  (only if wait is True)
 
 
-    @FAQ(Exception when installing a module)
+    .. faqref::
+        :title: Exception when installing a module
 
-    This error can occur when a module is installed on a virtual environment
-    created before *pip* was updated on the main distribution.
-    The solution consists in removing the virtual environment and create it again.
+        This error can occur when a module is installed on a virtual environment
+        created before *pip* was updated on the main distribution.
+        The solution consists in removing the virtual environment and create it again.
 
-    ::
+        ::
 
-        c:\\Python34_x64vir\\install\\Scripts\\python -u setup.py install
-        running install
-        running bdist_egg
-        running egg_info
-        Traceback (most recent call last):
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2785, in _dep_map
-            return self.__dep_map
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
-            raise AttributeError(attr)
-        AttributeError: _DistInfoDistribution__dep_map
+            c:\\Python34_x64vir\\install\\Scripts\\python -u setup.py install
+            running install
+            running bdist_egg
+            running egg_info
+            Traceback (most recent call last):
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2785, in _dep_map
+                return self.__dep_map
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
+                raise AttributeError(attr)
+            AttributeError: _DistInfoDistribution__dep_map
 
-        During handling of the above exception, another exception occurred:
+            During handling of the above exception, another exception occurred:
 
-        Traceback (most recent call last):
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2776, in _parsed_pkg_info
-            return self._pkg_info
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
-            raise AttributeError(attr)
-        AttributeError: _pkg_info
+            Traceback (most recent call last):
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2776, in _parsed_pkg_info
+                return self._pkg_info
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
+                raise AttributeError(attr)
+            AttributeError: _pkg_info
 
-        During handling of the above exception, another exception occurred:
+            During handling of the above exception, another exception occurred:
 
-        Traceback (most recent call last):
-          File "setup.py", line 169, in <module>
-            package_data=package_data,
-          File "C:\\Python34_x64\\Lib\\distutils\\core.py", line 148, in setup
-            dist.run_commands()
-          File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 955, in run_commands
-            self.run_command(cmd)
-          File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
-            cmd_obj.run()
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 67, in run
-            self.do_egg_install()
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 109, in do_egg_install
-            self.run_command('bdist_egg')
-          File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
-            self.distribution.run_command(command)
-          File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
-            cmd_obj.run()
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\bdist_egg.py", line 151, in run
-            self.run_command("egg_info")
-          File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
-            self.distribution.run_command(command)
-          File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
-            cmd_obj.run()
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\egg_info.py", line 171, in run
-            ep.require(installer=installer)
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2355, in require
-            items = working_set.resolve(reqs, env, installer)
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 835, in resolve
-            new_requirements = dist.requires(req.extras)[::-1]
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2586, in requires
-            dm = self._dep_map
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2787, in _dep_map
-            self.__dep_map = self._compute_dependencies()
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2809, in _compute_dependencies
-            for req in self._parsed_pkg_info.get_all('Requires-Dist') or []:
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2778, in _parsed_pkg_info
-            metadata = self.get_metadata(self.PKG_INFO)
-          File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 1993, in get_metadata
-            raise KeyError("No metadata except PKG-INFO is available")
-        KeyError: 'No metadata except PKG-INFO is available'
-
-    @endFAQ
+            Traceback (most recent call last):
+            File "setup.py", line 169, in <module>
+                package_data=package_data,
+            File "C:\\Python34_x64\\Lib\\distutils\\core.py", line 148, in setup
+                dist.run_commands()
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 955, in run_commands
+                self.run_command(cmd)
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
+                cmd_obj.run()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 67, in run
+                self.do_egg_install()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 109, in do_egg_install
+                self.run_command('bdist_egg')
+            File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
+                self.distribution.run_command(command)
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
+                cmd_obj.run()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\bdist_egg.py", line 151, in run
+                self.run_command("egg_info")
+            File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
+                self.distribution.run_command(command)
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
+                cmd_obj.run()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\egg_info.py", line 171, in run
+                ep.require(installer=installer)
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2355, in require
+                items = working_set.resolve(reqs, env, installer)
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 835, in resolve
+                new_requirements = dist.requires(req.extras)[::-1]
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2586, in requires
+                dm = self._dep_map
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2787, in _dep_map
+                self.__dep_map = self._compute_dependencies()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2809, in _compute_dependencies
+                for req in self._parsed_pkg_info.get_all('Requires-Dist') or []:
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2778, in _parsed_pkg_info
+                metadata = self.get_metadata(self.PKG_INFO)
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 1993, in get_metadata
+                raise KeyError("No metadata except PKG-INFO is available")
+            KeyError: 'No metadata except PKG-INFO is available'
     """
     if sin is not None and sin != "":
         raise NotImplementedError("sin is not used")
@@ -308,52 +307,51 @@ def get_pip_program(exe=None):
     @param      exe             path to python executable
     @return                     pip executable
 
-    @FAQ(How can I check the dependencies?)
+    .. faqref::
+        :title: How can I check the dependencies?
 
-    The module `pipdeptree <https://github.com/naiquevin/pipdeptree>`_ gives
-    you something like::
+        The module `pipdeptree <https://github.com/naiquevin/pipdeptree>`_ gives
+        you something like::
 
-        d3py==0.2.3
-          - ipython [installed: 3.1.0]
-          - networkx [installed: 1.9.1]
-            - decorator [required: >=3.4.0, installed: 3.4.2]
-          - numpy [installed: 1.9.2]
-          - pandas [installed: 0.16.0]
-            - pytz [required: >=2011k, installed: 2015.4]
-            - python-dateutil [required: >=2, installed: 2.4.2]
-              - six [required: >=1.5, installed: 1.9.0]
-            - numpy [required: >=1.7.0, installed: 1.9.2]
-        autopep8==1.1.1
-          - pep8 [required: >=1.5.7, installed: 1.5.7]
-        sphinxjp.themes.basicstrap==0.4.2
-          - setuptools
-          - Sphinx [installed: 1.3.1]
-            - alabaster [required: >=0.7, installed: 0.7.4]
-            - six [required: >=1.4, installed: 1.9.0]
-            - colorama [installed: 0.3.3]
-            - Pygments [required: >=2.0, installed: 2.0.2]
-            - Babel [required: >=1.3, installed: 1.3]
-              - pytz [required: >=0a, installed: 2015.4]
-            - snowballstemmer [required: >=1.1, installed: 1.2.0]
-            - docutils [required: >=0.11, installed: 0.12]
-            - sphinx-rtd-theme [required: >=0.1, installed: 0.1.8]
-              - Sphinx [required: >=1.3, installed: 1.3.1]
+            d3py==0.2.3
+            - ipython [installed: 3.1.0]
+            - networkx [installed: 1.9.1]
+                - decorator [required: >=3.4.0, installed: 3.4.2]
+            - numpy [installed: 1.9.2]
+            - pandas [installed: 0.16.0]
+                - pytz [required: >=2011k, installed: 2015.4]
+                - python-dateutil [required: >=2, installed: 2.4.2]
+                - six [required: >=1.5, installed: 1.9.0]
+                - numpy [required: >=1.7.0, installed: 1.9.2]
+            autopep8==1.1.1
+            - pep8 [required: >=1.5.7, installed: 1.5.7]
+            sphinxjp.themes.basicstrap==0.4.2
+            - setuptools
+            - Sphinx [installed: 1.3.1]
                 - alabaster [required: >=0.7, installed: 0.7.4]
                 - six [required: >=1.4, installed: 1.9.0]
                 - colorama [installed: 0.3.3]
                 - Pygments [required: >=2.0, installed: 2.0.2]
                 - Babel [required: >=1.3, installed: 1.3]
-                  - pytz [required: >=0a, installed: 2015.4]
+                - pytz [required: >=0a, installed: 2015.4]
                 - snowballstemmer [required: >=1.1, installed: 1.2.0]
                 - docutils [required: >=0.11, installed: 0.12]
+                - sphinx-rtd-theme [required: >=0.1, installed: 0.1.8]
+                - Sphinx [required: >=1.3, installed: 1.3.1]
+                    - alabaster [required: >=0.7, installed: 0.7.4]
+                    - six [required: >=1.4, installed: 1.9.0]
+                    - colorama [installed: 0.3.3]
+                    - Pygments [required: >=2.0, installed: 2.0.2]
+                    - Babel [required: >=1.3, installed: 1.3]
+                    - pytz [required: >=0a, installed: 2015.4]
+                    - snowballstemmer [required: >=1.1, installed: 1.2.0]
+                    - docutils [required: >=0.11, installed: 0.12]
+                    - Jinja2 [required: >=2.3, installed: 2.7.3]
+                    - MarkupSafe [installed: 0.23]
                 - Jinja2 [required: >=2.3, installed: 2.7.3]
-                  - MarkupSafe [installed: 0.23]
-            - Jinja2 [required: >=2.3, installed: 2.7.3]
-              - MarkupSafe [installed: 0.23]
+                - MarkupSafe [installed: 0.23]
 
-        ...
-
-    @endFAQ
+            ...
     """
     tried = []
     if exe is None:

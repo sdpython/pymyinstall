@@ -79,24 +79,23 @@ def fix_pywin32_installation(python_path=None, fLOG=print):
     @param      python_path     python path
     @param      fLOG            logging function
 
-    @FAQ(pywin32 does not work)
+    .. faqref::
+        :title: pywin32 does not work)
 
-    To check module `pywin32 <https://pypi.python.org/pypi/pywin32>`_ is installed,
-    you must run::
+        To check module `pywin32 <https://pypi.python.org/pypi/pywin32>`_ is installed,
+        you must run::
 
-        import win32com
+            import win32com
 
-    If it displays the message ``ImportError: DLL load failed``, it means
-    it was not able to find DLLs *pythoncom34.dll*, *pythoncom34.dll*.
-    Two solutions:
+        If it displays the message ``ImportError: DLL load failed``, it means
+        it was not able to find DLLs *pythoncom34.dll*, *pythoncom34.dll*.
+        Two solutions:
 
-    * Add the folder ``C:\\Python34_x64\\Lib\\site-packages\\pywin32_system32``
-      to environment variable ``PATH``. That's what function
-      @see fn import_pywin32 is doing every time it is called.
-    * Copy the two DLLs to ``C:\\Windows\\System32``, that's what function
-      @see fn fix_pywin32_installation does if it is run with admin rights.
-
-    @endFAQ
+        * Add the folder ``C:\\Python34_x64\\Lib\\site-packages\\pywin32_system32``
+        to environment variable ``PATH``. That's what function
+        @see fn import_pywin32 is doing every time it is called.
+        * Copy the two DLLs to ``C:\\Windows\\System32``, that's what function
+        @see fn fix_pywin32_installation does if it is run with admin rights.
 
     .. versionadded:: 1.1
     """

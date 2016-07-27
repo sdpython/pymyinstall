@@ -37,15 +37,14 @@ def windows_startup(destination, temp_folder, params=None, fLOG=print):
     * *tools*: list of tools to install, see @see fn win_download, if None, use a default list defined
       in @see fn windows_default_tools_list
 
-    @example(Setup a machine)
+    .. exref::
+        :title: Setup a machine
 
-    The following code tries to download many tools and packages
-    to prepare a machine for a datascientist on Windows::
+        The following code tries to download many tools and packages
+        to prepare a machine for a datascientist on Windows::
 
-        from pymyinstall.startup import windows_startup
-        windows_startup(r"d:\datascientist", r"d:\temp\datascientist", fLOG=print)
-
-    @endexample
+            from pymyinstall.startup import windows_startup
+            windows_startup(r"d:\datascientist", r"d:\temp\datascientist", fLOG=print)
 
     .. versionadded:: 1.1
     """
