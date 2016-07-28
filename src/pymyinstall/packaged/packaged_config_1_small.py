@@ -213,8 +213,9 @@ def small_set():
             "backports_abc", "pip", purpose="A backport of recent additions to the 'collections.abc' module",
             usage="JUPYTER"),
         ModuleInstall(
-            "widgetsnbextension", "pip", purpose="Interactive HTML widgets for Jupyter notebooks.",
-            usage="JUPYTER"),
+            "widgetsnbextension", "pip", purpose="ipython-contrib",
+            "jupyter_contrib_nbextensions", "github", 
+            purpose="Interactive HTML widgets for Jupyter notebooks.", usage="JUPYTER"),
         ModuleInstall(
             "backports.shutil-get-terminal-size", "pip", mname="backports", purpose="needed for Jupyter",
             usage="JUPYTER"),
