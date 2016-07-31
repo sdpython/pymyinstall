@@ -66,7 +66,7 @@ class TestPyMyInstallCliTool(unittest.TestCase):
         fLOG(err.replace("\r", "").replace("\n\n", "\n"))
         content = os.listdir(temp)
         if not content:
-            comp = "OUT:\n{0}\nERR:\n{1}".forma(out, err)
+            comp = "OUT:\n{0}\nERR:\n{1}".format(out, err)
             if is_travis_or_appveyor():
                 warnings.warn("content is empty for: " + temp + "\n" + comp)
             else:
