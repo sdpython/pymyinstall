@@ -80,7 +80,7 @@ def fix_pywin32_installation(python_path=None, fLOG=print):
     @param      fLOG            logging function
 
     .. faqref::
-        :title: pywin32 does not work)
+        :title: pywin32 does not work
 
         To check module `pywin32 <https://pypi.python.org/pypi/pywin32>`_ is installed,
         you must run::

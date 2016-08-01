@@ -44,7 +44,7 @@ class ModuleInstall:
     defines the necessary information for a module
 
     .. exref::
-            :title: Installation from GitHub)
+        :title: Installation from GitHub
 
         ::
 

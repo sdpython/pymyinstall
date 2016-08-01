@@ -180,7 +180,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     to do it again.
 
     .. exref::
-        :title: Prepare a standalone distribution)
+        :title: Prepare a standalone distribution
 
         The function downloads everything. The installation of tools
         is still manual. Package installation is automated.

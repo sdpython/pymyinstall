@@ -60,7 +60,7 @@ def create_virtual_env(where, symlinks=False, system_site_packages=False,
     @return                             stand output
 
     .. exref::
-        :title: Create a virtual environment)
+        :title: Create a virtual environment
 
         The following example creates a virtual environment.
         Packages can be added by specifying the parameter *package*.
