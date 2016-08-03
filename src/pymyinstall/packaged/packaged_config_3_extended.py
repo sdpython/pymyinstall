@@ -387,6 +387,9 @@ def extended_set():
                       "instead of just the final function in it."),
         ModuleInstall("gprof2dot", "pip", usage="PROFILING",
                       purpose="This is a Python script to convert the output from many profilers into a dot graph."),
+        ModuleInstall("vprof", "pip", usage="PROFILING",
+                      purpose="vprof is a Python package providing rich and interactive visualizations for various Python " +
+                      "program characteristics such as running time and memory usage."),
         ModuleInstall("snakeviz", "pip",
                       purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
         ModuleInstall("mpmath", "pip",
