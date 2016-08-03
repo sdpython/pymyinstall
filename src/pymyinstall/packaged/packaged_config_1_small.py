@@ -294,8 +294,9 @@ def small_set():
         ModuleInstall('itsdangerous', 'pip',
                       purpose="Various helpers to pass trusted data to untrusted environments and back."),
         ModuleInstall('simplejson', 'wheel', purpose="json parser"),
-        ModuleInstall('flask', 'pip', purpose="python server",
-                      usage="NETWORK"),
+        ModuleInstall('flask', 'pip', usage="NETWORK",
+                      purpose="Flask is a microframework for Python based on Werkzeug, " +
+                      "Jinja 2 and good intentions. And before you ask: It's BSD licensed!"),
         ModuleInstall('flask-sqlalchemy', 'pip',
                       mname='flask.ext.sqlalchemy', usage="NETWORK"),
         ModuleInstall('flask-login', 'pip',
@@ -304,6 +305,11 @@ def small_set():
                       purpose="A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible."),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
+        ModuleInstall('python-mimeparse', 'pip',
+                      purpose="A module provides basic functions for parsing mime-type names and matching them against a list of media-ranges. (falcon)"),
+        ModuleInstall('falcon', 'pip', usage="NETWORK",
+                      purpose="Falcon is a very fast, very minimal Python web framework for building microservices, " +
+                      "app backends, and higher-level frameworks."),
         ModuleInstall(
             'markdown', 'pip', purpose="markdown parser (for bokeh)"),
         ModuleInstall(
