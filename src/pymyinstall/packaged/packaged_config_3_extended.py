@@ -375,13 +375,18 @@ def extended_set():
         ModuleInstall("mysqlclient", "wheel", mname="MySQLdb",
                       purpose="MySQL driver written in Python which does not depend on MySQL C client libraries and " +
                       "implements the DB API v2.0 specification (PEP-249).", usage="SQL"),
-        ModuleInstall("line_profiler", "wheel",
+        ModuleInstall("line-profiler", "wheel", mname="line_profiler",
                       purpose="line_profiler is a module for doing line-by-line profiling of functions. kernprof " +
                       "is a convenient script for running either line_profiler or the " +
                       "Python standard library's cProfile or profile modules, depending on what is available.",
                       usage="PROFILING"),
         ModuleInstall("memory-profiler", "pip", mname="memory_profiler",
                       purpose="A module for monitoring memory usage of a python program", usage="PROFILING"),
+        ModuleInstall("pyinstrument", "pip", usage="PROFILING",
+                      purpose="A Python profiler that records the call stack of the executing code, " +
+                      "instead of just the final function in it."),
+        ModuleInstall("gprof2dot", "pip", usage="PROFILING",
+                      purpose="This is a Python script to convert the output from many profilers into a dot graph."),
         ModuleInstall("snakeviz", "pip",
                       purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
         ModuleInstall("mpmath", "pip",

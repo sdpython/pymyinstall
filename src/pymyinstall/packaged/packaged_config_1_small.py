@@ -338,8 +338,6 @@ def small_set():
                       purpose="A relatively sane approach to multiple dispatch in Python."),
         ModuleInstall("future", "pip",
                       purpose="Clean single-source support for Python 3 and 2"),
-        ModuleInstall("pyprofiler", "pip",
-                      purpose="profiler", usage="PROFILING"),
         ModuleInstall("mock", "pip",
                       purpose="mock is a library for testing in Python. It allows you to replace parts of your system " +
                       "under test with mock objects and make assertions about how they have been used."),
