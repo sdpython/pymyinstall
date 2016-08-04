@@ -3,7 +3,7 @@
 .. blogpost::
     :title: Build xgboost on Windows (again)
     :keywords: xgboost
-    :date: 2016-07-18
+    :date: 2016-08-31
     :categories: module, build
     
     I'm trying to build 
@@ -15,5 +15,6 @@
     where say that the 
     official `instructions <http://xgboost.readthedocs.io/en/latest/build.html>`_
     are not working. Nothing seems to work for me.
+    Still trying.
     
     

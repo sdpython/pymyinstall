@@ -1,0 +1,17 @@
+
+
+.. blogpost::
+    :title: Virtual environment and Anaconda
+    :keywords: xgboost
+    :date: 2016-08-04
+    :categories: CI
+
+    I'm heavily using virtual environment to test my modules
+    on multiple configuration. Anaconda has been failing
+    for six months. I did not find a way to create a virtual 
+    environment. I let some updates go through. I don't remember
+    why it failed but right now it is just because
+    I create a virtual environment on disk D 
+    but Anaconda is installed on disk C.
+    This is explained but this 
+    `issue <https://github.com/conda/conda/issues/3198>`_.
