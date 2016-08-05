@@ -557,6 +557,16 @@ def extended_set():
                       purpose="Magics to use brython in Jupyter notebook."),
         # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
         # enable?
+        #
+
+        #
+        # August 2016
+        #
+        ModuleInstall('qinfer', 'pip', usage="DATA/ML",
+                      purpose="QInfer is a library using Bayesian sequential Monte Carlo for quantum parameter estimation."),
+        ModuleInstall('flexx', 'pip', usage="GUI",
+                      purpose="Flexx is a pure Python toolkit for creating graphical user interfaces (GUI's), " +
+                      "that uses web technology for its rendering. Apps are written purely in Python; Flexx' transpiler generates the necessary JavaScript on the fly."),
     ]
 
     if sys.platform.startswith("win"):

@@ -19,8 +19,9 @@ install:
   - "%PYTHON%\\python -m pip install --upgrade pip"
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyquickhelper"
-  - "%PYTHON%\\Scripts\\pymy_install3 memory_profiler"
+  - "%PYTHON%\\Scripts\\pymy_install3 memory_profiler xgboost spyder"
   - "%PYTHON%\\Scripts\\pip install pyquickhelper"
+  - "%PYTHON%\\Scripts\\pip install rodeo ggplot"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"
 
 build: off

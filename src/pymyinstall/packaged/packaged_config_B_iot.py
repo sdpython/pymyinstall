@@ -41,8 +41,6 @@ def iot_set():
                       purpose="A simple python client for pushbullet.com"),
         ModuleInstall('python-nest', 'pip', usage="IoT",
                       purpose="Python API and command line tool for talking to the Nest™ Thermostat"),
-        ModuleInstall('pydispatcher', 'pip',
-                      purpose="Multi-producer-multi-consumer signal dispatching mechanism"),
         ModuleInstall('VarEvents', 'pip', usage="IoT",
                       purpose="Python module to create variables that can raise custom events."),
         ModuleInstall('PyISY', 'pip', usage="IoT",

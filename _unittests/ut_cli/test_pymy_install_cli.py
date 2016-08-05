@@ -58,7 +58,9 @@ class TestPyMyInstallCli(unittest.TestCase):
         cmd = "{0} {1} {2}".format(
             sys.executable, script, "--set=pyquickhelper --schedule")
         out, err = run_cmd(cmd, wait=True, do_not_log=True)
-        assert len(out) > 0
+        if len(out) == 0:
+            raise Exception(
+                "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
 
     def test_install_download(self):
         fLOG(

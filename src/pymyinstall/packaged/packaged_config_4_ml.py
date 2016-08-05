@@ -170,8 +170,6 @@ def ensae_set():
         # ModuleInstall("pyjs", "pip"), # needs manual installation
         # ModuleInstall("pyjs", "github", "pyjs"), #does not work really
         # ModuleInstall("pyjsdl", "github", "jggatc"), # no setup.py
-        #
-        # twisted, scrapy, not ready yet on Python 3
 
         #
         #
@@ -497,6 +495,23 @@ def ensae_set():
         ModuleInstall("mlxtend", "pip", usage="ML",
                       purpose="Mlxtend (machine learning extensions) " +
                       "is a Python library of useful tools for the day-to-day data science tasks."),
+        #
+        # August 2016
+        #
+        ModuleInstall('pydispatcher', 'pip',
+                      purpose="Multi-producer-multi-consumer signal dispatching mechanism"),
+        ModuleInstall('twisted', 'pip',
+                      purpose="An asynchronous networking framework written in Python"),
+        ModuleInstall('attrs', 'pip',
+                      purpose="Attributes without boilerplate."),
+        ModuleInstall('parsel', 'pip',
+                      purpose="Parsel is a library to extract data from HTML and XML using XPath and CSS selectors."),
+        ModuleInstall('pyasn1-modules', 'pip', mname="pyasn1_modules",
+                      purpose="A collection of ASN.1-based protocols modules."),
+        ModuleInstall('service_identity', 'pip',
+                      purpose="Service identity verification for pyOpenSSL."),
+        ModuleInstall("scrapy", "pip", usage="ML",
+                      purpose="A high-level Web Crawling and Web Scraping framework"),
     ]
 
     if sys.version_info[0] == 2:

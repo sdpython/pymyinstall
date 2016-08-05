@@ -74,7 +74,7 @@ def anaconda_set():
             --configobj
             coverage
             --cryptography
-            --cssselect Linux Mac
+            cssselect
             --csvkit
             --cubes
             --curl
@@ -120,7 +120,7 @@ def anaconda_set():
             holoviews
             html5lib
             --icu Linux Mac
-            --idna
+            idna
             --iopro
             imagesize
             ipython
@@ -283,7 +283,7 @@ def anaconda_set():
             toolz
             tornado
             --translationstring
-            --twisted
+            twisted
             ujson
             unidecode
             --unixodbc Linux
