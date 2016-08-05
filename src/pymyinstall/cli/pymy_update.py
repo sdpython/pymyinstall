@@ -67,15 +67,14 @@ def do_main(temp_folder="build/update_modules",
     try:
         from pymyinstall import is_travis_or_appveyor
     except ImportError:
-        pfolder = os.path.normpath(os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), "..", ".."))
-        sys.path.insert(0, pfolder)
-        try:
-            from pymyinstall import is_travis_or_appveyor
-        except ImportError as e:
-            mes = "Unable to import is_travis_or_appveyor from '{0}' after adding '{1}'.".format(__file__, pfolder)
-            raise ImportError(mes)
-        del sys.path[0]
+        def is_travis_or_appveyor():
+            import sys
+            if "travis" in sys.executable:
+                return "travis"
+            import os
+            if os.environ["USERNAME"] == "appveyor":
+                return "appveyor"
+            return None
     if is_travis_or_appveyor() and source is None:
         source = "2"
 
