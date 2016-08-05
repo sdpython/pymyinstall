@@ -48,7 +48,7 @@ def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=
 
         ::
 
-²           install_scite("my_folder_for_scite")
+            install_scite("my_folder_for_scite")
 
     .. versionchanged:: 1.1
         Parameter *change_python_path* was added.
