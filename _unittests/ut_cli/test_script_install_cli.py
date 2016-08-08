@@ -74,7 +74,8 @@ class TestScriptInstallCli(unittest.TestCase):
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if "usage: pymy_update.py" not in out:
             if is_travis_or_appveyor() == "appveyor":
-                warnings.warn("CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+                warnings.warn(
+                    "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
                 raise Exception(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
@@ -101,7 +102,8 @@ class TestScriptInstallCli(unittest.TestCase):
         fLOG(err)
         if "check module:  flake8" not in out and sys.version_info[0] > 2:
             if is_travis_or_appveyor() == "appveyor":
-                warnings.warn("CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+                warnings.warn(
+                    "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
                 raise Exception(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
@@ -110,7 +112,8 @@ class TestScriptInstallCli(unittest.TestCase):
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if "check module:  flake8" not in out and sys.version_info[0] > 2:
             if is_travis_or_appveyor() == "appveyor":
-                warnings.warn("CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+                warnings.warn(
+                    "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
                 raise Exception(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))

@@ -62,7 +62,8 @@ class TestPyMyInstallCli(unittest.TestCase):
         out, err = run_cmd(cmd, wait=True, do_not_log=True)
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
-                warnings.warn("CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+                warnings.warn(
+                    "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
                 raise Exception(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
@@ -89,7 +90,8 @@ class TestPyMyInstallCli(unittest.TestCase):
         content = os.listdir(temp)
         if len(content) != 2:
             if is_travis_or_appveyor() == "appveyor":
-                warnings.warn("CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+                warnings.warn(
+                    "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
                 raise Exception(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
