@@ -51,6 +51,8 @@ class TestDownloadPip (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         fold = get_temp_folder(__file__, "temp_download_pip")
+        # This test can fail if the latest version of pyquickhelper is not
+        # available for Python 2.7
         m = ModuleInstall("pyquickhelper", "pip", fLOG=fLOG)
         out = m.download(temp_folder=fold)
         assert os.path.exists(out)
@@ -65,6 +67,8 @@ class TestDownloadPip (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         fold = get_temp_folder(__file__, "temp_download_pip_deps")
+        # This test can fail if the latest version of pyquickhelper is not
+        # available for Python 2.7
         m = ModuleInstall("pyquickhelper", "pip", fLOG=fLOG)
         out = m.download(temp_folder=fold, deps=True)
         assert os.path.exists(out)

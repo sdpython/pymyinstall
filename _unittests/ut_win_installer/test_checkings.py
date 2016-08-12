@@ -63,7 +63,8 @@ class TestCheckings(unittest.TestCase):
                 for line in lines:
                     if "pymyinstall" in line:
                         if "rodeo" not in line and "spyder" not in line:
-                            raise e
+                            raise Exception(
+                                "rodeo or spyder not found in line\n{0}".format(line)) from e
         else:
             distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
 
