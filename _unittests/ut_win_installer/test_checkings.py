@@ -66,7 +66,10 @@ class TestCheckings(unittest.TestCase):
                             raise Exception(
                                 "rodeo or spyder not found in line\n{0}".format(line)) from e
         else:
-            distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
+            try:
+                distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
+            except Exception as e:
+                raise Exception("version: " + sys.version) from e
 
 
 if __name__ == "__main__":
