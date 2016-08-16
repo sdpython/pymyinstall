@@ -66,7 +66,7 @@ class ModuleInstall:
     def __init__(self, name, kind="pip", gitrepo=None, mname=None, fLOG=print,
                  version=None, script=None, index_url=None, deps=None,
                  purpose=None, usage=None, web=None, source=None, custom=None,
-                 branch="master"):
+                 branch="master", pip_options=None):
         """
         constructor
 
@@ -89,9 +89,10 @@ class ModuleInstall:
                                     ``['build', 'install']`` to run
                                     ``setup.py build`` and ``setup.py install``
         @param      branch          only necessary for install process with github
+        @param      pip_options     additional options for pip (list)
 
         .. versionchanged:: 1.1
-            Parameters *source*, *custom*, *branch* were added.
+            Parameters *source*, *custom*, *branch*, *pip_options* were added.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -111,6 +112,7 @@ class ModuleInstall:
         self.source = source
         self.custom = custom
         self.branch = branch
+        self.pip_options = pip_options
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -546,6 +548,8 @@ class ModuleInstall:
                     self.index_url, slash)
                 parsed_uri = urlsplit(self.index_url)
                 cmd += " --trusted-host " + parsed_uri.hostname
+            if self.pip_options is not None:
+                cmd += " " + " ".join(self.pip_options)
 
             out, err = run_cmd(
                 cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
@@ -911,6 +915,8 @@ class ModuleInstall:
 
         deps = deps if self.deps is None else self.deps
 
+        if options is None:
+            options = self.pip_options
         if options is None:
             options = []
 

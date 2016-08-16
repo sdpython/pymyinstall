@@ -9,26 +9,12 @@ def pyensae_set():
     """
     list of modules needed to run unit test of module *pyensae*
     """
-    from .packaged_config_0_pyquickhelper import pyquickhelper_set
+    from .packaged_config_0_pyquickhelper import pyquickhelper_set, all_set
     names = pyquickhelper_set()
     names += [
         "ansi2html",  # ssh
         "ansiconv",  # ssh
         "antlr4-python3-runtime",
-        "azure",  # azure
-        "azure-nspkg",
-        "azure-mgmt-nspkg",
-        "azure-common",
-        "azure-mgmt-common",
-        "azure-mgmt-compute",
-        "azure-mgmt-network",
-        "azure-mgmt-resource",
-        "azure-mgmt-storage",
-        "azure-mgmt",
-        "azure-servicebus",
-        "azure-storage",
-        "azure-servicemanagement-legacy",
-        "azure-storage",
         "azureml",
         "colormap",
         "dbfread",
@@ -48,6 +34,10 @@ def pyensae_set():
         "scikit-learn",
         "urllib3",
     ]
+
+    for m in all_set:
+        if m.name.startswith("azure"):
+            names.append(m)
 
     from .automate_install import find_module_install
     return [find_module_install(_) for _ in names if _ is not None]

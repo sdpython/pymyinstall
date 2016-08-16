@@ -334,39 +334,6 @@ def ensae_set():
         # ModuleInstall("biokit", "github", "biokit", usage="VIZ",
         # purpose="Access to Biological Web Services from Python"),
 
-
-        # azure part
-        ModuleInstall("azure-nspkg", "pip", usage="AZURE", mname="azure.mgmt",
-                      purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
-        ModuleInstall("azure-common", "pip", usage="AZURE", mname="azure.common",
-                      purpose="Microsoft Azure Client Library for Python (Common)"),
-        ModuleInstall("azure-mgmt-nspkg", "pip", usage="AZURE", mname="azure.mgmt.common",
-                      purpose="Microsoft Azure Resource Management Namespace Package [Internal]"),
-        ModuleInstall("azure-mgmt-common", "pip", usage="AZURE", mname="azure.mgmt.common",
-                      purpose="Microsoft Azure Resource Management Client Library for Python (Common)"),
-        ModuleInstall("azure-mgmt-compute", "pip", usage="AZURE", mname="azure.mgmt.compute",
-                      purpose="Microsoft Azure Compute Resource Management Client Library for Python"),
-        ModuleInstall("azure-mgmt-network", "pip", usage="AZURE", mname="azure.mgmt.network",
-                      purpose="Microsoft Azure Network Resource Management Client Library for Python"),
-        ModuleInstall("azure-mgmt-resource", "pip", usage="AZURE", mname="azure.mgmt.resource",
-                      purpose=""),
-        ModuleInstall("azure-mgmt-storage", "pip", usage="AZURE", mname="azure.mgmt.storage",
-                      purpose="Microsoft Azure Storage Resource Management Client Library for Python"),
-        ModuleInstall("azure-mgmt", "pip", usage="AZURE", mname="azure.mgmt",
-                      purpose="Microsoft Azure Resource Management Client Libraries for Python"),
-        ModuleInstall("azure-servicebus", "pip", usage="AZURE", mname="azure.servicebus",
-                      purpose="Microsoft Azure Service Bus Client Library for Python"),
-        ModuleInstall("azure-storage", "pip", usage="AZURE", mname="azure.storage",
-                      purpose="Microsoft Azure Storage Client Library for Python"),
-        ModuleInstall("azure-servicemanagement-legacy", "pip", usage="AZURE", mname="azure.servicemanagement",
-                      purpose="Microsoft Azure Legacy Service Management Client Library for Python"),
-        ModuleInstall(
-            "azure", "pip", purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE"),
-        ModuleInstall(
-            "azureml", "pip", purpose="Python wrapper for Azure ML API (Azure ML Pipeline)", usage="AZURE"),
-        ModuleInstall(
-            "azure-batch-apps", "pip", usage="AZURE", mname="batchapps",
-            purpose="Python wrapper for Azure ML API (Azure ML Pipeline)"),
         #
         #
         #
@@ -542,5 +509,18 @@ def ensae_set():
                                  purpose="General utility modules that supply commonly-used functionality"))
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
+
+    for name in ['azure-nspkg', 'azure-common', 'azure-mgmt-nspkg', 'azure-mgmt-authorization',
+                 'azure-mgmt-batch', 'azure-mgmt-cdn', 'azure-mgmt-cognitiveservices', 'azure-mgmt-commerce',
+                 'azure-mgmt-compute', 'azure-mgmt-logic', 'azure-mgmt-graphrbac', 'azure-mgmt-network',
+                 'azure-mgmt-notificationhubs', 'azure-mgmt-powerbiembedded', 'azure-mgmt-redis',
+                 'azure-mgmt-resource', 'azure-mgmt-scheduler', 'azure-mgmt-storage',
+                 'azure-mgmt-web', 'azure-graphrbac', 'azure-batch', 'azure-servicebus',
+                 'azure-servicemanagement-legacy', 'azure']:
+        # azure part
+        m = ModuleInstall(
+            name, "pip", pip_options=["--pre"],
+            purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE")
+        mod.append(m)
 
     return [_ for _ in mod if _ is not None]

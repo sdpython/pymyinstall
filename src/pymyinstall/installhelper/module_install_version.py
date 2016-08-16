@@ -5,7 +5,7 @@
 from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
 from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
-from .install_cmd_regex import regex_wheel_version, regex_wheel_version2
+from .install_cmd_regex import regex_wheel_version, regex_wheel_version2, regex_wheel_version3
 
 import sys
 import re
@@ -227,11 +227,6 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
     See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
     `pkgtools.pypi: PyPI interface <http://pkgtools.readthedocs.org/en/latest/pypi.html>`_.
 
-    The function leaves a connection open::
-
-        ResourceWarning: unclosed <socket.socket fd=XXX, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('XXX.XXX.X...
-
-    It should be fixed in Python > 3.4.
     It the function fails, check the status of
     `Python Infrastructure <https://status.python.org/>`_.
     It can return errors::
@@ -738,8 +733,11 @@ def get_wheel_version(whlname):
         exp = re.compile(regex_wheel_version2)
         find = exp.findall(whlname)
     if len(find) == 0:
-        raise ValueError(
-            "[get_wheel_version] unable to extract version of {0} (pattern: {1})".format(whlname, exp.pattern))
+        exp = re.compile(regex_wheel_version3)
+        find = exp.findall(whlname)
+    if len(find) == 0:
+        mes = "[get_wheel_version] unable to extract version of {0}\n(pattern: '{1}' or\n'{2}' or\n'{3}')"
+        raise ValueError(mes.format(whlname, regex_wheel_version, regex_wheel_version2, regex_wheel_version3))
     if len(find) > 1:
         raise ValueError(
             "[get_wheel_version] unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))
