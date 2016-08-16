@@ -1,0 +1,14 @@
+
+
+.. blogpost::
+    :title: Build param on Windows
+    :keywords: param
+    :date: 2016-08-16
+    :categories: module, build
+
+    Just follow the steps to build `param <https://github.com/ioam/param>`_:
+
+    #. Install Python and Visual Studio Community
+    #. Get the sources from GitHub
+    #. Run ``python setup.py build_ext --inplace``
+    #. Run ``python setup.py bdist_wheel``

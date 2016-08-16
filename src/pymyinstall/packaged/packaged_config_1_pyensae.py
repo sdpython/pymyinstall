@@ -9,7 +9,8 @@ def pyensae_set():
     """
     list of modules needed to run unit test of module *pyensae*
     """
-    from .packaged_config_0_pyquickhelper import pyquickhelper_set, all_set
+    from .packaged_config_0_pyquickhelper import pyquickhelper_set
+    from .packaged_config_4_ml import ensae_set
     names = pyquickhelper_set()
     names += [
         "ansi2html",  # ssh
@@ -35,7 +36,7 @@ def pyensae_set():
         "urllib3",
     ]
 
-    for m in all_set:
+    for m in ensae_set():
         if m.name.startswith("azure"):
             names.append(m)
 
