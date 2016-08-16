@@ -53,7 +53,7 @@ class TestCheckings(unittest.TestCase):
         if sys.version_info[0] == 2:
             # not maintained in Python 2.7
             return
-        if "Continuum Analytics" in sys.version:
+        if "Anaconda custom" in sys.version:
             try:
                 distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
             except Exception as e:
