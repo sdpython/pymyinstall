@@ -737,7 +737,8 @@ def get_wheel_version(whlname):
         find = exp.findall(whlname)
     if len(find) == 0:
         mes = "[get_wheel_version] unable to extract version of {0}\n(pattern: '{1}' or\n'{2}' or\n'{3}')"
-        raise ValueError(mes.format(whlname, regex_wheel_version, regex_wheel_version2, regex_wheel_version3))
+        raise ValueError(mes.format(whlname, regex_wheel_version,
+                                    regex_wheel_version2, regex_wheel_version3))
     if len(find) > 1:
         raise ValueError(
             "[get_wheel_version] unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))

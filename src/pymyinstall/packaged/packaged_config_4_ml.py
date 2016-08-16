@@ -430,8 +430,6 @@ def ensae_set():
                       purpose="kabuki is a python toolbox that allows easy creation of hierarchical bayesian models for the cognitive sciences."),
         ModuleInstall("HDDM", "wheel", mname="hddm", usage="ML",
                       purpose="HDDM is a python module that implements Hierarchical Bayesian estimation of Drift Diffusion Models."),
-        ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
-                      purpose="large-scale linear classification, regression and ranking"),
         ModuleInstall("reportlab", "wheel",
                       purpose="This is the ReportLab PDF Toolkit. It allows rapid creation of rich PDF documents, and also creation of " +
                       "charts in a variety of bitmap and vector formats."),
@@ -479,6 +477,28 @@ def ensae_set():
                       purpose="Service identity verification for pyOpenSSL."),
         ModuleInstall("scrapy", "pip", usage="ML",
                       purpose="A high-level Web Crawling and Web Scraping framework"),
+
+        #
+        # August 2016
+        #
+        ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
+                      purpose="large-scale linear classification, regression and ranking"),
+        ModuleInstall("imbalanced-learn", "github", "scikit-learn-contrib",
+                      mname="imblearn", usage="ML",
+                      purpose="imbalanced-learn is a python package offering a number of re-sampling " +
+                      "techniques commonly used in datasets showing strong between-class imbalance. " +
+                      "It is compatible with scikit-learn and is part of scikit-learn-contrib projects."),
+        ModuleInstall("forest-confidence-interval", "github", "scikit-learn-contrib",
+                      mname="forestci", usage="ML",
+                      purpose="Python module for calculating variance and adding confidence intervals to scikit-learn random forest regression " +
+                      "or classification objects. The core functions calculate an in-bag and error bars for random forest objects"),
+        ModuleInstall("py_earth", "wheel", source="2", mname="pyearth", usage="ML",
+                      purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of " +
+                      "scikit-learn. The py-earth package implements Multivariate Adaptive Regression Splines using Cython and provides an " +
+                      "interface that is compatible with scikit-learn's Estimator, Predictor, Transformer, and Model interfaces. For more " +
+                      "information about Multivariate Adaptive Regression Splines, see the references below."),
+        ModuleInstall("polylearn", "wheel", source="2", usage="ML",
+                      purpose="A library for factorization machines and polynomial networks for classification and regression in Python."),
     ]
 
     if sys.version_info[0] == 2:
