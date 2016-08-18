@@ -1,0 +1,107 @@
+
+
+.. blogpost::
+    :title: Build rpy2 on Windows
+    :keywords: rpy2
+    :date: 2016-08-31
+    :categories: module, build
+
+    This is not easy! Still figure it out. You need:
+    
+    * Install `R <https://cran.univ-paris1.fr/bin/windows/base/>`_
+    * Install `Rtools <https://cran.univ-paris1.fr/bin/windows/Rtools/>`_
+    * Install `Cygwin <https://www.cygwin.com/>`_
+    
+    Maybe:
+    
+    * Install `pexports <https://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/>`_
+      (exports all symbols from a DLL: ``pexports "R.dll" >R.def``,
+      `import R <http://www.stats.uwo.ca/faculty/murdoch/software/compilingDLLs/existingDLL.html#import>`_)
+      
+    Steps:
+    
+    * Get the sources from `rpy2 <https://bitbucket.org/rpy2/rpy2>`_
+    
+    **Compilation with Visual Studio 2015 (still failing)**
+    
+    Open *_rinterface.c*, comment out the following lines::
+
+        //static PyTypeObject NAInteger_Type;
+        //static PyTypeObject NALogical_Type;
+        //static PyTypeObject NAReal_Type;
+        //static PyTypeObject NAComplex_Type;
+        //static PyTypeObject NACharacter_Type;
+        
+        //Rp->ResetConsole = EmbeddedR_ResetConsole; 
+        
+    From a cygwin environment:
+    
+    ::
+
+        export PATH=$PATH:'/cygdrive/c/Program Files/R/R-3.3.1/bin/x64'
+        export PATH=$PATH:'/cygdrive/c/Program Files/R/R-3.3.1/include'
+        export R_HOME=/cygdrive/c/Program\ Files/R/R-3.3.1
+        
+    Or from the command line before starting *cygwin*:
+        
+        set PATH=%PATH%;c:\Program Files\R\R-3.3.1\bin\x64
+        set PATH=%PATH%;c:\Program Files\R\R-3.3.1\include
+        set R_HOME=c:\Program Files\R\R-3.3.1
+        set PATH=%PATH%;C:\cygwin64\bin
+        
+    In file ``distutils/cygwinccompiler.py``, modifies:
+    
+    * function *get_msvcr*, replace ::
+        
+        else:
+            raise ValueError("Unknown MS Compiler version %s " % msc_ver)
+        
+      by::
+      
+        else:
+            return ["msvcr140"]
+    * function *Mingw32CCompiler.__init__*, comment out the following lines::
+    
+        if is_cygwingcc():
+            raise CCompilerError(
+                'Cygwin gcc cannot be used with --compiler=mingw32')        
+                
+    From a Cygwin environment, run:
+
+    ::
+
+        /cygdrive/c/Python35_x64/python setup.py build_ext -I C:\\Program\ Files\\R\\R-3.3.1\\include
+        
+    Or from the Windows command line:
+    
+    ::
+    
+        c:\Python35_x64\python setup.py build_ext -I "C:\Program Files\R\R-3.3.1\include" --compiler=mingw32
+        
+    Without the option ``--compiler=mingw32``, I get the following error which
+    means I cannot link with *R.dll* symbols.
+    
+    ::
+        ...
+    
+        error LNK2001: unresolved external symbol Rf_allocVector3
+        
+        ...
+    
+        fatal error LNK1120: 107 unresolved externals
+
+    **Remarks**
+    
+    If you get the following error:
+    
+    ::
+    
+        'sh' is not recognized as an internal or external command
+    
+    Just add:
+    
+    ::
+    
+        set PATH=%PATH%;C:\cygwin64\bin
+
+    https://wanglongqi.github.io/r/2015/04/08/rpy2install/

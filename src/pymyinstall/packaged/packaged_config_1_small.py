@@ -165,6 +165,8 @@ def small_set():
         ModuleInstall(
             "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall("PyPDF2", "pip", purpose="PDF toolkit"),
+        ModuleInstall(
+            "ghost.py", "pip", mname="ghost", purpose="ghost.py is a webkit web client written in python", usage="JUPYTER"),
         ModuleInstall("nbbrowserpdf", "pip",
                       purpose="LaTeX-free PDF generation from Jupyter Notebooks", usage="JUPYTER"),
         ModuleInstall(

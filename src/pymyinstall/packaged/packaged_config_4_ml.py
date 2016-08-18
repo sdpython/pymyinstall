@@ -479,7 +479,7 @@ def ensae_set():
                       purpose="A high-level Web Crawling and Web Scraping framework"),
 
         #
-        # August 2016
+        # 2015-08-11
         #
         ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
                       purpose="large-scale linear classification, regression and ranking"),
@@ -499,6 +499,35 @@ def ensae_set():
                       "information about Multivariate Adaptive Regression Splines, see the references below."),
         ModuleInstall("polylearn", "wheel", source="2", usage="ML",
                       purpose="A library for factorization machines and polynomial networks for classification and regression in Python."),
+        #
+        # 2015-08-18: weidelin.core
+        #
+        ModuleInstall("lda", "pip", usage="ML",
+                      purpose="lda implements latent Dirichlet allocation (LDA) using collapsed Gibbs sampling."),
+        #
+        # 2015-08-18: weidelin.core
+        #
+        ModuleInstall("ZConfig", "pip",
+                      purpose="Structured Configuration Library"),
+        ModuleInstall("transaction", "pip",
+                      purpose="Transaction management for Python. " +
+                      "This package contains a generic transaction implementation for Python. It is mainly used by the ZODB."),
+        ModuleInstall("zc.lockfile", "pip",
+                      purpose="Basic inter-process locks"),
+        ModuleInstall("zodbpickle", "wheel",
+                      purpose="This package presents a uniform pickling interface for ZODB."),
+        ModuleInstall("ZODB", "pip",
+                      purpose="The Zope Object Database provides an object-oriented database for Python that provides a high-degree of transparency."),
+        ModuleInstall("zdaemon", "pip",
+                      purpose="Daemon process control library and tools for Unix-based systems"),
+        ModuleInstall("ZEO", "pip",
+                      purpose="ZEO provides a client-server storage implementation for ZODB."),
+        ModuleInstall("ZODB3", "pip",
+                      purpose="ZODB3 - Meta release for ZODB, persistent, BTrees and ZEO"),
+        ModuleInstall("weidelin.core", "wheel", source="2",
+                      purpose="Out-of-core NumPy arrays. " +
+                      "Wendelin.core allows you to work with arrays bigger than RAM and local disk. Bigarrays are persisted to storage, " +
+                      "and can be changed in transactional manner."),
     ]
 
     if sys.version_info[0] == 2:
