@@ -522,10 +522,10 @@ def ensae_set():
                       purpose="ZEO provides a client-server storage implementation for ZODB."),
         ModuleInstall("ZODB3", "pip",
                       purpose="ZODB3 - Meta release for ZODB, persistent, BTrees and ZEO"),
-        ModuleInstall("weidelin.core", "wheel", source="2",
-                      purpose="Out-of-core NumPy arrays. " +
-                      "Wendelin.core allows you to work with arrays bigger than RAM and local disk. Bigarrays are persisted to storage, " +
-                      "and can be changed in transactional manner."),
+        # ModuleInstall("wendelin.core", "wheel", source="2",
+        #               purpose="Out-of-core NumPy arrays. " +
+        #               "Wendelin.core allows you to work with arrays bigger than RAM and local disk. Bigarrays are persisted to storage, " +
+        #               "and can be changed in transactional manner."),
     ]
 
     if sys.version_info[0] == 2:
