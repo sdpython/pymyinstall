@@ -397,7 +397,10 @@ def ensae_set():
         ModuleInstall("pystruct", "wheel", usage="ML", source="2",
                       purpose="Learning Structured Prediction in Python"),
         ModuleInstall("py-earth", "wheel", mname="pyearth", usage="ML", source="2",
-                      purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of scikit-learn."),
+                      purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of " +
+                      "scikit-learn. The py-earth package implements Multivariate Adaptive Regression Splines using Cython and provides an " +
+                      "interface that is compatible with scikit-learn's Estimator, Predictor, Transformer, and Model interfaces. For more " +
+                      "information about Multivariate Adaptive Regression Splines, see the references below."),
         ModuleInstall("seqlearn", "wheel", usage="ML",
                       purpose="sequence classification toolkit for Python"),
         ModuleInstall("hmmlearn", "wheel", usage="ML",
@@ -492,11 +495,6 @@ def ensae_set():
                       mname="forestci", usage="ML",
                       purpose="Python module for calculating variance and adding confidence intervals to scikit-learn random forest regression " +
                       "or classification objects. The core functions calculate an in-bag and error bars for random forest objects"),
-        ModuleInstall("py_earth", "wheel", source="2", mname="pyearth", usage="ML",
-                      purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of " +
-                      "scikit-learn. The py-earth package implements Multivariate Adaptive Regression Splines using Cython and provides an " +
-                      "interface that is compatible with scikit-learn's Estimator, Predictor, Transformer, and Model interfaces. For more " +
-                      "information about Multivariate Adaptive Regression Splines, see the references below."),
         ModuleInstall("polylearn", "wheel", source="2", usage="ML",
                       purpose="A library for factorization machines and polynomial networks for classification and regression in Python."),
         #
