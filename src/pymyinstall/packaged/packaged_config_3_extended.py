@@ -89,7 +89,7 @@ def extended_set():
                       purpose="clustering, AHC, ... (issue on Linux and Anaconda)", usage="DATA/ML"),
         ModuleInstall(
             'pycosat', 'wheel', purpose="PicoSAT is a popular SAT solver written by Armin Biere in pure C."),
-        ModuleInstall('pyshp', 'pip', mname='shapefile',
+        ModuleInstall('pyshp', 'github', 'GeospatialPython', mname='shapefile',
                       purpose="Pure Python read/write support for ESRI Shapefile format"),
         ModuleInstall('Shapely', 'wheel', mname='shapely',
                       purpose="Manipulation and analysis of geometric objects in the Cartesian plane."),
