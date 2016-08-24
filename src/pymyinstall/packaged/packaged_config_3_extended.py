@@ -568,6 +568,10 @@ def extended_set():
                       purpose="Flexx is a pure Python toolkit for creating graphical user interfaces (GUI's), " +
                       "that uses web technology for its rendering. Apps are written purely in Python; Flexx' " +
                       "transpiler generates the necessary JavaScript on the fly."),
+        ModuleInstall('toyplot', 'pip', usage="VIZ",
+                      purpose="The kid-sized plotting toolkit for Python with grownup-sized goals."),
+        ModuleInstall('images2gif', 'pip',
+                      purpose="Create a GIF from a list of images."),
     ]
 
     if sys.platform.startswith("win"):

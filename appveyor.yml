@@ -22,7 +22,8 @@ install:
   - "%PYTHON%\\Scripts\\pymy_install3 memory_profiler xgboost spyder statsmodels scipy scikit-learn"
   - "%PYTHON%\\Scripts\\pip install pyquickhelper"
   - "%PYTHON%\\Scripts\\pip install ggplot version_information"
-  - "%PYTHON%\\Scripts\\pip install rodeo"
+#  check the status of rodeo
+# - "%PYTHON%\\Scripts\\pip install rodeo"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"
 
 build: off
