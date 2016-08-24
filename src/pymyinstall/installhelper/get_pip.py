@@ -109,6 +109,7 @@ def bootstrap(tmpdir=None):
         # install it
         try:
             import setuptools  # noqa
+            assert setuptools
         except ImportError:
             packages += ["setuptools"]
 
@@ -119,6 +120,7 @@ def bootstrap(tmpdir=None):
         # We want to see if wheel is available before attempting to install it.
         try:
             import wheel  # noqa
+            assert wheel
         except ImportError:
             args += ["wheel"]
 
