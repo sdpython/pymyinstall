@@ -3,10 +3,42 @@
 .. blogpost::
     :title: Build rpy2 on Windows
     :keywords: rpy2
-    :date: 2016-08-31
+    :date: 2016-08-25
     :categories: module, build
+    
+    I started this blog post because I got the following error
+    with `rpy2 <http://rpy2.bitbucket.org/>`_:
+    
+    ::
 
-    This is not easy! Still figure it out. You need:
+        In [2]: %load_ext rpy2.ipython
+        ---------------------------------------------------------------------------
+        AttributeError                            Traceback (most recent call last)
+        <ipython-input-2-a69f80d0128e> in <module>()
+        ----> 1 get_ipython().magic('load_ext rpy2.ipython')
+
+        c:\python35_x64\lib\site-packages\IPython\core\interactiveshell.py in magic(sel
+        
+        ....
+        
+        c:\python35_x64\lib\site-packages\rpy2\ipython\rmagic.py in load_ipython_extension(ip)
+            786     # Initialising rpy2 interferes with readline. Since, at this point, we've
+            787     # probably just loaded rpy2, we reset the delimiters. See issue gh-2759.
+        --> 788     if ip.has_readline:
+            789         ip.readline.set_completer_delims(ip.readline_delims)
+
+        AttributeError: 'ZMQInteractiveShell' object has no attribute 'has_readline'        
+        
+    The first solution just consists in commenting out those two lines:
+    
+    ::
+    
+        --> 788     # if ip.has_readline:
+            789     #     ip.readline.set_completer_delims(ip.readline_delims)
+    
+    I then though about compiling rpy2 for Windows. But...
+    I'm still figuring out. It does not work but this is
+    what I did. You need:
     
     * Install `R <https://cran.univ-paris1.fr/bin/windows/base/>`_
     * Install `Rtools <https://cran.univ-paris1.fr/bin/windows/Rtools/>`_

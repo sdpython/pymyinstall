@@ -12,7 +12,7 @@ from .install_custom import download_page, download_file
 
 def install_inkscape(dest_folder=".", fLOG=print, install=True, version=None):
     """
-    install `InkScape <http://https://inkscape.org/>`_ (only on Windows)
+    install `InkScape <https://inkscape.org/en/>`_ (only on Windows)
 
     @param      dest_folder     where to download the setup
     @param      fLOG            logging function
