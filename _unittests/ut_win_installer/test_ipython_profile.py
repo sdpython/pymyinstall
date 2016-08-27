@@ -5,6 +5,7 @@
 import sys
 import os
 import unittest
+import warnings
 
 try:
     import src
@@ -63,7 +64,8 @@ class TestIPythonProfile(unittest.TestCase):
         except FileNotFoundError as e:
             if "_venv" in str(e) and ".exe" in str(e):
                 # ipython.exe not present in virtual environment
-                pass
+                warnings.warn("needs to add custom command line")
+                return
             else:
                 raise e
 
