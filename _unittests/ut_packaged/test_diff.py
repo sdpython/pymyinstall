@@ -78,7 +78,6 @@ class TestDifference(unittest.TestCase):
             count[mod.name] = 1
 
         assert "pyquickhelper" in count
-        assert "rodeo" in count
         assert "code_beatrix" in count
 
 

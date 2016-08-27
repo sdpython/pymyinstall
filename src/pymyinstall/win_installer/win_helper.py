@@ -167,11 +167,6 @@ def get_julia_version(path):
     return exec_shell_cmd('julia.exe -v', path).splitlines()[0].split(" ")[-1]
 
 
-def get_rodeo_version(path):
-    """Return version of the Rodeo installed in *path*"""
-    return python_query('import rodeo;print(rodeo.__version__)', path)
-
-
 def python_query(cmd, path):
     """Execute Python command using the Python interpreter located in *path*"""
     res = exec_shell_cmd('python -c "%s"' % cmd, path).splitlines()

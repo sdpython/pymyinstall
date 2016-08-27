@@ -32,7 +32,6 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
         raise ValueError("module_list cannot be None")
 
     has_jupyter = False
-    has_rodeo = False
     has_spyder = False
     has_rss = False
     has_glue = False
@@ -43,8 +42,6 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
             has_jupyter = True
         if mod.name == "orange3":
             has_orange = True
-        if mod.name == "rodeo":
-            has_rodeo = True
         if mod.name == "spyder":
             has_spyder = True
         if mod.name == "pyrsslocal":
@@ -71,9 +68,6 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
                                create_win_jupyter_notebook,
                                win_install_kernels,
                                ])
-
-    if has_rodeo:
-        list_functions.append(create_win_rodeo)
 
     if has_orange:
         list_functions.append(create_win_orange)
@@ -229,26 +223,6 @@ def create_win_jupyter_notebook(folders):
 
     text = "\n".join(text)
     name = os.path.join(folders["config"], "jupyter_notebook.bat")
-    with open(name, "w") as f:
-        f.write(text)
-    return [('batch', name)]
-
-
-def create_win_rodeo(folders):
-    """
-    create a batch file to start rodeo
-
-    @param      folders     see @see fn create_win_batches
-    @return                 operations (list of what was done)
-    """
-    text = ['@echo off',
-            'set CURRENT2=%~dp0',
-            'call "%CURRENT2%env.bat"',
-            'set RODEO=%PYTHON_WINSCRIPTS%\\rodeo.exe',
-            '"%RODEO%" "%WORKSPACE%"']
-
-    text = "\n".join(text)
-    name = os.path.join(folders["config"], "rodeo.bat")
     with open(name, "w") as f:
         f.write(text)
     return [('batch', name)]

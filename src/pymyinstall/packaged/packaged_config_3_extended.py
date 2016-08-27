@@ -303,8 +303,9 @@ def extended_set():
         ModuleInstall(
             "py2exe", "wheel",
             purpose="convert a python program into an exe program") if sys.platform.startswith("win") and sys.version_info[:2] <= (3, 4) else None,
-        ModuleInstall(
-            "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
+        # rodeo disappeared from pipy
+        # ModuleInstall(
+        #     "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
         ModuleInstall(
             "tzlocal", "pip", purpose="tzinfo object for the local timezone"),
         ModuleInstall(

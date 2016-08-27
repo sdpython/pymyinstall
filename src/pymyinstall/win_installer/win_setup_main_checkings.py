@@ -50,15 +50,15 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
     if not os.path.exists(pip) and not os.path.exists(pep8):
         scripts = os.path.join(python_path, "Scripts")
         files_to_check.extend(
-            ["rodeo.exe", "spyder.bat", "autopep8.exe"])
+            ["spyder.bat", "autopep8.exe"])
         if sys.version_info[:2] != (3, 5):
             files_to_check.append("pip.exe")
     else:
         scripts = python_path
 
-    #############################################
-    # check Jupyter, Rodeo, numpy works properly
-    #############################################
+    ######################################
+    # check Jupyter, numpy, works properly
+    ######################################
     if sys.platform.startswith("win"):
         for file in files_to_check:
             f = os.path.join(scripts, file)
