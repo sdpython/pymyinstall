@@ -50,15 +50,15 @@ class TestInstall (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        out, err = run_cmd("find", wait=True, do_not_log=True)
+        out, err = run_cmd("find", wait=True)
 
     def test_install(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        if sys.version_info[0] == 2 or "anaconda" in sys.executable.lower():
-            # disabled on python 2.7
+        if sys.version_info[0] == 2 or "conda" in sys.version:
+            # disabled on python 2.7 and anaconda
             return
         m = ModuleInstall("pip", "pip")
         assert m.install()
