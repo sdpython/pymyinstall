@@ -50,6 +50,9 @@ class TestInstall (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+        if sys.version_info[0] == 2:
+            # disabled on python 2.7
+            return
         out, err = run_cmd("find", wait=True)
 
     def test_install(self):
