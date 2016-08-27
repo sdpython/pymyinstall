@@ -72,7 +72,7 @@ class TestCheckings(unittest.TestCase):
             try:
                 distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
             except Exception as e:
-                if 'rodeo.exe' not in str(e):
+                if '_venv' not in str(e) or ('Scripts' not in str(e) and '.exe' not in str(e)):
                     raise Exception("version: " + sys.version) from e
 
 
