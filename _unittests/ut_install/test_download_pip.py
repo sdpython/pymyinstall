@@ -50,6 +50,9 @@ class TestDownloadPip (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+        if sys.version_info[0] == 2:
+            # disabled on python 2.7
+            return
         fold = get_temp_folder(__file__, "temp_download_pip")
         # This test can fail if the latest version of pyquickhelper is not
         # available for Python 2.7
