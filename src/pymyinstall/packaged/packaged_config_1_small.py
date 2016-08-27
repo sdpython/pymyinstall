@@ -150,6 +150,8 @@ def small_set():
             "wcwidth", "pip", purpose="Measures number of Terminal column cells of wide-character codes", usage="JUPYTER"),
         ModuleInstall(
             "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
+        ModuleInstall("win_unicode_console", "pip",
+                      "Enable Unicode input and display when running Python from Windows console."),
         ModuleInstall(
             "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
