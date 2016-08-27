@@ -66,7 +66,7 @@ class TestIPythonProfile(unittest.TestCase):
                 pass
             else:
                 raise e
-                
+
         fLOG(path)
         assert os.path.exists(path)
 
