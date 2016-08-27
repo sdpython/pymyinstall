@@ -4,6 +4,7 @@
 
 .. versionadded:: 1.1
 """
+from __future__ import print_function
 import sys
 import os
 from ..win_installer.win_setup_main_helper import win_download, win_install
