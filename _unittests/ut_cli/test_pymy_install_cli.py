@@ -80,13 +80,14 @@ class TestPyMyInstallCli(unittest.TestCase):
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
         cmd = "{0} {1} {2} --force --folder={3}".format(
             sys.executable, script, "colorama xlrd --download", temp)
-        out, err = run_cmd(cmd, wait=True, do_not_log=True)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         fLOG("----", cmd)
         fLOG(out.replace("\r", "").replace("\n\n", "\n"))
         fLOG("-----")
         fLOG(err.replace("\r", "").replace("\n\n", "\n"))
         if "downloaded modules" not in out:
-            raise Exception(out)
+            raise Exception(
+                "CMD: {0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
         content = os.listdir(temp)
         if len(content) != 2:
             if is_travis_or_appveyor() == "appveyor":

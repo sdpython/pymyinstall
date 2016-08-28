@@ -53,7 +53,7 @@ class TestInstall (unittest.TestCase):
         if sys.version_info[0] == 2:
             # disabled on python 2.7
             return
-        out, err = run_cmd("find", wait=True)
+        out, err = run_cmd("find", wait=True, fLOG=fLOG)
 
     def test_install(self):
         fLOG(
