@@ -117,6 +117,8 @@ def install_python(
             # file
             if versioni <= (3, 5, 1):
                 url = "http://www.xavierdupre.fr/enseignement/setup/Python35_x64.7z"
+            elif versioni == (3, 5, 2):
+                url = "http://www.xavierdupre.fr/enseignement/setup/Python35_x64.352.7z"
             else:
                 raise Exception(
                     "unable to find a proper version for version {0}".format(version))

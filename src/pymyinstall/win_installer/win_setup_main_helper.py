@@ -96,22 +96,23 @@ def win_download(folder=None,
     @return                     list of completed operations
 
     List of available tools:
-        * scite
-        * putty
-        * mingw
-        * SQLiteSpy
-        * python
-        * R
-        * vs
-        * julia
-        * 7z
-        * graphviz
-        * tdm
-        * jdk (java)
-        * jenkins
-        * git
-        * miktex
-        * inkscape
+
+    * scite
+    * putty
+    * mingw
+    * SQLiteSpy
+    * python
+    * R
+    * vs
+    * julia
+    * 7z
+    * graphviz
+    * tdm
+    * jdk (java)
+    * jenkins
+    * git
+    * miktex
+    * inkscape
     """
     if selection is None:
         raise ValueError("selection must be specified")
