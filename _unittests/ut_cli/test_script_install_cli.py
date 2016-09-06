@@ -106,7 +106,8 @@ class TestScriptInstallCli(unittest.TestCase):
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
                 raise Exception(
-                    "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+                    "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}\nFOUND STRING\n{3}".format(cmd,
+                                                                               out, err, "[install-check] flake8" not in out))
 
         cmd = exe + " " + scriptu + " --schedule --set=minimal --source=2"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
