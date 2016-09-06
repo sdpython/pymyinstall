@@ -561,7 +561,7 @@ def extended_set():
         #
 
         #
-        # August 2016
+        # August, September 2016
         #
         ModuleInstall('qinfer', 'pip', usage="DATA/ML",
                       purpose="QInfer is a library using Bayesian sequential Monte Carlo for quantum parameter estimation."),
@@ -573,6 +573,10 @@ def extended_set():
                       purpose="The kid-sized plotting toolkit for Python with grownup-sized goals."),
         ModuleInstall('images2gif', 'pip',
                       purpose="Create a GIF from a list of images."),
+        ModuleInstall('hypothesis', 'pip',
+                      purpose="Hypothesis is an advanced testing library for Python. It lets you write tests which are parametrized " +
+                      "by a source of examples, and then generates simple and comprehensible examples that make your tests fail. " +
+                      "This lets you find more bugs in your code with less work."),
     ]
 
     if sys.platform.startswith("win"):

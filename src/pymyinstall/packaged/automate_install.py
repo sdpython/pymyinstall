@@ -173,7 +173,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     schedule = []
     for mod in modules:
         if verbose:
-            fLOG("[loopu] check module: ", mod.name)
+            fLOG("[update-check]", mod.name)
 
         is_installed = mod.is_installed_version()
         if not is_installed:
@@ -312,7 +312,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             # already done
             continue
         if verbose:
-            fLOG("[loopi] check module: ", mod.name)
+            fLOG("[install-check]", mod.name)
         if force or not mod.is_installed_version():
             schedule.append(mod)
             if not schedule_only:
@@ -321,7 +321,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                     .format(mod.name, ver, mod.kind)
                 fLOG(m)
                 if deps:
-                    fLOG("[loopi] check dependencies: ", mod.name)
+                    fLOG("[install-check-dep]", mod.name)
                     install_module_deps(mod.name, temp_folder=temp_folder,
                                         fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
                                         _memory=_memory, source=source, download_only=download_only,

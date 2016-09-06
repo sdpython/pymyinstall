@@ -168,7 +168,7 @@ if is_local():
     r = process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
         # not need for the regular setup, just for the documentation, unit
-        layout = ["html"],
+        layout=["html"],
         # tests
         requirements=["pyquickhelper"],
         additional_notebook_path=["pyquickhelper"],
