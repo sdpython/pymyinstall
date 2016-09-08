@@ -8,10 +8,9 @@ import sys
 import platform
 import os
 import zipfile
-import time
-import subprocess
 import datetime
-from .module_install_exceptions import UpdatePipError, RunCmdError
+from .module_install_exceptions import UpdatePipError
+from .run_cmd import run_cmd_private
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
@@ -24,224 +23,6 @@ def python_version():
     @return     tuple, example: ("win32","32bit") or ("win32","64bit")
     """
     return sys.platform, platform.architecture()[0]
-
-
-def split_cmp_command(cmd, remove_quotes=True):
-    """
-
-    splits a command line
-
-    @param      cmd             command line
-    @param      remove_quotes   True by default
-    @return                     list
-
-    """
-    if isinstance(cmd, str):
-        spl = cmd.split()
-        res = []
-        for s in spl:
-            if len(res) == 0:
-                res.append(s)
-            elif res[-1].startswith('"') and not res[-1].endswith('"'):
-                res[-1] += " " + s
-            else:
-                res.append(s)
-        if remove_quotes:
-            res = [_.strip('"') for _ in res]
-        return res
-    else:
-        return cmd
-
-
-def run_cmd(cmd, sin="", shell=False, wait=False, log_error=True,
-            secure=None, stop_waiting_if=None, do_not_log=False,
-            encerror="ignore", encoding="utf8", cwd=None, fLOG=print):
-    """
-    run a command line and wait for the result
-    @param      cmd                 command line
-    @param      sin                 sin, what must be written on the standard input
-    @param      shell               if True, cmd is a shell command (and no command window is opened)
-    @param      wait                call proc.wait
-    @param      log_error           if log_error, call fLOG (error)
-    @param      secure              if secure is a string (a valid filename), the function stores the output in a file
-                                    and reads it continuously
-    @param      stop_waiting_if     the function stops waiting if some condition is fulfilled.
-                                    The function received the last line from the logs.
-    @param      do_not_log          do not log the output
-    @param      encerror            encoding errors (ignore by default) while converting the output into a string
-    @param      encoding            encoding of the output
-    @param      cwd                 current folder
-    @param      fLOG                logging function
-    @return                         content of stdout, stderr  (only if wait is True)
-
-
-    .. faqref::
-        :title: Exception when installing a module
-
-        This error can occur when a module is installed on a virtual environment
-        created before *pip* was updated on the main distribution.
-        The solution consists in removing the virtual environment and create it again.
-
-        ::
-
-            c:\\Python34_x64vir\\install\\Scripts\\python -u setup.py install
-            running install
-            running bdist_egg
-            running egg_info
-            Traceback (most recent call last):
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2785, in _dep_map
-                return self.__dep_map
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
-                raise AttributeError(attr)
-            AttributeError: _DistInfoDistribution__dep_map
-
-            During handling of the above exception, another exception occurred:
-
-            Traceback (most recent call last):
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2776, in _parsed_pkg_info
-                return self._pkg_info
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
-                raise AttributeError(attr)
-            AttributeError: _pkg_info
-
-            During handling of the above exception, another exception occurred:
-
-            Traceback (most recent call last):
-            File "setup.py", line 169, in <module>
-                package_data=package_data,
-            File "C:\\Python34_x64\\Lib\\distutils\\core.py", line 148, in setup
-                dist.run_commands()
-            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 955, in run_commands
-                self.run_command(cmd)
-            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
-                cmd_obj.run()
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 67, in run
-                self.do_egg_install()
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 109, in do_egg_install
-                self.run_command('bdist_egg')
-            File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
-                self.distribution.run_command(command)
-            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
-                cmd_obj.run()
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\bdist_egg.py", line 151, in run
-                self.run_command("egg_info")
-            File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
-                self.distribution.run_command(command)
-            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
-                cmd_obj.run()
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\egg_info.py", line 171, in run
-                ep.require(installer=installer)
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2355, in require
-                items = working_set.resolve(reqs, env, installer)
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 835, in resolve
-                new_requirements = dist.requires(req.extras)[::-1]
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2586, in requires
-                dm = self._dep_map
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2787, in _dep_map
-                self.__dep_map = self._compute_dependencies()
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2809, in _compute_dependencies
-                for req in self._parsed_pkg_info.get_all('Requires-Dist') or []:
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2778, in _parsed_pkg_info
-                metadata = self.get_metadata(self.PKG_INFO)
-            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 1993, in get_metadata
-                raise KeyError("No metadata except PKG-INFO is available")
-            KeyError: 'No metadata except PKG-INFO is available'
-    """
-    if sin is not None and sin != "":
-        raise NotImplementedError("sin is not used")
-
-    if secure is not None:
-        if not do_not_log:
-            fLOG("secure=", secure)
-        with open(secure, "w") as f:
-            f.write("")
-        add = ">%s" % secure
-        if isinstance(cmd, str):
-            cmd += " " + add
-        else:
-            cmd.append(add)
-    if not do_not_log:
-        fLOG("execute ", cmd)
-
-    if sys.platform.startswith("win"):
-
-        startupinfo = subprocess.STARTUPINFO()
-        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-
-        try:
-            proc = subprocess.Popen(cmd, shell=shell,
-                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                    startupinfo=startupinfo, cwd=cwd)
-        except FileNotFoundError as e:
-            raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e
-    else:
-        try:
-            proc = subprocess.Popen(split_cmp_command(cmd), shell=shell,
-                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                    cwd=cwd)
-        except FileNotFoundError as e:
-            raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e
-    if wait:
-
-        out = []
-        skip_waiting = False
-
-        if secure is None:
-            for line in proc.stdout:
-                if not do_not_log:
-                    fLOG(line.decode(encoding, errors=encerror).strip("\n"))
-                try:
-                    out.append(
-                        line.decode(
-                            encoding,
-                            errors=encerror).strip("\n"))
-                except UnicodeDecodeError as exu:
-                    raise RunCmdError(
-                        "issue with cmd:" +
-                        str(cmd) +
-                        "\n" +
-                        str(exu))
-                if proc.stdout.closed:
-                    break
-                if stop_waiting_if is not None and stop_waiting_if(
-                        line.decode("utf8", errors=encerror)):
-                    skip_waiting = True
-                    break
-        else:
-            last = []
-            while proc.poll() is None:
-                if os.path.exists(secure):
-                    with open(secure, "r") as f:
-                        lines = f.readlines()
-                    if len(lines) > len(last):
-                        for line in lines[len(last):]:
-                            if not do_not_log:
-                                fLOG(line.strip("\n"))
-                            out.append(line.strip("\n"))
-                        last = lines
-                    if stop_waiting_if is not None and len(
-                            last) > 0 and stop_waiting_if(last[-1]):
-                        skip_waiting = True
-                        break
-                time.sleep(0.1)
-
-        if not skip_waiting:
-            proc.wait()
-
-        out = "\n".join(out)
-        err = proc.stderr.read().decode(encoding, errors=encerror)
-        if not do_not_log:
-            fLOG("end of execution ", cmd)
-        if len(err) > 0 and log_error and not do_not_log:
-            fLOG("error (log)\n%s" % err)
-        # return bytes.decode (out, errors="ignore"), bytes.decode(err,
-        # errors="ignore")
-        proc.stdout.close()
-        proc.stderr.close()
-
-        return out, err
-    else:
-        return "", ""
 
 
 def unzip_files(zipf, whereTo, fLOG=print):
@@ -585,3 +366,91 @@ def is_conda_distribution():
     .. versionadded:: 1.1
     """
     return "Continuum Analytics" in sys.version or "|Anaconda" in sys.version
+
+
+def run_cmd(cmd, sin="", shell=True, wait=False, log_error=True,
+            stop_running_if=None, encerror="ignore",
+            encoding="utf8", change_path=None, communicate=True,
+            preprocess=True, timeout=None, catch_exit=False, fLOG=None,
+            tell_if_no_output=None):
+    """
+    run a command line and wait for the result,
+    @see fn run_cmd_private
+
+    .. faqref::
+        :title: Exception when installing a module
+
+        This error can occur when a module is installed on a virtual environment
+        created before *pip* was updated on the main distribution.
+        The solution consists in removing the virtual environment and create it again.
+
+        ::
+
+            c:\\Python34_x64vir\\install\\Scripts\\python -u setup.py install
+            running install
+            running bdist_egg
+            running egg_info
+            Traceback (most recent call last):
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2785, in _dep_map
+                return self.__dep_map
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
+                raise AttributeError(attr)
+            AttributeError: _DistInfoDistribution__dep_map
+
+            During handling of the above exception, another exception occurred:
+
+            Traceback (most recent call last):
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2776, in _parsed_pkg_info
+                return self._pkg_info
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2642, in __getattr__
+                raise AttributeError(attr)
+            AttributeError: _pkg_info
+
+            During handling of the above exception, another exception occurred:
+
+            Traceback (most recent call last):
+            File "setup.py", line 169, in <module>
+                package_data=package_data,
+            File "C:\\Python34_x64\\Lib\\distutils\\core.py", line 148, in setup
+                dist.run_commands()
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 955, in run_commands
+                self.run_command(cmd)
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
+                cmd_obj.run()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 67, in run
+                self.do_egg_install()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\install.py", line 109, in do_egg_install
+                self.run_command('bdist_egg')
+            File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
+                self.distribution.run_command(command)
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
+                cmd_obj.run()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\bdist_egg.py", line 151, in run
+                self.run_command("egg_info")
+            File "C:\\Python34_x64\\Lib\\distutils\\cmd.py", line 313, in run_command
+                self.distribution.run_command(command)
+            File "C:\\Python34_x64\\Lib\\distutils\\dist.py", line 974, in run_command
+                cmd_obj.run()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\setuptools\\command\\egg_info.py", line 171, in run
+                ep.require(installer=installer)
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2355, in require
+                items = working_set.resolve(reqs, env, installer)
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 835, in resolve
+                new_requirements = dist.requires(req.extras)[::-1]
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2586, in requires
+                dm = self._dep_map
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2787, in _dep_map
+                self.__dep_map = self._compute_dependencies()
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2809, in _compute_dependencies
+                for req in self._parsed_pkg_info.get_all('Requires-Dist') or []:
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 2778, in _parsed_pkg_info
+                metadata = self.get_metadata(self.PKG_INFO)
+            File "c:\\Python34_x64vir\\install\\lib\\site-packages\\pkg_resources\\__init__.py", line 1993, in get_metadata
+                raise KeyError("No metadata except PKG-INFO is available")
+            KeyError: 'No metadata except PKG-INFO is available'
+    """
+    return run_cmd_private(cmd=cmd, sin=sin, shell=shell, wait=wait, log_error=log_error,
+                           stop_running_if=stop_running_if, encerror=encerror,
+                           encoding=encoding, change_path=change_path, communicate=communicate,
+                           preprocess=preprocess, timeout=timeout, catch_exit=catch_exit, fLOG=fLOG,
+                           tell_if_no_output=tell_if_no_output)
