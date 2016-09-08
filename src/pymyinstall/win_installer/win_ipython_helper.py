@@ -45,7 +45,7 @@ def ipython_create_profile(config_path, python_path, name="win_profile", fLOG=pr
 
     cmd = " profile create {1} --ipython-dir={0}".format(config_path, name)
     cmd = ipython_path + cmd
-    out, err = run_cmd(cmd, wait=True, fLOG=fLOG, cwd=python_path)
+    out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=python_path)
     profile = os.path.join(
         config_path, "profile_" + name, "ipython_config.py")
     if not os.path.exists(profile):
