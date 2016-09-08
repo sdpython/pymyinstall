@@ -59,7 +59,7 @@ class TestPyMyInstallCli(unittest.TestCase):
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
         cmd = "{0} {1} {2}".format(
             sys.executable, script, "--set=pyquickhelper --schedule")
-        out, err = run_cmd(cmd, wait=True)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
