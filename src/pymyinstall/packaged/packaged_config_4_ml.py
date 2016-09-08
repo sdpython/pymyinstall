@@ -83,7 +83,7 @@ def ensae_set():
         ModuleInstall(
             "opencv_python", "wheel", mname="cv2", purpose="OpenVC wrapper",
             web="https://opencv-python-tutroals.readthedocs.org/en/latest/"),
-        ModuleInstall("dlib", "pip",
+        ModuleInstall("dlib", "wheel", source="2", usage="ML",
                       purpose="A toolkit for making real world machine learning and data analysis applications"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio",
                       purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. " +
@@ -559,7 +559,7 @@ def ensae_set():
 
     for name in ['azure-nspkg', 'azure-common', 'azure-mgmt-nspkg', 'azure-mgmt-authorization',
                  'azure-mgmt-batch', 'azure-mgmt-cdn', 'azure-mgmt-cognitiveservices', 'azure-mgmt-commerce',
-                 'azure-mgmt-compute', 'azure-mgmt-logic', 'azure-mgmt-graphrbac', 'azure-mgmt-network',
+                 'azure-mgmt-compute', 'azure-mgmt-logic', 'azure-graphrbac', 'azure-mgmt-network',
                  'azure-mgmt-notificationhubs', 'azure-mgmt-powerbiembedded', 'azure-mgmt-redis',
                  'azure-mgmt-resource', 'azure-mgmt-scheduler', 'azure-mgmt-storage',
                  'azure-mgmt-web', 'azure-graphrbac', 'azure-batch', 'azure-servicebus',

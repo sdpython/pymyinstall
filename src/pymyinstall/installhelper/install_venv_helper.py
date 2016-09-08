@@ -199,7 +199,7 @@ def run_venv_script(venv, script, fLOG=print, file=False, is_cmd=False):
         return out
 
 
-def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False):
+def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False, **kwargs):
     """
     run a script knowing python path, it does not raise an exception.
 
@@ -208,6 +208,7 @@ def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False):
     @param      fLOG            logging function
     @param      file            is script a file or a string to execute
     @param      is_cmd          if True, script is a command line to run (as a list) for python executable
+    @param      kwargs          extra parameters
     @return                     output, error
     """
     if sys.platform.startswith("win"):
@@ -218,7 +219,7 @@ def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False):
             exe = os.path.join(python_path, "bin", "python")
     if is_cmd:
         cmd = " ".join([exe] + script)
-        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG, **kwargs)
         return out, err
     else:
         script = ";".join(script.split("\n"))
@@ -228,5 +229,5 @@ def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False):
             cmd = " ".join([exe, "-u", '"{0}"'.format(script)])
         else:
             cmd = " ".join([exe, "-u", "-c", '"{0}"'.format(script)])
-        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG, **kwargs)
         return out, err
