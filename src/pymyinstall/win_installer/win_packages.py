@@ -30,7 +30,7 @@ def get_modules_version(python_path):
     cmd = prog + " list"
 
     try:
-        out, err = run_cmd(cmd, wait=True, do_not_log=True, cwd=python_path)
+        out, err = run_cmd(cmd, wait=True, fLOG=None, change_path=python_path)
     except Exception as e:
         raise Exception("unable to run: {0}".format(cmd)) from e
 
@@ -97,7 +97,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     if (deps is not None and not deps) or name.startswith("zipline"):
         cmd += " --no-deps"
 
-    out, err = run_cmd(cmd, wait=True, fLOG=fLOG, do_not_log=True)
+    out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
 
     if cur != python_path:
         os.chdir(cur)

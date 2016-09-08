@@ -172,7 +172,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
             elif m.mname == "theano":
                 # we need to check that TDM-GCC is installed
                 cmd = "g++ --help"
-                out, err = run_cmd(cmd, wait=True, do_not_log=True)
+                out, err = run_cmd(cmd, wait=True, fLOG=None)
                 if err is not None and len(err) > 0:
                     fLOG("{0}/{1}: failed (g++)".format(i,
                                                         len(module_list) - start), m)

@@ -2,6 +2,8 @@
 """
 @file
 @brief Implements function @see fn run_cmd.
+
+.. versionadded:: 1.1
 """
 import sys
 import os
@@ -130,7 +132,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                                     and the standard error while running.
     @param      encerror            encoding errors (ignore by default) while converting the output into a string
     @param      encoding            encoding of the output
-    @param      change_path         change the current path if  not None (put it back after the execution)
+    @param      change_path         change the current path if not None (put it back after the execution)
     @param      communicate         use method `communicate <https://docs.python.org/3.4/library/subprocess.html#subprocess.Popen.communicate>`_ which is supposed to be safer,
                                     parameter ``wait`` must be True
     @param      preprocess          preprocess the command line if necessary (not available on Windows) (False to disable that option)
@@ -164,19 +166,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         more freedom to the main program to listen or stop the command line
         execution.
 
-    .. versionchanged:: 0.9
-        parameters *timeout*, *fLOG* were added,
-        the function now works with stdin
-
-    .. versionchanged:: 1.3
-        Catches *SystemExit* exception. Add parameter *catch_exit*.
-
-    .. versionchanged:: 1.4
-        Changed *fLOG* default value to None. Remove parameter *do_not_log*, *secure*, *stop_waiting_if*.
-        Implements parameter *stop_running_if*.
-        Improve the behavior of the function.
-        See `Constantly print Subprocess output while process is running <http://stackoverflow.com/questions/4417546/constantly-print-subprocess-output-while-process-is-running/4417735>`_.
-        Parameter *tell_if_no_output*, *stop_running_if* were added.
+    .. versionadded:: 1.1
     """
     if fLOG is not None:
         fLOG("execute", cmd)

@@ -552,7 +552,7 @@ class ModuleInstall:
                 cmd += " " + " ".join(self.pip_options)
 
             out, err = run_cmd(
-                cmd, wait=True, do_not_log=True, fLOG=self.fLOG)
+                cmd, wait=True, fLOG=self.fLOG)
             if "Successfully downloaded" not in out:
                 raise DownloadError(
                     "unable to download with pip " +
@@ -951,7 +951,7 @@ class ModuleInstall:
                 memo = sys.argv
                 sys.argv = []
             out, err = run_cmd(
-                cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+                cmd, wait=True, fLOG=self.fLOG)
             if self.name == "kivy-garden":
                 sys.argv = memo
 
@@ -998,7 +998,7 @@ class ModuleInstall:
                 cmd += ' --no-deps'
 
             out, err = run_cmd(
-                cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+                cmd, wait=True, fLOG=self.fLOG)
             if "No distributions matching the version" in out or \
                "No packages found in current linux" in out:
                 mes = "(4) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
@@ -1056,7 +1056,7 @@ class ModuleInstall:
                 if not deps:
                     cmd += ' --no-deps'
                 out, err = run_cmd(
-                    cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+                    cmd, wait=True, fLOG=self.fLOG)
                 if "No distributions matching the version" in out:
                     mes = "(7) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
                         str(self), cmd, out, err)
@@ -1138,7 +1138,7 @@ class ModuleInstall:
             errs = ""
             for cmd in cmds:
                 out, err = run_cmd(
-                    cmd, wait=True, do_not_log=not log, fLOG=self.fLOG)
+                    cmd, wait=True, fLOG=self.fLOG)
                 if len(outs) > 0:
                     outs += "\n"
                 if len(errs) > 0:
@@ -1187,7 +1187,7 @@ class ModuleInstall:
                     source=source)
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
-                    exename + " /s /qn /SILENT", wait=True, do_not_log=not log, fLOG=self.fLOG)
+                    exename + " /s /qn /SILENT", wait=True, fLOG=self.fLOG)
                 ret = len(err) == 0
 
         elif kind == "exe2":
@@ -1205,7 +1205,7 @@ class ModuleInstall:
                     source=source)
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
-                    exename + " /s /qn", wait=True, do_not_log=not log, fLOG=self.fLOG)
+                    exename + " /s /qn", wait=True, fLOG=self.fLOG)
                 ret = len(err) == 0
         else:
             raise ImportError(

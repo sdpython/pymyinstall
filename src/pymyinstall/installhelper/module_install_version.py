@@ -90,7 +90,7 @@ def get_module_version(module, use_cmd=False):
     if use_cmd:
         prog = get_pip_program()
         cmd = prog + " list"
-        out, err = run_cmd(cmd, wait=True, do_not_log=True)
+        out, err = run_cmd(cmd, wait=True, fLOG=None)
 
         if err is not None and len(err) > 0:
             if len(err.split("\n")) > 3 or \
