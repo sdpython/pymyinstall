@@ -80,7 +80,7 @@ class TestPyMyInstallCli(unittest.TestCase):
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
         cmd = "{0} {1} {2} --force --folder={3}".format(
             sys.executable, script, "colorama xlrd --download", temp)
-        out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG, communicate=False, timeout=20)
         fLOG("----", cmd)
         fLOG(out.replace("\r", "").replace("\n\n", "\n"))
         fLOG("-----")
