@@ -53,6 +53,9 @@ class TestPyMyUpdateCli(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
+        if is_travis_or_appveyor() == "travis":
+            warnings.warn("run_cmd no end on travis")
+            return
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_update.py"))
