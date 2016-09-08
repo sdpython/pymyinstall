@@ -58,7 +58,7 @@ class TestPyMyInstallCliTool(unittest.TestCase):
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
         cmd = "{0} {1} {2} --force --folder={3}".format(
             sys.executable, script, "graphviz --task=tool --source=zip", temp)
-        out, err = run_cmd(cmd, wait=True, do_not_log=True)
+        out, err = run_cmd(cmd, wait=True)
         fLOG("----", cmd)
         fLOG(out.replace("\r", "").replace("\n\n", "\n"))
         fLOG("-----")
