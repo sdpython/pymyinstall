@@ -52,7 +52,7 @@ class TestPyMyInstallCli(unittest.TestCase):
         fLOG(
             __file__,
             self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+            OutputPrint=True)#__name__ == "__main__")
 
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
@@ -73,7 +73,7 @@ class TestPyMyInstallCli(unittest.TestCase):
         fLOG(
             __file__,
             self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+            OutputPrint=True)#__name__ == "__main__")
 
         temp = get_temp_folder(__file__, "temp_install_download")
         this = os.path.abspath(os.path.dirname(__file__))
