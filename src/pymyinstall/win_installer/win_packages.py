@@ -214,8 +214,14 @@ def is_package_installed(python_path, module_name, installed_packages=None):
         if installed_packages is not None and name in installed_packages:
             return True
         pymy = os.path.join(python_path, "lib", "site-packages", name)
-        r = os.path.exists(pymy)
-        if r:
+        if os.path.exists(pymy):
+            return True
+        pymy += ".py"
+        if os.path.exists(pymy):
+            return True
+        pymy = pymy.replace(".py", ".cp%d%d-win_amd64.pyd" %
+                            (sys.version_info[0], sys.version_info[1]))
+        if os.path.exists(pymy):
             return True
     return False
 
