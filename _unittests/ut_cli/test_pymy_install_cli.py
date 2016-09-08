@@ -54,13 +54,16 @@ class TestPyMyInstallCli(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        flog = print
+        if is_travis_or_appveyor() == "travis":
+            warnings.warn("cli not tested on travis")
+            return
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
         cmd = "{0} {1} {2}".format(
             sys.executable, script, "--set=pyquickhelper --schedule")
-        out, err = run_cmd(cmd, wait=True, fLOG=flog, communicate=False, timeout=20)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                           communicate=False, timeout=20)
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
@@ -75,18 +78,21 @@ class TestPyMyInstallCli(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        flog = print
+        if is_travis_or_appveyor() == "travis":
+            warnings.warn("cli not tested on travis")
+            return
         temp = get_temp_folder(__file__, "temp_install_download")
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
         cmd = "{0} {1} {2} --force --folder={3}".format(
             sys.executable, script, "colorama xlrd --download", temp)
-        out, err = run_cmd(cmd, wait=True, fLOG=flog, communicate=False, timeout=20)
-        flog("----", cmd)
-        flog(out.replace("\r", "").replace("\n\n", "\n"))
-        flog("-----")
-        flog(err.replace("\r", "").replace("\n\n", "\n"))
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                           communicate=False, timeout=20)
+        fLOG("----", cmd)
+        fLOG(out.replace("\r", "").replace("\n\n", "\n"))
+        fLOG("-----")
+        fLOG(err.replace("\r", "").replace("\n\n", "\n"))
         if len(out) == 0 and is_travis_or_appveyor() == "appveyor":
             warnings.warn(
                 "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
