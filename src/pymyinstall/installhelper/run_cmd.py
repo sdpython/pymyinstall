@@ -185,8 +185,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         try:
             pproc = subprocess.Popen(cmdl,
                                      shell=shell,
-                                     stdin=subprocess.PIPE if sin is not None and len(
-                                         sin) > 0 else None,
+                                     stdin=None,
                                      stdout=subprocess.PIPE if wait else None,
                                      stderr=subprocess.PIPE if wait else None)
         except SystemExit as e:
@@ -197,8 +196,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
     else:
         pproc = subprocess.Popen(cmdl,
                                  shell=shell,
-                                 stdin=subprocess.PIPE if sin is not None and len(
-                                     sin) > 0 else None,
+                                 stdin=None,
                                  stdout=subprocess.PIPE if wait else None,
                                  stderr=subprocess.PIPE if wait else None)
 
@@ -255,7 +253,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             if stop_running_if is not None:
                 raise NotImplementedError(
                     "stop_running_if is not implemented when communicate is True")
-            input = sin if sin is None else sin.encode()
+            input = None if sin is None or len(sin) > 0 else sin.encode()
             if input is not None and len(input) > 0:
                 if fLOG is not None:
                     fLOG("input", [input])
