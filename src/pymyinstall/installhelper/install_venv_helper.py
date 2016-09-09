@@ -214,7 +214,8 @@ def run_cmd_path(python_path, script, fLOG=print, file=False, is_cmd=False, **kw
     if sys.platform.startswith("win"):
         exe = os.path.join(python_path, "python")
     else:
-        python_name = "python" if sys.version_info[0] == 2 else "python%d" % sys.version_info[0]
+        python_name = "python" if sys.version_info[
+            0] == 2 else "python%d" % sys.version_info[0]
         exe = os.path.join(python_path, python_name)
         if not os.path.exists(exe):
             exe = os.path.join(python_path, "bin", python_name)

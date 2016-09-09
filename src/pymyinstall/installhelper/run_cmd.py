@@ -185,7 +185,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         try:
             pproc = subprocess.Popen(cmdl,
                                      shell=shell,
-                                     stdin=None,
+                                     stdin=subprocess.PIPE if (
+                                         sin and len(sin) > 0) else None,
                                      stdout=subprocess.PIPE if wait else None,
                                      stderr=subprocess.PIPE if wait else None)
         except SystemExit as e:
@@ -196,7 +197,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
     else:
         pproc = subprocess.Popen(cmdl,
                                  shell=shell,
-                                 stdin=None,
+                                 stdin=subprocess.PIPE if (
+                                     sin and len(sin) > 0) else None,
                                  stdout=subprocess.PIPE if wait else None,
                                  stderr=subprocess.PIPE if wait else None)
 
@@ -259,8 +261,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                 if fLOG is not None:
                     fLOG("input", [input])
 
-            input = None
-            fLOG("[run_cmd] communicate", [input], [sin], catch_exit)
+            fLOG("[run_cmd] communicate", input, [sin], catch_exit)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:

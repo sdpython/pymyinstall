@@ -196,7 +196,8 @@ def get_pip_program(exe=None):
                 if not os.path.exists(pi):
                     pi = os.path.join(exe, "pip")
                     if not os.path.exists(pi):
-                        raise FileNotFoundError("unable to find pip: {0}\n__file__={1}\nexe={2}".format(pi, pip.__file__, exe))
+                        raise FileNotFoundError(
+                            "unable to find pip: {0}\n__file__={1}\nexe={2}".format(pi, pip.__file__, exe))
     return pi
 
 
