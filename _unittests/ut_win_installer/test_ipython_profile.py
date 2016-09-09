@@ -57,7 +57,7 @@ class TestIPythonProfile(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         python_path = os.path.abspath(os.path.dirname(sys.executable))
-        temp = get_temp_folder(__file__, "temp_ipython")
+        temp = get_temp_folder(__file__, "temp_ipython_profile")
         try:
             path = ipython_create_profile(
                 temp, python_path, name="ZZZ", fLOG=fLOG)
