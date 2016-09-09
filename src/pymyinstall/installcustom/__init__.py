@@ -14,6 +14,7 @@ from .install_custom_julia import install_julia
 from .install_custom_inkscape import install_inkscape
 from .install_custom_miktex import install_miktex
 from .install_custom_mingw import install_mingw
+from .install_custom_operadriver import install_operadriver
 from .install_custom_pandoc import install_pandoc
 from .install_custom_putty import install_putty
 from .install_custom_python import install_python
