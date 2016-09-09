@@ -254,7 +254,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             if stop_running_if is not None:
                 raise NotImplementedError(
                     "stop_running_if is not implemented when communicate is True")
-            input = None if sin is None or len(sin) > 0 else sin.encode()
+            input = None if (sin is None or len(sin) > 0) else sin.encode()
             if input is not None and len(input) > 0:
                 if fLOG is not None:
                     fLOG("input", [input])
