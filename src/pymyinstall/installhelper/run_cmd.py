@@ -211,6 +211,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         skip_waiting = False
 
         if old_behavior:
+            fLOG("[run_cmd] old_behvior")
             for line in pproc.stdout:
                 if fLOG is not None:
                     fLOG(line.decode(encoding, errors=encerror).strip("\n"))
@@ -258,6 +259,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                 if fLOG is not None:
                     fLOG("input", [input])
 
+            fLOG("[run_cmd] communicate", input, catch_exit)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:
@@ -286,6 +288,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             err = decode_outerr(stderrdata, encoding, encerror, cmd)
         else:
             # communicate is False: use of threads
+            fLOG("[run_cmd] thread")
             if sin is not None and len(sin) > 0:
                 if change_path is not None:
                     os.chdir(current)
