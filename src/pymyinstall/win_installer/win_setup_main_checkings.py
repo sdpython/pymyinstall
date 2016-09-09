@@ -172,7 +172,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
             elif m.mname == "theano":
                 # we need to check that TDM-GCC is installed
                 cmd = "g++ --help"
-                out, err = run_cmd(cmd, wait=True, fLOG=None)
+                out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
                 if err is not None and len(err) > 0:
                     fLOG("{0}/{1}: failed (g++)".format(i,
                                                         len(module_list) - start), m)
@@ -194,7 +194,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                 # http://stackoverflow.com/questions/14778178/import-cvxopt-base-the-specified-module-could-not-be-found
                 sc += sc + ";import scipy.stats"
             out, err = run_cmd_path(
-                python_path, sc, fLOG=noLOG, communicate=False, timeout=10)
+                python_path, sc, fLOG=fLOG, communicate=False, timeout=10)
             suc = analyze_error_success(m, err)
             nextm = module_list[i + 1] if i + 1 < len(module_list) else ""
             if suc:
