@@ -687,5 +687,6 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             if isinstance(b, str  # unicode#
                           ):
                 b = b.replace(folder, "")
-                b = b.replace(os.environ["USERNAME"], "---")
+                b = b.replace(os.environ.get(
+                    "USERNAME", os.environ["USER"]), "---")
             f.write("{0}\t{1}\n".format(a, b))

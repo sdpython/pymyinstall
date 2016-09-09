@@ -72,7 +72,7 @@ def do_main(temp_folder="build/update_modules",
             if "travis" in sys.executable:
                 return "travis"
             import os
-            if os.environ["USERNAME"] == "appveyor":
+            if os.environ.get("USERNAME", os.environ["USER"]) == "appveyor":
                 return "appveyor"
             return None
     if is_travis_or_appveyor() and source is None:
