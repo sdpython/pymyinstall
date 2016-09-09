@@ -259,7 +259,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                 if fLOG is not None:
                     fLOG("input", [input])
 
-            fLOG("[run_cmd] communicate", input, catch_exit)
+            input = None
+            fLOG("[run_cmd] communicate", [input], [sin], catch_exit)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:
