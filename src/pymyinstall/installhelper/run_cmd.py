@@ -213,7 +213,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         skip_waiting = False
 
         if old_behavior:
-            fLOG("[run_cmd] old_behvior")
+            if fLOG is not None:
+                fLOG("[run_cmd] old_behvior")
             for line in pproc.stdout:
                 if fLOG is not None:
                     fLOG(line.decode(encoding, errors=encerror).strip("\n"))
@@ -261,7 +262,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                 if fLOG is not None:
                     fLOG("input", [input])
 
-            fLOG("[run_cmd] communicate", input, [sin], catch_exit)
+            if fLOG is not None:
+                fLOG("[run_cmd] communicate", input, [sin], catch_exit)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:
@@ -290,7 +292,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             err = decode_outerr(stderrdata, encoding, encerror, cmd)
         else:
             # communicate is False: use of threads
-            fLOG("[run_cmd] thread")
+            if fLOG is not None:
+                fLOG("[run_cmd] thread")
             if sin is not None and len(sin) > 0:
                 if change_path is not None:
                     os.chdir(current)
@@ -335,14 +338,16 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
 
                 delta = time.clock() - last_update
                 if tell_if_no_output is not None and delta >= tell_if_no_output:
-                    fLOG("[run_cmd] No update in {0} seconds for cmd: {1}".format(
-                        "%5.1f" % (last_update - begin), cmd))
+                    if fLOG is not None:
+                        fLOG("[run_cmd] No update in {0} seconds for cmd: {1}".format(
+                            "%5.1f" % (last_update - begin), cmd))
                     last_update = time.clock()
                 full_delta = time.clock() - begin
                 if timeout is not None and full_delta > timeout:
                     runloop = False
-                    fLOG("[run_cmd] Timeout after {0} seconds for cmd: {1}".format(
-                        "%5.1f" % full_delta, cmd))
+                    if fLOG is not None:
+                        fLOG("[run_cmd] Timeout after {0} seconds for cmd: {1}".format(
+                            "%5.1f" % full_delta, cmd))
                     break
 
             if runloop:
@@ -373,10 +378,12 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     pproc.wait()
             else:
                 out.append("[run_cmd] killing process.")
-                fLOG("[run_cmd] killing process because stop_running_if returned True.")
+                if fLOG is not None:
+                    fLOG("[run_cmd] killing process because stop_running_if returned True.")
                 pproc.kill()
                 err_read = True
-                fLOG("[run_cmd] process killed.")
+                if fLOG is not None:
+                    fLOG("[run_cmd] process killed.")
                 skip_out_err = True
 
             out = "\n".join(out)
