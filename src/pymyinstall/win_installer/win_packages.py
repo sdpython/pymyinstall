@@ -223,6 +223,11 @@ def is_package_installed(python_path, module_name, installed_packages=None):
                             (sys.version_info[0], sys.version_info[1]))
         if os.path.exists(pymy):
             return True
+        mod = find_module_install(name)
+        if mod:
+            pymy = os.path.join(python_path, "lib", "site-packages", mod.mname)
+            if os.path.exists(pymy):
+                return True
     return False
 
 
