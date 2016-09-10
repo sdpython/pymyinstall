@@ -155,10 +155,6 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
     if fLOG is not None:
         fLOG("execute", cmd)
 
-    if change_path is not None:
-        current = os.getcwd()
-        os.chdir(change_path)
-
     if sys.platform.startswith("win"):
         cmdl = cmd
     else:
@@ -171,19 +167,20 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                                      stdin=subprocess.PIPE if (
                                          sin and len(sin) > 0) else None,
                                      stdout=subprocess.PIPE if wait else None,
-                                     stderr=subprocess.PIPE if wait else None)
+                                     stderr=subprocess.PIPE if wait else None,
+                                     cwd=change_path)
         except SystemExit as e:
-            if change_path is not None:
-                os.chdir(current)
             raise RunCmdException("SystemExit raised (1)") from e
 
     else:
+        shell = True
         pproc = subprocess.Popen(cmdl,
                                  shell=shell,
                                  stdin=subprocess.PIPE if (
                                      sin and len(sin) > 0) else None,
                                  stdout=subprocess.PIPE if wait else None,
-                                 stderr=subprocess.PIPE if wait else None)
+                                 stderr=subprocess.PIPE if wait else None,
+                                 cwd=change_path)
 
     if isinstance(cmd, list):
         cmd = " ".join(cmd)
@@ -195,7 +192,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         err_read = False
         skip_waiting = False
 
-        if True or old_behavior:
+        if old_behavior:
             if fLOG is not None:
                 fLOG("[run_cmd] old_behavior")
             for line in pproc.stdout:
@@ -248,6 +245,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             if fLOG is not None:
                 fLOG("[run_cmd] communicate", "input", input, [sin], "catch_exit=", catch_exit, "timeout=", timeout)
                 fLOG("[run_cmd] CMD", cmd)
+                fLOG("[run_cmd] CMDL", cmdl)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:
@@ -259,8 +257,6 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                         stdoutdata, stderrdata = pproc.communicate(
                             input=input, timeout=timeout)
                 except SystemExit as e:
-                    if change_path is not None:
-                        os.chdir(current)
                     raise RunCmdException("SystemExit raised (2)") from e
             else:
                 if sys.version_info[0] == 2:
@@ -279,8 +275,6 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             if fLOG is not None:
                 fLOG("[run_cmd] thread")
             if sin is not None and len(sin) > 0:
-                if change_path is not None:
-                    os.chdir(current)
                 raise Exception(
                     "communicate should be True to send something on stdin")
             stdout, stderr = pproc.stdout, pproc.stderr
@@ -344,8 +338,6 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                 err_read = True
 
                 if returnCode != 0:
-                    if change_path is not None:
-                        os.chdir(current)
                     try:
                         # we try to close the ressources
                         stdout.close()
@@ -393,17 +385,11 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         if len(err) > 0 and log_error and fLOG is not None:
             fLOG("error (log)\n%s" % err)
 
-        if change_path is not None:
-            os.chdir(current)
-
         if sys.platform.startswith("win"):
             return out.replace("\r\n", "\n"), err.replace("\r\n", "\n")
         else:
             return out, err
     else:
-
-        if change_path is not None:
-            os.chdir(current)
 
         return "", ""
 
