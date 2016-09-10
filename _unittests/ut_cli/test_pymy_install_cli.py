@@ -62,7 +62,7 @@ class TestPyMyInstallCli(unittest.TestCase):
             sys.executable, script, "--set=pyquickhelper --schedule")
         try:
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
-                               communicate=False, timeout=60)
+                               communicate=True, timeout=60)
         except subprocess.CalledProcessError as e:
             mes = "CMD\n{0}\nOUT\n{1}\nERR\n{2}".format(
                 e.cmd, e.output, e.stderr.read() if e.stderr else "")

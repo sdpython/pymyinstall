@@ -495,7 +495,7 @@ def run_cmd_old(cmd, sin="", shell=False, wait=False, log_error=True,
             cmd += " " + add
         else:
             cmd.append(add)
-    if not do_not_log:
+    if not do_not_log and fLOG is not None:
         fLOG("execute ", cmd)
 
     if sys.platform.startswith("win"):
@@ -523,7 +523,7 @@ def run_cmd_old(cmd, sin="", shell=False, wait=False, log_error=True,
 
         if secure is None:
             for line in proc.stdout:
-                if not do_not_log:
+                if not do_not_log and fLOG is not None:
                     fLOG(line.decode(encoding, errors=encerror).strip("\n"))
                 try:
                     out.append(
@@ -550,7 +550,7 @@ def run_cmd_old(cmd, sin="", shell=False, wait=False, log_error=True,
                         lines = f.readlines()
                     if len(lines) > len(last):
                         for line in lines[len(last):]:
-                            if not do_not_log:
+                            if not do_not_log and fLOG is not None:
                                 fLOG(line.strip("\n"))
                             out.append(line.strip("\n"))
                         last = lines
@@ -565,9 +565,9 @@ def run_cmd_old(cmd, sin="", shell=False, wait=False, log_error=True,
 
         out = "\n".join(out)
         err = proc.stderr.read().decode(encoding, errors=encerror)
-        if not do_not_log:
+        if not do_not_log and fLOG is not None:
             fLOG("end of execution ", cmd)
-        if len(err) > 0 and log_error and not do_not_log:
+        if len(err) > 0 and log_error and not do_not_log and fLOG is not None:
             fLOG("error (log)\n%s" % err)
         # return bytes.decode (out, errors="ignore"), bytes.decode(err,
         # errors="ignore")
