@@ -8,8 +8,7 @@ import os
 import sys
 from .win_exception import WinInstallPackageException
 from ..installhelper.install_cmd_helper import run_cmd, get_pip_program
-from ..pymyinstall.packaged import find_module_install
-from ..packaged import ensae_fullset
+from ..packaged import ensae_fullset, find_module_install
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
