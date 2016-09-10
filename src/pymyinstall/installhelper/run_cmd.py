@@ -11,6 +11,7 @@ import time
 import subprocess
 import threading
 import warnings
+import shlex
 if sys.version_info[0] == 2:
     import Queue as queue
 else:
@@ -43,25 +44,7 @@ def split_cmp_command(cmd, remove_quotes=True):
     """
     if isinstance(cmd, str  # unicode#
                   ):
-        spl = cmd.split()
-        res = []
-        for s in spl:
-            if len(res) == 0:
-                res.append(s)
-            elif res[-1].startswith('"') and not res[-1].endswith('"'):
-                res[-1] += " " + s
-            else:
-                res.append(s)
-        if remove_quotes:
-            nres = []
-            for _ in res:
-                if _.startswith('"') and _.endswith('"'):
-                    nres.append(_.strip('"'))
-                else:
-                    nres.append(_)
-            return nres
-        else:
-            return res
+        return shlex.split(cmd)
     else:
         return cmd
 
@@ -286,7 +269,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     stdoutdata, stderrdata = pproc.communicate(input=input)
                 else:
                     stdoutdata, stderrdata = pproc.communicate(
-                        input=input, timeout=timeout)
+                        input=None, timeout=timeout)
 
             out = decode_outerr(stdoutdata, encoding, encerror, cmd)
             err = decode_outerr(stderrdata, encoding, encerror, cmd)
