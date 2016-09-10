@@ -67,7 +67,7 @@ class TestPyMyInstallCli(unittest.TestCase):
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                communicate=False, timeout=60)
         except subprocess.CalledProcessError as e:
-            mes = "CMD\n{0}\nOUT\n{1}\nERR\n{2}".format(e.cmd, e.output, e.stderr.read())
+            mes = "CMD\n{0}\nOUT\n{1}\nERR\n{2}".format(e.cmd, e.output, e.stderr.read() if e.stderr else "")
             raise Exception(mes) from e
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":

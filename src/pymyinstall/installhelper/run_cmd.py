@@ -263,7 +263,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     fLOG("input", [input])
 
             if fLOG is not None:
-                fLOG("[run_cmd] communicate", input, [sin], catch_exit)
+                fLOG("[run_cmd] communicate", "input", input, [sin], "catch_exit=", catch_exit, "timeout=", timeout)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:
