@@ -195,9 +195,9 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         err_read = False
         skip_waiting = False
 
-        if old_behavior:
+        if True or old_behavior:
             if fLOG is not None:
-                fLOG("[run_cmd] old_behvior")
+                fLOG("[run_cmd] old_behavior")
             for line in pproc.stdout:
                 if fLOG is not None:
                     fLOG(line.decode(encoding, errors=encerror).strip("\n"))
@@ -247,6 +247,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
 
             if fLOG is not None:
                 fLOG("[run_cmd] communicate", "input", input, [sin], "catch_exit=", catch_exit, "timeout=", timeout)
+                fLOG("[run_cmd] CMD", cmd)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:
@@ -269,7 +270,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     stdoutdata, stderrdata = pproc.communicate(input=input)
                 else:
                     stdoutdata, stderrdata = pproc.communicate(
-                        input=None, timeout=timeout)
+                        input=input, timeout=timeout)
 
             out = decode_outerr(stdoutdata, encoding, encerror, cmd)
             err = decode_outerr(stderrdata, encoding, encerror, cmd)
