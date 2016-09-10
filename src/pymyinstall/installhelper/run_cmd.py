@@ -219,8 +219,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             else:
                 if sys.version_info[0] == 2:
                     if timeout is not None:
-                        raise NotImplementedError(
-                            "timeout is only available with Python 3")
+                        warnings.warn(
+                            "[run_cmd_private] timeout is only available with Python 3")
                     stdoutdata, stderrdata = pproc.communicate(input=input)
                 else:
                     stdoutdata, stderrdata = pproc.communicate(
