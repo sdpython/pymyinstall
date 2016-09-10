@@ -174,6 +174,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
 
     else:
         shell = True
+        old_behavior = True
         pproc = subprocess.Popen(cmdl,
                                  shell=shell,
                                  stdin=subprocess.PIPE if (
@@ -195,26 +196,27 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         if old_behavior:
             if fLOG is not None:
                 fLOG("[run_cmd] old_behavior")
-            for line in pproc.stdout:
-                if fLOG is not None:
-                    fLOG(line.decode(encoding, errors=encerror).strip("\n"))
-                try:
-                    out.append(
-                        line.decode(
-                            encoding,
-                            errors=encerror).strip("\n"))
-                except UnicodeDecodeError as exu:
-                    raise RunCmdException(
-                        "issue with cmd:" +
-                        str(cmd) +
-                        "\n" +
-                        str(exu))
-                if pproc.stdout.closed:
-                    break
-                if stop_running_if is not None and stop_running_if(
-                        line.decode("utf8", errors=encerror)):
-                    skip_waiting = True
-                    break
+            if not pproc.stdout.closed:
+                for line in pproc.stdout:
+                    if fLOG is not None:
+                        fLOG(line.decode(encoding, errors=encerror).strip("\n"))
+                    try:
+                        out.append(
+                            line.decode(
+                                encoding,
+                                errors=encerror).strip("\n"))
+                    except UnicodeDecodeError as exu:
+                        raise RunCmdException(
+                            "issue with cmd:" +
+                            str(cmd) +
+                            "\n" +
+                            str(exu))
+                    if pproc.stdout.closed:
+                        break
+                    if stop_running_if is not None and stop_running_if(
+                            line.decode("utf8", errors=encerror)):
+                        skip_waiting = True
+                        break
 
             if not skip_waiting:
                 pproc.wait()
