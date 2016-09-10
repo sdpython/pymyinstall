@@ -6,6 +6,7 @@ import sys
 import os
 import unittest
 import warnings
+import subprocess
 
 
 try:
@@ -62,8 +63,12 @@ class TestPyMyInstallCli(unittest.TestCase):
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
         cmd = "{0} {1} {2}".format(
             sys.executable, script, "--set=pyquickhelper --schedule")
-        out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
-                           communicate=False, timeout=20)
+        try:
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                               communicate=False, timeout=60)
+        except subprocess.CalledProcessError as e:
+            mes = "CMD\n{0}\nOUT\n{1}\nERR\n{2}".format(e.cmd, e.output, e.stderr.read())
+            raise Exception(mes) from e
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
