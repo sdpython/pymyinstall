@@ -203,10 +203,6 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                 if fLOG is not None:
                     fLOG("input", [input])
 
-            if fLOG is not None:
-                fLOG("[run_cmd] communicate", "input", input, [sin], "catch_exit=", catch_exit, "timeout=", timeout)
-                fLOG("[run_cmd] CMD", cmd)
-                fLOG("[run_cmd] CMDL", cmdl)
             if catch_exit:
                 try:
                     if sys.version_info[0] == 2:
@@ -233,8 +229,6 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             err = decode_outerr(stderrdata, encoding, encerror, cmd)
         else:
             # communicate is False: use of threads
-            if fLOG is not None:
-                fLOG("[run_cmd] thread")
             if sin is not None and len(sin) > 0:
                 raise Exception(
                     "communicate should be True to send something on stdin")
@@ -316,7 +310,8 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
             else:
                 out.append("[run_cmd] killing process.")
                 if fLOG is not None:
-                    fLOG("[run_cmd] killing process because stop_running_if returned True.")
+                    fLOG(
+                        "[run_cmd] killing process because stop_running_if returned True.")
                 pproc.kill()
                 err_read = True
                 if fLOG is not None:
@@ -394,8 +389,8 @@ class _AsyncLineReader(threading.Thread):
 
 
 def run_cmd_old(cmd, sin="", shell=False, wait=False, log_error=True,
-            secure=None, stop_waiting_if=None, do_not_log=False,
-            encerror="ignore", encoding="utf8", cwd=None, fLOG=print):
+                secure=None, stop_waiting_if=None, do_not_log=False,
+                encerror="ignore", encoding="utf8", cwd=None, fLOG=print):
     """
     run a command line and wait for the result
     @param      cmd                 command line
@@ -513,14 +508,14 @@ def run_cmd_old(cmd, sin="", shell=False, wait=False, log_error=True,
                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                     startupinfo=startupinfo, cwd=cwd)
         except FileNotFoundError as e:
-            raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e
+            raise RunCmdException("unable to run CMD:\n{0}".format(cmd)) from e
     else:
         try:
             proc = subprocess.Popen(split_cmp_command(cmd), shell=shell,
                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                     cwd=cwd)
         except FileNotFoundError as e:
-            raise RunCmdError("unable to run CMD:\n{0}".format(cmd)) from e
+            raise RunCmdException("unable to run CMD:\n{0}".format(cmd)) from e
     if wait:
 
         out = []
@@ -536,7 +531,7 @@ def run_cmd_old(cmd, sin="", shell=False, wait=False, log_error=True,
                             encoding,
                             errors=encerror).strip("\n"))
                 except UnicodeDecodeError as exu:
-                    raise RunCmdError(
+                    raise RunCmdException(
                         "issue with cmd:" +
                         str(cmd) +
                         "\n" +
