@@ -486,7 +486,7 @@ def ensae_set():
         #
         ModuleInstall("sklearn_contrib_lightning", "wheel", mname="lightning", usage="ML",
                       purpose="large-scale linear classification, regression and ranking"),
-        ModuleInstall("imbalanced-learn", "github", "scikit-learn-contrib",
+        ModuleInstall("imbalanced-learn", "pip",
                       mname="imblearn", usage="ML",
                       purpose="imbalanced-learn is a python package offering a number of re-sampling " +
                       "techniques commonly used in datasets showing strong between-class imbalance. " +
