@@ -63,6 +63,6 @@ def is_travis_or_appveyor():
     if "travis" in sys.executable:
         return "travis"
     import os
-    if os.environ.get("USERNAME", os.environ["USER"]) == "appveyor":
+    if os.environ.get("USERNAME", os.environ.get("USER", "")) == "appveyor":
         return "appveyor"
     return None
