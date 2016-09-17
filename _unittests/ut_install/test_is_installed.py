@@ -54,7 +54,8 @@ class TestIsInstalled(unittest.TestCase):
             return
         mod = find_module_install("imbalanced-learn")
         assert mod.is_installed_local()
-        r = is_package_installed(sys.real_prefix if hasattr(sys, "real_prefix") else sys.prefix, "imbalanced-learn")
+        r = is_package_installed(sys.real_prefix if hasattr(
+            sys, "real_prefix") else sys.prefix, "imbalanced-learn")
         assert r
 
 

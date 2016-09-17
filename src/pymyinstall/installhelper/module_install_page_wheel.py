@@ -49,7 +49,10 @@ def get_page_wheel(page, sele=False):
             page,
             headers={
                 'User-agent': default_user_agent})
-        u = urllib_request.urlopen(req)
+        try:
+            u = urllib_request.urlopen(req)
+        except Exception as e:
+            raise Exception("unable to get '{0}'".format(page)) from e
         text = u.read()
         u.close()
         text = text.decode("utf8")
