@@ -22,6 +22,8 @@ def ensae_set():
         ModuleInstall(
             "billiard", "pip", purpose="Python multiprocessing fork with improvements and bugfixes (for celery)"),
         ModuleInstall(
+            "vine", "pip", purpose="Promises, promises, promises"),
+        ModuleInstall(
             "amqp", "pip", purpose="Low-level AMQP client for Python (fork of amqplib) (for celery)"),
         ModuleInstall(
             "anyjson", "pip", purpose="Wraps the best available JSON implementation available in a common interface (for celery)"),
@@ -67,10 +69,18 @@ def ensae_set():
             "tweepy", "pip", purpose="Python wrapper for the twitter API"),
         #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
         ModuleInstall(
-            "mutagenx", "pip", purpose="ead and write audio tags for many formats in Python 3"),
+            "mutagen", "pip", purpose="eead and write audio tags for many formats in Python 3"),
         ModuleInstall("django-audiotracks", "pip",
                       mname="audiotracks", purpose="read audio with django"),
-        ModuleInstall("Quandl", "pip", purpose="access Quandl API"),
+        ModuleInstall("more-itertools", "pip",
+                      mname="more_itertools",
+                      purpose="More routines for operating on iterables, beyond itertools"),
+        ModuleInstall("inflection", "pip",
+                      purpose="A port of Ruby on Rails inflector to Python"),
+        ModuleInstall("ndg-httpsclient", "pip", mname="ndg_httpsclient",
+                      purpose="Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL"),
+        ModuleInstall("Quandl", "pip", mname="quandl",
+                      purpose="access Quandl API"),
         ModuleInstall(
             "nltk", "pip", purpose="NLP, natural language processing", usage="NLP"),
         ModuleInstall(
@@ -144,6 +154,8 @@ def ensae_set():
         ModuleInstall(
             "scandir", "wheel", purpose="Better directory iterator and faster os.walk(), " +
             "now in the Python 3.5 stdlib") if sys.version_info[:2] <= (3, 4) else None,
+        ModuleInstall(
+            "backports.lzma", "wheel", purpose="Backport of Python 3.3's 'lzma' module for XZ/LZMA compressed files."),
         ModuleInstall(
             "zs", "wheel", purpose="S is a compressed, read-only file format for efficiently distributing, " +
             "querying, and archiving arbitrarily large record-oriented datasets."),
@@ -367,6 +379,8 @@ def ensae_set():
         #
         ModuleInstall("picklable-itertools", "pip", mname="picklable_itertools",
                       purpose="A reimplementation of the Python standard library's itertools, in Python, using picklable iterator objects. (fuel)"),
+        ModuleInstall("python-utils", "pip", mname="python_utils",
+                      purpose="Python Utils is a module with some convenient utilities not included with the standard Python install"),
         ModuleInstall("progressbar2", "pip", usage="VIZ",
                       purpose="Text progress bar library for Python. (fuel)"),
         ModuleInstall("fuel", "pip", usage="DATA/VIZ",
@@ -386,8 +400,12 @@ def ensae_set():
         #
         ModuleInstall("prettytable", "pip",
                       purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
+        ModuleInstall("ruamel.ordereddict", "pip",
+                      purpose="a version of dict that keeps keys in insertion resp. sorted order"),
         ModuleInstall("ruamel.yaml", "pip",
                       purpose="uamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"),
+        ModuleInstall("logutils", "pip",
+                      purpose="Logging utilities"),
         ModuleInstall("skll", "pip", usage="ML",
                       purpose="SciKit-Learn Laboratory makes it easier to run machinelearning experiments with scikit-learn."),
         ModuleInstall("sklearn_pandas", "pip", usage="ML",
@@ -518,6 +536,8 @@ def ensae_set():
                       purpose="The Zope Object Database provides an object-oriented database for Python that provides a high-degree of transparency."),
         ModuleInstall("zdaemon", "pip",
                       purpose="Daemon process control library and tools for Unix-based systems"),
+        ModuleInstall("trollius", "pip",
+                      purpose="Port of the Tulip project (asyncio module, PEP 3156)"),
         ModuleInstall("ZEO", "pip",
                       purpose="ZEO provides a client-server storage implementation for ZODB."),
         ModuleInstall("ZODB3", "pip",
@@ -526,17 +546,23 @@ def ensae_set():
         #               purpose="Out-of-core NumPy arrays. " +
         #               "Wendelin.core allows you to work with arrays bigger than RAM and local disk. Bigarrays are persisted to storage, " +
         #               "and can be changed in transactional manner."),
+        ModuleInstall("pystorm", "pip",
+                      purpose="Battle-tested Apache Storm Multi-Lang implementation for Python."),
+        ModuleInstall("Fabric3", "pip", mname="fabric",
+                      purpose="Fabric is a simple, Pythonic tool for remote execution and deployment (py2.7/py3.4+ compatible fork)"),
+        ModuleInstall("streamparse", "pip",
+                      purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
     ]
 
     if sys.version_info[0] == 2:
         mod.extend([
             # (for dpark)"),
+            ModuleInstall("google-common", "pip", mname="google_common",
+                          purpose="Google namespace package"),
             ModuleInstall("mesos.interface", "pip",
                           purpose="Mesos interfaces (for dpark)"),
             ModuleInstall("pymesos", "pip",
                           purpose="Mesos interfaces (for dpark)"),
-            ModuleInstall("streamparse", "pip",
-                          purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
             # ModuleInstall("dpark", "wheel2",
             # purpose="DPark is a Python clone of Spark, MapReduce(R) alike
             # computing framework supporting iterative computation., see
@@ -558,15 +584,16 @@ def ensae_set():
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
     for name in ['azure-nspkg', 'azure-common', 'azure-mgmt-nspkg', 'azure-mgmt-authorization',
+                 'azure-mgmt-common',
                  'azure-mgmt-batch', 'azure-mgmt-cdn', 'azure-mgmt-cognitiveservices', 'azure-mgmt-commerce',
                  'azure-mgmt-compute', 'azure-mgmt-logic', 'azure-graphrbac', 'azure-mgmt-network',
                  'azure-mgmt-notificationhubs', 'azure-mgmt-powerbiembedded', 'azure-mgmt-redis',
                  'azure-mgmt-resource', 'azure-mgmt-scheduler', 'azure-mgmt-storage',
                  'azure-mgmt-web', 'azure-graphrbac', 'azure-batch', 'azure-servicebus',
-                 'azure-servicemanagement-legacy', 'azure']:
+                 'azure-servicemanagement-legacy', 'azure-mgmt', 'azure']:
         # azure part
         m = ModuleInstall(
-            name, "pip", pip_options=["--pre"],
+            name, "pip", mname=name.replace("-", "_"), pip_options=["--pre"],
             purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE")
         mod.append(m)
 

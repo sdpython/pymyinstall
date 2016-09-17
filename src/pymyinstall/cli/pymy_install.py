@@ -134,34 +134,34 @@ def do_main(temp_folder="build/update_modules",
                 sys.path.append(pfolder)
                 from pymyinstall.win_installer import import_every_module
 
-                def to_int(s):
-                    if "end" in s:
-                        return -1
-                    try:
-                        return int(s)
-                    except:
-                        return -1
+            def to_int(s):
+                if "end" in s:
+                    return -1
+                try:
+                    return int(s)
+                except:
+                    return -1
 
-                if checkings in ("", "0,end", "0,-1"):
-                    module_list = None
-                    start = 0
-                    end = -1
-                elif ":" in checkings:
-                    module_list = None
-                    spl = checkings.split(":")
-                    if len(spl) == 2:
-                        start = to_int(spl[0])
-                        end = to_int(spl[1])
-                    else:
-                        raise ValueError("unable to interpret: " + checkings)
+            if checkings in ("", "0,end", "0,-1"):
+                module_list = None
+                start = 0
+                end = -1
+            elif ":" in checkings:
+                module_list = None
+                spl = checkings.split(":")
+                if len(spl) == 2:
+                    start = to_int(spl[0])
+                    end = to_int(spl[1])
                 else:
-                    module_list = [_.strip() for _ in checkings.split(",")]
-                    start = 0
-                    end = -1
+                    raise ValueError("unable to interpret: " + checkings)
+            else:
+                module_list = [_.strip() for _ in checkings.split(",")]
+                start = 0
+                end = -1
 
-                print("CHECKINGS {}:{} -- {}".format(start, end,
-                                                     "all" if module_list is None else ",".join(module_list)))
-                import_every_module(None, module_list, start=start, end=end)
+            print("CHECKINGS {}:{} -- {}".format(start, end,
+                                                 "all" if module_list is None else ",".join(module_list)))
+            import_every_module(None, module_list, start=start, end=end)
         else:
             if not os.path.exists(temp_folder):
                 os.makedirs(temp_folder)

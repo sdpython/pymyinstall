@@ -240,11 +240,15 @@ def extended_set():
         ModuleInstall("botocore", "pip", usage="AWS",
                       purpose="A low-level interface to a growing number of Amazon Web Services. " +
                       "The botocore package is the foundation for the AWS CLI as well as boto3."),
+        ModuleInstall("s3transfer", "pip", usage="AWS",
+                      purpose="An Amazon S3 Transfer Manager"),
         ModuleInstall("boto3", "pip", usage="AWS",
                       purpose="A Python interface to Amazon Web Services"),
         # for gensim
         ModuleInstall("bz2file", "pip", purpose="process bz2 files"),
         # for gensim
+        ModuleInstall("boto", "pip",
+                      purpose="Amazon Web Services Library"),
         ModuleInstall("smart_open", "pip",
                       purpose="Utils for streaming large files (S3, HDFS, gzip, bz2...), provides the same API for many format"),
         ModuleInstall("httpretty", "pip",
@@ -308,6 +312,8 @@ def extended_set():
         #     "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
         ModuleInstall(
             "tzlocal", "pip", purpose="tzinfo object for the local timezone"),
+        ModuleInstall(
+            "funcsigs", "pip", purpose="Python function signatures from PEP362"),
         ModuleInstall(
             "apscheduler", "pip", purpose="to schedule the execution of jobs, tasks"),
         #
@@ -395,6 +401,12 @@ def extended_set():
                       purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
         ModuleInstall("mpmath", "pip",
                       purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
+        ModuleInstall("httplib2", "pip",
+                      purpose="A comprehensive HTTP client library."),
+        ModuleInstall("oauth2client", "pip",
+                      purpose="The oauth2client is a client library for OAuth 2.0."),
+        ModuleInstall("uritemplate", "pip",
+                      purpose="URI templates"),
         ModuleInstall("google-api-python-client", "pip", mname="googleapiclient",
                       purpose="The Google API Client for Python is a client library for accessing the Plus, Moderator, and many other Google APIs."),
         ModuleInstall("googlemaps", "pip",
@@ -423,6 +435,8 @@ def extended_set():
                       purpose="The smartest command line arguments parser in the world"),
         ModuleInstall("idna", "pip",
                       purpose="Internationalized Domain Names in Applications (IDNA)"),
+        ModuleInstall("ipaddress", "pip",
+                      purpose="IPv4/IPv6 manipulation library") if sys.version_info[0] == 2 else None,
         ModuleInstall("cryptography", "pip",
                       purpose="cryptography is a package which provides cryptographic recipes and primitives to Python developers."),
         ModuleInstall("pyOpenSSL", "pip", mname="pyopenssl",
@@ -450,6 +464,10 @@ def extended_set():
                       purpose="Traceback fiddling library. For now allows you to pickle tracebacks and raise exceptions with pickled " +
                       "tracebacks in different processes. This allows better error handling when running code over " +
                       "multiple processes (imagine multiprocessing, billiard, futures, celery etc)"),
+        ModuleInstall("zict", "pip",
+                      purpose="The dictionary / mutable mapping interface is powerful and multi-faceted."),
+        ModuleInstall("click", "pip",
+                      purpose="A simple wrapper around optparse for powerful command line utilities."),
         ModuleInstall('distributed', 'pip',
                       purpose="Distributed is a lightweight library for distributed computing in Python. It extends both the concurrent.futures " +
                       "and dask APIs to moderate sized clusters. Distributed provides data-local computation " +
@@ -501,6 +519,8 @@ def extended_set():
                       purpose="Pattern-matching language based on OMeta for Python 3 and 2"),
         # ModuleInstall("ViTables", "pip", mname="vitables",
         #               purpose="A viewer for PyTables package"),
+        ModuleInstall("pybars3", "pip",
+                      purpose="Handlebars.js templating"),
         ModuleInstall("db.py", "pip", mname="db.tables",
                       purpose="db.py is an easier way to interact with your databases. It makes it easier to explore tables, columns, views, etc. " +
                       "It puts the emphasis on user interaction, information display, and providing easy to use helper functions."),
@@ -552,6 +572,12 @@ def extended_set():
                       purpose="isPy: interactive scientific visualization in Python"),
         ModuleInstall("apache-libcloud", "pip", mname="libcloud",
                       purpose="A standard Python library that abstracts away differences among multiple cloud provider APIs."),
+        ModuleInstall("click-plugins", "pip", mname="click_plugins",
+                      purpose="An extension module for click to enable registering CLI commands via setuptools entry-points."),
+        ModuleInstall("clickj", "pip",
+                      purpose="Click params for commmand line interfaces to GeoJSON"),
+        ModuleInstall("munch", "pip",
+                      purpose="A dot-accessible dictionary (a la JavaScript objects)."),
         ModuleInstall("Fiona", "wheel", usage="GEO", mname="fiona",
                       purpose="Fiona is OGR’s neat, nimble, no-nonsense API for Python programmers."),
         ModuleInstall("brythonmagic", "pip",
@@ -569,6 +595,12 @@ def extended_set():
                       purpose="Flexx is a pure Python toolkit for creating graphical user interfaces (GUI's), " +
                       "that uses web technology for its rendering. Apps are written purely in Python; Flexx' " +
                       "transpiler generates the necessary JavaScript on the fly."),
+        ModuleInstall('pypng', 'pip',
+                      purpose="Pure Python PNG image encoder/decoder"),
+        ModuleInstall('colormath', 'pip',
+                      purpose="Color math and conversion library."),
+        ModuleInstall('arrow', 'pip',
+                      purpose="Better dates and times for Python"),
         ModuleInstall('toyplot', 'pip', usage="VIZ",
                       purpose="The kid-sized plotting toolkit for Python with grownup-sized goals."),
         ModuleInstall('images2gif', 'pip',

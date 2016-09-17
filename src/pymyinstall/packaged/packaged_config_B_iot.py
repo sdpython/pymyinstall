@@ -27,6 +27,8 @@ def iot_set():
             'protobuf', 'pip', purpose="Protocol Buffers are Google’s data interchange format"),
         ModuleInstall('pychromecast', 'pip',
                       purpose="Library for Python 2 and 3 to communicate with the Google Chromecast."),
+        ModuleInstall('python-xlib', 'pip', mname="python_xlib",
+                      purpose="Python X Library"),
         ModuleInstall('pyuserinput', 'pip',
                       purpose="A simple, cross-platform module for mouse and keyboard control"),
         ModuleInstall('tellcore-py', 'pip', usage="IoT",
@@ -109,6 +111,8 @@ def iot_set():
         # ModuleInstall('pymodbus', 'github', 'bashwork', usage='IoT'),
         ModuleInstall('python-verisure', 'github',
                       'persandstrom', usage='IoT', purpose="A python module for reading and changing status of verisure devices through mypages."),
+        ModuleInstall('voluptuous', 'pip',
+                      purpose="Voluptuous is a Python data validation library"),
 
         ModuleInstall('homeassistant', 'pip',
                       purpose="Home Assistant is a home automation platform running on Python 3. " +

@@ -201,17 +201,20 @@ if not r:
             'console_scripts': [
                 'pymy_update3 = pymyinstall.cli.pymy_update:main',
                 'pymy_install3 = pymyinstall.cli.pymy_install:main',
+                'pymy_deps3 = pymyinstall.cli.pymy_deps:main',
             ]}
         if sys.platform.startswith("win"):
             entry_points['console_scripts'].extend([
                 'pymy_update = pymyinstall.cli.pymy_update:main',
                 'pymy_install = pymyinstall.cli.pymy_install:main',
+                'pymy_deps = pymyinstall.cli.pymy_deps:main',
             ])
     else:
         entry_points = {
             'console_scripts': [
                 'pymy_update = pymyinstall.cli.pymy_update:main',
                 'pymy_install = pymyinstall.cli.pymy_install:main',
+                'pymy_deps = pymyinstall.cli.pymy_deps:main',
             ]}
 
     setup(

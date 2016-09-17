@@ -18,6 +18,9 @@ def small_set():
         # purpose="Backport of the concurrent.futures package from Python
         # 3.2"),
         ModuleInstall(
+            "wincertstore", "pip", purpose="Python module to extract CA and CRL certs from Windows' cert store (ctypes based).") \
+        if sys.platform.startswith("win") else None,
+        ModuleInstall(
             "virtualenv", "pip", purpose="creatre virtual environments") if not is_conda_distribution() else None,
         ModuleInstall(
             "six", "pip", purpose="helpers for python 2/3 conversion"),
@@ -32,6 +35,8 @@ def small_set():
             "python-dateutil", "pip", "dateutil", purpose="helpers to manipulate dates"),
         ModuleInstall(
             "html5lib", "pip", purpose="pure-python library for parsing HTML"),
+        ModuleInstall(
+            "webencodings", "pip", purpose="Character encoding aliases for legacy web content"),
         ModuleInstall("beautifulsoup4", "pip", mname="bs4",
                       purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for " +
                       "iterating, searching, and modifying the parse tree."),
@@ -269,6 +274,14 @@ def small_set():
         ModuleInstall(
             "rope_py3k", "pip", mname="rope", purpose="refactoring library") if sys.version_info[0] >= 3 else None,  #
         ModuleInstall(
+            "isort", "pip", purpose="A Python utility / library to sort Python imports."),
+        ModuleInstall(
+            "backports.functools_lru_cache", "pip",
+            purpose="backports.functools_lru_cache"),
+        ModuleInstall(
+            "astroid", "pip",
+            purpose="A abstract syntax tree for Python with inference support."),
+        ModuleInstall(
             "pylint", "pip", purpose="statistics on Python script style"),  #
         ModuleInstall(
             "guidata", "pip", purpose="Automatic graphical user interfaces generation for easy dataset editing and display (Spyder)"),
@@ -282,6 +295,8 @@ def small_set():
         # ModuleInstall("goslate", "pip",  # version="1.4",
         #               purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
+        ModuleInstall(
+            "aenum", "pip", purpose="Advanced Enumerations (compatible with Python's stdlib Enum), NamedTuples, and NamedConstants"),
         ModuleInstall("dbf", "pip", purpose="access DBase format"),
         ModuleInstall(
             "xmltodict", "pip", purpose="Makes working with XML feel like you are working with JSON"),
