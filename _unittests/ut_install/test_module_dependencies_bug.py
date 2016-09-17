@@ -65,6 +65,12 @@ class TestModuleDependenciesBug(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+        try:
+            import luigi
+            mod = "luigi"
+        except ImportError:
+            mod = "pandas"
+
         if not is_conda_distribution():
             dep = missing_dependencies("luigi")
             self.assertEqual(dep, {})
