@@ -68,13 +68,14 @@ class TestModuleDependenciesBug(unittest.TestCase):
         try:
             import luigi
             mod = "luigi"
+            assert luigi is not None
         except ImportError:
             mod = "pandas"
 
         if not is_conda_distribution():
-            dep = missing_dependencies("luigi")
+            dep = missing_dependencies(mod)
             self.assertEqual(dep, {})
-            self.common_function("luigi")
+            self.common_function(mod)
         else:
             # issue with Anaconda, not investigated
             return
