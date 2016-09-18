@@ -1,8 +1,18 @@
 #!python
 """
-script which updates all modules,
-works on Linux and Windows if the module is
-included the list of modules handled by this module
+script which looks into the dependencies for a module
+
+.. todoext::
+    :title: add a script to look into dependencies
+    :tag: done
+    :cost: 0.5
+    :date: 2016-09-18
+    :hidden:
+    :release: 1.1
+
+    Add a script to check the missing dependencies.
+
+.. versionadded:: 1.1
 """
 from __future__ import print_function
 import sys
@@ -39,7 +49,8 @@ def do_main(list_modules=None):
         try:
             from pymyinstall.installhelper import missing_dependencies, get_module_dependencies
         except ImportError as e:
-            mes = "pfolder={0}\nPATH:\n{1}".format(pfolder, "\n".join(sys.path))
+            mes = "pfolder={0}\nPATH:\n{1}".format(
+                pfolder, "\n".join(sys.path))
             raise ImportError(mes) from e
     res = missing_dependencies(list_modules)
     if len(res) > 0:

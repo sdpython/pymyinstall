@@ -136,20 +136,6 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
 
     If you are using this function to run git function, parameter ``shell`` must be True.
 
-    .. todoext::
-        :title: refactor run_cmd
-        :tag: bug
-        :cost: 2
-        :date: 2016-08-25
-        :issue: 33
-        :hidden:
-        :release: 1.4
-
-        Some options were not implemented, unused parameters were removed.
-        When communicate is False, the command is run within a thread which gives
-        more freedom to the main program to listen or stop the command line
-        execution.
-
     .. versionadded:: 1.1
     """
     if fLOG is not None:
