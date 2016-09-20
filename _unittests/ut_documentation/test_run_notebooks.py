@@ -42,7 +42,7 @@ import pyquickhelper
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyquickhelper.ipythonhelper import execute_notebook_list
-from pyquickhelper.pycode import compare_module_version
+from pyquickhelper.pycode import compare_module_version, is_travis_or_appveyor
 from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 import IPython
 
@@ -95,10 +95,12 @@ class TestRunNotebooks(unittest.TestCase):
             os.path.abspath(os.path.dirname(__file__)), "..", "..", "src"))]
 
         if "travis" in sys.executable:
-            keepnote = [_ for _ in keepnote if "javascript_extension" not in _]
+            keepnote = [_ for _ in keepnote if "javascript_extension" not in _ and
+                        (not is_travis_or_appveyor() or "example_xgboost" not in _)]
 
         res = execute_notebook_list(
-            temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths, kernel_name=kernel_name)
+            temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths,
+            kernel_name=kernel_name)
         assert len(res) > 0
         fails = [(os.path.split(k)[-1], v)
                  for k, v in sorted(res.items()) if not v[0]]
