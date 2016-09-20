@@ -552,6 +552,12 @@ def ensae_set():
                       purpose="Fabric is a simple, Pythonic tool for remote execution and deployment (py2.7/py3.4+ compatible fork)"),
         ModuleInstall("streamparse", "pip",
                       purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
+        #
+        # 2015-09-20: treeinterpreter
+        #
+        ModuleInstall("treeinterpreter", "pip", usage="ML",
+                      purpose="Package for interpreting scikit-learn's decision tree and random forest predictions. Allows decomposing " +
+                      "each prediction into bias and feature contribution components"),
     ]
 
     if sys.version_info[0] == 2:
