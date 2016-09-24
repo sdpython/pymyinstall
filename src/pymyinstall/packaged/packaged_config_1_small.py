@@ -115,6 +115,16 @@ def small_set():
                       mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
         ModuleInstall(
             "colorama", "pip", purpose="Cross-platform colored terminal text.", usage="SPHINX"),
+        ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
+        ModuleInstall("requests", "pip", purpose="human interface for http"),
+        ModuleInstall(
+            "wcwidth", "pip", purpose="Measures number of Terminal column cells of wide-character codes", usage="JUPYTER"),
+        ModuleInstall(
+            "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
+        ModuleInstall(
+            "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
+        ModuleInstall(
+            "decorator", "pip", purpose="Better living through Python with decorators"),
         ModuleInstall("docutils", "pip",
                       purpose="interpret RST format", usage="SPHINX"),
         ModuleInstall(
@@ -134,7 +144,6 @@ def small_set():
             "mccabe", "pip", purpose="This module provides a plugin for flake8, the Python code checker."),
         ModuleInstall("pyflakes", "pip", purpose="verify pep8 on a script"),
         ModuleInstall("flake8", "pip", purpose="verify pep8 on a script"),
-        ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
@@ -151,10 +160,6 @@ def small_set():
         ModuleInstall(
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
         # ipython
-        ModuleInstall(
-            "wcwidth", "pip", purpose="Measures number of Terminal column cells of wide-character codes", usage="JUPYTER"),
-        ModuleInstall(
-            "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
         ModuleInstall("win_unicode_console", "pip",
                       "Enable Unicode input and display when running Python from Windows console."),
         ModuleInstall(
@@ -165,6 +170,8 @@ def small_set():
             "jupyter_core", "pip", purpose="Jupyter Core", usage="JUPYTER"),
         ModuleInstall(
             "jupyter_client", "pip", purpose="Jupyter client", usage="JUPYTER"),
+        ModuleInstall(
+            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
             "nbformat", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
@@ -184,8 +191,6 @@ def small_set():
                       purpose="An Attribute class to be used with pandocfilters"),
         ModuleInstall(
             "notedown", "pip", purpose="Convert markdown to IPython notebook.", usage="JUPYTER"),
-        ModuleInstall(
-            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall("pexpect", "pip",
                       purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.",
                       usage="JUPYTER") if not sys.platform.startswith("win") else None,
@@ -195,8 +200,6 @@ def small_set():
             "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="JUPYTER"),
         ModuleInstall(
             "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="JUPYTER"),
-        ModuleInstall(
-            "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
             "pickleshare", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
@@ -256,11 +259,8 @@ def small_set():
             :2] < (3, 5) else None,
         ModuleInstall("typecheck-decorator", "pip", mname="typecheck",
                       purpose="verifies decorators at running time"),
-        ModuleInstall(
-            "decorator", "pip", purpose="Better living through Python with decorators"),
         ModuleInstall("requests-cache", "pip", mname="requests_cache",
                       purpose="Persistent cache for requests library"),
-        ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall("PyQt4", "wheel", mname="PyQt4", usage="GUI"),
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
