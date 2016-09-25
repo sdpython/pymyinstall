@@ -39,6 +39,7 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
+from src.pymyinstall import is_travis_or_appveyor
 from src.pymyinstall.win_installer.win_setup_main_checkings import distribution_checkings
 
 
@@ -68,7 +69,7 @@ class TestCheckings(unittest.TestCase):
                         if "spyder" not in line:
                             raise Exception(
                                 "spyder not found in line\n{0}".format(line)) from e
-        else:
+        elif not is_travis_or_appveyor():
             try:
                 distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
             except Exception as e:
