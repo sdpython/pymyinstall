@@ -62,6 +62,8 @@ def extended_set():
                       purpose="DyND-Python, a component of the Blaze project, " +
                       "is the Python exposure of the DyND dynamic multi-dimensional array library.")
         if sys.version_info[0] >= 3 else None,
+        ModuleInstall("mpmath", "pip",
+                      purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
         ModuleInstall(
             'sympy', 'pip', purpose="SymPy is a Python library for symbolic mathematics."),
         ModuleInstall('gmpy2', 'wheel',
@@ -399,8 +401,6 @@ def extended_set():
                       "program characteristics such as running time and memory usage."),
         ModuleInstall("snakeviz", "pip",
                       purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
-        ModuleInstall("mpmath", "pip",
-                      purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
         ModuleInstall("httplib2", "pip",
                       purpose="A comprehensive HTTP client library."),
         ModuleInstall("oauth2client", "pip",
@@ -509,8 +509,6 @@ def extended_set():
                       purpose="Julia/Python bridge with IPython support", usage="DATA/ML"),
         ModuleInstall("lazy-object-proxy", "pip", mname="lazy_object_proxy",
                       purpose="A fast and thorough lazy object proxy"),
-        ModuleInstall("mpmath", "pip", usage="OPTIM",
-                      purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
         ModuleInstall("oct2py", "pip",
                       purpose="Python to GNU Octave bridge --> run m-files from python.", usage="DATA/ML"),
         ModuleInstall("pg8000", "pip",

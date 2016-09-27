@@ -100,6 +100,8 @@ def small_set():
         ModuleInstall(
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
+            "decorator", "pip", purpose="Better living through Python with decorators"),
+        ModuleInstall(
             "networkx", "pip", purpose="graph libraries, basic drawing", usage="VIZ"),
         ModuleInstall(
             "graphviz", "pip", purpose="wrapper for graphviz (most famous tool to draw graphs", usage="VIZ"),
@@ -115,7 +117,6 @@ def small_set():
                       mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
         ModuleInstall(
             "colorama", "pip", purpose="Cross-platform colored terminal text.", usage="SPHINX"),
-        ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "wcwidth", "pip", purpose="Measures number of Terminal column cells of wide-character codes", usage="JUPYTER"),
@@ -123,8 +124,7 @@ def small_set():
             "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
         ModuleInstall(
             "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
-        ModuleInstall(
-            "decorator", "pip", purpose="Better living through Python with decorators"),
+        ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
         ModuleInstall("docutils", "pip",
                       purpose="interpret RST format", usage="SPHINX"),
         ModuleInstall(
@@ -165,13 +165,13 @@ def small_set():
         ModuleInstall(
             "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
-            "jupyter", "pip", purpose="Jupyter", usage="JUPYTER"),
+            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
             "jupyter_core", "pip", purpose="Jupyter Core", usage="JUPYTER"),
         ModuleInstall(
-            "jupyter_client", "pip", purpose="Jupyter client", usage="JUPYTER"),
+            "jupyter", "pip", purpose="Jupyter", usage="JUPYTER"),
         ModuleInstall(
-            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
+            "jupyter_client", "pip", purpose="Jupyter client", usage="JUPYTER"),
         ModuleInstall(
             "nbformat", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
