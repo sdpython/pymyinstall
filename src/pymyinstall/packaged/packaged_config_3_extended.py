@@ -585,7 +585,7 @@ def extended_set():
         #
 
         #
-        # August, September 2016
+        # August, September, October 2016
         #
         ModuleInstall('qinfer', 'pip', usage="DATA/ML",
                       purpose="QInfer is a library using Bayesian sequential Monte Carlo for quantum parameter estimation."),
@@ -607,6 +607,10 @@ def extended_set():
                       purpose="Hypothesis is an advanced testing library for Python. It lets you write tests which are parametrized " +
                       "by a source of examples, and then generates simple and comprehensible examples that make your tests fail. " +
                       "This lets you find more bugs in your code with less work."),
+        ModuleInstall('zarr', 'pip',
+                      purpose="A minimal implementation of chunked, compressed, N-dimensional arrays for Python."),
+        ModuleInstall('rx', 'pip',
+                      purpose="Reactive Extensions (Rx) for Python (LINQ)"),
     ]
 
     if sys.platform.startswith("win"):
