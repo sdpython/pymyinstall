@@ -611,6 +611,8 @@ def extended_set():
                       purpose="A minimal implementation of chunked, compressed, N-dimensional arrays for Python."),
         ModuleInstall('rx', 'pip',
                       purpose="Reactive Extensions (Rx) for Python (LINQ)"),
+        ModuleInstall('PySocks', 'pip', mname="socks",
+                      purpose="A semi-actively maintained SocksiPy fork. Contains many improvements to the original."),
     ]
 
     if sys.platform.startswith("win"):
