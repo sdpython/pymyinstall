@@ -75,8 +75,10 @@ class TestPyMyDepsCli(unittest.TestCase):
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
         else:
             fLOG(out)
-            assert "pandas" in out
-            assert "['pandas']" in out
+            if "pandas" not in out:
+                raise Exception(out)
+            if "['pandas']" not in out:
+                raise Exception(out)
 
 
 if __name__ == "__main__":
