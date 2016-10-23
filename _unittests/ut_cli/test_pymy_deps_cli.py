@@ -66,6 +66,7 @@ class TestPyMyDepsCli(unittest.TestCase):
             mes = "CMD\n{0}\nOUT\n{1}\nERR\n{2}".format(
                 e.cmd, e.output, e.stderr.read() if e.stderr else "")
             raise Exception(mes) from e
+        out = out.strip()
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
