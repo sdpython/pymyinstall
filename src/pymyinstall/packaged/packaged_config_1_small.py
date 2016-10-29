@@ -224,6 +224,7 @@ def small_set():
         ModuleInstall(
             "backports_abc", "pip", purpose="A backport of recent additions to the 'collections.abc' module",
             usage="JUPYTER"),
+        ModuleInstall("yapf", "pip", purpose="Code formatter"),
         ModuleInstall(
             "widgetsnbextension", "pip",
             purpose="Interactive HTML widgets for Jupyter notebooks.", usage="JUPYTER"),
