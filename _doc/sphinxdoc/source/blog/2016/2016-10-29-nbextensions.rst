@@ -57,15 +57,17 @@
     ::
     
         jupyter nbextension enable code_prettify/code_prettify
-        jupyter nbextension enable codefolding/main
         jupyter nbextension enable execute_time/ExecuteTime
         jupyter nbextension enable exercise2/main
         jupyter nbextension enable highlighter/highlighter
         jupyter nbextension enable move_selected_cells/main
         jupyter nbextension enable scratchpad/main
         jupyter nbextension enable toc2/toc2
-        jupyter nbextension enable skip-traceback/main
         jupyter nbextension enable tree-filter/index
+        
+    ::
     
+        jupyter nbextension enable skip-traceback/main
+        jupyter nbextension enable codefolding/main
     
     
