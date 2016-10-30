@@ -11,14 +11,16 @@
     to start but I was surprised to discover others modules
     extending shapely in their own way.
     
-    * `shapely <https://github.com/Toblerity/Shapely>`_ leverages 
-      `GEOS <https://trac.osgeo.org/geos/>`_
-    * `pyproj <http://jswhit.github.io/pyproj/>`_ leverages 
-      `PROJ.4 <https://github.com/OSGeo/proj.4/wiki>`_ to convert geocoordinates
-      into many projections systems (`list <https://trac.osgeo.org/proj/wiki/ProjList>`_)
     * `descartes <https://bitbucket.org/sgillies/descartes/>`_ explicitely extends 
       `shapely <https://github.com/Toblerity/Shapely>`_ 
     * `fiona <https://github.com/Toblerity/Fiona>`_ leverages 
       `GDAL <http://www.gdal.org/>`_
     * `geopandas <http://geopandas.org/index.html#>`_ tries to unify
-      all of them
+      all of them    
+    * `mapnik <https://github.com/mapnik/python-mapnik>`_: binding for
+      `Mapnik <http://mapnik.org/>`_
+    * `pyproj <http://jswhit.github.io/pyproj/>`_ leverages 
+      `PROJ.4 <https://github.com/OSGeo/proj.4/wiki>`_ to convert geocoordinates
+      into many projections systems (`list <https://trac.osgeo.org/proj/wiki/ProjList>`_)
+    * `shapely <https://github.com/Toblerity/Shapely>`_ leverages 
+      `GEOS <https://trac.osgeo.org/geos/>`_
