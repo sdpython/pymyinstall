@@ -25,6 +25,7 @@ def small_set():
         ModuleInstall(
             "six", "pip", purpose="helpers for python 2/3 conversion"),
         ModuleInstall("lxml", "wheel", purpose="xml parsers (C++)"),
+        ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
         ModuleInstall("jinja2", "pip", purpose="templating"),
         ModuleInstall("Mako", "pip", mname="mako", purpose="templating"),
         ModuleInstall(
@@ -70,6 +71,7 @@ def small_set():
         ModuleInstall(
             "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
             "of SSL certificates while verifying the identity of TLS hosts."),
+        ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
@@ -117,14 +119,12 @@ def small_set():
                       mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
         ModuleInstall(
             "colorama", "pip", purpose="Cross-platform colored terminal text.", usage="SPHINX"),
-        ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "wcwidth", "pip", purpose="Measures number of Terminal column cells of wide-character codes", usage="JUPYTER"),
         ModuleInstall(
             "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
         ModuleInstall(
             "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
-        ModuleInstall('markupsafe', 'pip', purpose="parses mardown"),
         ModuleInstall("docutils", "pip",
                       purpose="interpret RST format", usage="SPHINX"),
         ModuleInstall(

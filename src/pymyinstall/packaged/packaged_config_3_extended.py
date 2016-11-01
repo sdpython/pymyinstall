@@ -446,9 +446,9 @@ def extended_set():
         # ModuleInstall('python-cloudfiles-hubic', 'github', "Gu1", mname="cloudfiles",
         #                   web="https://github.com/Gu1/python-cloudfiles-hubic",
         #              purpose="access to Hubic"),
-        ModuleInstall('onedrive-sdk-python', 'github', "OneDrive", mname="onedrivesdk",
-                      web="https://github.com/Gu1/python-cloudfiles-hubic/",
-                      purpose="access to OneDrive"),
+        # ModuleInstall('onedrive-sdk-python', 'github', "OneDrive", mname="onedrivesdk",
+        #               web="https://github.com/Gu1/python-cloudfiles-hubic/",
+        #               purpose="access to OneDrive"),
         # ModuleInstall('rlpy', 'pip', usage="DATA/ML",
         # purpose="RLPy is a framework to conduct sequential decision making
         # experiments. The current focus of this project lies on
