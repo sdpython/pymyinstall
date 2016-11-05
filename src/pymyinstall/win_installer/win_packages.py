@@ -27,7 +27,11 @@ def get_modules_version(python_path):
             prog = get_pip_program(exe=python_path)
     else:
         prog = get_pip_program(exe=python_path)
-    cmd = prog + " list --format=legacy"
+
+    cmd = prog + " list"
+    from pip import __version__
+    if int(__version__.split(".")[0]) >= 9:
+        cmd += " --format=legacy"
 
     try:
         out, err = run_cmd(cmd, wait=True, fLOG=None, change_path=python_path)
