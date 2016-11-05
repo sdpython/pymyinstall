@@ -27,7 +27,7 @@ def get_modules_version(python_path):
             prog = get_pip_program(exe=python_path)
     else:
         prog = get_pip_program(exe=python_path)
-    cmd = prog + " list"
+    cmd = prog + " list --format=legacy"
 
     try:
         out, err = run_cmd(cmd, wait=True, fLOG=None, change_path=python_path)
