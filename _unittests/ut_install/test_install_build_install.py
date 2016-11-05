@@ -90,5 +90,6 @@ class TestInstallBuildInstall(unittest.TestCase):
         fLOG(script)
         run_venv_script(temp, script, fLOG=fLOG)
 
+
 if __name__ == "__main__":
     unittest.main()

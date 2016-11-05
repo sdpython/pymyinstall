@@ -29,6 +29,7 @@ def description(filepath, image):
         format = " (" + image.format + " %dx%d "
     return title + format % image.size + image.mode + ")"
 
+
 if len(sys.argv) == 1:
     print("PIL Print 0.2a1/96-10-04 -- print image files")
     print("Usage: pilprint files...")

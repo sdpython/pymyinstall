@@ -71,5 +71,6 @@ class TestSetupIPython (unittest.TestCase):
             for _ in r:
                 assert os.path.exists(_)
 
+
 if __name__ == "__main__":
     unittest.main()

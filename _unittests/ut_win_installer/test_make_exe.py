@@ -59,5 +59,6 @@ class TestMakeExe(unittest.TestCase):
             exe = os.path.join(temp, "run_update_all.exe")
             assert os.path.exists(exe)
 
+
 if __name__ == "__main__":
     unittest.main()

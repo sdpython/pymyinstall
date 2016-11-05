@@ -71,5 +71,6 @@ class TestDownloadlxml (unittest.TestCase):
             assert os.path.exists(exe)
             assert os.stat(exe).st_size > 100000
 
+
 if __name__ == "__main__":
     unittest.main()

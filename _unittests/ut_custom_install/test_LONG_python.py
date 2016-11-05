@@ -63,5 +63,6 @@ class TestDownloadPython (unittest.TestCase):
         if sys.platform.startswith("win"):
             install_python(install=True, temp_folder=temp, fLOG=fLOG)
 
+
 if __name__ == "__main__":
     unittest.main()

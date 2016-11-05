@@ -432,6 +432,7 @@ def register(target, current=True):
         print('Unable to register ActiveX: please install pywin32',
               file=sys.stderr)
 
+
 '''
 def unregister(target, current=True):
     """Unregister a Python distribution in Windows registry"""

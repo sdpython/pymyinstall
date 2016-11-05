@@ -77,5 +77,6 @@ class TestRequirements (unittest.TestCase):
         fLOG(k2)
         assert k == k2
 
+
 if __name__ == "__main__":
     unittest.main()

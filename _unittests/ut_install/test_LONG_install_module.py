@@ -107,5 +107,6 @@ class TestLONGInstallModule (unittest.TestCase):
         if mod.get_installed_version() != mod.get_pypi_version():
             assert mod.has_update()
 
+
 if __name__ == "__main__":
     unittest.main()

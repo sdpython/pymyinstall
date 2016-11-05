@@ -80,5 +80,6 @@ class TestModuleDependenciesBug(unittest.TestCase):
             # issue with Anaconda, not investigated
             return
 
+
 if __name__ == "__main__":
     unittest.main()

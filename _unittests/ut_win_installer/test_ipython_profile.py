@@ -88,5 +88,6 @@ class TestIPythonProfile(unittest.TestCase):
             profile = os.path.join(path, "ipython_config.py")
             assert os.path.exists(profile)
 
+
 if __name__ == "__main__":
     unittest.main()

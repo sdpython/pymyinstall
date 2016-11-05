@@ -55,5 +55,6 @@ class TestMissingModules (unittest.TestCase):
         for k, v in sorted(deps.items()):
             fLOG(k, "--->", ", ".join(v))
 
+
 if __name__ == "__main__":
     unittest.main()

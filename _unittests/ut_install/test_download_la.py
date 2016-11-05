@@ -71,5 +71,6 @@ class TestDownloadLa(unittest.TestCase):
             fLOG(exe)
             assert os.stat(exe).st_size > 1000
 
+
 if __name__ == "__main__":
     unittest.main()

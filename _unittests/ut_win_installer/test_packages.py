@@ -64,5 +64,6 @@ class TestPackages(unittest.TestCase):
             mods = get_modules_version(path)
             assert len(mods) > 0
 
+
 if __name__ == "__main__":
     unittest.main()

@@ -180,5 +180,6 @@ def add_shortcut_to_desktop_for_ipython(folder):
     return add_shortcut_to_desktop(
         file, "notebook." + ver, "Jupyter Notebook {1} ({0})".format(folder, ver), arguments)
 
+
 if __name__ == "__main__":
     setup_ipython("C:\\temp", [], apply_modification=False)

@@ -77,5 +77,6 @@ class TestDownloadPyCrypto (unittest.TestCase):
             assert os.stat(exe).st_size > 100000
             assert ("cp%d%d-none-win_amd64" % sys.version_info[:2]) in exe
 
+
 if __name__ == "__main__":
     unittest.main()

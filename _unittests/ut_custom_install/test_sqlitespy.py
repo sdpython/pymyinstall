@@ -67,5 +67,6 @@ class TestSqliteSpy (unittest.TestCase):
 # http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481;media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip
 # http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip
 
+
 if __name__ == "__main__":
     unittest.main()

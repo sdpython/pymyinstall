@@ -58,5 +58,6 @@ class TestInstallHelper(unittest.TestCase):
         if v != "4.2":
             raise Exception(v)
 
+
 if __name__ == "__main__":
     unittest.main()

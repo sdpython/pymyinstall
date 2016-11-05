@@ -44,5 +44,6 @@ def open_tool_on_browser(tool=None):
     for t in tool:
         webbrowser.open_new_tab(_tools[t])
 
+
 if __name__ == "__main__":
     open_tool_on_browser()

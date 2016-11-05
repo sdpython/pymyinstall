@@ -211,6 +211,7 @@ def _get_pypi_version_memoize_op(f):
         return memo[key]
     return helper
 
+
 _get_pypi_version_memoize = {}
 
 
@@ -570,6 +571,7 @@ def version_consensus(v1, v2):
                 "incompatible version and wrong format: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
 
         return '{0}{1}'.format(res[0], '.'.join(str(_) for _ in res[1]))
+
 
 _get_module_dependencies_deps = None
 

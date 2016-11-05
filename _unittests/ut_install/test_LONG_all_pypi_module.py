@@ -103,5 +103,6 @@ class TestAllPyPiModule (unittest.TestCase):
             fLOG("Annoying\n", "\n".join(annoying))
             warnings.warn("ANNOYING PACKAGES\n" + "\n".join(annoying))
 
+
 if __name__ == "__main__":
     unittest.main()

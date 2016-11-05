@@ -62,5 +62,6 @@ class TestKernels(unittest.TestCase):
         fLOG(content)
         assert '"IPython.kernel", "-f", "{connection_file}"' in content
 
+
 if __name__ == "__main__":
     unittest.main()

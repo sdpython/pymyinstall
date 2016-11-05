@@ -52,5 +52,6 @@ class TestOnlyMain (unittest.TestCase):
         if __name__ == "__main__":
             add_shortcut_to_desktop_for_module("spyder")
 
+
 if __name__ == "__main__":
     unittest.main()

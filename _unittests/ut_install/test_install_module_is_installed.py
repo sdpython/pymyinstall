@@ -54,5 +54,6 @@ class TestInstallModuleIsInstalled (unittest.TestCase):
         assert mod.is_installed_local()
         assert mod.is_installed_local_cmd()
 
+
 if __name__ == "__main__":
     unittest.main()

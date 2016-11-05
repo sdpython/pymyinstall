@@ -65,5 +65,6 @@ class TestDocumentation(unittest.TestCase):
                       "license", "purpose", "classifier"]
         fLOG(df2rst(df))
 
+
 if __name__ == "__main__":
     unittest.main()
