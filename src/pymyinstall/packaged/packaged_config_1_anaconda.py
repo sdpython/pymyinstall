@@ -194,7 +194,7 @@ def anaconda_set():
             patsy
             pep8
             persistent
-            --pexpect Linux Mac
+            pexpect
             pillow
             pip
             plac

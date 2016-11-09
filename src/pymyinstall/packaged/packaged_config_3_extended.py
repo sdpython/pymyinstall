@@ -116,7 +116,7 @@ def extended_set():
         ModuleInstall(
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
         ModuleInstall('python-daemon', 'pip', mname="daemon",
-                      purpose="Library to implement a well-behaved Unix daemon process (for luigi)") if not sys.platform.startswith("win") else None,
+                      purpose="Library to implement a well-behaved Unix daemon process (for luigi)"),
         ModuleInstall('cached_property', 'pip',
                       purpose="A decorator for caching properties in classes (for luigi)"),
         ModuleInstall('luigi', 'pip',
@@ -196,6 +196,8 @@ def extended_set():
         ModuleInstall(
             "CVXcanon", "wheel", purpose="A low-level library to perform the matrix building step in cvxpy, " +
             "a convex optimization modeling software.", usage="OPTIM") if sys.version_info[:2] >= (3, 5) else None,
+        ModuleInstall(
+            "fastcache", "wheel", source="2", purpose="C implementation of Python 3 lru_cache for Python."),
         ModuleInstall("cvxpy", "pip", usage="OPTIM",
                       purpose="linear, quadratic optimization, depends on cvxopt") if sys.version_info[:2] >= (3, 5) else None,
         # to install packages with conda
@@ -576,6 +578,8 @@ def extended_set():
                       purpose="Click params for commmand line interfaces to GeoJSON"),
         ModuleInstall("munch", "pip",
                       purpose="A dot-accessible dictionary (a la JavaScript objects)."),
+        ModuleInstall("cligj", "pip",
+                      purpose="Click params for commmand line interfaces to GeoJSON"),
         ModuleInstall("Fiona", "wheel", usage="GEO", mname="fiona",
                       purpose="Fiona is OGR’s neat, nimble, no-nonsense API for Python programmers."),
         ModuleInstall("brythonmagic", "pip",

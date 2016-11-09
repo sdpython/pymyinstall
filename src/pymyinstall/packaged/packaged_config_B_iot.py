@@ -3,6 +3,7 @@
 @file
 @brief Defines different a set of IoT related modules (Internet of Things)
 """
+import sys
 
 from ..installhelper.module_install import ModuleInstall
 
@@ -16,9 +17,8 @@ def iot_set():
             'phue', 'pip', purpose="A Philips Hue Python library", usage="IoT"),
         ModuleInstall('ledcontroller', 'pip',
                       purpose="Controller library for limitlessled/easybulb/milight Wi-Fi LEDs", usage="IoT"),
-
         ModuleInstall('enum-compat', 'pip',
-                      purpose="enum/enum34 compatibility package"),
+                      purpose="enum/enum34 compatibility package") if sys.version_info[0] == 2 else None,
         ModuleInstall('netifaces', 'pip',
                       purpose="Portable network interface information."),
         ModuleInstall('zeroconf', 'pip',
@@ -33,11 +33,11 @@ def iot_set():
                       purpose="A simple, cross-platform module for mouse and keyboard control"),
         ModuleInstall('tellcore-py', 'pip', usage="IoT",
                       purpose="Python wrapper for Telldus' home automation library"),
-        ModuleInstall('python-nmap', 'pip',
+        ModuleInstall('python-nmap', 'pip', mname="nmap",
                       purpose="This is a python class to use nmap and access scan results from python3"),
         ModuleInstall('python-magic', 'pip',
                       purpose="File type identification using libmagic"),
-        ModuleInstall('websocket-client', 'pip',
+        ModuleInstall('websocket-client', 'pip', mname="websocket",
                       purpose="WebSocket client for python. hybi13 is supported."),
         ModuleInstall('pushbullet.py', 'pip', usage="IoT",
                       purpose="A simple python client for pushbullet.com"),
@@ -65,7 +65,7 @@ def iot_set():
                       purpose="Provides a python interface to interact with a hikvision camera"),
         ModuleInstall('colorlog', 'pip',
                       purpose="Log formatting with colors!"),
-        ModuleInstall('jsonrpc-requests', 'pip',
+        ModuleInstall('jsonrpc-requests', 'pip', mname="jsonrpc_requests",
                       purpose="A JSON-RPC client library, backed by requests"),
         ModuleInstall(
             'cookies', 'pip', purpose="Friendlier RFC 6265-compliant cookie parser/renderer"),

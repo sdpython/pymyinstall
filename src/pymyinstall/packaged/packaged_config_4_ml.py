@@ -190,6 +190,21 @@ def ensae_set():
         ModuleInstall("contextlib2", "pip",
                       purpose="Backports and enhancements for the contextlib module"),
         ModuleInstall(
+            "sortedcontainers", "pip",
+            purpose="Python Sorted Container Types: SortedList, SortedDict, and SortedSet"),
+        ModuleInstall(
+            "alembic", "pip",
+            purpose="A database migration tool for SQLAlchemy."),
+        ModuleInstall(
+            "intervaltree", "pip",
+            purpose="Editable interval tree data structure for Python 2 and 3"),
+        ModuleInstall(
+            "cachetools", "pip",
+            purpose="Extensible memoizing collections and decorators"),
+        ModuleInstall(
+            "empyrical", "pip",
+            purpose="empyrical is a Python library with performance and risk statistics commonly used in quantitative finance"),
+        ModuleInstall(
             "zipline", "pip",
             purpose="A backtester for financial algorithms.") if sys.version_info[:2] >= (3, 5) else None,  # finance
         ModuleInstall("vincent", "pip", purpose="plotting",
@@ -371,6 +386,8 @@ def ensae_set():
                       purpose="The most basic Text::Unidecode port") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("thinc", "pip", usage="OPTIM",
                       purpose="Learn sparse linear models") if sys.version_info[:2] >= (3, 5) else None,
+        ModuleInstall("sputnik", "pip",
+                      purpose="Data package manager library") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("spacy", "pip", usage="NLP",
                       purpose="Industrial-strength NLP") if sys.version_info[:2] >= (3, 5) else None,
 
@@ -484,6 +501,10 @@ def ensae_set():
         #
         # August 2016
         #
+        ModuleInstall('incremental', 'pip',
+                      purpose="Incremental is a small library that versions your Python projects."),
+        ModuleInstall('constantly', 'pip',
+                      purpose="Symbolic constants in Python"),
         ModuleInstall('pydispatcher', 'pip',
                       purpose="Multi-producer-multi-consumer signal dispatching mechanism"),
         ModuleInstall('twisted', 'pip',
@@ -590,7 +611,7 @@ def ensae_set():
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
     for name in ['azure-nspkg', 'azure-common', 'azure-mgmt-nspkg', 'azure-mgmt-authorization',
-                 'azure-mgmt-common',
+                 'azure-mgmt-common', 'azure-storage',
                  'azure-mgmt-batch', 'azure-mgmt-cdn', 'azure-mgmt-cognitiveservices', 'azure-mgmt-commerce',
                  'azure-mgmt-compute', 'azure-mgmt-logic', 'azure-graphrbac', 'azure-mgmt-network',
                  'azure-mgmt-notificationhubs', 'azure-mgmt-powerbiembedded', 'azure-mgmt-redis',

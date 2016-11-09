@@ -64,6 +64,8 @@ def small_set():
         ModuleInstall("pypiwin32", "pip",
                       mname="win32com", purpose="call Windows DLL",
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
+        ModuleInstall("pywin32-ctypes", "pip", mname="win32ctypes",
+                      purpose="call Windows DLL", usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall("winshell", "pip", purpose="Windows shell functions",
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
@@ -193,7 +195,7 @@ def small_set():
             "notedown", "pip", purpose="Convert markdown to IPython notebook.", usage="JUPYTER"),
         ModuleInstall("pexpect", "pip",
                       purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.",
-                      usage="JUPYTER") if not sys.platform.startswith("win") else None,
+                      usage="JUPYTER"),
         ModuleInstall(
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
@@ -291,6 +293,9 @@ def small_set():
         ModuleInstall(
             "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
         ModuleInstall(
+            "QtAwesome", "pip", mname="qtawesome",
+            purpose="QtAwesome enables iconic fonts such as Font Awesome and Elusive Icons in PyQt and PySide applications."),
+        ModuleInstall(
             "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
         # remove goslate from the list to avoid installing futures which appears as a dependency
         # ModuleInstall("goslate", "pip",  # version="1.4",
@@ -336,6 +341,8 @@ def small_set():
             'pystache', 'pip', purpose="Mustache for Python (for bokeh)"),
         ModuleInstall(
             'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
+        ModuleInstall(
+            'traittypes', 'pip', purpose="Custom trait types for scientific computing."),
         ModuleInstall(
             'bqplot', 'pip', purpose="interactive graphs, zoomable, d3.js for notebooks", usage="VIZ"),
         ModuleInstall(

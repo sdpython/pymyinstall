@@ -30,6 +30,15 @@ def scraping_set():
             "cchardet", "wheel", usage="WEB",
             purpose="Universal encoding detector. This library is faster than chardet."),
         ModuleInstall(
+            "multidict", "pip",
+            purpose="Multidicts are useful for working with HTTP headers, URL query args etc."),
+        ModuleInstall(
+            "async_timeout", "pip", usage="WEB",
+            purpose="Timeout context manager for asyncio programs"),
+        ModuleInstall(
+            "yarl", "pip", usage="WEB",
+            purpose="Yet another URL library"),
+        ModuleInstall(
             "aiohttp", "wheel", usage="WEB",
             purpose="http client/server for asyncio"),
         ModuleInstall(
