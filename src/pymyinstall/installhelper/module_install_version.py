@@ -685,10 +685,15 @@ def choose_most_recent(list_name):
         numpy-1.10.0+mkl-cp34-none-win_amd64.whl
         numpy-1.9.1.0+mkl-cp34-none-win_amd64.whl
     """
+    def find_wheel(tu):
+        for t in tu:
+            if ".whl" in t:
+                return t
+        raise ValueError("unable to find a wheel in {0}".format(tu))
     if len(list_name) == 0:
         return None
     if isinstance(list_name[0], tuple):
-        list_name = [(_[-1], _) for _ in list_name]
+        list_name = [(find_wheel(_), _) for _ in list_name]
     else:
         list_name = [(_, _) for _ in list_name]
 
