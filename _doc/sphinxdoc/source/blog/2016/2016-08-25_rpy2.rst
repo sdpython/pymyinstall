@@ -114,6 +114,7 @@
     means I cannot link with *R.dll* symbols.
     
     ::
+
         ...
     
         error LNK2001: unresolved external symbol Rf_allocVector3
