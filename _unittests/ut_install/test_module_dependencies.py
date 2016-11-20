@@ -82,7 +82,13 @@ class TestModuleDependencies (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         if "travis" not in sys.executable:
-            self.common_function("ggplot")
+            try:
+                self.common_function("ggplot")
+            except ImportError as e:
+                if "unable to get metadata for ipykernel;" in str(e):
+                    warnings.warn("Unable to test ggplot dependencies due to ipykernel")
+                else:
+                    raise e
 
     def test_dependencies_ggplot_pip(self):
         fLOG(
