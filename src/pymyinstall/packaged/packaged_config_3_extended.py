@@ -417,6 +417,8 @@ def extended_set():
                       purpose="Google Maps API client http://python-gmaps.readthedocs.org"),
         ModuleInstall("keyring", "pip",
                       purpose="Store and access your passwords safely."),
+        ModuleInstall("pyotp", "pip",
+                      purpose="PyOTP is a Python library for generating and verifying one-time passwords."),
         ModuleInstall("param", "wheel", source="2",
                       purpose="Declarative Python programming using Parameters."),
         ModuleInstall("holoviews", "pip", usage="VIZ",

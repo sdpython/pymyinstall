@@ -574,11 +574,19 @@ def ensae_set():
         ModuleInstall("streamparse", "pip",
                       purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
         #
-        # 2015-09-20: treeinterpreter
+        # 2016-09-20: treeinterpreter
         #
         ModuleInstall("treeinterpreter", "pip", usage="ML",
                       purpose="Package for interpreting scikit-learn's decision tree and random forest predictions. Allows decomposing " +
                       "each prediction into bias and feature contribution components"),
+
+        #
+        # 2016-11-20
+        #
+        ModuleInstall("update_checker", "pip", purpose="A python module that will check for package updates."),
+        ModuleInstall("tpot", "pip", usage="ML",
+                      purpose="Consider TPOT your Data Science Assistant. TPOT is a Python tool that automatically " +
+                      "creates and optimizes machine learning pipelines using genetic programming."),
     ]
 
     if sys.version_info[0] == 2:
