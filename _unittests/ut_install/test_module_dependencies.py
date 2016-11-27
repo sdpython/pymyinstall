@@ -86,7 +86,8 @@ class TestModuleDependencies (unittest.TestCase):
                 self.common_function("ggplot")
             except ImportError as e:
                 if "unable to get metadata for ipykernel;" in str(e):
-                    warnings.warn("Unable to test ggplot dependencies due to ipykernel")
+                    warnings.warn(
+                        "Unable to test ggplot dependencies due to ipykernel")
                 else:
                     raise e
 

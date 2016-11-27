@@ -70,9 +70,6 @@ def small_set():
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
-        ModuleInstall(
-            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
-            "of SSL certificates while verifying the identity of TLS hosts."),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
@@ -114,7 +111,6 @@ def small_set():
         ModuleInstall(
             "mistune", "pip", purpose="The fastest markdown parser in pure Python with renderer features, inspired by marked."),
         ModuleInstall("wheel", "pip", purpose="handle wheels"),
-        ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall(
             "alabaster", "pip", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
         ModuleInstall("babel", "pip",  # version="1.3",
@@ -148,6 +144,10 @@ def small_set():
         ModuleInstall("flake8", "pip", purpose="verify pep8 on a script"),
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
+        ModuleInstall(
+            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
+            "of SSL certificates while verifying the identity of TLS hosts."),
+        ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall(
             "requests-file", "pip", mname="requests_file", purpose="File transport adapter for Requests"),
         ModuleInstall(
@@ -347,6 +347,10 @@ def small_set():
             'bqplot', 'pip', purpose="interactive graphs, zoomable, d3.js for notebooks", usage="VIZ"),
         ModuleInstall(
             'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
+        ModuleInstall(
+            'toolz', 'pip', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries.", usage="DATA/ML"),
+        ModuleInstall(
+            'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
         ModuleInstall('snowballstemmer', 'pip',
                       purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball " +
                       "algorithms, needed by sphinx-rtd-theme."),

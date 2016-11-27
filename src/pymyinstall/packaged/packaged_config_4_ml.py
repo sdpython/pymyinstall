@@ -583,7 +583,8 @@ def ensae_set():
         #
         # 2016-11-20
         #
-        ModuleInstall("update_checker", "pip", purpose="A python module that will check for package updates."),
+        ModuleInstall("update_checker", "pip",
+                      purpose="A python module that will check for package updates."),
         ModuleInstall("tpot", "pip", usage="ML",
                       purpose="Consider TPOT your Data Science Assistant. TPOT is a Python tool that automatically " +
                       "creates and optimizes machine learning pipelines using genetic programming."),

@@ -49,13 +49,9 @@ def extended_set():
         ModuleInstall(
             'odo', 'pip', purpose="usually used with blaze, handles dataframe in various type of containers", usage="DATA/ML"),
         ModuleInstall(
-            'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
-        ModuleInstall(
             'ordereddict', 'pip', purpose="Python's collections.OrderedDict") if sys.version_info[0] == 2 else None,
         ModuleInstall(
             'cyordereddict', 'wheel', purpose="Cython implementation of Python's collections.OrderedDict"),
-        ModuleInstall(
-            'toolz', 'pip', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries.", usage="DATA/ML"),
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
         ModuleInstall('dynd', 'wheel',
