@@ -581,13 +581,16 @@ def ensae_set():
                       "each prediction into bias and feature contribution components"),
 
         #
-        # 2016-11-20
+        # 2016-11/12
         #
         ModuleInstall("update_checker", "pip",
                       purpose="A python module that will check for package updates."),
         ModuleInstall("tpot", "pip", usage="ML",
                       purpose="Consider TPOT your Data Science Assistant. TPOT is a Python tool that automatically " +
                       "creates and optimizes machine learning pipelines using genetic programming."),
+        ModuleInstall("category_encoders", "pip", usage="ML",
+                      purpose="A set of scikit-learn-style transformers for encoding categorical " +
+                      "variables into numeric by means of different techniques."),
     ]
 
     if sys.version_info[0] == 2:
