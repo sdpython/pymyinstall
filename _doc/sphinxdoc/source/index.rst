@@ -17,10 +17,6 @@ pymyinstall documentation
 .. image:: https://badge.fury.io/py/pymyinstall.svg
     :target: http://badge.fury.io/py/pymyinstall    
    
-.. image:: http://img.shields.io/pypi/dm/pymyinstall.png
-    :alt: PYPI Package
-    :target: https://pypi.python.org/pypi/pymyinstall
-
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT  
