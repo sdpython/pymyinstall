@@ -39,6 +39,7 @@ openpyxl
 pandas
 path.py
 pickleshare
+pivottablejs
 pkgtools
 pycodestyle
 pycparser

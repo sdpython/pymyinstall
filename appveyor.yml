@@ -21,7 +21,7 @@ install:
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyquickhelper"
   - "%PYTHON%\\Scripts\\pymy_install3 memory_profiler xgboost spyder statsmodels scipy scikit-learn"
   - "%PYTHON%\\Scripts\\pip install pyquickhelper jyquickhelper"
-  - "%PYTHON%\\Scripts\\pip install ggplot version_information"
+  - "%PYTHON%\\Scripts\\pip install ggplot version_information pivottablejs"
   - "%PYTHON%\\Scripts\\pip install spyder"
 #  check the status of rodeo
 # - "%PYTHON%\\Scripts\\pip install rodeo"

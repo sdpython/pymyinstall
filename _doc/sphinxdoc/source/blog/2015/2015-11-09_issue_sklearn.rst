@@ -2,7 +2,7 @@
 
 .. blogpost::
     :title: Issue with Scipy on Windows and Python 3.5
-    :keywords: scopy, numpy, sklearn, scikit-learn, DLL
+    :keywords: scipy, numpy, sklearn, scikit-learn, DLL
     :date: 2015-11-01
     :categories: issue
     

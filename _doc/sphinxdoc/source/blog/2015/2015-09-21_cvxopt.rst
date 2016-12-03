@@ -18,6 +18,6 @@
     *numpy* needs to be imported first::
     
         import numpy
-        import cvxopy
+        import cvxopt
         
     And everything works fine.
