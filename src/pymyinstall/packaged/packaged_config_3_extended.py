@@ -587,7 +587,7 @@ def extended_set():
         #
 
         #
-        # August, September, October 2016
+        # August, September, October, December 2016
         #
         ModuleInstall('qinfer', 'pip', usage="DATA/ML",
                       purpose="QInfer is a library using Bayesian sequential Monte Carlo for quantum parameter estimation."),
@@ -615,6 +615,9 @@ def extended_set():
                       purpose="Reactive Extensions (Rx) for Python (LINQ)"),
         ModuleInstall('PySocks', 'pip', mname="socks",
                       purpose="A semi-actively maintained SocksiPy fork. Contains many improvements to the original."),
+        ModuleInstall('pympler', 'pip',
+                      purpose="Pympler is a development tool to measure, monitor and analyze the memory behavior of Python " +
+                      "objects in a running Python application."),
     ]
 
     if sys.platform.startswith("win"):
