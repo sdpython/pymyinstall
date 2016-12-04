@@ -54,7 +54,8 @@ class TestStatusHelper(unittest.TestCase):
             fLOG=fLOG, stop=10, pypi=True, short_list=["pep8"])
         for f in res:
             fLOG(f)
-        self.assertEqual(len(res), 1)
+        if sys.version_info[0] > 2:
+            self.assertEqual(len(res), 1)
 
         res = get_installed_modules(
             fLOG=fLOG, stop=10, pypi=True, short_list=["dataspyre"])
