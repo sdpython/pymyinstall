@@ -51,7 +51,7 @@ class TestStatusHelper(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         res = get_installed_modules(
-            fLOG=fLOG, stop=10, pypi=True, short_list=["numpy"])
+            fLOG=fLOG, stop=10, pypi=True, short_list=["sphinx"])
         for f in res:
             fLOG(f)
         self.assertEqual(len(res), 1)
