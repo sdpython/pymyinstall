@@ -27,12 +27,8 @@ annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",
                     "NLopt"}
 
 
-def call_get_installed_distributions(local_only=True,
-                                     skip=None,
-                                     include_editables=True,
-                                     editables_only=False,
-                                     user_only=False,
-                                     use_cmd=False):
+def call_get_installed_distributions(local_only=True, skip=None, include_editables=True,
+                                     editables_only=False, user_only=False, use_cmd=False):
     """
     Direct call to function *get_installed_distributions* from
     `pip <https://pip.pypa.io/en/stable/>`_
@@ -58,8 +54,7 @@ def call_get_installed_distributions(local_only=True,
         from pip.compat import stdlib_pkgs
         skip = stdlib_pkgs
     from pip.utils import get_installed_distributions
-    return get_installed_distributions(local_only=local_only,
-                                       skip=skip,
+    return get_installed_distributions(local_only=local_only, skip=skip,
                                        include_editables=include_editables,
                                        editables_only=editables_only,
                                        user_only=user_only)
@@ -215,14 +210,15 @@ def _get_pypi_version_memoize_op(f):
 _get_pypi_version_memoize = {}
 
 
-def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/pypi"):
+def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/pypi", skip_betas=True):
     """
     returns the version of a package on pypi,
     we skip alpha, beta or dev version
 
     @param      module_name     module name
-    @param      url             pipy server
+    @param      url             pypi server
     @param      full_list       results as a list or return the last stable version
+    @param      skip_betas      skip the intermediate functions
     @return                     version (str or list)
 
     See also `installing_python_packages_programatically.py <https://gist.github.com/rwilcox/755524>`_,
@@ -348,20 +344,25 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
         if available is None or len(available) == 0:
             raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
 
-        if full_list:
-            _get_pypi_version_memoize[key] = available
-            return available
-
-        for a in available:
+        def filter_betas(a):
             spl = a.split(".")
             if len(spl) in (2, 3):
                 last = spl[-1]
-                if "a" not in last and "b" not in last and "dev" not in last:
-                    _get_pypi_version_memoize[key] = available
-                    return a
+                if skip_betas and "a" not in last and "b" not in last and "dev" not in last:
+                    return True
             else:
+                # we don't really know here, so we assume it is not
+                return True
+            return False
+
+        if full_list:
+            _get_pypi_version_memoize[key] = list(
+                filter(filter_betas, available))
+            return available
+
+        for a in available:
+            if filter_betas(a):
                 _get_pypi_version_memoize[key] = available
-                return a
 
         raise MissingVersionOnPyPiException(
             "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))

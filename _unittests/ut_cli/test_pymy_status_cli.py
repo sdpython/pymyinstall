@@ -1,5 +1,5 @@
 """
-@brief      test log(time=63s)
+@brief      test log(time=7s)
 """
 
 import sys
@@ -42,12 +42,12 @@ except ImportError:
 
 from src.pymyinstall.installhelper.install_cmd_helper import run_cmd
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import is_travis_or_appveyor
+from pyquickhelper.pycode import is_travis_or_appveyor, get_temp_folder
 
 
-class TestPyMyUpdateCli(unittest.TestCase):
+class TestPyMyStatusCli(unittest.TestCase):
 
-    def test_update_set_schedule(self):
+    def test_status(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -56,11 +56,14 @@ class TestPyMyUpdateCli(unittest.TestCase):
         if is_travis_or_appveyor() == "travis":
             warnings.warn("run_cmd no end on travis")
             return
+        temp = get_temp_folder(__file__, "temp_status")
+        outfile = os.path.join(temp, "modules.xlsx")
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
-            this, "..", "..", "src", "pymyinstall", "cli", "pymy_update.py"))
+            this, "..", "..", "src", "pymyinstall", "cli", "pymy_status.py"))
         cmd = "{0} -u {1} {2}".format(
-            sys.executable, script, "--set=pyquickhelper --schedule")
+            sys.executable, script, "numpy --out={0}".format(outfile))
+        fLOG(cmd)
         out, err = run_cmd(cmd, wait=True)
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
@@ -69,6 +72,12 @@ class TestPyMyUpdateCli(unittest.TestCase):
             else:
                 raise Exception(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+        if len(err) > 0:
+            raise Exception(
+                "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+        if not os.path.exists(outfile):
+            raise Exception(outfile)
+        fLOG(out)
 
 
 if __name__ == "__main__":

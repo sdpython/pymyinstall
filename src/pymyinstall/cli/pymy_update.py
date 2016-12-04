@@ -12,7 +12,7 @@ import argparse
 
 def get_parser():
     """
-    defines the way to parse the magic command ``%head``
+    defines the way to parse the script ``pymy_update``
     """
     typstr = str  # unicode#
     parser = argparse.ArgumentParser(

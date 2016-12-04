@@ -1,5 +1,5 @@
 """
-@brief      test log(time=7s)
+@brief      test log(time=23s)
 """
 
 import sys
@@ -58,7 +58,7 @@ class TestPyMyInstallCli(unittest.TestCase):
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
-        cmd = "{0} {1} {2}".format(
+        cmd = "{0} -u {1} {2}".format(
             sys.executable, script, "--set=pyquickhelper --schedule")
         try:
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,

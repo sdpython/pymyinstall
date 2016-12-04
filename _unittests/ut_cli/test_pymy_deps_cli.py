@@ -57,7 +57,7 @@ class TestPyMyDepsCli(unittest.TestCase):
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_deps.py"))
-        cmd = "{0} {1} {2}".format(
+        cmd = "{0} -u {1} {2}".format(
             sys.executable, script, "pandas")
         try:
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,

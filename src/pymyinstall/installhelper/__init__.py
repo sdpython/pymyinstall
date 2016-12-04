@@ -10,6 +10,7 @@ from .module_install import ModuleInstall
 from .module_dependencies import missing_dependencies
 from .module_install_version import get_module_dependencies, get_module_version, get_pypi_version, get_module_metadata
 from .module_install_version import version_consensus, numeric_version, compare_version, is_installed, get_wheel_version
+from .status_helper import get_installed_modules
 
 
 def module_as_table(list_module, as_df=False):

@@ -1,5 +1,5 @@
 """
-@brief      test log(time=1s)
+@brief      test log(time=32s)
 """
 
 import sys
@@ -59,7 +59,7 @@ class TestPyMyInstallCliTool(unittest.TestCase):
         this = os.path.abspath(os.path.dirname(__file__))
         script = os.path.normpath(os.path.join(
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_install.py"))
-        cmd = "{0} {1} {2} --force --folder={3}".format(
+        cmd = "{0} -u {1} {2} --force --folder={3}".format(
             sys.executable, script, "graphviz --task=tool --source=zip", temp)
         out, err = run_cmd(cmd, wait=True)
         fLOG("----", cmd)
