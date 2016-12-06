@@ -618,6 +618,10 @@ def extended_set():
         ModuleInstall('pympler', 'pip',
                       purpose="Pympler is a development tool to measure, monitor and analyze the memory behavior of Python " +
                       "objects in a running Python application."),
+        ModuleInstall('fbpca', 'pip',
+                      purpose="Functions for principal component analysis (PCA) and accuracy checks."),
+        ModuleInstall('prince', 'github', 'MaxHalford',
+                      purpose="Prince is a factor analysis library for datasets that fit in memory."),
     ]
 
     if sys.platform.startswith("win"):

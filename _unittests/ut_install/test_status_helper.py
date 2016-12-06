@@ -60,7 +60,8 @@ class TestStatusHelper(unittest.TestCase):
             if is_travis_or_appveyor():
                 self.assertEqual(len(res), 1)
             else:
-                warnings.warn("This test does not work well on a virtual environment [TestStatusHelper].")
+                warnings.warn(
+                    "This test does not work well on a virtual environment [TestStatusHelper].")
 
         res = get_installed_modules(
             fLOG=fLOG, stop=10, pypi=True, short_list=["dataspyre"])
