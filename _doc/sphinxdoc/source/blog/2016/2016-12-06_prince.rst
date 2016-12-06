@@ -1,0 +1,17 @@
+
+
+.. blogpost::
+    :title: prince and MCA
+    :keywords: prince, MCA
+    :date: 2016-12-06
+    :categories: module
+
+    My students were struggling to find a module which
+    implements `MCA <https://en.wikipedia.org/wiki/Multiple_correspondence_analysis>`_
+    (or `ACM <https://fr.wikipedia.org/wiki/Analyse_des_correspondances_multiples>`_ in French).
+    The module they first found was not really accurate
+    `mca <https://github.com/esafak/mca>`_. Bad sign, no update in two years.
+    So they found `prince <https://github.com/MaxHalford/Prince>`_,
+    recenly updated and nice graphs.
+    Don't forget to read the first question from 
+    `FAQ <http://prince.readthedocs.io/en/latest/faq.html#faq>`_.
