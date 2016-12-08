@@ -404,6 +404,8 @@ def small_set():
                       purpose="HTTPie - a CLI, cURL-like tool for humans"),
         ModuleInstall("version-information", "pip", mname="version_information",
                       purpose="Version information"),
+        ModuleInstall("pytablewriter", "pip",
+                      purpose="convert a dataframe into many formats"),
     ]
 
     return [_ for _ in mod if _ is not None]

@@ -30,6 +30,7 @@ def pyensae_set():
         "paramiko",  # ssh
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
         "pyquickhelper",
+        "pytablewriter",
         "qgrid",  # magic command
         "scipy",
         "scikit-learn",
