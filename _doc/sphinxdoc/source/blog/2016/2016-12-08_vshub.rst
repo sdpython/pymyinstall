@@ -1,0 +1,12 @@
+
+
+.. blogpost::
+    :title: How to fix: HttpHostx64.exe has stopped working
+    :keywords: Visual Studio, VsHub, HttpHostx64.exe
+    :date: 2016-12-08
+    :categories: installation
+
+    If you get the message
+    *'Microsoft.VsHub.Server.HttpHostx64.exe has stopped working'*,
+    you should read:
+    `How to fix: HttpHostx64.exe has stopped working <https://thomas-barthelemy.github.io/2015/05/01/visual-studio-vshub/>`_.
