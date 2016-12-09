@@ -32,6 +32,12 @@ def get_parser():
         nargs="*",
         default="all",
         help='update only the list of modules included in this list or all modules if not specified or equal to all')
+    parser.add_argument(
+        '--set',
+        default="-",
+        type=typstr,
+        help='set of module to install, see documentation of function get_name_set to get a comprehensive list, ' +
+             'this option is ignored if a module is specified on the command line')
     return parser
 
 
@@ -62,7 +68,7 @@ def do_main(list_module=None, outfile="python_module.xlsx", pypi=True):
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(pfolder)
         from pymyinstall.installhelper import get_installed_modules
-    if len(list_module) == 0:
+    if list_module is not None and len(list_module) == 0:
         list_module = None
     if outfile:
         import pandas
