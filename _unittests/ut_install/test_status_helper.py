@@ -70,6 +70,10 @@ class TestStatusHelper(unittest.TestCase):
         res = get_installed_modules(fLOG=fLOG, stop=10, pypi=True)
         for f in res:
             fLOG(f)
+        if sys.version_info[0] == 2:
+            # we disable the test for Python 2.7
+            warnings.warn("TestStatusHelper.test_status_helper disabled on Python 2.7")
+            return
         self.assertEqual(len(res), 10)
 
 
