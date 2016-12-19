@@ -72,7 +72,8 @@ class TestStatusHelper(unittest.TestCase):
             fLOG(f)
         if sys.version_info[0] == 2:
             # we disable the test for Python 2.7
-            warnings.warn("TestStatusHelper.test_status_helper disabled on Python 2.7")
+            warnings.warn(
+                "TestStatusHelper.test_status_helper disabled on Python 2.7")
             return
         self.assertEqual(len(res), 10)
 
