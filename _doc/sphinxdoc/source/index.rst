@@ -130,6 +130,16 @@ Quick start
     completed_todoextlist
     issues_todoextlist
     
+Galleries
+---------
+
+.. toctree::
+    :maxdepth: 1
+    
+    gyexamples/index
+    gynotebooks/index    
+
+    
 Indices and tables
 ------------------
 
