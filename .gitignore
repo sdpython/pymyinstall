@@ -229,9 +229,12 @@ temp_*
 out_*
 */sphinxdoc/source/index_*
 */sphinxdoc/source/readme.*
-*/sphinxdoc/source/notebooks/*
+_doc/sphinxdoc/source/notebooks/*
+*/sphinxdoc/source/gynotebooks/*
+_doc/sphinxdoc/source/gyexamples/*
 _doc/sphinxdoc/source/examples/*
 _doc/sphinxdoc/source/gallery/*
+_doc/sphinxdoc/source/gallerynb/*
 */sphinxdoc/source/LICENSE.txt
 */sphinxdoc/source/filechanges.*
 version.txt
