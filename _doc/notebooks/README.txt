@@ -1,6 +1,4 @@
 Notebook Gallery
 ================
 
-Modules, Examples
------------------
 
