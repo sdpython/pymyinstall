@@ -123,8 +123,8 @@ Quick start
     :maxdepth: 1
     
     i_ex
-    i_faq
     all_notebooks
+    i_faq
     name_set_table
     ensae_full_set_table    
     completed_todoextlist
