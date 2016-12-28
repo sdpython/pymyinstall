@@ -1,29 +1,28 @@
 
-
 .. blogpost::
     :title: Natural Sort
     :keywords: natsort, sort
     :date: 2015-10-19
     :categories: module, sort
-    
-    `natsort <https://pypi.python.org/pypi/natsort>`_ is part of the 
+
+    `natsort <https://pypi.python.org/pypi/natsort>`_ is part of the
     `Anaconda distribution <http://docs.continuum.io/anaconda/pkg-docs>`_ package list.
-    It does something I sometimes needs and which is quite annoying to do 
+    It does something I sometimes needs and which is quite annoying to do
     about sorting.
     Here is the results of a default sorting algorithm:
-    
+
     .. runpython::
         :showcode:
-    
+
         a = ['a2', 'a9', 'a1', 'a4', 'a10']
         print(list(sorted(a)))
-        
-    `natsort <https://pypi.python.org/pypi/natsort>`_ does 
+
+    `natsort <https://pypi.python.org/pypi/natsort>`_ does
     something different with numbers:
-    
+
     .. runpython::
         :showcode:
-    
+
         from natsort import natsorted
         a = ['a2', 'a9', 'a1', 'a4', 'a10']
         print(natsorted(a))

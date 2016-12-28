@@ -1,5 +1,4 @@
 
-
 .. blogpost::
     :title: prince and MCA
     :keywords: prince, MCA
@@ -13,5 +12,5 @@
     `mca <https://github.com/esafak/mca>`_. Bad sign, no update in two years.
     So they found `prince <https://github.com/MaxHalford/Prince>`_,
     recenly updated and nice graphs.
-    Don't forget to read the first question from 
+    Don't forget to read the first question from
     `FAQ <http://prince.readthedocs.io/en/latest/faq.html#faq>`_.

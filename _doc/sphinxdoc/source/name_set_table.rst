@@ -9,13 +9,12 @@ List of available sets of modules
 I defined sets of modules which can be installed by using::
 
     pymy_install3 --set=<set_name>
-    
+
 Or updated if they were installed with::
 
     pymy_update3 --set=<set_name>
-    
+
 The following table described the available sets.
-    
 
 .. runpython::
     :showcode:
@@ -28,5 +27,3 @@ The following table described the available sets.
     df = pandas.DataFrame(r)
     df = df[["name", "description"]]
     print(df2rst(df))
-
-

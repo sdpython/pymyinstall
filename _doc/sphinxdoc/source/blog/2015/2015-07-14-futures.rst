@@ -1,5 +1,4 @@
 
-
 .. index:: futures, issue
 
 .. blogpost::
@@ -9,7 +8,7 @@
     :categories: module
 
     On the way to build a setup for my student,
-    I went through an issue with the packages 
+    I went through an issue with the packages
     `futures <https://pypi.python.org/pypi/futures>`_,
     version 3.0.3 which contains the following line::
 

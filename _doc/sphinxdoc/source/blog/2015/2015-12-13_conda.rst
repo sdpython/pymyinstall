@@ -1,24 +1,23 @@
 
-
 .. blogpost::
     :title: Install a package on Anaconda
     :keywords: install
     :date: 2015-12-13
     :categories: install, module, Anaconda
-    
-    Some packages are specifically compiled for 
+
+    Some packages are specifically compiled for
     `Anaconda <https://www.continuum.io/downloads>`_ distribution.
     That's why it is better to install them with the command::
-    
+
         conda install numpy
-        
+
     When it does not not we can check if this package
     is available somewhere else::
-    
+
         anaconda search -t conda psycopg2
-        
+
     Which gives something like::
-    
+
         Name                      |  Version | Package Types   | Platforms
         ------------------------- |   ------ | --------------- | ---------------
         auto/psycopg2database     |    0.2.0 | conda           | linux-64
@@ -39,12 +38,12 @@
                                              : Python-PostgreSQL Database Adapter
         kevincal/psycopg2         |    2.5.1 | conda           | linux-64
         trent/psycopg2            |    2.5.1 | conda           | osx-64
-                                             : None    
-                                             
+                                             : None
+
     The installation will work if a version is available for the desired operating system.
-    I was looking for Windows and it seems that it is not available. 
+    I was looking for Windows and it seems that it is not available.
     Otherwise, I could write::
-    
+
         conda -c <location> <modulename>
 
     See also `How to install a binstar package in Anaconda? <http://stackoverflow.com/questions/27030656/how-to-install-a-binstar-package-in-anaconda>`_.

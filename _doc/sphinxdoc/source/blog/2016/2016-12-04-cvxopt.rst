@@ -1,22 +1,21 @@
 
-
 .. blogpost::
     :title: cvxopt
     :keywords: cvxopt, DLL
     :date: 2016-12-04
     :categories: module
 
-    I tried the latest version of 
-    `cvxopt <http://cvxopt.org/>`_ (1.1.9) taken from 
+    I tried the latest version of
+    `cvxopt <http://cvxopt.org/>`_ (1.1.9) taken from
     `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
-    
+
     ::
-    
+
         >>> import cvxopt
         Traceback (most recent call last):
           File "<stdin>", line 1, in <module>
           File "C:\Python35_x64\lib\site-packages\cvxopt\__init__.py", line 34, in <module>
             import cvxopt.base
-        ImportError: DLL load failed: Le module spécifié est introuvable.    
-        
+        ImportError: DLL load failed: Le module spécifié est introuvable.
+
     Still some issues. Still don't know exactly which DLL is missing.

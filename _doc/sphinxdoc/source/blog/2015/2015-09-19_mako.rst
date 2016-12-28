@@ -1,21 +1,20 @@
 
-
 .. blogpost::
     :title: Warning with Mako
     :keywords: Mako, warning, issue
     :date: 2015-09-19
     :categories: install, module, issue
-    
+
     The installation of `Mako <http://www.makotemplates.org/>`_
     generates the following error::
-    
+
         File "c:\python34_x64\lib\site-packages\wheel\metadata.py", line 194, in pkginfo_to_dict
 
           for item in sorted(items.values()):
-        
+
         TypeError: unorderable types: EntryPoint() < EntryPoint()
-          
-    It is due to the fact that 
+
+    It is due to the fact that
     class `EntryPoint <https://github.com/pypa/pip/blob/develop/pip/_vendor/pkg_resources/__init__.py>`_
     defined in `pip <https://pypi.python.org/pypi/pip>`_ does not have method
     `__lt__ <http://programmers.stackexchange.com/questions/151069/sorting-using-a-custom-definition-of-and-in-python>`_.

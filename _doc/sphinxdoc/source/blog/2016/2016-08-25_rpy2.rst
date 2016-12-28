@@ -1,14 +1,13 @@
 
-
 .. blogpost::
     :title: Build rpy2 on Windows
     :keywords: rpy2
     :date: 2016-08-25
     :categories: module, build
-    
+
     I started this blog post because I got the following error
     with `rpy2 <http://rpy2.bitbucket.org/>`_:
-    
+
     ::
 
         In [2]: %load_ext rpy2.ipython
@@ -18,44 +17,44 @@
         ----> 1 get_ipython().magic('load_ext rpy2.ipython')
 
         c:\python35_x64\lib\site-packages\IPython\core\interactiveshell.py in magic(sel
-        
+
         ....
-        
+
         c:\python35_x64\lib\site-packages\rpy2\ipython\rmagic.py in load_ipython_extension(ip)
             786     # Initialising rpy2 interferes with readline. Since, at this point, we've
             787     # probably just loaded rpy2, we reset the delimiters. See issue gh-2759.
         --> 788     if ip.has_readline:
             789         ip.readline.set_completer_delims(ip.readline_delims)
 
-        AttributeError: 'ZMQInteractiveShell' object has no attribute 'has_readline'        
-        
+        AttributeError: 'ZMQInteractiveShell' object has no attribute 'has_readline'
+
     The first solution just consists in commenting out those two lines:
-    
+
     ::
-    
+
         --> 788     # if ip.has_readline:
             789     #     ip.readline.set_completer_delims(ip.readline_delims)
-    
+
     I then though about compiling rpy2 for Windows. But...
     I'm still figuring out. It does not work but this is
     what I did. You need:
-    
+
     * Install `R <https://cran.univ-paris1.fr/bin/windows/base/>`_
     * Install `Rtools <https://cran.univ-paris1.fr/bin/windows/Rtools/>`_
     * Install `Cygwin <https://www.cygwin.com/>`_
-    
+
     Maybe:
-    
+
     * Install `pexports <https://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/>`_
       (exports all symbols from a DLL: ``pexports "R.dll" >R.def``,
       `import R <http://www.stats.uwo.ca/faculty/murdoch/software/compilingDLLs/existingDLL.html#import>`_)
-      
+
     Steps:
-    
+
     * Get the sources from `rpy2 <https://bitbucket.org/rpy2/rpy2>`_
-    
+
     **Compilation with Visual Studio 2015 (still failing)**
-    
+
     Open *_rinterface.c*, comment out the following lines::
 
         //static PyTypeObject NAInteger_Type;
@@ -63,78 +62,78 @@
         //static PyTypeObject NAReal_Type;
         //static PyTypeObject NAComplex_Type;
         //static PyTypeObject NACharacter_Type;
-        
-        //Rp->ResetConsole = EmbeddedR_ResetConsole; 
-        
+
+        //Rp->ResetConsole = EmbeddedR_ResetConsole;
+
     From a cygwin environment:
-    
+
     ::
 
         export PATH=$PATH:'/cygdrive/c/Program Files/R/R-3.3.1/bin/x64'
         export PATH=$PATH:'/cygdrive/c/Program Files/R/R-3.3.1/include'
         export R_HOME=/cygdrive/c/Program\ Files/R/R-3.3.1
-        
+
     Or from the command line before starting *cygwin*:
-        
+
         set PATH=%PATH%;c:\Program Files\R\R-3.3.1\bin\x64
         set PATH=%PATH%;c:\Program Files\R\R-3.3.1\include
         set R_HOME=c:\Program Files\R\R-3.3.1
         set PATH=%PATH%;C:\cygwin64\bin
-        
+
     In file ``distutils/cygwinccompiler.py``, modifies:
-    
+
     * function *get_msvcr*, replace ::
-        
+
         else:
             raise ValueError("Unknown MS Compiler version %s " % msc_ver)
-        
+
       by::
-      
+
         else:
             return ["msvcr140"]
     * function *Mingw32CCompiler.__init__*, comment out the following lines::
-    
+
         if is_cygwingcc():
             raise CCompilerError(
-                'Cygwin gcc cannot be used with --compiler=mingw32')        
-                
+                'Cygwin gcc cannot be used with --compiler=mingw32')
+
     From a Cygwin environment, run:
 
     ::
 
         /cygdrive/c/Python35_x64/python setup.py build_ext -I C:\\Program\ Files\\R\\R-3.3.1\\include
-        
+
     Or from the Windows command line:
-    
+
     ::
-    
+
         c:\Python35_x64\python setup.py build_ext -I "C:\Program Files\R\R-3.3.1\include" --compiler=mingw32
-        
+
     Without the option ``--compiler=mingw32``, I get the following error which
     means I cannot link with *R.dll* symbols.
-    
+
     ::
 
         ...
-    
+
         error LNK2001: unresolved external symbol Rf_allocVector3
-        
+
         ...
-    
+
         fatal error LNK1120: 107 unresolved externals
 
     **Remarks**
-    
+
     If you get the following error:
-    
+
     ::
-    
+
         'sh' is not recognized as an internal or external command
-    
+
     Just add:
-    
+
     ::
-    
+
         set PATH=%PATH%;C:\cygwin64\bin
 
     https://wanglongqi.github.io/r/2015/04/08/rpy2install/

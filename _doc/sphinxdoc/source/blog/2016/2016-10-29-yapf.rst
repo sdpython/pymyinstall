@@ -1,11 +1,10 @@
 
-
 .. blogpost::
     :title: yapf, code formatter
     :keywords: pep8, yapf, code formatting
     :date: 2016-10-29
     :categories: module
 
-    Another one made by google but quite interesting: 
+    Another one made by google but quite interesting:
     `yapf <https://github.com/google/yapf>`_.
     I might use it to replace `flake8 <https://pypi.python.org/pypi/flake8>`_.

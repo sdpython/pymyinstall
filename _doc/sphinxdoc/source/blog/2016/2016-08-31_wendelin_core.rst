@@ -1,5 +1,4 @@
 
-
 .. blogpost::
     :title: Build wendelin.core on Windows
     :keywords: wendelin.core
@@ -8,6 +7,5 @@
 
     Not easy !
     Unresolved.
-    
+
     `wendelin.core <https://lab.nexedi.com/nexedi/wendelin.core>`_
-    

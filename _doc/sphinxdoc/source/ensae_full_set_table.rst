@@ -12,7 +12,7 @@ defined in pymyinstall as a table.
 .. runpython::
     :showcode:
     :rst:
-    
+
     from pymyinstall.packaged import all_set
     from pyquickhelper.pandashelper import df2rst
     import pandas
@@ -29,7 +29,3 @@ defined in pymyinstall as a table.
     df.columns=["usage", "name", "kind", "version", "license", "purpose", "classifier"]
     df = df.sort_values("name")
     print(df2rst(df))
-
-
-
-

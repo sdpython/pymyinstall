@@ -1,5 +1,4 @@
 
-
 .. index:: setup
 
 .. blogpost::
@@ -11,4 +10,3 @@
     This is described by
     `Explain Python entry points? <http://stackoverflow.com/questions/774824/explain-python-entry-points>`_.
     Example: `setup.py <https://github.com/sdpython/pymyinstall/blob/master/setup.py>`_.
-    

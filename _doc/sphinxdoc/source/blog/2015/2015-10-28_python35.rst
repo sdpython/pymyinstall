@@ -1,45 +1,44 @@
 
-
 .. blogpost::
     :title: Issues with Python 3.5
     :keywords: issues, Python 3.5
     :date: 2015-10-28
     :categories: module, issue
     :lid: l-blog-pymy-2015-10-28
-    
+
     I'm still trying to get a proper distribution of Python 3.5 on Windows.
     I had a couple of issues so far. Most of them come from
     some DLL which cannot be found.
-    
+
     `pyzmq <https://github.com/zeromq/pyzmq>`_.
-    The version I got from 
+    The version I got from
     `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyzmq>`_
-    did not work and I had to install the 
+    did not work and I had to install the
     `PyPi version <https://pypi.python.org/pypi/pyzmq>`_ which
     proposes versions for Windows.
-    
+
     `pywin32 <https://pypi.python.org/pypi/pypiwin32>`_
-    is now available from 
+    is now available from
     `PyPi <https://pypi.python.org/pypi/pypiwin32>`_.
     Some DLLs might have to be copied
-    from 
+    from
     ``C:\Python35_x64\Lib\site-packages\pywin32_system32``
     to ``C:\Python35_x64`` unless the first path is added to ``PATH``.
     I don't do that because I have multiple versions of Python on the same machine.
-    
+
     Some parts of matplotlib are still failing due to some issues
     with DLLs. The following instructions fails::
-    
+
         import matplotlib.colorbar
-        
+
     I tried to follow some solutions from *stackoverflow* but it still fails for me.
     One link `http://prod.openclassrooms.com/forum/sujet/matplotlib-sous-windows <http://prod.openclassrooms.com/forum/sujet/matplotlib-sous-windows>`_.
     However, this error happened with version 1.4, it does not happen
     with matplotlib **1.5**.
-    
-    Here is the list of packages not available yet (in a compiled version) 
+
+    Here is the list of packages not available yet (in a compiled version)
     on Python 3.5::
-    
+
         aiohttp*
         cchardet*
         cgal_bindings
@@ -58,13 +57,12 @@
         PySide
         pygit2*
         rpy2*
-        tifffile* 
-        
+        tifffile*
+
     `scandir <https://docs.python.org/3/library/os.html#os.scandir>`_ is now
     part of the distribution.
-    
+
     **2016/03/12** changes, some packages are now available on Python 3.5 (marked with ``*``),
     modules were disabled with::
-    
+
         ModuleInstall(...) if sys.version_info[:2] <= (3, 4) else None
-        

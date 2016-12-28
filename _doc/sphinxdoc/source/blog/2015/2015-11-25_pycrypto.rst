@@ -1,5 +1,4 @@
 
-
 .. blogpost::
     :title: Pycrypto on Python 3.5
     :keywords: install, pycrypto
@@ -9,4 +8,3 @@
     Fortunately, somebody already did that
     and it is available here:
     `sfbahr/PyCrypto-Wheels <https://github.com/sfbahr/PyCrypto-Wheels>`_.
-    

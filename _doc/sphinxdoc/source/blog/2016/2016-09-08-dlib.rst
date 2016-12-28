@@ -1,5 +1,4 @@
 
-
 .. blogpost::
     :title: Build dlib on Windows
     :keywords: dlib
@@ -10,47 +9,45 @@
     It is implemented in C++ but there is a Python wrapper.
     This is how you build it on Windows. First,
     install:
-    
+
     * `boost <http://www.boost.org/>`_
     * `cmake <https://cmake.org/>`_
-    
+
     You need to build boost with your own interpreter.
     For that, you need to create a file ``user-config.jam``
     in ``c:\users\<username>`` which contains. Just replace
     the path by yours:
-    
+
     ::
-    
-        using python 
+
+        using python
             : 3.5                   # Version
             : C:\\Python35_x64\\python.exe      # Python Path
             : C:\\Python35_x64\\include         # include path
-            : C:\\Python35_x64\\libs            # lib path(s)   
-            :    
+            : C:\\Python35_x64\\libs            # lib path(s)
+            :
             ;
-            
+
     To build `boost <http://www.boost.org/>`_, two steps are neded from a command line
     where it was installed (sources)
-    
+
     ::
-    
+
         bootstrap
         b2 -a --with-python address-model=64 toolset=msvc runtime-link=static --debug-configuration
 
     The flag ``--debug-configuration`` allows to check the right Python was used.
-    After `cmake <https://cmake.org/>`_ is isntalled, 
+    After `cmake <https://cmake.org/>`_ is isntalled,
     we can build dlib with the sources obtained from pypi.
-    
+
     ::
-    
+
         set PATH=%PATH%;C:\Program Files\CMake\bin
         set BOOST_ROOT=C:\atools\local\boost_1_61_0
         set BOOST_LIBRARYDIR=C:\atools\local\boost_1_61_0\stage\lib
 
     And finally:
-    
+
     ::
-    
+
         c:\Python35_x64\python setup.py bdist_wheel
-    
-    

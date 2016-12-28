@@ -1,23 +1,21 @@
 
-
-
 .. blogpost::
     :title: import cvxopt fails
     :keywords: cvxopt, Windows
     :date: 2015-09-21
     :categories: import, module, issue
     :lid: l-blog-cvxopt-2015
-    
-    The instruction ``import cvxopt`` sometimes fails 
+
+    The instruction ``import cvxopt`` sometimes fails
     with the following error::
-    
+
         ImportError: DLL load failed
-        
+
     According to this article
     `import cvxopt.base: the specified module could not be found <http://stackoverflow.com/questions/14778178/import-cvxopt-base-the-specified-module-could-not-be-found>`_,
     *numpy* needs to be imported first::
-    
+
         import numpy
         import cvxopt
-        
+
     And everything works fine.

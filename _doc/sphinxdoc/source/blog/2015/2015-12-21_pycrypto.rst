@@ -1,14 +1,13 @@
 
-
 .. blogpost::
     :title: PyCrypto and pycryptodome
     :keywords: pycrypto, pycryptodome
     :date: 2015-12-21
     :categories: install, module
-    
+
     `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_ is not longer maintained,
     it should be replaced by `pycryptodome <https://pypi.python.org/pypi/pycryptodome/>`_.
     The second module is a fork of the first.
-    You can check on gihub 
+    You can check on gihub
     `Legrandin/pycryptodome <https://github.com/Legrandin/pycryptodome>`_
     for the latest release.

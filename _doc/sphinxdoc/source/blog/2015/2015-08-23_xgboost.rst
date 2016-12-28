@@ -1,5 +1,4 @@
 
-
 .. index:: xgboost
 
 .. blogpost::
@@ -9,10 +8,9 @@
     :categories: module
 
     `xgboost <https://github.com/dmlc/xgboost>`_
-    is now on 
+    is now on
     `pypi <https://pypi.python.org/pypi/xgboost>`_
     but I knew too late and I built it for Windows.
     In case you want to know how to do it,
     you can read this blog post:
     `Building xgboost on Windows for Python <http://www.xavierdupre.fr/blog/2015-08-23_nojs.html>`_.
-    

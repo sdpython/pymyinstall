@@ -1,5 +1,4 @@
 
-
 .. blogpost::
     :title: How to fix: HttpHostx64.exe has stopped working
     :keywords: Visual Studio, VsHub, HttpHostx64.exe
