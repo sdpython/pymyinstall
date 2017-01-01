@@ -361,7 +361,7 @@ def extended_set():
         ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
-            "xgboost", "wheel2", purpose="Parallelized Stochastic Gradient Descent (only available on " +
+            "xgboost", "wheel", purpose="Parallelized Stochastic Gradient Descent (only available on " +
             "Python 3 and x64)", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
         ModuleInstall("pygling", "pip",
                       purpose="to build makefile with python") if sys.version_info[0] == 2 else None,
