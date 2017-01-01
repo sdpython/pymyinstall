@@ -69,7 +69,9 @@ def ensae_set():
             "tweepy", "pip", purpose="Python wrapper for the twitter API"),
         #ModuleInstall("newspaper3k", "pip", mname="newspaper"),
         ModuleInstall(
-            "mutagen", "pip", purpose="eead and write audio tags for many formats in Python 3"),
+            "mutagen", "pip", purpose="read and write audio tags for many formats in Python 3"),
+        ModuleInstall(
+            "mutagenx", "pip", purpose="read and write audio tags for many formats in Python 3"),
         ModuleInstall("django-audiotracks", "pip",
                       mname="audiotracks", purpose="read audio with django"),
         ModuleInstall("more-itertools", "pip",
@@ -192,6 +194,8 @@ def ensae_set():
         ModuleInstall(
             "sortedcontainers", "pip",
             purpose="Python Sorted Container Types: SortedList, SortedDict, and SortedSet"),
+        ModuleInstall("python-editor", "pip", mname="python_editor",
+                      purpose="Programmatically open an editor, capture the result."),
         ModuleInstall(
             "alembic", "pip",
             purpose="A database migration tool for SQLAlchemy."),
@@ -386,6 +390,8 @@ def ensae_set():
                       purpose="The most basic Text::Unidecode port") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("thinc", "pip", usage="OPTIM",
                       purpose="Learn sparse linear models") if sys.version_info[:2] >= (3, 5) else None,
+        ModuleInstall("semver", "pip",
+                      purpose="Python helper for Semantic Versioning (http://semver.org/)"),
         ModuleInstall("sputnik", "pip",
                       purpose="Data package manager library") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("spacy", "pip", usage="NLP",
@@ -622,6 +628,8 @@ def ensae_set():
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
+    mod.append(ModuleInstall("msrestazure", "pip",
+                             purpose="AutoRest swagger generator Python client runtime. Azure-specific module."))
     for name in ['azure-nspkg', 'azure-common', 'azure-mgmt-nspkg', 'azure-mgmt-authorization',
                  'azure-mgmt-common', 'azure-storage',
                  'azure-mgmt-batch', 'azure-mgmt-cdn', 'azure-mgmt-cognitiveservices', 'azure-mgmt-commerce',

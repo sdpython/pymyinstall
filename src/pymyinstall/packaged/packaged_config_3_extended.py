@@ -194,6 +194,8 @@ def extended_set():
             "a convex optimization modeling software.", usage="OPTIM") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall(
             "fastcache", "wheel", source="2", purpose="C implementation of Python 3 lru_cache for Python."),
+        ModuleInstall(
+            "multiprocess", "wheel", purpose="better multiprocessing and multithreading in python"),
         ModuleInstall("cvxpy", "pip", usage="OPTIM",
                       purpose="linear, quadratic optimization, depends on cvxopt") if sys.version_info[:2] >= (3, 5) else None,
         # to install packages with conda
@@ -401,6 +403,8 @@ def extended_set():
                       purpose="SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module.", usage="PROFILING"),
         ModuleInstall("httplib2", "pip",
                       purpose="A comprehensive HTTP client library."),
+        ModuleInstall("rsa", "pip",
+                      purpose="Pure-Python RSA implementation"),
         ModuleInstall("oauth2client", "pip",
                       purpose="The oauth2client is a client library for OAuth 2.0."),
         ModuleInstall("uritemplate", "pip",
@@ -509,6 +513,8 @@ def extended_set():
                       purpose="Julia/Python bridge with IPython support", usage="DATA/ML"),
         ModuleInstall("lazy-object-proxy", "pip", mname="lazy_object_proxy",
                       purpose="A fast and thorough lazy object proxy"),
+        ModuleInstall("octave_kernel", "pip",
+                      purpose="A Jupyter kernel for Octave."),
         ModuleInstall("oct2py", "pip",
                       purpose="Python to GNU Octave bridge --> run m-files from python.", usage="DATA/ML"),
         ModuleInstall("pg8000", "pip",
@@ -609,6 +615,8 @@ def extended_set():
                       purpose="Hypothesis is an advanced testing library for Python. It lets you write tests which are parametrized " +
                       "by a source of examples, and then generates simple and comprehensible examples that make your tests fail. " +
                       "This lets you find more bugs in your code with less work."),
+        ModuleInstall('fasteners', 'pip',
+                      purpose="A python package that provides useful locks."),
         ModuleInstall('zarr', 'pip',
                       purpose="A minimal implementation of chunked, compressed, N-dimensional arrays for Python."),
         ModuleInstall('rx', 'pip',
