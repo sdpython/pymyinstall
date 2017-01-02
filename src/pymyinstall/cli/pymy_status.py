@@ -67,6 +67,10 @@ def do_main(list_module=None, outfile="python_module.xlsx", pypi=True):
         pfolder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(pfolder)
+        if "pymyinstall" in sys.modules:
+            del sys.modules["pymyinstall"]
+        if "pymyinstall.installhelper" in sys.modules:
+            del sys.modules["pymyinstall.installhelper"]
         from pymyinstall.installhelper import get_installed_modules
     if list_module is not None and len(list_module) == 0:
         list_module = None

@@ -86,6 +86,10 @@ def do_main(temp_folder="build/update_modules",
         pfolder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(pfolder)
+        if "pymyinstall" in sys.modules:
+            del sys.modules["pymyinstall"]
+        if "pymyinstall.packaged" in sys.modules:
+            del sys.modules["pymyinstall.packaged"]
         from pymyinstall.packaged import update_all
     res = update_all(temp_folder=temp_folder, verbose=True,
                      skip_module=skip_module, list_module=list_module,

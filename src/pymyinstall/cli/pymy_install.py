@@ -132,6 +132,10 @@ def do_main(temp_folder="build/update_modules",
                 pfolder = os.path.normpath(os.path.join(
                     os.path.abspath(os.path.dirname(__file__)), "..", ".."))
                 sys.path.append(pfolder)
+                if "pymyinstall" in sys.modules:
+                    del sys.modules["pymyinstall"]
+                if "pymyinstall.win_installer" in sys.modules:
+                    del sys.modules["pymyinstall.win_installer"]
                 from pymyinstall.win_installer import import_every_module
 
             def to_int(s):
@@ -171,6 +175,10 @@ def do_main(temp_folder="build/update_modules",
                 folder = os.path.normpath(os.path.join(
                     os.path.abspath(os.path.dirname(__file__)), "..", ".."))
                 sys.path.append(folder)
+                if "pymyinstall" in sys.modules:
+                    del sys.modules["pymyinstall"]
+                if "pymyinstall.packaged" in sys.modules:
+                    del sys.modules["pymyinstall.packaged"]
                 from pymyinstall.packaged import install_all
             res = install_all(temp_folder=temp_folder, verbose=True,
                               skip_module=skip_module, list_module=list_module, deps=deps,
@@ -189,6 +197,12 @@ def do_main(temp_folder="build/update_modules",
             pfolder = os.path.normpath(os.path.join(
                 os.path.abspath(os.path.dirname(__file__)), "..", ".."))
             sys.path.append(pfolder)
+            if "pymyinstall" in sys.modules:
+                del sys.modules["pymyinstall"]
+            if "pymyinstall.packaged" in sys.modules:
+                del sys.modules["pymyinstall.packaged"]
+            if "pymyinstall.win_installer" in sys.modules:
+                del sys.modules["pymyinstall.win_installer"]
             from pymyinstall.win_installer import win_patch_paths
             from pymyinstall.installhelper import get_pip_program
         pip = get_pip_program()
@@ -201,6 +215,10 @@ def do_main(temp_folder="build/update_modules",
             pfolder = os.path.normpath(os.path.join(
                 os.path.abspath(os.path.dirname(__file__)), "..", ".."))
             sys.path.append(pfolder)
+            if "pymyinstall" in sys.modules:
+                del sys.modules["pymyinstall"]
+            if "pymyinstall.installcustom" in sys.modules:
+                del sys.modules["pymyinstall.installcustom"]
             from pymyinstall.installcustom import install_graphviz
         if list_module is None:
             raise ValueError("A tool must be precised, list cannot be empty.")

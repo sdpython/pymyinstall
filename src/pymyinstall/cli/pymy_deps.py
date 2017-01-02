@@ -46,6 +46,10 @@ def do_main(list_modules=None):
         pfolder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(pfolder)
+        if "pymyinstall" in sys.modules:
+            del sys.modules["pymyinstall"]
+        if "pymyinstall.installhelper" in sys.modules:
+            del sys.modules["pymyinstall.installhelper"]
         try:
             from pymyinstall.installhelper import missing_dependencies, get_module_dependencies
         except ImportError as e:

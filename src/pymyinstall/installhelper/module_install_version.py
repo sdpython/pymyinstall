@@ -604,6 +604,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         # \'test\'
         python_version = ".".join(str(_) for _ in sys.version_info[:3])
         extra = ""
+        sys_platform = sys.platform
         try:
             return eval(cond)
         except Exception as e:
@@ -612,8 +613,9 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                 # we don't check that
                 return True
             else:
-                raise Exception(
-                    "Unable to evaluate condition '{0}' from '{1}', extra='{2}', python_version='{3}'.".format(cond, full, extra, python_version))
+                mes = "Unable to evaluate condition '{0}' from '{1}', extra='{2}', python_version='{3}', sys_platform='{4}'.".format(
+                    cond, full, extra, python_version, sys_platform)
+                raise Exception(mes)
 
     if use_pip:
         global _get_module_dependencies_deps
