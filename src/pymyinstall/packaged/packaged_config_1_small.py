@@ -147,6 +147,10 @@ def small_set():
         ModuleInstall(
             "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
             "of SSL certificates while verifying the identity of TLS hosts."),
+        ModuleInstall(
+            "enum34", "pip", purpose="for ggplot, Object-oriented filesystem paths") if sys.version_info[:2] < (3, 4) else None,
+        ModuleInstall("pathlib2", "pip",
+                      purpose="for ggplot, Object-oriented filesystem paths"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
         ModuleInstall(
             "requests-file", "pip", mname="requests_file", purpose="File transport adapter for Requests"),
@@ -265,6 +269,8 @@ def small_set():
         ModuleInstall("requests-cache", "pip", mname="requests_cache",
                       purpose="Persistent cache for requests library"),
         ModuleInstall("PyQt4", "wheel", mname="PyQt4", usage="GUI"),
+        ModuleInstall("sip", "pip", usage="GUI", purpose="For PyQt5"),
+        ModuleInstall("PyQt5", "pip", mname="PyQt5", usage="GUI"),
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
         ModuleInstall(
