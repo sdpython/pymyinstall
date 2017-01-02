@@ -50,7 +50,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
     if not os.path.exists(pip) and not os.path.exists(pep8):
         scripts = os.path.join(python_path, "Scripts")
         files_to_check.extend(
-            ["spyder.bat", "autopep8.exe"])
+            [("spyder.bat", 'spyder.exe'), "autopep8.exe"])
         if sys.version_info[:2] != (3, 5):
             files_to_check.append("pip.exe")
     else:
@@ -60,13 +60,28 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
     # check Jupyter, numpy, works properly
     ######################################
     if sys.platform.startswith("win"):
+        new_files_to_check = []
         for file in files_to_check:
-            f = os.path.join(scripts, file)
-            if not os.path.exists(f):
-                try:
-                    raise FileNotFoundError(f)
-                except Exception as e:
-                    exceptions.append(e)
+            if isinstance(file, tuple):
+                fs = [os.path.join(scripts, f) for f in file]
+                ft = [f for f in fs if os.path.exists(f)]
+                if len(ft) > 0:
+                    new_files_to_check.append(os.path.split(ft[0])[-1])
+                else:
+                    try:
+                        raise FileNotFoundError(fs)
+                    except Exception as e:
+                        exceptions.append(e)
+            else:
+                f = os.path.join(scripts, file)
+                if not os.path.exists(f):
+                    try:
+                        raise FileNotFoundError(f)
+                    except Exception as e:
+                        exceptions.append(e)
+                else:
+                    new_files_to_check.append(file)
+        files_to_check = new_files_to_check
 
     ################################
     # check that module can be imported

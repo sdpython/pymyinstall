@@ -266,3 +266,5 @@ src/pymyinstall/installhelper/page2.html
 pymyinstall-*/*
 _doc/sphinxdoc/source/phdoc_static/style_notebook_snippet.css
 _doc/sphinxdoc/source/phdoc_static/require.js
+*.err
+*.out

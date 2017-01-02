@@ -620,8 +620,9 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
             module, use_cmd, refresh_cache=refresh_cache)
         if meta is None:
             raise ImportError(
-                "unable to get metadata for {0} - refresh_cache={1}".format(module, refresh_cache))
-        deps = [v for k, v in meta.items() if "Requires" in k]
+                "unable to get metadata for module '{0}' - refresh_cache={1}".format(module, refresh_cache))
+        deps = [v for k, v in meta.items(
+        ) if "Requires" in k and "Requires-Python" not in k]
         res = []
         for d in deps:
             if not isinstance(d, list):
@@ -644,6 +645,9 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
             mod = 0
             for r in res:
                 if r[0] not in done:
+                    if r[0].lower() < 'a' or r[0].lower() > 'z':
+                        raise NameError(
+                            "A module has an unexpected name '{0}', r={1} when looking for dependencies of '{2}'.".format(r[0], r, module))
                     temp = get_module_dependencies(
                         r[0], use_cmd=use_cmd, deep=deep, collapse=False, use_pip=use_pip, refresh_cache=refresh_cache)
                     for key in temp:
