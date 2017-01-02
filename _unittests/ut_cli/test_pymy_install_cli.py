@@ -88,7 +88,7 @@ class TestPyMyInstallCli(unittest.TestCase):
         cmd = "{0} {1} {2} --force --folder={3}".format(
             sys.executable, script, "colorama xlrd --download", temp)
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
-                           communicate=True, timeout=20)
+                           communicate=True, timeout=60)
         fLOG("----", cmd)
         fLOG(out.replace("\r", "").replace("\n\n", "\n"))
         fLOG("-----")
