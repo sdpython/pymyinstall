@@ -599,6 +599,22 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
     if use_pip is None:
         use_pip = not sys.platform.startswith("win")
 
+    def evaluate_condition(cond, full):
+        # example python_version=="3.3" or python_version=="2.7" and extra ==
+        # \'test\'
+        python_version = ".".join(str(_) for _ in sys.version_info[:3])
+        extra = ""
+        try:
+            return eval(cond)
+        except Exception as e:
+            if "python_version" not in cond and "extra" not in cond:
+                # probably something like cycler (>=0.10)
+                # we don't check that
+                return True
+            else:
+                raise Exception(
+                    "Unable to evaluate condition '{0}' from '{1}', extra='{2}', python_version='{3}'.".format(cond, full, extra, python_version))
+
     if use_pip:
         global _get_module_dependencies_deps
         if _get_module_dependencies_deps is None or refresh_cache:
@@ -621,8 +637,8 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         if meta is None:
             raise ImportError(
                 "unable to get metadata for module '{0}' - refresh_cache={1}".format(module, refresh_cache))
-        deps = [v for k, v in meta.items(
-        ) if "Requires" in k and "Requires-Python" not in k]
+        deps = [v for k, v in meta.items()
+                if "Requires" in k and "Requires-Python" not in k]
         res = []
         for d in deps:
             if not isinstance(d, list):
@@ -631,12 +647,30 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                 dl = d
             for v in dl:
                 spl = v.split()
+                if len(spl) > 1:
+                    spl = [spl[0], " ".join(spl[1:])]
                 if len(spl) == 1:
                     key = (v, None, module)
                 else:
-                    key = (spl[0], spl[1], module)
+                    conds = spl[1].split(";")
+                    ok = [evaluate_condition(cond, v) for cond in conds]
+                    if not all(ok):
+                        continue
+                    key = (spl[0].strip(";"), spl[1], module)
                 if key not in res:
                     res.append(key)
+
+    # specific filters
+    def validate_module(name):
+        if name == "enum34" and sys.version_info[:2] > (3, ):
+            raise NameError(
+                "Unexpected dependency '{0}' for module '{1}'.".format(name, module))
+        if name == "configparser":
+            raise NameError(
+                "Unexpected dependency '{0}' for module '{1}'.".format(name, module))
+        return True
+
+    res = [key for key in res if validate_module(key[0])]
 
     if deep:
         done = {module: None}
@@ -645,7 +679,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
             mod = 0
             for r in res:
                 if r[0] not in done:
-                    if r[0].lower() < 'a' or r[0].lower() > 'z':
+                    if r[0].lower() < 'a' or r[0].lower() > 'z' or r[0].endswith(";"):
                         raise NameError(
                             "A module has an unexpected name '{0}', r={1} when looking for dependencies of '{2}'.".format(r[0], r, module))
                     temp = get_module_dependencies(
