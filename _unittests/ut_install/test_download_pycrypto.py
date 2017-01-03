@@ -75,7 +75,8 @@ class TestDownloadPyCrypto (unittest.TestCase):
                     "out_page.html"), source="2")
             assert os.path.exists(exe)
             assert os.stat(exe).st_size > 100000
-            assert ("cp%d%d-none-win_amd64" % sys.version_info[:2]) in exe
+            if "cp{0}{1}-cp{0}{1}m-win_amd64".format(*sys.version_info[:2]) not in exe:
+                raise Exception(exe)
 
 
 if __name__ == "__main__":
