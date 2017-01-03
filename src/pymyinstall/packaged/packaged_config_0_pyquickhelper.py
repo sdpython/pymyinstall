@@ -87,7 +87,7 @@ def pyquickhelper_set():
         "python-dateutil",
         "python-jenkins",
         "pytz",
-        "pypiwin32" if sys.platform.startswith("win") else None,
+        "pywin32" if sys.platform.startswith("win") else None,
         "pyzmq",
         "qtconsole",
         "requests",
