@@ -1,0 +1,27 @@
+
+.. blogpost::
+    :title: Build pypiwin32 on Windows
+    :keywords: Windows, pywin32, pypiwin32
+    :date: 2017-01-03
+    :categories: module
+
+    The module `pypiwin32 <https://github.com/pywin32/pypiwin32>`_ does not seem to
+    be refreshed on `PyPi <https://pypi.python.org/pypi/pypiwin32/>`_.
+    To compile it, you need to get the sources from 
+    `pypiwin32 <https://github.com/pywin32/pypiwin32>`_,
+    to install `Windows SDK <https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk>`_
+    if you did not already (not sure that is required but just in case).
+    
+    Set up the environment variable ``MSSdk`` to the location
+    of the Microsoft SDK. In my case, it was:
+    
+    ::
+    
+        set MSSdk=C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A
+        
+    Change ``from distutils.core import setup`` into
+    ``from setuptools import setup`` to be able to build
+    a wheel.
+    
+    
+    
