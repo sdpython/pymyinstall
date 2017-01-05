@@ -6,5 +6,5 @@ skip = ["actuariat_python", "code_beatrix", "ensae_teaching_cs",
         "pymmails", "teachpyx",
         ]
 from pymyinstall.packaged import install_all
-install_all(temp_folder="build/update_modules", verbose=True,
+install_all(temp_folder="build/update_modules{0}{1}{2}".format(*sys.version_info[:3]), verbose=True,
             skip_module=skip, source="2")
