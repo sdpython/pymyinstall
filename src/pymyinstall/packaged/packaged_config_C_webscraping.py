@@ -13,9 +13,6 @@ def scraping_set():
     """
     mod = [
         ModuleInstall(
-            "distribute", "pip",
-            purpose="distribute legacy wrapper (just for sky)"),
-        ModuleInstall(
             "langdetect", "pip", usage="WEB",
             purpose="Language detection library ported from Google's language-detection."),
         ModuleInstall(
