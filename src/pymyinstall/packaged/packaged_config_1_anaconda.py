@@ -111,7 +111,6 @@ def anaconda_set():
             gensim
             --geos
             greenlet
-            guidata
             guiqwt
             --gunicorn Linux Mac
             h5py
