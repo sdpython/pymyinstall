@@ -423,10 +423,8 @@ def ensae_set():
         #
         ModuleInstall("prettytable", "pip",
                       purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
-        ModuleInstall("ruamel.ordereddict", "pip",
-                      purpose="a version of dict that keeps keys in insertion resp. sorted order"),
         ModuleInstall("ruamel.yaml", "pip",
-                      purpose="uamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"),
+                      purpose="ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"),
         ModuleInstall("logutils", "pip",
                       purpose="Logging utilities"),
         ModuleInstall("skll", "pip", usage="ML",

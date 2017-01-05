@@ -293,8 +293,6 @@ def small_set():
         ModuleInstall(
             "pylint", "pip", purpose="statistics on Python script style"),  #
         ModuleInstall(
-            "guidata", "pip", purpose="Automatic graphical user interfaces generation for easy dataset editing and display (Spyder)"),
-        ModuleInstall(
             "pythonqwt", "pip", purpose="Qt plotting widgets (Spyder)"),
         ModuleInstall(
             "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),

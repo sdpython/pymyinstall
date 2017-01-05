@@ -474,11 +474,6 @@ def extended_set():
                       purpose="The dictionary / mutable mapping interface is powerful and multi-faceted."),
         ModuleInstall("click", "pip",
                       purpose="A simple wrapper around optparse for powerful command line utilities."),
-        ModuleInstall('distributed', 'pip',
-                      purpose="Distributed is a lightweight library for distributed computing in Python. It extends both the concurrent.futures " +
-                      "and dask APIs to moderate sized clusters. Distributed provides data-local computation " +
-                      "by keeping data on worker nodes, running computations where data lives, " +
-                      "and by managing complex data dependencies between tasks."),
 
         # mezzanine
         ModuleInstall(
@@ -580,8 +575,6 @@ def extended_set():
                       purpose="A standard Python library that abstracts away differences among multiple cloud provider APIs."),
         ModuleInstall("click-plugins", "pip", mname="click_plugins",
                       purpose="An extension module for click to enable registering CLI commands via setuptools entry-points."),
-        ModuleInstall("clickj", "pip",
-                      purpose="Click params for commmand line interfaces to GeoJSON"),
         ModuleInstall("munch", "pip",
                       purpose="A dot-accessible dictionary (a la JavaScript objects)."),
         ModuleInstall("cligj", "pip",
