@@ -625,6 +625,8 @@ def extended_set():
                       purpose="Functions for principal component analysis (PCA) and accuracy checks."),
         ModuleInstall('prince', 'github', 'MaxHalford',
                       purpose="Prince is a factor analysis library for datasets that fit in memory."),
+        ModuleInstall('pivottablejs', 'pip',
+                      purpose="PivotTable.js integration for Jupyter/IPython Notebook."),
     ]
 
     if sys.platform.startswith("win"):
