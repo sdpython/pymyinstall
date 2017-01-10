@@ -1,7 +1,4 @@
 @echo off
-rem The script requires one argument: Python PATH
-rem https://github.com/libdynd/dynd-python/blob/master/BUILD_INSTALL.md
-
 if "%1"=="" goto default_value_python:
 if "%1"=="default" goto default_value_python:
 set pythonexe=%1
@@ -16,22 +13,15 @@ set PATH=%pythonexe%;%pythonexe%\Scripts;%PATH%
 if not exist %current%..\..\dist mkdir %current%..\..\dist
 
 :clone:
-if exist dynd goto update:
-git clone --recursive https://github.com/libdynd/dynd-python %current%dync
-pushd %current%dync\dynd-python
-git clone --recursive https://github.com/libdynd/libdynd
-popd
+if exist polylearn goto update:
+git clone --recursive https://github.com/scikit-learn-contrib/polylearn %current%polylearn
 goto buid:
 
 :update:
-git pull %current%dynd
-pushd %current%dync\dynd-python
-git pull
-popd
+git pull %current%polylearn
 
 :build:
-pushd %current%dynd
-python -u setup.py develop
+pushd %current%polylearn
 python -u setup.py bdist_wheel
 popd
 
