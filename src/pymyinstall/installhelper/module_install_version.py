@@ -348,7 +348,7 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
             spl = a.split(".")
             if len(spl) in (2, 3):
                 last = spl[-1]
-                if skip_betas and "a" not in last and "b" not in last and "dev" not in last:
+                if not skip_betas or ("a" not in last and "b" not in last and "dev" not in last):
                     return True
             else:
                 # we don't really know here, so we assume it is not
