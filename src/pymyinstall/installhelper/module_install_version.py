@@ -355,14 +355,13 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
                 return True
             return False
 
-        if full_list:
-            _get_pypi_version_memoize[key] = list(
-                filter(filter_betas, available))
-            return available
-
-        for a in available:
-            if filter_betas(a):
-                _get_pypi_version_memoize[key] = available
+        if available:
+            available = list(filter(filter_betas, available))
+            _get_pypi_version_memoize[key] = available
+            if full_list:
+                return available
+            else:
+                return available[0]
 
         raise MissingVersionOnPyPiException(
             "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
