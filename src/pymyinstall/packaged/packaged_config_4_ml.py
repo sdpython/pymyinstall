@@ -299,8 +299,8 @@ def ensae_set():
         # this module is not on pypi and the py3k version is in a separate folder
         # i don't want to write too much specific code for it
         # i compile it into a wheel
-        ModuleInstall("skdata", "wheel2",
-                      purpose="Data Sets for Machine Learning in Python", usage="DATA"),
+        # ModuleInstall("skdata", "wheel2",
+        #               purpose="Data Sets for Machine Learning in Python", usage="DATA"),
         ModuleInstall("hebel", "pip",
                       purpose="GPU-Accelerated Deep Learning Library in Python", usage="DATA/ML"),
         # ModuleInstall("vowpal_porpoise", "pip",

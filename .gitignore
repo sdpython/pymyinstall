@@ -269,3 +269,4 @@ _doc/sphinxdoc/source/phdoc_static/require.js
 *.err
 *.out
 whl/windows/polylearn/*
+.vscode/settings.json
