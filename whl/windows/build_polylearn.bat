@@ -10,6 +10,7 @@ set pythonexe=c:\Python35_x64
 :start_script:
 set current=%~dp0
 set PATH=%pythonexe%;%pythonexe%\Scripts;%PATH%
+@echo create %current%..\..\dist
 if not exist %current%..\..\dist mkdir %current%..\..\dist
 
 :clone:

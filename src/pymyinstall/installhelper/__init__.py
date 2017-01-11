@@ -2,8 +2,6 @@
 @file
 @brief Shortuts
 """
-from __future__ import print_function
-
 from .install_cmd_helper import run_cmd, update_pip, has_pip, add_shortcut_to_desktop_for_module, get_pip_program
 from .install_venv_helper import run_cmd_path, run_venv_script, venv_install, create_virtual_env
 from .module_install import ModuleInstall

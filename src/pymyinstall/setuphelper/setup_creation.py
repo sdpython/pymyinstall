@@ -1,6 +1,6 @@
 """
 @file
-@brief Functions to hepl creating a setup
+@brief Functions to help creating a setup
 
 .. versionadded:: 1.1
 """

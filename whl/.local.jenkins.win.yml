@@ -7,9 +7,8 @@ virtualenv:
 install:
   - pip freeze
   - pip freeze > pip_freeze.txt
-  - mkdir dist
 script:
-  - { CMD: "whl\\windows\\build___MODULE__.bat ${Python}", NAME: "__MODULE__" }
+  - { CMDPY: "'build___MODULE__.bat ' + ${YMLPYTHON}", NAME: "__MODULE__" }
 after_script:
   - copy dist\*.whl ..
 
