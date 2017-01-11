@@ -118,12 +118,14 @@ def bootstrap(tmpdir=None):
         try:
             import setuptools  # noqa
             implicit_setuptools = False
+            assert setuptools
         except ImportError:
             pass
     if implicit_wheel:
         try:
             import wheel  # noqa
             implicit_wheel = False
+            assert wheel
         except ImportError:
             pass
 
