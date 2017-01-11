@@ -235,6 +235,12 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
     key = module_name, full_list, url
     if key in _get_pypi_version_memoize:
         available = _get_pypi_version_memoize[key]
+        if full_list:
+            return available
+        elif available is not None and len(available) > 0:
+            return available[0]
+        else:
+            return None
     else:
 
         def pypi_package_releases(module_name, b):

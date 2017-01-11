@@ -67,7 +67,6 @@ class TestLONGInstallModule (unittest.TestCase):
             return
 
         mod = ModuleInstall("pandas", "wheel")
-        fLOG(mod)
         vers = mod.get_pypi_version()
         if vers is None or vers < "0.16.1":
             raise Exception("{0}: {1}".format(mod.name, vers))
