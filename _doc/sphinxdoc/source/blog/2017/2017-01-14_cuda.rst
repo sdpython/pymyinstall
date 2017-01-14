@@ -1,0 +1,88 @@
+
+.. blogpost::
+    :title: GPU and pycuda or pyopencl on Windows
+    :keywords: Windows, pycuda
+    :date: 2017-01-14
+    :categories: module
+
+    `pycuda <https://developer.nvidia.com/pycuda>`_
+    is a python module implemented to use GPU.
+    On Windows, the best way to install it is to get it
+    from `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
+    The module requires `Visual Studio Community Edition <https://www.visualstudio.com/vs/community/>`_ and
+    `CUDA Toolkit <https://developer.nvidia.com/accelerated-computing-toolkit>`_.
+    Once it is done, you can try the following program to test
+    your installation:
+
+    ::
+
+        from pycuda.compiler import SourceModule
+        mod = SourceModule("""
+        __global__ void multiply_them(float *dest, float *a, float *b)
+        {
+          const int i = threadIdx.x;
+          dest[i] = a[i] * b[i];
+        }
+        """)
+
+        multiply_them = mod.get_function("multiply_them")
+
+        a = numpy.random.randn(400).astype(numpy.float32)
+        b = numpy.random.randn(400).astype(numpy.float32)
+
+        dest = numpy.zeros_like(a)
+        multiply_them(
+                drv.Out(dest), drv.In(a), drv.In(b),
+                block=(400,1,1), grid=(1,1))
+
+        print(dest-a*b)
+
+    If it fails due to the following error:
+
+    ::
+
+        ImportError: DLL load failed: Le module spécifié est introuvable.
+
+    It probably means the DLL ``nvcuda.dll`` is missing.
+    You can use `dependency walker <http://www.dependencywalker.com/>`_
+    to look at the DLL dependencies for a specific DLL (files *.dll
+    or *.pyd if they are compiled with Python).
+    In that case, this means the drivers for the graphics card is missing.
+    You first need to check your card. If you realise your card is not
+    NVidia, you can stop: pycuda only works with a NVidia card.
+    Mine is a *Intel Graphics 4000* and I downloaded the drivers from this location:
+    `Intel® Graphics Driver for Windows® 10 and Windows 7*/8.1* [15.33] <https://downloadcenter.intel.com/download/25977/Intel-Graphics-Driver-for-Windows-10-and-Windows-7-8-1-15-33-?product=81499>`_.
+    In that case, you will need to switch to
+    `pyopencl <https://documen.tician.de/pyopencl/>`_.
+    You can still get it from
+    `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
+
+    .. https://software.intel.com/en-us/articles/opencl-drivers#win64.
+
+    Finally, you should get the same OpenCL library used to compile
+    *pyopencl* which `Intel OpenCL <https://software.intel.com/en-us/intel-opencl>`_.
+    You might also need
+    `Windows 10 SDK <Khttps://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk>`_.
+    Finally, you need to choose the backend for *pyopencl*:
+
+    ::
+
+        import pyopencl as cl
+        ctx = cl.create_some_context()
+
+    Follow the questions and choose the graphics card as the backend.
+    Setup the following environment variable to skip the questions next time:
+
+    ::
+
+        import os
+        os.environ["PYOPENCL_CTX"] = '0:1'
+
+    **theano**
+
+    If you want to use `theano <http://deeplearning.net/software/theano/>`_ on GPU,
+    you need `TDM-GCC 64bit <http://tdm-gcc.tdragon.net/>`_ but
+    `theano <http://deeplearning.net/software/theano/>`_ only
+    supports NVidia cards. The documentation
+    tells it will support *opencl* soon:
+    `GpuArray Backend <http://deeplearning.net/software/theano/tutorial/using_gpu.html#gpuarray>`_.

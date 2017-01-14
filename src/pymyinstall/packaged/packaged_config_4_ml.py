@@ -141,6 +141,8 @@ def ensae_set():
             "pytest", "pip", purpose="pytest allows you to use the standard python assert for verifying expectations and values in Python tests."),
         ModuleInstall("pycuda", "wheel", usage="GPU",
                       purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python."),
+        ModuleInstall("pyopencl", "wheel", usage="GPU",
+                      purpose="PyOpenCL lets you access the OpenCL parallel computation API from Python."),
         # ModuleInstall("scikits.cuda", "pip", mname="skcuda"), # no stable
         # version
         ModuleInstall(
@@ -300,7 +302,7 @@ def ensae_set():
         # i don't want to write too much specific code for it
         # i compile it into a wheel
         # ModuleInstall("skdata", "wheel2",
-        #               purpose="Data Sets for Machine Learning in Python", usage="DATA"),
+        # purpose="Data Sets for Machine Learning in Python", usage="DATA"),
         ModuleInstall("hebel", "pip",
                       purpose="GPU-Accelerated Deep Learning Library in Python", usage="DATA/ML"),
         # ModuleInstall("vowpal_porpoise", "pip",
