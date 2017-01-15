@@ -209,7 +209,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                 # http://stackoverflow.com/questions/14778178/import-cvxopt-base-the-specified-module-could-not-be-found
                 sc += sc + ";import scipy.stats"
             out, err = run_cmd_path(
-                python_path, sc, fLOG=fLOG, communicate=True, timeout=10)
+                python_path, sc, fLOG=fLOG, communicate=True, timeout=40)
             suc = analyze_error_success(m, err)
             nextm = module_list[i + 1] if i + 1 < len(module_list) else ""
             if suc:
