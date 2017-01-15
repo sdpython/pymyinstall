@@ -100,7 +100,7 @@ class TestAllPyPiModule (unittest.TestCase):
                                                 "\n".join("{0}:{1}\n   {2}".format(a, b, c) for a, b, c in sorted(error)))
 
         if len(annoying) > 0:
-            fLOG("Annoying\n", "\n".join(annoying))
+            fLOG("Annoying\n", "\n".join(str(_) for _ in annoying))
             warnings.warn("ANNOYING PACKAGES\n" + "\n".join(annoying))
 
 
