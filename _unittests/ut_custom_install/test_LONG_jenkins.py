@@ -57,9 +57,9 @@ class TestJenkins(unittest.TestCase):
         temp = get_temp_folder(__file__, "temp_jenkins")
 
         if sys.platform.startswith("win"):
-            r = install_jenkins(temp, fLOG=fLOG, install=True)
+            r = install_jenkins(temp, fLOG=fLOG, install=False)
             fLOG(r)
-            z = os.path.join(temp, "jenkins.zip")
+            z = os.path.join(temp, "jenkins.war")
             assert os.path.exists(z)
 
 
