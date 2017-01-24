@@ -270,3 +270,4 @@ _doc/sphinxdoc/source/phdoc_static/require.js
 *.out
 whl/windows/polylearn/*
 .vscode/settings.json
+_unittests/ut_module/windows_modules_versions.txt

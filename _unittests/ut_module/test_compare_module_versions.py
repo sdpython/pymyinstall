@@ -39,7 +39,7 @@ except ImportError:
     import pyquickhelper as skip_
 
 
-from pyquickhelper.loghelper import fLOG
+from pyquickhelper.loghelper import fLOG, CustomLog
 from src.pymyinstall.packaged import all_set
 from src.pymyinstall.installhelper import get_wheel_version, compare_version
 from src.pymyinstall.installhelper.module_install_exceptions import MissingWheelException
@@ -64,6 +64,7 @@ class TestCompareVersion(unittest.TestCase):
         mods = [mod for mod in all_set() if mod.kind in ("wheel",)]
         fLOG(len(mods))
         assert len(mods) > 0
+        clog = CustomLog(os.path.dirname(__file__), "windows_modules_versions.txt")
 
         diff = []
         for i, mod in enumerate(mods[0:]):
@@ -83,6 +84,7 @@ class TestCompareVersion(unittest.TestCase):
                 url2 = None
             if url1 is None and url2 is None:
                 fLOG("missing package on both sides", mod)
+                clog("missing package on both sides", mod)
                 continue
             # fLOG(i, url1, url2)
             n1 = url1[-1] if url1 is not None else None
@@ -93,6 +95,7 @@ class TestCompareVersion(unittest.TestCase):
                 v1, v2) if v1 is not None and v2 is not None else -2
             if cmp != 0:
                 fLOG("---", i, v1, v2, mod.name)
+                clog("---", i, v1, v2, mod.name)
                 if v1 is not None and v2 is not None and not ("rc1" in v1 or "rc1" in v2):
                     diff.append(mod)
 
