@@ -90,6 +90,6 @@ for filepath in argv:
         ps.image(letter, im)
         ps.end_document()
 
-    except:
+    except Exception:
         print("cannot print image", end=' ')
         print("(%s:%s)" % (sys.exc_info()[0], sys.exc_info()[1]))
