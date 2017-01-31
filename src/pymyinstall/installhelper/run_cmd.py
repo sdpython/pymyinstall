@@ -315,7 +315,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     temp = err = stderr.read()
                     try:
                         err = decode_outerr(temp, encoding, encerror, cmd)
-                    except:
+                    except Exception:
                         err = decode_outerr(temp, encoding, "ignore", cmd)
                 stdout.close()
                 stderr.close()

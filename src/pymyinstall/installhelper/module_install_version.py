@@ -391,7 +391,7 @@ def numeric_version(vers):
         try:
             i = int(_)
             r.append(i)
-        except:
+        except ValueError:
             r.append(_)
     return tuple(r)
 

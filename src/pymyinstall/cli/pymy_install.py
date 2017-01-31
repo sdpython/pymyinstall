@@ -143,7 +143,7 @@ def do_main(temp_folder="build/update_modules",
                     return -1
                 try:
                     return int(s)
-                except:
+                except ValueError:
                     return -1
 
             if checkings in ("", "0,end", "0,-1"):

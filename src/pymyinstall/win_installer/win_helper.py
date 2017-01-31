@@ -72,7 +72,7 @@ def get_env(name, current=True):
                 # Return both value[0] and value[1] because value[0] could be
                 # different from name (lowercase/uppercase)
                 return value[0], value[1]
-        except:
+        except Exception:
             break
 
 
@@ -252,9 +252,9 @@ def patch_sourcelines(fname, in_line_start, out_line, endline='\n', silent_mode=
             with io.open(fname, 'wt') as fh:
                 try:
                     fh.write(new_content)
-                except:
+                except Exception as e:
                     print("impossible to patch", fname, "from", content,
-                          "to", new_content)
+                          "to", new_content, " --- ", str(e).replace("\n", "--"))
 
 
 WININST_PATTERN = r'([a-zA-Z0-9\-\_]*|[a-zA-Z\-\_\.]*)-([0-9\.\-]*[a-z]*[0-9]?)(-Qt-([0-9\.]+))?.(win32|win\-amd64)(-py([0-9\.]+))?(-setup)?\.exe'
