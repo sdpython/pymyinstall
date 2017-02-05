@@ -21,6 +21,7 @@ before_script:
 script:
   - { CMD: "python -u setup.py unittests", NAME: "UT" }
   - { CMD: "python -u setup.py unittests_LONG", NAME: "UT_LONG" }
+  - { CMD: "python -u setup.py unittests_SKIP", NAME: "UT_SKIP" }
 after_script:
   - python setup.py bdist_wheel
   - if [ ${VERSION} == "2.7" and ${DIST} != "conda" ] then copy dist\*.whl ..\..\..\local_pypi\local_pypi_server fi
