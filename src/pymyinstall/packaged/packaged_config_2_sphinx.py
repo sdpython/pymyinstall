@@ -65,8 +65,6 @@ def sphinx_theme_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinx-gallery", "pip", mname="sphinx_gallery",
                       purpose="gallery for examples", usage="SPHINX"),
-        ModuleInstall("sphinx-nbexamples", "github", "sdpython", mname="sphinx_nbexamples",
-                      purpose="gallery for notebooks", usage="SPHINX"),
         ModuleInstall("docrepr", "pip",
                       purpose="docrepr renders Python docstrings in HTML", usage="SPHINX"),
         ModuleInstall("foundation-sphinx-theme", "pip", mname="foundation_sphinx_theme",
