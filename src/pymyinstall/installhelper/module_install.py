@@ -369,8 +369,8 @@ class ModuleInstall:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
             short_list = [_ for _ in alls if self.name in _]
-            raise Exception("unable to find a single link for " +
-                            self.name + "\n" + "\n".join(short_list))
+            raise MissingWheelException("unable to find a single link for " +
+                                        self.name + "\n" + "\n".join(short_list))
 
         links = [(l.split("/")[-1], l) for l in links]
         links0 = links

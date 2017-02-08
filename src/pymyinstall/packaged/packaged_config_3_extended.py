@@ -107,8 +107,6 @@ def extended_set():
                       purpose="Garden tool for kivy flowers.", usage="GUI"),
         ModuleInstall(
             'py4j', 'pip', purpose="Enables Python programs to dynamically access arbitrary Java objects"),
-        ModuleInstall('python-igraph', 'wheel', mname='igraph',
-                      purpose="High performance graph data structures and algorithms (issue on Linux and Anaconda)"),
         ModuleInstall(
             'lockfile', 'pip', purpose="Platform-independent file locking module"),
         ModuleInstall('python-daemon', 'pip', mname="daemon",
