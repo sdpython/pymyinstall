@@ -16,23 +16,31 @@ def pyensae_set():
         "ansi2html",  # ssh
         "ansiconv",  # ssh
         "antlr4-python3-runtime",
+        "azure",
         "azureml",
         "colormap",
         "chardet",
+        "cryptography",
         "dbfread",
         "easydev",
         "ecdsa",  # paramiko
         "folium",  # maps
-        "osmapi",  # maps
+        "ipykernel",
+        "keyring",
         "linkedin",
         "networkx",
-        "requests_file",
+        "osmapi",  # maps
         "pandas_datareader",
         "paramiko",  # ssh
+        "prompt_toolkit",
+        "pycodestyle",
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
+        "pycryptodomex",
         "pyquickhelper",
         "pytablewriter",
         "qgrid",  # magic command
+        "requests_file",
+        "requests-ftp",
         "scipy",
         "scikit-learn",
         "urllib3",

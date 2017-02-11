@@ -64,7 +64,8 @@ class TestCompareVersion(unittest.TestCase):
         mods = [mod for mod in all_set() if mod.kind in ("wheel",)]
         fLOG(len(mods))
         assert len(mods) > 0
-        clog = CustomLog(os.path.dirname(__file__), "windows_modules_versions.txt")
+        clog = CustomLog(os.path.dirname(__file__),
+                         "windows_modules_versions.txt")
 
         diff = []
         for i, mod in enumerate(mods[0:]):

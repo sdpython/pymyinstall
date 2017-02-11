@@ -410,6 +410,9 @@ def small_set():
                       purpose="Version information"),
         ModuleInstall("pytablewriter", "pip",
                       purpose="convert a dataframe into many formats"),
+        ModuleInstall("requests-ftp", "pip", mname="requests_ftp",
+                      purpose="Requests-FTP is an implementation of a very stupid FTP transport " +
+                      "adapter for use with the awesome Requests Python library."),
     ]
 
     return [_ for _ in mod if _ is not None]
