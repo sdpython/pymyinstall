@@ -10,7 +10,7 @@ pymyinstall documentation
     :target: https://travis-ci.org/sdpython/pymyinstall
     :alt: Build status
 
-.. image:: https://ci.appveyor.com/api/projects/status/yy4aripbhp38wo17?svg=true
+.. image:: https://ci.appveyor.com/api/projects/status/ccsvoi29n3a71i6j?svg=true
     :target: https://ci.appveyor.com/project/sdpython/pymyinstall
     :alt: Build Status Windows
 
