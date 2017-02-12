@@ -1,0 +1,11 @@
+
+.. blogpost::
+    :title: Standalone Python Distribution
+    :keywords: Python, standalone, py2to3, grammar.txt
+    :date: 2017-02-12
+    :categories: python
+
+    I tried to build a standalone distribution and I faced
+    this issue `Can't use lib2to3 with embeddable zip file. <https://bugs.python.org/issue24960>`_.
+    Really annoying one. No fix is proposed assuming a standalone
+    should not be used for that.

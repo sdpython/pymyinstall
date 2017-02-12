@@ -171,7 +171,7 @@ def install_python(
                             "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
                     fLOG(out)
 
-                    cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(temp_folder=\'download\', ' +
+                    cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'download\', ' +
                            'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe, modules)
                     out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
                     if len(err) > 0:
