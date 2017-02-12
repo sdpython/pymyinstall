@@ -62,6 +62,8 @@ class TestConvertNotebooks(unittest.TestCase):
 
         fold2 = os.path.normpath(os.path.join(fold, "..", "..", "_unittests"))
         for nbf in explore_folder_iterfile(fold2, pattern=".*[.]ipynb"):
+            if "site-packages" in nbf:
+                continue
             t = upgrade_notebook(nbf)
             if t:
                 fLOG("modified", nbf)
