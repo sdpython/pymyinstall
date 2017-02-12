@@ -45,16 +45,16 @@ from src.pymyinstall.installcustom import install_python
 from pyquickhelper.loghelper import fLOG
 
 
-class TestDownloadPythonPyQuickHelper (unittest.TestCase):
+class TestDownloadPythonPyEnsae(unittest.TestCase):
 
-    def test_install_python_pyquickhelper(self):
+    def test_install_python_pyensae(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
         vers = "%d%d" % sys.version_info[:2]
-        temp = os.path.join(fold, "temp_python%s_pyquickhelper" % vers)
+        temp = os.path.join(fold, "temp_python%s_pyensae" % vers)
         if not os.path.exists(temp):
             os.mkdir(temp)
         for _ in os.listdir(temp):
@@ -63,7 +63,7 @@ class TestDownloadPythonPyQuickHelper (unittest.TestCase):
 
         if sys.platform.startswith("win"):
             install_python(install=True, temp_folder=temp,
-                           fLOG=fLOG, modules="pyquickhelper")
+                           fLOG=fLOG, modules="ensae")
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
             if not os.path.exists(pyt):

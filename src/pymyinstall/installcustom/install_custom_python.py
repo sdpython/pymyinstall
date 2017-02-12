@@ -137,12 +137,13 @@ def install_python(
 
                 # following issue https://github.com/pypa/get-pip/issues/7
                 vers = "%d%d" % sys.version_info[:2]
-                pth = os.path.join(temp_folder, "python%s._pth" % vers)
-                with open(pth, "r") as f:
-                    content = f.read()
-                content = content.replace("#import site", "import site")
-                with open(pth, "w") as f:
-                    f.write(content)
+                if vers == "36":
+                    pth = os.path.join(temp_folder, "python%s._pth" % vers)
+                    with open(pth, "r") as f:
+                        content = f.read()
+                    content = content.replace("#import site", "import site")
+                    with open(pth, "w") as f:
+                        f.write(content)
 
                 # run get-pip.py
                 pyexe = os.path.join(temp_folder, "python.exe")
