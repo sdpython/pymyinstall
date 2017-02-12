@@ -49,7 +49,7 @@ def unzip7_files(filename_7z, fLOG=print, dest="."):
 
 
 def install_python(
-        temp_folder=".", fLOG=print, install=True, force_download=False, version=None):
+        temp_folder=".", fLOG=print, install=True, force_download=False, version=None, modules=None):
     """
     Install `python <http://www.python.org/>`_.
     It does not do it a second time if it is already installed.
@@ -59,6 +59,7 @@ def install_python(
     @param      install         install (otherwise only download)
     @param      force_download  force the downloading of python
     @param      version         version to download (by default the current version of Python)
+    @param      modules         modules to install
     @return                     temporary file
 
     The version is fixed to the current version of Python and amd64.
@@ -115,10 +116,10 @@ def install_python(
             # the setup for Python 3.5 does not accept multiple version
             # it was installed on one machine and then compressed into a 7z
             # file
-            if versioni <= (3, 5, 1):
-                url = "http://www.xavierdupre.fr/enseignement/setup/Python35_x64.7z"
-            elif versioni == (3, 5, 2):
-                url = "http://www.xavierdupre.fr/enseignement/setup/Python35_x64.352.7z"
+            if versioni >= (3, 6, 0):
+                url = "https://www.python.org/ftp/python/3.6.0/python-3.6.0-embed-amd64.zip"
+            elif versioni >= (3, 5, 0):
+                url = "https://www.python.org/ftp/python/3.5.3/python-3.5.3-embed-amd64.zip"
             else:
                 raise Exception(
                     "unable to find a proper version for version {0}".format(version))
@@ -126,7 +127,56 @@ def install_python(
             outfile = os.path.join(temp_folder, full)
             local = download_file(url, outfile, fLOG=fLOG)
             if install:
-                unzip7_files(local, temp_folder, fLOG=fLOG)
+                # unzip files
+                unzip_files(local, temp_folder, fLOG=fLOG)
+
+                # get-pip
+                get_pip = "https://bootstrap.pypa.io/get-pip.py"
+                outfile_pip = os.path.join(temp_folder, "get-pip.py")
+                download_file(get_pip, outfile_pip, fLOG=fLOG)
+
+                # following issue https://github.com/pypa/get-pip/issues/7
+                pth = os.path.join(temp_folder, "python36._pth")
+                with open(pth, "r") as f:
+                    content = f.read()
+                content = content.replace("#import site", "import site")
+                with open(pth, "w") as f:
+                    f.write(content)
+
+                # run get-pip.py
+                pyexe = os.path.join(temp_folder, "python.exe")
+                if not os.path.exists(pyexe):
+                    raise FileNotFoundError(pyexe)
+                cmd = '"{0}" -u "{1}"'.format(pyexe, outfile_pip)
+                out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+                if len(err) > 0:
+                    raise Exception(
+                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+
+                # modules
+                if modules is not None:
+                    if isinstance(modules, list):
+                        raise NotImplementedError(
+                            "Not implemented for a list of modules.")
+
+                    # cmd = '"{0}" -u -c "import pip;pip.main([\'install\', \'https://github.com/sdpython/pymyinstall/archive/master.zip\'])"'.format(pyexe)
+                    cmd = '"{0}" -u -c "import pip;pip.main([\'install\', \'pymyinstall\'])"'.format(
+                        pyexe)
+                    out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+                    exp = ".zip/lib2to3/Grammar.txt"
+                    if len(err) > 0 and exp not in out.replace("\\", "/").replace("//", "/"):
+                        raise Exception(
+                            "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+                    fLOG(out)
+
+                    cmd = '"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(temp_folder=\'download\', verbose=True, source=\'2\', list_module=\'{1}\')"'.format(
+                        pyexe, modules)
+                    out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+                    if len(err) > 0:
+                        raise Exception(
+                            "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+                    fLOG(out)
+
             return local
     else:
         raise NotImplementedError("not available on platform " + sys.platform)

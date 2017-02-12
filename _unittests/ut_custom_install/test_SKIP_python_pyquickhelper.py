@@ -1,5 +1,5 @@
 """
-@brief      test log(time=12s)
+@brief      test log(time=129s)
 
 skip this test for regular run
 """
@@ -45,15 +45,15 @@ from src.pymyinstall.installcustom import install_python
 from pyquickhelper.loghelper import fLOG
 
 
-class TestDownloadPython (unittest.TestCase):
+class TestDownloadPythonPyQuickHelper (unittest.TestCase):
 
-    def test_install_python(self):
+    def test_install_python_pyquickhelper(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold, "temp_python")
+        temp = os.path.join(fold, "temp_python_pyquickhelper")
         if not os.path.exists(temp):
             os.mkdir(temp)
         for _ in os.listdir(temp):
@@ -61,14 +61,14 @@ class TestDownloadPython (unittest.TestCase):
                 os.remove(os.path.join(temp, _))
 
         if sys.platform.startswith("win"):
-            install_python(install=True, temp_folder=temp, fLOG=fLOG)
+            install_python(install=True, temp_folder=temp,
+                           fLOG=fLOG, modules="pyquickhelper")
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
             if not os.path.exists(pyt):
                 raise FileNotFoundError(pyt)
             if not os.path.exists(pip):
                 raise FileNotFoundError(pip)
-
 
 if __name__ == "__main__":
     unittest.main()
