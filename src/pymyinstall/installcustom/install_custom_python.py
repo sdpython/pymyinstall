@@ -136,7 +136,8 @@ def install_python(
                 download_file(get_pip, outfile_pip, fLOG=fLOG)
 
                 # following issue https://github.com/pypa/get-pip/issues/7
-                pth = os.path.join(temp_folder, "python36._pth")
+                vers = "%d%d" % sys.version_info[:2]
+                pth = os.path.join(temp_folder, "python%s._pth" % vers)
                 with open(pth, "r") as f:
                     content = f.read()
                 content = content.replace("#import site", "import site")
