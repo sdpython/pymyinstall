@@ -70,5 +70,6 @@ class TestDownloadPythonPyQuickHelper (unittest.TestCase):
             if not os.path.exists(pip):
                 raise FileNotFoundError(pip)
 
+
 if __name__ == "__main__":
     unittest.main()
