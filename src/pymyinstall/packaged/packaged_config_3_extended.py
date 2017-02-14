@@ -586,7 +586,7 @@ def extended_set():
         ModuleInstall("brythonmagic", "pip",
                       purpose="Magics to use brython in Jupyter notebook."),
         ModuleInstall(
-            "lmfit", "wheel", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
+            "lmfit", "wheel", purpose="Least-Squares Minimization with Bounds and Constraints", usage="OPTIM"),
 
         #
         # August, September, October, December 2016
