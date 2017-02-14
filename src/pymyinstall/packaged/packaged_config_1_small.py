@@ -86,6 +86,9 @@ def small_set():
                       purpose="pseudo C++ in python"),
         ModuleInstall("numpy", "wheel",
                       purpose="matrix computation", usage="DATA/ML"),
+        ModuleInstall("mkl_service", "wheel",
+                      purpose="This package exposes a few functions which are declared in mkl_service.h. The main purpose of the " +
+                      "package is to allow the user to change the number of CPU's MKL is using at runtime.", usage="DATA/ML"),
         ModuleInstall("cycler", "pip",
                       purpose="dependency for matplotlib", usage="VIZ"),
         ModuleInstall("matplotlib", "wheel",
@@ -184,7 +187,7 @@ def small_set():
             "entrypoints", "pip", purpose="Discover and load entry points from installed packages.", usage="JUPYTER"),
         ModuleInstall(
             "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
-        ModuleInstall("PyPDF2", "pip", purpose="PDF toolkit"),
+        ModuleInstall("PyPDF2", "pip", purpose="PDF toolkit", usage="PDF"),
         ModuleInstall(
             "ghost.py", "pip", mname="ghost", purpose="ghost.py is a webkit web client written in python", usage="JUPYTER"),
         ModuleInstall("nbbrowserpdf", "pip",

@@ -242,6 +242,8 @@ def extended_set():
                       "The botocore package is the foundation for the AWS CLI as well as boto3."),
         ModuleInstall("s3transfer", "pip", usage="AWS",
                       purpose="An Amazon S3 Transfer Manager"),
+        ModuleInstall("s3fs", "pip", usage="AWS",
+                      purpose="Convenient Filesystem interface over S3"),
         ModuleInstall("boto3", "pip", usage="AWS",
                       purpose="A Python interface to Amazon Web Services"),
         # for gensim
@@ -489,8 +491,10 @@ def extended_set():
         ModuleInstall("mezzanine", "pip", usage="WEB",
                       purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),
         # pdf
-        ModuleInstall("pyPdf", "github", "sdpython",
+        ModuleInstall("pyPdf", "github", "sdpython", usage="PDF",
                       branch="trunk", purpose="read PDF"),
+        ModuleInstall("pdfrw", "pip", usage="PDF",
+                      purpose="PDF file reader/writer library"),
         # 2016-05
         ModuleInstall("pydub", "pip", usage="MUSIC",
                       purpose="Pydub lets you do stuff to audio in a way that isn't stupid."),
@@ -581,9 +585,8 @@ def extended_set():
                       purpose="Fiona is OGR’s neat, nimble, no-nonsense API for Python programmers."),
         ModuleInstall("brythonmagic", "pip",
                       purpose="Magics to use brython in Jupyter notebook."),
-        # ModuleInstall("lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
-        # enable?
-        #
+        ModuleInstall(
+            "lmfit", "wheel", purpose="Least-Squares Minimization with Bounds and Constraints", usgae="OPTIM"),
 
         #
         # August, September, October, December 2016

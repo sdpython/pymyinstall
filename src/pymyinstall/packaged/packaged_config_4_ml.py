@@ -597,6 +597,19 @@ def ensae_set():
         ModuleInstall("category_encoders", "pip", usage="ML",
                       purpose="A set of scikit-learn-style transformers for encoding categorical " +
                       "variables into numeric by means of different techniques."),
+        #
+        # 2017-01/02
+        #
+        ModuleInstall("tensorflow", "wheel", usage="DATA/ML",
+                      purpose="An open-source software library for Machine Intelligence"),
+        ModuleInstall("edward", "pip", usage="DATA/ML",
+                      purpose="Edward is a Python library for probabilistic modeling, inference, and criticism"),
+        ModuleInstall("python_Levenshtein", "wheel", mname="Levenshtein",
+                      purpose="C implementation of Levenshtein distance."),
+        ModuleInstall("fuzzywuzzy", "pip",
+                      purpose="Fuzzy string matching in python"),
+        ModuleInstall("nbdime", "pip",
+                      purpose="Comparison of notebooks"),
     ]
 
     if sys.version_info[0] == 2:
