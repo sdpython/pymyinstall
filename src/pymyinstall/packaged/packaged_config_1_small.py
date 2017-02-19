@@ -158,6 +158,8 @@ def small_set():
         ModuleInstall(
             "requests-file", "pip", mname="requests_file", purpose="File transport adapter for Requests"),
         ModuleInstall(
+            "requests-ftp", "pip", mname="requests_ftp", purpose="FTP Transport Adapter for Requests"),
+        ModuleInstall(
             "pandas-datareader", "pip", mname="pandas_datareader",
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
         ModuleInstall(
@@ -413,9 +415,6 @@ def small_set():
                       purpose="Version information"),
         ModuleInstall("pytablewriter", "pip",
                       purpose="convert a dataframe into many formats"),
-        ModuleInstall("requests-ftp", "pip", mname="requests_ftp",
-                      purpose="Requests-FTP is an implementation of a very stupid FTP transport " +
-                      "adapter for use with the awesome Requests Python library."),
     ]
 
     return [_ for _ in mod if _ is not None]
