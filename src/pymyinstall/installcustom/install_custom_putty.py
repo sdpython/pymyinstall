@@ -47,11 +47,11 @@ def install_putty(dest_folder=".", fLOG=print, install=True, version=None):
         raise NotImplementedError(
             "SciTE can only be installed on Windows at the moment")
 
-    url = "http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html"
+    url = "http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"
     page = download_page(url)
 
     reg = re.compile(
-        "<a href=\\\"(.*latest/x86/putty.exe)\\\"><code>putty.exe</code></a>")
+        "<a href=\\\"(.*latest/w64/putty.exe)\\\"><code>putty.exe</code></a>")
     find = reg.findall(page)
     if len(find) != 1:
         mes = "unable to find the file to download at {0}\nfound: {1}\npattern: {2}\nOUT:\n{3}".format(

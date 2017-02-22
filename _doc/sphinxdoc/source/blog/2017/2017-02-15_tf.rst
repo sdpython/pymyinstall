@@ -5,10 +5,10 @@
     :date: 2017-02-15
     :categories: modules
 
-    `TensorFlow <https://www.tensorflow.org/>`_ 
+    `TensorFlow <https://www.tensorflow.org/>`_
     is now available on Windows. You can find it
     on `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
     It is compiled for GPU (NVIDIA only) and CPU.
-    It is a dependency required for 
+    It is a dependency required for
     `edward <http://edwardlib.org/>`_ which seems to be a new and interesting package
     for Bayesian statistics. The documentation is really nice.
