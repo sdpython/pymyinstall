@@ -88,7 +88,7 @@ class TestRegex (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        pattern = 'onclick=.javascript:dl[(]([,\[\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)].' + \
+        pattern = 'onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl]+).[)].' + \
                   ' title(.+)?.>(.+?-((cp34)|(py3)|(py2[.]py3)|(py33[.]py34))-none-((win_amd64)|(any)).whl)</a>'
         raw = """<li><a id='networkx'></a><strong><a href='http://networkx.lanl.gov/'>NetworkX</a></strong>, a package for complex networks.
                 <ul>
@@ -107,7 +107,7 @@ class TestRegex (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        pattern = '''onclick=.javascript:dl[(]([,\[\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>''' + \
+        pattern = '''onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>''' + \
                   '''(.+?-((cp34)|(py3)|(py2[.]py3)|(py34))-none-((win_amd64)|(any)).whl)</a>'''
         raw = """<li><a href='javascript:;' onclick='javascript:dl([45,111,46,119,109,108,112,104,105,50,51,120,110,118,48,47,52,99,53,102,121,101],""" + \
               """ "A7CD=&lt;@&lt;?5;450:2B2&#62;0A6:@0&lt;1&lt;E038&lt;:92375")' """ + \
@@ -125,7 +125,7 @@ class TestRegex (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        pattern = '''onclick=.javascript:dl[(]([,\[\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>''' + \
+        pattern = '''onclick=.javascript:dl[(]([,\\[\\]0-9]+) *, *.([0-9&;@?=:A-Zgtl#]+).[)]. title(.+)?.>''' + \
                   '''(.+?-((cp34)|(py3)|(py2[.]py3)|(py34))(-none)?-((win_amd64)|(any))(.whl)?)</a>'''
         raw = """<li><a href='javascript:;' onclick='javascript:dl([120,53,99,109,95,100,122,51,46,97,119,117,110,57,54,104,47,106,52,48,105,101,108,111,116,45,112], "6;H;BA1=@F03FI7818CI2J7BI&lt;G&lt;EI:D&lt;4935&#62;B8:?F")' """ + \
               """title='[1.6&#160;MB] [Nov 30, 2015]'>lxml-3.5.0-cp34-win_amd64</a></li>"""

@@ -46,7 +46,7 @@ def windows_startup(destination, temp_folder, params=None, fLOG=print):
         to prepare a machine for a datascientist on Windows::
 
             from pymyinstall.startup import windows_startup
-            windows_startup(r"d:\datascientist", r"d:\temp\datascientist", fLOG=print)
+            windows_startup(r"d:\\datascientist", r"d:\\temp\\datascientist", fLOG=print)
 
     .. versionadded:: 1.1
     """

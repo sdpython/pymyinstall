@@ -26,9 +26,9 @@ def patch_shebang_line(fname, pad=b' ', fLOG=print):
     @return                 boolean, True if patched, False otherwise
     """
     if sys.version_info[0] == 2:
-        shebang_line = re.compile(r"(#!.+pythonw?\.exe)")  # Python2.7
+        shebang_line = re.compile(r"(#!.+pythonw?\\.exe)")  # Python2.7
     else:
-        shebang_line = re.compile(b"(#!.+pythonw?\.exe)")  # Python3+
+        shebang_line = re.compile(b"(#!.+pythonw?\\.exe)")  # Python3+
 
     with open(fname, 'rb') as fh:
         content = fh.read()
@@ -159,7 +159,7 @@ def get_gcc_version(path):
 
 def get_r_version(path):
     """Return version of the R installed in *path*"""
-    return exec_shell_cmd('dir ..\README.R*', path).splitlines()[-3].split("-")[-1]
+    return exec_shell_cmd('dir ..\\README.R*', path).splitlines()[-3].split("-")[-1]
 
 
 def get_julia_version(path):
@@ -353,7 +353,7 @@ def register(target, current=True):
     pythonw = osp.abspath(osp.join(target, 'pythonw.exe'))
     spyder = osp.abspath(osp.join(target, os.pardir, 'Spyder.exe'))
     if not osp.isfile(spyder):
-        spyder = '%s" "%s\Scripts\spyder' % (pythonw, target)
+        spyder = '%s" "%s\\Scripts\\spyder' % (pythonw, target)
     winreg.SetValueEx(winreg.CreateKey(root, KEY_C2 % ("", "open")),
                       "", 0, winreg.REG_SZ, '"%s" "%%1" %%*' % python)
     winreg.SetValueEx(winreg.CreateKey(root, KEY_C2 % ("NoCon", "open")),
@@ -362,11 +362,11 @@ def register(target, current=True):
                       "", 0, winreg.REG_SZ, '"%s" "%%1" %%*' % python)
     winreg.SetValueEx(winreg.CreateKey(root, KEY_C2 % ("", EWI)),
                       "", 0, winreg.REG_SZ,
-                      '"%s" "%s\Lib\idlelib\idle.pyw" -n -e "%%1"'
+                      '"%s" "%s\\Lib\\idlelib\\idle.pyw" -n -e "%%1"'
                       % (pythonw, target))
     winreg.SetValueEx(winreg.CreateKey(root, KEY_C2 % ("NoCon", EWI)),
                       "", 0, winreg.REG_SZ,
-                      '"%s" "%s\Lib\idlelib\idle.pyw" -n -e "%%1"'
+                      '"%s" "%s\\Lib\\idlelib\\idle.pyw" -n -e "%%1"'
                       % (pythonw, target))
     winreg.SetValueEx(winreg.CreateKey(root, KEY_C2 % ("", EWS)),
                       "", 0, winreg.REG_SZ, '"%s" "%%1"' % spyder)
@@ -400,21 +400,21 @@ def register(target, current=True):
     '''
     short_version = utils.get_python_infos(target)[0]
     long_version = utils.get_python_long_version(target)
-    key_core = (KEY_S1 % short_version) + r'\%s'
+    key_core = (KEY_S1 % short_version) + r'\\%s'
     winreg.SetValueEx(winreg.CreateKey(root, key_core % 'InstallPath'),
                       "", 0, winreg.REG_SZ, target)
     winreg.SetValueEx(winreg.CreateKey(root,
-                                       key_core % r'InstallPath\InstallGroup'),
+                                       key_core % r'InstallPath\\InstallGroup'),
                       "", 0, winreg.REG_SZ, "Python %s" % short_version)
     winreg.SetValueEx(winreg.CreateKey(root, key_core % 'Modules'),
                       "", 0, winreg.REG_SZ, "")
     winreg.SetValueEx(winreg.CreateKey(root, key_core % 'PythonPath'),
                       "", 0, winreg.REG_SZ,
-                      r"%s\Lib;%s\DLLs" % (target, target))
+                      r"%s\\Lib;%s\\DLLs" % (target, target))
     winreg.SetValueEx(winreg.CreateKey(root,
-                                       key_core % r'Help\Main Python Documentation'),
+                                       key_core % r'Help\\Main Python Documentation'),
                       "", 0, winreg.REG_SZ,
-                      r"%s\Doc\python%s.chm" % (target, long_version))
+                      r"%s\\Doc\\python%s.chm" % (target, long_version))
     '''
 
     # Create start menu entries for all WinPython launchers
@@ -439,7 +439,7 @@ def unregister(target, current=True):
     # Registry entries
     root = winreg.HKEY_CURRENT_USER if current else winreg.HKEY_LOCAL_MACHINE
     short_version = utils.get_python_infos(target)[0]
-    key_core = (KEY_S1 % short_version) + r'\%s'
+    key_core = (KEY_S1 % short_version) + r'\\%s'
     for key in (
         # Drop support
         KEY_DROP1 % "", KEY_DROP1 % "NoCon", KEY_DROP1 % "Compiled",
@@ -463,11 +463,11 @@ def unregister(target, current=True):
                 # Descriptions
                 KEY_D % "NoCon", KEY_D % "Compiled", KEY_D % "",
                 # PythonCore
-                key_core % r'InstallPath\InstallGroup',
+                key_core % r'InstallPath\\InstallGroup',
                 key_core % 'InstallPath',
                 key_core % 'Modules',
                 key_core % 'PythonPath',
-                key_core % r'Help\Main Python Documentation',
+                key_core % r'Help\\Main Python Documentation',
                 key_core % 'Help',
                 KEY_S1 % short_version, KEY_S0, KEY_S,
     ):
@@ -476,7 +476,7 @@ def unregister(target, current=True):
             winreg.DeleteKey(root, key)
         except WindowsError:
             rootkey = 'HKEY_CURRENT_USER' if current else 'HKEY_LOCAL_MACHINE'
-            print(r'Unable to remove %s\%s' % (rootkey, key), file=sys.stderr)
+            print(r'Unable to remove %s\\%s' % (rootkey, key), file=sys.stderr)
 
     # Start menu shortcuts
     for path, desc, fname in _get_shortcut_data(target, current=current):

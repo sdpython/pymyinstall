@@ -19,11 +19,11 @@ before_script:
   - if [ ${VERSION} == "2.7" ] then cd dist_module27 fi
   - if [ ${VERSION} == "2.7" ] then pip install backports.shutil_get_terminal_size fi
 script:
-  - { CMD: "python -u setup.py unittests", NAME: "UT" }
-  - { CMD: "python -u setup.py unittests_LONG", NAME: "UT_LONG" }
-  - { CMD: "python -u setup.py unittests -e \".*SKIP.*base.*\"", NAME: "UT_SKIP_BASE" }
-  - { CMD: "python -u setup.py unittests -e \".*SKIP.*pyquickhelper.*\"", NAME: "UT_SKIP_PYQUICKHELPER" }
-  - { CMD: "python -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE" }
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests", NAME: "UT" }
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests_LONG", NAME: "UT_LONG" }
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*base.*\"", NAME: "UT_SKIP_BASE" }
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*pyquickhelper.*\"", NAME: "UT_SKIP_PYQUICKHELPER" }
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE" }
 after_script:
   - python setup.py bdist_wheel
   - if [ ${VERSION} == "2.7" and ${DIST} != "conda" ] then copy dist\*.whl ..\..\..\local_pypi\local_pypi_server fi
