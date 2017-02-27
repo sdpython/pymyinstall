@@ -601,7 +601,7 @@ def ensae_set():
         # 2017-01/02
         #
         ModuleInstall("tensorflow", "wheel", usage="DATA/ML",
-                      purpose="An open-source software library for Machine Intelligence"),
+                      purpose="Deep Learning from Google"),
         ModuleInstall("edward", "pip", usage="DATA/ML",
                       purpose="Edward is a Python library for probabilistic modeling, inference, and criticism"),
         ModuleInstall("python_Levenshtein", "wheel", mname="Levenshtein",
@@ -610,6 +610,9 @@ def ensae_set():
                       purpose="Fuzzy string matching in python"),
         ModuleInstall("nbdime", "pip",
                       purpose="Comparison of notebooks"),
+        ModuleInstall("cntk", "wheel", usage="DATA/ML",
+                      overwrite="https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0.beta12.0-cp{0}{1}-cp{0}{1}m-win_amd64.whl",
+                      purpose="Deep Learning from Microsoft"),
     ]
 
     if sys.version_info[0] == 2:

@@ -627,6 +627,12 @@ def extended_set():
                       purpose="Prince is a factor analysis library for datasets that fit in memory."),
         ModuleInstall('pivottablejs', 'pip',
                       purpose="PivotTable.js integration for Jupyter/IPython Notebook."),
+        #
+        # January 2017
+        #
+        ModuleInstall('pystan', 'pip', usage="DATA/ML",
+                      purpose="PyStan provides an interface to Stan, a package for Bayesian inference using " +
+                      "the No-U-Turn sampler, a variant of Hamiltonian Monte Carlo."),
     ]
 
     if sys.platform.startswith("win"):

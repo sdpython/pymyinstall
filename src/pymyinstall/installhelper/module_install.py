@@ -66,7 +66,7 @@ class ModuleInstall:
     def __init__(self, name, kind="pip", gitrepo=None, mname=None, fLOG=print,
                  version=None, script=None, index_url=None, deps=None,
                  purpose=None, usage=None, web=None, source=None, custom=None,
-                 branch="master", pip_options=None):
+                 branch="master", pip_options=None, overwrite=None):
         """
         constructor
 
@@ -90,9 +90,10 @@ class ModuleInstall:
                                     ``setup.py build`` and ``setup.py install``
         @param      branch          only necessary for install process with github
         @param      pip_options     additional options for pip (list)
+        @param      overwrite       overwrite the location of the wheel
 
         .. versionchanged:: 1.1
-            Parameters *source*, *custom*, *branch*, *pip_options* were added.
+            Parameters *source*, *custom*, *branch*, *pip_options*, *overwrite* were added.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -113,6 +114,7 @@ class ModuleInstall:
         self.custom = custom
         self.branch = branch
         self.pip_options = pip_options
+        self.overwrite = overwrite
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -593,7 +595,12 @@ class ModuleInstall:
                 # nothing to download, you should use pip
                 return None
             else:
-                if kind == "wheel":
+                if hasattr(self, "overwrite") and self.overwrite is not None:
+                    over = self.overwrite.format(*sys.version_info[0:2])
+                    url, whl = over, over.split("/")[-1]
+                    self.existing_version = "{0}{1}".format(
+                        *sys.version_info[0:2])
+                elif kind == "wheel":
                     url, whl = self.get_exewheel_url_link(
                         file_save=file_save, wheel=True)
                 else:
@@ -606,7 +613,8 @@ class ModuleInstall:
 
                     self.fLOG("downloading", whl)
                     # self.fLOG("url", url)
-                    self.existing_version = self.extract_version(whl)
+                    if self.existing_version is None:
+                        self.existing_version = self.extract_version(whl)
                     req = urllib_request.Request(
                         url, headers={
                             'User-agent': default_user_agent})
@@ -1266,14 +1274,8 @@ class ModuleInstall:
 
         return ret
 
-    def update(self,
-               force_kind=None,
-               force=False,
-               temp_folder=".",
-               log=False,
-               options=None,
-               deps=False,
-               source=None):
+    def update(self, force_kind=None, force=False, temp_folder=".",
+               log=False, options=None, deps=False, source=None):
         """
         update the package if necessary, we use ``pip install <module_name> --upgrade --no-deps``,
 
