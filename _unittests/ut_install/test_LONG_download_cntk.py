@@ -45,7 +45,7 @@ from pyquickhelper.loghelper import fLOG
 from src.pymyinstall.packaged import find_module_install
 
 
-class TestDownloadCntk(unittest.TestCase):
+class TestLONGDownloadCntk(unittest.TestCase):
 
     def test_install_cntk(self):
         fLOG(
