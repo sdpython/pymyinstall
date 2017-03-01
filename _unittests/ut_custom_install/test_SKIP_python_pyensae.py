@@ -49,10 +49,7 @@ from pyquickhelper.pycode import get_temp_folder
 class TestDownloadPythonPyEnsae(unittest.TestCase):
 
     def test_install_python_pyensae(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
             __file__, "temp_python%s_pyensae" % vers, clean=False)

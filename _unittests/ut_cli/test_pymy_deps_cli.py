@@ -80,9 +80,11 @@ class TestPyMyDepsCli(unittest.TestCase):
                 # failing on Python 2.7
                 return
             if "pandas" not in out:
-                raise Exception(out)
+                raise Exception(
+                    "(1)CMD:\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
             if "['pandas']" not in out:
-                raise Exception(out)
+                raise Exception(
+                    "(2)CMD:\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
 
 
 if __name__ == "__main__":

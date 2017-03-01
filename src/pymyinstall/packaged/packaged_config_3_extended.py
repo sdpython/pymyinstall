@@ -479,8 +479,6 @@ def extended_set():
         ModuleInstall(
             "chardet", "pip", usage="WEB",
             purpose="Universal encoding detector."),
-        ModuleInstall("bleach", "pip", usage="WEB",
-                      purpose="An easy whitelist-based HTML-sanitizing tool."),
         ModuleInstall("grappelli_safe", "pip", usage="WEB",
                       purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency for the Mezzanine CMS for Django."),
         ModuleInstall("filebrowser_safe", "pip", usage="WEB",

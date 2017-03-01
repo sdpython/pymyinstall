@@ -66,7 +66,7 @@ class ModuleInstall:
     def __init__(self, name, kind="pip", gitrepo=None, mname=None, fLOG=print,
                  version=None, script=None, index_url=None, deps=None,
                  purpose=None, usage=None, web=None, source=None, custom=None,
-                 branch="master", pip_options=None, overwrite=None):
+                 branch="master", pip_options=None, overwrite=None, post=None):
         """
         constructor
 
@@ -91,9 +91,11 @@ class ModuleInstall:
         @param      branch          only necessary for install process with github
         @param      pip_options     additional options for pip (list)
         @param      overwrite       overwrite the location of the wheel
+        @param      post            instructions post installation (look for this parameter
+                                    in the code to see what is supported)
 
         .. versionchanged:: 1.1
-            Parameters *source*, *custom*, *branch*, *pip_options*, *overwrite* were added.
+            Parameters *source*, *custom*, *branch*, *pip_options*, *overwrite*, *post* were added.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -115,6 +117,7 @@ class ModuleInstall:
         self.branch = branch
         self.pip_options = pip_options
         self.overwrite = overwrite
+        self.post_installation = post
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -883,7 +886,7 @@ class ModuleInstall:
 
     def install(self, force_kind=None, force=False, temp_folder=".",
                 log=False, options=None, deps=False, source=None,
-                custom=None):
+                custom=None, post=None):
         """
         install the package
 
@@ -896,6 +899,7 @@ class ModuleInstall:
         @param      source          overwrite the source of the wheels,
                                     see @see me get_exewheel_url_link2
         @param      custom          overwrite parameters in ``self.custom``
+        @param      post            instructions post installation (see the cnostructor for more help)
         @return                     boolean
 
         The options mentioned in parameter ``options``
@@ -912,9 +916,12 @@ class ModuleInstall:
             Exception were changed from ``Exception`` to ``InstallError``.
             Parameter *source* was added, if None, it is overwritten by *self.source*.
             Parameter *custom* was added, it works the same as *source*.
+            Parameter *post* was added.
         """
         if source is None:
             source = self.source
+        if post is None:
+            post = self.post_installation
         if not force and force_kind is None and is_conda_distribution():
             try:
                 return self.install(force_kind="conda", force=True, temp_folder=temp_folder,
@@ -1272,7 +1279,39 @@ class ModuleInstall:
                 raise InstallError(
                     "** unable to install module {0}, unable to import it".format(self.name))
 
+        if ret is not None and post is not None:
+            ret = self.run_post_installation(post)
+
         return ret
+
+    def run_post_installation(self, post):
+        """
+        Run instructions post installation
+
+        @param      post        dictionary, instructions post installation
+        @return                 boolean
+
+        Example:
+
+        ::
+
+            post = dict(cmd_python="Scripts\\\\pywin32_postinstall.py -install")
+
+        .. versionadded:: 1.1
+        """
+        if not isinstance(post, dict):
+            raise TypeError("exepcting a dictionary")
+        for k, v in post.items():
+            if k == "cmd_python":
+                exe = os.path.abspath(sys.executable)
+                cmd = '"{0}" {1}'.format(exe, v)
+                out, err = run_cmd(cmd, wait=True, fLOG=self.fLOG)
+                if err is not None and len(err) > 0:
+                    raise InstallError(
+                        "Post installation script failed.\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+            else:
+                raise KeyError("Unable to interpret command '{0}'".format(k))
+        return True
 
     def update(self, force_kind=None, force=False, temp_folder=".",
                log=False, options=None, deps=False, source=None):

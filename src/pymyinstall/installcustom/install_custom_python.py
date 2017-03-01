@@ -47,6 +47,35 @@ def unzip7_files(filename_7z, fLOG=print, dest="."):
     return out
 
 
+def fix_fcntl_windows(path):
+    """
+    Add a file fnctl.py on Windows (only available on Linux)
+
+    @param   path       path to the python installation
+    """
+    if not sys.platform.startswith("win"):
+        raise Exception("fcntl should only be added on Windows.")
+    dest = os.path.join(path, "Lib", "fcntl.py")
+    if os.path.exists(dest):
+        # already done
+        return
+    module = """
+                def fcntl(fd, op, arg=0):
+                    return 0
+                def ioctl(fd, op, arg=0, mutable_flag=True):
+                    if mutable_flag:
+                        return 0
+                    else:
+                        return ""
+                def flock(fd, op):
+                    return
+                def lockf(fd, operation, length=0, start=0, whence=0):
+                    return
+        """.replace("                ", "")
+    with open(dest, "w") as f:
+        f.write(module)
+
+
 def install_python(temp_folder=".", fLOG=print, install=True, force_download=False,
                    version=None, modules=None, custom=False, latest=False):
     """
@@ -105,6 +134,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 "unable to find a proper version for version {0}".format(version))
         full = url.split("/")[-1]
         outfile = os.path.join(temp_folder, full)
+        fLOG("[install_python] download", url)
         local = download_file(url, outfile, fLOG=fLOG)
         if install:
             # unzip files
@@ -139,10 +169,13 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                         "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
                 from ..win_installer.win_patch import win_patch_paths
-                fLOG("Patch scripts .exe")
+                fLOG("[install_python] Patch scripts .exe")
                 patched = win_patch_paths(temp_folder, pyexe, fLOG=fLOG)
                 for pat in patched:
                     fLOG("  - ", pat)
+
+            # fix fcntl
+            fix_fcntl_windows(temp_folder)
 
             # modules
             if modules is not None:
@@ -176,6 +209,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                         "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
                 fLOG(out)
 
+                fLOG("[install_python] modules")
                 cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'download\', ' +
                        'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe, modules)
                 out, err = run_cmd(

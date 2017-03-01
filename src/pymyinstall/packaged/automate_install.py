@@ -172,12 +172,11 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     errors = []
     schedule = []
     for mod in modules:
-        if verbose:
-            fLOG("[update-check]", mod.name)
-
         is_installed = mod.is_installed_version()
         if not is_installed:
             continue
+        if verbose:
+            fLOG("[update-check] ##", mod.name, "## [begin]")
 
         try:
             has_update = mod.has_update()
@@ -186,6 +185,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
             fLOG("    - unable to check updates", e)
             has_update = False
         if not has_update:
+            if verbose:
+                fLOG("[update-check] ##", mod.name, "## [end no update]")
             continue
 
         ver = mod.get_pypi_version()
@@ -210,6 +211,9 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
                 errors.append((mod, e))
             if b:
                 again.append(m)
+
+        if verbose:
+            fLOG("[update-check] ##", mod.name, "## [end]")
 
     if schedule_only:
         return schedule
@@ -312,7 +316,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             # already done
             continue
         if verbose:
-            fLOG("[install-check]", mod.name)
+            fLOG("[install-check] ##", mod.name, "## [begin]")
         if force or not mod.is_installed_version():
             schedule.append(mod)
             if not schedule_only:
@@ -321,11 +325,12 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                     .format(mod.name, ver, mod.kind)
                 fLOG(m)
                 if deps:
-                    fLOG("[install-check-dep]", mod.name)
+                    fLOG("[install-check-dep] ##", mod.name, "## [begin]")
                     install_module_deps(mod.name, temp_folder=temp_folder,
                                         fLOG=fLOG, verbose=verbose, deps=deps, deep_deps=deep_deps,
                                         _memory=_memory, source=source, download_only=download_only,
                                         force=force)
+                    fLOG("[install-check-dep] ##", mod.name, "## [end]")
                 else:
                     try:
                         if download_only:
@@ -343,6 +348,8 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                     if b:
                         again.append(m)
                         installed.append(mod)
+        if verbose:
+            fLOG("[install-check] ##", mod.name, "## [end]")
         _memory[mod.name] = True
 
     if schedule_only:

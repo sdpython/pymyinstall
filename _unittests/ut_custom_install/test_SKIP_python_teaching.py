@@ -46,17 +46,17 @@ from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 
 
-class TestDownloadPythonPyQuickHelper (unittest.TestCase):
+class TestDownloadPythonTeaaching(unittest.TestCase):
 
-    def test_install_python_pyquickhelper(self):
+    def test_install_python_teaching(self):
         fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
-            __file__, "temp_python%s_pyquickhelper" % vers, clean=False)
+            __file__, "temp_python%s_teaching" % vers, clean=False)
 
         if sys.platform.startswith("win"):
             install_python(install=True, temp_folder=temp,
-                           fLOG=fLOG, modules="pyquickhelper", custom=True, latest=True)
+                           fLOG=fLOG, modules="ensae_teaching_cs", custom=True, latest=True)
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
             if not os.path.exists(pyt):

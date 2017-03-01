@@ -35,8 +35,6 @@ def small_set():
         ModuleInstall(
             "python-dateutil", "pip", "dateutil", purpose="helpers to manipulate dates"),
         ModuleInstall(
-            "html5lib", "pip", purpose="pure-python library for parsing HTML"),
-        ModuleInstall(
             "webencodings", "pip", purpose="Character encoding aliases for legacy web content"),
         ModuleInstall("beautifulsoup4", "pip", mname="bs4",
                       purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for " +
@@ -64,6 +62,8 @@ def small_set():
         ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
         ModuleInstall("pywin32", "wheel2",
                       mname="win32com", purpose="call Windows DLL",
+                      post=dict(
+                          cmd_python="Scripts\\pywin32_postinstall.py -install"),
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall("pywin32-ctypes", "pip", mname="win32ctypes",
                       purpose="call Windows DLL", usage="WINDOWS") if sys.platform.startswith("win") else None,
@@ -171,14 +171,26 @@ def small_set():
         # ipython
         ModuleInstall("pandocfilters", "pip",
                       purpose="Utilities for writing pandoc filters in python"),
+        ModuleInstall("pandoc-attributes", "pip", mname="pandocattributes",
+                      purpose="An Attribute class to be used with pandocfilters"),
         ModuleInstall("win_unicode_console", "pip",
                       "Enable Unicode input and display when running Python from Windows console."),
         ModuleInstall(
+            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
+        ModuleInstall(
+            "html5lib", "pip", purpose="pure-python library for parsing HTML"),
+        ModuleInstall("bleach", "pip", usage="WEB",
+                      purpose="An easy whitelist-based HTML-sanitizing tool."),
+        ModuleInstall(
+            "testpath", "pip", purpose="Test utilities for code working with files and commands"),
+        ModuleInstall(
             "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
+            "pickleshare", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
+            "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
+        ModuleInstall(
+            "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
             "jupyter_core", "pip", purpose="Jupyter Core", usage="JUPYTER"),
         ModuleInstall(
@@ -197,18 +209,7 @@ def small_set():
         ModuleInstall("nbbrowserpdf", "pip",
                       purpose="LaTeX-free PDF generation from Jupyter Notebooks", usage="JUPYTER"),
         ModuleInstall(
-            "nbpresent", "pip", purpose="Next generation slides from Jupyter Notebooks", usage="JUPYTER"),
-        ModuleInstall("pandoc-attributes", "pip", mname="pandocattributes",
-                      purpose="An Attribute class to be used with pandocfilters"),
-        ModuleInstall(
             "notedown", "pip", purpose="Convert markdown to IPython notebook.", usage="JUPYTER"),
-        ModuleInstall("pexpect", "pip",
-                      purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.",
-                      usage="JUPYTER"),
-        ModuleInstall(
-            "pickleshare", "pip", purpose="IPython, dependency", usage="JUPYTER"),
-        ModuleInstall(
-            "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
@@ -229,6 +230,9 @@ def small_set():
         ModuleInstall(
             "ptyprocess", "pip", purpose="dependency for the terminado, Run a subprocess in a pseudo terminal",
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+        ModuleInstall("pexpect", "pip",
+                      purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications (needed by metakernel).",
+                      usage="JUPYTER"),
         ModuleInstall(
             "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets",
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
@@ -247,6 +251,8 @@ def small_set():
             usage="JUPYTER"),
         ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
+        ModuleInstall(
+            "nbpresent", "pip", purpose="Next generation slides from Jupyter Notebooks", usage="JUPYTER"),
         ModuleInstall(
             "jupyter-console", "pip", mname="jupyter_console", purpose="Jupyter console, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
