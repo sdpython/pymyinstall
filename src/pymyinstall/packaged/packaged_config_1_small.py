@@ -43,6 +43,7 @@ def small_set():
                       "iterating, searching, and modifying the parse tree."),
         ModuleInstall(
             "coverage", "pip", purpose="measure the coverage of unit tests"),
+        ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "codecov", "pip", purpose="submit coverage report to codecov"),
         ModuleInstall("nose", "pip", purpose="run unit tests"),
@@ -70,7 +71,6 @@ def small_set():
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
-        ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
@@ -124,8 +124,6 @@ def small_set():
             "wcwidth", "pip", purpose="Measures number of Terminal column cells of wide-character codes", usage="JUPYTER"),
         ModuleInstall(
             "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
-        ModuleInstall(
-            "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall("docutils", "pip",
                       purpose="interpret RST format", usage="SPHINX"),
         ModuleInstall(
@@ -171,8 +169,12 @@ def small_set():
         ModuleInstall(
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
         # ipython
+        ModuleInstall("pandocfilters", "pip",
+                      purpose="Utilities for writing pandoc filters in python"),
         ModuleInstall("win_unicode_console", "pip",
                       "Enable Unicode input and display when running Python from Windows console."),
+        ModuleInstall(
+            "traitlets", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
             "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
@@ -196,8 +198,6 @@ def small_set():
                       purpose="LaTeX-free PDF generation from Jupyter Notebooks", usage="JUPYTER"),
         ModuleInstall(
             "nbpresent", "pip", purpose="Next generation slides from Jupyter Notebooks", usage="JUPYTER"),
-        ModuleInstall("pandocfilters", "pip",
-                      purpose="Utilities for writing pandoc filters in python"),
         ModuleInstall("pandoc-attributes", "pip", mname="pandocattributes",
                       purpose="An Attribute class to be used with pandocfilters"),
         ModuleInstall(
@@ -206,17 +206,17 @@ def small_set():
                       purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications.",
                       usage="JUPYTER"),
         ModuleInstall(
+            "pickleshare", "pip", purpose="IPython, dependency", usage="JUPYTER"),
+        ModuleInstall(
+            "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
+        ModuleInstall(
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
             "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="JUPYTER"),
         ModuleInstall(
             "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="JUPYTER"),
         ModuleInstall(
-            "pickleshare", "pip", purpose="IPython, dependency", usage="JUPYTER"),
-        ModuleInstall(
             "path.py", "pip", mname="path", purpose="IPython, dependency", usage="JUPYTER"),
-        ModuleInstall(
-            "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
             "micropython-libc", "pip", mname="libc", purpose="dependency for ptyprocess, MicroPython FFI helper module",
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,

@@ -129,10 +129,10 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
     .. exref::
         :title: Run a program using the command line)
 
-        @code
-        from pyquickhelper.loghelper import run_cmd
-        out,err = run_cmd( "python setup.py install", wait=True)
-        @endcode
+        ::
+
+            from pyquickhelper.loghelper import run_cmd
+            out,err = run_cmd( "python setup.py install", wait=True)
 
     If you are using this function to run git function, parameter ``shell`` must be True.
 

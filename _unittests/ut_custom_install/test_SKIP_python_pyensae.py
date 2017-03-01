@@ -1,5 +1,5 @@
 """
-@brief      test log(time=129s)
+@brief      test log(time=2290s)
 
 skip this test for regular run
 """
@@ -43,6 +43,7 @@ except ImportError:
 
 from src.pymyinstall.installcustom import install_python
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 
 
 class TestDownloadPythonPyEnsae(unittest.TestCase):
@@ -52,18 +53,13 @@ class TestDownloadPythonPyEnsae(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        fold = os.path.abspath(os.path.split(__file__)[0])
         vers = "%d%d" % sys.version_info[:2]
-        temp = os.path.join(fold, "temp_python%s_pyensae" % vers)
-        if not os.path.exists(temp):
-            os.mkdir(temp)
-        for _ in os.listdir(temp):
-            if os.path.isfile(os.path.join(temp, _)):
-                os.remove(os.path.join(temp, _))
+        temp = get_temp_folder(
+            __file__, "temp_python%s_pyensae" % vers, clean=False)
 
         if sys.platform.startswith("win"):
             install_python(install=True, temp_folder=temp,
-                           fLOG=fLOG, modules="ensae")
+                           fLOG=fLOG, modules="pyensae", custom=True, latest=True)
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
             if not os.path.exists(pyt):
