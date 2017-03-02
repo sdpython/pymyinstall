@@ -95,6 +95,24 @@ def fix_termios_windows(path):
         f.write(module)
 
 
+def fix_resource_windows(path):
+    """
+    Add a file resource.py on Windows (only available on Linux)
+
+    @param   path       path to the python installation
+    """
+    if not sys.platform.startswith("win"):
+        raise Exception("fcntl should only be added on Windows.")
+    dest = os.path.join(path, "Lib", "resource.py")
+    if os.path.exists(dest):
+        # already done
+        return
+    module = """
+        """.replace("                ", "")
+    with open(dest, "w") as f:
+        f.write(module)
+
+
 def install_python(temp_folder=".", fLOG=print, install=True, force_download=False,
                    version=None, modules=None, custom=False, latest=False):
     """
@@ -196,6 +214,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             # fix fcntl
             fix_fcntl_windows(temp_folder)
             fix_termios_windows(temp_folder)
+            fix_resource_windows(temp_folder)
 
             # modules
             if modules is not None:
