@@ -63,7 +63,7 @@ def small_set():
         ModuleInstall("pywin32", "wheel2",
                       mname="win32com", purpose="call Windows DLL",
                       post=dict(
-                          cmd_python="Scripts\\pywin32_postinstall.py -install"),
+                          cmd_python="{0}\\Scripts\\pywin32_postinstall.py -install"),
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall("pywin32-ctypes", "pip", mname="win32ctypes",
                       purpose="call Windows DLL", usage="WINDOWS") if sys.platform.startswith("win") else None,
@@ -179,7 +179,7 @@ def small_set():
             "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
             "html5lib", "pip", purpose="pure-python library for parsing HTML"),
-        ModuleInstall("bleach", "pip", usage="WEB",
+        ModuleInstall("bleach", "github", "mozilla", usage="WEB",
                       purpose="An easy whitelist-based HTML-sanitizing tool."),
         ModuleInstall(
             "testpath", "pip", purpose="Test utilities for code working with files and commands"),

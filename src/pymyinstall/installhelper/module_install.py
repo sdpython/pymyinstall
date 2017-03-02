@@ -152,11 +152,10 @@ class ModuleInstall:
         @param      rst_link    if True, add rst_link, license, classifier
         @return                 dictionary
         """
-        r = dict(name=self.name, kind=self.kind, gitrepo=self.gitrepo,
-                 version=self.version, mname=self.mname,
-                 script=self.script, deps=self.deps,
-                 index_url=self.index_url, purpose=self.purpose,
-                 usage=self.usage, web=self.web)
+        r = dict(name=self.name, kind=self.kind, gitrepo=self.gitrepo, version=self.version,
+                 mname=self.mname, script=self.script, deps=self.deps, index_url=self.index_url,
+                 purpose=self.purpose, usage=self.usage, web=self.web,
+                 post=None if self.post_installation is None else self.post_installation.copy())
         if rst_link:
             r["rst_link"] = "`{0} <{1}>`_".format(self.name, self.web)
             r["license"] = self.get_installed_license()
@@ -1280,7 +1279,10 @@ class ModuleInstall:
                     "** unable to install module {0}, unable to import it".format(self.name))
 
         if ret is not None and post is not None:
+            self.fLOG("run_post_installation", post, self.post_installation)
             ret = self.run_post_installation(post)
+        else:
+            self.fLOG("no run_post_installation", post, self.post_installation)
 
         return ret
 
@@ -1304,7 +1306,7 @@ class ModuleInstall:
         for k, v in post.items():
             if k == "cmd_python":
                 exe = os.path.abspath(sys.executable)
-                cmd = '"{0}" {1}'.format(exe, v)
+                cmd = '"{0}" {1}'.format(exe, v.format(os.path.dirname(exe)))
                 out, err = run_cmd(cmd, wait=True, fLOG=self.fLOG)
                 if err is not None and len(err) > 0:
                     raise InstallError(

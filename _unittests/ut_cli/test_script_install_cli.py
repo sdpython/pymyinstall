@@ -106,7 +106,7 @@ class TestScriptInstallCli(unittest.TestCase):
         fLOG(out)
         fLOG("---")
         fLOG(err)
-        if "[install-check] flake8" not in out and sys.version_info[0] > 2:
+        if "[install-check] ## flake8 ## [begin]" not in out and sys.version_info[0] > 2:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))

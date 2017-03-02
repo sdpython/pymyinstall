@@ -10,23 +10,22 @@ def minimal_set():
     """
     list of modules to add to python to get a minimal python
     """
-    names = ["pipdeptree"
-             "virtualenv",
-             "six",
-             "wheel",
-             "pep8",
-             "autopep8",
-             "mccabe",
-             "pyflakes",
+    names = ["autopep8",
              "flake8",
              'markupsafe',
+             "mccabe",
+             "pep8",
+             "pipdeptree",
              "psutil",
+             "pyflakes",
+             "pythonnet" if sys.platform.startswith("win") else None,
+             "pywin32" if sys.platform.startswith("win") else None,
+             "pywin32-ctypes" if sys.platform.startswith("win") else None,
+             "six",
+             "virtualenv",
+             "wheel",
+             "winshell" if sys.platform.startswith("win") else None,
              ]
-
-    if sys.platform.startswith("win"):
-        names.append("pywin32")  # pypiwin32
-        names.append("winshell")
-        names.append("pythonnet")
 
     from .automate_install import find_module_install
     return [find_module_install(_) for _ in names if _ is not None]

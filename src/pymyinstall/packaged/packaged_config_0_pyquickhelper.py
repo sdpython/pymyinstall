@@ -91,7 +91,7 @@ def pyquickhelper_set():
         "python-jenkins",
         "pytz",
         "pywin32" if sys.platform.startswith("win") else None,
-        "pywin32_ctypes" if sys.platform.startswith("win") else None,
+        "pywin32-ctypes" if sys.platform.startswith("win") else None,
         "pyzmq",
         "qtconsole",
         "requests",
