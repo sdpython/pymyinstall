@@ -1272,17 +1272,16 @@ class ModuleInstall:
                             f.write("\n")
                             f.write(full)
 
+        if ret is not None and post is not None:
+            self.fLOG("run_post_installation [begin]", post)
+            ret = self.run_post_installation(post)
+            self.fLOG("run_post_installation [end]")
+
         if ret is not None and ret:
             # we check the module was properly installed
             if not self.is_installed_local_cmd():
                 raise InstallError(
                     "** unable to install module {0}, unable to import it".format(self.name))
-
-        if ret is not None and post is not None:
-            self.fLOG("run_post_installation", post, self.post_installation)
-            ret = self.run_post_installation(post)
-        else:
-            self.fLOG("no run_post_installation", post, self.post_installation)
 
         return ret
 
@@ -1302,7 +1301,7 @@ class ModuleInstall:
         .. versionadded:: 1.1
         """
         if not isinstance(post, dict):
-            raise TypeError("exepcting a dictionary")
+            raise TypeError("expecting a dictionary")
         for k, v in post.items():
             if k == "cmd_python":
                 exe = os.path.abspath(sys.executable)
@@ -1311,6 +1310,7 @@ class ModuleInstall:
                 if err is not None and len(err) > 0:
                     raise InstallError(
                         "Post installation script failed.\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+                self.fLOG("OUT:\n{0}".format(out))
             else:
                 raise KeyError("Unable to interpret command '{0}'".format(k))
         return True

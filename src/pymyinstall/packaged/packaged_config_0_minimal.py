@@ -18,6 +18,7 @@ def minimal_set():
              "pipdeptree",
              "psutil",
              "pyflakes",
+             "pycodestyle",
              "pythonnet" if sys.platform.startswith("win") else None,
              "pywin32" if sys.platform.startswith("win") else None,
              "pywin32-ctypes" if sys.platform.startswith("win") else None,
