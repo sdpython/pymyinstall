@@ -42,7 +42,7 @@ except ImportError:
 
 
 from src.pymyinstall.installcustom import install_python
-from pyquickhelper.loghelper import fLOG
+from pyquickhelper.loghelper import fLOG, CustomLog
 
 
 class TestDownloadPython (unittest.TestCase):
@@ -62,7 +62,8 @@ class TestDownloadPython (unittest.TestCase):
                 os.remove(os.path.join(temp, _))
 
         if sys.platform.startswith("win"):
-            install_python(install=True, temp_folder=temp, fLOG=fLOG)
+            clog = CustomLog(temp)
+            install_python(install=True, temp_folder=temp, fLOG=clog)
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
             if not os.path.exists(pyt):
