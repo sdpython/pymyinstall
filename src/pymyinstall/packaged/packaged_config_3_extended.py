@@ -85,6 +85,8 @@ def extended_set():
             'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation", usage="DATA/ML"),
         ModuleInstall('fastcluster', 'wheel',
                       purpose="clustering, AHC, ... (issue on Linux and Anaconda)", usage="DATA/ML"),
+        ModuleInstall('pyclustering', 'pip',
+                      purpose="many kinds of clustering (Optics, DBScan, x-means, ...)", usage="DATA/ML"),
         ModuleInstall(
             'pycosat', 'wheel', purpose="PicoSAT is a popular SAT solver written by Armin Biere in pure C."),
         ModuleInstall('pyshp', 'github', 'GeospatialPython', mname='shapefile',
@@ -631,6 +633,11 @@ def extended_set():
         ModuleInstall('pystan', 'pip', usage="DATA/ML",
                       purpose="PyStan provides an interface to Stan, a package for Bayesian inference using " +
                       "the No-U-Turn sampler, a variant of Hamiltonian Monte Carlo."),
+        ModuleInstall('fbprophet', 'pip', usage="DATA/ML",
+                      purpose="Prophet is a procedure for forecasting time series data. It is based on an additive " +
+                      "model where non-linear trends are fit with yearly and weekly seasonality, plus holidays. " +
+                      "It works best with daily periodicity data with at least one year of historical data. " +
+                      "Prophet is robust to missing data, shifts in the trend, and large outliers."),
     ]
 
     if sys.platform.startswith("win"):
