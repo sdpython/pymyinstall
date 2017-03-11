@@ -16,6 +16,7 @@ def ensae_teaching_cs_set():
         "bayespy",
         "beautifulsoup4",
         "bokeh",
+        "branca",
         "cartopy",
         "cloudpickle",
         "cvxopt",

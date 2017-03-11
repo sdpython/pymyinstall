@@ -129,7 +129,11 @@ def extended_set():
         ModuleInstall(
             'smopy', 'pip', purpose="OpenStreetMap image tiles in Python", usage="VIZ"),
         ModuleInstall(
-            'folium', 'pip', purpose="Make beautiful maps with Leaflet.js & Python", usage="VIZ"),
+            'branca', 'pip', purpose="", usage="VIZ"),
+        ModuleInstall('folium', 'pip', usage="VIZ",
+                      purpose="This library is a spinoff from folium, that would host the " +
+                      "non-map-specific features. It may become a HTML+JS generation " +
+                      "library in the future."),
         ModuleInstall(
             'osmapi', 'pip', purpose="Python wrapper for the OSM API", usage="VIZ"),
         ModuleInstall('geopy', 'pip',

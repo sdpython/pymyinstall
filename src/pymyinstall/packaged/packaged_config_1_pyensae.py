@@ -18,6 +18,7 @@ def pyensae_set():
         "antlr4-python3-runtime",
         "azure",
         "azureml",
+        "branca",
         "colormap",
         "chardet",
         "cryptography",
