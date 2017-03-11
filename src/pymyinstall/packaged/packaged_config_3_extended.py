@@ -594,7 +594,7 @@ def extended_set():
         #
         # August, September, October, December 2016
         #
-        ModuleInstall('qinfer', 'pip', usage="DATA/ML",
+        ModuleInstall('QInfer', 'pip', mname="qinfer", usage="DATA/ML",
                       purpose="QInfer is a library using Bayesian sequential Monte Carlo for quantum parameter estimation."),
         ModuleInstall('flexx', 'pip', usage="GUI",
                       purpose="Flexx is a pure Python toolkit for creating graphical user interfaces (GUI's), " +

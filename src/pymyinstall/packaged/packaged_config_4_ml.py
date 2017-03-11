@@ -423,7 +423,7 @@ def ensae_set():
         #
         # 2016-03
         #
-        ModuleInstall("prettytable", "pip",
+        ModuleInstall("PrettyTable", "pip", mname="prettytable",
                       purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
         ModuleInstall("ruamel.yaml", "pip",
                       purpose="ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"),
@@ -437,7 +437,7 @@ def ensae_set():
                       purpose="AD3 (approximate MAP decoder with Alternating Direction Dual Decomposition)"),
         ModuleInstall("pystruct", "wheel", usage="ML", source="2",
                       purpose="Learning Structured Prediction in Python"),
-        ModuleInstall("py-earth", "wheel", mname="pyearth", usage="ML", source="2",
+        ModuleInstall("py_earth", "wheel", mname="pyearth", usage="ML", source="2",
                       purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of " +
                       "scikit-learn. The py-earth package implements Multivariate Adaptive Regression Splines using Cython and provides an " +
                       "interface that is compatible with scikit-learn's Estimator, Predictor, Transformer, and Model interfaces. For more " +
@@ -492,7 +492,7 @@ def ensae_set():
                       purpose="Python data processing framework."),
         ModuleInstall("pyamg", "wheel", usage="OPTIM",
                       purpose="PyAMG is a library of Algebraic Multigrid (AMG) solvers with a convenient Python interface."),
-        ModuleInstall("pysal", "pip", usage="MATHS",
+        ModuleInstall("PySAL", "pip", mname="pysal", usage="MATHS",
                       purpose="PySAL is an open source library of spatial analysis functions written in Python intended " +
                       "to support the development of high level applications."),
         #
@@ -511,7 +511,7 @@ def ensae_set():
                       purpose="Incremental is a small library that versions your Python projects."),
         ModuleInstall('constantly', 'pip',
                       purpose="Symbolic constants in Python"),
-        ModuleInstall('pydispatcher', 'pip',
+        ModuleInstall('PyDispatcher', 'pip', mname="pydispatcher",
                       purpose="Multi-producer-multi-consumer signal dispatching mechanism"),
         ModuleInstall('twisted', 'pip',
                       purpose="An asynchronous networking framework written in Python"),
@@ -536,8 +536,7 @@ def ensae_set():
                       purpose="imbalanced-learn is a python package offering a number of re-sampling " +
                       "techniques commonly used in datasets showing strong between-class imbalance. " +
                       "It is compatible with scikit-learn and is part of scikit-learn-contrib projects."),
-        ModuleInstall("forest-confidence-interval", "github", "scikit-learn-contrib",
-                      mname="forestci", usage="ML",
+        ModuleInstall("forestci", "pip", usage="ML",
                       purpose="Python module for calculating variance and adding confidence intervals to scikit-learn random forest regression " +
                       "or classification objects. The core functions calculate an in-bag and error bars for random forest objects"),
         ModuleInstall("polylearn", "wheel", source="2", usage="ML",
@@ -591,7 +590,7 @@ def ensae_set():
         #
         ModuleInstall("update_checker", "pip",
                       purpose="A python module that will check for package updates."),
-        ModuleInstall("tpot", "pip", usage="ML",
+        ModuleInstall("TPOT", "pip", mname="tpot", usage="ML",
                       purpose="Consider TPOT your Data Science Assistant. TPOT is a Python tool that automatically " +
                       "creates and optimizes machine learning pipelines using genetic programming."),
         ModuleInstall("category_encoders", "pip", usage="ML",

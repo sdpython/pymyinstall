@@ -57,11 +57,11 @@ class TestAllPyPiModule (unittest.TestCase):
 
         subset = {"cubehelix", "dataspyre", "ete3", "heapdict", "libpython", "natgrid", "onedrive-sdk-python",
                   "orange3", "orange3-associate", "orange3-network", "orange3-text",
-                  "py-earth", "pyexecjs", "pymc3", "pyreact", "pythonqwt", "qtpy", "xgboost"}
+                  "py-earth", "pyexecjs", "pymc3", "pyreact", "pythonqwt", "qtpy"}
 
         mods = ensae_fullset()
         mods = [_ for _ in mods if _.name in subset]
-        self._pipy_version(mods, nbmax=8)
+        self._pipy_version(mods, nbmax=15)
 
     def test_all_pipy_version(self):
         fLOG(
