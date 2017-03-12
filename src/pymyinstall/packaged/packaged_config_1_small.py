@@ -203,6 +203,10 @@ def small_set():
             "entrypoints", "pip", purpose="Discover and load entry points from installed packages.", usage="JUPYTER"),
         ModuleInstall(
             "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
+        ModuleInstall(
+            "jupyter_sphinx", "pip", purpose="Jupyter Sphinx Extensions", usage="JUPYTER"),
+        ModuleInstall(
+            "nbsphinx", "pip", purpose="nbsphinx is a Sphinx extension that provides a source parser for *.ipynb files.", usage="JUPYTER"),
         ModuleInstall("PyPDF2", "pip", purpose="PDF toolkit", usage="PDF"),
         ModuleInstall(
             "ghost.py", "pip", mname="ghost", purpose="ghost.py is a webkit web client written in python", usage="JUPYTER"),
