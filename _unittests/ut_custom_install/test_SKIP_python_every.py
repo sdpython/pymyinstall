@@ -57,7 +57,8 @@ class TestDownloadPythonEvery(unittest.TestCase):
         if sys.platform.startswith("win"):
             clog = CustomLog(temp)
             install_python(install=True, temp_folder=temp,
-                           fLOG=clog, modules="all", custom=True, latest=True)
+                           fLOG=clog, modules="all", custom=True, latest=True,
+                           download_folder=temp + "_download")
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
             if not os.path.exists(pyt):

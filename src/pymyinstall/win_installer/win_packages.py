@@ -41,7 +41,7 @@ def get_modules_version(python_path):
     if err is not None and len(err) > 0:
         if len(err.split("\n")) > 3 or \
            "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
-            raise Exception("unable to run, #lines {0}\nERR:\n{1}\nOUT:\n{2}".format(
+            raise Exception("unable to run, #lines {0}\nERR-8:\n{1}\nOUT:\n{2}".format(
                 len(err.split("\n")), err, out))
 
     lines = out.split("\n")
@@ -114,7 +114,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
         look = "Successfully installed " + name
         if look not in err:
             raise WinInstallPackageException(
-                "unable to install {0}, due to:\nCMD\n{3}\nOUT:\n{1}\nERR:\n{2}\nNOT FOUND\n{4}".format(package, out, err, cmd, look))
+                "unable to install {0}, due to:\nCMD\n{3}\nOUT:\n{1}\nERR-9:\n{2}\nNOT FOUND\n{4}".format(package, out, err, cmd, look))
 
     if "No distributions matching the version" in out:
         raise WinInstallPackageException(
@@ -124,7 +124,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
             cmd +
             "\nOUT:\n" +
             out +
-            "\nERR:\n" +
+            "\nERR--A:\n" +
             err)
     elif "Testing of typecheck-decorator passed without failure." in out:
         operations.append(("pip", package))
@@ -140,7 +140,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
                 cmd +
                 "OUT:\n" +
                 out +
-                "\nERR:\n" +
+                "\nERR--B:\n" +
                 err)
         if "Requirement already satisfied" not in out:
             raise WinInstallPackageException(
@@ -150,7 +150,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
                 cmd +
                 "\nOUT:\n" +
                 out +
-                "\nERR:\n" +
+                "\nERR--C:\n" +
                 err)
     else:
         operations.append(("pip", package))

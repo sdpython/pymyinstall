@@ -85,7 +85,7 @@ def create_virtual_env(where, symlinks=False, system_site_packages=False,
     out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
     if len(err) > 0:
         raise VirtualEnvError(
-            "unable to create virtual environement at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, where, cmd))
+            "unable to create virtual environement at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR-G:\n{1}".format(out, err, where, cmd))
 
     if sys.platform.startswith("win"):
         scripts = os.path.join(where, "Scripts")
@@ -182,7 +182,7 @@ def run_venv_script(venv, script, fLOG=print, file=False, is_cmd=False):
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if len(err) > 0:
             raise VirtualEnvError(
-                "unable to run cmd at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, venv, cmd))
+                "unable to run cmd at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR-H:\n{1}".format(out, err, venv, cmd))
         return out
     else:
         script = ";".join(script.split("\n"))
@@ -195,7 +195,7 @@ def run_venv_script(venv, script, fLOG=print, file=False, is_cmd=False):
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if len(err) > 0:
             raise VirtualEnvError(
-                "unable to run script at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR:\n{1}".format(out, err, venv, cmd))
+                "unable to run script at {2}\nCMD:\n{3}\nOUT:\n{0}\nERR-I:\n{1}".format(out, err, venv, cmd))
         return out
 
 

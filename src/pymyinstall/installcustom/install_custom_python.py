@@ -42,7 +42,7 @@ def unzip7_files(filename_7z, fLOG=print, dest="."):
     out, err = run_cmd(cmd, wait=True)
 
     if err is not None and len(err) > 0:
-        raise Exception("OUT:\n{0}\nERR:\n{1}".format(out, err))
+        raise Exception("OUT:\n{0}\nERR-A:\n{1}".format(out, err))
 
     return out
 
@@ -114,7 +114,8 @@ def fix_resource_windows(path):
 
 
 def install_python(temp_folder=".", fLOG=print, install=True, force_download=False,
-                   version=None, modules=None, custom=False, latest=False):
+                   version=None, modules=None, custom=False, latest=False,
+                   download_folder="download", verbose=False):
     """
     Install `python <http://www.python.org/>`_.
     It does not do it a second time if it is already installed.
@@ -128,12 +129,14 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
     @param      custom          the standalone distribution has issue when installing new packages,
                                 custom is True means switching to a zip of the standard distribution
     @param      latest          install this version of pymyinstall and not the pypi version
+    @param      download        download folder
+    @param      verbose         more display
     @return                     temporary file
 
     The version is fixed to the current version of Python and amd64.
 
     .. versionmodified:: 1.1
-        Add parameters *custom*, *latest*.
+        Add parameters *custom*, *latest*, *verbose*.
     """
     if version is None:
         version = "%s.%s.%s" % sys.version_info[:3]
@@ -203,7 +206,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
                 if len(err) > 0:
                     raise Exception(
-                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-B\n{2}".format(cmd, out, err))
             else:
                 from ..win_installer.win_patch import win_patch_paths
                 fLOG("[install_python] Patch scripts .exe")
@@ -238,24 +241,36 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     change_path = None
                 out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                    change_path=change_path)
+                err_keep = err
                 err = [_ for _ in err.split("\n") if not _.startswith("pymyinstall.") and not _.startswith(
-                    "zip_safe flag not set; analyzing archive contents...")]
+                    "zip_safe flag not set; analyzing archive contents...") and not _.startswith("error removing build")]
                 err = "\n".join(_ for _ in err if _)
 
                 exp = ".zip/lib2to3/Grammar.txt"
                 if len(err) > 0 and exp not in out.replace("\\", "/").replace("//", "/"):
                     raise Exception(
-                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-C\n{2}".format(cmd, out, err_keep))
                 fLOG(out)
 
-                fLOG("[install_python] modules")
-                cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'download\', ' +
-                       'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe, modules)
+                fLOG("[install_python] install modules")
+                cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\', ' +
+                       'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe,
+                                                                                   modules, download_folder.replace("\\", "/"))
                 out, err = run_cmd(
-                    cmd, wait=True, fLOG=fLOG, communicate=False)
+                    cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=True)
+                fLOG("[install_python] end installed modules.")
                 if len(err) > 0:
-                    raise Exception(
-                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+                    # We try a second time to make sure a second pass does not
+                    # help.
+                    fLOG("[install_python2] install modules")
+                    out_, err_ = run_cmd(
+                        cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=True)
+                    if len(err_) > 0:
+                        fLOG("[install_python2] end installed modules.")
+                        raise Exception(
+                            "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}".format(cmd, out, err, out_, err_))
+                    else:
+                        out += "\n-------------\n" + out_
                 fLOG(out)
 
         return local

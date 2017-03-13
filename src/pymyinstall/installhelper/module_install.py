@@ -269,7 +269,7 @@ class ModuleInstall:
                     return r is not None
                 return r is not None
             except ImportError:
-                txt = "import {0}".format(self.ImportName)
+                txt = "import {0}  # {1}".format(self.ImportName, self.name)
                 try:
                     exec(txt)
                     return True
@@ -286,21 +286,22 @@ class ModuleInstall:
         .. versionadded:: 1.1
         """
         exe = get_python_program()
-        cmd = exe + ' -u -c "import {0}"'.format(self.ImportName)
+        cmd = exe + \
+            ' -u -c "import {0} # {1}"'.format(self.ImportName, self.name)
         out, err = run_cmd(cmd, fLOG=self.fLOG)
         if err:
-            raise InstallError("cannot import module {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+            raise InstallError("cannot import module {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-K:\n{3}".format(
                 self.ImportName, cmd, out, err))
         if self.name == "scipy":
             cmd = exe + '-u -c "import scipy.sparse"'
             out, err = run_cmd(cmd, fLOG=self.fLOG)
             if err:
                 if sys.platform.startswith("win") and sys.version_info[:2] >= (3, 5) and "DLL" in err:
-                    mes = "scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}"
+                    mes = "scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-M:\n{3}"
                     raise InstallError(mes.format(
                         self.ImportName, cmd, out, err))
                 else:
-                    raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                    raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-L:\n{3}".format(
                         self.ImportName, cmd, out, err))
         return True
 
@@ -570,7 +571,7 @@ class ModuleInstall:
                     cmd +
                     "\nOUT:\n" +
                     out +
-                    "\nERR:\n" +
+                    "\nERR-N:\n" +
                     err)
             else:
                 lines = out.split("\n")
@@ -586,7 +587,7 @@ class ModuleInstall:
                     cmd +
                     "\nOUT:\n" +
                     out +
-                    "\nERR:\n" +
+                    "\nERR-O:\n" +
                     err)
 
         elif kind in ("wheel", "wheel2"):
@@ -885,7 +886,7 @@ class ModuleInstall:
 
     def install(self, force_kind=None, force=False, temp_folder=".",
                 log=False, options=None, deps=False, source=None,
-                custom=None, post=None):
+                custom=None, post=None, out_streams=None):
         """
         install the package
 
@@ -899,6 +900,7 @@ class ModuleInstall:
                                     see @see me get_exewheel_url_link2
         @param      custom          overwrite parameters in ``self.custom``
         @param      post            instructions post installation (see the cnostructor for more help)
+        @param      out_streams     if it is a list, the function will add standard outputs
         @return                     boolean
 
         The options mentioned in parameter ``options``
@@ -916,6 +918,7 @@ class ModuleInstall:
             Parameter *source* was added, if None, it is overwritten by *self.source*.
             Parameter *custom* was added, it works the same as *source*.
             Parameter *post* was added.
+            Parameter *out_streas* added.
         """
         if source is None:
             source = self.source
@@ -971,6 +974,8 @@ class ModuleInstall:
                 sys.argv = []
             out, err = run_cmd(
                 cmd, wait=True, fLOG=self.fLOG)
+            if out_streams is not None:
+                out_streams.append((cmd, out, err))
             if self.name == "kivy-garden":
                 sys.argv = memo
 
@@ -978,7 +983,7 @@ class ModuleInstall:
             uptodate = success2.replace("-", "_") in out.replace("-", "_")
 
             if "No distributions matching the version" in out:
-                mes = "(1) unable to install with pip {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                mes = "(1) unable to install with pip {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-P:\n{3}".format(
                     str(self), cmd, out, err)
                 raise InstallError(mes)
             elif "Testing of typecheck-decorator passed without failure." in out:
@@ -986,11 +991,11 @@ class ModuleInstall:
             elif "Successfully installed" not in out and not uptodate:
                 if "error: Unable to find vcvarsall.bat" in out:
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                    mes = "(2) unable to install with pip {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR:\n{4}".format(
+                    mes = "(2) unable to install with pip {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR-P:\n{4}".format(
                         str(self), url, cmd, out, err)
                     raise InstallError(mes)
                 if "Requirement already satisfied" not in out and not uptodate:
-                    mes = "(3) unable to install with pip {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                    mes = "(3) unable to install with pip {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-Q:\n{3}".format(
                         str(self), cmd, out, err)
                     raise InstallError(mes)
             else:
@@ -1018,9 +1023,11 @@ class ModuleInstall:
 
             out, err = run_cmd(
                 cmd, wait=True, fLOG=self.fLOG)
+            if out_streams is not None:
+                out_streams.append((cmd, out, err))
             if "No distributions matching the version" in out or \
                "No packages found in current linux" in out:
-                mes = "(4) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                mes = "(4) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-R:\n{3}".format(
                     str(self), cmd, out, err)
                 raise InstallError(mes)
             elif "Testing of typecheck-decorator passed without failure." in out:
@@ -1028,11 +1035,11 @@ class ModuleInstall:
             elif "Successfully installed" not in out:
                 if "error: Unable to find vcvarsall.bat" in out:
                     url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                    mes = "(5) unable to install with conda {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR:\n{4}".format(
+                    mes = "(5) unable to install with conda {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR-S:\n{4}".format(
                         str(self), url, cmd, out, err)
                     raise InstallError(mes)
                 if "Requirement already satisfied" not in out:
-                    mes = "(6) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                    mes = "(6) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-T:\n{3}".format(
                         str(self), cmd, out, err)
                     raise InstallError(mes)
             else:
@@ -1076,8 +1083,10 @@ class ModuleInstall:
                     cmd += ' --no-deps'
                 out, err = run_cmd(
                     cmd, wait=True, fLOG=self.fLOG)
+                if out_streams is not None:
+                    out_streams.append((cmd, out, err))
                 if "No distributions matching the version" in out:
-                    mes = "(7) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                    mes = "(7) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-U:\n{3}".format(
                         str(self), cmd, out, err)
                     raise InstallError(mes)
                 elif "Testing of typecheck-decorator passed without failure." in out:
@@ -1085,11 +1094,11 @@ class ModuleInstall:
                 elif "Successfully installed" not in out:
                     if "error: Unable to find vcvarsall.bat" in out:
                         url = "http://www.xavierdupre.fr/blog/2013-07-07_nojs.html"
-                        mes = "(8) unable to install with wheel {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR:\n{4}".format(
+                        mes = "(8) unable to install with wheel {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR-V:\n{4}".format(
                             str(self), url, cmd, out, err)
                         raise InstallError(mes)
                     if "Requirement already satisfied" not in out:
-                        mes = "(9) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR:\n{3}".format(
+                        mes = "(9) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-W:\n{3}".format(
                             str(self), cmd, out, err)
                         raise InstallError(mes)
                 else:
@@ -1158,6 +1167,8 @@ class ModuleInstall:
             for cmd in cmds:
                 out, err = run_cmd(
                     cmd, wait=True, fLOG=self.fLOG)
+                if out_streams is not None:
+                    out_streams.append((cmd, out, err))
                 if len(outs) > 0:
                     outs += "\n"
                 if len(errs) > 0:
@@ -1174,7 +1185,7 @@ class ModuleInstall:
                         str(self) +
                         "\nOUT:\n" +
                         out +
-                        "\nERR:\n" +
+                        "\nERR-X:\n" +
                         err)
                 else:
                     self.fLOG(
@@ -1187,7 +1198,7 @@ class ModuleInstall:
                         cmd +
                         "\nOUT:\n" +
                         out +
-                        "\nERR:\n" +
+                        "\nERR-Y:\n" +
                         err)
             ret = True
 
@@ -1207,6 +1218,8 @@ class ModuleInstall:
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
                     exename + " /s /qn /SILENT", wait=True, fLOG=self.fLOG)
+                if out_streams is not None:
+                    out_streams.append((cmd, out, err))
                 ret = len(err) == 0
 
         elif kind == "exe2":
@@ -1225,6 +1238,8 @@ class ModuleInstall:
                 self.fLOG("executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
                     exename + " /s /qn", wait=True, fLOG=self.fLOG)
+                if out_streams is not None:
+                    out_streams.append((cmd, out, err))
                 ret = len(err) == 0
         else:
             raise ImportError(
@@ -1309,7 +1324,7 @@ class ModuleInstall:
                 out, err = run_cmd(cmd, wait=True, fLOG=self.fLOG)
                 if err is not None and len(err) > 0:
                     raise InstallError(
-                        "Post installation script failed.\nCMD\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
+                        "Post installation script failed.\nCMD\n{0}\nOUT\n{1}\nERR-Z\n{2}".format(cmd, out, err))
                 self.fLOG("OUT:\n{0}".format(out))
             else:
                 raise KeyError("Unable to interpret command '{0}'".format(k))

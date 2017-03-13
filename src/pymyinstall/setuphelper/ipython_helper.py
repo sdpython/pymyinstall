@@ -75,7 +75,7 @@ def setup_ipython(current_path=None,
 
             if not os.path.exists(ipython_config):
                 raise Exception(
-                    "unable to create jupyter configuration because of:\n{0}\nERR:\n{1}\ncmd={2}".format(
+                    "unable to create jupyter configuration because of:\n{0}\nERR-4:\n{1}\ncmd={2}".format(
                         out,
                         err,
                         cmd))

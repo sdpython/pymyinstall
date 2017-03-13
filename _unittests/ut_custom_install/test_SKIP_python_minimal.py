@@ -52,12 +52,15 @@ class TestDownloadPythonMinimal(unittest.TestCase):
         fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
-            __file__, "temp_python%s_minimal" % vers, clean=False)
+            __file__, "temp_python%s_minimal" % vers, clean=True)
 
         if sys.platform.startswith("win"):
+            fLOG("BEGIN")
             clog = CustomLog(temp)
             install_python(install=True, temp_folder=temp,
-                           fLOG=clog, modules="minimal", custom=True, latest=True)
+                           fLOG=clog, modules="minimal", custom=True, latest=True,
+                           download_folder=temp + "_download")
+            fLOG("END")
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
             if not os.path.exists(pyt):

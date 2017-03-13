@@ -43,7 +43,7 @@ def r_run_script(r_path, script, output=None):
     out, err = run_cmd(cmd, wait=True)
     if err is not None and len(err) > 0:
         raise RBatchException(
-            "CMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+            "CMD:\n{0}\nOUT:\n{1}\nERR--G:\n{2}".format(cmd, out, err))
     return out
 
 

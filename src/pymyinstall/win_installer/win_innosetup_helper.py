@@ -58,7 +58,7 @@ def run_innosetup(new_script, innosetup=None, log_script=None, temp_folder=".", 
     out, err = run_cmd(" ".join(cmd), wait=True, fLOG=fLOG)
     if err is not None and len(err) > 0:
         raise InnoSetupException(
-            "CMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+            "CMD:\n{0}\nOUT:\n{1}\nERR-5:\n{2}".format(cmd, out, err))
     return out
 
 

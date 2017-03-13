@@ -330,7 +330,7 @@ def update_pip(python_path=None, fLOG=print):
                 out, err = run_cmd(cmd, wait=True)
                 if err and len(err) > 0:
                     raise UpdatePipError(
-                        "unable to update pip with get_pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+                        "unable to update pip with get_pip.\nCMD:\n{0}\nOUT:\n{1}\nERR-E:\n{2}".format(cmd, out, err))
         else:
             lines = err.split("\n")
             keep = []
@@ -339,7 +339,7 @@ def update_pip(python_path=None, fLOG=print):
                     keep.append(line)
             if len(keep) > 0:
                 raise UpdatePipError(
-                    "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+                    "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR-F:\n{2}".format(cmd, out, err))
     return out
 
 

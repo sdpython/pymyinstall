@@ -3,6 +3,7 @@
 @brief Install or update all packages.
 """
 from __future__ import print_function
+import sys
 import os
 import warnings
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
@@ -255,6 +256,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     @param      source          overwrite the location of the wheels, see @see me get_exewheel_url_link2
     @param      download_only   only downloads the module, no installation
     @param      force           force the installation or the download
+    @return                     output streams
 
     *list_module* can be a set of modules of a name set.
     Name sets can be accesses by function @see fn get_package_set.
@@ -271,6 +273,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
     .. versionadded:: 1.1
     """
+    fLOG("[install_all] begin, exe:", sys.executable)
     if _memory is None:
         _memory = {}
     deps = deps or deep_deps
@@ -311,6 +314,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     errors = []
     installed = []
     schedule = []
+    out_streams_module = {}
     for mod in modules:
         if mod.name in _memory:
             # already done
@@ -332,13 +336,15 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                                         force=force)
                     fLOG("[install-check-dep] ##", mod.name, "## [end]")
                 else:
+                    out_streams = []
                     try:
                         if download_only:
                             b = mod.download(
                                 temp_folder=temp_folder, source=source)
                         else:
                             b = mod.install(temp_folder=temp_folder,
-                                            log=verbose, source=source)
+                                            log=verbose, source=source,
+                                            out_streams=out_streams)
                     except (SystemExit, Exception) as e:
                         b = False
                         m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
@@ -348,6 +354,19 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                     if b:
                         again.append(m)
                         installed.append(mod)
+                    if verbose:
+                        ne = 0
+                        for lll in out_streams:
+                            if lll[-1]:
+                                ne += 1
+                        if ne > 0:
+                            fLOG("###################")
+                            fLOG("##", mod.name, "##")
+                            for jj in out_streams:
+                                for la, va in zip(("CMD", "OUT", "ERR-1"), jj):
+                                    fLOG(la, va)
+                            fLOG("###################.")
+                    out_streams_module[mod.name] = out_streams
         if verbose:
             fLOG("[install-check] ##", mod.name, "## [end]")
         _memory[mod.name] = True
@@ -357,20 +376,37 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
     if verbose:
         fLOG("")
-        fLOG("downloaded modules" if download_only else "installed modules")
+        fLOG("[install_all]" +
+             (" downloaded modules" if download_only else "installed modules"))
         for m in again:
             fLOG("  ", m)
+        fLOG("[install_all] end: ", len(errors), "errors")
         if len(errors) > 0:
-            fLOG("failed modules")
+            fLOG("[install_all] failed modules")
             for m in errors:
                 fLOG("  ", m[0], m[1])
+            fLOG("[install_all] end failed modules")
 
     if not skip_missing:
+        fLOG("[install_all] check dependencies")
         miss = missing_dependencies()
         if len(miss) > 0:
             mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
                             for k, v in sorted(miss.items()))
             warnings.warn("missing dependencies\n" + mes)
+        fLOG("[install_all] end check dependencies")
+
+    for k, v in sorted(out_streams_module.items()):
+        fLOG("[%s] #########################" % k)
+        if isinstance(v, list):
+            for _ in v:
+                for la, va in zip(("CMD", "OUT", "ERR-2"), _):
+                    fLOG(la, va)
+        else:
+            for la, va in zip(("CMD", "OUT", "ERR-3"), v):
+                fLOG(la, va)
+        fLOG(".")
+    return out_streams_module
 
 
 def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=True,

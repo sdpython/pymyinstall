@@ -50,7 +50,7 @@ def ipython_create_profile(config_path, python_path, name="win_profile", fLOG=pr
         config_path, "profile_" + name, "ipython_config.py")
     if not os.path.exists(profile):
         raise WinInstallException(
-            "missing file, unable to execute:\nFILE:\n{3}\nCMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err, profile))
+            "missing file, unable to execute:\nFILE:\n{3}\nCMD:\n{0}\nOUT:\n{1}\nERR-6:\n{2}".format(cmd, out, err, profile))
     return os.path.dirname(profile)
 
 
@@ -93,5 +93,5 @@ def install_jupyter_extension(python_path):
     out, err = run_cmd(cmd)
     if err:
         raise WinInstallException(
-            "unable to install jupyter extension\nOUT:{0}\nERR{1}".format(out, err))
+            "unable to install jupyter extension\nOUT:{0}\nERR-7{1}".format(out, err))
     return out, err

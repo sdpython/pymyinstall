@@ -63,7 +63,7 @@ def julia_run_script(julia_path, python_path, script, verbose=False, fLOG=print)
     if err is not None and len(err) > 0 and \
             "err" in err.lower() or "warn" in err.lower():
         raise JuliaBatchException(
-            "CMD:\n{0}\nOUT:\n{1}\nERR:\n{2}".format(cmd, out, err))
+            "CMD:\n{0}\nOUT:\n{1}\nERR--D:\n{2}".format(cmd, out, err))
 
     os.environ["PATH"] = memo_path
     patch_julia03(julia_path, verbose=verbose, fLOG=fLOG)

@@ -92,7 +92,7 @@ def distribution_checkings(python_path, tools_path, fLOG=print, skip_import=Fals
         mes = []
         for r in res:
             if not r[0]:
-                m = "------\nFAILED {0}\nOUT\n{1}\nERR\n{2}".format(
+                m = "------\nFAILED {0}\nOUT\n{1}\nERR--E\n{2}".format(
                     r[1].name, r[2], r[3])
                 mes.append(m)
         if len(mes) > 0:
@@ -222,7 +222,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
                     err = "You might have to install manually pycrypto.\n" + \
                           "Please read http://www.xavierdupre.fr/app/pymyinstall/helpsphinx//blog/2016/2016-02-27_pycrypto_paramiko.html" + \
                           err
-                err = [(" - ERR: " if is_errored_line(line)
+                err = [(" - ERR--F: " if is_errored_line(line)
                         else " - OK:  ") + line.rstrip("\n\r") for line in err.split("\n")]
                 err = "\n".join(err)
             res.append((suc, m, out, err))
