@@ -116,6 +116,7 @@ def pyquickhelper_set():
         "wheel",
         "widgetsnbextension",
         "wild_sphinx_theme",
+        "win_unicode_console",
         "winrandom" if sys.platform.startswith("win") else None,
         "winshell" if sys.platform.startswith("win") else None,
     ]
