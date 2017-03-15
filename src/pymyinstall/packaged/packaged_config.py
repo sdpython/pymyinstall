@@ -5,7 +5,7 @@
 
 
 """
-from .packaged_config_0_minimal import minimal_set
+from .packaged_config_0_minimal import minimal_set, pywin32_set
 from .packaged_config_0_pyquickhelper import pyquickhelper_set
 from .packaged_config_1_pyensae import pyensae_set
 from .packaged_config_1_anaconda import anaconda_set, anaconda_ext_set
@@ -65,7 +65,8 @@ _modules_set = [minimal_set,
                 anaconda_set,
                 ensae_teaching_cs_set,
                 all_but_teachings_set,
-                orange_set
+                orange_set,
+                pywin32_set
                 ]
 
 

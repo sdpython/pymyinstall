@@ -63,6 +63,7 @@ def small_set():
         ModuleInstall("pywin32", "wheel2",
                       mname="win32com", purpose="call Windows DLL",
                       post=dict(
+                          pre_cmd="module_install_preprocess",
                           cmd_python="{0}\\Scripts\\pywin32_postinstall.py -install"),
                       usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall("pywin32-ctypes", "pip", mname="win32ctypes",

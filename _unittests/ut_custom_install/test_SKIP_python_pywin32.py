@@ -1,5 +1,5 @@
 """
-@brief      test log(time=12s)
+@brief      test log(time=1290s)
 
 skip this test for regular run
 """
@@ -46,21 +46,18 @@ from pyquickhelper.loghelper import fLOG, CustomLog
 from pyquickhelper.pycode import get_temp_folder
 
 
-class TestDownloadPython (unittest.TestCase):
+class TestDownloadPythonPyWin32 (unittest.TestCase):
 
-    def test_install_python(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-        fold = os.path.abspath(os.path.split(__file__)[0])
+    def test_install_python_pywin32(self):
+        fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
-        temp = os.path.join(fold, "temp_python%s" % vers)
-        temp = get_temp_folder(__file__, "temp_python_base%s" % vers)
+        temp = get_temp_folder(
+            __file__, "temp_python%s_pywin32" % vers, clean=True)
 
         if sys.platform.startswith("win"):
             clog = CustomLog(temp)
-            install_python(install=True, temp_folder=temp, fLOG=clog,
+            install_python(install=True, temp_folder=temp,
+                           fLOG=clog, modules="pywin32", custom=True, latest=True,
                            download_folder=temp + "_download")
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")

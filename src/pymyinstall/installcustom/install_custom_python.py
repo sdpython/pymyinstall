@@ -239,6 +239,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     cmd = '"{0}" -u -c "import pip;pip.main([\'install\', \'pymyinstall\'])"'.format(
                         pyexe)
                     change_path = None
+                fLOG("[install_python] " + cmd)
                 out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                    change_path=change_path)
                 err_keep = err
@@ -264,7 +265,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     # help.
                     fLOG("[install_python2] install modules")
                     out_, err_ = run_cmd(
-                        cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=True)
+                        cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=False)
                     if len(err_) > 0:
                         fLOG("[install_python2] end installed modules.")
                         raise Exception(

@@ -1288,9 +1288,9 @@ class ModuleInstall:
                             f.write(full)
 
         if ret is not None and post is not None:
-            self.fLOG("run_post_installation [begin]", post)
+            self.fLOG("_ run_post_installation [begin]", post)
             ret = self.run_post_installation(post)
-            self.fLOG("run_post_installation [end]")
+            self.fLOG("_ run_post_installation [end]")
 
         if ret is not None and ret:
             # we check the module was properly installed
@@ -1319,6 +1319,20 @@ class ModuleInstall:
             raise TypeError("expecting a dictionary")
         for k, v in post.items():
             if k == "cmd_python":
+                # processed just above
+                continue
+            elif k == "pre_cmd":
+                if v == "module_install_preprocess":
+                    self.fLOG("_ module_install_preprocess [begin]")
+                    self.module_install_preprocess(post)
+                    self.fLOG("_ module_install_preprocess [end]")
+                else:
+                    raise ValueError(
+                        "Unable to interpret value '{0}'.".format(v))
+            else:
+                raise KeyError("Unable to interpret command '{0}'".format(k))
+        for k, v in post.items():
+            if k == "cmd_python":
                 exe = os.path.abspath(sys.executable)
                 cmd = '"{0}" {1}'.format(exe, v.format(os.path.dirname(exe)))
                 out, err = run_cmd(cmd, wait=True, fLOG=self.fLOG)
@@ -1326,6 +1340,9 @@ class ModuleInstall:
                     raise InstallError(
                         "Post installation script failed.\nCMD\n{0}\nOUT\n{1}\nERR-Z\n{2}".format(cmd, out, err))
                 self.fLOG("OUT:\n{0}".format(out))
+            elif k == "pre_cmd":
+                # processed just above
+                continue
             else:
                 raise KeyError("Unable to interpret command '{0}'".format(k))
         return True
@@ -1374,3 +1391,37 @@ class ModuleInstall:
         res = self.install(force_kind=force_kind, force=True,
                            temp_folder=temp_folder, log=log, options=options, source=source)
         return res
+
+    def module_install_preprocess(self, post):
+        """
+        Run some preprocessing for specific modules
+
+        @param      post        dictionary
+        """
+        if self.name == "pywin32":
+            self.fLOG("_ module_install_preprocess", self.name)
+            if "cmd_python" not in post:
+                raise KeyError("Key 'cmd_python' is not in post.")
+            cmd_python = post["cmd_python"]
+            name = cmd_python.split()[0].format(
+                os.path.dirname(sys.executable))
+            self.fLOG("_ opening", name)
+            if not os.path.exists(name):
+                raise FileNotFoundError(name)
+            with open(name, "r") as f:
+                content = f.read()
+            repby = "os.path.exists(dest)"
+            if repby not in content:
+                self.fLOG("_ Preprocess '{0}'".format(name))
+                rep = "def CopyTo(desc, src, dest):"
+                content = content.replace(
+                    rep, "{0}\n    if {1}: return".format(rep, repby))
+                with open(name, "w") as f:
+                    f.write(content)
+                self.fLOG("_ Done.")
+            else:
+                self.fLOG(
+                    "Skip preprocess '{0}' because '{1}' was found.".format(name, repby))
+        else:
+            raise ValueError(
+                "No preprocessing for module '{0}'.".format(self.name))

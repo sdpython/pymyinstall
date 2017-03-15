@@ -67,6 +67,12 @@ class TestDownloadPythonMinimal(unittest.TestCase):
                 raise FileNotFoundError(pyt)
             if not os.path.exists(pip):
                 raise FileNotFoundError(pip)
+            post = os.path.join(temp, "Scripts", "pywin32_postinstall.py")
+            with open(post, "r") as f:
+                content = f.read()
+            if "os.path.exists(dest)" not in content:
+                raise Exception(
+                    "'os.path.exists(dest)' not found in '{0}'".format(post))
 
 
 if __name__ == "__main__":

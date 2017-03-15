@@ -197,7 +197,7 @@ if not r:
     if len(sys.argv) in (1, 2) and sys.argv[-1] in ("--help-commands",):
         pyquickhelper = import_pyquickhelper()
         from pyquickhelper.pycode import process_standard_options_for_setup_help
-        process_standard_options_for_setup_help(sys.argv)
+        process_standard_options_for_setup_help(sys.argv, fLOG=print)
 
     if sys.version_info[0] >= 3:
         entry_points = {
