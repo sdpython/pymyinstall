@@ -100,6 +100,10 @@ def extended_set():
         ModuleInstall(
             'splinter', 'pip', purpose="browser abstraction for web acceptance testing", usage="NETWORK"),
         ModuleInstall(
+            'olefile', 'pip', purpose="Python package to parse, read and write Microsoft OLE2 files " +
+            "(Structured Storage or Compound Document, Microsoft Office) - Improved version of the " +
+            "OleFileIO module from PIL, the Python Image Library."),
+        ModuleInstall(
             'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         ModuleInstall(
             'pygame', 'wheel', purpose="GUI, interface for games (needs to be installed from www.pygame.org on Linux)", usage="GUI"),
@@ -206,7 +210,7 @@ def extended_set():
             "CVXcanon", "wheel", purpose="A low-level library to perform the matrix building step in cvxpy, " +
             "a convex optimization modeling software.", usage="OPTIM") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall(
-            "fastcache", "wheel", source="2", purpose="C implementation of Python 3 lru_cache for Python."),
+            "fastcache", "wheel", purpose="C implementation of Python 3 lru_cache for Python."),
         ModuleInstall(
             "multiprocess", "wheel", purpose="better multiprocessing and multithreading in python"),
         ModuleInstall("cvxpy", "pip", usage="OPTIM",

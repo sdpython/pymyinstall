@@ -117,9 +117,6 @@ def ensae_set():
         ModuleInstall(
             "Bottleneck", "wheel", mname="bottleneck", purpose="Fast NumPy array functions written in Cython, needed by la"),
         ModuleInstall(
-            "la", "wheel",
-            purpose="Label the rows, columns, any dimension, of your NumPy arrays."),
-        ModuleInstall(
             "mahotas", "wheel", purpose="Mahotas: Computer Vision Library", usage="VIZ"),
         ModuleInstall("nitime", "wheel",
                       purpose="Nitime is a library for time-series analysis of data from neuroscience experiments.", usage="DATA/ML"),
@@ -643,6 +640,8 @@ def ensae_set():
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
+    mod.append(ModuleInstall(
+        "jwt", "pip", purpose="JSON Web Token library for Python 3."))
     mod.append(ModuleInstall("adal", "pip",
                              purpose="The ADAL for Python library makes it easy for python application to authenticate " +
                              "to Azure Active Directory (AAD) in order to access AAD protected web resources."))
