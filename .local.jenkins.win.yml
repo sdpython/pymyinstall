@@ -25,9 +25,9 @@ script:
   - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*pywin32.*\"", NAME: "UT_SKIP_PYWIN32" }
   - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL" }
   - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*pyquickhelper.*\"", NAME: "UT_SKIP_PYQUICKHELPER" }
-  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE", TIMEOUT: 4800 }
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE", TIMEOUT: 3600 }
   - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*teaching.*\"", NAME: "UT_SKIP_TEACHING", TIMEOUT: 3600 }
-  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*every.*\"", NAME: "UT_SKIP_ALL", TIMEOUT: 7200 }
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests -e \".*SKIP.*every.*\"", NAME: "UT_SKIP_ALL", TIMEOUT: 10800 }
 after_script:
   - python setup.py bdist_wheel
   - if [ ${VERSION} == "2.7" and ${DIST} != "conda" ] then copy dist\*.whl ..\..\..\local_pypi\local_pypi_server fi
