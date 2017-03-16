@@ -13,9 +13,11 @@ def pyensae_set():
     from .packaged_config_4_ml import ensae_set
     names = pyquickhelper_set()
     names += [
+        "adal",
         "ansi2html",  # ssh
         "ansiconv",  # ssh
         "antlr4-python3-runtime",
+        "asn1crypto",
         "azure",
         "azure_batch",
         "azure_common",
@@ -55,10 +57,13 @@ def pyensae_set():
         "easydev",
         "ecdsa",  # paramiko
         "folium",  # maps
+        "idna",
         "ipykernel",
+        "isodate",
         "keyring",
         "linkedin",
         "logbook",
+        "markdown2",
         "msrest",
         "msrestazure",
         "mbstrdecoder",

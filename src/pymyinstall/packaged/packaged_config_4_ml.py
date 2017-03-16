@@ -643,6 +643,9 @@ def ensae_set():
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
+    mod.append(ModuleInstall("adal", "pip",
+                             purpose="The ADAL for Python library makes it easy for python application to authenticate " +
+                             "to Azure Active Directory (AAD) in order to access AAD protected web resources."))
     mod.append(ModuleInstall("msrest", "pip",
                              purpose="AutoRest swagger generator Python client runtime."))
     mod.append(ModuleInstall("msrestazure", "pip",
@@ -660,5 +663,8 @@ def ensae_set():
             name, "pip", mname=name.replace("-", "_"), pip_options=["--pre"],
             purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE")
         mod.append(m)
+
+    mod.append(ModuleInstall("azureml", "pip",
+                             purpose="Microsoft Azure Machine Learning Python client library"))
 
     return [_ for _ in mod if _ is not None]

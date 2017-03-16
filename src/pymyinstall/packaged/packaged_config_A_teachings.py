@@ -12,6 +12,8 @@ def teachings_set():
     """
     mod = [
         ModuleInstall(
+            "jyquickhelper", "pip", purpose="Helpers for Jupyter notebooks.", usage="TEACH"),
+        ModuleInstall(
             "pyquickhelper", "pip", purpose="helpers to generation documentation", usage="TEACH"),
         ModuleInstall(
             "pymyinstall", "pip", purpose="easy installation of modules including Windows", usage="TEACH"),
@@ -30,9 +32,11 @@ def teachings_set():
         ModuleInstall("jupytalk", "pip",
                       purpose="materials for presentations", usage="TEACH"),
         ModuleInstall("mlstatpy", "pip",
-                      purpose="materials for presentations", usage="TEACH"),
-        # ModuleInstall("ensae_projects", "pip",
-        #              purpose="single use code", usage="TEACH"),
+                      purpose="materials for machine learning", usage="TEACH"),
+        ModuleInstall("teachpyx", "pip",
+                      purpose="materials for teachings", usage="TEACH"),
+        ModuleInstall("ensae_projects", "pip",
+                      purpose="single use code", usage="TEACH"),
     ]
     #
     return [_ for _ in mod if _ is not None]

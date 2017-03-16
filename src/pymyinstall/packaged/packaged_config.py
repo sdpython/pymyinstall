@@ -45,6 +45,7 @@ def all_set():
         ensae_set() + \
         teachings_set() + \
         iot_set() + \
+        orange_set() + \
         scraping_set() + \
         anaconda_ext_set()
 

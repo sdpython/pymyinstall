@@ -73,7 +73,7 @@ def find_module_install(name, must_exist=False):
                 return _reverse_module_index[n]
         if must_exist:
             raise MissingReferenceException(
-                "unable to find reference for module {}".format(name))
+                "Unable to find reference for module '{0}'\nCheck '{0}'".format(name))
         else:
             mod = ModuleInstall(name, "pip")
 

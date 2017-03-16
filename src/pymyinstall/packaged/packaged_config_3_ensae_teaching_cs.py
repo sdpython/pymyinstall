@@ -45,7 +45,6 @@ def ensae_teaching_cs_set():
         "pygal",
         "pygame",
         "pylzma",
-        "pyximport",
         "requests_oauthlib",
         "rpy2",
         "seaborn",

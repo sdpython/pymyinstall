@@ -234,7 +234,7 @@ def small_set():
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
         ModuleInstall(
             "ptyprocess", "pip", purpose="dependency for the terminado, Run a subprocess in a pseudo terminal",
-            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+            usage="JUPYTER/LINUX"),
         ModuleInstall("pexpect", "pip",
                       purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications (needed by metakernel).",
                       usage="JUPYTER"),
@@ -425,6 +425,8 @@ def small_set():
                       purpose="HTTPie - a CLI, cURL-like tool for humans"),
         ModuleInstall("version-information", "pip", mname="version_information",
                       purpose="Version information"),
+        ModuleInstall("isodate", "pip",
+                      purpose="An ISO 8601 date/time/duration parser and formatter"),
         ModuleInstall("dominate", "pip",
                       purpose="Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."),
         ModuleInstall("mbstrdecoder", "pip",
