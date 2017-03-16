@@ -174,6 +174,10 @@ def extended_set():
                       purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
         ModuleInstall("xxhash", "pip",
                       purpose="xxHash is an Extremely fast Hash algorithm, running at RAM speed limits."),
+        ModuleInstall("cryptography", "pip",
+                      purpose="cryptography is a package which provides cryptographic recipes and primitives to Python developers."),
+        ModuleInstall(
+            "pyasn1", "pip", purpose="ASN.1 types and codecs (for pysnmp)"),
         ModuleInstall("paramiko", "pip",
                       purpose="SSH2 protocol library", usage="NETWORK"),
         #
@@ -353,8 +357,6 @@ def extended_set():
         ModuleInstall(
             "pysmi", "pip", purpose="SNMP SMI/MIB Parser (for pysnmp)"),
         ModuleInstall(
-            "pyasn1", "pip", purpose="ASN.1 types and codecs (for pysnmp)"),
-        ModuleInstall(
             "pysnmp", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
         # pyinstaller does not install properly on Windows
         # ModuleInstall(
@@ -449,8 +451,6 @@ def extended_set():
                       purpose="Internationalized Domain Names in Applications (IDNA)"),
         ModuleInstall("ipaddress", "pip",
                       purpose="IPv4/IPv6 manipulation library") if sys.version_info[0] == 2 else None,
-        ModuleInstall("cryptography", "pip",
-                      purpose="cryptography is a package which provides cryptographic recipes and primitives to Python developers."),
         ModuleInstall("pyOpenSSL", "pip", mname="pyopenssl",
                       purpose="Python wrapper module around the OpenSSL library"),
         ModuleInstall("w3lib", "pip",

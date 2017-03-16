@@ -293,7 +293,7 @@ class ModuleInstall:
             raise InstallError("cannot import module {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-K:\n{3}".format(
                 self.ImportName, cmd, out, err))
         if self.name == "scipy":
-            cmd = exe + '-u -c "import scipy.sparse"'
+            cmd = exe + ' -u -c "import scipy.sparse"'
             out, err = run_cmd(cmd, fLOG=self.fLOG)
             if err:
                 if sys.platform.startswith("win") and sys.version_info[:2] >= (3, 5) and "DLL" in err:
