@@ -45,6 +45,7 @@ def pyensae_set():
         "azureml",
         "beautifulsoup4",
         "branca",
+        "cffi",
         "colormap",
         "chardet",
         "cryptography",
@@ -56,9 +57,10 @@ def pyensae_set():
         "folium",  # maps
         "ipykernel",
         "keyring",
-        "msrestazure",
         "linkedin",
         "logbook",
+        "msrest",
+        "msrestazure",
         "mbstrdecoder",
         "networkx",
         "osmapi",  # maps
