@@ -43,6 +43,7 @@ def pyensae_set():
         "azure_servicemanagement_legacy",
         "azure_storage",
         "azureml",
+        "beautifulsoup4",
         "branca",
         "colormap",
         "chardet",
@@ -61,6 +62,7 @@ def pyensae_set():
         "mbstrdecoder",
         "networkx",
         "osmapi",  # maps
+        "packaging",
         "pandas_datareader",
         "paramiko",  # ssh
         "pathvalidate",

@@ -355,10 +355,10 @@ def ensae_set():
         # biokit
         ModuleInstall("wrapt", "wheel",
                       purpose="A Python module for decorators, wrappers and monkey patching."),
-        ModuleInstall("colormap", "pip", usage="VIZ",
-                      purpose="Utilities to ease manipulation of matplotlib colormaps and color codecs (e.g., hex2rgb)"),
         ModuleInstall("easydev", "pip",
                       purpose="Common utilities to ease the development of Python packages"),
+        ModuleInstall("colormap", "pip", usage="VIZ",
+                      purpose="Utilities to ease manipulation of matplotlib colormaps and color codecs (e.g., hex2rgb)"),
         ModuleInstall("suds-jurko", "pip", mname="suds",
                       purpose="Lightweight SOAP client (Jurko's fork)"),
         # bugged and still uses ordereddict
@@ -643,6 +643,8 @@ def ensae_set():
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
+    mod.append(ModuleInstall("msrest", "pip",
+                             purpose="AutoRest swagger generator Python client runtime."))
     mod.append(ModuleInstall("msrestazure", "pip",
                              purpose="AutoRest swagger generator Python client runtime. Azure-specific module."))
     for name in ['azure-nspkg', 'azure-common', 'azure-mgmt-nspkg', 'azure-mgmt-authorization',
