@@ -60,7 +60,6 @@ def pyensae_set():
         "idna",
         "ipykernel",
         "isodate",
-        "jwt",
         "keyring",
         "linkedin",
         "logbook",
@@ -79,6 +78,7 @@ def pyensae_set():
         "pycodestyle",
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
         "pycryptodomex",
+        "PyJWT",
         "pyquickhelper",
         "pytablereader",
         "pytablewriter",

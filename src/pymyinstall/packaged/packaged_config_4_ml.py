@@ -641,7 +641,7 @@ def ensae_set():
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
 
     mod.append(ModuleInstall(
-        "jwt", "pip", purpose="JSON Web Token library for Python 3."))
+        "PyJWT", "pip", mname="jwt", purpose="JSON Web Token library for Python 3."))
     mod.append(ModuleInstall("adal", "pip",
                              purpose="The ADAL for Python library makes it easy for python application to authenticate " +
                              "to Azure Active Directory (AAD) in order to access AAD protected web resources."))
