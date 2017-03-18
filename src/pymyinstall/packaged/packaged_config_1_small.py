@@ -103,8 +103,6 @@ def small_set():
         ModuleInstall(
             "patsy", "pip", purpose="A Python package for describing statistical models and for building design matrices.", usage="DATA/ML"),
         ModuleInstall(
-            "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
-        ModuleInstall(
             "decorator", "pip", purpose="Better living through Python with decorators"),
         ModuleInstall(
             "networkx", "pip", purpose="graph libraries, basic drawing", usage="VIZ"),
@@ -146,6 +144,8 @@ def small_set():
         ModuleInstall("flake8", "pip", purpose="verify pep8 on a script"),
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
+        ModuleInstall(
+            "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
             "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
             "of SSL certificates while verifying the identity of TLS hosts."),
