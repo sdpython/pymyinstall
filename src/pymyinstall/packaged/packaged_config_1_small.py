@@ -440,6 +440,8 @@ def small_set():
                       purpose="convert a dataframe into many formats"),
         ModuleInstall("defusedxml", "pip",
                       purpose="XML bomb protection for Python stdlib modules"),
+        ModuleInstall(
+            "tqdm", "pip", purpose="A Simple Python Progress Meter (for moviepy)", usage="JUPYTER"),
     ]
 
     return [_ for _ in mod if _ is not None]

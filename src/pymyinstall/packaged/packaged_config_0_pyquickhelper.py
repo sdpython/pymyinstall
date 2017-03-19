@@ -107,7 +107,7 @@ def pyquickhelper_set():
         'sphinx-rtd-theme',
         "sphinxjp.themes.revealjs",
         'tabulate',
-        'tdqm',
+        'tqdm',
         "terminado" if not sys.platform.startswith("win") else None,
         "testpath",
         "tornado",

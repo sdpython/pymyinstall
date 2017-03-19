@@ -395,8 +395,6 @@ def extended_set():
             "imageio", "pip", purpose="Library for reading and writing a wide range of image, video, " +
             "scientific, and volumetric data formats (for moviepy)", usage="VIDEO"),
         ModuleInstall(
-            "tqdm", "pip", purpose="A Simple Python Progress Meter (for moviepy)", usage="VIDEO"),
-        ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
             "xgboost", "wheel", purpose="Parallelized Stochastic Gradient Descent (only available on " +
