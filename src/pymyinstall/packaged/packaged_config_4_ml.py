@@ -208,7 +208,7 @@ def ensae_set():
             "empyrical", "pip",
             purpose="empyrical is a Python library with performance and risk statistics commonly used in quantitative finance"),
         ModuleInstall(
-            "zipline", "lru_dict", purpose="An Dict like LRU container."),
+            "lru_dict", "pip", purpose="An Dict like LRU container."),
         ModuleInstall(
             "zipline", "pip",
             purpose="A backtester for financial algorithms.") if sys.version_info[:2] >= (3, 5) else None,  # finance
