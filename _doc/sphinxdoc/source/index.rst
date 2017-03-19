@@ -40,6 +40,10 @@ pymyinstall documentation
     :alt: Waffle
     :target: https://waffle.io/sdpython/pymyinstall
 
+.. image:: https://www.codacy.com/app/sdpython/pymyinstall?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sdpython/pymyinstall&amp;utm_campaign=Badge_Grade
+    :alt: Codacy Badge
+    :target: https://www.codacy.com/app/sdpython/pymyinstall?
+
 **Links:** `pypi <https://pypi.python.org/pypi/pymyinstall/>`_,
 `github <https://github.com/sdpython/pymyinstall/>`_,
 `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_,

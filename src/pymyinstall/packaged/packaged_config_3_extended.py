@@ -13,6 +13,23 @@ def extended_set():
     list of modules to install, an rich set, to work with data and more, it requires the modules in set *small*
     """
     mod = [
+        ModuleInstall("CommonMark", "pip", mname="commonmark",
+                      purpose="Python parser for the CommonMark Markdown spec"),
+        ModuleInstall("recommonmark", "pip",
+                      purpose="For pymc3???"),
+        ModuleInstall("numdifftools", "pip", usage="OPTIM",
+                      purpose="Solves automatic numerical differentiation problems in one or more variables."),
+        ModuleInstall("numpydoc", "pip",
+                      purpose="Sphinx extension to support docstrings in Numpy format"),
+        ModuleInstall("Automat", "pip", mname="automat",
+                      purpose="Self-service finite-state machines for the programmer on the go."),
+        ModuleInstall(
+            "guidata", "pip", purpose="Automatic graphical user interfaces generation for easy dataset editing and display"),
+        ModuleInstall(
+            "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
+        ModuleInstall(
+            "QtAwesome", "pip", mname="qtawesome",
+            purpose="QtAwesome enables iconic fonts such as Font Awesome and Elusive Icons in PyQt and PySide applications."),
         ModuleInstall(
             "natgrid", "wheel", mname="mpl_toolkits.natgrid",
             purpose="Python interface to NCAR natgrid library (for matplotlib)"),
@@ -287,6 +304,10 @@ def extended_set():
         ModuleInstall(
             "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas, bcolz and more."),
         #
+        ModuleInstall("glue-core", "pip", mname="glue_core",
+                      purpose="Multidimensional data visualzation across files"),
+        ModuleInstall("glue-vispy-viewers", "pip", mname="glue_vispy_viewers",
+                      purpose="Vispy-based viewers for Glue"),
         ModuleInstall("glueviz", "pip", mname="glue",
                       purpose="ploting, Multidimensional data visualzation across files", usage="DATA/ML"),
         #
@@ -651,6 +672,12 @@ def extended_set():
                       "model where non-linear trends are fit with yearly and weekly seasonality, plus holidays. " +
                       "It works best with daily periodicity data with at least one year of historical data. " +
                       "Prophet is robust to missing data, shifts in the trend, and large outliers."),
+        ModuleInstall('wikipedia', 'pip',
+                      purpose="Wikipedia API for Python"),
+        ModuleInstall('validate_email', 'pip',
+                      purpose="Validate_email verify if an email address is valid and really exists."),
+        ModuleInstall('simhash', 'pip',
+                      purpose="A Python implementation of Simhash Algorithm"),
     ]
 
     if sys.platform.startswith("win"):

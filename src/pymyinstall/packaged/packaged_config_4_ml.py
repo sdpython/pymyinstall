@@ -208,6 +208,8 @@ def ensae_set():
             "empyrical", "pip",
             purpose="empyrical is a Python library with performance and risk statistics commonly used in quantitative finance"),
         ModuleInstall(
+            "zipline", "lru_dict", purpose="An Dict like LRU container."),
+        ModuleInstall(
             "zipline", "pip",
             purpose="A backtester for financial algorithms.") if sys.version_info[:2] >= (3, 5) else None,  # finance
         ModuleInstall("vincent", "pip", purpose="plotting",
@@ -239,6 +241,10 @@ def ensae_set():
         #
         # pydata
         #
+        ModuleInstall("portend", "pip",
+                      purpose="TCP port monitoring utilities"),
+        ModuleInstall("cheroot", "pip",
+                      purpose="Highly-optimized, pure-python HTTP server"),
         ModuleInstall("CherryPy", "pip", mname="cherrypy",
                       purpose="create web application, needed by Spyre"),
         ModuleInstall("dataspyre", "pip", mname="spyre",
@@ -295,13 +301,6 @@ def ensae_set():
                       "two-dimensional quality mesh generator and delaunay triangulator library."),
         ModuleInstall("redis", "pip",
                       purpose="Python client for Redis key-value store"),
-        # this module is not on pypi and the py3k version is in a separate folder
-        # i don't want to write too much specific code for it
-        # i compile it into a wheel
-        # ModuleInstall("skdata", "wheel2",
-        # purpose="Data Sets for Machine Learning in Python", usage="DATA"),
-        ModuleInstall("hebel", "pip",
-                      purpose="GPU-Accelerated Deep Learning Library in Python", usage="DATA/ML"),
         # ModuleInstall("vowpal_porpoise", "pip",
         #              purpose="Lightweight python wrapper for vowpal_wabbit.", purpose="DATA/ML"),
         # it requires to build vowpal_wabbit for Windows

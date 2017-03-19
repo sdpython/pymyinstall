@@ -27,7 +27,7 @@ def missing_dependencies(specific=None):
     the function relis on module pipdeptree.
     """
     skip = {"setuptools", "pip", "distribute", "ordereddict", "argparse", "futures",
-            "pywin32", "pywin32_ctypes"}
+            "pywin32", "pywin32_ctypes", "pypiwin32", "monotonic", "typing"}
     tree = _main_pipdeptree()
     stack = {}
     for k, v in tree.items():

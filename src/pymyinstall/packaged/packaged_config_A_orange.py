@@ -22,7 +22,10 @@ def orange_set():
             "scikit-fusion", "pip", mname="skfusion",
             purpose="A Python module for data fusion built on top of factorized models."),
         ModuleInstall(
-            "orange3", "github", "biolab", mname="Orange", custom=["build", "install"],
+            "hyper", "pip",
+            purpose="HTTP/2 Client for Python"),
+        ModuleInstall(
+            "orange3", "pip", mname="Orange",
             usage="ORANGE", purpose="Orange is a component-based data mining software. It includes a range of data visualization, exploration, " +
             "preprocessing and modeling techniques. It can be used through a nice and intuitive user interface or, for more advanced users, " +
             "as a module for the Python programming language."),

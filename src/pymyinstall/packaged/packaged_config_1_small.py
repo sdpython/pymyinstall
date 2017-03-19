@@ -312,11 +312,6 @@ def small_set():
         ModuleInstall(
             "pythonqwt", "pip", purpose="Qt plotting widgets (Spyder)"),
         ModuleInstall(
-            "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
-        ModuleInstall(
-            "QtAwesome", "pip", mname="qtawesome",
-            purpose="QtAwesome enables iconic fonts such as Font Awesome and Elusive Icons in PyQt and PySide applications."),
-        ModuleInstall(
             "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
         # remove goslate from the list to avoid installing futures which appears as a dependency
         # ModuleInstall("goslate", "pip",  # version="1.4",
@@ -443,6 +438,8 @@ def small_set():
                       purpose="A python library to load structured table data from files/URL with various data format: CSV/Excel/HTML/JSON/LTSV/Markdown/TSV."),
         ModuleInstall("pytablewriter", "pip",
                       purpose="convert a dataframe into many formats"),
+        ModuleInstall("defusedxml", "pip",
+                      purpose="XML bomb protection for Python stdlib modules"),
     ]
 
     return [_ for _ in mod if _ is not None]
