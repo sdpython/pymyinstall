@@ -67,7 +67,7 @@ class TestInstallBuildInstall(unittest.TestCase):
             temp, "..", "..", "..", "setup.py"))
         assert os.path.exists(setup)
         folder = os.path.split(setup)[0]
-        cmd = "setup.py install".format(setup)
+        cmd = "{0} install".format(setup)
         fLOG("CMD: " + cmd)
         cwd = os.getcwd()
         os.chdir(folder)

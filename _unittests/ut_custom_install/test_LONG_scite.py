@@ -72,10 +72,10 @@ class TestScite (unittest.TestCase):
         if sys.platform.startswith("win"):
             r = install_scite(temp, fLOG=fLOG, change_python_path=True)
             exe = os.path.abspath(r)
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
             conf = exe.replace("SciTE.exe", "python.properties")
             fLOG(conf)
-            assert os.path.exists(conf)
+            self.assertTrue(os.path.exists(conf))
             with open(conf, "r") as f:
                 content = f.read().lower()
             if sys.executable.lower() not in content and \

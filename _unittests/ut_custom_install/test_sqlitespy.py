@@ -62,7 +62,7 @@ class TestSqliteSpy (unittest.TestCase):
                 "http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip")
             exe = install_sqlitespy(temp, fLOG=fLOG)
             fLOG("exe", exe)
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
 
 # http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481;media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip
 # http://www.yunqa.de/delphi/lib/exe/fetch.php?hash=938481&media=http%3A%2F%2Fwww.yunqa.de%2Fdelphi%2Fdownloads%2FSQLiteSpy_1.9.7.zip

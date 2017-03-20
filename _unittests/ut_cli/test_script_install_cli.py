@@ -94,10 +94,10 @@ class TestScriptInstallCli(unittest.TestCase):
             return
         script = os.path.join(os.path.dirname(os.path.abspath(
             __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_install.py")
-        assert os.path.exists(script)
+        self.assertTrue(os.path.exists(script))
         scriptu = os.path.join(os.path.dirname(os.path.abspath(
             __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_update.py")
-        assert os.path.exists(script)
+        self.assertTrue(os.path.exists(script))
 
         exe = sys.executable
 

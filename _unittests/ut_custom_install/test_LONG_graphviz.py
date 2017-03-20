@@ -66,7 +66,7 @@ class TestGraphviz(unittest.TestCase):
         if sys.platform.startswith("win"):
             r = install_graphviz(temp, fLOG=fLOG, install=False, source="2")
             exe = os.path.abspath(r)
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
 
     def test_install_graphviz_zip(self):
         fLOG(
@@ -82,9 +82,9 @@ class TestGraphviz(unittest.TestCase):
         if sys.platform.startswith("win"):
             r = install_graphviz(temp, fLOG=fLOG, install=True, source="zip")
             exe = os.path.abspath(r)
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
             exe = os.path.join(temp, "Graphviz", "bin", "dot.exe")
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
 
 
 if __name__ == "__main__":

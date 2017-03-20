@@ -59,7 +59,7 @@ class TestTDMGCC (unittest.TestCase):
         if sys.platform.startswith("win"):
             r = install_tdm_gcc(temp, fLOG=fLOG)
             exe = os.path.abspath(r)
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
 
 
 if __name__ == "__main__":

@@ -60,7 +60,7 @@ class TestJenkins(unittest.TestCase):
             r = install_jenkins(temp, fLOG=fLOG, install=False)
             fLOG(r)
             z = os.path.join(temp, "jenkins.war")
-            assert os.path.exists(z)
+            self.assertTrue(os.path.exists(z))
 
 
 if __name__ == "__main__":

@@ -76,13 +76,8 @@ def copy_icons(src, dest):
     return operations
 
 
-def win_download(folder=None,
-                 module_list=None,
-                 verbose=False,
-                 fLOG=print,
-                 download_only=True,
-                 selection=None,
-                 source=None):
+def win_download(folder=None, module_list=None, verbose=False, fLOG=print,
+                 download_only=True, selection=None, source=None):
     """
     The function downloads everything needed to prepare a setup.
 
@@ -279,12 +274,8 @@ def win_download(folder=None,
     return operations
 
 
-def win_install(folders,
-                download_folder,
-                verbose=False,
-                fLOG=print,
-                names=[
-                    "Julia", "Scite", "7z", "TDM", "MinGW", "R", "pandoc", "Python", "SQLiteSpy", "Putty", "Graphviz"],
+def win_install(folders, download_folder, verbose=False, fLOG=print,
+                names="Julia Scite 7z TDM MinGW R pandoc Python SQLiteSpy Putty Graphviz".split(),
                 selection=None):
     """
     Install setups
@@ -363,7 +354,6 @@ def win_install(folders,
         if exe is not None:
             # already done
             fLOG("--- already installed", exe)
-            pass
         else:
             fLOG("--- install", cand, " in ", loc)
             full = os.path.join(download_folder, cand)

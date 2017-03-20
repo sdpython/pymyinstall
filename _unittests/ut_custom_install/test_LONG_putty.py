@@ -66,7 +66,7 @@ class TestPutty (unittest.TestCase):
             r = install_putty(temp, fLOG=fLOG)
             exe = os.path.abspath(r)
             fLOG(exe)
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
 
 
 if __name__ == "__main__":

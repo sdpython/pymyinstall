@@ -51,8 +51,8 @@ class Testinks (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         suf = suffix()
         fLOG("*", suf)
-        assert "." in suf
-        assert len(suf.split(".")) == 3
+        self.assertTrue("." in suf)
+        self.assertEqual(len(suf.split(".")), 3)
 
 
 if __name__ == "__main__":

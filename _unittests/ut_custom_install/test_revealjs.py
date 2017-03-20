@@ -57,9 +57,9 @@ class TestRevealjs(unittest.TestCase):
         dest = get_temp_folder(__file__, "temp_install_revealjs_dest")
         fs = download_revealjs(temp, dest, fLOG=fLOG)
         fLOG(fs)
-        assert len(fs) > 0
+        self.assertTrue(len(fs) > 0)
         for a in fs:
-            assert os.path.exists(a)
+            self.assertTrue(os.path.exists(a))
 
 
 if __name__ == "__main__":

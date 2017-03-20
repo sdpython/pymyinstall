@@ -639,8 +639,8 @@ def ensae_set():
         ])
 
     if sys.platform.startswith("win"):
-        ModuleInstall(
-            "xlwings", "pip", purpose="reads/writes Excel files", usage="WINDOWS") if sys.platform.startswith("win") else None,
+        mod.append(ModuleInstall("xlwings", "pip",
+                                 purpose="reads/writes Excel files", usage="WINDOWS") if sys.platform.startswith("win") else None),
         mod.append(ModuleInstall("VideoCapture", "wheel",
                                  purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))
         mod.append(ModuleInstall("comtypes", "pip",

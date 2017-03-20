@@ -65,7 +65,7 @@ class TestLONGPandoc (unittest.TestCase):
                 fLOG=fLOG,
                 install=False,
                 force_download=True)
-            assert os.path.exists(r)
+            self.assertTrue(os.path.exists(r))
 
 
 if __name__ == "__main__":

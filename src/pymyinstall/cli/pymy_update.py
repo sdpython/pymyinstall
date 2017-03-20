@@ -53,7 +53,7 @@ def get_parser():
 
 
 def do_main(temp_folder="build/update_modules",
-            skip_module=["ete", "dataspyre", "pycuda", "cubehelix"],
+            skip_module="ete dataspyre pycuda cubehelix".split(),
             list_module=None, schedule_only=False, source=None):
     """
     calls function @see fn update_all but is meant to be added to scripts folder
