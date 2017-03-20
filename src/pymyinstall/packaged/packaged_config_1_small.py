@@ -304,6 +304,8 @@ def small_set():
         ModuleInstall(
             "backports.functools_lru_cache", "pip",
             purpose="backports.functools_lru_cache"),
+        ModuleInstall("lazy-object-proxy", "pip", mname="lazy_object_proxy",
+                      purpose="A fast and thorough lazy object proxy"),
         ModuleInstall(
             "astroid", "pip",
             purpose="A abstract syntax tree for Python with inference support."),
@@ -335,6 +337,8 @@ def small_set():
         ModuleInstall('itsdangerous', 'pip',
                       purpose="Various helpers to pass trusted data to untrusted environments and back."),
         ModuleInstall('simplejson', 'wheel', purpose="json parser"),
+        ModuleInstall("click", "pip",
+                      purpose="A simple wrapper around optparse for powerful command line utilities."),
         ModuleInstall('flask', 'pip', usage="NETWORK",
                       purpose="Flask is a microframework for Python based on Werkzeug, " +
                       "Jinja 2 and good intentions. And before you ask: It's BSD licensed!"),

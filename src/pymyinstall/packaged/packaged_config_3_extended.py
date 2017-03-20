@@ -57,6 +57,8 @@ def extended_set():
         if not sys.platform.startswith("win") else None,
         ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
                       usage="DATA/ML"),
+        ModuleInstall(
+            'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         ModuleInstall('python-pptx', 'pip', mname="pptx",
                       purpose="read/write PowerPoint presentation"),
         ModuleInstall(
@@ -66,13 +68,13 @@ def extended_set():
         ModuleInstall(
             'cffi', 'wheel', purpose="Foreign Function Interface for Python calling C code."),
         ModuleInstall(
+            'datashape', 'pip', purpose="A data description language."),
+        ModuleInstall(
             'odo', 'pip', purpose="usually used with blaze, handles dataframe in various type of containers", usage="DATA/ML"),
         ModuleInstall(
             'ordereddict', 'pip', purpose="Python's collections.OrderedDict") if sys.version_info[0] == 2 else None,
         ModuleInstall(
             'cyordereddict', 'wheel', purpose="Cython implementation of Python's collections.OrderedDict"),
-        ModuleInstall(
-            'datashape', 'pip', purpose="A data description language."),
         ModuleInstall('dynd', 'wheel',
                       purpose="DyND-Python, a component of the Blaze project, " +
                       "is the Python exposure of the DyND dynamic multi-dimensional array library.")
@@ -122,8 +124,6 @@ def extended_set():
             'olefile', 'pip', purpose="Python package to parse, read and write Microsoft OLE2 files " +
             "(Structured Storage or Compound Document, Microsoft Office) - Improved version of the " +
             "OleFileIO module from PIL, the Python Image Library."),
-        ModuleInstall(
-            'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         ModuleInstall(
             'pygame', 'wheel', purpose="GUI, interface for games (needs to be installed from www.pygame.org on Linux)", usage="GUI"),
         ModuleInstall(
@@ -258,6 +258,8 @@ def extended_set():
             "libpython", "wheel",
             purpose="needed for theano (C++ compilation), compilation of libpython with mingw") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall(
+            "nose-parameterized", "pip", mname="nose_parameterized", purpose="for theano"),
+        ModuleInstall(
             "Theano", "pip", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
         ModuleInstall('pymc', 'wheel',
                       purpose="Monte Carlo computation", usage="DATA/ML"),
@@ -306,7 +308,7 @@ def extended_set():
         ModuleInstall(
             "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas, bcolz and more."),
         #
-        ModuleInstall("glue-core", "pip", mname="glue_core",
+        ModuleInstall("glue-core", "pip", mname="glue.core",
                       purpose="Multidimensional data visualzation across files"),
         ModuleInstall("glue-vispy-viewers", "pip", mname="glue_vispy_viewers",
                       purpose="Vispy-based viewers for Glue"),
@@ -317,11 +319,11 @@ def extended_set():
                       purpose="plotting in javascript and pandas", usage="VIZ"),
         #
         ModuleInstall(
-            "chest", "pip",
-            purpose="Simple on-disk dictionary"),
-        ModuleInstall(
             "heapdict", "pip",
             purpose="a heap with decrease-key and increase-key operations"),
+        ModuleInstall(
+            "chest", "pip",
+            purpose="Simple on-disk dictionary"),
         ModuleInstall(
             "locket", "pip",
             purpose="File-based locks for Python for Linux and Windows"),
@@ -508,22 +510,11 @@ def extended_set():
                       "multiple processes (imagine multiprocessing, billiard, futures, celery etc)"),
         ModuleInstall("zict", "pip",
                       purpose="The dictionary / mutable mapping interface is powerful and multi-faceted."),
-        ModuleInstall("click", "pip",
-                      purpose="A simple wrapper around optparse for powerful command line utilities."),
 
         # mezzanine
         ModuleInstall(
             "chardet", "pip", usage="WEB",
             purpose="Universal encoding detector."),
-        ModuleInstall("grappelli_safe", "pip", usage="WEB",
-                      purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency for the Mezzanine CMS for Django."),
-        ModuleInstall("filebrowser_safe", "pip", usage="WEB",
-                      purpose="A snapshot of the filebrowser_3 branch of django-filebrowser, packaged as a dependency for the Mezzanine CMS for Django."),
-        ModuleInstall("django-contrib-comments", "pip", usage="WEB", mname="django_comments",
-                      purpose="Django used to include a comments framework; since Django 1.6 it’s " +
-                      "been separated to a separate project. This is that project."),
-        ModuleInstall("mezzanine", "pip", usage="WEB",
-                      purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),
         # pdf
         ModuleInstall("pyPdf", "github", "sdpython", usage="PDF",
                       branch="trunk", purpose="read PDF"),
@@ -544,8 +535,6 @@ def extended_set():
         # ModuleInstall("ipython-sql", "pip", purpose="RDBMS access via IPython", usgae="JUPYTER"),
         ModuleInstall("julia", "pip",
                       purpose="Julia/Python bridge with IPython support", usage="DATA/ML"),
-        ModuleInstall("lazy-object-proxy", "pip", mname="lazy_object_proxy",
-                      purpose="A fast and thorough lazy object proxy"),
         ModuleInstall("octave_kernel", "pip",
                       purpose="A Jupyter kernel for Octave."),
         ModuleInstall("oct2py", "pip",

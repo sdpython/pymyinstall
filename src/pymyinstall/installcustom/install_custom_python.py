@@ -269,7 +269,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     if len(err_) > 0:
                         fLOG("[install_python2] end installed modules.")
                         raise Exception(
-                            "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}".format(cmd, out, err, out_, err_))
+                            "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\n**CMD**\n{0}".format(cmd, out, err, out_, err_))
                     else:
                         out += "\n-------------\n" + out_
                 fLOG(out)

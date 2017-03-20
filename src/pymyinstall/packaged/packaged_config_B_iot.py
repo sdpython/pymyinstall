@@ -23,18 +23,16 @@ def iot_set():
                       purpose="Portable network interface information."),
         ModuleInstall('zeroconf', 'pip',
                       purpose="Multicast DNS Service Discovery for Python, originally by Paul Scott-Murphy."),
-        ModuleInstall(
-            'protobuf', 'pip', purpose="Protocol Buffers are Google’s data interchange format"),
         ModuleInstall('pychromecast', 'pip',
                       purpose="Library for Python 2 and 3 to communicate with the Google Chromecast."),
-        ModuleInstall('python-xlib', 'pip', mname="python_xlib",
+        ModuleInstall('python-xlib', 'pip', mname="Xlib",
                       purpose="Python X Library"),
-        ModuleInstall('pyHook', 'wheel', mname="pyhook",
+        ModuleInstall('pyHook', 'wheel', mname="pyHook",
                       purpose="Python wrapper for global input hooks in Windows. The package provides callbacks for mouse and keyboard events;" +
                       " events can be monitored and filtered."),
-        ModuleInstall('pyuserinput', 'pip',
+        ModuleInstall('pyuserinput', 'pip', mname="pykeyboard",
                       purpose="A simple, cross-platform module for mouse and keyboard control"),
-        ModuleInstall('tellcore-py', 'pip', usage="IoT",
+        ModuleInstall('tellcore-py', 'pip', mname="tellcore", usage="IoT",
                       purpose="Python wrapper for Telldus' home automation library"),
         ModuleInstall('python-nmap', 'pip', mname="nmap",
                       purpose="This is a python class to use nmap and access scan results from python3"),
@@ -109,7 +107,7 @@ def iot_set():
         # uncomment on a Raspberry Pi / Beaglebone
         # ModuleInstall('Adafruit_Python_DHT', 'github', 'mala-zaba', purpose="Adafruit temperature/humidity sensor", usage="IoT"),
 
-        ModuleInstall('paho-mqtt', 'pip', usage="IoT",
+        ModuleInstall('paho-mqtt', 'pip', mname="paho.mqtt", usage="IoT",
                       purpose="MQTT version 3.1/3.1.1 client class"),
         # ModuleInstall('pymodbus', 'github', 'bashwork', usage='IoT'),
         ModuleInstall('python-verisure', 'github',

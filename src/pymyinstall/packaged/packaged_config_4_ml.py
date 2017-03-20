@@ -57,6 +57,15 @@ def ensae_set():
                       purpose="localshop dependency, Accounts for Django made beautifully simple"),
         ModuleInstall('django-uuidfield', 'pip', mname="uuidfield",
                       purpose="localshop dependency, UUIDField in Django"),
+        ModuleInstall("grappelli_safe", "pip", usage="WEB",
+                      purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency for the Mezzanine CMS for Django."),
+        ModuleInstall("filebrowser_safe", "pip", usage="WEB",
+                      purpose="A snapshot of the filebrowser_3 branch of django-filebrowser, packaged as a dependency for the Mezzanine CMS for Django."),
+        ModuleInstall("django-contrib-comments", "pip", usage="WEB", mname="django_comments",
+                      purpose="Django used to include a comments framework; since Django 1.6 it’s " +
+                      "been separated to a separate project. This is that project."),
+        ModuleInstall("mezzanine", "pip", usage="WEB",
+                      purpose="Mezzanine is a powerful, consistent, and flexible content management platform."),
         ModuleInstall(
             'gunicorn', 'pip', purpose="localshop dependency, WSGI HTTP Server for UNIX"),
         ModuleInstall(
@@ -188,6 +197,15 @@ def ensae_set():
         #
         #
         # ModuleInstall("contextlib2", "pip", purpose="Backports and enhancements for the contextlib module"),
+        ModuleInstall(
+            "nuitka", "pip", purpose="C++ compilation, code optimization"),
+        # ModuleInstall("tri", "pip", purpose="Delaunay triangulation"), # only
+        # works on Python 2.7
+        ModuleInstall(
+            "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
+        ModuleInstall(
+            "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets " +
+            "and designed to efficiently and easily cope with extremely large amounts of data."),
         ModuleInstall("contextlib2", "pip",
                       purpose="Backports and enhancements for the contextlib module"),
         ModuleInstall(
@@ -267,15 +285,6 @@ def ensae_set():
         #
         # 2015-07
         #
-        ModuleInstall(
-            "nuitka", "pip", purpose="C++ compilation, code optimization"),
-        # ModuleInstall("tri", "pip", purpose="Delaunay triangulation"), # only
-        # works on Python 2.7
-        ModuleInstall(
-            "blosc", "wheel", purpose="Blosc (http://blosc.org) is a high performance compressor optimized for binary data."),
-        ModuleInstall(
-            "tables", "wheel", purpose="PyTables is a package for managing hierarchical datasets " +
-            "and designed to efficiently and easily cope with extremely large amounts of data."),
         ModuleInstall(
             "heatmap", "wheel", purpose="draw heatmap", usage="VIZ"),
         ModuleInstall("planar", "wheel",
@@ -597,6 +606,8 @@ def ensae_set():
         #
         # 2017-01/02
         #
+        ModuleInstall(
+            'protobuf', 'pip', purpose="Protocol Buffers are Google’s data interchange format"),
         ModuleInstall("tensorflow", "wheel", usage="DATA/ML",
                       purpose="Deep Learning from Google"),
         ModuleInstall("edward", "pip", usage="DATA/ML",
@@ -660,7 +671,7 @@ def ensae_set():
                  'azure-servicemanagement-legacy', 'azure-mgmt', 'azure']:
         # azure part
         m = ModuleInstall(
-            name, "pip", mname=name.replace("-", "_"), pip_options=["--pre"],
+            name, "pip", mname=name.replace("-", "."), pip_options=["--pre"],
             purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE")
         mod.append(m)
 

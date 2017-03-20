@@ -28,6 +28,9 @@ def orange_set():
             "hyperframe", "pip",
             purpose="HTTP/2 framing layer for Python"),
         ModuleInstall(
+            "hpack", "pip",
+            purpose="Pure-Python HPACK header compression"),
+        ModuleInstall(
             "h2", "pip",
             purpose="HTTP/2 State-Machine based protocol implementation"),
         ModuleInstall(

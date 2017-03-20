@@ -574,7 +574,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
 
     miss = missing_dependencies()
     if len(miss) > 0:
-        mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
+        mes = "\n".join("{0} misses '{1}'".format(k, ", ".join(v))
                         for k, v in sorted(miss.items()))
         warnings.warn(mes)
 
