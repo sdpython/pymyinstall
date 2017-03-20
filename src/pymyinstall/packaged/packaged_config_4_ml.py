@@ -241,6 +241,8 @@ def ensae_set():
         #
         # pydata
         #
+        ModuleInstall("tempora", "pip",
+                      purpose="Objects and routines pertaining to date and time (tempora)"),
         ModuleInstall("portend", "pip",
                       purpose="TCP port monitoring utilities"),
         ModuleInstall("cheroot", "pip",

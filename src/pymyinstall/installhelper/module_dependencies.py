@@ -28,7 +28,7 @@ def missing_dependencies(specific=None):
     """
     skip = {"setuptools", "pip", "distribute", "ordereddict", "argparse", "futures",
             "pywin32", "pywin32_ctypes", "pypiwin32", "monotonic", "typing", "pathlib",
-            "enum_compat"}
+            "enum_compat", "guidata", "pycryptodome"}
     tree = _main_pipdeptree()
     stack = {}
     for k, v in tree.items():

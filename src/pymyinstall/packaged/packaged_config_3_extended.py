@@ -17,6 +17,8 @@ def extended_set():
                       purpose="Python parser for the CommonMark Markdown spec"),
         ModuleInstall("recommonmark", "pip",
                       purpose="For pymc3???"),
+        ModuleInstall("algopy", "pip", usage="OPTIM",
+                      purpose="ALGOPY: Taylor Arithmetic Computation and Algorithmic Differentiation"),
         ModuleInstall("numdifftools", "pip", usage="OPTIM",
                       purpose="Solves automatic numerical differentiation problems in one or more variables."),
         ModuleInstall("numpydoc", "pip",

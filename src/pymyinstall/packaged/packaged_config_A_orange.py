@@ -22,6 +22,15 @@ def orange_set():
             "scikit-fusion", "pip", mname="skfusion",
             purpose="A Python module for data fusion built on top of factorized models."),
         ModuleInstall(
+            "anyqt", "pip",
+            purpose="PyQt4/PyQt5 compatibility layer."),
+        ModuleInstall(
+            "hyperframe", "pip",
+            purpose="HTTP/2 framing layer for Python"),
+        ModuleInstall(
+            "h2", "pip",
+            purpose="HTTP/2 State-Machine based protocol implementation"),
+        ModuleInstall(
             "hyper", "pip",
             purpose="HTTP/2 Client for Python"),
         ModuleInstall(
