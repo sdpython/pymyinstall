@@ -43,6 +43,7 @@ def pyquickhelper_set():
         "jupyter_core",
         "jupyter_client",
         "jupyter-pip",
+        "jupyter_sphinx",
         "jyquickhelper",
         "keyring",
         "lxml",

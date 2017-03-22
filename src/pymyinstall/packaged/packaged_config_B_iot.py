@@ -110,7 +110,7 @@ def iot_set():
         ModuleInstall('paho-mqtt', 'pip', mname="paho.mqtt", usage="IoT",
                       purpose="MQTT version 3.1/3.1.1 client class"),
         # ModuleInstall('pymodbus', 'github', 'bashwork', usage='IoT'),
-        ModuleInstall('python-verisure', 'github',
+        ModuleInstall('python-verisure', 'github', mname="verisure",
                       'persandstrom', usage='IoT', purpose="A python module for reading and changing status of verisure devices through mypages."),
         ModuleInstall('voluptuous', 'pip',
                       purpose="Voluptuous is a Python data validation library"),

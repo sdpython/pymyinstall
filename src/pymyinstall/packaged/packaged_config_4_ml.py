@@ -430,7 +430,7 @@ def ensae_set():
         #
         # 2016-03
         #
-        ModuleInstall("PrettyTable", "pip", mname="prettytable",
+        ModuleInstall("PTable", "pip", mname="prettytable",
                       purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
         ModuleInstall("ruamel.yaml", "pip",
                       purpose="ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"),
@@ -522,8 +522,6 @@ def ensae_set():
                       purpose="Multi-producer-multi-consumer signal dispatching mechanism"),
         ModuleInstall('twisted', 'pip',
                       purpose="An asynchronous networking framework written in Python"),
-        ModuleInstall('attrs', 'pip',
-                      purpose="Attributes without boilerplate."),
         ModuleInstall('parsel', 'pip',
                       purpose="Parsel is a library to extract data from HTML and XML using XPath and CSS selectors."),
         ModuleInstall('pyasn1-modules', 'pip', mname="pyasn1_modules",
@@ -639,12 +637,12 @@ def ensae_set():
         ])
 
     if sys.platform.startswith("win"):
+        mod.append(ModuleInstall("comtypes", "pip",
+                                 purpose="Pure Python COM package"))
         mod.append(ModuleInstall("xlwings", "pip",
                                  purpose="reads/writes Excel files", usage="WINDOWS") if sys.platform.startswith("win") else None),
         mod.append(ModuleInstall("VideoCapture", "wheel",
                                  purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))
-        mod.append(ModuleInstall("comtypes", "pip",
-                                 purpose="Pure Python COM package"))
         mod.append(ModuleInstall("jaraco.structures", "pip",
                                  purpose="jaraco.structures"))
         mod.append(ModuleInstall("jaraco.util", "pip",

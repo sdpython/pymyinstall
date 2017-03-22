@@ -23,6 +23,8 @@ def extended_set():
                       purpose="Solves automatic numerical differentiation problems in one or more variables."),
         ModuleInstall("numpydoc", "pip",
                       purpose="Sphinx extension to support docstrings in Numpy format"),
+        ModuleInstall('attrs', 'pip',
+                      purpose="Attributes without boilerplate."),
         ModuleInstall("Automat", "pip", mname="automat",
                       purpose="Self-service finite-state machines for the programmer on the go."),
         ModuleInstall(
@@ -282,10 +284,10 @@ def extended_set():
                       "The botocore package is the foundation for the AWS CLI as well as boto3."),
         ModuleInstall("s3transfer", "pip", usage="AWS",
                       purpose="An Amazon S3 Transfer Manager"),
-        ModuleInstall("s3fs", "pip", usage="AWS",
-                      purpose="Convenient Filesystem interface over S3"),
         ModuleInstall("boto3", "pip", usage="AWS",
                       purpose="A Python interface to Amazon Web Services"),
+        ModuleInstall("s3fs", "pip", usage="AWS",
+                      purpose="Convenient Filesystem interface over S3"),
         # for gensim
         ModuleInstall("bz2file", "pip", purpose="process bz2 files"),
         # for gensim
@@ -545,7 +547,7 @@ def extended_set():
                       purpose="Pattern-matching language based on OMeta for Python 3 and 2"),
         # ModuleInstall("ViTables", "pip", mname="vitables",
         #               purpose="A viewer for PyTables package"),
-        ModuleInstall("pybars3", "pip",
+        ModuleInstall("pybars3", "pip", mname="pybar",
                       purpose="Handlebars.js templating"),
         ModuleInstall("db.py", "pip", mname="db.tables",
                       purpose="db.py is an easier way to interact with your databases. It makes it easier to explore tables, columns, views, etc. " +
