@@ -648,7 +648,7 @@ def extended_set():
                       "objects in a running Python application."),
         ModuleInstall('fbpca', 'pip',
                       purpose="Functions for principal component analysis (PCA) and accuracy checks."),
-        ModuleInstall('prince', 'github', 'MaxHalford',
+        ModuleInstall('prince', 'pip',
                       purpose="Prince is a factor analysis library for datasets that fit in memory."),
         ModuleInstall('pivottablejs', 'pip',
                       purpose="PivotTable.js integration for Jupyter/IPython Notebook."),
