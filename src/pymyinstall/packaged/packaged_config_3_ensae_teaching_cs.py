@@ -65,7 +65,9 @@ def ensae_teaching_cs_set():
         "toolz",
         "ujson",
         "xarray",
+        "wikipedia",
         "wordcloud",
+        "wptools",
         "yaml",
         #
         "actuariat_python",

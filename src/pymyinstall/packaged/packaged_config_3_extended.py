@@ -669,6 +669,10 @@ def extended_set():
                       purpose="Validate_email verify if an email address is valid and really exists."),
         ModuleInstall('simhash', 'pip',
                       purpose="A Python implementation of Simhash Algorithm"),
+        ModuleInstall('wikipedia', 'pip',
+                      purpose="Wikipedia API for Python"),
+        ModuleInstall('wptools', 'pip',
+                      purpose="Wikipedia tools (for Humans)"),
     ]
 
     if sys.platform.startswith("win"):
