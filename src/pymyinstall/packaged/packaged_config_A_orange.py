@@ -12,7 +12,8 @@ def orange_set():
     """
     mod = [
         ModuleInstall(
-            "bottlechest", "wheel2", purpose="Bottlechest is a fork of bottleneck specialized for use in Orange", usage="ORANGE"),
+            "Bottlechest", "wheel2", mname="bottlechest",
+            purpose="Bottlechest is a fork of bottleneck specialized for use in Orange", usage="ORANGE"),
         ModuleInstall(
             "setuptools-git", "pip", mname="setuptools_git",
             purpose="This is a plugin for setuptools that enables git integration. Once installed, Setuptools " +
