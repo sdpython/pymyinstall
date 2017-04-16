@@ -1,0 +1,9 @@
+
+.. blogpost::
+    :title: Skip Pillow 4.1.0 for Windows
+    :keywords: pillow, Windows
+    :date: 2017-04-16
+    :categories: modules
+
+    See
+    `PIL: DLL load failed: specified procedure could not be found <http://stackoverflow.com/questions/43264773/pil-dll-load-failed-specified-procedure-could-not-be-found>`_.
