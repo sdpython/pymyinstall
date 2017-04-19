@@ -617,7 +617,7 @@ def ensae_set():
         ModuleInstall("nbdime", "pip",
                       purpose="Comparison of notebooks"),
         ModuleInstall("cntk", "wheel", usage="DATA/ML",
-                      overwrite="https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0.beta12.0-cp{0}{1}-cp{0}{1}m-win_amd64.whl",
+                      overwrite="https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0.rc1.0-cp{0}{1}-cp{0}{1}m-win_amd64.whl",
                       purpose="Deep Learning from Microsoft"),
     ]
 

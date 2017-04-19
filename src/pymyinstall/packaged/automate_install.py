@@ -1,6 +1,17 @@
 """
 @file
 @brief Install or update all packages.
+
+.. faqref::
+    :title: Skipped modules
+
+    Some modules are still marked as a dependency by others
+    even if they are not needed or cannot be installed.
+
+    * `enum-compat <https://pypi.python.org/pypi/enum-compat>`_:
+      not needed after Python 3.5
+    * `prettytable <https://pypi.python.org/pypi/PrettyTable>`_:
+      should be repladed by `PTable <https://pypi.python.org/pypi/PTable>`_.
 """
 from __future__ import print_function
 import sys
@@ -401,10 +412,12 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         if isinstance(v, list):
             for _ in v:
                 for la, va in zip(("CMD", "OUT", "ERR-2"), _):
-                    fLOG(la, va)
+                    if va is not None and len(va) > 0:
+                        fLOG(la, va)
         else:
             for la, va in zip(("CMD", "OUT", "ERR-3"), v):
-                fLOG(la, va)
+                if va is not None and len(va) > 0:
+                    fLOG(la, va)
         fLOG(".")
     return out_streams_module
 

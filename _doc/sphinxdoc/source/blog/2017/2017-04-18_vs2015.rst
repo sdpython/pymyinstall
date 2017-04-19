@@ -1,0 +1,14 @@
+
+.. blogpost::
+    :title: Get Visual Studio Community Edition 2015
+    :keywords: Microsoft, Visual Studio
+    :date: 2017-04-18
+    :categories: C++
+
+    Visual Studio Community Edition has updated to 2017
+    and the link to kind the 2015 version is somehow difficult to find.
+    It is not like I prefer 2015 but I need it to compile
+    many Python module:
+    `Visual Studio Community 2015 <https://imagine.microsoft.com/en-us/Catalog/Product/101>`_
+    or this other link
+    `Visual Studio Community 2015 with Update 3 <https://my.visualstudio.com/Downloads?q=visual%20studio%20community%202015>`_.

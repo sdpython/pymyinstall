@@ -1,3 +1,4 @@
+# execute in admin mode
 import sys
 sys.path.append("../src")
 from pymyinstall.packaged import update_all

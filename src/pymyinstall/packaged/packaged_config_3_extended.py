@@ -27,8 +27,9 @@ def extended_set():
                       purpose="Attributes without boilerplate."),
         ModuleInstall("Automat", "pip", mname="automat",
                       purpose="Self-service finite-state machines for the programmer on the go."),
-        ModuleInstall(
-            "guidata", "pip", purpose="Automatic graphical user interfaces generation for easy dataset editing and display"),
+        ModuleInstall(  # requires VS 2015
+            "guidata", "pip", purpose="Automatic graphical user interfaces generation for easy dataset editing and display") \
+        if not sys.platform.startswith("win") else None,  # it does not work on Windows
         ModuleInstall(
             "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
         ModuleInstall(
@@ -197,7 +198,7 @@ def extended_set():
                       purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
         ModuleInstall("pycryptodomex", "pip", mname="Cryptodome",
                       purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
-        ModuleInstall("xxhash", "pip",
+        ModuleInstall("xxhash", "wheel",
                       purpose="xxHash is an Extremely fast Hash algorithm, running at RAM speed limits."),
         ModuleInstall("packaging", "pip",
                       purpose="helpers for packages"),
@@ -572,7 +573,7 @@ def extended_set():
                       "This version of the protocol is often referred to as 'IDNA2008'."),
         ModuleInstall("ldap3", "pip", usage="WEB",
                       purpose="ldap3 is a strictly RFC 4510 conforming LDAP V3 pure Python client library."),
-        ModuleInstall("mpi4py", "pip",
+        ModuleInstall("mpi4py", "wheel",
                       purpose="MPI for Python"),
         ModuleInstall("mss", "pip", mname="mms",
                       purpose="An ultra fast cross-platform multiple screenshots module in pure python using ctypes"),

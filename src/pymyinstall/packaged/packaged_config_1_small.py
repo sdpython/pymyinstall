@@ -417,7 +417,7 @@ def small_set():
         ModuleInstall("sqlite_bro", "pip",
                       purpose="GUI for SQLite"),
         ModuleInstall("uvloop", "pip", purpose="Fast implementation of asyncio event loop on top of libuv") if sys.version_info[
-            :2] > (3, 5) else None,
+            :2] > (3, 5) and not sys.platform.startswith("win") else None,  # requires VS 2015 ?
         ModuleInstall("tabulate", "pip",
                       purpose="Pretty-print tabular data"),
         ModuleInstall("httpie", "pip",
