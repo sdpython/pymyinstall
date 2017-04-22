@@ -668,9 +668,15 @@ def ensae_set():
                  'azure-mgmt-web', 'azure-graphrbac', 'azure-batch', 'azure-servicebus',
                  'azure-servicemanagement-legacy', 'azure-mgmt', 'azure']:
         # azure part
+        mname = name.replace("-", ".")
+        if mname == "azure.nspkg":
+            skip_import = True
+        else:
+            skip_import = False
         m = ModuleInstall(
-            name, "pip", mname=name.replace("-", "."), pip_options=["--pre"],
-            purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE")
+            name, "pip", mname=mname, pip_options=["--pre"],
+            purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE",
+            skip_import=skip_import)
         mod.append(m)
 
     mod.append(ModuleInstall("azureml", "pip",

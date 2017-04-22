@@ -66,7 +66,8 @@ class ModuleInstall:
     def __init__(self, name, kind="pip", gitrepo=None, mname=None, fLOG=print,
                  version=None, script=None, index_url=None, deps=None,
                  purpose=None, usage=None, web=None, source=None, custom=None,
-                 branch="master", pip_options=None, overwrite=None, post=None):
+                 branch="master", pip_options=None, overwrite=None, post=None,
+                 skip_import=False):
         """
         constructor
 
@@ -93,9 +94,11 @@ class ModuleInstall:
         @param      overwrite       overwrite the location of the wheel
         @param      post            instructions post installation (look for this parameter
                                     in the code to see what is supported)
+        @param      skip_import     added to indicate the module cannot be imported
 
         .. versionchanged:: 1.1
             Parameters *source*, *custom*, *branch*, *pip_options*, *overwrite*, *post* were added.
+            Parameter *skip_import* was introduced to skip the checking of the installation.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -118,6 +121,11 @@ class ModuleInstall:
         self.pip_options = pip_options
         self.overwrite = overwrite
         self.post_installation = post
+        if self.mname is not None and self.mname.startswith("-"):
+            self.mname = self.mname[1:]
+            self.skip_import = True
+        else:
+            self.skip_import = skip_import
         self.web = web if web is not None else (
             "https://pypi.python.org/pypi/" + self.name)
 
@@ -155,7 +163,8 @@ class ModuleInstall:
         r = dict(name=self.name, kind=self.kind, gitrepo=self.gitrepo, version=self.version,
                  mname=self.mname, script=self.script, deps=self.deps, index_url=self.index_url,
                  purpose=self.purpose, usage=self.usage, web=self.web,
-                 post=None if self.post_installation is None else self.post_installation.copy())
+                 post=None if self.post_installation is None else self.post_installation.copy(),
+                 skip_import=self.skip_import)
         if rst_link:
             r["rst_link"] = "`{0} <{1}>`_".format(self.name, self.web)
             r["license"] = self.get_installed_license()
@@ -258,23 +267,30 @@ class ModuleInstall:
         checks if a module is installed
         """
         if self.script is None:
-            try:
-                if "." in self.ImportName:
-                    raise ImportError(self.ImportName)
-                if sys.version_info[0] == 2:
-                    r = importlib.import_module(self.ImportName)
-                    return r
-                else:
-                    r = importlib.util.find_spec(self.ImportName)
-                    return r is not None
-                return r is not None
-            except ImportError:
-                txt = "import {0}  # {1}".format(self.ImportName, self.name)
+            if self.skip_import:
                 try:
-                    exec(txt)
-                    return True
-                except Exception:
+                    return self.is_installed_local_cmd()
+                except InstallError:
                     return False
+            else:
+                try:
+                    if "." in self.ImportName:
+                        raise ImportError(self.ImportName)
+                    if sys.version_info[0] == 2:
+                        r = importlib.import_module(self.ImportName)
+                        return r
+                    else:
+                        r = importlib.util.find_spec(self.ImportName)
+                        return r is not None
+                    return r is not None
+                except ImportError:
+                    txt = "import {0}  # {1}".format(
+                        self.ImportName, self.name)
+                    try:
+                        exec(txt)
+                        return True
+                    except Exception:
+                        return False
         else:
             return os.path.exists(self.Script)
 
@@ -286,24 +302,37 @@ class ModuleInstall:
         .. versionadded:: 1.1
         """
         exe = get_python_program()
-        cmd = exe + \
-            ' -u -c "import {0} # {1}"'.format(self.ImportName, self.name)
-        out, err = run_cmd(cmd, fLOG=self.fLOG)
-        if err:
-            raise InstallError("cannot import module {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-K:\n{3}".format(
-                self.ImportName, cmd, out, err))
-        if self.name == "scipy":
-            cmd = exe + ' -u -c "import scipy.sparse"'
+        if self.skip_import:
+            cmd = exe + \
+                ' -u -c "import pip # pip.main(["show", "{0}"])'.format(
+                    self.name)
+            out, err = run_cmd(cmd, fLOG=self.fLOG)
+            if err or out is None:
+                raise InstallError("Cannot find {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-K1:\n{3}".format(
+                    self.name, cmd, out, err))
+            if ("Name: " + self.name) not in out:
+                raise InstallError("Cannot find {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-K3:\n{3}".format(
+                    self.name, cmd, out, err))
+            return True
+        else:
+            cmd = exe + \
+                ' -u -c "import {0} # {1}"'.format(self.ImportName, self.name)
             out, err = run_cmd(cmd, fLOG=self.fLOG)
             if err:
-                if sys.platform.startswith("win") and sys.version_info[:2] >= (3, 5) and "DLL" in err:
-                    mes = "scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-M:\n{3}"
-                    raise InstallError(mes.format(
-                        self.ImportName, cmd, out, err))
-                else:
-                    raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-L:\n{3}".format(
-                        self.ImportName, cmd, out, err))
-        return True
+                raise InstallError("cannot import module {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-K2:\n{3}".format(
+                    self.ImportName, cmd, out, err))
+            if self.name == "scipy":
+                cmd = exe + ' -u -c "import scipy.sparse"'
+                out, err = run_cmd(cmd, fLOG=self.fLOG)
+                if err:
+                    if sys.platform.startswith("win") and sys.version_info[:2] >= (3, 5) and "DLL" in err:
+                        mes = "scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-M:\n{3}"
+                        raise InstallError(mes.format(
+                            self.ImportName, cmd, out, err))
+                    else:
+                        raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-L:\n{3}".format(
+                            self.ImportName, cmd, out, err))
+            return True
 
     _page_cache_html2 = os.path.join(
         os.path.abspath(os.path.split(__file__)[0]), "page2.html")
