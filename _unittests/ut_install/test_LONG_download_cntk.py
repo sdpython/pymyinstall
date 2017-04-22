@@ -62,16 +62,12 @@ class TestLONGDownloadCntk(unittest.TestCase):
                 os.remove(os.path.join(temp, _))
 
         if sys.platform.startswith("win"):
-            if sys.version_info[:2] != (3, 6):
-                fLOG("install", "cntk")
-                m = find_module_install("cntk")
-                m.fLOG = fLOG
-                exe = m.download(temp_folder=temp)
-                assert os.path.exists(exe)
-                assert os.stat(exe).st_size > 100000
-            else:
-                fLOG("CNTK not available for 3.6")
-                warnings.warn("CNTK not available for 3.6")
+            fLOG("install", "cntk")
+            m = find_module_install("cntk")
+            m.fLOG = fLOG
+            exe = m.download(temp_folder=temp)
+            assert os.path.exists(exe)
+            assert os.stat(exe).st_size > 100000
 
 
 if __name__ == "__main__":
