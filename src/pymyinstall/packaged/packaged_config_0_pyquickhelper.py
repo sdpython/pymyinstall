@@ -36,6 +36,7 @@ def pyquickhelper_set():
         "ipystata" if sys.version_info[0] == 2 else None,
         "ipython_genutils",
         "ipywidgets",
+        "jedi",
         "jinja2",
         "jsonschema",
         "jupyter-console",
