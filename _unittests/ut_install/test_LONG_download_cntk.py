@@ -7,7 +7,6 @@ skip this test for regular run
 import sys
 import os
 import unittest
-import warnings
 
 
 try:
