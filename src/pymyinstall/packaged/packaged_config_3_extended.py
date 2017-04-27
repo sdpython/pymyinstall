@@ -347,8 +347,6 @@ def extended_set():
             "from heterogeneous grids to supercomputers", usage="DATA/ML"),
         #
         ModuleInstall(
-            "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
-        ModuleInstall(
             "docopt", "pip", purpose="Pythonic argument parser, that will make you smile"),
         ModuleInstall("markdown2", "pip", purpose="markdown parser"),
         ModuleInstall(

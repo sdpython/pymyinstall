@@ -155,12 +155,14 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         # file
         if versioni >= (3, 6, 0):
             if custom:
-                if versioni != (3, 6, 0):
+                if versioni > (3, 6, 1):
                     raise ValueError(
                         "Not custom zip available for Python {0}".format(versioni))
-                url = "http://www.xavierdupre.fr/enseignement/setup/Python36-3.6.0-amd64.zip"
+                url = "http://www.xavierdupre.fr/enseignement/setup/Python{0}{1}-{0}.{1}.{2}-amd64.zip".format(
+                    *sys.version_info[:3])
             else:
-                url = "https://www.python.org/ftp/python/3.6.0/python-3.6.0-embed-amd64.zip"
+                url = "https://www.python.org/ftp/python/{0}.{1}.{2}/python-{0}.{1}.{2}-embed-amd64.zip".format(
+                    *sys.version_info[:3])
         elif versioni >= (3, 5, 0):
             if custom:
                 if versioni not in [(3, 5, 3), (3, 5, 2)]:

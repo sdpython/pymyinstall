@@ -191,6 +191,8 @@ def small_set():
         ModuleInstall(
             "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
+            "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
+        ModuleInstall(
             "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(
             "jupyter_core", "pip", purpose="Jupyter Core", usage="JUPYTER"),
