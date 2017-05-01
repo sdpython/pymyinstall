@@ -48,6 +48,7 @@ def ensae_teaching_cs_set():
         "progressbar2",
         "psutil",
         "psycopg2",
+        "pycurl",
         "pydub",
         "pygal",
         "pygame",
