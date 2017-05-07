@@ -16,6 +16,13 @@ else:
     from html.parser import HTMLParser
 
 
+class InternalJsException(Exception):
+    """
+    Raises when a javascript url cannot be decrypted.
+    """
+    pass
+
+
 @install_memoize
 def get_page_wheel(page, sele=False):
     """
@@ -243,14 +250,16 @@ def enumerate_links_module(name, alls, version, plat):
                 js = val.lstrip()
 
         if js:
-            b = "javascript:"
-            if js.startswith(b):
-                js = js[len(b):]
-                dl = _cg_dl
-                if dl is not None:
-                    res = eval(js)
-                else:
-                    res = None
-            else:
-                res = None
+            bs = ["javascript:", "javascript :"]
+            res = None
+            for b in bs:
+                if js.startswith(b):
+                    js = js[len(b):]
+                    dl = _cg_dl
+                    if dl is not None:
+                        res = eval(js)
+                        break
+            if res is None:
+                raise InternalJsException(
+                    "Unable to decode js '{0}'".format(js))
             yield n, js, res

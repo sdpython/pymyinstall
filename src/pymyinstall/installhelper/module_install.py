@@ -481,7 +481,12 @@ class ModuleInstall:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
             raise MissingWheelException(
-                "unable to find a single link for " + self.name)
+                "Unable to find a single link for " + self.name)
+        else:
+            nbnone = [l for l in links if l[2] is None]
+            if len(nbnone) * 2 > len(links):
+                raise WrongWheelException("Unable to find any version in\n{0}".format(
+                    "\n".join(str(_) for _ in links)))
         links0 = links
 
         if self.name == "PyQt":
@@ -498,6 +503,9 @@ class ModuleInstall:
 
         link = choose_most_recent(links)
         self.existing_version = self.extract_version(link[0])
+        if link[2] is None:
+            raise WrongWheelException("Unable to find a proper link in {0}\n{1}".format(
+                link, "\n".join(str(_) for _ in links)))
         url, whl = ModuleInstall.exeLocation + link[2], link[0]
         if not whl.endswith(".whl"):
             whl += ".whl"

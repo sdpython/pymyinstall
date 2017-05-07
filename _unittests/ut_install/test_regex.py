@@ -99,7 +99,7 @@ class TestRegex (unittest.TestCase):
         if r:
             fLOG(r.groups())
         else:
-            assert False
+            self.assertTrue(False)
 
     def test_2(self):
         fLOG(
@@ -117,7 +117,7 @@ class TestRegex (unittest.TestCase):
         if r:
             fLOG(r.groups())
         else:
-            assert False
+            self.assertTrue(False)
 
     def test_3(self):
         fLOG(
@@ -134,7 +134,7 @@ class TestRegex (unittest.TestCase):
         if r:
             fLOG(r.groups())
         else:
-            assert False
+            self.assertTrue(False)
 
     def test_4(self):
         fLOG(
@@ -151,7 +151,24 @@ class TestRegex (unittest.TestCase):
         if r:
             fLOG(r.groups())
         else:
-            assert False
+            self.assertTrue(False)
+
+    def test_5(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        pattern = "[-]([0-9]+[.][abc0-9]+([.][0-9])?([.][0-9abdevcr]+)?)([+][a-z]+)?" + \
+                  "([+]cuda[0-9]{2,5})?([+]sdl[0-9])?([+]numpy[0-9]{1,2})?([+.]post[0-9]{1,2})?([.][0-9])?[-]"
+        raw = """<li><a href='javascript:;' onclick='&nbsp;javascript :dl([101,45,52,107,65,100,51,109,110,108,97,57,115,117,53,121,46,104,54,119,116,95,112,47,105,111,99,50], """ + \
+              """"C&lt;H@=&#62;12F3;;G6&lt;8H0J?:0IE5A0IE5A60BG7D964A1?B@8")' title='[1.6&#160;MB] [Nov 13, 2016]'>Assimulo-2.9-cp36-cp36m-win_amd64.whl</a></li>"""
+        reg = re.compile(pattern)
+        r = reg.search(raw)
+        if r:
+            fLOG(r.groups())
+        else:
+            self.assertTrue(False)
 
 
 if __name__ == "__main__":
