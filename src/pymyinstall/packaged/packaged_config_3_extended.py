@@ -174,8 +174,8 @@ def extended_set():
                       "and visualisation as easy as possible (issue on Linux and Anaconda)", usage="VIZ"),
         # the module cartopy requires GEOS https://trac.osgeo.org/geos/
         #
-        ModuleInstall("python-linkedin", "github", "ozgur", mname="linkedin",
-                      purpose="python wrapper for linkedin interface"),
+        ModuleInstall("python3-linkedin", "pip", mname="linkedin",
+                      purpose="Python Interface to the LinkedIn API"),
         # access to linkedin
         ModuleInstall(
             "oauthlib", "pip", purpose="A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"),

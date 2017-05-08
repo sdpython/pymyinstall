@@ -61,7 +61,7 @@ def pyensae_set():
         "ipykernel",
         "isodate",
         "keyring",
-        "linkedin",
+        "python3-linkedin",
         "logbook",
         "markdown2",
         "msrest",
@@ -80,6 +80,7 @@ def pyensae_set():
         "pycryptodomex",
         "PyJWT",
         "pyquickhelper",
+        "simplesqlite",
         "pytablereader",
         "pytablewriter",
         "qgrid",  # magic command

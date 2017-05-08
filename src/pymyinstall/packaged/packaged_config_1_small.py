@@ -440,6 +440,8 @@ def small_set():
                       purpose="Python Library for Tom's Obvious, Minimal Language"),
         ModuleInstall("dataproperty", "pip",
                       purpose="Python library for extract property from data."),
+        ModuleInstall("simplesqlite", "pip",
+                      purpose="SimpleSQLite is a Python library to simplify the table creation and data insertion into SQLite database."),
         ModuleInstall("pytablereader", "pip",
                       purpose="A python library to load structured table data from files/URL with various data format: CSV/Excel/HTML/JSON/LTSV/Markdown/TSV."),
         ModuleInstall("pytablewriter", "pip",
