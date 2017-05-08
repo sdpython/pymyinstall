@@ -73,14 +73,17 @@ def ensae_teaching_cs_set():
         #
         "actuariat_python",
         "code_beatrix",
+        "ensae_projects",
         "ensae_teaching_cs",
         "jupytalk",
         "jyquickhelper",
+        "mlstatpy",
         "pyensae",
         "pymmails",
         "pyquickhelper",
         "pyrsslocal",
-        #"ensae_projects",
+        "teachpyx",
+        "tkinterquickhelper",
     ]
 
     from .automate_install import find_module_install

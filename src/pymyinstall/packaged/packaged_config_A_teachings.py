@@ -16,6 +16,8 @@ def teachings_set():
         ModuleInstall(
             "pyquickhelper", "pip", purpose="helpers to generation documentation", usage="TEACH"),
         ModuleInstall(
+            "tkinterquickhelper", "pip", purpose="windows on the top of tkinter", usage="TEACH"),
+        ModuleInstall(
             "pymyinstall", "pip", purpose="easy installation of modules including Windows", usage="TEACH"),
         ModuleInstall("pymmails", "pip",
                       purpose="read/send emails", usage="TEACH"),
