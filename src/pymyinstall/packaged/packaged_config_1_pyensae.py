@@ -87,6 +87,7 @@ def pyensae_set():
         "qgrid",  # magic command
         "requests_file",
         "requests-ftp",
+        "requests_oauthlib",
         "scipy",
         "scikit-learn",
         "toml",
