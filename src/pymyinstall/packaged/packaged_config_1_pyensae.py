@@ -68,6 +68,7 @@ def pyensae_set():
         "msrestazure",
         "mbstrdecoder",
         "networkx",
+        "oauthlib",
         "osmapi",  # maps
         "packaging",
         "pandas_datareader",

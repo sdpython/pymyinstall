@@ -669,7 +669,8 @@ def ensae_set():
                  'azure-servicemanagement-legacy', 'azure-mgmt', 'azure']:
         # azure part
         mname = name.replace("-", ".")
-        if mname == "azure.nspkg":
+        if mname in ("azure.nspkg", "azure.mgmt.nspkg",
+                     "azure.servicemanagement.legacy"):
             skip_import = True
         else:
             skip_import = False
