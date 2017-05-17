@@ -130,7 +130,7 @@ def small_set():
         ModuleInstall(
             'imagesize', 'pip', usage="SPHINX", purpose="Getting image size from png/jpeg/jpeg2000/gif file"),
         ModuleInstall(
-            'sphinxcontrib-images', 'pip', mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
+            'sphinxcontrib-images', 'github', "sdpython", mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
         ModuleInstall(
