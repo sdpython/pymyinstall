@@ -85,6 +85,7 @@ def pyensae_set():
         "pytablereader",
         "pytablewriter",
         "qgrid",  # magic command
+        "quandl",
         "requests_file",
         "requests-ftp",
         "requests_oauthlib",
