@@ -41,6 +41,7 @@ except ImportError:
 from src.pymyinstall.packaged import find_module_install
 from src.pymyinstall.installhelper import compare_version, get_wheel_version
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 
 
 class TestDownloadAzure(unittest.TestCase):
@@ -50,18 +51,12 @@ class TestDownloadAzure(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold, "temp_download_azure")
-        if not os.path.exists(temp):
-            os.mkdir(temp)
-        for _ in os.listdir(temp):
-            if os.path.isfile(os.path.join(temp, _)):
-                os.remove(os.path.join(temp, _))
+        temp = get_temp_folder(__file__, "temp_download_azure")
 
         r1 = compare_version("2.0.0rc5", "1.0.3")
         r2 = compare_version("1.0.3", "2.0.0rc5")
-        assert r1 * r2 < 0
-        assert r1 > 0
+        self.assertTrue(r1 * r2 < 0)
+        self.assertTrue(r1 > 0)
         if sys.platform.startswith("win") and sys.version_info[0] >= 3:
             m = find_module_install("azure")
             if m.pip_options is None:
@@ -74,8 +69,8 @@ class TestDownloadAzure(unittest.TestCase):
                 raise Exception(
                     "unexception version for '{0}',\nshould be >= 1.9.9 not '{1}'".format(name, v))
             fLOG(m.version, v, name)
-            assert os.path.exists(name)
-            assert "azure" in name
+            self.assertTrue(os.path.exists(name))
+            self.assertTrue("azure" in name)
 
 
 if __name__ == "__main__":

@@ -50,13 +50,13 @@ class TestDownloadTornado(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        temp = get_temp_folder(__file__, "temp_download_tornado")
 
         if sys.platform.startswith("win"):
+            temp = get_temp_folder(__file__, "temp_download_tornado")
             m = find_module_install("tornado")
             m.fLOG = fLOG
             whl = m.download(temp_folder=temp, source="2")
-            assert os.path.exists(whl)
+            self.assertTrue(os.path.exists(whl))
 
 
 if __name__ == "__main__":

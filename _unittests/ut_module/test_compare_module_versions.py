@@ -40,6 +40,7 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG, CustomLog
+from pyquickhelper.pycode import is_travis_or_appveyor
 from src.pymyinstall.packaged import all_set
 from src.pymyinstall.installhelper import get_wheel_version, compare_version
 from src.pymyinstall.installhelper.module_install_exceptions import MissingWheelException
@@ -53,8 +54,7 @@ class TestCompareVersion(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if not sys.platform.startswith("win"):
-            # useful only on Windows
+        if is_travis_or_appveyor():
             return
 
         if sys.version_info[0] == 2:
@@ -63,7 +63,7 @@ class TestCompareVersion(unittest.TestCase):
 
         mods = [mod for mod in all_set() if mod.kind in ("wheel",)]
         fLOG(len(mods))
-        assert len(mods) > 0
+        self.assertTrue(len(mods) > 0)
         clog = CustomLog(os.path.dirname(__file__),
                          "windows_modules_versions.txt")
 
@@ -100,7 +100,7 @@ class TestCompareVersion(unittest.TestCase):
                 if v1 is not None and v2 is not None and not ("rc1" in v1 or "rc1" in v2):
                     diff.append(mod)
 
-        assert len(diff) <= 10
+        self.assertTrue(len(diff) <= 10)
 
 
 if __name__ == "__main__":

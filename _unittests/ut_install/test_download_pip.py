@@ -58,11 +58,11 @@ class TestDownloadPip (unittest.TestCase):
         # available for Python 2.7
         m = ModuleInstall("pyquickhelper", "pip", fLOG=fLOG)
         out = m.download(temp_folder=fold)
-        assert os.path.exists(out)
-        assert "pyquickhelper" in out
+        self.assertTrue(os.path.exists(out))
+        self.assertTrue("pyquickhelper" in out)
         out = m.download(temp_folder=fold)
-        assert os.path.exists(out)
-        assert "pyquickhelper" in out
+        self.assertTrue(os.path.exists(out))
+        self.assertTrue("pyquickhelper" in out)
 
     def test_install_pip_deps(self):
         fLOG(
@@ -77,11 +77,11 @@ class TestDownloadPip (unittest.TestCase):
         # available for Python 2.7
         m = ModuleInstall("pyquickhelper", "pip", fLOG=fLOG)
         out = m.download(temp_folder=fold, deps=True)
-        assert os.path.exists(out)
-        assert "pyquickhelper" in out
+        self.assertTrue(os.path.exists(out))
+        self.assertTrue("pyquickhelper" in out)
         out = m.download(temp_folder=fold, source="2")
-        assert os.path.exists(out)
-        assert "pyquickhelper" in out
+        self.assertTrue(os.path.exists(out))
+        self.assertTrue("pyquickhelper" in out)
 
 
 if __name__ == "__main__":

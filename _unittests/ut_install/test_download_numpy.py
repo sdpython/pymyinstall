@@ -41,6 +41,7 @@ except ImportError:
 from src.pymyinstall.installhelper.module_install import ModuleInstall
 from src.pymyinstall.installhelper import compare_version
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import is_travis_or_appveyor, get_temp_folder
 
 
 class TestDownloadNumpy (unittest.TestCase):
@@ -50,28 +51,24 @@ class TestDownloadNumpy (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        fold = os.path.abspath(os.path.split(__file__)[0])
-        temp = os.path.join(fold, "temp_download_numpy")
-        if not os.path.exists(temp):
-            os.mkdir(temp)
-        for _ in os.listdir(temp):
-            if os.path.isfile(os.path.join(temp, _)):
-                os.remove(os.path.join(temp, _))
 
         if sys.platform.startswith("win") and sys.version_info[0] >= 3:
+            temp = get_temp_folder(__file__, "temp_download_numpy")
+            source = "2" if is_travis_or_appveyor() else None
             m = ModuleInstall(
                 "numpy",
                 "wheel",
-                fLOG=fLOG)
+                fLOG=fLOG,
+                source=source)
             name = m.get_exewheel_url_link(wheel=True)
             fLOG(m.existing_version)
             r = compare_version(m.existing_version, "1.10.1")
-            assert r >= 0
-            assert "unoptimized" not in name[0]
+            self.assertTrue(r >= 0)
+            self.assertTrue("unoptimized" not in name[0])
             whl = m.download(temp_folder=temp, source="2")
             fLOG(m.version)
-            assert os.path.exists(whl)
-            assert "unoptimized" not in whl
+            self.assertTrue(os.path.exists(whl))
+            self.assertTrue("unoptimized" not in whl)
 
 
 if __name__ == "__main__":
