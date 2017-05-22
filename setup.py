@@ -142,7 +142,7 @@ if is_local() and "--help" not in sys.argv and "--help-commands" not in sys.argv
             lines = f.readlines()
         subversion = "." + lines[0].strip("\r\n ")
         if subversion == ".0":
-            raise Exception("subversion is wrong: " + subversion)
+            raise Exception("Subversion is wrong: '{0}'.".format(subversion))
     else:
         raise FileNotFoundError(versiontxt)
 else:
