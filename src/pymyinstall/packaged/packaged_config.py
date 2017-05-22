@@ -8,8 +8,8 @@
 from .packaged_config_0_minimal import minimal_set, pywin32_set
 from .packaged_config_0_pyquickhelper import pyquickhelper_set
 from .packaged_config_1_pyensae import pyensae_set
-from .packaged_config_1_anaconda import anaconda_set, anaconda_ext_set
 from .packaged_config_1_small import small_set
+from .packaged_config_2_cloud import cloud_set
 from .packaged_config_2_sphinx import sphinx_theme_set
 from .packaged_config_3_extended import extended_set
 from .packaged_config_3_ensae_teaching_cs import ensae_teaching_cs_set
@@ -27,6 +27,7 @@ def ensae_fullset():
     """
     base = small_set() +  \
         sphinx_theme_set() + \
+        cloud_set() + \
         extended_set() + \
         ensae_set() + \
         teachings_set() + \
@@ -41,33 +42,33 @@ def all_set():
     """
     base = small_set() +  \
         sphinx_theme_set() + \
+        cloud_set() + \
         extended_set() + \
         ensae_set() + \
         teachings_set() + \
         iot_set() + \
         orange_set() + \
-        scraping_set() + \
-        anaconda_ext_set()
+        scraping_set()
 
     return base
 
 
-_modules_set = [minimal_set,
+_modules_set = [all_but_teachings_set,
+                all_set,
+                cloud_set,
+                iot_set,
+                ensae_teaching_cs_set,
+                extended_set,
+                minimal_set,
+                ml_set, ensae_set,
+                orange_set,
+                pyensae_set,
+                pyquickhelper_set,
+                pywin32_set,
+                scraping_set,
                 small_set,
                 sphinx_theme_set,
-                extended_set,
-                ml_set, ensae_set,
                 teachings_set,
-                iot_set,
-                scraping_set,
-                all_set,
-                pyquickhelper_set,
-                pyensae_set,
-                anaconda_set,
-                ensae_teaching_cs_set,
-                all_but_teachings_set,
-                orange_set,
-                pywin32_set
                 ]
 
 

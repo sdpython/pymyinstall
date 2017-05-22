@@ -41,24 +41,33 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from src.pymyinstall.packaged import anaconda_set
+from src.pymyinstall.packaged import all_set
 
 
-class TestAnaconda(unittest.TestCase):
+class TestPackageListPrint(unittest.TestCase):
 
-    def test_script_help(self):
+    def test_package_list_print(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if sys.version_info[0] == 2:
-            # too long
-            return
+        every = {}
+        duplicated = []
+        for _ in all_set():
+            name = _.name
+            if name in every:
+                duplicated.append(name)
+            every[name] = 1
 
-        res = anaconda_set()
-        fLOG(len(res))
-        assert len(res) > 0
+        if len(duplicated) > 0:
+            raise Exception("Duplicated modules\n{0}".format(
+                "\n".join(duplicated)))
+
+        fLOG(len(every))
+        couples = [(k.lower(), k) for k in every]
+        for kn, k in sorted(couples):
+            fLOG("'{0}',".format(k))
 
 
 if __name__ == "__main__":

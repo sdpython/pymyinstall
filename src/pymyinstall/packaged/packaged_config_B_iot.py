@@ -70,8 +70,6 @@ def iot_set():
                       purpose="A JSON-RPC client library, backed by requests"),
         ModuleInstall(
             'cookies', 'pip', purpose="Friendlier RFC 6265-compliant cookie parser/renderer"),
-        ModuleInstall(
-            'mock', 'pip', purpose="Rolling backport of unittest.mock for all Pythons"),
         ModuleInstall('responses', 'pip',
                       purpose="A utility library for mocking out the `requests` Python library."),
         ModuleInstall('python-forecastio', 'pip', usage="IoT",

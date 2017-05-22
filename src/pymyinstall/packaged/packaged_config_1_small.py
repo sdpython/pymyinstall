@@ -97,8 +97,6 @@ def small_set():
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall(
-            'patsy', 'pip', purpose="A Python package for describing statistical models and for building design matrices (y ~ x1 + x2)"),
-        ModuleInstall(
             "scipy", "wheel", purpose="scientific computation, eigen values, linear algebra", usage="DATA/ML"),
         ModuleInstall(
             "patsy", "pip", purpose="A Python package for describing statistical models and for building design matrices.", usage="DATA/ML"),
@@ -134,14 +132,17 @@ def small_set():
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
         ModuleInstall(
-            "pycodestyle", "pip", purpose="Python style guide checker"),
+            "pycodestyle", "pip", purpose="Python style guide checker", usage="STYLE"),
         ModuleInstall(
             "pep8", "pip", purpose="official guidelines on Python style"),
-        ModuleInstall("autopep8", "pip", purpose="apply pep8 on a script"),
-        ModuleInstall(
-            "mccabe", "pip", purpose="This module provides a plugin for flake8, the Python code checker."),
-        ModuleInstall("pyflakes", "pip", purpose="verify pep8 on a script"),
-        ModuleInstall("flake8", "pip", purpose="verify pep8 on a script"),
+        ModuleInstall("autopep8", "pip",
+                      purpose="apply pep8 on a script", usage="STYLE"),
+        ModuleInstall("mccabe", "pip", usage="STYLE",
+                      purpose="This module provides a plugin for flake8, the Python code checker."),
+        ModuleInstall("pyflakes", "pip",
+                      purpose="verify pep8 on a script", usage="STYLE"),
+        ModuleInstall("flake8", "pip",
+                      purpose="verify pep8 on a script", usage="STYLE"),
         ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
@@ -317,9 +318,6 @@ def small_set():
             "pythonqwt", "pip", purpose="Qt plotting widgets (Spyder)"),
         ModuleInstall(
             "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
-        # remove goslate from the list to avoid installing futures which appears as a dependency
-        # ModuleInstall("goslate", "pip",  # version="1.4",
-        #               purpose="calls google translate"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
         ModuleInstall(
             "aenum", "pip", purpose="Advanced Enumerations (compatible with Python's stdlib Enum), NamedTuples, and NamedConstants"),

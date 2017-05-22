@@ -83,13 +83,13 @@ def ensae_set():
             "mutagenx", "pip", purpose="read and write audio tags for many formats in Python 3"),
         ModuleInstall("django-audiotracks", "pip",
                       mname="audiotracks", purpose="read audio with django"),
+        ModuleInstall("ndg-httpsclient", "pip", mname="ndg_httpsclient",
+                      purpose="Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL"),
+        ModuleInstall("inflection", "pip",
+                      purpose="A port of Ruby on Rails inflector to Python"),
         ModuleInstall("more-itertools", "pip",
                       mname="more_itertools",
                       purpose="More routines for operating on iterables, beyond itertools"),
-        ModuleInstall("inflection", "pip",
-                      purpose="A port of Ruby on Rails inflector to Python"),
-        ModuleInstall("ndg-httpsclient", "pip", mname="ndg_httpsclient",
-                      purpose="Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL"),
         ModuleInstall("Quandl", "pip", mname="quandl",
                       purpose="access Quandl API"),
         ModuleInstall(
@@ -140,11 +140,7 @@ def ensae_set():
         ModuleInstall(
             "pytool", "pip", purpose="A collection of tools for Python"),
         ModuleInstall(
-            "py", "pip", purpose="library with cross-python path, ini-parsing, io, code, log facilities"),
-        ModuleInstall(
             "pytools", "pip", purpose="A collection of tools for Python"),
-        ModuleInstall(
-            "pytest", "pip", purpose="pytest allows you to use the standard python assert for verifying expectations and values in Python tests."),
         ModuleInstall("pycuda", "wheel", usage="GPU",
                       purpose="PyCUDA lets you access Nvidia's CUDA parallel computation API from Python."),
         ModuleInstall("pyopencl", "wheel", usage="GPU",
@@ -470,8 +466,6 @@ def ensae_set():
         ModuleInstall("astropy", "wheel",
                       purpose="Community-developed python astronomy tools"),
         # h2o
-        ModuleInstall("future", "pip",
-                      purpose="Clean single-source support for Python 3 and 2 (h2o)"),
         ModuleInstall("h2o", "pip", usage="ML",
                       purpose="H2O, Fast Scalable Machine Learning, for python"),
         #
@@ -508,9 +502,6 @@ def ensae_set():
         ModuleInstall("hyperopt", "github", "hyperopt", usage="ML",
                       purpose="Hyperopt is a Python library for serial and parallel optimization over awkwardsearch spaces, " +
                       "which may include real-valued, discrete, and conditional dimensions."),
-        ModuleInstall("mlxtend", "pip", usage="ML",
-                      purpose="Mlxtend (machine learning extensions) " +
-                      "is a Python library of useful tools for the day-to-day data science tasks."),
         #
         # August 2016
         #
@@ -652,35 +643,5 @@ def ensae_set():
 
     mod.append(ModuleInstall(
         "PyJWT", "pip", mname="jwt", purpose="JSON Web Token library for Python 3."))
-    mod.append(ModuleInstall("adal", "pip",
-                             purpose="The ADAL for Python library makes it easy for python application to authenticate " +
-                             "to Azure Active Directory (AAD) in order to access AAD protected web resources."))
-    mod.append(ModuleInstall("msrest", "pip",
-                             purpose="AutoRest swagger generator Python client runtime."))
-    mod.append(ModuleInstall("msrestazure", "pip",
-                             purpose="AutoRest swagger generator Python client runtime. Azure-specific module."))
-    for name in ['azure-nspkg', 'azure-common', 'azure-mgmt-nspkg', 'azure-mgmt-authorization',
-                 'azure-mgmt-common', 'azure-storage',
-                 'azure-mgmt-batch', 'azure-mgmt-cdn', 'azure-mgmt-cognitiveservices', 'azure-mgmt-commerce',
-                 'azure-mgmt-compute', 'azure-mgmt-logic', 'azure-graphrbac', 'azure-mgmt-network',
-                 'azure-mgmt-notificationhubs', 'azure-mgmt-powerbiembedded', 'azure-mgmt-redis',
-                 'azure-mgmt-resource', 'azure-mgmt-scheduler', 'azure-mgmt-storage',
-                 'azure-mgmt-web', 'azure-graphrbac', 'azure-batch', 'azure-servicebus',
-                 'azure-servicemanagement-legacy', 'azure-mgmt', 'azure']:
-        # azure part
-        mname = name.replace("-", ".")
-        if mname in ("azure.nspkg", "azure.mgmt.nspkg",
-                     "azure.servicemanagement.legacy"):
-            skip_import = True
-        else:
-            skip_import = False
-        m = ModuleInstall(
-            name, "pip", mname=mname, pip_options=["--pre"],
-            purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE",
-            skip_import=skip_import)
-        mod.append(m)
-
-    mod.append(ModuleInstall("azureml", "pip",
-                             purpose="Microsoft Azure Machine Learning Python client library"))
 
     return [_ for _ in mod if _ is not None]

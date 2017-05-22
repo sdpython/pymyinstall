@@ -12,11 +12,6 @@ def sphinx_theme_set():
     list of sphinx themes, it requires the modules in set *small*
     """
     mod = [
-        ModuleInstall('snowballstemmer', 'pip',
-                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer)" +
-                      "generated from Snowball algorithms, needed by sphinx-rtd-theme."),
-        ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
-                      purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall(
             'sphinxjp.themes.basicstrap', 'pip', purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall('sphinxjp.themecore', 'pip',
