@@ -296,7 +296,7 @@ def small_set():
         ModuleInstall(
             "PySide", "wheel",
             purpose="open source version of PyQt (issue on Linux and Anaconda)",
-            usage="GUI") if sys.version_info[:2] <= (3, 4) else None,
+            usage="GUI"),
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information " +
             "onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #

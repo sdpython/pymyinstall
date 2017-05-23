@@ -338,7 +338,7 @@ def create_win_spyder(folders):
 
     .. index:: Spyder, PySide, PyQt
 
-    This installation uses `PySide <https://pypi.python.org/pypi/PySide/1.2.2>`_
+    This installation uses `PySide <https://pypi.python.org/pypi/PySide/>`_
     instead of `PyQt <https://www.riverbankcomputing.com/software/pyqt/intro>`_.
     The environment variable ``QT_API`` could to be set to ``pyside`` before
     running Spyder but PySide does not seem to be under active development.
@@ -349,7 +349,7 @@ def create_win_spyder(folders):
     text = ['@echo off',
             'set CURRENT2=%~dp0',
             'call "%CURRENT2%env.bat"',
-            'rem set QT_API=pyside',
+            'set QT_API=pyside',
             '"%PYTHON_WINSCRIPTS%\\spyder.bat" "--workdir=%WORKSPACE%"']
 
     text = "\n".join(text)

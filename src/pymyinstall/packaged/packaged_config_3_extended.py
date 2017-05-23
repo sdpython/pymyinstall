@@ -191,7 +191,7 @@ def extended_set():
         #
         ModuleInstall(
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
-        ModuleInstall("winrandom", "wheel2", mname="winrandom",
+        ModuleInstall("winrandom", "wheel", mname="winrandom",
                       purpose="This module gives direct access to Windows Cryptographic API CryptGetRandom() function, " +
                       "which is cryptographically strong pseudo-random number generator (PRNG) on Windows:"),
         ModuleInstall("pycrypto", "wheel2", mname="Crypto",

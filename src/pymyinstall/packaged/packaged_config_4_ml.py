@@ -610,6 +610,43 @@ def ensae_set():
         ModuleInstall("cntk", "wheel", usage="DATA/ML",
                       overwrite="https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0rc2-cp{0}{1}-cp{0}{1}m-win_amd64.whl",
                       purpose="Deep Learning from Microsoft"),
+
+        #
+        # 2017-05/23
+        #
+        ModuleInstall('fasttext', 'wheel', usage="DATA/ML",
+                      purpose="fastText is a library for efficient learning of word representations and sentence classification."),
+        ModuleInstall('chainer', 'wheel', usage="DATA/DML",
+                      purpose="A flexible framework of neural networks (GPU)"),
+        ModuleInstall('sfepy', 'wheel', usage="OPTIM",
+                      purpose="Simple Finite Elements in Python"),
+        ModuleInstall('pymatgen', 'wheel', usage="PHYS",
+                      purpose="Pymatgen (Python Materials Genomics) is a robust, open-source Python library for materials analysis."),
+        ModuleInstall('lsqfit', 'wheel', usage="OPTIM",
+                      purpose="Utilities for nonlinear least-squares fits"),
+        ModuleInstall('qutip', 'wheel', usage="OPTIM",
+                      purpose="QuTiP is open-source software for simulating the dynamics of open quantum systems."),
+        ModuleInstall('pyemd', 'wheel',
+                      purpose="A Python wrapper for Ofir Pele and Michael Werman's implementation of the Earth Mover's Distance."),
+        ModuleInstall('hyperspy', 'wheel',
+                      purpose="HyperSpy is an open source Python library which provides tools to facilitate " +
+                      "the interactive data analysis of multi-dimensional " +
+                      "datasets that can be described as multi-dimensional arrays of a given " +
+                      "signal (e.g. a 2D array of spectra a.k.a spectrum image)."),
+        ModuleInstall('holopy', 'wheel',
+                      purpose="Hologram processing and light scattering in python"),
+        ModuleInstall('sounddevice', 'wheel',
+                      purpose="This Python module provides bindings for the PortAudio library and a few " +
+                      "convenience functions to play and record NumPy arrays containing audio signals."),
+        ModuleInstall('drawtree', 'wheel', usage="VIZ",
+                      purpose="Draw binary tree in plain text"),
+        ModuleInstall('JPype1', 'wheel', purpose="A Python to Java bridge."),
+        ModuleInstall('pyflux', 'wheel', usage="DATA/ML",
+                      purpose="An open source time series library for the Python Programming Language"),
+        ModuleInstall('rtree', 'wheel', usage="MATHS",
+                      purpose="R-Tree spatial index for Python GIS"),
+        ModuleInstall('sima', 'wheel', usage="MATHS",
+                      purpose="Software for analysis of sequential imaging data"),
     ]
 
     if sys.version_info[0] == 2:
