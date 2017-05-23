@@ -60,7 +60,7 @@ class TestDownloadNumpy (unittest.TestCase):
                 "wheel",
                 fLOG=fLOG,
                 source=source)
-            name = m.get_exewheel_url_link(wheel=True)
+            name = m.get_exewheel_url_link(wheel=True, source=source)
             fLOG(m.existing_version)
             r = compare_version(m.existing_version, "1.10.1")
             self.assertTrue(r >= 0)

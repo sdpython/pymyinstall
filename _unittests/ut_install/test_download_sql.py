@@ -55,7 +55,7 @@ class TestDownloadSQLAlchemy (unittest.TestCase):
         if sys.platform.startswith("win"):
             m = ModuleInstall("SQLAlchemy", "wheel", fLOG=fLOG)
             whl = m.download(temp_folder=temp, source="2")
-            assert os.path.exists(whl)
+            self.assertTrue(os.path.exists(whl))
 
 
 if __name__ == "__main__":

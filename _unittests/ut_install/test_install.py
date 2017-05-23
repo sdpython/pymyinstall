@@ -64,9 +64,9 @@ class TestInstall (unittest.TestCase):
             # disabled on python 2.7 and anaconda
             return
         m = ModuleInstall("pip", "pip")
-        assert m.install()
+        self.assertTrue(m.install())
         m = ModuleInstall("pip", "exe")
-        assert m.install()
+        self.assertTrue(m.install())
 
 
 if __name__ == "__main__":

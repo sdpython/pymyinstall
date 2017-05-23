@@ -61,7 +61,7 @@ class TestInstallModule (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        assert compare_version("0.16.0", "0.16.2") == -1
+        self.assertEqual(compare_version("0.16.0", "0.16.2"), -1)
 
 
 if __name__ == "__main__":

@@ -55,11 +55,11 @@ class TestInstallModuleVersion(unittest.TestCase):
 
         res = get_module_version("matplotlib")
         fLOG(res)
-        assert len(res) > 0
+        self.assertTrue(len(res) > 0)
 
         res = get_module_metadata("matplotlib")
         fLOG(res)
-        assert isinstance(res, dict)
+        self.assertTrue(isinstance(res, dict))
 
     def test_all_module_summary(self):
 
@@ -81,11 +81,11 @@ class TestInstallModuleVersion(unittest.TestCase):
         nolic = df[df.license.isnull()]
         fLOG("no license", nolic.shape)
         fLOG(nolic[["name", "license"]])
-        assert lic.shape[0] > 0
+        self.assertTrue(lic.shape[0] > 0)
 
         rst = df2rst(df)
         # fLOG(rst)
-        assert len(rst) > 1000
+        self.assertTrue(len(rst) > 1000)
 
 
 if __name__ == "__main__":

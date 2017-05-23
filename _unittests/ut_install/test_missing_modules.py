@@ -51,7 +51,7 @@ class TestMissingModules (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         deps = missing_dependencies()
-        assert isinstance(deps, dict)
+        self.assertTrue(isinstance(deps, dict))
         for k, v in sorted(deps.items()):
             fLOG(k, "--->", ", ".join(v))
 

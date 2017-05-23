@@ -51,8 +51,8 @@ class TestInstallModuleIsInstalled (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         mod = ModuleInstall("pep8", "pip", fLOG=fLOG)
-        assert mod.is_installed_local()
-        assert mod.is_installed_local_cmd()
+        self.assertTrue(mod.is_installed_local())
+        self.assertTrue(mod.is_installed_local_cmd())
 
 
 if __name__ == "__main__":

@@ -49,7 +49,7 @@ class TestModuleDependenciesBug(unittest.TestCase):
     def common_function(self, name, use_pip=None):
         res = get_module_dependencies(name, deep=True, use_pip=use_pip)
         for k, v in sorted(res.items()):
-            assert isinstance(v, tuple)
+            self.assertTrue(isinstance(v, tuple))
             fLOG(k, "-->", v)
         if len(res) < 3:
             from pip import get_installed_distributions
@@ -68,7 +68,7 @@ class TestModuleDependenciesBug(unittest.TestCase):
         try:
             import luigi
             mod = "luigi"
-            assert luigi is not None
+            self.assertTrue(luigi is not None)
         except ImportError:
             mod = "pandas"
 

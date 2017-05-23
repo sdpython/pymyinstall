@@ -67,9 +67,9 @@ class TestDownload (unittest.TestCase):
 
         m = ModuleInstall("jsdifflib", "github", gitrepo="cemerick", fLOG=fLOG)
         files = m.download(temp_folder=temp, unzipFile=True, source="2")
-        assert len(files) > 0
+        self.assertTrue(len(files) > 0)
         for _ in files:
-            assert os.path.exists(_)
+            self.assertTrue(os.path.exists(_))
 
     def test_install_mlpy(self):
         fLOG(
@@ -87,7 +87,7 @@ class TestDownload (unittest.TestCase):
         if sys.platform.startswith("win"):
             m = ModuleInstall("mlpy", "wheel", fLOG=fLOG)
             whl = m.download(temp_folder=temp, source="2")
-            assert os.path.exists(whl)
+            self.assertTrue(os.path.exists(whl))
 
     def test_install_scikit(self):
         fLOG(
@@ -109,7 +109,7 @@ class TestDownload (unittest.TestCase):
                 mname="sklearn",
                 fLOG=fLOG)
             whl = m.download(temp_folder=temp, source="2")
-            assert os.path.exists(whl)
+            self.assertTrue(os.path.exists(whl))
             if os.stat(whl).st_size < 1000:
                 raise Exception("small file: " + whl)
 

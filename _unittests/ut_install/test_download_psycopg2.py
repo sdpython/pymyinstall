@@ -56,7 +56,7 @@ class TestDownloadPyscopg2(unittest.TestCase):
             m = find_module_install("psycopg2")
             m.fLOG = fLOG
             whl = m.download(temp_folder=temp, source="2")
-            assert os.path.exists(whl)
+            self.assertTrue(os.path.exists(whl))
 
 
 if __name__ == "__main__":

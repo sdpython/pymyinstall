@@ -58,7 +58,7 @@ class TestDownloadPyWin32 (unittest.TestCase):
             fLOG(m.__module__)
             m.fLOG = fLOG
             whl = m.download(temp_folder=temp, source="2")
-            assert os.path.exists(whl)
+            self.assertTrue(os.path.exists(whl))
 
 
 if __name__ == "__main__":

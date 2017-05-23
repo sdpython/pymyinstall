@@ -65,7 +65,7 @@ class TestInstallBuildInstall(unittest.TestCase):
         create_virtual_env(temp, fLOG=fLOG)
         setup = os.path.normpath(os.path.join(
             temp, "..", "..", "..", "setup.py"))
-        assert os.path.exists(setup)
+        self.assertTrue(os.path.exists(setup))
         folder = os.path.split(setup)[0]
         cmd = "{0} install".format(setup)
         fLOG("CMD: " + cmd)

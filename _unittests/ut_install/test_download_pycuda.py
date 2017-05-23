@@ -63,7 +63,7 @@ class TestDownloadPyCuda(unittest.TestCase):
                 file_save=os.path.join(
                     temp,
                     "out_page.html"), source="2")
-            assert os.path.exists(exe)
+            self.assertTrue(os.path.exists(exe))
 
 
 if __name__ == "__main__":
