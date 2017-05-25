@@ -101,7 +101,6 @@ def pyensae_set():
         "PyJWT",
         "pyopenssl",  # quandl
         "pyquickhelper",
-        "simplesqlite",
         "pytablereader",
         "pytablewriter",
         "qgrid",  # magic command
@@ -111,6 +110,7 @@ def pyensae_set():
         "requests_oauthlib",
         "scipy",
         "scikit-learn",
+        "simplesqlite",
         "toml",
         "typepy",
         "urllib3",
