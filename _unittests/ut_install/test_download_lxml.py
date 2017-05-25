@@ -57,7 +57,7 @@ class TestDownloadlxml (unittest.TestCase):
         if sys.platform.startswith("win"):
             temp = get_temp_folder(__file__, "temp_download_lxml")
             fLOG("install", "lxml")
-            m = ModuleInstall("lxml", "wheel", fLOG=fLOG)
+            m = ModuleInstall("lxml", "wheel", fLOG=fLOG, source="2")
             exe = m.download(
                 temp_folder=temp,
                 file_save=os.path.join(
