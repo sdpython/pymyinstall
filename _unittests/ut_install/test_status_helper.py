@@ -75,7 +75,8 @@ class TestStatusHelper(unittest.TestCase):
             warnings.warn(
                 "TestStatusHelper.test_status_helper disabled on Python 2.7")
             return
-        self.assertEqual(len(res), 10)
+        if len(res) != 10:
+            raise Exception("\n".join(str(_) for _ in res))
 
 
 if __name__ == "__main__":
