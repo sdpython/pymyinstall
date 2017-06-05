@@ -76,7 +76,8 @@ class TestStatusHelper(unittest.TestCase):
                 "TestStatusHelper.test_status_helper disabled on Python 2.7")
             return
         if len(res) != 10:
-            raise Exception("\n".join(str(_) for _ in res))
+            raise Exception("\n".join(
+                "\n---------\n{0}/{1} {2}".format(i + 1, len(res), _) for i, _ in enumerate(res)))
 
 
 if __name__ == "__main__":
