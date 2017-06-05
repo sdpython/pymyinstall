@@ -393,7 +393,7 @@ def ensae_set():
                       purpose="Cython hash table that trusts the keys are pre-hashed") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("text-unidecode", "pip", mname="text_unidecode",
                       purpose="The most basic Text::Unidecode port") if sys.version_info[:2] >= (3, 5) else None,
-        ModuleInstall("thinc", "pip", usage="OPTIM",
+        ModuleInstall("thinc", "wheel", usage="OPTIM",
                       purpose="Learn sparse linear models") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("semver", "pip",
                       purpose="Python helper for Semantic Versioning (http://semver.org/)"),
@@ -608,8 +608,9 @@ def ensae_set():
         ModuleInstall("nbdime", "pip",
                       purpose="Comparison of notebooks"),
         ModuleInstall("cntk", "wheel", usage="DATA/ML",
-                      overwrite="https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0rc2-cp{0}{1}-cp{0}{1}m-win_amd64.whl",
-                      purpose="Deep Learning from Microsoft"),
+                      overwrite="https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0-cp{0}{1}-cp{0}{1}m-win_amd64.whl",
+                      purpose="Deep Learning from Microsoft " +
+                      "see https://docs.microsoft.com/en-us/cognitive-toolkit/setup-windows-python"),
 
         #
         # 2017-05/23

@@ -644,6 +644,12 @@ def extended_set():
                       purpose="A Python implementation of Simhash Algorithm"),
         ModuleInstall('wptools', 'pip',
                       purpose="Wikipedia tools (for Humans)"),
+        #
+        # June 2017
+        #
+        ModuleInstall('fastparquet', 'wheel',
+                      purpose="fastparquet is a python implementation of the parquet format, aiming integrate " +
+                      "into python-based big data work-flows."),
     ]
 
     if sys.platform.startswith("win"):
