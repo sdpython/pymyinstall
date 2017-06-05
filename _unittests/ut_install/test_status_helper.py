@@ -64,10 +64,10 @@ class TestStatusHelper(unittest.TestCase):
                     "This test does not work well on a virtual environment [TestStatusHelper].")
 
         res = get_installed_modules(
-            fLOG=fLOG, stop=10, pypi=True, short_list=["dataspyre"])
+            fLOG=fLOG, stop=5, pypi=True, short_list=["dataspyre"])
         fLOG(res)
 
-        res = get_installed_modules(fLOG=fLOG, stop=10, pypi=True)
+        res = get_installed_modules(fLOG=fLOG, stop=5, pypi=True)
         for f in res:
             fLOG(f)
         if sys.version_info[0] == 2:
@@ -75,7 +75,7 @@ class TestStatusHelper(unittest.TestCase):
             warnings.warn(
                 "TestStatusHelper.test_status_helper disabled on Python 2.7")
             return
-        if len(res) != 10:
+        if len(res) != 5:
             raise Exception("\n".join(
                 "\n---------\n{0}/{1} {2}".format(i + 1, len(res), _) for i, _ in enumerate(res)))
 
