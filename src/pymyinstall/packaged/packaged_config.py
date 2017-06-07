@@ -19,6 +19,7 @@ from .packaged_config_A_orange import orange_set
 from .packaged_config_B_iot import iot_set
 from .packaged_config_C_webscraping import scraping_set
 from .packaged_config_all_but_teachings import all_but_teachings_set
+from .packaged_config_Z import datascientistbase_set
 
 
 def ensae_fullset():
@@ -56,6 +57,7 @@ def all_set():
 _modules_set = [all_but_teachings_set,
                 all_set,
                 cloud_set,
+                datascientistbase_set,
                 iot_set,
                 ensae_teaching_cs_set,
                 extended_set,
