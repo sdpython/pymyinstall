@@ -453,6 +453,8 @@ def extended_set():
                               "polar charts and bubble charts."),
         ModuleInstall("colorlover", "pip", usage="VIZ",
                       purpose="Color scales for IPython notebook"),
+        ModuleInstall("TA_Lib", "wheel", mname="talib",
+                      purpose="This is a Python wrapper for TA-LIB based on Cython instead of SWIG."),
         ModuleInstall("cufflinks", "pip", usage="VIZ",
                       purpose="Productivity Tools for Plotly + Pandas"),
         ModuleInstall("lightning-python", "pip", mname="lightning", usage="VIZ",
