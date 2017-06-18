@@ -539,6 +539,9 @@ def extended_set():
         ModuleInstall("chalmers", "pip",
                       purpose="Chalmers is an application that allows its users to monitor and control a number of processes on any " +
                       "operating system (Posix and Win32 included)"),
+        ModuleInstall("colorcet", "pip",
+                      purpose="colorcet is a collection of perceptually uniform colormaps for use with Python plotting programs " +
+                      "like bokeh, matplotlib, holoviews, and datashader."),
         ModuleInstall("datashader", "github", "bokeh", usage="VIZ",
                       purpose="Datashader is a graphics pipeline system for creating meaningful representations " +
                       "of large amounts of data.") if sys.version_info[:2] >= (3, 5) else None,
