@@ -539,7 +539,7 @@ def extended_set():
         ModuleInstall("chalmers", "pip",
                       purpose="Chalmers is an application that allows its users to monitor and control a number of processes on any " +
                       "operating system (Posix and Win32 included)"),
-        ModuleInstall("datashader", "github", "sdpython", usage="VIZ",
+        ModuleInstall("datashader", "github", "bokeh", usage="VIZ",
                       purpose="Datashader is a graphics pipeline system for creating meaningful representations " +
                       "of large amounts of data.") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("dnspython", "pip", usage="WEB",
