@@ -5,7 +5,7 @@ set pythonexe=%1
 goto start_script:
 
 :default_value_python:
-set pythonexe=c:\Python35_x64
+set pythonexe=c:\Python36_x64
 
 :start_script:
 set current=%~dp0
@@ -17,7 +17,7 @@ if not exist %current%..\..\dist mkdir %current%..\..\dist
 @echo CLONE
 if exist param goto update:
 git clone --recursive https://github.com/ioam/param %current%param
-goto buid:
+goto build:
 
 :update:
 @echo PULL

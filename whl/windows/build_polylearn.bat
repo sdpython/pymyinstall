@@ -16,7 +16,7 @@ if not exist %current%..\..\dist mkdir %current%..\..\dist
 :clone:
 if exist polylearn goto update:
 git clone --recursive https://github.com/scikit-learn-contrib/polylearn %current%polylearn
-goto buid:
+goto build:
 
 :update:
 git pull %current%polylearn

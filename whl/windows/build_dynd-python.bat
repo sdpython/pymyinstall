@@ -22,7 +22,7 @@ git clone --recursive https://github.com/libdynd/dynd-python %current%dync
 pushd %current%dync\dynd-python
 git clone --recursive https://github.com/libdynd/libdynd
 popd
-goto buid:
+goto build:
 
 :update:
 git pull %current%dynd
