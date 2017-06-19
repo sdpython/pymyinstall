@@ -336,7 +336,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             schedule.append(mod)
             if not schedule_only:
                 ver = mod.version
-                m = "    - installing module  {0} --- --> {1} (kind={2})" \
+                m = "    - installing module '{0}' --- --> '{1}' (kind='{2}')" \
                     .format(mod.name, ver, mod.kind)
                 fLOG(m)
                 if deps:
@@ -358,7 +358,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                                             out_streams=out_streams)
                     except (SystemExit, Exception) as e:
                         b = False
-                        m = "    - failed to update module  {0} --- {1} --> {2} (kind={3}) due to {4} ({5})" \
+                        m = "    - failed to update module '{0}' --- '{1}' --> '{2}' (kind='{3}') due to '{4}' ('{5}')" \
                             .format(mod.name, '', ver, mod.kind, str(e), type(e))
                         fLOG(m)
                         errors.append((mod, e))
@@ -402,7 +402,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         fLOG("[install_all] check dependencies")
         miss = missing_dependencies()
         if len(miss) > 0:
-            mes = "\n".join("{0} misses {1}".format(k, ", ".join(v))
+            mes = "\n".join("'{0}' misses '{1}'".format(k, ", ".join(v))
                             for k, v in sorted(miss.items()))
             warnings.warn("missing dependencies\n" + mes)
         fLOG("[install_all] end check dependencies")

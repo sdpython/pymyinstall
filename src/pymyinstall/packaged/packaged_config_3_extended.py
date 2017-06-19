@@ -209,6 +209,10 @@ def extended_set():
         ModuleInstall("asn1crypto", "pip",
                       purpose="Fast ASN.1 parser and serializer with definitions for private keys, " +
                       "public keys, certificates, CRL, OCSP, CMS, PKCS#3, PKCS#7, PKCS#8, PKCS#12, PKCS#5, X.509 and TSP"),
+        ModuleInstall("pynacl", "pip",
+                      purpose="Python binding to the Networking and Cryptography (NaCl) library", usage="NETWORK"),
+        ModuleInstall("bcrypt", "pip",
+                      purpose="Modern password hashing for your software and your servers"),
         ModuleInstall("paramiko", "pip",
                       purpose="SSH2 protocol library", usage="NETWORK"),
         #

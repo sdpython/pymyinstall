@@ -23,7 +23,7 @@ def pyensae_set():
         "azure-common",
         "azure-graphrbac",
         "azure-mgmt",
-        "azure-mgmt misses",
+        "azure-mgmt",
         "azure-mgmt-authorization",
         "azure-mgmt-batch",
         "azure-mgmt-cdn",
@@ -49,6 +49,7 @@ def pyensae_set():
         "azure_keyvault",
         "azure_mgmt_containerregistry",
         "azure_mgmt_datalake_analytics",
+        "azure_mgmt_datalake_nspkg",
         "azure_mgmt_datalake_store",
         "azure_mgmt_devtestlabs",
         "azure_mgmt_dns",
@@ -61,6 +62,7 @@ def pyensae_set():
         "azure_mgmt_trafficmanager",
         "azure_servicefabric",
         "azureml",
+        "bcrypt",
         "beautifulsoup4",
         "branca",
         "cffi",
@@ -99,6 +101,7 @@ def pyensae_set():
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
         "pycryptodomex",
         "PyJWT",
+        "pynacl",  # paramiko
         "pyopenssl",  # quandl
         "pyquickhelper",
         "pytablereader",

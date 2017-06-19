@@ -562,7 +562,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     ##################
     if not download_only:
         scr = "from pymyinstall.installhelper import missing_dependencies;r=missing_dependencies();" + \
-              "print('\\n'.join('{0} misses {1}'.format(k,v) for k,v in sorted(r.items())))"
+              "print('\\n'.join('\'{0}\' misses \'{1}\''.format(k,v) for k,v in sorted(r.items())))"
         cmd = '{0} -c "{1}"'.format(os.path.join(
             folders["python"], "python.exe"), scr)
         fLOG("--- run dependencies")
@@ -574,7 +574,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
 
     miss = missing_dependencies()
     if len(miss) > 0:
-        mes = "\n".join("{0} misses '{1}'".format(k, ", ".join(v))
+        mes = "\n".join("'{0}' misses '{1}'".format(k, ", ".join(v))
                         for k, v in sorted(miss.items()))
         warnings.warn(mes)
 
