@@ -68,7 +68,6 @@ def cloud_set():
                  "azure_keyvault",
                  "azure_datalake_store",
                  "azure_servicefabric",
-                 "azure-mgmt",
                  "azure_mgmt_devtestlabs",
                  "azure_mgmt_documentdb",
                  "azure_mgmt_containerregistry",

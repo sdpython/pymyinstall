@@ -23,7 +23,6 @@ def pyensae_set():
         "azure-common",
         "azure-graphrbac",
         "azure-mgmt",
-        "azure-mgmt",
         "azure-mgmt-authorization",
         "azure-mgmt-batch",
         "azure-mgmt-cdn",
