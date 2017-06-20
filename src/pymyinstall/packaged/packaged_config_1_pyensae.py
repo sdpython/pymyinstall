@@ -94,9 +94,7 @@ def pyensae_set():
         "pandas_datareader",
         "paramiko",  # ssh
         "pathvalidate",
-        "prompt_toolkit",
         "pyasn1",
-        "pycodestyle",
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
         "pycryptodomex",
         "PyJWT",

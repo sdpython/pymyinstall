@@ -85,8 +85,6 @@ def pyquickhelper_set():
         "ptyprocess",  # if not sys.platform.startswith("win") else None,
         "pycodestyle",
         "pycparser",
-        "pycrypto",
-        "pycryptodomex",
         "pyflakes",
         "pygments",
         "pyparsing",

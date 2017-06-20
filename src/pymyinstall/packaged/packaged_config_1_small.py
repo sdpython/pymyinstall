@@ -362,6 +362,8 @@ def small_set():
         ModuleInstall(
             'bokeh', 'pip', purpose="interactive graphs, zoomable, javascript", usage="VIZ"),
         ModuleInstall(
+            'bkcharts', 'pip', purpose="High level chart types built on top of Bokeh", usage="VIZ"),
+        ModuleInstall(
             'traittypes', 'pip', purpose="Custom trait types for scientific computing."),
         ModuleInstall(
             'bqplot', 'pip', purpose="interactive graphs, zoomable, d3.js for notebooks", usage="VIZ"),
