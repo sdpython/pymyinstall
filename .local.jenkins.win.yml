@@ -23,9 +23,9 @@ script:
   - { CMD: "python -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL" }
   - { CMD: "python -u setup.py unittests -e \".*SKIP.*pyquickhelper.*\"", NAME: "UT_SKIP_PYQUICKHELPER" }
   - { CMD: "python -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE", TIMEOUT: 3600 }
-  - { CMD: "python -u setup.py unittests -e \".*SKIP.*teaching.*\"", NAME: "UT_SKIP_TEACHING", TIMEOUT: 3600 }
+  - { CMD: "python -u setup.py unittests -e \".*SKIP.*teaching.*\"", NAME: "UT_SKIP_TEACHING", TIMEOUT: 7200 }
   - { CMD: "python -u setup.py unittests -e \".*SKIP.*datascientist.*\"", NAME: "UT_SKIP_DATASCIENTIST", TIMEOUT: 3600 }
-  - { CMD: "python -u setup.py unittests -e \".*SKIP.*every.*\"", NAME: "UT_SKIP_ALL", TIMEOUT: 16200 }
+  - { CMD: "python -u setup.py unittests -e \".*SKIP.*every.*\"", NAME: "UT_SKIP_ALL", TIMEOUT: 20000 }
 after_script:
   - python setup.py bdist_wheel
   - if [ ${VERSION} == "2.7" and ${DIST} != "conda" ] then copy dist\*.whl {{root_path}}\..\..\local_pypi\local_pypi_server fi
