@@ -22,3 +22,9 @@
     ::
 
         ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+    You should replace ``fc`` by a tuple:
+
+    ::
+
+        set_markerfacecolor(self, tuple(fc[:3]))
