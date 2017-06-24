@@ -43,6 +43,7 @@ except ImportError:
 from pyquickhelper.loghelper import fLOG
 from src.pymyinstall.installhelper.module_install_page_wheel import extract_all_links, enumerate_links_module
 from src.pymyinstall.installhelper.install_cmd_helper import python_version
+from src.pymyinstall.installhelper.install_cmd_regex import regex_wheel_versions
 
 if sys.version_info[0] == 2:
     from codecs import open
@@ -169,6 +170,26 @@ class TestRegex (unittest.TestCase):
             fLOG(r.groups())
         else:
             self.assertTrue(False)
+
+    def test_6(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        raw = "<li><a href='javascript:;' onclick='&nbsp;javascript :dl([101,102,50,118,121,110," + \
+            "47,46,45,120,51,55,52,54,100,48,119,101,112,108,116,105,97,114,109,95,117,99,49,104], " + \
+            "\"2I;L8:3F5CD000DB@71&#62;K:6&lt;61K6=@2&#62;7JA9&lt;7JA9&lt;G7?D4HEG=&lt;;6?LB\")' " + \
+            "title='[89&#160;KB] [Jun 21, 2017]'>" + \
+            "tifffile-2017.6.21.dev0-cp36-cp36m-win_amd64.whl</a></li>"
+        found = 0
+        for pattern in regex_wheel_versions:
+            reg = re.compile(pattern)
+            r = reg.search(raw)
+            if r:
+                fLOG(r.groups())
+                found += 1
+        self.assertTrue(found > 0)
 
 
 if __name__ == "__main__":
