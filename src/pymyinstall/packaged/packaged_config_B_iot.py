@@ -112,6 +112,8 @@ def iot_set():
                       purpose="A python module for reading and changing status of verisure devices through mypages."),
         ModuleInstall('voluptuous', 'pip',
                       purpose="Voluptuous is a Python data validation library"),
+        ModuleInstall('astral', 'pip',
+                      purpose="Calculations for the position of the sun and moon."),
 
         ModuleInstall('homeassistant', 'pip',
                       purpose="Home Assistant is a home automation platform running on Python 3. " +

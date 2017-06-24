@@ -66,6 +66,9 @@ def orange_set():
             "Orange3-Network", "pip", mname="orangecontrib.network", usage="ORANGE",
             purpose="Orange Network is an add-on for Orange data mining software package. It provides network visualization and analysis tools."),
         ModuleInstall(
+            "cachecontrol", "pip",
+            purpose="httplib2 caching for requests"),
+        ModuleInstall(
             "Orange3-ImageAnalytics", "pip", mname="orangecontrib.imageanalytics", usage="ORANGE",
             purpose="Orange3 add-on for image data mining."),
         # weird

@@ -150,7 +150,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         if versioni[:2] <= (3, 4):
             raise NotImplementedError(
                 "Python <= 3.4 is not supported anymore.")
-        # the setup for Python 3.5 does not accept multiple version
+        # the setup for Python 3.5 does not accept multiple versions
         # it was installed on one machine and then compressed into a 7z
         # file
         if versioni >= (3, 6, 0):
@@ -263,8 +263,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=True)
                 fLOG("[install_python] end installed modules.")
                 if len(err) > 0:
-                    # We try a second time to make sure a second pass does not
-                    # help.
+                    # We try a second time to make sure a second pass does not help.
                     fLOG("[install_python2] install modules")
                     out_, err_ = run_cmd(
                         cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=False)
@@ -273,7 +272,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                         raise Exception(
                             "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\n**CMD**\n{0}".format(cmd, out, err, out_, err_))
                     else:
-                        out += "\n-------------\n" + out_
+                        out += ("\n-------------" * 5) + "\n" + out_
                 fLOG(out)
 
         return local

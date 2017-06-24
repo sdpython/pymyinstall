@@ -4,9 +4,43 @@
 """
 
 
+def get_default_ignore_modules():
+    """
+    A couple of modules have some dependencies on not supported modules
+    or modules integrated to the standard distributiion such
+    `enum34 <https://pypi.python.org/pypi/enum34>`_.
+    This function returns this list.
+    """
+    return [
+        "argparse",          # standard distribution (>= 3.5)
+        "backports.weakref",  # standard distribution (>= 3.4)
+        "distribute",        # standard distribution
+        "enum",              # standard distribution (>= 3.4)
+        "enum34",            # standard distribution (>= 3.4)
+        "enum_compat",       # standard distribution (>= 3.4)
+        "futures",           # standard distribution (>= 3.5)
+        "keyrings.alt",      # weird this one on Windows
+        # "guidata",
+        # "monotonic",
+        "ordereddict",      # standard distribution (>= 3.4)
+        "pathlib",          # standard distribution (>= 3.5)
+        "pip",              # almost standard distribution, should be rare
+        # manny names for this one (PTable, not maintained anymore)
+        "prettytable",
+        "pycryptodome",     # manny names for this one
+        "pyopengl",         # weird this one
+        "pypiwin32",        # manny names for this one
+        "pywin32",          # manny names for this one
+        "pywin32_ctypes",   # manny names for this one
+        "setuptools",       # standard distribution
+        "typing",           # standard distribution (>= 3.6)
+    ]
+
+
 def _main_pipdeptree(local_only=False):
     """
-    replicate pipdeptree.main to catch the standard output
+    The function relies on module
+    `pipdeptree.main <https://pypi.python.org/pypi/pipdeptree>`_.
     """
     from pip import get_installed_distributions
 
@@ -17,18 +51,19 @@ def _main_pipdeptree(local_only=False):
     return req_map
 
 
-def missing_dependencies(specific=None):
+def missing_dependencies(specific=None, ignore_module=get_default_ignore_modules()):
     """
     return the list of missing dependencies for the installed modules
 
-    @param      specific    look dependencies only for a specific module
-    @return                 list of missing dependencies as dictionary (module, missing dependencies)
+    @param      specific        look dependencies only for a specific module
+    @param      ignore_module   list of modules not to consider as a missing dependency
+                                even if they are installed
+    @return                     list of missing dependencies as dictionary (module, missing dependencies)
 
-    the function relis on module pipdeptree.
+    .. versionchanged:: 1.5
+        Parameters *ignore_module*.
     """
-    skip = {"setuptools", "pip", "distribute", "ordereddict", "argparse", "futures",
-            "pywin32", "pywin32_ctypes", "pypiwin32", "monotonic", "typing", "pathlib",
-            "enum_compat", "guidata", "pycryptodome"}
+    skip = set(ignore_module)
     tree = _main_pipdeptree()
     stack = {}
     for k, v in tree.items():
