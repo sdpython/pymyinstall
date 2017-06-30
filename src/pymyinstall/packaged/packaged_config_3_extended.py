@@ -469,8 +469,6 @@ def extended_set():
                       purpose="The smartest command line arguments parser in the world"),
         ModuleInstall("idna", "pip", usage="WEB",
                       purpose="Internationalized Domain Names in Applications (IDNA)"),
-        ModuleInstall("ipaddress", "pip",
-                      purpose="IPv4/IPv6 manipulation library") if sys.version_info[0] == 2 else None,
         ModuleInstall("pyOpenSSL", "pip", mname="pyopenssl",
                       purpose="Python wrapper module around the OpenSSL library"),
         ModuleInstall("w3lib", "pip",

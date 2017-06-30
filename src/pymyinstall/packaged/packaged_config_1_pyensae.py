@@ -73,9 +73,11 @@ def pyensae_set():
         "dominate",
         "easydev",
         "ecdsa",  # paramiko
+        "elasticsearch",
         "folium",  # maps
         "idna",
         "inflection",  # quandl
+        "ipaddress",
         "ipykernel",
         "isodate",
         "keyring",
