@@ -122,10 +122,6 @@ def extended_set():
         ModuleInstall(
             'splinter', 'pip', purpose="browser abstraction for web acceptance testing", usage="NETWORK"),
         ModuleInstall(
-            'olefile', 'pip', purpose="Python package to parse, read and write Microsoft OLE2 files " +
-            "(Structured Storage or Compound Document, Microsoft Office) - Improved version of the " +
-            "OleFileIO module from PIL, the Python Image Library."),
-        ModuleInstall(
             'pygame', 'wheel', purpose="GUI, interface for games (needs to be installed from www.pygame.org on Linux)", usage="GUI"),
         ModuleInstall(
             'Kivy', 'wheel', mname='kivy', purpose="GUI, interface for games, mobile (use sudo apt-get install python3-kivy on Linux)", usage="GUI"),

@@ -35,7 +35,6 @@ def ensae_teaching_cs_set():
         "mpld3",
         "natgrid",
         "numexpr",
-        "olefile",
         "partd",
         "patsy",
         "picklable-itertools",

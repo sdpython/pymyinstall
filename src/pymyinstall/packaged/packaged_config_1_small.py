@@ -456,6 +456,10 @@ def small_set():
             "tqdm", "pip", purpose="A Simple Python Progress Meter (for moviepy)", usage="JUPYTER"),
 
         ModuleInstall(
+            'olefile', 'pip', purpose="Python package to parse, read and write Microsoft OLE2 files " +
+            "(Structured Storage or Compound Document, Microsoft Office) - Improved version of the " +
+            "OleFileIO module from PIL, the Python Image Library."),
+        ModuleInstall(
             'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         # Sphinx extension to draw graphs.
         ModuleInstall(

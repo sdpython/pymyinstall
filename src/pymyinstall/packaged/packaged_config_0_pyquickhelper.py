@@ -71,6 +71,7 @@ def pyquickhelper_set():
         "notedown",
         "numpy",
         "jdcal",
+        "olefile",
         "openpyxl",
         "path.py",
         "pbr",

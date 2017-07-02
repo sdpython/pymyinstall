@@ -28,6 +28,7 @@ def datascientistbase_set():
         "matplotlib",
         "mccabe",
         "numpy",
+        "olefile",
         "openpyxl",
         "packaging",
         "pandas",
