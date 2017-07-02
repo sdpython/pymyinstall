@@ -454,6 +454,18 @@ def small_set():
                       purpose="XML bomb protection for Python stdlib modules"),
         ModuleInstall(
             "tqdm", "pip", purpose="A Simple Python Progress Meter (for moviepy)", usage="JUPYTER"),
+
+        # Sphinx extension to draw graphs.
+        ModuleInstall(
+            "webcolors", "pip", purpose="A library for working with color names and color value formats defined " +
+            "by the HTML and CSS specifications for use in documents on the Web."),
+        ModuleInstall(
+            "funcparserlib", "pip", purpose="Recursive descent parsing library based on functional combinators"),
+        ModuleInstall(
+            "blockdiag", "pip", purpose="blockdiag generates block-diagram image from text"),
+        ModuleInstall(
+            "sphinxcontrib-blockdiag", "pip", mname="sphinxcontrib.blockdiag",
+            purpose="Sphinx 'blockdiag' extension"),
     ]
 
     return [_ for _ in mod if _ is not None]
