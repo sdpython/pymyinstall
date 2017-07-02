@@ -455,6 +455,8 @@ def small_set():
         ModuleInstall(
             "tqdm", "pip", purpose="A Simple Python Progress Meter (for moviepy)", usage="JUPYTER"),
 
+        ModuleInstall(
+            'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         # Sphinx extension to draw graphs.
         ModuleInstall(
             "webcolors", "pip", purpose="A library for working with color names and color value formats defined " +

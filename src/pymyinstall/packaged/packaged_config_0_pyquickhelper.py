@@ -81,6 +81,7 @@ def pyquickhelper_set():
         "pep8",
         "pexpect",  # if not sys.platform.startswith("win") else None,
         "pickleshare",
+        "Pillow",
         "pipdeptree",
         "prompt_toolkit",
         "psutil",

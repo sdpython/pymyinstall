@@ -60,8 +60,6 @@ def extended_set():
         if not sys.platform.startswith("win") else None,
         ModuleInstall('rpy2', 'wheel', purpose="interact with R (R_HOME needs to be set up on Linux)",
                       usage="DATA/ML"),
-        ModuleInstall(
-            'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         ModuleInstall('python-pptx', 'pip', mname="pptx",
                       purpose="read/write PowerPoint presentation"),
         ModuleInstall(

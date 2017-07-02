@@ -39,7 +39,6 @@ def ensae_teaching_cs_set():
         "partd",
         "patsy",
         "picklable-itertools",
-        "pillow",
         "progressbar2",
         "psutil",
         "psycopg2",
