@@ -31,20 +31,21 @@ pushd %current%dlib
 @echo BUILD following APPVEYOR instructions
 mkdir build_test
 cd build_test
-rem cmake -G "Visual Studio 14 2015 Win64" ../dlib/test
-rem cmake --build . --config Release
+cmake -G "Visual Studio 14 2015 Win64" ../dlib/test
+cmake --build . --config Release
 popd
   
 :python:
 @echo BUILD python module
-set BOOST_ROOT=C:\xavierdupre\boost\boost_1_64_0
-set BOOST_LIBRARYDIR=C:\xavierdupre\boost\boost_1_64_0\lib64-msvc-14.1
+set version=1_64_0
+set BOOST_ROOT=%~dp0boost\boost_%version%
+set BOOST_LIBRARYDIR=%~dp0boost\build\boost\bin.v2\libs
 if exist %BOOST_ROOT% goto good1:
-@echo Unable to find %BOOST_ROOT%
+@echo Unable to find(1) %BOOST_ROOT%
 exit 1
 :good1:
 if exist %BOOST_LIBRARYDIR% goto good2:
-@echo Unable to find %BOOST_LIBRARYDIR%
+@echo Unable to find(2) %BOOST_LIBRARYDIR%
 exit 1
 
 :good2:

@@ -274,3 +274,5 @@ _unittests/ut_module/windows_modules_versions.txt
 _unittests/*/download/*
 src/.vscode/settings.json
 /whl/windows/bottlechest
+/whl/windows/boost
+/whl/windows/dlib
