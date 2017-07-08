@@ -1,0 +1,45 @@
+
+.. blogpost::
+    :title: Building dlib, boost on Windows
+    :keywords: dlib, Windows
+    :date: 2017-07-10
+    :categories: module
+
+    `dlib <http://dlib.net/>`_ is quite difficult to build on
+    Windows for Python 3.6. A compiled version exists on
+    `PyPi/dlib <https://pypi.python.org/pypi/dlib>`_ for Python 3.5
+    but the version for Python 3.6 remains unavailable unless you
+    are using Anaconda:
+    `Installing Dlib on Anaconda Python on Windows <http://www.codesofinterest.com/2016/10/installing-dlib-on-anaconda-python-on.html>`_.
+    The blog `Install Dlib on Windows <http://www.learnopencv.com/install-dlib-on-windows/>`_
+    even recommends not to try and to use *conda* (with Anaconda) instead:
+
+    ::
+
+        conda install -c conda-forge dlib=19.4
+
+    It seems easier to do it on Ubuntu
+    ` <http://www.learnopencv.com/install-dlib-on-ubuntu/>`_.
+    As I was still trying to go on with the compilation, I discovered this tool
+    `vcpkg <https://blogs.msdn.microsoft.com/vcblog/2016/09/19/vcpkg-a-tool-to-acquire-and-build-c-open-source-libraries-on-windows/>`_
+    which helps installing C++ packages on Windows.
+    I followed the instructions to build it:
+
+    ::
+
+        git clone https://github.com/Microsoft/vcpkg
+        powershell -exec bypass scripts\bootstrap.ps1
+
+    And I compiled boost:
+
+    ::
+
+        vcpkg install boost:x64-windows
+
+    Be patient because installing
+    `boost <http://www.boost.org/>`_
+    takes a while. The same instruction works for *dlib*:
+
+    ::
+
+        vcpkg install dlib:x64-windows

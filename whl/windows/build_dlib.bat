@@ -34,7 +34,7 @@ cd build_test
 cmake -G "Visual Studio 14 2015 Win64" ../dlib/test
 cmake --build . --config Release
 popd
-  
+
 :python:
 @echo BUILD python module
 set version=1_64_0
