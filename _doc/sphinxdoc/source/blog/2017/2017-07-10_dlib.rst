@@ -40,7 +40,7 @@
     `boost <http://www.boost.org/>`_
     takes a while. One issuee though:
     it does not include Python:
-    `issue 78 <https://github.com/Microsoft/vcpkg/issues/78>`_.    
+    `issue 78 <https://github.com/Microsoft/vcpkg/issues/78>`_.
     The same instruction works for *dlib*:
 
     ::
