@@ -25,14 +25,19 @@ set PATH=%PATH%;C:\Program Files\7-Zip\
 
 :booststrap:
 @echo BOOTSTRAP ---------------------
-cd %current%boost\boost_%version%\tools\build
-cmd /c bootstrap
+cd %current%boost\boost_%version%\boost_%version%\tools\build
+rem cmd /c bootstrap
 
 :b2:
 @echo B2 ---------------------
-cmd /c b2 install --prefix=%current%boost\MYINST
+rem cmd /c b2 install --prefix=%current%boost\MYINST
+
+:python-config:
+@echo [config]
+rem @echo "using python : 3.6;" >> boost\MYINST\share\boost-build\example\user-config.jam
 
 :build:
+@echo [build]
 set PATH=%PATH%;%current%boost\MYINST\bin
-cd %current%boost\boost_%version%
-b2 --build-dir=%current%boost\build toolset=msvc --build-type=complete msvc stage
+cd %current%boost\boost_%version%\boost_%version%
+b2 --build-dir=%current%boost\build toolset=msvc --with-python --build-type=complete architecture=x86 address-model=64 runtime-link=static msvc stage
