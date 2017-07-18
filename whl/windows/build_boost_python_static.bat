@@ -11,9 +11,9 @@ set pythonexe=c:\Python36_x64
 :start_script:
 set current=%~dp0
 
-@echo [boost] vcvarsall.bat
-pushd "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC"
-call vcvarsall.bat x64
+@echo [boost] vcvarsall.bat from "%VS140COMNTOOLS%..\..\VC
+pushd "%VS140COMNTOOLS%..\..\VC"
+call vcvarsall.bat x86
 popd
 @echo [boost] vcvarsall.bat Done
 
@@ -56,5 +56,5 @@ exit 1
 @echo [boost] build
 set PATH=%PATH%;%current%boost\MYINST\bin
 cd %current%boost\boost_%version%\boost_%version%
-b2 --build-dir=%current%boost\build toolset=msvc --stagedir=stage/x64 --without-python --build-type=complete architecture=x86 address-model=64 runtime-link=static msvc stage
+b2 --build-dir=%current%boost\build toolset=msvc --stagedir=stage/x64 --with-python --build-type=complete architecture=x86 address-model=64 runtime-link=static msvc stage
 @echo [boost] done

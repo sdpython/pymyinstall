@@ -9,58 +9,60 @@ set pythonexe=c:\Python36_x64
 
 :start_script:
 set current=%~dp0
-set PATH=%pythonexe%;%pythonexe%\Scripts;%PATH%
+set PATH=%pythonexe%;%pythonexe%\Scripts;%pythonexe%\libs;%PATH%
 @echo create %current%..\..\dist
 if not exist %current%..\..\dist mkdir %current%..\..\dist
 
 :clone:
-@echo CLONE
+@echo [dlib] CLONE
 if exist param goto update:
 git clone --recursive https://github.com/davisking/dlib %current%dlib
 goto build:
 
 :update:
-@echo PULL
+@echo [dlib] PULL
 git pull %current%param
 
 :build:
-@echo BUILD
+@echo [dlib] BUILD
 
+:boost:
+@echo [dlib] set up boost
+set version=1_64_0
+set BOOST_ROOT=%~dp0boost\boost_%version%\boost_%version%
+set BOOST_LIBRARYDIR=%~dp0boost\boost_%version%\boost_%version%\stage\x64\lib
+if exist %BOOST_ROOT%\bootstrap.bat goto good1:
+@echo [dlib] ERROR: Unable to find(1) %BOOST_ROOT%
+exit 1
+
+:good1:
+if exist %BOOST_LIBRARYDIR%\libboost_python3-vc140-s-1_64.lib goto good2:
+@echo [dlib] ERROR: Unable to find(2) '%BOOST_LIBRARYDIR%\libboost_python3-vc140-s-1_64.lib'
+@echo [dlib] call build_boost_python_static.bat from a visual studio command line in 64 bits
+exit 1
+
+:good2:
 :appveyor:
 pushd %current%dlib
-@echo BUILD following APPVEYOR instructions
+if exist build_test goto python:
+@echo [dlib] BUILD following APPVEYOR instructions
 mkdir build_test
-cd build_test
+pushd build_test
 cmake -G "Visual Studio 14 2015 Win64" ../dlib/test
 cmake --build . --config Release
 popd
 
 :python:
-@echo BUILD python module
-set version=1_64_0
-set BOOST_ROOT=%~dp0boost\boost_%version%
-set BOOST_LIBRARYDIR=%~dp0boost\build\boost\bin.v2\libs
-if exist %BOOST_ROOT% goto good1:
-@echo Unable to find(1) %BOOST_ROOT%
-exit 1
-:good1:
-if exist %BOOST_LIBRARYDIR% goto good2:
-@echo Unable to find(2) %BOOST_LIBRARYDIR%
-exit 1
-
-:good2:
-rem boost
-rem got boost/build/tools
-rem run bootstrap.bat
-rem run b2 toolset=msvc-14.0 --build-type=complete --abbreviate-paths architecture=x86 address-model=64 install -j4
-
-:python:
-set PATH=c:\Python36_x64;%PATH%
+popd
+@echo [dlib] build_wheel
+set PATH=%pythonexe%;%pythonexe%\include;%pythonexe%\libs;%BOOST_LIBRARYDIR%;%PATH%
+@echo [dlib] copy Python lib into %BOOST_LIBRARYDIR%
+copy %pythonexe%\libs\*.lib %BOOST_LIBRARYDIR%
+copy %BOOST_LIBRARYDIR%\libboost_python3-vc140-mt-s-1_64.lib %BOOST_LIBRARYDIR%\libboost_python-vc140-mt-s-1_64.lib
+copy %BOOST_LIBRARYDIR%\libboost_numpy3-vc140-mt-s-1_64.lib %BOOST_LIBRARYDIR%\libboost_numpy3-vc140-mt-s-1_64.lib
+@echo [dlib] done copy
 pushd %current%dlib
 python -u %current%dlib\setup.py build_ext --inplace --yes USE_AVX_INSTRUCTIONS
 python -u %current%dlib\setup.py bdist_wheel
 popd
 
-:copy:
-@echo COPY
-copy %current%param\dist\*.whl %current%..\..\dist
