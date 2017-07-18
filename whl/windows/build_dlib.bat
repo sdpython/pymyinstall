@@ -65,4 +65,3 @@ pushd %current%dlib
 python -u %current%dlib\setup.py build_ext --inplace --yes USE_AVX_INSTRUCTIONS
 python -u %current%dlib\setup.py bdist_wheel
 popd
-

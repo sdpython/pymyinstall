@@ -1,11 +1,11 @@
 
 .. blogpost::
-    :title: Building dlib, boost on Windows
-    :keywords: dlib, Windows
+    :title: Building dlib for Python 3.6 and boost_python on Windows
+    :keywords: dlib, Windows, boost_python
     :date: 2017-07-10
     :categories: module
 
-    `dlib <http://dlib.net/>`_ is quite difficult to build on
+    :epkg:`dlib` is quite difficult to build on
     Windows for Python 3.6. A compiled version exists on
     `PyPi/dlib <https://pypi.python.org/pypi/dlib>`_ for Python 3.5
     but the version for Python 3.6 remains unavailable unless you
@@ -37,8 +37,8 @@
         vcpkg install boost:x64-windows
 
     Be patient because installing
-    `boost <http://www.boost.org/>`_
-    takes a while. One issuee though:
+    :epkg:`boost` takes a while because it builds everything.
+    One issue though:
     it does not include Python:
     `issue 78 <https://github.com/Microsoft/vcpkg/issues/78>`_.
     The same instruction works for *dlib*:
@@ -46,3 +46,42 @@
     ::
 
         vcpkg install dlib:x64-windows
+
+    But it is yet impossible to build the python extension *dlib* for Windows.
+    I had to start from scratch.
+    So I started to build :epkg:`boost_python`
+    on my own. The tutorial is easy to follow but it took a week
+    to find the good page telling how to get the 64 bits version of it.
+    The trick I was missing is to build :epkg:`boost_python`
+    from a *VS2015 x64 Native Tools Command Prompt* otherwise
+    the builds gets stuck in 32 bits.
+    
+    * `Boost Build <http://www.boost.org/doc/libs/1_64_0/doc/html/bbv2/reference.html#bbv2.reference.tools.compiler.hp_cxx>`_
+    * `How to build boost Version 1.58.0 using Visual Studio 2015 (Enterprise) <https://stackoverflow.com/questions/31566807/how-to-build-boost-version-1-58-0-using-visual-studio-2015-enterprise>`_
+    
+    This part is summarize in the script
+    `build_boost_python.bat <>`_.
+    Then comes :epkg:`dlib`. I also followed the tutorial which explains
+    how to build the C++ version of it. No issue there. The first part
+    starts with:
+    
+    ::
+    
+        python -u setup.py build_ext --inplace --yes USE_AVX_INSTRUCTIONS
+        python -u setup.py bdist_wheel
+    
+    If fails to find the Python static libraries because the linker
+    cannot find them and *boost_python* because the name is different.
+    So I copied tham at the same location as *boost_python* build.
+    
+    ::
+    
+        set version=1_64_0
+        set BOOST_LIBRARYDIR=something like ...\boost_%version%\boost_%version%\stage\x64\lib
+        copy %pythonexe%\libs\*.lib %BOOST_LIBRARYDIR%
+        copy %BOOST_LIBRARYDIR%\libboost_python3-vc140-mt-s-1_64.lib %BOOST_LIBRARYDIR%\libboost_python-vc140-mt-s-1_64.lib
+        copy %BOOST_LIBRARYDIR%\libboost_numpy3-vc140-mt-s-1_64.lib %BOOST_LIBRARYDIR%\libboost_numpy3-vc140-mt-s-1_64.lib
+
+    The full process is given by 
+    `build_dlib.bat <>`_.
+    It was quite a long journey.
