@@ -84,4 +84,5 @@
 
     The full process is given by
     `build_dlib.bat <https://github.com/sdpython/pymyinstall/blob/master/whl/windows/build_dlib.bat>`_.
-    It was quite a long journey.
+    It was quite a long journey. You can find my build
+    at `dlib-19.4.99-cp36-cp36m-win_amd64.whl <http://www.xavierdupre.fr/enseignement/setup/dlib-19.4.99-cp36-cp36m-win_amd64.whl>`_.
