@@ -55,33 +55,33 @@
     The trick I was missing is to build :epkg:`boost_python`
     from a *VS2015 x64 Native Tools Command Prompt* otherwise
     the builds gets stuck in 32 bits.
-    
+
     * `Boost Build <http://www.boost.org/doc/libs/1_64_0/doc/html/bbv2/reference.html#bbv2.reference.tools.compiler.hp_cxx>`_
     * `How to build boost Version 1.58.0 using Visual Studio 2015 (Enterprise) <https://stackoverflow.com/questions/31566807/how-to-build-boost-version-1-58-0-using-visual-studio-2015-enterprise>`_
-    
+
     This part is summarize in the script
-    `build_boost_python.bat <>`_.
+    `build_boost_python_static.bat <https://github.com/sdpython/pymyinstall/blob/master/whl/windows/build_boost_python_static.bat>`_.
     Then comes :epkg:`dlib`. I also followed the tutorial which explains
     how to build the C++ version of it. No issue there. The first part
     starts with:
-    
+
     ::
-    
+
         python -u setup.py build_ext --inplace --yes USE_AVX_INSTRUCTIONS
         python -u setup.py bdist_wheel
-    
+
     If fails to find the Python static libraries because the linker
     cannot find them and *boost_python* because the name is different.
     So I copied tham at the same location as *boost_python* build.
-    
+
     ::
-    
+
         set version=1_64_0
         set BOOST_LIBRARYDIR=something like ...\boost_%version%\boost_%version%\stage\x64\lib
         copy %pythonexe%\libs\*.lib %BOOST_LIBRARYDIR%
         copy %BOOST_LIBRARYDIR%\libboost_python3-vc140-mt-s-1_64.lib %BOOST_LIBRARYDIR%\libboost_python-vc140-mt-s-1_64.lib
         copy %BOOST_LIBRARYDIR%\libboost_numpy3-vc140-mt-s-1_64.lib %BOOST_LIBRARYDIR%\libboost_numpy3-vc140-mt-s-1_64.lib
 
-    The full process is given by 
-    `build_dlib.bat <>`_.
+    The full process is given by
+    `build_dlib.bat <https://github.com/sdpython/pymyinstall/blob/master/whl/windows/build_dlib.bat>`_.
     It was quite a long journey.
