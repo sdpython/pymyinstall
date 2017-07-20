@@ -345,7 +345,7 @@ def small_set():
         ModuleInstall('flask-sqlalchemy', 'pip',
                       mname='flask.ext.sqlalchemy', usage="NETWORK"),
         ModuleInstall('Flask-Login', 'pip', mname="flask_login",
-                      mname='flask.ext.login', usage="NETWORK"),
+                      usage="NETWORK"),
         ModuleInstall("Flask-Cors", "pip", mname="flask_cors",
                       purpose="A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible."),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
