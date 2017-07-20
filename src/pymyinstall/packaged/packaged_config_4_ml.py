@@ -272,9 +272,9 @@ def ensae_set():
             "colorspacious", "pip", purpose="A powerful, accurate, and easy-to-use Python library for doing colorspace conversions (for viscm)"),
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
-        ModuleInstall("cubehelix", "github", "jradavenport",
-                      purpose="a full implementation of Dave Green's cubehelix colormap for Python",
-                      web="https://github.com/jradavenport/cubehelix"),
+        # ModuleInstall("cubehelix", "github", "jradavenport",
+        #               purpose="a full implementation of Dave Green's cubehelix colormap for Python",
+        #              web="https://github.com/jradavenport/cubehelix"),
         ModuleInstall("lifelines", "pip",
                       purpose="survival analysis", usage="OPTIM"),
         # ModuleInstall("pysnptools", "pip", purpose="operation on DNA sequences"), # only available on Python 2.7
@@ -613,7 +613,7 @@ def ensae_set():
                       purpose="C implementation of Levenshtein distance."),
         ModuleInstall("fuzzywuzzy", "pip",
                       purpose="Fuzzy string matching in python"),
-        ModuleInstall("gitpython", "pip",
+        ModuleInstall("GitPython", "pip", mname="git",
                       purpose="Python Git Library"),
         ModuleInstall("nbdime", "pip",
                       purpose="Comparison of notebooks"),
@@ -658,7 +658,7 @@ def ensae_set():
                       "the interactive data analysis of multi-dimensional " +
                       "datasets that can be described as multi-dimensional arrays of a given " +
                       "signal (e.g. a 2D array of spectra a.k.a spectrum image)."),
-        ModuleInstall('holopy', 'wheel',
+        ModuleInstall('HoloPy', 'wheel', mname="holopy",
                       purpose="Hologram processing and light scattering in python"),
         ModuleInstall('sounddevice', 'wheel',
                       purpose="This Python module provides bindings for the PortAudio library and a few " +
