@@ -663,7 +663,7 @@ def ensae_set():
         ModuleInstall('sounddevice', 'wheel',
                       purpose="This Python module provides bindings for the PortAudio library and a few " +
                       "convenience functions to play and record NumPy arrays containing audio signals."),
-        ModuleInstall('drawtree', 'wheel', usage="VIZ",
+        ModuleInstall('drawtree', 'pip', usage="VIZ",
                       purpose="Draw binary tree in plain text"),
         ModuleInstall('JPype1', 'wheel', purpose="A Python to Java bridge."),
         ModuleInstall('pyflux', 'wheel', usage="DATA/ML",
