@@ -668,7 +668,7 @@ def ensae_set():
         ModuleInstall('JPype1', 'wheel', purpose="A Python to Java bridge."),
         ModuleInstall('pyflux', 'wheel', usage="DATA/ML",
                       purpose="An open source time series library for the Python Programming Language"),
-        ModuleInstall('rtree', 'wheel', usage="MATHS",
+        ModuleInstall('Rtree', 'wheel', usage="MATHS", mnane="rtree",
                       purpose="R-Tree spatial index for Python GIS"),
         ModuleInstall('sima', 'wheel', usage="MATHS",
                       purpose="Software for analysis of sequential imaging data"),
