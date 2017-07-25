@@ -250,14 +250,21 @@ def enumerate_links_module(name, alls, version, plat):
                 js = val.lstrip()
 
         if js:
+            suf = '"javascript:dl("'
             bs = ["javascript:", "javascript :"]
             res = None
             for b in bs:
                 if js.startswith(b):
                     js = js[len(b):]
+                    if js.endswith(suf):
+                        js = js[:-len(suf) - 2]
                     dl = _cg_dl
                     if dl is not None:
-                        res = eval(js)
+                        try:
+                            res = eval(js)
+                        except SyntaxError as e:
+                            raise SyntaxError(
+                                "Unable to evaluate '{0}'.".format(js))
                         break
             if res is None:
                 raise InternalJsException(
