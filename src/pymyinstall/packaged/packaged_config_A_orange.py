@@ -12,6 +12,15 @@ def orange_set():
     """
     mod = [
         ModuleInstall(
+            "pdfminer3k", "pip",
+            purpose="PDF parser and analyzer"),
+        ModuleInstall(
+            "docx2txt", "pip",
+            purpose="A pure python-based utility to extract text and images from docx files."),
+        ModuleInstall(
+            "odfpy", "pip",
+            purpose="Python API and tools to manipulate OpenDocument files"),
+        ModuleInstall(
             "Bottlechest", "wheel2", mname="bottlechest",
             purpose="Bottlechest is a fork of bottleneck specialized for use in Orange", usage="ORANGE"),
         ModuleInstall(

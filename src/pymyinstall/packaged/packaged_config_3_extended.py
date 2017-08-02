@@ -27,9 +27,8 @@ def extended_set():
                       purpose="Attributes without boilerplate."),
         ModuleInstall("Automat", "pip", mname="automat",
                       purpose="Self-service finite-state machines for the programmer on the go."),
-        ModuleInstall(  # requires VS 2015
-            "guidata", "pip", purpose="Automatic graphical user interfaces generation for easy dataset editing and display") \
-        if not sys.platform.startswith("win") else None,  # it does not work on Windows
+        ModuleInstall("guidata", "pip" if not sys.platform.startswith("win") else "wheel2",
+                      purpose="Automatic graphical user interfaces generation for easy dataset editing and display"),
         ModuleInstall(
             "guiqwt", "wheel", purpose="Efficient 2D plotting Python library based on PythonQwt (Spyder)"),
         ModuleInstall(
@@ -612,6 +611,10 @@ def extended_set():
                       purpose="Hypothesis is an advanced testing library for Python. It lets you write tests which are parametrized " +
                       "by a source of examples, and then generates simple and comprehensible examples that make your tests fail. " +
                       "This lets you find more bugs in your code with less work."),
+        ModuleInstall('monotonic', 'pip',
+                      purpose="This module provides a monotonic() function which returns the value (in fractional seconds) " +
+                      "of a clock which never goes backwards. " +
+                      "It is compatible with Python 2 and Python 3."),
         ModuleInstall('fasteners', 'pip',
                       purpose="A python package that provides useful locks."),
         ModuleInstall('zarr', 'pip',
