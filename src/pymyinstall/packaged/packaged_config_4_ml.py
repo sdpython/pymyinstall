@@ -618,6 +618,8 @@ def ensae_set():
                       purpose="C implementation of Levenshtein distance."),
         ModuleInstall("fuzzywuzzy", "pip",
                       purpose="Fuzzy string matching in python"),
+        ModuleInstall("smmap2", "pip", mname="smmap",
+                      purpose="A pure python implementation of a sliding window memory map manager"),
         ModuleInstall("gitdb2", "pip", mname="git",
                       purpose="GitDB is a pure-Python git object database"),
         ModuleInstall("GitPython", "pip", mname="git",
