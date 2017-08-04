@@ -53,7 +53,7 @@ class TestDownloadGuiData(unittest.TestCase):
         if sys.version_info[0] == 2:
             # disabled on python 2.7
             return
-        if  not sys.platform.startswith("win"):
+        if not sys.platform.startswith("win"):
             # only for windows
             return
         fold = get_temp_folder(__file__, "temp_download_guidata")
