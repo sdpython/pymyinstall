@@ -68,7 +68,7 @@ def pyensae_set():
         "colormap",
         "chardet",
         "cryptography",
-        "dataproperty",
+        "DataProperty",
         "dbfread",
         "dominate",
         "easydev",

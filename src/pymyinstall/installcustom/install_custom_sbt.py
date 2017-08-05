@@ -34,7 +34,7 @@ def install_scala_sbt(
     link = "http://www.scala-sbt.org/download.html"
     page = download_page(link)
     if sys.platform.startswith("win"):
-        reg = re.compile("href=\\\"(.*?[.]msi)\\\"")
+        reg = re.compile("href=\\\"(https://cocl.*?msi)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0:
             raise Exception(
@@ -47,6 +47,8 @@ def install_scala_sbt(
         version = file.split("/")[-2]
         fLOG("scala-sbt, version ", version)
         outfile = os.path.join(temp_folder, full.split("/")[-1])
+        if not outfile.endswith(".msi"):
+            outfile += ".msi"
         fLOG("download ", full)
         local = download_file(full, outfile)
         if install and not bb:

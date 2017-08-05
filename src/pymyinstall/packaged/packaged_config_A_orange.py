@@ -12,6 +12,15 @@ def orange_set():
     """
     mod = [
         ModuleInstall(
+            "pdfminer3k", "pip",
+            purpose="PDF parser and analyzer"),
+        ModuleInstall(
+            "docx2txt", "pip",
+            purpose="A pure python-based utility to extract text and images from docx files."),
+        ModuleInstall(
+            "odfpy", "pip",
+            purpose="Python API and tools to manipulate OpenDocument files"),
+        ModuleInstall(
             "Bottlechest", "wheel2", mname="bottlechest",
             purpose="Bottlechest is a fork of bottleneck specialized for use in Orange", usage="ORANGE"),
         ModuleInstall(
@@ -23,7 +32,7 @@ def orange_set():
             "scikit-fusion", "pip", mname="skfusion",
             purpose="A Python module for data fusion built on top of factorized models."),
         ModuleInstall(
-            "anyqt", "pip",
+            "AnyQt", "pip",
             purpose="PyQt4/PyQt5 compatibility layer."),
         ModuleInstall(
             "hyperframe", "pip",
@@ -66,7 +75,7 @@ def orange_set():
             "Orange3-Network", "pip", mname="orangecontrib.network", usage="ORANGE",
             purpose="Orange Network is an add-on for Orange data mining software package. It provides network visualization and analysis tools."),
         ModuleInstall(
-            "cachecontrol", "pip",
+            "CacheControl", "pip", mname="cachecontrol",
             purpose="httplib2 caching for requests"),
         ModuleInstall(
             "Orange3-ImageAnalytics", "pip", mname="orangecontrib.imageanalytics", usage="ORANGE",

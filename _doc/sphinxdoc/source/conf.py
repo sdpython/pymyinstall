@@ -26,3 +26,8 @@ set_sphinx_variables(__file__, "pymyinstall", "Xavier Dupré", 2017,
                      extlinks=dict(issue=('https://github.com/sdpython/pymyinstall/issues/%s', 'issue')))
 
 blog_root = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/"
+
+
+epkg_dictionary['boost'] = "http://www.boost.org/"
+epkg_dictionary['dlib'] = "http://dlib.net/"
+epkg_dictionary['boost_python'] = "http://www.boost.org/doc/libs/release/libs/python/"

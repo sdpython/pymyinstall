@@ -175,6 +175,12 @@ else:
 if "--verbose" in sys.argv:
     verbose()
 
+
+def file_filter_pep8(filename):
+    filename = filename.replace("\\", "/")
+    return "/whl/" not in filename
+
+
 if is_local():
     pyquickhelper = import_pyquickhelper()
     logging_function = pyquickhelper.get_fLOG()
@@ -189,7 +195,9 @@ if is_local():
         additional_notebook_path=["pyquickhelper"],
         additional_local_path=["pyquickhelper"],
         unittest_modules=["pyquickhelper"], fLOG=logging_function,
-        covtoken=("b67b3051-8c5d-460b-b2fa-51d81ab7008c", "'_UT_36_std' in outfile"))
+        covtoken=("b67b3051-8c5d-460b-b2fa-51d81ab7008c",
+                  "'_UT_36_std' in outfile"),
+        file_filter_pep8=file_filter_pep8)
     if not r and not ({"bdist_msi", "sdist",
                        "bdist_wheel", "publish", "publish_doc", "register",
                        "upload_docs", "bdist_wininst", "build_ext"} & set(sys.argv)):

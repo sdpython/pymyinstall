@@ -399,6 +399,9 @@ class ModuleInstall:
             links = [_ for _ in alls if "/" +
                      name_ in _ and (pyn in _ or py in _ or cp in _) and (plat in _ or "-any" in _)]
         if len(links) == 0:
+            # exception for guidata
+            links = [_ for _ in alls if self.name in _ and "-py2.py3-" in _]
+        if len(links) == 0:
             if file_save is not None:
                 with open(file_save, "w", encoding="utf8") as f:
                     f.write(page)
