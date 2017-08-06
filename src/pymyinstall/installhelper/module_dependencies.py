@@ -18,16 +18,18 @@ def get_default_ignore_modules():
         "enum",              # standard distribution (>= 3.4)
         "enum34",            # standard distribution (>= 3.4)
         "enum_compat",       # standard distribution (>= 3.4)
+        "enum-compat",       # standard distribution (>= 3.4)
         "futures",           # standard distribution (>= 3.5)
         "keyrings.alt",      # weird this one on Windows
         # "guidata",
         # "monotonic",
+        "rope",             # for spyder
         "ordereddict",      # standard distribution (>= 3.4)
         "pathlib",          # standard distribution (>= 3.5)
         "pip",              # almost standard distribution, should be rare
         # manny names for this one (PTable, not maintained anymore)
         "prettytable",
-        "pycryptodome",     # manny names for this one
+        "pycryptodome",     # many names for this one
         "pyopengl",         # weird this one
         "pypiwin32",        # manny names for this one
         "pywin32",          # manny names for this one

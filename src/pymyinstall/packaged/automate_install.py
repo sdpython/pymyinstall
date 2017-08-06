@@ -402,7 +402,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         fLOG("[install_all] check dependencies")
         miss = missing_dependencies()
         if len(miss) > 0:
-            mes = "\n".join("'{0}' misses '{1}'".format(k, ", ".join(v))
+            mes = "\n".join("Module '{0}' misses '{1}'".format(k, ", ".join(v))
                             for k, v in sorted(miss.items()))
             warnings.warn("missing dependencies\n" + mes)
         fLOG("[install_all] end check dependencies")
