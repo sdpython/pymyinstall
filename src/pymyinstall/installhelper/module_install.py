@@ -410,9 +410,15 @@ class ModuleInstall:
                                         self.name + "\n" + "\n".join(short_list))
 
         # Last filter. Removes modules with a longer name.
-        pref = self.name.lower() + "-"
-        links_ = [_ for _ in links if _.split(
-            "/")[-1].lower().startswith(pref)]
+        pref1 = self.name.lower() + "-"
+        pref2 = self.name.lower().replace("-", "_") + "-"
+        pref3 = self.name.lower().replace("_", "-") + "-"
+
+        def filter_cond(name):
+            name = name.split("/")[-1].lower()
+            return name.startswith(pref1) or name.startswith(pref2) or name.startswith(pref3)
+
+        links_ = [_ for _ in links if filter_cond(_)]
         if len(links_) == 0:
             raise MissingWheelException("unable to find a single link for " +
                                         self.name + "\n" + "\n".join(links))
