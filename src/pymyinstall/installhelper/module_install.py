@@ -409,6 +409,15 @@ class ModuleInstall:
             raise MissingWheelException("unable to find a single link for " +
                                         self.name + "\n" + "\n".join(short_list))
 
+        # Last filter. Removes modules with a longer name.
+        pref = self.name.lower() + "-"
+        links_ = [_ for _ in links if _.split(
+            "/")[-1].lower().startswith(pref)]
+        if len(links_) == 0:
+            raise MissingWheelException("unable to find a single link for " +
+                                        self.name + "\n" + "\n".join(links))
+        links = links_
+
         links = [(l.split("/")[-1], l) for l in links]
         links0 = links
 
@@ -552,7 +561,7 @@ class ModuleInstall:
     def download(self, temp_folder=".", force=False, unzipFile=True,
                  file_save=None, deps=False, source=None):
         """
-        download the module without installation
+        Downloads the module without installation.
 
         @param      temp_folder     destination
         @param      force           force the installation even if already installed
