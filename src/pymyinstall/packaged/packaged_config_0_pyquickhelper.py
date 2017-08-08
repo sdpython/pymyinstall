@@ -100,6 +100,7 @@ def pyquickhelper_set():
         "pywin32-ctypes" if sys.platform.startswith("win") else None,
         "pyzmq",
         "qtconsole",
+        "releases",
         "requests",
         "simplegeneric",
         "six",
