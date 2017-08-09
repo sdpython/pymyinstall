@@ -102,6 +102,7 @@ def pyquickhelper_set():
         "qtconsole",
         "releases",
         "requests",
+        "semantic_version",
         "simplegeneric",
         "six",
         "sphinx",
