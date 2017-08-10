@@ -1,0 +1,31 @@
+
+.. blogpost::
+    :title: Issue with PyQt
+    :keywords: PyQt
+    :date: 2017-08-09
+    :categories: module
+
+    I recently faced the issue:
+
+    ::
+
+        This application failed to start because it could not find or load the Qt platform plugin "windows"
+        in "".
+
+    The failing instruction:
+
+    ::
+
+        import matplotlib.plt
+
+    Quite annoying. I finally found this page
+    `Qt 5.1.1: Application failed to start because platform plugin "windows" is missing <https://stackoverflow.com/questions/20495620/qt-5-1-1-application-failed-to-start-because-platform-plugin-windows-is-missi>`_
+    which tells to set up ``QT_QPA_PLATFORM_PLUGIN_PATH`` ot find DLL
+    ``qwindows.dll``:
+
+    ::
+
+        set QT_QPA_PLATFORM_PLUGIN_PATH=%PYTHON%\Library\plugins\platforms
+
+    Quite annoying.
+    I was using Anaconda 3.5.
