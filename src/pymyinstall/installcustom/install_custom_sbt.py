@@ -34,7 +34,7 @@ def install_scala_sbt(
     link = "http://www.scala-sbt.org/download.html"
     page = download_page(link)
     if sys.platform.startswith("win"):
-        reg = re.compile("href=\\\"(https://cocl.*?msi)\\\"")
+        reg = re.compile("href=\\\"(https://github.*?msi)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0:
             raise Exception(
