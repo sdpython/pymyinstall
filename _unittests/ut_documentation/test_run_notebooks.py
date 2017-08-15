@@ -42,7 +42,7 @@ import pyquickhelper
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
-from pyquickhelper.pycode import compare_module_version, is_travis_or_appveyor
+from pyquickhelper.pycode import is_travis_or_appveyor
 from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 import src.pymyinstall
 
@@ -91,7 +91,7 @@ class TestRunNotebooks(unittest.TestCase):
             os.path.abspath(os.path.dirname(__file__)), "..", "..", "src")),
             os.path.normpath(os.path.join(
                 os.path.abspath(os.path.dirname(__file__)), "..", "..", "..", "jyquickhelper", "src"))
-            ]
+        ]
 
         if "travis" in sys.executable:
             keepnote = [_ for _ in keepnote if "javascript_extension" not in _ and

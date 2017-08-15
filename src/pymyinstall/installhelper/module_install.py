@@ -420,7 +420,8 @@ class ModuleInstall:
 
         links_ = [_ for _ in links if filter_cond(_)]
         if len(links_) == 0:
-            prefs = "\npref1={0}\npref2={1}\npref3={2}".format(pref1, pref2, pref3)
+            prefs = "\npref1={0}\npref2={1}\npref3={2}".format(
+                pref1, pref2, pref3)
             raise MissingWheelException("unable to find a single link for " +
                                         self.name + "\n" + "\n".join(links) + prefs)
         links = links_
