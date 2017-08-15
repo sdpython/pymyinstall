@@ -41,10 +41,10 @@ except ImportError:
 import pyquickhelper
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from pyquickhelper.ipythonhelper import execute_notebook_list
+from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
 from pyquickhelper.pycode import compare_module_version, is_travis_or_appveyor
 from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
-import IPython
+import src.pymyinstall
 
 
 class TestRunNotebooks(unittest.TestCase):
@@ -61,10 +61,6 @@ class TestRunNotebooks(unittest.TestCase):
 
         if "travis" in sys.executable:
             # requires too many dependencies
-            return
-
-        if compare_module_version(IPython.__version__, "4.0.0") < 0:
-            # IPython is not recent enough
             return
 
         kernel_name = None if "travis" in sys.executable else install_python_kernel_for_unittest(
@@ -92,7 +88,10 @@ class TestRunNotebooks(unittest.TestCase):
             return True
 
         addpaths = [os.path.normpath(os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), "..", "..", "src"))]
+            os.path.abspath(os.path.dirname(__file__)), "..", "..", "src")),
+            os.path.normpath(os.path.join(
+                os.path.abspath(os.path.dirname(__file__)), "..", "..", "..", "jyquickhelper", "src"))
+            ]
 
         if "travis" in sys.executable:
             keepnote = [_ for _ in keepnote if "javascript_extension" not in _ and
@@ -101,16 +100,8 @@ class TestRunNotebooks(unittest.TestCase):
         res = execute_notebook_list(
             temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths,
             kernel_name=kernel_name)
-        assert len(res) > 0
-        fails = [(os.path.split(k)[-1], v)
-                 for k, v in sorted(res.items()) if not v[0]]
-        for f in fails:
-            fLOG(f)
-        for k, v in sorted(res.items()):
-            name = os.path.split(k)[-1]
-            fLOG(name, v[0], v[1])
-        if len(fails) > 0:
-            raise fails[0][1][-1]
+        execute_notebook_list_finalize_ut(
+            res, fLOG=fLOG, dump=src.pymyinstall)
 
 
 if __name__ == "__main__":
