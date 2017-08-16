@@ -42,6 +42,11 @@ README
     :alt: Codacy Badge
     :target: https://www.codacy.com/app/sdpython/pymyinstall?
 
+.. image:: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/nbcov.png
+    :target: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/all_notebooks_coverage.html
+    :alt: Notebook Coverage    
+
+
 **Links:**
 
 * `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_
