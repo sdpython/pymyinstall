@@ -1,0 +1,60 @@
+
+.. blogpost::
+    :title: Theano and Mingw
+    :keywords: theano, mingw
+    :date: 2017-08-17
+    :categories: module
+
+    `theano <http://deeplearning.net/software/theano/>`_
+    requires a gcc 64 bit compiler. On Windows,
+    the choice is between
+    `TDM-GCC <http://tdm-gcc.tdragon.net/>`_
+    which was not updated since 2015 and
+    `mingw-w64 <https://mingw-w64.org/doku.php>`_.
+    The installer did not really work for me so
+    I had to download and unzip the following file:
+    *x86_64-7.1.0-release-posix-seh-rt_v5-rev2.7z*
+    which you can find at the following location:
+    `sourceforge/mingw-w64/files <https://sourceforge.net/projects/mingw-w64/files/?source=navbar>`_.
+    To avoid adding any new path to the environment variable
+    ``PATH``, this file can be unzipped in
+    ``<your python>\Library\mingw-w64`` and you be able
+    to see the file ``<your python>\Library\mingw-w64\g++.exe``.
+
+    It is not over yet. An error might occur when
+    running ``import theano``:
+
+    ::
+
+        Problem occurred during compilation with the command line below:
+        "<your python>\Library\mingw-w64\bin\g++.exe" -shared -g -march=skylake -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mno-rtm -mno-hle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=4096 -mtune=skylake -DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION -m64 -DMS_WIN64 -I"<your python>\lib\site-packages\numpy\core\include" -I"<your python>\include" -I"<your python>\lib\site-packages\theano\gof" -L"<your python>\libs" -L"<your python>" -o <user>\AppData\Local\Theano\compiledir_Windows-10-10.0.15063-SP0-Intel64_Family_6_Model_78_Stepping_3_GenuineIntel-3.6.1-64\lazylinker_ext\lazylinker_ext.pyd <user>\AppData\Local\Theano\compiledir_Windows-10-10.0.15063-SP0-Intel64_Family_6_Model_78_Stepping_3_GenuineIntel-3.6.1-64\lazylinker_ext\mod.cpp -lpython36
+        In file included from <your python>/Library/mingw-w64/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/math.h:36:0,
+
+                         from <your python>\include/pyport.h:194,
+
+                         from <your python>\include/Python.h:50,
+
+                         from <user>\AppData\Local\Theano\compiledir_Windows-10-10.0.15063-SP0-Intel64_Family_6_Model_78_Stepping_3_GenuineIntel-3.6.1-64\lazylinker_ext\mod.cpp:1:
+
+        <your python>/Library/mingw-w64/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/cmath:1136:11: error: '::hypot' has not been declared
+
+           using ::hypot;
+
+                   ^~~~~
+
+    I found a solution at
+    `g++ error on import of Theano on Windows 7 <https://stackoverflow.com/questions/38536788/g-error-on-import-of-theano-on-windows-7>`_.
+    The solution is to create a file in the user folder called ``.theanorc`` which contains:
+
+    ::
+
+        [gcc]
+        cxxflags = -D_hypot=hypot
+
+    You can also execute the code:
+
+    ::
+
+        import os
+        with open(os.path.join(os.environ["USERPROFILE"], ".theanorc"), "w") as f:
+            f.write("[gcc]\ncxxflags = -D_hypot=hypot")

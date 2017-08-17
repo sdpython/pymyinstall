@@ -44,8 +44,7 @@ README
 
 .. image:: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/_images/nbcov.png
     :target: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/all_notebooks_coverage.html
-    :alt: Notebook Coverage    
-
+    :alt: Notebook Coverage
 
 **Links:**
 
