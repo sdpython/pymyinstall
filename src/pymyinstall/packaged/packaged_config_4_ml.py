@@ -684,6 +684,11 @@ def ensae_set():
                       purpose="R-Tree spatial index for Python GIS"),
         ModuleInstall('sima', 'wheel', usage="MATHS",
                       purpose="Software for analysis of sequential imaging data"),
+        #
+        # 2017-08/10
+        #
+        ModuleInstall('foolbox', 'pip', usage="ML",
+                      purpose="Foolbox is a Python toolbox to create adversarial examples that fool neural networks."),
     ]
 
     if sys.version_info[0] == 2:

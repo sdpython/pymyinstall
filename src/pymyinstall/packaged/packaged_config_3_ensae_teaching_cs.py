@@ -24,6 +24,7 @@ def ensae_teaching_cs_set():
         "dask",
         "django",
         "feedparser",
+        "foolbox",
         "fuel",
         "ggplot",
         "graphviz",
