@@ -50,7 +50,7 @@ class TestIsInstalled(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if is_travis_or_appveyor() in ('travis', 'appveyor') or sys.version_info[0] == 2:
+        if is_travis_or_appveyor() or sys.version_info[0] == 2:
             return
         mod = find_module_install("imbalanced-learn")
         self.assertTrue(mod.is_installed_local())

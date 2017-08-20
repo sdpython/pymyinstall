@@ -12,6 +12,7 @@ jyquickhelper
 keyring
 Mako
 matplotlib
+memory_profiler
 mistune
 nbconvert>=5.0.0
 nbformat
