@@ -53,7 +53,7 @@ class TestStatusHelper(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         res = get_installed_modules(
-            fLOG=fLOG, stop=10, pypi=True, short_list=["pep8"])
+            fLOG=fLOG, stop=10, pypi=True, short_list=["autopep8"])
         for f in res:
             fLOG(f)
         if sys.version_info[0] > 2:

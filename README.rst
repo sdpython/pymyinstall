@@ -12,6 +12,9 @@ README
     :target: https://ci.appveyor.com/project/sdpython/pymyinstall
     :alt: Build Status Windows
 
+.. image:: https://circleci.com/gh/sdpython/pymyinstall/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/sdpython/pymyinstall/tree/master
+
 .. image:: https://badge.fury.io/py/pymyinstall.svg
     :target: http://badge.fury.io/py/pymyinstall
 

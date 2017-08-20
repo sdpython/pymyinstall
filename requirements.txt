@@ -34,6 +34,7 @@ semantic_version
 setuptools
 Sphinx
 sphinx-gallery
+sphinx-readable-theme
 sphinx-rtd-theme
 sphinxcontrib-images
 sphinxcontrib-imagesvg
