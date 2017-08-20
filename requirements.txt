@@ -14,6 +14,7 @@ Mako
 matplotlib
 memory_profiler
 mistune
+natsort
 nbconvert>=5.0.0
 nbformat
 nbpresent
