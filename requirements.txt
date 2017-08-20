@@ -47,6 +47,7 @@ sphinxjp.themes.revealjs
 sphinxjp.themes.sphinxjp
 tqdm
 unify
+version_information
 virtualenv
 wheel
 xgboost
