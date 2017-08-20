@@ -48,3 +48,4 @@ tqdm
 unify
 virtualenv
 wheel
+xgboost
