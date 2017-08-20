@@ -55,7 +55,7 @@ class TestScriptInstallCli(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         if is_travis_or_appveyor() == "travis":
-            warnings.warn("run_cmd no end on travis")
+            # run_cmd no end on travis.
             return
         script = os.path.join(os.path.dirname(os.path.abspath(
             __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_install.py")
@@ -90,7 +90,7 @@ class TestScriptInstallCli(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         if is_travis_or_appveyor() == "travis":
-            warnings.warn("run_cmd no end on travis")
+            # run_cmd no end on travis.
             return
         script = os.path.join(os.path.dirname(os.path.abspath(
             __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_install.py")

@@ -54,7 +54,7 @@ class TestPyMyStatusCli(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         if is_travis_or_appveyor() == "travis":
-            warnings.warn("run_cmd no end on travis")
+            # run_cmd no end on travis.
             return
         temp = get_temp_folder(__file__, "temp_status")
         outfile = os.path.join(temp, "modules.xlsx")

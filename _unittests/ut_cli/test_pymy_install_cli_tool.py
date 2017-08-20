@@ -52,8 +52,8 @@ class TestPyMyInstallCliTool(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if is_travis_or_appveyor() == "travis":
-            warnings.warn("run_cmd no end on travis")
+        if not sys.platform.startswith("win"):
+            # No installation on linux.
             return
         temp = get_temp_folder(__file__, "temp_install_tool")
         this = os.path.abspath(os.path.dirname(__file__))
@@ -69,9 +69,7 @@ class TestPyMyInstallCliTool(unittest.TestCase):
         content = os.listdir(temp)
         if not content:
             comp = "OUT:\n{0}\nERR:\n{1}".format(out, err)
-            if is_travis_or_appveyor():
-                warnings.warn("content is empty for: " + temp + "\n" + comp)
-            else:
+            if sys.platform.startswith("win"):
                 raise Exception("content is empty for: " + temp + "\n" + comp)
 
 
