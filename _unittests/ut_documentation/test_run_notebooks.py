@@ -63,7 +63,7 @@ class TestRunNotebooks(unittest.TestCase):
             # requires too many dependencies
             return
 
-        kernel_name = None if "travis" in sys.executable else install_python_kernel_for_unittest(
+        kernel_name = None if is_travis_or_appveyor() else install_python_kernel_for_unittest(
             "pymyinstall")
 
         temp = get_temp_folder(__file__, "temp_run_notebooks")
@@ -80,7 +80,6 @@ class TestRunNotebooks(unittest.TestCase):
                     continue
                 else:
                     keepnote.append((os.path.join(fnb, f), code_init))
-        assert len(keepnote) > 0
 
         def valid(cell):
             if "snakeviz" in cell:
@@ -93,7 +92,7 @@ class TestRunNotebooks(unittest.TestCase):
                 os.path.abspath(os.path.dirname(__file__)), "..", "..", "..", "jyquickhelper", "src"))
         ]
 
-        if "travis" in sys.executable:
+        if is_travis_or_appveyor() == "travis":
             keepnote = [_ for _ in keepnote if "javascript_extension" not in _ and
                         (not is_travis_or_appveyor() or "example_xgboost" not in _)]
 
