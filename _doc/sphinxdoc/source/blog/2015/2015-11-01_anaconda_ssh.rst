@@ -16,7 +16,7 @@
     As I do not want to install a server, I directly go to the
     second step ::
 
-        curl 'http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh' > Miniconda3.sh
+        curl 'https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh' > Miniconda3.sh
         bash Miniconda3.sh
 
     I avoid adding the new Python to be added to the current ``PATH``. I followed the instructions,
@@ -49,5 +49,5 @@
     at `Miniconda installer archive <https://repo.continuum.io/miniconda/>`_.
     It should be::
 
-        curl 'http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh' > Miniconda3.sh
+        curl 'https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh' > Miniconda3.sh
         bash Miniconda3.sh

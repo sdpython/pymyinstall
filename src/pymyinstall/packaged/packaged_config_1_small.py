@@ -132,11 +132,19 @@ def small_set():
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
         ModuleInstall(
+            "untokenize", "pip", purpose="Transforms tokens into original source code (while preserving whitespace).", usage="STYLE"),
+        ModuleInstall(
             "pycodestyle", "pip", purpose="Python style guide checker", usage="STYLE"),
+        ModuleInstall(
+            "pydocstyle", "pip", purpose="Python docstring style checker", usage="STYLE"),
         ModuleInstall(
             "pep8", "pip", purpose="official guidelines on Python style"),
         ModuleInstall("autopep8", "pip",
                       purpose="apply pep8 on a script", usage="STYLE"),
+        ModuleInstall("docformatter", "pip",
+                      purpose="Formats docstrings to follow PEP 257.", usage="STYLE"),
+        ModuleInstall("unify", "pip",
+                      purpose="Modifies strings to all use the same (single/double) quote where possible.", usage="STYLE"),
         ModuleInstall("mccabe", "pip", usage="STYLE",
                       purpose="This module provides a plugin for flake8, the Python code checker."),
         ModuleInstall("pyflakes", "pip",
