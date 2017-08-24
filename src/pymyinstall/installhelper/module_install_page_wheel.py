@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 """
 @file
 @brief Functions get_page_wheel
@@ -250,6 +251,7 @@ def enumerate_links_module(name, alls, version, plat):
                 js = val.lstrip()
 
         if js:
+            js0 = js
             suf = '"javascript:dl("'
             bs = ["javascript:", "javascript :"]
             res = None
@@ -258,13 +260,17 @@ def enumerate_links_module(name, alls, version, plat):
                     js = js[len(b):]
                     if js.endswith(suf):
                         js = js[:-len(suf) - 2]
+                    if "javascript:" in js:
+                        # Addition: 207-08-24
+                        js = js[:js.index('"javascript:')]
+                    js = js.strip('" \t ;')
                     dl = _cg_dl
                     if dl is not None:
                         try:
                             res = eval(js)
                         except SyntaxError as e:
                             raise SyntaxError(
-                                "Unable to evaluate '{0}'.".format(js))
+                                "Unable to evaluate '{0}'\njs0='{1}'.".format(js, js0))
                         break
             if res is None:
                 raise InternalJsException(
