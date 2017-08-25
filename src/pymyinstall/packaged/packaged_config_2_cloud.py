@@ -66,7 +66,7 @@ def cloud_set():
                  'azure-mgmt',
                  # addition 2017-05
                  "azure-keyvault",
-                 "azure-datalake_store",
+                 "azure-datalake-store",
                  "azure-servicefabric",
                  "azure-mgmt-devtestlabs",
                  "azure-mgmt-documentdb",
@@ -77,7 +77,7 @@ def cloud_set():
                  "azure-mgmt-datalake-nspkg",
                  "azure-mgmt-trafficmanager",
                  "azure-mgmt-rdbms",
-                 "azure-mgmt-datalake_store",
+                 "azure-mgmt-datalake-store",
                  "azure-mgmt-iothub",
                  "azure-mgmt-sql",
                  "azure-mgmt-monitor",
