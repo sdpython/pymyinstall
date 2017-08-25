@@ -623,11 +623,11 @@ def ensae_set():
                       purpose="Fuzzy string matching in python"),
         ModuleInstall("smmap2", "pip", mname="smmap",
                       purpose="A pure python implementation of a sliding window memory map manager"),
-        ModuleInstall("gitdb2", "pip", mname="git",
+        ModuleInstall("gitdb2", "pip", mname="gitdb",
                       purpose="GitDB is a pure-Python git object database"),
         ModuleInstall("GitPython", "pip", mname="git",
                       purpose="Python Git Library"),
-        ModuleInstall("git-pandas", "pip", mname="git",
+        ModuleInstall("git-pandas", "pip", mname="git_pandas",
                       purpose=""),
         ModuleInstall("nbdime", "pip",
                       purpose="Comparison of notebooks"),
@@ -691,6 +691,25 @@ def ensae_set():
         #
         ModuleInstall('foolbox', 'pip', usage="ML",
                       purpose="Foolbox is a Python toolbox to create adversarial examples that fool neural networks."),
+        #
+        # 2017-08/25
+        #
+        # kealib: https://bitbucket.org/chchrsc/kealib/wiki/Home
+        ModuleInstall('iso8601', 'pip',
+                      purpose="Simple module to parse ISO 8601 dates"),
+        ModuleInstall('translationstring', 'pip',
+                      purpose="Utility library for i18n relied on by various Repoze and Pyramid packages"),
+        ModuleInstall('colander', 'pip',
+                      purpose="A simple schema-based serialization and deserialization library"),
+        #
+        ModuleInstall('climate', 'pip',
+                      purpose="Command-line utilities (turn function into command line)"),
+        ModuleInstall('downhill', 'pip', usage='ML',
+                      purpose="Stochastic optimization routines for Theano"),
+        ModuleInstall('knnimpute', 'pip', usage="ML",
+                      purpose="k-Nearest Neighbor imputation"),
+        ModuleInstall('fancyimpute', 'pip', usage="ML",
+                      purpose="Matrix completion and feature imputation algorithms"),
     ]
 
     if sys.version_info[0] == 2:
