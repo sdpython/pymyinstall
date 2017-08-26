@@ -627,7 +627,7 @@ def ensae_set():
                       purpose="GitDB is a pure-Python git object database"),
         ModuleInstall("GitPython", "pip", mname="git",
                       purpose="Python Git Library"),
-        ModuleInstall("git-pandas", "pip", mname="git_pandas",
+        ModuleInstall("git-pandas", "pip", mname="gitpandas",
                       purpose=""),
         ModuleInstall("nbdime", "pip",
                       purpose="Comparison of notebooks"),
