@@ -657,6 +657,12 @@ def extended_set():
         ModuleInstall('fastparquet', 'wheel',
                       purpose="fastparquet is a python implementation of the parquet format, aiming integrate " +
                       "into python-based big data work-flows."),
+        ModuleInstall('citeproc-py', 'pip', mname="citeproc_py",
+                      purpose="citeproc-py is a CSL processor for Python. It aims to implement the CSL 1.0.1 specification. " +
+                      "citeproc-py can output styled citations and bibliographies in a number of different output formats. " +
+                      "Currently supported are plain text, reStructuredText and HTML. Other formats can be added easily."),
+        ModuleInstall('duecredit', 'pip',
+                      purpose="Publications (and donations) tracer"),
     ]
 
     if sys.platform.startswith("win"):
