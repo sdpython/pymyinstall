@@ -176,26 +176,27 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
         if i < start:
             continue
         if end != -1 and i >= end:
-            fLOG("{0}/{1}: end".format(i, len(module_list) - start))
+            fLOG("[pymy] {0}/{1}: end".format(i, len(module_list) - start))
             break
         if m.is_installed_version():
 
             if m.name in ["libpython", "tutormagic", "pymyinstall", "distribute"]:
                 # nothing to import or failure
-                fLOG("{0}/{1}: skipped".format(i, len(module_list) - start), m)
+                fLOG("[pymy] {0}/{1}: skipped".format(i,
+                                                      len(module_list) - start), m)
                 continue
             elif m.mname == "theano":
                 # we need to check that TDM-GCC is installed
                 cmd = "g++ --help"
                 out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
                 if err is not None and len(err) > 0:
-                    fLOG("{0}/{1}: failed (g++)".format(i,
-                                                        len(module_list) - start), m)
+                    fLOG("[pymy] {0}/{1}: failed (g++)".format(i,
+                                                               len(module_list) - start), m)
                     res.append((False, m, out, err))
                     continue
                 if "Usage: g++ [options] file..." not in out:
-                    fLOG("{0}/{1}: failed (g++)".format(i,
-                                                        len(module_list) - start), m)
+                    fLOG("[pymy] {0}/{1}: failed (g++)".format(i,
+                                                               len(module_list) - start), m)
                     res.append((False, m, out, err))
                     continue
 
@@ -213,11 +214,11 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
             suc = analyze_error_success(m, err)
             nextm = module_list[i + 1] if i + 1 < len(module_list) else ""
             if suc:
-                fLOG("{0}/{1}: success".format(i,
-                                               len(module_list) - start), m, "-->", nextm)
+                fLOG("[pymy] {0}/{1}: success".format(i,
+                                                      len(module_list) - start), m, "-->", nextm)
             else:
-                fLOG("{0}/{1}: failed ".format(i,
-                                               len(module_list) - start), m, "-->", nextm)
+                fLOG("[pymy] {0}/{1}: failed ".format(i,
+                                                      len(module_list) - start), m, "-->", nextm)
                 if m.name == "paramiko":
                     err = "You might have to install manually pycrypto.\n" + \
                           "Please read http://www.xavierdupre.fr/app/pymyinstall/helpsphinx//blog/2016/2016-02-27_pycrypto_paramiko.html" + \

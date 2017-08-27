@@ -55,11 +55,11 @@ def install_pandoc(
         file = alls[0].split("/")[-1]
         filel = "https://github.com/jgm/pandoc/releases/download/{0}/pandoc-{1}-windows.msi"
         version = file.replace("pandoc-", "").replace("-windows.msi", "")
-        fLOG("pandoc, version ", version)
+        fLOG("[pymy] pandoc, version ", version)
         vershort = version.split("-")[0]
         full = filel.format(vershort, version)
         outfile = os.path.join(temp_folder, full.split("/")[-1])
-        fLOG("download ", full)
+        fLOG("[pymy] download ", full)
         local = download_file(full, outfile)
         if install and not bb:
             run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)

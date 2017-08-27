@@ -94,7 +94,7 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
             mes = '{pkg_info} {msg:3} - {date:20} --- {available} - {location}'
             mes = mes.format(pkg_info=pkg_info, msg=msg, date=date, dist=dist,
                              available=available, location=res.get('location', ''))
-            fLOG("{0}/{1} - {2}".format(i, len(dists), mes))
+            fLOG("[pymy] {0}/{1} - {2}".format(i, len(dists), mes))
 
         all_installed.append(res)
     return all_installed

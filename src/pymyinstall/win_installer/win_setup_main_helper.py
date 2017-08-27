@@ -122,111 +122,111 @@ def win_download(folder=None, module_list=None, verbose=False, fLOG=print,
 
     if not is_here("scite") and "scite" in selection:
         if verbose:
-            fLOG("--- download", "scite")
+            fLOG("[pymy] --- download", "scite")
         r = install_scite(dest_folder=folder, fLOG=fLOG,
                           install=False, version=selection.get("scite", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("putty") and "putty" in selection:
         if verbose:
-            fLOG("--- download", "putty")
+            fLOG("[pymy] --- download", "putty")
         r = install_putty(dest_folder=folder, fLOG=fLOG,
                           install=False, version=selection.get("putty", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("mingw") and "mingw" in selection:
         if verbose:
-            fLOG("--- download", "mingw")
+            fLOG("[pymy] --- download", "mingw")
         r = install_mingw(dest_folder=folder, fLOG=fLOG,
                           install=False, version=selection.get("mingw", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("miktex") and "miktex" in selection:
         if verbose:
-            fLOG("--- download", "miktex")
+            fLOG("[pymy] --- download", "miktex")
         r = install_miktex(dest_folder=folder, fLOG=fLOG,
                            install=False, version=selection.get("miktex", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("inkscape") and "inkscape" in selection:
         if verbose:
-            fLOG("--- download", "inkscape")
+            fLOG("[pymy] --- download", "inkscape")
         r = install_inkscape(dest_folder=folder, fLOG=fLOG,
                              install=False, version=selection.get("inkscape", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("tdm") and "tdm" in selection:
         if verbose:
-            fLOG("--- download", "tdm")
+            fLOG("[pymy] --- download", "tdm")
         r = install_tdm_gcc(dest_folder=folder, fLOG=fLOG,
                             install=False, version=selection.get("tdm", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("git") and "git" in selection:
         if verbose:
-            fLOG("--- download", "git")
+            fLOG("[pymy] --- download", "git")
         r = install_git(folder, fLOG=fLOG,
                         install=False, version=selection.get("git", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("SQLiteSpy") and "sqlitespy" in selection:
         if verbose:
-            fLOG("--- download", "sqllitespy")
+            fLOG("[pymy] --- download", "sqllitespy")
         r = install_sqlitespy(temp_folder=folder, fLOG=fLOG,
                               install=False, version=selection.get("sqlitespy", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("python") and "python" in selection:
         if verbose:
-            fLOG("--- download", "python")
+            fLOG("[pymy] --- download", "python")
         r = install_python(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("python", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("R-") and "r" in selection:
         if verbose:
-            fLOG("--- download", "R")
+            fLOG("[pymy] --- download", "R")
         r = install_R(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("r", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("vs") and "vs" in selection:
         if verbose:
-            fLOG("--- download", "Visual Studio Express")
+            fLOG("[pymy] --- download", "Visual Studio Express")
         r = install_vs(folder, fLOG=fLOG, install=False,
                        version=selection.get("vs", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("julia") and "julia" in selection:
         if verbose:
-            fLOG("--- download", "julia")
+            fLOG("[pymy] --- download", "julia")
         r = install_julia(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("julia", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("pandoc") and "pandoc" in selection:
         if verbose:
-            fLOG("--- download", "pandoc")
+            fLOG("[pymy] --- download", "pandoc")
         r = install_pandoc(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("pandoc", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("7z") and "7z" in selection:
         if verbose:
-            fLOG("--- download", "7z")
+            fLOG("[pymy] --- download", "7z")
         r = install_7z(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("7z", None))
         operations.append(("download", r))
@@ -234,27 +234,27 @@ def win_download(folder=None, module_list=None, verbose=False, fLOG=print,
 
     if not is_here("graphviz", no_wheel=True) and "graphviz" in selection:
         if verbose:
-            fLOG("--- download", "graphviz")
+            fLOG("[pymy] --- download", "graphviz")
         r = install_graphviz(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("graphviz", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("jdk", no_wheel=True) and "jdk" in selection:
         if verbose:
-            fLOG("--- download", "java jdk")
+            fLOG("[pymy] --- download", "java jdk")
         r = install_javajdk(
             temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("java jdk", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if not is_here("jenkins", no_wheel=True) and "jenkins" in selection:
         if verbose:
-            fLOG("--- download", "jenkins")
+            fLOG("[pymy] --- download", "jenkins")
         r = install_jenkins(folder, fLOG=fLOG, install=False,
                             version=selection.get("jenkins", None))
         operations.append(("download", r))
-        fLOG("done")
+        fLOG("[pymy] done")
 
     if module_list is None:
         module_list = minimal_set()
@@ -263,7 +263,7 @@ def win_download(folder=None, module_list=None, verbose=False, fLOG=print,
         if is_here(mod.name + "-"):
             continue
         if verbose:
-            fLOG("download module", mod.name)
+            fLOG("[pymy] download module", mod.name)
         res = mod.download(temp_folder=folder, source=source)
         if isinstance(res, list):
             for r in res:
@@ -353,9 +353,9 @@ def win_install(folders, download_folder, verbose=False, fLOG=print,
         exe = find_exe(loc, name)
         if exe is not None:
             # already done
-            fLOG("--- already installed", exe)
+            fLOG("[pymy] --- already installed", exe)
         else:
-            fLOG("--- install", cand, " in ", loc)
+            fLOG("[pymy] --- install", cand, " in ", loc)
             full = os.path.join(download_folder, cand)
             if 'tdm' in cand and 'gcc' in cand:
                 raise WinInstallException(
@@ -367,21 +367,21 @@ def win_install(folders, download_folder, verbose=False, fLOG=print,
                 options = [os.path.join(
                     download_folder, cand), "/quiet", "/layout", temploc]
                 cmd = " ".join(options)
-                fLOG("run ", cmd)
+                fLOG("[pymy] run ", cmd)
                 out, err = run_cmd(cmd, wait=True)
-                fLOG("OUT:\n", out)
+                fLOG("[pymy] OUT:\n", out)
                 if err:
-                    fLOG("OUT:\n", err)
+                    fLOG("[pymy] OUT:\n", err)
                 options = [os.path.join(temploc, cand),
                            "TargetDir={0}".format(loc), "InstallAllUsers=1",
                            "AssociateFiles=0", "CompileAll=1", "Include_symbols=1",
                            "SimpleInstall=1"]
                 cmd = " ".join(options)
-                fLOG("run ", cmd)
+                fLOG("[pymy] run ", cmd)
                 out, err = run_cmd(cmd, wait=True)
-                fLOG("OUT:\n", out)
+                fLOG("[pymy] OUT:\n", out)
                 if err:
-                    fLOG("OUT:\n", err)
+                    fLOG("[pymy] OUT:\n", err)
             else:
                 ext = os.path.splitext(cand)[-1]
                 filename = os.path.split(cand)[-1]
@@ -394,7 +394,7 @@ def win_install(folders, download_folder, verbose=False, fLOG=print,
                     func(full, loc, verbose=verbose, fLOG=fLOG)
 
             operations.append(("install", cand))
-            fLOG("done")
+            fLOG("[pymy] done")
 
         # add main executable
         found = find_exe(loc, name)
@@ -407,7 +407,7 @@ def win_install(folders, download_folder, verbose=False, fLOG=print,
                     cmd = exe + \
                         " install binutils gcc g++ mingw32 fortran gdb mingw32 mingw w32api g77"
                     if verbose:
-                        fLOG("install MinGW", cmd)
+                        fLOG("[pymy] install MinGW", cmd)
                     retcode = subprocess.call(
                         cmd, shell=True, stdout=sys.stderr)
                     if retcode < 0:
@@ -450,7 +450,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
                          name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
                          folder=folder)
             if verbose:
-                fLOG("create link", dest)
+                fLOG("[pymy] create link", dest)
             operations.append(("link", link_name))
 
             name = "test R Console"
@@ -460,7 +460,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
                          name=name, arguments="", icon="~dp0\\tools\\icons\\r.ico",
                          folder=folder)
             if verbose:
-                fLOG("create link", dest)
+                fLOG("[pymy] create link", dest)
             operations.append(("link", link_name))
 
         elif k == "julia":
@@ -471,7 +471,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
                          name=name, arguments="", icon="~dp0\\tools\\icons\\julia.ico",
                          folder=folder)
             if verbose:
-                fLOG("create link", dest)
+                fLOG("[pymy] create link", dest)
             operations.append(("link", link_name))
 
         elif k == "python":
@@ -482,7 +482,7 @@ def create_links_tools(folder, installed, verbose=False, fLOG=print):
                          name=name, arguments="", icon="~dp0\\tools\\icons\\python.ico",
                          folder=folder)
             if verbose:
-                fLOG("create link", dest)
+                fLOG("[pymy] create link", dest)
             operations.append(("link", link_name))
 
     return operations
@@ -533,7 +533,7 @@ def win_install_julia_step(folders, verbose=False, fLOG=print):
         ##########################
         # init Julia packages
         #########################
-        fLOG("--- init julia packages")
+        fLOG("[pymy] --- init julia packages")
         jl = os.path.join(folders["tools"], "Julia")
         output = os.path.join(folders["logs"], "out.init.julia.txt")
         out = julia_run_script(
@@ -548,7 +548,7 @@ def win_install_julia_step(folders, verbose=False, fLOG=print):
         ##########################
         # install Julia packages
         #########################
-        fLOG("--- install julia packages")
+        fLOG("[pymy] --- install julia packages")
         jl = os.path.join(folders["tools"], "Julia")
         output = os.path.join(folders["logs"], "out.install.julia.txt")
         out = julia_run_script(
@@ -563,7 +563,7 @@ def win_install_julia_step(folders, verbose=False, fLOG=print):
         #########################
         # build Julia packages
         #########################
-        fLOG("--- build julia packages")
+        fLOG("[pymy] --- build julia packages")
         jl = os.path.join(folders["tools"], "Julia")
         output = os.path.join(folders["logs"], "out.build.julia.txt")
         out = julia_run_script(
@@ -591,7 +591,7 @@ def win_install_r_step(folders, verbose=False, fLOG=print):
         ######################
         # install R packages
         ######################
-        fLOG("--- install R packages")
+        fLOG("[pymy] --- install R packages")
         r = os.path.join(folders["tools"], "R")
         output = os.path.join(folders["logs"], "out.install.r.txt")
         out = r_run_script(r, _script_r, output)

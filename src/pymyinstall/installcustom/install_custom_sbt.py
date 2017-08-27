@@ -45,11 +45,11 @@ def install_scala_sbt(
         filel = file
         full = filel
         version = file.split("/")[-2]
-        fLOG("scala-sbt, version ", version)
+        fLOG("[pymy] scala-sbt, version ", version)
         outfile = os.path.join(temp_folder, full.split("/")[-1])
         if not outfile.endswith(".msi"):
             outfile += ".msi"
-        fLOG("download ", full)
+        fLOG("[pymy] download ", full)
         local = download_file(full, outfile)
         if install and not bb:
             run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)

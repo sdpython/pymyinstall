@@ -53,8 +53,8 @@ def run_innosetup(new_script, innosetup=None, log_script=None, temp_folder=".", 
         raise NotImplementedError()
         # cmd.append('/LOG="{0}"'.format(log_script))
 
-    fLOG("ISS script", new_script)
-    fLOG("CMD", cmd)
+    fLOG("[pymy] ISS script", new_script)
+    fLOG("[pymy] CMD", cmd)
     out, err = run_cmd(" ".join(cmd), wait=True, fLOG=fLOG)
     if err is not None and len(err) > 0:
         raise InnoSetupException(

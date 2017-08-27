@@ -115,6 +115,6 @@ def fix_pywin32_installation(python_path=None, fLOG=print):
             dest = os.path.join(destf, dll)
             if not os.path.exists(dest):
                 shutil.copy(full, destf)
-                fLOG("copy", full, "to", destf)
+                fLOG("[pymy] copy", full, "to", destf)
             else:
-                fLOG("already copied", dest)
+                fLOG("[pymy] already copied", dest)

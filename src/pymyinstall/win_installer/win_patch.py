@@ -68,7 +68,7 @@ def win_patch_paths(folder, path_to_python="", fLOG=print):
                 new_content = reg_exe.sub(
                     "#!" + g_path_to_python + "\\5", content)
                 if new_content != content:
-                    fLOG("update ", full)
+                    fLOG("[pymy] update ", full)
                     operations.append(("update", full))
                     with open(full, "w") as f:
                         f.write(new_content)
@@ -79,7 +79,7 @@ def win_patch_paths(folder, path_to_python="", fLOG=print):
                 new_content = breg_exe.sub(
                     b1 + bg_path_to_python + b2, content)
                 if new_content != content:
-                    fLOG("update ", full)
+                    fLOG("[pymy] update ", full)
                     operations.append(("update", full))
                     try:
                         with open(full, "wb") as f:

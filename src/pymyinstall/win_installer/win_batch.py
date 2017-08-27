@@ -102,7 +102,7 @@ def create_win_batches(folders, verbose=False, selection=None, fLOG=print, modul
             op = func(folders)
             if verbose:
                 for o in op:
-                    fLOG(" ".join(o))
+                    fLOG("[pymy] " + " ".join(o))
             operations.extend(op)
     return operations
 

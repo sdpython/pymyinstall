@@ -43,10 +43,10 @@ def patch_shebang_line(fname, pad=b' ', fLOG=print):
     try:
         with open(fname, 'wb') as fh:
             fh.write(content)
-            fLOG("patched", fname)
+            fLOG("[pymy] patched", fname)
         return True
     except Exception:
-        fLOG("failed to patch", fname)
+        fLOG("[pymy] failed to patch", fname)
         return False
 
 

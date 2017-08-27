@@ -69,7 +69,7 @@ def windows_startup(destination, temp_folder, params=None, fLOG=print):
     if isinstance(tools, list):
         tools = {k: None for k in tools}
 
-    fLOG("------ download", tools)
+    fLOG("[pymy] ------ download", tools)
     op = win_download(temp_folder, fLOG=fLOG, selection=tools, module_list=[])
 
     # copy de SQLiteSpy, putty, Scite
@@ -78,7 +78,7 @@ def windows_startup(destination, temp_folder, params=None, fLOG=print):
              "MikTex", "InkScape",
              "Python", ]
 
-    fLOG("------ install", tools)
+    fLOG("[pymy] ------ install", tools)
     folders = dict(tools=destination,
                    python=os.path.join(destination, "python"))
     op += win_install(folders, download_folder=temp_folder,

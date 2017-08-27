@@ -73,7 +73,7 @@ def create_virtual_env(where, symlinks=False, system_site_packages=False,
                 os.mkdir(fold)
             create_virtual_env(fold)
     """
-    fLOG("create virtual environment at:", where)
+    fLOG("[pymy] create virtual environment at:", where)
     params = {}
     if symlinks:
         params["symlinks"] = None
@@ -109,7 +109,7 @@ def create_virtual_env(where, symlinks=False, system_site_packages=False,
             "unable to find pip in {0}, content:\n  {1}".format(scripts, in_scripts))
 
     if packages is not None and len(packages) > 0:
-        fLOG("install packages in:", where)
+        fLOG("[pymy] install packages in:", where)
         packages = [_ for _ in packages if _ != "pymyinstall" and _ != "pip"]
         if len(packages) > 0:
             out += venv_install(where, packages, fLOG=fLOG,

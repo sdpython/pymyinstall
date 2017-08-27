@@ -56,13 +56,13 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
         file = alls[0].replace("&amp;", "&")
         full = file
         version = file.split("_")[-1].replace(".zip", "")
-        fLOG("SQLiteSpy, version ", version)
+        fLOG("[pymy] SQLiteSpy, version ", version)
         outfile = os.path.join(
             temp_folder,
             "{0}_{1}.zip".format(
                 "SQLiteSpy",
                 version))
-        fLOG("download ", full)
+        fLOG("[pymy] download ", full)
         download_from_sourceforge(
             full,
             outfile,

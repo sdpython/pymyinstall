@@ -45,7 +45,7 @@ def install_chromedriver(dest_folder=".", fLOG=print, install=True, version=None
     name = url.split("/")[-1]
 
     outfile = os.path.join(dest_folder, name)
-    fLOG("chromedriver, download from ", url)
+    fLOG("[pymy] chromedriver, download from ", url)
     download_file(url, outfile, fLOG=fLOG)
 
     if install:

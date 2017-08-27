@@ -57,7 +57,7 @@ def extract_msi(fname, targetdir=None, verbose=False, fLOG=print):
         args += ['/quiet', '/qn']
     args += ['TARGETDIR=%s' % targetdir]
     cmd = [extract] + args
-    fLOG("RUN: ", cmd)
+    fLOG("[pymy] RUN: ", cmd)
     subprocess.call(cmd, cwd=osp.dirname(fname))
     fLOG('fname=%s' % fname)
     fLOG('TARGETDIR=%s' % targetdir)
@@ -151,7 +151,7 @@ def clean_msi(folder, pattern, verbose=False, fLOG=print):
     operations = []
     for r in remove:
         if verbose:
-            fLOG("remove", r)
+            fLOG("[pymy] remove", r)
             os.remove(r)
             operations.append(("remove", r))
     return operations

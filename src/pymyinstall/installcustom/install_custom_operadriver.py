@@ -45,7 +45,7 @@ def install_operadriver(dest_folder=".", fLOG=print, install=True, version=None)
     name = url.split("/")[-1]
 
     outfile = os.path.join(dest_folder, name)
-    fLOG("operadriver, download from ", url)
+    fLOG("[pymy] operadriver, download from ", url)
     download_file(url, outfile, fLOG=fLOG)
 
     if install:

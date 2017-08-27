@@ -671,7 +671,7 @@ class ModuleInstall:
                 exi = os.path.exists(whlname)
                 if force or not exi:
 
-                    self.fLOG("downloading", whl)
+                    self.fLOG("[pymy] downloading", whl)
                     # self.fLOG("url", url)
                     if self.existing_version is None:
                         self.existing_version = self.extract_version(whl)
@@ -693,7 +693,7 @@ class ModuleInstall:
                         raise WrongWheelException("Size of downloaded wheel is too small: {0}\nurl={1}\nagent={2}".format(
                             len(text), url, default_user_agent))
 
-                    self.fLOG("writing", whl)
+                    self.fLOG("[pymy] writing", whl)
                     with open(whlname, "wb") as f:
                         f.write(text)
 
@@ -704,7 +704,7 @@ class ModuleInstall:
             if force or not os.path.exists(outfile):
                 zipurl = "https://github.com/{1}/{0}/archive/{2}.zip".format(
                     self.name, self.gitrepo, self.branch)
-                self.fLOG("downloading", zipurl)
+                self.fLOG("[pymy] downloading", zipurl)
                 try:
                     req = urllib_request.Request(
                         zipurl, headers={
@@ -724,7 +724,7 @@ class ModuleInstall:
                 u.close()
 
             if unzipFile:
-                self.fLOG("unzipping ", outfile)
+                self.fLOG("[pymy] unzipping ", outfile)
                 files = self.unzipfiles(outfile, temp_folder)
                 return files
             else:
@@ -742,7 +742,7 @@ class ModuleInstall:
                     file_save=file_save) if kind == "exe" else self.get_exewheel_url_link2(
                     file_save=file_save, source=source)
 
-                self.fLOG("downloading", exe)
+                self.fLOG("[pymy] downloading", exe)
                 req = urllib_request.Request(
                     url, headers={
                         'User-agent': default_user_agent})
@@ -754,7 +754,7 @@ class ModuleInstall:
                     os.makedirs(temp_folder)
 
                 exename = os.path.join(temp_folder, exe)
-                self.fLOG("writing", exe)
+                self.fLOG("[pymy] writing", exe)
                 with open(exename, "wb") as f:
                     f.write(text)
                 return exename
@@ -1001,7 +1001,7 @@ class ModuleInstall:
 
         kind = force_kind if force_kind is not None else self.kind
         add = (" with " + kind) if kind != self.kind else ""
-        self.fLOG("installation of " + str(self) + add)
+        self.fLOG("[pymy] installation of " + str(self) + add)
         ret = None
         custom = custom or self.custom
 
@@ -1122,11 +1122,11 @@ class ModuleInstall:
                 if vers is not None:
                     whlvers = numeric_version(get_wheel_version(whlname))
                     if compare_version(vers, whlvers) >= 0:
-                        self.fLOG("skipping, no newer version {0} <= {1}: whl= {2}".format(
+                        self.fLOG("[pymy] skipping, no newer version {0} <= {1}: whl= {2}".format(
                             whlvers, vers, whlname))
                         ret = False
             if ret:
-                self.fLOG("installing", os.path.split(whlname)[-1])
+                self.fLOG("[pymy] installing", os.path.split(whlname)[-1])
 
                 pip = get_pip_program()
                 cmd = pip + " install {0}".format(whlname)
@@ -1189,11 +1189,12 @@ class ModuleInstall:
                         "\n".join(
                             str(_) for _ in setu))
                 else:
-                    self.fLOG("warning: more than one setup: " + str(setu))
+                    self.fLOG(
+                        "[pymy] warning: more than one setup: " + str(setu))
                     setu = [setu[0][1]]
             setu = os.path.abspath(setu[0])
 
-            self.fLOG("install ", setu[0])
+            self.fLOG("[pymy] install ", setu[0])
             cwd = os.getcwd()
             os.chdir(os.path.split(setu)[0])
             if custom is None:
@@ -1272,7 +1273,7 @@ class ModuleInstall:
                     force=force,
                     unzipFile=True,
                     source=source)
-                self.fLOG("executing", os.path.split(exename)[-1])
+                self.fLOG("[pymy] executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
                     exename + " /s /qn /SILENT", wait=True, fLOG=self.fLOG)
                 if out_streams is not None:
@@ -1292,7 +1293,7 @@ class ModuleInstall:
                     force=force,
                     unzipFile=True,
                     source=source)
-                self.fLOG("executing", os.path.split(exename)[-1])
+                self.fLOG("[pymy] executing", os.path.split(exename)[-1])
                 out, err = run_cmd(
                     exename + " /s /qn", wait=True, fLOG=self.fLOG)
                 if out_streams is not None:
@@ -1332,7 +1333,7 @@ class ModuleInstall:
                 exe = os.path.split(sys.executable)[0]
                 cmd = "set path=%path%;{0}".format(exe)
                 if cmd not in full:
-                    self.fLOG("add {0} to {1}".format(cmd, self.Script))
+                    self.fLOG("[pymy] add {0} to {1}".format(cmd, self.Script))
                     with open(self.Script, "w") as f:
                         if full.startswith("@echo off"):
                             f.write(
@@ -1345,9 +1346,9 @@ class ModuleInstall:
                             f.write(full)
 
         if ret is not None and post is not None:
-            self.fLOG("_ run_post_installation [begin]", post)
+            self.fLOG("[pymy] _ run_post_installation [begin]", post)
             ret = self.run_post_installation(post)
-            self.fLOG("_ run_post_installation [end]")
+            self.fLOG("[pymy] _ run_post_installation [end]")
 
         if ret is not None and ret:
             # we check the module was properly installed
@@ -1380,9 +1381,9 @@ class ModuleInstall:
                 continue
             elif k == "pre_cmd":
                 if v == "module_install_preprocess":
-                    self.fLOG("_ module_install_preprocess [begin]")
+                    self.fLOG("[pymy] _ module_install_preprocess [begin]")
                     self.module_install_preprocess(post)
-                    self.fLOG("_ module_install_preprocess [end]")
+                    self.fLOG("[pymy] _ module_install_preprocess [end]")
                 else:
                     raise ValueError(
                         "Unable to interpret value '{0}'.".format(v))
@@ -1396,7 +1397,7 @@ class ModuleInstall:
                 if err is not None and len(err) > 0:
                     raise InstallError(
                         "Post installation script failed.\nCMD\n{0}\nOUT\n{1}\nERR-Z\n{2}".format(cmd, out, err))
-                self.fLOG("OUT:\n{0}".format(out))
+                self.fLOG("[pymy] OUT:\n{0}".format(out))
             elif k == "pre_cmd":
                 # processed just above
                 continue
@@ -1437,7 +1438,7 @@ class ModuleInstall:
         if not force and not self.has_update():
             return True
 
-        self.fLOG("update of ", self)
+        self.fLOG("[pymy] update of ", self)
 
         options = [] if options is None else list(options)
         for opt in ["--upgrade", "--no-deps"]:
@@ -1456,26 +1457,26 @@ class ModuleInstall:
         @param      post        dictionary
         """
         if self.name == "pywin32":
-            self.fLOG("_ module_install_preprocess", self.name)
+            self.fLOG("[pymy] _ module_install_preprocess", self.name)
             if "cmd_python" not in post:
                 raise KeyError("Key 'cmd_python' is not in post.")
             cmd_python = post["cmd_python"]
             name = cmd_python.split()[0].format(
                 os.path.dirname(sys.executable))
-            self.fLOG("_ opening", name)
+            self.fLOG("[pymy] _ opening", name)
             if not os.path.exists(name):
                 raise FileNotFoundError(name)
             with open(name, "r") as f:
                 content = f.read()
             repby = "os.path.exists(dest)"
             if repby not in content:
-                self.fLOG("_ Preprocess '{0}'".format(name))
+                self.fLOG("[pymy] _ Preprocess '{0}'".format(name))
                 rep = "def CopyTo(desc, src, dest):"
                 content = content.replace(
                     rep, "{0}\n    if {1}: return".format(rep, repby))
                 with open(name, "w") as f:
                     f.write(content)
-                self.fLOG("_ Done.")
+                self.fLOG("[pymy] _ Done.")
             else:
                 self.fLOG(
                     "Skip preprocess '{0}' because '{1}' was found.".format(name, repby))

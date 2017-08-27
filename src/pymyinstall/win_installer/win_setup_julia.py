@@ -58,7 +58,7 @@ def julia_run_script(julia_path, python_path, script, verbose=False, fLOG=print)
     cmd = [exe, script, "--no_history-file"]
     cmd = " ".join(cmd)
     if verbose:
-        fLOG("set JULIA_PKGDIR=" + pkg)
+        fLOG("[pymy] set JULIA_PKGDIR=" + pkg)
     out, err = run_cmd(cmd, wait=True)
     if err is not None and len(err) > 0 and \
             "err" in err.lower() or "warn" in err.lower():
@@ -81,7 +81,7 @@ def patch_julia03(julia_path, verbose=False, fLOG=print):
     pkg = os.path.join(julia_path, "pkg")
     pkg_d = pkg.replace("\\", "\\\\")
     if verbose:
-        fLOG("  string to replace", pkg_d)
+        fLOG("[pymy]   string to replace", pkg_d)
     for root, dirs, files in os.walk(pkg):
         for name in files:
             if name.endswith("deps.jl"):
@@ -91,6 +91,6 @@ def patch_julia03(julia_path, verbose=False, fLOG=print):
                 if pkg_d in content:
                     content = content.replace(pkg_d, "%JULIA_PKGDIR%")
                     if verbose:
-                        fLOG("  patch ", full)
+                        fLOG("[pymy]   patch ", full)
                     with open(full, "w", encoding="utf8") as f:
                         f.write(content)

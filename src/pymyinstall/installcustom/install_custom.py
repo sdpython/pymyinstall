@@ -65,7 +65,7 @@ def download_file(url, outfile, fLOG=None):
 
     try:
         if fLOG:
-            fLOG("download", url)
+            fLOG("[pymy] download", url)
         req = urllib_request.Request(
             url,
             headers={
@@ -108,7 +108,7 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
     try:
         import requests
     except ImportError:
-        fLOG("installing module requests")
+        fLOG("[pymy] installing module requests")
         from ..installhelper.module_install import ModuleInstall
         ModuleInstall("requests", fLOG=fLOG).install(temp_folder=temp_folder)
         import requests
@@ -116,7 +116,7 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
     try:
         req = requests.get(url, allow_redirects=True, stream=True)
         text = req.raw.read()
-        fLOG("len ", len(text))
+        fLOG("[pymy] len ", len(text))
     except urllib_error.HTTPError as e:
         raise Exception("unable to get archive from: " + url) from e
     except requests.exceptions.ConnectionError as ee:

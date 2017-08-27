@@ -155,8 +155,8 @@ def _cg_dl(ml, mi, fLOG=None):
         </script>
     """
     if fLOG:
-        fLOG("decode", ml)
-        fLOG("decode", mi)
+        fLOG("[pymy] decode", ml)
+        fLOG("[pymy] decode", mi)
     mi = mi.replace('&lt;', '<')
     mi = mi.replace('&#62;', '>')
     mi = mi.replace('&gt;', '>')

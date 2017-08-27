@@ -260,7 +260,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             raise ValueError("{0} unknown, should be in {1}".format(
                 s, ", ".join(sorted(_allowed))))
 
-    fLOG("--- selection", selection)
+    fLOG("[pymy] --- selection", selection)
 
     #####
     # we change  for the version
@@ -336,7 +336,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     ########
     # license
     ########
-    fLOG("--- license")
+    fLOG("[pymy] --- license")
     with open(os.path.join(folder, "license.txt"), "w") as f:
         f.write(license)
     operations.append(("license", "license.txt"))
@@ -345,7 +345,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         ########################
         # copy icons in tools/icons
         #######################
-        fLOG("--- copy icons")
+        fLOG("[pymy] --- copy icons")
         op = copy_icons(os.path.join(os.path.dirname(__file__), "icons"),
                         os.path.join(folders["tools"], "icons"))
         operations.extend(op)
@@ -354,8 +354,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         #############
         # install setups
         #############
-        fLOG("--- installation of python and tools")
-        fLOG("--- you might have to it yourself for R, Julia")
+        fLOG("[pymy] --- installation of python and tools")
+        fLOG("[pymy] --- you might have to it yourself for R, Julia")
         op, installed = win_install(
             folders=folders, download_folder=download_folder, verbose=verbose, fLOG=fLOG,
             selection=selection)
@@ -366,12 +366,12 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
 
         if verbose:
             for k, v in installed.items():
-                fLOG("  INSTALLED:", k, "-->", v)
+                fLOG("[pymy]   INSTALLED:", k, "-->", v)
 
         ##########
         # clean msi
         ##########
-        fLOG("--- clean msi")
+        fLOG("[pymy] --- clean msi")
         op = clean_msi(folders["tools"], "*.msi", verbose=verbose, fLOG=fLOG)
         operations.extend(op)
         operations.append(("time", dtnow()))
@@ -379,7 +379,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         ################
         # create links tools
         ################
-        fLOG("--- create links")
+        fLOG("[pymy] --- create links")
         op = create_links_tools(folder, installed, verbose=verbose, fLOG=fLOG)
         operations.extend(op)
         operations.append(("time", dtnow()))
@@ -387,7 +387,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         #########################
         # create batch command files
         #########################
-        fLOG("--- create batch command file")
+        fLOG("[pymy] --- create batch command file")
         op = create_win_batches(
             folders, verbose=verbose, fLOG=fLOG, selection=selection, module_list=module_list)
         operations.extend(op)
@@ -395,7 +395,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         ###########
         # update pip
         ###########
-        fLOG("--- update pip")
+        fLOG("[pymy] --- update pip")
         operations.append(("python pip", "update"))
         op = update_pip(folders["python"])
         operations.extend(op)
@@ -416,20 +416,20 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         ######################
         # installation of packages
         ######################
-        fLOG("--- installation of python packages")
+        fLOG("[pymy] --- installation of python packages")
         operations.append(("python packaes", "start"))
         python_path = folders["python"]
         win_install_packages_other_python(
             python_path, download_folder, verbose=verbose, fLOG=fLOG,
             module_list=module_list)
-        fLOG("done")
+        fLOG("[pymy] done")
         operations.append(("time", dtnow()))
 
         ##########################
         # mingw, add file distutils.cfg
         ##########################
         if "mingw" in selection and "vs" not in selection:
-            fLOG("--- switch_to_mingw_compiler")
+            fLOG("[pymy] --- switch_to_mingw_compiler")
             op = switch_to_mingw_compiler(folders["python"])
             for o in op:
                 operations.append(("modify", o))
@@ -438,7 +438,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         # Visual Studio, VS 2015 for Python 3.5
         ##########################
         if "vs" in selection:
-            fLOG("--- switch_to_VS_compiler")
+            fLOG("[pymy] --- switch_to_VS_compiler")
             op = switch_to_VS_compiler(folders["python"])
             for o in op:
                 operations.append(("modify", o))
@@ -451,7 +451,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
             if mod.name == "jupyter":
                 has_jupyter = True
         if has_jupyter:
-            fLOG("--- create jupyter profile")
+            fLOG("[pymy] --- create jupyter profile")
             operations.append(("jupyter", "create profile"))
             ipath = ipython_create_profile(
                 folders["config"], folders["python"], fLOG=fLOG)
@@ -462,7 +462,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         # update ipython profile
         ######################
         if has_jupyter:
-            fLOG("--- update jupyter profile")
+            fLOG("[pymy] --- update jupyter profile")
             operations.append(("jupyter", "update profile"))
             ipython_update_profile(ipath)
             operations.append(("time", dtnow()))
@@ -471,7 +471,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         # update jupyter extension
         ######################
         if has_jupyter:
-            fLOG("--- install jupyter extension")
+            fLOG("[pymy] --- install jupyter extension")
             operations.append(("jupyter", "update install jupyter extension"))
             install_jupyter_extension(folders["python"])
             operations.append(("time", dtnow()))
@@ -479,7 +479,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         ######################
         # copy pywin32 dll to main folders
         ######################
-        fLOG("--- pywin32 dll to main folders")
+        fLOG("[pymy] --- pywin32 dll to main folders")
         operations.append(("pywin32", "dll"))
         fdll = os.path.join(
             python_path, "Lib", "site-packages", "pywin32_system32")
@@ -504,11 +504,11 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         # kernels
         ########
         if has_jupyter:
-            fLOG("--- add kernels")
+            fLOG("[pymy] --- add kernels")
             operations.append(("kernel", "add"))
             res = install_kernels(folders["tools"], folders["python"])
             for r in res:
-                fLOG("ADD: kernel", r)
+                fLOG("[pymy] ADD: kernel", r)
             operations.append(("time", dtnow()))
 
         #########
@@ -521,15 +521,15 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     # tutorial
     ########
     if tutorial is not None:
-        fLOG("--- copy tutorial")
+        fLOG("[pymy] --- copy tutorial")
         operations.append(("tutorial", "begin"))
         fold_tuto = os.path.join(folders["workspace"], "tutorial")
         if not os.path.exists(fold_tuto):
-            fLOG("--- create ", fold_tuto)
+            fLOG("[pymy] --- create ", fold_tuto)
             operations.append(("create", fold_tuto))
             os.mkdir(fold_tuto)
         for tuto in tutorial:
-            fLOG("copy tutorial", tuto)
+            fLOG("[pymy] copy tutorial", tuto)
             operations.append(("tutorial", tuto))
             res = copy_tutorial(tuto, fold_tuto)
             for a, b, c in res:
@@ -540,11 +540,11 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     ################################
     # prepare setup script for InnoSetup
     ###############################
-    fLOG("--- prepare setup script for InnoSetup")
+    fLOG("[pymy] --- prepare setup script for InnoSetup")
     replacements = dict(__DISTPATH__=folder)
     new_script = innosetup_replacements(replacements=replacements, fLOG=fLOG,
                                         temp_folder=os.path.join(folders["logs"]))
-    fLOG("done")
+    fLOG("[pymy] done")
     operations.append(("InnoSetup", "replacement"))
     operations.append(("time", dtnow()))
 
@@ -552,7 +552,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         #################
         # run last_function
         #################
-        fLOG("--- run last_function")
+        fLOG("[pymy] --- run last_function")
         operations.append(("start", "last_function"))
         last_function(new_script, folders, verbose=verbose, fLOG=fLOG)
         operations.append(("time", dtnow()))
@@ -565,8 +565,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
               "print('\\n'.join('\'{0}\' misses \'{1}\''.format(k,v) for k,v in sorted(r.items())))"
         cmd = '{0} -c "{1}"'.format(os.path.join(
             folders["python"], "python.exe"), scr)
-        fLOG("--- run dependencies")
-        fLOG("CMD:", cmd)
+        fLOG("[pymy] --- run dependencies")
+        fLOG("[pymy] CMD:", cmd)
         out, err = run_cmd(cmd, wait=True)
         if len(err) > 0:
             raise WinInstallMissingDependency(err)
@@ -593,9 +593,9 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     # print the list of modules (python)
     #################
     if not download_only:
-        fLOG("--- pip freeze")
+        fLOG("[pymy] --- pip freeze")
         mods = get_modules_version(folders["python"])
-        fLOG("nb modules: {0}".format(len(mods)))
+        fLOG("[pymy] nb modules: {0}".format(len(mods)))
         if len(mods) == 0:
             raise ValueError(
                 "unable to get module list from folder " + folders["python"])
@@ -611,7 +611,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         r_path = os.path.join(folders["tools"], "R")
         r_lib = os.path.join(r_path, "library")
         if os.path.exists(r_lib):
-            fLOG("--- list R packages")
+            fLOG("[pymy] --- list R packages")
             packs = os.listdir(r_lib)
             with open(os.path.join(folders["config"], "installed.R.packages.txt"), "w") as f:
                 packs_ = [(p.lower(), p) for p in packs]
@@ -629,7 +629,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                 "folder {0} is empty, it should not".format(folders["workspace"]))
 
         # remove
-        fLOG("--- remove setup")
+        fLOG("[pymy] --- remove setup")
         dist = os.path.join(folders["logs"], "..", "dist", "setup")
         if os.path.exists(dist):
             exe = [_ for _ in os.listdir(dist) if ".exe" in _]
@@ -642,17 +642,17 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
         ################################
         # prepare setup script for InnoSetup
         ###############################
-        fLOG("--- building setup with InnoSetup")
+        fLOG("[pymy] --- building setup with InnoSetup")
         out = run_innosetup(new_script, fLOG=fLOG,
                             temp_folder=os.path.join(folders["logs"]))
         with open(os.path.join(folders["logs"], "out.install.innosetup.txt"), "w", encoding="utf8") as f:
             f.write(out)
-        fLOG("done")
+        fLOG("[pymy] done")
         operations.append(("InnoSetup", "done"))
         operations.append(("time", dtnow()))
 
         # copy
-        fLOG("--- copy setup")
+        fLOG("[pymy] --- copy setup")
         dist = os.path.join(folders["logs"], "..", "dist", "setup")
         to = os.path.join(folders["logs"], "..", "..")
         exe = [_ for _ in os.listdir(dist) if ".exe" in _]

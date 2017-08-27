@@ -51,7 +51,7 @@ def download_revealjs(
     filel = location.replace("releases", "") + "/archive/{0}".format(filename)
     outfile = os.path.join(temp_folder, "reveal.js." + filename)
     version = ".".join(filel.split("/")[-1].split(".")[:-1])
-    fLOG("download ", filel, "to", outfile, "version", version)
+    fLOG("[pymy] download ", filel, "to", outfile, "version", version)
     local = download_file(filel, outfile)
     res = unzip_files(local, whereTo=unzip_to, fLOG=fLOG)
 

@@ -78,7 +78,7 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
         # jenkins.zip is not a python package
         return []
     if verbose:
-        fLOG("*** INSTALL", package)
+        fLOG("[pymy] *** INSTALL", package)
     operations = []
 
     if sys.version_info[0] == 2:
@@ -280,21 +280,21 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
                     mes = "failed to install {0}: {1}".format(mod.name, full)
                     raise Exception(mes) from e
                 if len(op) > 0:
-                    fLOG("installed", mod.name, " with ", a)
+                    fLOG("[pymy] installed", mod.name, " with ", a)
                 operations.extend(op)
             done.add(a)
 
     if verbose:
-        fLOG("*** install packages with unknown dependencies")
+        fLOG("[pymy] *** install packages with unknown dependencies")
     for pack in files:
         if pack not in done:
             full = os.path.join(package_folder, pack)
             op = win_install_package_other_python(
                 python_path, full, verbose=verbose, fLOG=fLOG)
             if len(op) > 0:
-                fLOG("installed", pack, " with ", full)
+                fLOG("[pymy] installed", pack, " with ", full)
             else:
-                fLOG("skipped package", pack, " from ", full)
+                fLOG("[pymy] skipped package", pack, " from ", full)
             operations.extend(op)
 
     return operations

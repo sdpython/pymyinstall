@@ -31,7 +31,7 @@ def install_vs(dest_folder=".", fLOG=print, install=True, version=None):
     name = "vs_community.exe"
     newurl = "https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x40c"
     outfile = os.path.join(dest_folder, name)
-    fLOG("Visual Studio, download from ", newurl)
+    fLOG("[pymy] Visual Studio, download from ", newurl)
     local = download_file(newurl, outfile)
 
     if install:

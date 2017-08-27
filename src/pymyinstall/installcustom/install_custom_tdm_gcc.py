@@ -46,7 +46,7 @@ def install_tdm_gcc(dest_folder=".", fLOG=print, install=False, version=None):
     newurl = "http://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/{0}/download?use_mirror=autoselect".format(
         name)
     outfile = os.path.join(dest_folder, name)
-    fLOG("tdm-gcc, download from ", newurl)
+    fLOG("[pymy] tdm-gcc, download from ", newurl)
     file = download_from_sourceforge(
         newurl,
         outfile,

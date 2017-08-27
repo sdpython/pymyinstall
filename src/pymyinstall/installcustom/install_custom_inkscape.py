@@ -40,7 +40,7 @@ def install_inkscape(dest_folder=".", fLOG=print, install=True, version=None):
         url = alls[0]
         outfile = os.path.join(dest_folder, url.split("/")[-1])
         if not os.path.exists(outfile):
-            fLOG("download ", url)
+            fLOG("[pymy] download ", url)
             local = download_file(url, outfile)
         else:
             return outfile

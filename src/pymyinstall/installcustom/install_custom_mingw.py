@@ -50,7 +50,7 @@ def install_mingw(dest_folder=".", fLOG=print, install=True, version=None):
     newurl = "http://sourceforge.net/projects/mingw/files/Installer/{0}/download?use_mirror=autoselect".format(
         name)
     outfile = os.path.join(dest_folder, name)
-    fLOG("mingw, download from ", newurl)
+    fLOG("[pymy] mingw, download from ", newurl)
     file = download_from_sourceforge(
         newurl,
         outfile,

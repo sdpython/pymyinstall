@@ -48,11 +48,11 @@ def install_javajdk(
             version, b18)
 
         filel = root + file
-        fLOG("java-jdk, version ", version)
+        fLOG("[pymy] java-jdk, version ", version)
         vershort = version.split("-")[0]
         full = filel.format(vershort, version)
         outfile = os.path.join(temp_folder, full.split("/")[-1])
-        fLOG("download ", full)
+        fLOG("[pymy] download ", full)
         local = download_file(full, outfile)
         size = os.stat(local).st_size
         if size < 2 ** 20:

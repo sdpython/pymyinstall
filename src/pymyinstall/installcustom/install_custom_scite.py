@@ -71,7 +71,7 @@ def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=
     if len(rel) == 0:
         raise Exception("unable to find the release version")
     rel = rel[0]
-    fLOG("SciTE, release version ", rel)
+    fLOG("[pymy] SciTE, release version ", rel)
 
     reg = re.compile("<a href=\\\"(.*zip.*)\\\">full download</a>")
     find = reg.findall(page)
@@ -93,7 +93,7 @@ def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=
                 rel.replace(
                     ".",
                     ""))
-            fLOG("SciTE, download from ", newurl)
+            fLOG("[pymy] SciTE, download from ", newurl)
             file = download_from_sourceforge(
                 newurl,
                 outfile,

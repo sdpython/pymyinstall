@@ -76,7 +76,7 @@ def install_R(
             url = spl[0] + "/old/" + version + "/R-" + version + "-win.exe"
         full = url.split("/")[-1]
         outfile = os.path.join(temp_folder, full)
-        fLOG("download ", url)
+        fLOG("[pymy] download ", url)
         local = download_file(url, outfile)
         if install and not bb:
             run_cmd("msiexec /i " + local, fLOG=fLOG, wait=True)
