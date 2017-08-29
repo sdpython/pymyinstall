@@ -117,7 +117,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                    version=None, modules=None, custom=False, latest=False,
                    download_folder="download", verbose=False):
     """
-    Install `python <http://www.python.org/>`_.
+    Installs `python <http://www.python.org/>`_.
     It does not do it a second time if it is already installed.
 
     @param      temp_folder     where to download the setup
