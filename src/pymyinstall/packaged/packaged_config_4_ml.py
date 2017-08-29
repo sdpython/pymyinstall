@@ -83,7 +83,7 @@ def ensae_set():
             "mutagenx", "pip", purpose="read and write audio tags for many formats in Python 3"),
         ModuleInstall("django-audiotracks", "pip",
                       mname="audiotracks", purpose="read audio with django"),
-        ModuleInstall("ndg-httpsclient", "pip", mname="ndg_httpsclient",
+        ModuleInstall("ndg-httpsclient", "pip", mname="ndg.httpsclient",
                       purpose="Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL"),
         ModuleInstall("inflection", "pip",
                       purpose="A port of Ruby on Rails inflector to Python"),

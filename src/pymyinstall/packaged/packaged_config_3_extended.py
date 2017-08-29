@@ -172,7 +172,7 @@ def extended_set():
         # access to linkedin
         ModuleInstall(
             "oauthlib", "pip", purpose="A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"),
-        ModuleInstall("requests_oauthlib", "pip",
+        ModuleInstall("requests-oauthlib", "pip", mname="requests_oauthlib",
                       purpose="OAuthlib authentication support for Requests."),
         ModuleInstall("antlr4-python3-runtime", "pip",
                       mname="antlr4", purpose="antlr4 runtime, grammar parser"),
@@ -202,7 +202,7 @@ def extended_set():
         ModuleInstall("asn1crypto", "pip",
                       purpose="Fast ASN.1 parser and serializer with definitions for private keys, " +
                       "public keys, certificates, CRL, OCSP, CMS, PKCS#3, PKCS#7, PKCS#8, PKCS#12, PKCS#5, X.509 and TSP"),
-        ModuleInstall("PyNaCl", "pip", mname="pynacl",
+        ModuleInstall("PyNaCl", "pip", mname="nacl",
                       purpose="Python binding to the Networking and Cryptography (NaCl) library", usage="NETWORK"),
         ModuleInstall("bcrypt", "pip",
                       purpose="Modern password hashing for your software and your servers"),
@@ -465,7 +465,7 @@ def extended_set():
                       purpose="The smartest command line arguments parser in the world"),
         ModuleInstall("idna", "pip", usage="WEB",
                       purpose="Internationalized Domain Names in Applications (IDNA)"),
-        ModuleInstall("pyOpenSSL", "pip", mname="pyopenssl",
+        ModuleInstall("pyOpenSSL", "pip", mname="OpenSSL",
                       purpose="Python wrapper module around the OpenSSL library"),
         ModuleInstall("w3lib", "pip",
                       purpose="Library of web-related functions"),

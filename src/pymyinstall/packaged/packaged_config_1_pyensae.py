@@ -89,7 +89,7 @@ def pyensae_set():
         "msrestazure",
         "mbstrdecoder",
         "networkx",
-        "ndg_httpsclient",  # quandl
+        "ndg-httpsclient",  # quandl
         "oauthlib",
         "osmapi",  # maps
         "packaging",
