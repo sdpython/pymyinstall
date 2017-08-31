@@ -70,11 +70,14 @@ class TestRunNotebooks(unittest.TestCase):
         code_init = "import sys\nsys.path.append('{0}')\n".format(
             pyq.replace("\\", "\\\\"))
         for f in os.listdir(fnb):
+            if name not in f:
+                continue
             if os.path.splitext(f)[-1] == ".ipynb":
                 if "install_module" in f:
                     continue
                 else:
                     keepnote.append((os.path.join(fnb, f), code_init))
+        self.assertTrue(len(keepnote) > 0)
 
         def valid(cell):
             if "snakeviz" in cell:
@@ -90,9 +93,6 @@ class TestRunNotebooks(unittest.TestCase):
         if is_travis_or_appveyor() == "travis":
             keepnote = [_ for _ in keepnote if "javascript_extension" not in _ and
                         (not is_travis_or_appveyor() or "example_xgboost" not in _)]
-
-        keepnote = [_ for _ in keepnote if name in _]
-        self.assertTrue(len(keepnote) > 0)
 
         res = execute_notebook_list(
             temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths,
