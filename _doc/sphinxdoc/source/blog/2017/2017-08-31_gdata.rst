@@ -1,0 +1,30 @@
+
+.. blogpost::
+    :title: Issue with keyrings.alt
+    :keywords: gdata, keyring, keyrings.alt
+    :date: 2017-08-31
+    :categories: module
+
+    If you see the following error, it is because the
+    package `gdata <https://pypi.python.org/pypi/gdata>`_.
+    It should be removed, it is not being updated anymore.
+
+    ::
+
+        Error initializing plugin Google = keyrings.alt.Google.
+        Traceback (most recent call last):
+          File "<python>\lib\site-packages\keyring\backend.py", line 167, in _load_plugins
+            init_func = ep.load()
+          File "<python>\lib\site-packages\pkg_resources\__init__.py", line 2316, in load
+            return self.resolve()
+          File "d:\jenkins\pymy\pyquickhelper\pyquickhelper_UT_36_std\_venv\lib\site-packages\pkg_resources\__init__.py", line 2322, in resolve
+            module = __import__(self.module_name, fromlist=['__name__'], level=0)
+          File "<python>\lib\site-packages\keyrings\alt\Google.py", line 14, in <module>
+            import gdata.docs.service
+          File "c:\python36_x64\lib\site-packages\gdata\__init__.py", line 27, in <module>
+            import atom
+          File "<python>\lib\site-packages\atom\__init__.py", line 133, in <module>
+            CreateClassFromXMLString)
+          File "<python>\lib\site-packages\atom\__init__.py", line 97, in mark_deprecated
+            optional_warn_function.func_name = f.func_name
+        AttributeError: 'function' object has no attribute 'func_name'
