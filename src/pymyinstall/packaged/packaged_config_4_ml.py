@@ -613,6 +613,9 @@ def ensae_set():
             "module under the backports namespace. (for tensorflow)"),
         ModuleInstall(
             'protobuf', 'pip', purpose="Protocol Buffers are Google’s data interchange format"),
+        ModuleInstall("tensorflow-tensorboard", "pip", usage="DATA/ML",
+                      mname="tensorflow_tensorboard",
+                      purpose="TensorBoard lets you watch Tensors Flow"),
         ModuleInstall("tensorflow", "wheel", usage="DATA/ML",
                       purpose="Deep Learning from Google"),
         ModuleInstall("edward", "pip", usage="DATA/ML",

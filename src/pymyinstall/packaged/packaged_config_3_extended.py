@@ -663,6 +663,8 @@ def extended_set():
                       "Currently supported are plain text, reStructuredText and HTML. Other formats can be added easily."),
         ModuleInstall('duecredit', 'pip',
                       purpose="Publications (and donations) tracer"),
+        ModuleInstall('odfpy', 'pip',
+                      purpose="Python API and tools to manipulate OpenDocument files"),
     ]
 
     if sys.platform.startswith("win"):
