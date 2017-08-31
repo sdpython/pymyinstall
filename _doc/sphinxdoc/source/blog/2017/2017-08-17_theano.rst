@@ -58,3 +58,7 @@
         import os
         with open(os.path.join(os.environ["USERPROFILE"], ".theanorc"), "w") as f:
             f.write("[gcc]\ncxxflags = -D_hypot=hypot")
+
+    This setup is only for CPU. If you need GPU,
+    you should read the following:
+    `Keras-TensorFlow-GPU-Windows-Installation <https://github.com/antoniosehk/keras-tensorflow-windows-installation>`_.
