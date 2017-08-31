@@ -663,19 +663,6 @@ def extended_set():
                       "Currently supported are plain text, reStructuredText and HTML. Other formats can be added easily."),
         ModuleInstall('duecredit', 'pip',
                       purpose="Publications (and donations) tracer"),
-        #
-        # September 2017
-        #
-        ModuleInstall('pyusb', 'pip', purpose="Python USB access module"),
-        ModuleInstall('pushbullet.py', 'pip',
-                      purpose="A simple python client for pushbullet.com"),
-        ModuleInstall('dnspython3', 'pip',
-                      purpose="A DNS toolkit for Python 3.x"),
-        ModuleInstall('pdfminer3k', 'pip',
-                      purpose="PDF parser and analyzer pdfminer3k is a Python 3 port of pdfminer."),
-        ModuleInstall('python-mpd2', 'pip', mname="mpd2",
-                      purpose="MDP is a Python library for building complex data processing software by combining " +
-                      "widely used machine learning algorithms into pipelines and networks."),
     ]
 
     if sys.platform.startswith("win"):

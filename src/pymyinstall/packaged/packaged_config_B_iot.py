@@ -60,7 +60,7 @@ def iot_set():
                       purpose="A DNS toolkit for Python 3.x"),
         ModuleInstall('blockchain', 'pip', usage="IoT",
                       purpose="Blockchain API library (v1)"),
-        ModuleInstall('python-mpd2', 'pip', usage="IoT",
+        ModuleInstall('python-mpd2', 'pip', usage="IoT", mname="mdp2",
                       purpose="A Python MPD client library"),
         ModuleInstall('hikvision', 'pip', usage="IoT",
                       purpose="Provides a python interface to interact with a hikvision camera"),
