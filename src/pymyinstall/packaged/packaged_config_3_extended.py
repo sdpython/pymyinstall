@@ -143,6 +143,8 @@ def extended_set():
         ModuleInstall(
             'ply', 'pip', purpose="Python Lex & Yacc (for thrifty)"),
         ModuleInstall(
+            'thrift', 'pip', purpose="Python bindings for the Apache Thrift RPC system"),
+        ModuleInstall(
             'thriftpy', 'pip', purpose="pure python implemention of Apache Thrift."),
         # ModuleInstall('airflow', 'pip'),  # does not work on Python 3
         ModuleInstall(
