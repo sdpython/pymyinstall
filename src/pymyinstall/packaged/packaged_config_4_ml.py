@@ -713,6 +713,8 @@ def ensae_set():
                       purpose="k-Nearest Neighbor imputation"),
         ModuleInstall('fancyimpute', 'pip', usage="ML",
                       purpose="Matrix completion and feature imputation algorithms"),
+        ModuleInstall('mnist', 'pip',
+                      purpose="Python utilities to download and parse the MNIST dataset"),
     ]
 
     if sys.version_info[0] == 2:
