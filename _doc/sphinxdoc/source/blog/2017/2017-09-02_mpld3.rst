@@ -1,0 +1,10 @@
+
+.. blogpost::
+    :title: mpld3 is no longer maintained.
+    :keywords: matplotlib, mpld3, altair
+    :date: 2017-09-02
+    :categories: module
+
+    `mpld3 <https://github.com/mpld3/mpld3>`_ is no longer maintained.
+    Its author is now working on
+    `altair <https://github.com/jakevdp/altair>`_.
