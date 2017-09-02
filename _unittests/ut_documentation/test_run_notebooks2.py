@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 """
-@brief      test log(time=33s)
+@brief      test log(time=15s)
 """
 
 import sys
@@ -47,7 +47,7 @@ from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 import src.pymyinstall
 
 
-class TestRunNotebooks(unittest.TestCase):
+class TestRunNotebooks2(unittest.TestCase):
 
     def a_test_run_notebook(self, name):
         if sys.version_info[0] == 2:
@@ -100,13 +100,29 @@ class TestRunNotebooks(unittest.TestCase):
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=src.pymyinstall)
 
-    def test_notebook_example_profiling(self):
+    def test_notebook_pivottablejs(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        self.a_test_run_notebook("example_profiling")
+        self.a_test_run_notebook("pivottablejs")
+
+    def test_notebook_example_xgboost(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        self.a_test_run_notebook("example_xgboost")
+
+    def test_notebook_version_information(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        self.a_test_run_notebook("version_information")
 
 
 if __name__ == "__main__":
