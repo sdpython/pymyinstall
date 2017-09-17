@@ -93,7 +93,7 @@ class TestRunNotebooks4(unittest.TestCase):
         if is_travis_or_appveyor() == "travis":
             keepnote = [_ for _ in keepnote if "javascript_extension" not in _ and
                         (not is_travis_or_appveyor() or "example_xgboost" not in _)]
-        if is_travis_or_appveyor() == "circli":
+        if is_travis_or_appveyor() == "circleci":
             # seems stuck on circleci
             keepnote = [_ for _ in keepnote if "example_xgboost" not in _]
 
