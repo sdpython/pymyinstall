@@ -56,7 +56,7 @@ class TestDownloadh5py (unittest.TestCase):
         if sys.platform.startswith("win"):
             temp = get_temp_folder(__file__, "temp_download_h5py")
             fLOG("install", "h5py")
-            m = ModuleInstall("h5py", "wheel", mname="h5py", fLOG=fLOG)
+            m = ModuleInstall("h5py", "wheel", fLOG=fLOG)
             exe = m.download(
                 temp_folder=temp,
                 file_save=os.path.join(
