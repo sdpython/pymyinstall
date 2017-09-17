@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 """
-@brief      test log(time=7s)
+@brief      test log(time=27s)
 """
 
 import sys
@@ -47,7 +47,7 @@ from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 import src.pymyinstall
 
 
-class TestRunNotebooks3(unittest.TestCase):
+class TestRunNotebooks4(unittest.TestCase):
 
     def a_test_run_notebook(self, name):
         if sys.version_info[0] == 2:
@@ -100,13 +100,13 @@ class TestRunNotebooks3(unittest.TestCase):
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=src.pymyinstall)
 
-    def test_notebook_version_information(self):
+    def test_notebook_example_xgboost(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        self.a_test_run_notebook("version_information")
+        self.a_test_run_notebook("example_xgboost")
 
 
 if __name__ == "__main__":
