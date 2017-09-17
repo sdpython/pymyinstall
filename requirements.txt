@@ -5,6 +5,7 @@ coverage
 docformatter
 ggplot
 ipython>=5.0.0
+joblib
 jupyter
 jupyter-client
 jupyter_sphinx
