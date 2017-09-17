@@ -91,11 +91,14 @@ class TestRunNotebooks4(unittest.TestCase):
         ]
 
         if is_travis_or_appveyor() == "travis":
-            keepnote = [_ for _ in keepnote if "javascript_extension" not in _ and
-                        (not is_travis_or_appveyor() or "example_xgboost" not in _)]
-        if is_travis_or_appveyor() == "circleci":
+            keepnote = [_ for _ in keepnote if "javascript_extension" not in _[0] and
+                        (not is_travis_or_appveyor() or "example_xgboost" not in _[0])]
+        if not sys.platform.startswith("win"):
             # seems stuck on circleci
-            keepnote = [_ for _ in keepnote if "example_xgboost" not in _]
+            keepnote = [_ for _ in keepnote if "example_xgboost" not in _[0]]
+
+        if len(keepnote) == 0:
+            return
 
         res = execute_notebook_list(
             temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths,
