@@ -47,7 +47,7 @@ from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 import src.pymyinstall
 
 
-class TestRunNotebooks2(unittest.TestCase):
+class TestRunNotebooks3(unittest.TestCase):
 
     def a_test_run_notebook(self, name):
         if sys.version_info[0] == 2:
@@ -100,13 +100,21 @@ class TestRunNotebooks2(unittest.TestCase):
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=src.pymyinstall)
 
-    def test_notebook_pivottablejs(self):
+    def test_notebook_example_xgboost(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        self.a_test_run_notebook("pivottablejs")
+        self.a_test_run_notebook("example_xgboost")
+
+    def test_notebook_version_information(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        self.a_test_run_notebook("version_information")
 
 
 if __name__ == "__main__":
