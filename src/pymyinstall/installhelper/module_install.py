@@ -55,6 +55,8 @@ class ModuleInstall:
     exeLocation = "http://www.lfd.uci.edu/~gohlke/pythonlibs/"
     exeLocationXd_Default = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
+    github_pattern_zip = "https://github.com/{1}/{0}/archive/{2}.zip"
+    github_pattern_git = "https://github.com/{1}/{0}.git{2}"
 
     @staticmethod
     def is_annoying(module_name):
@@ -67,9 +69,9 @@ class ModuleInstall:
                  version=None, script=None, index_url=None, deps=None,
                  purpose=None, usage=None, web=None, source=None, custom=None,
                  branch="master", pip_options=None, overwrite=None, post=None,
-                 skip_import=False):
+                 skip_import=False, pipgit=False):
         """
-        constructor
+        Constructor.
 
         @param      name            name
         @param      kind            kind of installation (*pip*, *github*, *wheel*)
@@ -94,11 +96,14 @@ class ModuleInstall:
         @param      overwrite       overwrite the location of the wheel
         @param      post            instructions post installation (look for this parameter
                                     in the code to see what is supported)
+        @param      pipgit          install the module with ``pip + git`` instead of
+                                    getting the full archive
         @param      skip_import     added to indicate the module cannot be imported
 
         .. versionchanged:: 1.1
             Parameters *source*, *custom*, *branch*, *pip_options*, *overwrite*, *post* were added.
             Parameter *skip_import* was introduced to skip the checking of the installation.
+            Parameter *pipgit* was added.
         """
         if kind != "pip" and version is not None:
             raise NotImplementedError(
@@ -121,6 +126,19 @@ class ModuleInstall:
         self.pip_options = pip_options
         self.overwrite = overwrite
         self.post_installation = post
+        self.pipgit = pipgit
+
+        if self.mname == self.name:
+            raise ValueError(
+                "Do not specify mname if it is equal to name '{0}'.".format(self.name))
+        if self.pipgit and self.gitrepo is None:
+            raise ValueError("If pipgit=True, gitrepo must be specified.")
+        if self.pipgit and kind != 'github':
+            raise ValueError(
+                "If pipgit=True, kind must be 'github' not '{0}'.".format(kind))
+        if self.version is not None and self.gitrepo is not None:
+            raise ValueError("version must be None if gitrepo is not.")
+
         if self.mname is not None and self.mname.startswith("-"):
             self.mname = self.mname[1:]
             self.skip_import = True
@@ -164,7 +182,7 @@ class ModuleInstall:
                  mname=self.mname, script=self.script, deps=self.deps, index_url=self.index_url,
                  purpose=self.purpose, usage=self.usage, web=self.web,
                  post=None if self.post_installation is None else self.post_installation.copy(),
-                 skip_import=self.skip_import)
+                 skip_import=self.skip_import, pipgit=self.pipgit)
         if rst_link:
             r["rst_link"] = "`{0} <{1}>`_".format(self.name, self.web)
             r["license"] = self.get_installed_license()
@@ -595,11 +613,18 @@ class ModuleInstall:
 
         deps = deps if self.deps is None else self.deps
 
-        if kind == "pip":
+        if kind == "pip" or self.pipgit:
             # see https://pip.pypa.io/en/latest/reference/pip_install.html
             # we use pip install <package> --download=temp_folder
             pp = get_pip_program()
-            cmd = pp + ' download {0}'.format(self.name)
+            if self.pipgit:
+                br = "@" + \
+                    self.branch if self.branch not in (None, "master") else ""
+                link = ModuleInstall.github_pattern_git.format(
+                    self.name, self.gitrepo, br)
+                cmd = pp + ' download git+' + link
+            else:
+                cmd = pp + ' download {0}'.format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if " " in temp_folder:
@@ -623,12 +648,9 @@ class ModuleInstall:
             if "Successfully downloaded" not in out:
                 raise DownloadError(
                     "unable to download with pip " +
-                    str(self) +
-                    "\nCMD:\n" +
-                    cmd +
-                    "\nOUT:\n" +
-                    out +
-                    "\nERR-N:\n" +
+                    str(self) + "\nCMD:\n" +
+                    cmd + "\nOUT:\n" +
+                    out + "\nERR-N:\n" +
                     err)
             else:
                 lines = out.split("\n")
@@ -639,12 +661,9 @@ class ModuleInstall:
                         return line.split("File was already downloaded")[-1].strip()
                 raise FileNotFoundError(
                     "unable to find downloaded file " +
-                    str(self) +
-                    "\nCMD:\n" +
-                    cmd +
-                    "\nOUT:\n" +
-                    out +
-                    "\nERR-O:\n" +
+                    str(self) + "\nCMD:\n" +
+                    cmd + "\nOUT:\n" +
+                    out + "\nERR-O:\n" +
                     err)
 
         elif kind in ("wheel", "wheel2"):
@@ -699,10 +718,10 @@ class ModuleInstall:
 
                 return whlname
 
-        elif kind == "github":
+        elif kind == "github" and not self.pipgit:
             outfile = os.path.join(temp_folder, self.name + ".zip")
             if force or not os.path.exists(outfile):
-                zipurl = "https://github.com/{1}/{0}/archive/{2}.zip".format(
+                zipurl = ModuleInstall.github_pattern_zip.format(
                     self.name, self.gitrepo, self.branch)
                 self.fLOG("[pymy] downloading", zipurl)
                 try:
@@ -945,7 +964,7 @@ class ModuleInstall:
                 log=False, options=None, deps=False, source=None,
                 custom=None, post=None, out_streams=None):
         """
-        install the package
+        Installs the package.
 
         @param      force_kind      overwrite self.kind
         @param      force           force the installation even if already installed
@@ -1005,12 +1024,19 @@ class ModuleInstall:
         ret = None
         custom = custom or self.custom
 
-        if kind == "pip":
+        if kind == "pip" or self.pipgit:
             if custom is not None:
                 raise NotImplementedError(
                     "custom must be None not '{0}' when kind is '{1}'".format(custom, kind))
             pp = get_pip_program()
-            cmd = pp + " install {0}".format(self.name)
+            if self.pipgit:
+                br = "@" + \
+                    self.branch if self.branch not in (None, "master") else ""
+                link = ModuleInstall.github_pattern_git.format(
+                    self.name, self.gitrepo, br)
+                cmd = pp + ' install git+' + link
+            else:
+                cmd = pp + " install {0}".format(self.name)
             if self.version is not None:
                 cmd += "=={0}".format(self.version)
             if len(options) > 0:
@@ -1161,7 +1187,7 @@ class ModuleInstall:
                 else:
                     ret = True
 
-        elif kind == "github":
+        elif kind == "github" and not self.pipgit:
             # the following code requires admin rights
             # if python_version()[0].startswith("win") and kind == "git" and not os.path.exists(ModuleInstall.gitexe) :
             #    raise FileNotFoundError("you need to install github first: see http://windows.github.com/")

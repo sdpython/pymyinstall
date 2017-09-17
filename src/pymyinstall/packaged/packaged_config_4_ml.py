@@ -135,7 +135,7 @@ def ensae_set():
         ModuleInstall(
             "NLopt", "wheel", mname="nlopt", purpose="linear, quadratic optimization",
             web="http://ab-initio.mit.edu/wiki/index.php/NLopt", usage="DATA/ML"),
-        ModuleInstall("Pmw", "pip", mname="Pmw",
+        ModuleInstall("Pmw", "pip",
                       purpose="Pmw is a toolkit for building high-level compound widgets in Python using the Tkinter module."),
         ModuleInstall(
             "pytool", "pip", purpose="A collection of tools for Python"),

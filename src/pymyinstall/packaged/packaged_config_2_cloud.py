@@ -91,6 +91,8 @@ def cloud_set():
             skip_import = True
         else:
             skip_import = False
+        if mname == name:
+            mname = None
         m = ModuleInstall(
             name, "pip", mname=mname, pip_options=["--pre"],
             purpose="Python wrapper for Azure API (HDInsight, Blog Storage)", usage="AZURE",

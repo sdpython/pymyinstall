@@ -27,7 +27,7 @@ def iot_set():
                       purpose="Library for Python 2 and 3 to communicate with the Google Chromecast."),
         ModuleInstall('python-xlib', 'pip', mname="Xlib",
                       purpose="Python X Library"),
-        ModuleInstall('pyHook', 'wheel', mname="pyHook",
+        ModuleInstall('pyHook', 'wheel',
                       purpose="Python wrapper for global input hooks in Windows. The package provides callbacks for mouse and keyboard events;" +
                       " events can be monitored and filtered."),
         ModuleInstall('pyuserinput', 'pip', mname="pykeyboard",

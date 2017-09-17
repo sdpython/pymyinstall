@@ -1,0 +1,14 @@
+
+.. blogpost::
+    :title: ete3 and pyqt5
+    :keywords: ete3, pyqt5, sip
+    :date: 2017-09-16
+    :categories: module
+
+    Module `ete3 <https://github.com/etetoolkit/ete/tree/master/ete3>`_
+    does not work with `PyQt5 <https://pypi.python.org/pypi/PyQt5>`_
+    which needs to be uninstalled with
+    `sip <https://pypi.python.org/pypi/SIP/>`_ otherwise
+    it is impossible to install
+    `ete3 <https://github.com/etetoolkit/ete/tree/master/ete3>`_
+    on Windows.

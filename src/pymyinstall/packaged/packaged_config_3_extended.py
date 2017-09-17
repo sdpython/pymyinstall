@@ -137,7 +137,7 @@ def extended_set():
         ModuleInstall('luigi', 'pip',
                       purpose="workflows, data workflows", usage="WORKFLOW"),
         #
-        ModuleInstall('setproctitle', 'wheel', mname='setproctitle',
+        ModuleInstall('setproctitle', 'wheel',
                       purpose="A Python module to customize the process title"),
         # thrift only works only for Python 2.7
         ModuleInstall(
@@ -186,7 +186,7 @@ def extended_set():
         #
         ModuleInstall(
             "ecdsa", "pip", purpose="ECDSA cryptographic signature library (pure python)"),
-        ModuleInstall("winrandom", "wheel", mname="winrandom",
+        ModuleInstall("winrandom", "wheel",
                       purpose="This module gives direct access to Windows Cryptographic API CryptGetRandom() function, " +
                       "which is cryptographically strong pseudo-random number generator (PRNG) on Windows:"),
         ModuleInstall("pycrypto", "wheel2", mname="Crypto",
@@ -216,7 +216,7 @@ def extended_set():
         #
         # 2015-02-05
         #
-        ModuleInstall("autopy3", "wheel", mname="autopy3",
+        ModuleInstall("autopy3", "wheel",
                       purpose="A simple, cross-platform GUI automation toolkit for Python 3 " +
                       "(issue on Linux and Anaconda)") if sys.version_info[0] >= 3 else None,  # simulate events
         # large double
@@ -249,9 +249,8 @@ def extended_set():
             "pygit2", "wheel", purpose="Pygit2 is a set of Python bindings to the libgit2 shared library, libgit2 implements the core of Git."),
         ModuleInstall(
             "pymongo", "wheel", purpose="Python wrapper for MongoDB", usage="NoSQL"),
-        ModuleInstall(
-            "psycopg2", "wheel", mname="psycopg2",
-            purpose="Python-PostgreSQL Database Adapter"),
+        ModuleInstall("psycopg2", "wheel",
+                      purpose="Python-PostgreSQL Database Adapter"),
         ModuleInstall(
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
@@ -358,13 +357,6 @@ def extended_set():
         #
         # July 2015
         #
-        # ModuleInstall("ete", "github", "jhcepas", mname="ete3",
-        #               web="http://etetoolkit.org/",
-        # purpose="tree visualisation", usage="VIZ"),  # graph visualization
-        ModuleInstall("ete3", "pip",
-                      web="http://etetoolkit.org/",
-                      purpose="tree visualisation", usage="VIZ"),  # graph visualization
-        # visualisation
         ModuleInstall(
             "pyexecjs", "pip", mname="execjs", purpose="Run JavaScript code from Python (for pyreact)", usage="NETWORK"),
         ModuleInstall("pyreact", "pip", mname="react",
@@ -500,7 +492,7 @@ def extended_set():
             "chardet", "pip", usage="WEB",
             purpose="Universal encoding detector."),
         # pdf
-        ModuleInstall("pyPdf", "github", "sdpython", usage="PDF",
+        ModuleInstall("pyPdf", "github", "sdpython", usage="PDF", pipgit=True,
                       branch="trunk", purpose="read PDF"),
         ModuleInstall("pdfrw", "pip", usage="PDF",
                       purpose="PDF file reader/writer library"),

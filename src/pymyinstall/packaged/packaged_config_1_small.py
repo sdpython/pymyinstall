@@ -47,7 +47,7 @@ def small_set():
         ModuleInstall("nose", "pip", purpose="run unit tests"),
         ModuleInstall(
             "pytz", "pip", purpose="World timezone definitions, modern and historical"),
-        ModuleInstall("pyreadline", "pip", mname="pyreadline",
+        ModuleInstall("pyreadline", "pip",
                       purpose="python implementation of GNU readline functionality"),
         ModuleInstall("husl", "pip", purpose="Python implementation of HUSL"),
         ModuleInstall(
@@ -114,7 +114,7 @@ def small_set():
         ModuleInstall(
             "alabaster", "pip", purpose="A configurable sidebar-enabled Sphinx theme", usage="SPHINX"),
         ModuleInstall("babel", "pip",  # version="1.3",
-                      mname="babel", purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
+                      purpose="Internationalization utilities, version 2.0 has bugs", usage="SPHINX"),
         ModuleInstall(
             "colorama", "pip", purpose="Cross-platform colored terminal text.", usage="SPHINX"),
         ModuleInstall(
@@ -170,8 +170,8 @@ def small_set():
         ModuleInstall(
             "pandas-datareader", "pip", mname="pandas_datareader",
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
-        ModuleInstall(
-            "netCDF4", "wheel", mname="netCDF4", purpose="xarray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
+        ModuleInstall("netCDF4", "wheel",
+                      purpose="xarray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
         ModuleInstall(
             "xarray", "pip", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
         ModuleInstall(
@@ -295,10 +295,12 @@ def small_set():
                       purpose="verifies decorators at running time"),
         ModuleInstall("requests-cache", "pip", mname="requests_cache",
                       purpose="Persistent cache for requests library"),
-        ModuleInstall("PyQt4", "wheel", mname="PyQt4", usage="GUI"),
+        ModuleInstall("PyQt4", "wheel", usage="GUI"),
         ModuleInstall("SIP", "pip", mname="sip",
                       usage="GUI", purpose="For PyQt5"),
-        ModuleInstall("PyQt5", "pip", mname="PyQt5", usage="GUI"),
+        ModuleInstall("ete3", "pip", "http://etetoolkit.org/", usage="VIZ",
+                      purpose="tree visualisation, ete3 does not work with PyQt5"),
+        ModuleInstall("PyQt5", "pip", usage="GUI"),
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
         ModuleInstall(

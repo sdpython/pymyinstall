@@ -32,9 +32,9 @@ def _build_reverse_index():
     mods = all_set()
     for m in mods:
         res[m.name] = m
-        if m.mname is not None:
+        if m.mname is not None and m.mname != m.name:
             res[m.mname] = m
-        if m.name.lower() != m.name:
+        if m.name.lower() not in (m.name, m.mname):
             res[m.name.lower()] = m
     return res
 
@@ -44,8 +44,10 @@ _reverse_module_index = _build_reverse_index()
 
 def find_module_install(name, must_exist=False):
     """
-    checks if there are specific instructions to run before installing module *name*,
-    on Windows, some modules requires compilation, if not uses default option with *pip*
+    Checks if there are specific instructions
+    to run before installing module *name*,
+    on Windows, some modules requires compilation,
+    if not uses default option with *pip*.
 
     @param      name        module name, the name can include a specific version number with '=='
     @param      must_exist  if True, raise an exception if not found
@@ -122,7 +124,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
                skip_module=None, schedule_only=False,
                source=None, download_only=False):
     """
-    update modules in *list_module*
+    Updates modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
     the function starts by updating pip.
 
@@ -248,7 +250,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
                 _memory=None, source=None, download_only=False,
                 force=False):
     """
-    install modules in *list_module*
+    Installs modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
     the function starts by updating pip.
 
@@ -426,8 +428,9 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
                         deep_deps=False, _memory=None, source=None,
                         download_only=False, force=False):
     """
-    install a module with its dependencies,
-    if a module is already installed, it installs the missing dependencies
+    Installs a module with its dependencies,
+    if a module is already installed, it installs
+    the missing dependencies.
 
     @param      module              module name
     @param      temp_folder         where to download
@@ -498,7 +501,7 @@ def install_module(module_name, temp_folder=".", fLOG=print, verbose=True,
                    _memory=None, source=None, download_only=False,
                    force=False):
     """
-    install a module
+    Installs a module.
 
     @param      module_name     module to install
     @param      temp_folder     temporary folder
@@ -532,7 +535,7 @@ def update_module(module_name, temp_folder=".", fLOG=print, verbose=True,
                   reorder=True, skip_module=None, schedule_only=False,
                   source=None):
     """
-    update modules in *list_module*
+    Update modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
     the function starts by updating pip.
 
