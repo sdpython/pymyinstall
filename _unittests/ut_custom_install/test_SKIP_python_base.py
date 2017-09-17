@@ -46,9 +46,9 @@ from pyquickhelper.loghelper import fLOG, CustomLog
 from pyquickhelper.pycode import get_temp_folder
 
 
-class TestDownloadPython (unittest.TestCase):
+class TestDownloadPythonBase(unittest.TestCase):
 
-    def test_install_python(self):
+    def test_install_python_base(self):
         fLOG(
             __file__,
             self._testMethodName,
