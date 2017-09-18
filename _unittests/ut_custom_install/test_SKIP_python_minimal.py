@@ -52,10 +52,10 @@ class TestDownloadPythonMinimal(unittest.TestCase):
         fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
-            __file__, "temp_python%s_minimal" % vers, clean=True)
+            __file__, "temp_py%s_minimal" % vers, clean=True, max_path=True)
 
         if sys.platform.startswith("win"):
-            fLOG("BEGIN")
+            fLOG("BEGIN in", temp)
             clog = CustomLog(temp)
             install_python(install=True, temp_folder=temp,
                            fLOG=clog, modules="minimal", custom=True, latest=True,

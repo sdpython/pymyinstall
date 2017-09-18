@@ -26,6 +26,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pyquickhelper jyquickhelper"
   - "%PYTHON%\\Scripts\\pip install ggplot version_information pivottablejs"
   - "%PYTHON%\\Scripts\\pip install spyder"
+  - "%PYTHON%\\Scripts\\pip install joblib"
 #  check the status of rodeo
 # - "%PYTHON%\\Scripts\\pip install rodeo"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"

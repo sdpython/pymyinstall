@@ -52,7 +52,7 @@ class TestDownloadPythonPyEnsae(unittest.TestCase):
         fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
-            __file__, "temp_python%s_pyensae" % vers, clean=False)
+            __file__, "temp_py%s_pyensae" % vers, clean=False, max_path=True)
 
         if sys.platform.startswith("win"):
             clog = CustomLog(temp)

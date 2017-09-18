@@ -56,7 +56,8 @@ class TestDownloadPythonBase(unittest.TestCase):
         fold = os.path.abspath(os.path.split(__file__)[0])
         vers = "%d%d" % sys.version_info[:2]
         temp = os.path.join(fold, "temp_python%s" % vers)
-        temp = get_temp_folder(__file__, "temp_python_base%s" % vers)
+        temp = get_temp_folder(__file__, "temp_py%s_base" %
+                               vers, max_path=True, clean=True)
 
         if sys.platform.startswith("win"):
             clog = CustomLog(temp)
