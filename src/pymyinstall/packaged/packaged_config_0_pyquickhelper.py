@@ -129,6 +129,7 @@ def pyquickhelper_set():
         "traitlets",
         "unify",
         "untokenize",
+        "urllib3",
         "virtualenv",
         "xlrd",
         "wcwidth",
