@@ -200,6 +200,10 @@ def small_set():
         ModuleInstall(
             "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
+            "parso", "pip", purpose="Parso is a Python parser that supports error recovery and " +
+            "round-trip parsing for different Python versions (in multiple Python versions). Parso " +
+            "is also able to list multiple syntax errors in your python file."),
+        ModuleInstall(
             "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
         ModuleInstall(
             "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),

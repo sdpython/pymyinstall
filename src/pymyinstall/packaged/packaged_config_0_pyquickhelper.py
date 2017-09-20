@@ -83,6 +83,7 @@ def pyquickhelper_set():
         "pandas",
         "pandoc-attributes",
         "pandocfilters",
+        "parso",
         "patsy",
         "pep8",
         "pexpect",  # if not sys.platform.startswith("win") else None,
