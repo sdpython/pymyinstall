@@ -57,7 +57,7 @@ class TestDownloadPythonDataScienstist (unittest.TestCase):
         vers = "%d%d" % sys.version_info[:2]
         temp = os.path.join(fold, "temp_python%s" % vers)
         temp = get_temp_folder(
-            __file__, "temp_pyds%s" % vers, max=path=True)
+            __file__, "temp_pyds%s" % vers, max_path=True)
 
         if sys.platform.startswith("win"):
             clog = CustomLog(temp)
