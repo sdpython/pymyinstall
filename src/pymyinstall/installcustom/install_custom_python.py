@@ -145,7 +145,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             _ for _ in lines if "UserWarning: Module pymyinstall was already imported" not in _]
         if len(lines2) < len(lines):
             lines2 = [
-                _ for _ in lines2 if "from pip._vendor import pkg_resources" not in lines2]
+                _ for _ in lines2 if "from pip._vendor import pkg_resources" not in _]
         return "\n".join(lines2)
 
     if version is None:
