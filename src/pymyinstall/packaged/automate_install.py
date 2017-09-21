@@ -136,7 +136,7 @@ def check_sys_path():
     for path in sys.path:
         if exp in path:
             raise FileShouldNotBeFound(
-                "'{0}' was found in sys.path:\n{1}".format(path, "\n".join(sys.path)))
+                "'{0}' was found in sys.path:\n{1}\n----\ncwd='{2}'\nexe='{3}'".format(path, "\n".join(sys.path), os.getcwd(), sys.executable))
 
 
 def update_all(temp_folder=".", fLOG=print, verbose=True,
