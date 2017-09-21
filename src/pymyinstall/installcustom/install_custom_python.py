@@ -138,6 +138,16 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
     .. versionmodified:: 1.1
         Add parameters *custom*, *latest*, *verbose*.
     """
+    def clean_err(err):
+        # remove a couple of warnings.
+        lines = err.split("\n")
+        lines2 = [
+            _ for _ in lines if "UserWarning: Module pymyinstall was already imported" not in _]
+        if len(lines2) < len(lines):
+            lines2 = [
+                _ for _ in lines2 if "from pip._vendor import pkg_resources" not in lines2]
+        return "\n".join(lines2)
+
     if version is None:
         version = "%s.%s.%s" % sys.version_info[:3]
     versioni = tuple([int(_) for _ in version.split(".")])
@@ -267,10 +277,12 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     fLOG("[install_python2] install modules")
                     out_, err_ = run_cmd(
                         cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=False)
-                    if len(err_) > 0:
+                    err__ = clean_err(err_)
+                    if len(err__) > 0:
                         mes = "[install_python2] end installed modules. Something went wrong:\n"
                         raise Exception(
-                            mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\n**CMD**\n{0}".format(cmd, out, err, out_, err_))
+                            mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\nERR2-Dc\n{5}\n**CMD**\n{0}".format(
+                                cmd, out, err, out_, err_, err__))
                     else:
                         out += ("\n-------------" * 5) + "\n" + out_
                     fLOG("[install_python2] end installed modules.")
