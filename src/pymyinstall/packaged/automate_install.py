@@ -133,6 +133,7 @@ def check_sys_path():
     not the case.
     """
     exp = "pymyinstall_ut_skip_pyquickhelper_%d%d_std" % sys.version_info[:2]
+    exp = os.path.join(exp, "src")
     for path in sys.path:
         if exp in path:
             raise FileShouldNotBeFound(
