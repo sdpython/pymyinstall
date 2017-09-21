@@ -119,6 +119,26 @@ def reorder_module_list(list_module):
     return res
 
 
+class FileShouldNotBeFound(Exception):
+    """
+    Raised by function @see fn check_sys_path.
+    """
+    pass
+
+
+def check_sys_path():
+    """
+    An issue is happening during unit test as pymyinstall
+    could be imported from two locations. We check this is
+    not the case.
+    """
+    exp = "pymyinstall_ut_skip_pyquickhelper_%d%d_std" % sys.version_info[:2]
+    for path in sys.path:
+        if exp in path:
+            raise FileShouldNotBeFound(
+                "'{0}' was found in sys.path:\n{1}".format(path, "\n".join(sys.path)))
+
+
 def update_all(temp_folder=".", fLOG=print, verbose=True,
                list_module=None, reorder=True,
                skip_module=None, schedule_only=False,
@@ -148,6 +168,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         It can be due to python keeping in memory an updated module.
         Parameters *source*, *download_only* were added.
     """
+    check_sys_path()
     if not os.path.exists(temp_folder):
         os.makedirs(temp_folder)
     if not has_pip():
@@ -171,6 +192,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
             mod, str) else mod for mod in list_module]
 
     list_module = [_ for _ in list_module if _.name not in skip_module]
+    check_sys_path()
 
     if reorder:
         list_module = reorder_module_list(list_module)
@@ -186,6 +208,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     errors = []
     schedule = []
     for mod in modules:
+        check_sys_path()
         is_installed = mod.is_installed_version()
         if not is_installed:
             continue
@@ -286,6 +309,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
 
     .. versionadded:: 1.1
     """
+    check_sys_path()
     fLOG("[install_all] begin, exe:", sys.executable)
     if _memory is None:
         _memory = {}
@@ -313,6 +337,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             mod, str) else mod for mod in list_module]
 
     list_module = [_ for _ in list_module if _.name not in skip_module]
+    check_sys_path()
 
     if reorder:
         list_module = reorder_module_list(list_module)
@@ -329,6 +354,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
     schedule = []
     out_streams_module = {}
     for mod in modules:
+        check_sys_path()
         if mod.name in _memory:
             # already done
             continue
@@ -450,6 +476,7 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
 
     .. versionadded:: 1.1
     """
+    check_sys_path()
     if _memory is None:
         _memory = {}
     deps = deps or deep_deps
@@ -466,6 +493,7 @@ def install_module_deps(name, temp_folder=".", fLOG=print, verbose=True, deps=Tr
 
     stack = [name]
     while len(stack) > 0:
+        check_sys_path()
         name = stack[-1]
         del stack[-1]
         if name in _memory:
@@ -535,7 +563,7 @@ def update_module(module_name, temp_folder=".", fLOG=print, verbose=True,
                   reorder=True, skip_module=None, schedule_only=False,
                   source=None):
     """
-    Update modules in *list_module*
+    Updates modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
     the function starts by updating pip.
 
@@ -560,7 +588,7 @@ def download_module(module_name,
                     unzipFile=True, file_save=None, deps=False,
                     source=None, fLOG=print):
     """
-    download the module without installation
+    Downloads the module without installation.
 
     @param      temp_folder     destination
     @param      force           force the installation even if already installed
