@@ -44,6 +44,7 @@ except ImportError:
 from src.pymyinstall.installcustom import install_python
 from pyquickhelper.loghelper import fLOG, CustomLog
 from pyquickhelper.pycode import get_temp_folder
+from src.pymyinstall.packaged.packaged_config import datascientistbase_set
 
 
 class TestDownloadPythonDataScienstist (unittest.TestCase):
@@ -53,6 +54,10 @@ class TestDownloadPythonDataScienstist (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+
+        res = datascientistbase_set()
+        self.assertTrue(res is not None)
+
         fold = os.path.abspath(os.path.split(__file__)[0])
         vers = "%d%d" % sys.version_info[:2]
         temp = os.path.join(fold, "temp_python%s" % vers)

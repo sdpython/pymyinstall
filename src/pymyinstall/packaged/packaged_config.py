@@ -19,7 +19,7 @@ from .packaged_config_A_orange import orange_set
 from .packaged_config_B_iot import iot_set
 from .packaged_config_C_webscraping import scraping_set
 from .packaged_config_all_but_teachings import all_but_teachings_set
-from .packaged_config_Z import datascientistbase_set
+from .packaged_config_Z_datascientist import datascientistbase_set
 
 
 def ensae_fullset():
