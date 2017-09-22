@@ -53,6 +53,9 @@ class TestDownloadPythonMinimal(unittest.TestCase):
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
             __file__, "temp_py%s_minimal" % vers, clean=True, max_path=True)
+        down = get_temp_folder(
+            __file__, "temp_py%s_minimal_download" % vers, clean=True, max_path=True)
+        self.assertEqual(len(os.listdir(down)), 0)
 
         if sys.platform.startswith("win"):
             fLOG("BEGIN in", temp)

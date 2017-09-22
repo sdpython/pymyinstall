@@ -63,6 +63,8 @@ def datascientistbase_set():
         "wheel",
         "winshell" if sys.platform.startswith("win") else None,
     ]
+    from .automate_install import find_module_install
+    names = [find_module_install(_) for _ in names if _ is not None]
 
     check_is = ["smart_open", "cycler", "olefile",
                 "toolz", "s3transfer", "jmespath", "botocore"]
@@ -71,6 +73,4 @@ def datascientistbase_set():
         if check not in names_:
             raise ImportError("Unable to find module '{0}' in\n{1}".format(
                 check, "\n".join(sorted(names_))))
-
-    from .automate_install import find_module_install
-    return [find_module_install(_) for _ in names if _ is not None]
+    return names

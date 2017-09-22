@@ -127,13 +127,22 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
     @param      version         version to download (by default the current version of Python)
     @param      modules         modules to install
     @param      custom          the standalone distribution has issue when installing new packages,
-                                custom is True means switching to a zip of the standard distribution
+                                custom is True means switching to a zip of the standard distribution,
+                                see below
     @param      latest          install this version of pymyinstall and not the pypi version
     @param      download        download folder
     @param      verbose         more display
     @return                     temporary file
 
     The version is fixed to the current version of Python and amd64.
+    The standalone distribution has an issue and raises an error for some
+    packages such as `smart_open <https://pypi.python.org/pypi/smart_open>`_:
+
+    ::
+
+        error: [Errno 2] No such file or directory: '<python>\\python36.zip\\lib2to3\\Grammar.txt'
+
+    In that case, you should consider using ``custom=True``.
 
     .. versionmodified:: 1.1
         Add parameters *custom*, *latest*, *verbose*.

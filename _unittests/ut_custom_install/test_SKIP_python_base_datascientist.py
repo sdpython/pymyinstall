@@ -57,16 +57,21 @@ class TestDownloadPythonDataScienstist (unittest.TestCase):
 
         res = datascientistbase_set()
         self.assertTrue(res is not None)
+        if not any(filter(lambda m: m.name == "toolz", res)):
+            raise ImportError("toolz not found.")
 
         fold = os.path.abspath(os.path.split(__file__)[0])
         vers = "%d%d" % sys.version_info[:2]
         temp = os.path.join(fold, "temp_python%s" % vers)
         temp = get_temp_folder(
             __file__, "temp_pyds%s" % vers, max_path=True)
+        down = get_temp_folder(
+            __file__, "temp_pyds%s_download" % vers, clean=True, max_path=True)
+        self.assertEqual(len(os.listdir(down)), 0)
 
         if sys.platform.startswith("win"):
             clog = CustomLog(temp)
-            install_python(install=True, temp_folder=temp, fLOG=clog,
+            install_python(install=True, temp_folder=temp, fLOG=clog, custom=True,
                            download_folder=temp + "_download", modules="datascientistbase")
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")

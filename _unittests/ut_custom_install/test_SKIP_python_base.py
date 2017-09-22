@@ -53,11 +53,12 @@ class TestDownloadPythonBase(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        fold = os.path.abspath(os.path.split(__file__)[0])
         vers = "%d%d" % sys.version_info[:2]
-        temp = os.path.join(fold, "temp_python%s" % vers)
         temp = get_temp_folder(__file__, "temp_py%s_base" %
                                vers, max_path=True, clean=True)
+        down = get_temp_folder(
+            __file__, "temp_py%s_base_download" % vers, clean=True, max_path=True)
+        self.assertEqual(len(os.listdir(down)), 0)
 
         if sys.platform.startswith("win"):
             clog = CustomLog(temp)
