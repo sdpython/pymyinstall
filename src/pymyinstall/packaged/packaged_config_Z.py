@@ -10,7 +10,9 @@ def datascientistbase_set():
     """
     list of modules to add to python to get a minimal python
     """
-    names = [
+    from .packaged_config_0_pyquickhelper import pyquickhelper_set
+    names = pyquickhelper_set()
+    names += [
         "appdir",
         "autopep8",
         "boto",
