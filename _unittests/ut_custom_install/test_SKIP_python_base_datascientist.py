@@ -50,6 +50,10 @@ from src.pymyinstall.packaged.packaged_config import datascientistbase_set
 class TestDownloadPythonDataScienstist (unittest.TestCase):
 
     def test_install_python_data_scientist(self):
+        """
+        This test is using pymyinstall from pypi not the latest version
+        of the sources.
+        """
         fLOG(
             __file__,
             self._testMethodName,
