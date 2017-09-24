@@ -79,7 +79,7 @@ def win_patch_paths(folder, path_to_python="", fLOG=print):
                 new_content = breg_exe.sub(
                     b1 + bg_path_to_python + b2, content)
                 if new_content != content:
-                    fLOG("[pymy] update ", full)
+                    fLOG("[win_patch_paths] update ", full)
                     operations.append(("update", full))
                     try:
                         with open(full, "wb") as f:
