@@ -667,6 +667,9 @@ def extended_set():
                       "combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling, " +
                       "with a compression ratio comparable to the best currently available general-purpose compression methods. " +
                       "It is similar in speed with deflate but offers more dense compression."),
+        ModuleInstall('fast-histogram', 'wheel2', mname="fast_histogram",
+                      purpose="Mizani is a scales package for graphics. It is written in Python and is " +
+                      "based on Hadley Wickham's Scales."),
         ModuleInstall('mizani', 'pip',
                       purpose="Mizani is a scales package for graphics. It is written in Python and is " +
                       "based on Hadley Wickham's Scales."),
