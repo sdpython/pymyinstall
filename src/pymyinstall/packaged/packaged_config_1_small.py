@@ -163,6 +163,8 @@ def small_set():
         ModuleInstall("pathlib2", "pip",
                       purpose="for ggplot, Object-oriented filesystem paths"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
+        ModuleInstall("plotnine", "pip",
+                      purpose="A grammar of graphics for Python"),
         ModuleInstall(
             "requests-file", "pip", mname="requests_file", purpose="File transport adapter for Requests"),
         ModuleInstall(
@@ -221,6 +223,8 @@ def small_set():
             "nbconvert", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "jupyter_sphinx", "pip", purpose="Jupyter Sphinx Extensions", usage="JUPYTER"),
+        ModuleInstall(
+            "ipympl", "pip", purpose="Matplotlib Jupyter Extension", usage="JUPYTER"),
         ModuleInstall(
             "nbsphinx", "pip", purpose="nbsphinx is a Sphinx extension that provides a source parser for *.ipynb files.", usage="JUPYTER"),
         ModuleInstall("PyPDF2", "pip", purpose="PDF toolkit", usage="PDF"),

@@ -39,6 +39,7 @@ def pyquickhelper_set():
         "imagesize",
         "ipython",
         "ipykernel",
+        "ipympl",
         "ipystata" if sys.version_info[0] == 2 else None,
         "ipython_genutils",
         "ipywidgets",

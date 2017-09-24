@@ -194,7 +194,7 @@ def ensae_set():
         #
         # ModuleInstall("contextlib2", "pip", purpose="Backports and enhancements for the contextlib module"),
         ModuleInstall(
-            "nuitka", "pip", purpose="C++ compilation, code optimization"),
+            "nuitka", "pip", usage="C++", purpose="C++ compilation, code optimization"),
         # ModuleInstall("tri", "pip", purpose="Delaunay triangulation"), # only
         # works on Python 2.7
         ModuleInstall(

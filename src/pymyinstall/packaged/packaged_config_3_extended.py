@@ -66,7 +66,7 @@ def extended_set():
         # ModuleInstall('flasksphinx', 'pip', purpose="serves Sphinx
         # documentation through a Flask server"), # issue with Python 3
         ModuleInstall(
-            'cffi', 'wheel', purpose="Foreign Function Interface for Python calling C code."),
+            'cffi', 'wheel', usage="C++", purpose="Foreign Function Interface for Python calling C code."),
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
         ModuleInstall(
@@ -96,8 +96,8 @@ def extended_set():
             "avoids doing everything in memory, handle better large datasets, check " +
             "issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll",
             usage="DATA/ML"),
-        ModuleInstall(
-            'numba', 'wheel', purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
+        ModuleInstall('numba', 'wheel', usage="C++",
+                      purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
         ModuleInstall('scikit-image', 'wheel', mname='skimage',
                       purpose="scikit-image is a collection of algorithms for image processing."),
         ModuleInstall(
@@ -290,6 +290,8 @@ def extended_set():
             "h5py", "wheel", purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. Trillion-Particle Simulation.", usage="DATA/ML"),
         ModuleInstall("keras", "pip", purpose="deep learning",
                       usage="DATA/ML"),
+        ModuleInstall("keras-vis", "pip", mname="vis", usage="DATA/ML",
+                      purpose="keras-vis is a high-level toolkit for visualizing and debugging your trained keras neural net models."),
         # Bayesian
         ModuleInstall(
             "bayespy", "pip", purpose="bayesian modelling and computation", usage="DATA/ML"),
@@ -657,6 +659,30 @@ def extended_set():
                       "Currently supported are plain text, reStructuredText and HTML. Other formats can be added easily."),
         ModuleInstall('duecredit', 'pip',
                       purpose="Publications (and donations) tracer"),
+        #
+        # September 2017
+        #
+        ModuleInstall('brotli', 'wheel',
+                      purpose="Brotli is a generic-purpose lossless compression algorithm that compresses data using a " +
+                      "combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling, " +
+                      "with a compression ratio comparable to the best currently available general-purpose compression methods. " +
+                      "It is similar in speed with deflate but offers more dense compression."),
+        ModuleInstall('mizani', 'pip',
+                      purpose="Mizani is a scales package for graphics. It is written in Python and is " +
+                      "based on Hadley Wickham's Scales."),
+        ModuleInstall('mpl-scatter-density', 'pip', mname="mpl_scatter_density",
+                      purpose="Matplotlib helpers to make density scatter plots"),
+        ModuleInstall('pybind11', 'pip', usage="C++",
+                      purpose="pybind11 is a lightweight header-only library that exposes C++ types in Python and vice versa, " +
+                      "mainly to create Python bindings of existing C++ code."),
+        ModuleInstall('typed_ast', 'pip',
+                      purpose="typed_ast is a Python 3 package that provides a Python 2.7 and Python 3 parser " +
+                      "similar to the standard ast library."),
+        ModuleInstall('mypy', 'pip',
+                      purpose="Mypy is an experimental optional static type checker for Python that aims to combine the benefits of " +
+                      "dynamic (or 'duck') typing and static typing."),
+        ModuleInstall('pypandoc', 'pip',
+                      purpose="Pypandoc provides a thin wrapper for pandoc, a universal document converter."),
     ]
 
     if sys.platform.startswith("win"):
