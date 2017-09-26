@@ -274,6 +274,11 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                         "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-C\n{2}".format(cmd, out, err_keep))
                 fLOG(out)
 
+                fLOG("[install_python] add python to PATH='{0}'".format(pyexe))
+                path = os.environ['PATH']
+                path = ";".join([pyexe, path])
+                os.environ['PATH'] = path
+
                 fLOG("[install_python] install modules")
                 cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\', ' +
                        'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe,
