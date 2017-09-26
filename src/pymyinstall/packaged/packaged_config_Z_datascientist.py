@@ -19,6 +19,7 @@ def datascientistbase_set():
         "boto",
         "botocore",
         "boto3",
+        "bz2file",
         "certifi",
         "chardet",
         "cchardet"
