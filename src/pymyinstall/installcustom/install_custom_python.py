@@ -275,7 +275,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 fLOG(out)
 
                 dirpyexe = os.path.dirname(pyexe)
-                fLOG("[install_python] add python to PATH='{0}'".format(dirpyexe))
+                fLOG(
+                    "[install_python] add python to PATH='{0}'".format(dirpyexe))
                 path = os.environ['PATH']
                 path = ";".join([dirpyexe, path])
                 os.environ['PATH'] = path
