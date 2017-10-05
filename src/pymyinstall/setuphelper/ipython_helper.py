@@ -44,11 +44,10 @@ def setup_ipython(current_path=None,
     If you need to create a shortcut with the appropriate paths, you can use the following instructions
     to open Jupyter notebook on a specific folder:
 
-    @code
-    set path=%path%;c:\\Python34;c:\\Python34\\Scripts
-    jupyter-notebook --notebook-dir=_doc\\notebooks
-    @endcode
+    ::
 
+        set path=%path%;c:\\Python34;c:\\Python34\\Scripts
+        jupyter-notebook --notebook-dir=_doc\\notebooks
     """
     raise NotImplementedError("not implemented for jupyter 4.0")
     if sys.platform.startswith("win"):

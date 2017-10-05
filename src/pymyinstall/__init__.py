@@ -1,16 +1,38 @@
 #-*- coding: utf-8 -*-
 """
-Documentation for this file.
-
+*pymyinstall* installs package on Windows and Linux.
+It automatically chooses a location for a
+:ref:`long list of package <l-ensae_fullset-table>`.
 To install a list of modules for a machine learner:
-@code
-from pymyinstall import complete_installation, install_scite, install_pandoc, open_tool_on_browser
-for _ in complete_installation() :
-    _.install(temp_folder="install")
-install_scite("install")
-install_pandoc("install")
-open_tool_on_browser()
-@endcode
+
+::
+
+    from pymyinstall import complete_installation, install_scite, install_pandoc, open_tool_on_browser
+    for _ in complete_installation():
+        _.install(temp_folder="install")
+
+You can also install some useful tools:
+
+::
+
+    from pymyinstall import install_scite, install_pandoc
+
+    install_scite("install")
+    install_pandoc("install")
+
+To download a module:
+
+::
+
+    from pymyinstall import download_module
+    download_module("module_name")
+
+To install a module:
+
+::
+
+    from pymyinstall import install_module
+    install_module("module_name")
 """
 from .installhelper.install_cmd_helper import run_cmd, unzip_files
 from .installhelper.module_install import ModuleInstall

@@ -87,7 +87,9 @@ Both scripts can be used to install a subset of modules::
     pymy_install3 --set=minimum
 
 Modules sets are described at :ref:`l-name-set-table`. Corresponding
-functions exist::
+functions exist:
+
+::
 
     from pymyinstall import download_module, install_module, update_module
     download_module("numpy")
@@ -101,14 +103,15 @@ The module also includes a function
 :func:`win_python_setup <pymyinstall.win_installer.win_setup_main.win_python_setup>`
 which creates a setup with Python and R which modules and packages for a datascientist.
 This function gives extra informations about module difficult to install
-such as `theano <http://deeplearning.net/software/theano/>`_.
+such as `theano <http://deeplearning.net/software/theano/>`_ which
+will disappear in 2018.
 
 Source of the packages
 ----------------------
 
 * `PyPI <https://pypi.python.org/pypi>`_: pure python packages
 * `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_: packages with C++
-* `xavierdupre.fr <http://www.xavierdupre.fr/>`_: custom build (xgboost, ...)
+* `xavierdupre.fr <http://www.xavierdupre.fr/>`_: custom build (dlib, ...)
 
 Installation
 ------------
