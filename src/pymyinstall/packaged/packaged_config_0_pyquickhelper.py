@@ -120,6 +120,7 @@ def pyquickhelper_set():
         'sphinxcontrib-images',
         'sphinxcontrib-imagesvg',
         'sphinxcontrib-jsdemo',
+        'sphinxcontrib.youtube',
         'snowballstemmer',
         'sphinx-rtd-theme',
         "sphinxjp.themes.revealjs",
