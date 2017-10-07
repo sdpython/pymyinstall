@@ -12,7 +12,7 @@
     `PyTorch <http://pytorch.org/>`_,
     `cupy <https://docs-cupy.chainer.org/en/stable/>`_,
     `pycuda <https://documen.tician.de/pycuda/>`_,
-    `pyopnecl <https://documen.tician.de/pyopencl/>`_,
+    `pyopencl <https://documen.tician.de/pyopencl/>`_,
     `cudamat <https://github.com/cudamat/cudamat>`_ (old),
     `libgpuarray <http://deeplearning.net/software/libgpuarray/index.html>`_...
     `bob.kaldi <http://pythonhosted.org/bob.kaldi/guide.html>`_
