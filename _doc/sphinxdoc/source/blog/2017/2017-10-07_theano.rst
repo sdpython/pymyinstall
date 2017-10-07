@@ -1,0 +1,21 @@
+
+.. blogpost::
+    :title: Last release of Theano.
+    :keywords: theano
+    :date: 2017-10-07
+    :categories: module
+
+    `Theano development will be stopped after the 1.0 release <https://groups.google.com/forum/#!msg/theano-users/7Poq8BZutbY/rNCIfvAEAwAJ>`_.
+    Other framworks and modules will have to be used,
+    `CNTK <https://github.com/Microsoft/CNTK>`_,
+    `TensorFlow <https://www.tensorflow.org/>`_,
+    `PyTorch <http://pytorch.org/>`_,
+    `cupy <https://docs-cupy.chainer.org/en/stable/>`_,
+    `pycuda <https://documen.tician.de/pycuda/>`_,
+    `pyopnecl <https://documen.tician.de/pyopencl/>`_,
+    `cudamat <https://github.com/cudamat/cudamat>`_ (old),
+    `libgpuarray <http://deeplearning.net/software/libgpuarray/index.html>`_...
+    `bob.kaldi <http://pythonhosted.org/bob.kaldi/guide.html>`_
+    also contains code GPU computation but does not expose it
+    (`cudamatrix <https://github.com/kaldi-asr/kaldi/tree/master/src/cudamatrix>`_).
+    `pyviennacl <https://github.com/viennacl/pyviennacl-dev>`_ seems a bit old.

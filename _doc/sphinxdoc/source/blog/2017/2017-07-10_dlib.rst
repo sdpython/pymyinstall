@@ -19,7 +19,7 @@
         conda install -c conda-forge dlib=19.4
 
     It seems easier to do it on Ubuntu
-    ` <http://www.learnopencv.com/install-dlib-on-ubuntu/>`_.
+    `Install dlib on Ubuntu <http://www.learnopencv.com/install-dlib-on-ubuntu/>`_.
     As I was still trying to go on with the compilation, I discovered this tool
     `vcpkg <https://blogs.msdn.microsoft.com/vcblog/2016/09/19/vcpkg-a-tool-to-acquire-and-build-c-open-source-libraries-on-windows/>`_
     which helps installing C++ packages on Windows.
