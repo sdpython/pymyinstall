@@ -686,6 +686,8 @@ def extended_set():
                       "dynamic (or 'duck') typing and static typing."),
         ModuleInstall('pypandoc', 'pip',
                       purpose="Pypandoc provides a thin wrapper for pandoc, a universal document converter."),
+        ModuleInstall('pocket', 'pip',
+                      purpose="Access to pocket API."),
     ]
 
     if sys.platform.startswith("win"):
