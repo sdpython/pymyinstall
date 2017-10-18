@@ -14,60 +14,33 @@ def datascientistbase_set():
     from ..installhelper import ModuleInstall
     names = pyquickhelper_set()
     names += [
-        "appdir",
-        "autopep8",
+        "appdirs",
         "boto",
         "botocore",
         "boto3",
         "bz2file",
-        "certifi",
         "chardet",
         "cchardet"
-        "cycler",
-        "cython",
         "cytoolz",
         "dask",
-        "flake8",
         "gensim",
         "idna",
         "jmespath",
-        'markupsafe',
-        "matplotlib",
-        "mccabe",
-        "numpy",
-        "olefile",
-        "openpyxl",
         "packaging",
-        "pandas",
-        "pep8",
-        "pillow",
-        "pipdeptree",
-        "psutil",
-        "pyflakes",
-        "pycodestyle",
-        "pyparsing",
         "pythonnet" if sys.platform.startswith("win") else None,
-        "python-dateutil",
-        "pytz",
         "pywin32" if sys.platform.startswith("win") else None,
         "pywin32-ctypes" if sys.platform.startswith("win") else None,
-        "requests",
         "s3transfer",
         "scikit-learn",
         "scipy",
         "smart_open",
-        "six",
         "statsmodels",
         "toolz",
-        "urllib3",
-        "virtualenv",
-        "wheel",
-        "winshell" if sys.platform.startswith("win") else None,
     ]
     from .automate_install import find_module_install
     names = [find_module_install(_) for _ in names if _ is not None]
 
-    check_is = ["smart_open", "cycler", "olefile",
+    check_is = ["smart_open", "cycler", "olefile", "smart-open",
                 "toolz", "s3transfer", "jmespath", "botocore"]
     names_ = set(_.name if isinstance(_, ModuleInstall) else _ for _ in names)
     for check in check_is:

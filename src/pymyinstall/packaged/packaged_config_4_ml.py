@@ -104,7 +104,9 @@ def ensae_set():
         ModuleInstall(
             "opencv_python", "wheel", mname="cv2", purpose="OpenVC wrapper",
             web="https://opencv-python-tutroals.readthedocs.org/en/latest/"),
-        ModuleInstall("dlib", "wheel", source="2", usage="ML",
+        ModuleInstall("dlib", "pip" if sys.version_info[:2] >= (3, 6) else "wheel",
+                      source="2" if sys.version_info[:2] >= (3, 6) else None,
+                      usage="ML",
                       purpose="A toolkit for making real world machine learning and data analysis applications"),
         ModuleInstall("PyAudio", "wheel", mname="pyaudio",
                       purpose="PyAudio provides Python bindings for PortAudio v19, the cross-platform audio I/O library. " +

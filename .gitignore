@@ -276,3 +276,4 @@ src/.vscode/settings.json
 /whl/windows/bottlechest
 /whl/windows/boost
 /whl/windows/dlib
+src/pymyinstall/.vscode/settings.json
