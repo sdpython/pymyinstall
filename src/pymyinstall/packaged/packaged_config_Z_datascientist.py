@@ -40,7 +40,7 @@ def datascientistbase_set():
     from .automate_install import find_module_install
     names = [find_module_install(_) for _ in names if _ is not None]
 
-    check_is = ["smart_open", "cycler", "olefile", "smart-open",
+    check_is = ["smart_open", "cycler", "olefile",
                 "toolz", "s3transfer", "jmespath", "botocore"]
     names_ = set(_.name if isinstance(_, ModuleInstall) else _ for _ in names)
     for check in check_is:
