@@ -1,0 +1,14 @@
+
+.. blogpost::
+    :title: Last release of basemap.
+    :keywords: basemap
+    :date: 2017-10-26
+    :categories: module
+
+    `basemap <https://matplotlib.org/basemap/>`_
+    is discontinued and
+    should be replaced by
+    `cartopy <http://scitools.org.uk/cartopy/>`_.
+    I wonder how long it will take me to replace
+    that dependency by the new one in all the notebooks
+    using it.

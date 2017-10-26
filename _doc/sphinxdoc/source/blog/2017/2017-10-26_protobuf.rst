@@ -1,0 +1,12 @@
+
+.. blogpost::
+    :title: build protobuf on windows
+    :keywords: protobuf
+    :date: 2017-10-26
+    :categories: module
+
+    The page `Environment Setup <https://github.com/google/protobuf/blob/master/cmake/README.md>`_
+    explains how to build
+    `protobuf <https://github.com/google/protobuf>`_.
+    don't follow it, just follow the instructions
+    in `appveyor.yml <https://github.com/google/protobuf/blob/master/appveyor.yml>`_.
