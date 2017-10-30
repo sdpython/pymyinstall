@@ -354,7 +354,10 @@ def small_set():
             'werkzeug', 'pip', purpose="The Swiss Army knife of Python web development"),
         ModuleInstall('itsdangerous', 'pip',
                       purpose="Various helpers to pass trusted data to untrusted environments and back."),
-        ModuleInstall('simplejson', 'wheel', purpose="json parser"),
+        ModuleInstall('simplejson', 'wheel',
+                      purpose="Simple, fast, extensible JSON encoder/decoder for Python"),
+        ModuleInstall(
+            'ijson', 'pip', purpose="Iterative JSON parser with a standard Python iterator interface"),
         ModuleInstall("click", "pip",
                       purpose="A simple wrapper around optparse for powerful command line utilities."),
         ModuleInstall('flask', 'pip', usage="NETWORK",

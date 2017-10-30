@@ -76,6 +76,7 @@ def pyensae_set():
         "elasticsearch",
         "folium",  # maps
         "idna",
+        "ijson",
         "inflection",  # quandl
         "ipaddress",
         "ipykernel",
