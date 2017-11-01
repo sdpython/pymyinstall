@@ -5,6 +5,7 @@
 """
 
 import sys
+from ssl import SSLEOFError
 from .install_memoize import install_memoize
 from .internet_settings import default_user_agent
 
@@ -15,6 +16,7 @@ if sys.version_info[0] == 2:
 else:
     import urllib.request as urllib_request
     from html.parser import HTMLParser
+    from urllib.error import URLError
 
 
 class InternalJsException(Exception):
@@ -25,42 +27,43 @@ class InternalJsException(Exception):
 
 
 @install_memoize
-def get_page_wheel(page, sele=False):
+def get_page_wheel(page, sele=True):
     """
     get the page
 
     @param      page        location
-    @param      sele        use selenium or not or False to try
+    @param      sele        use selenium or not or False to try if the other way did not work
     @return                 page content
     """
-    if sele is None or sele:
-        try:
-            import selenium
-            sele = True
-        except ImportError:
-            sele = False
-    else:
-        sele = False
+    req = urllib_request.Request(
+        page,
+        headers={
+            'User-agent': default_user_agent})
+    ull = False
+    try:
+        u = urllib_request.urlopen(req)
+        ull = True
+    except (SSLEOFError, URLError) as ee:
+        # This usually happens on Windows.
+        # ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:749)
+        if sele:
+            from ..installcustom.install_custom_chromedriver import install_chromedriver
+            import selenium.webdriver
+            install_chromedriver(fLOG=None)
+            browser = selenium.webdriver.Chrome()
+            browser.get(page)
+            text = browser.page_source
+            browser.close()
+            if len(text) < 1000:
+                raise ValueError(
+                    "Unable to retrieve information from '{0}' with selenium len={1}".format(page, len(text)))
+        else:
+            raise ee
+    except Exception as e:
+        raise Exception(
+            "unable to get '{0}' '{1}'".format(page, type(e))) from e
 
-    if sele:
-        import selenium.webdriver
-        browser = selenium.webdriver.Firefox()
-        browser.get(page)
-        text = browser.page_source
-        browser.close()
-        regular = len(text) < 100000
-    else:
-        regular = True
-
-    if regular:
-        req = urllib_request.Request(
-            page,
-            headers={
-                'User-agent': default_user_agent})
-        try:
-            u = urllib_request.urlopen(req)
-        except Exception as e:
-            raise Exception("unable to get '{0}'".format(page)) from e
+    if ull:
         text = u.read()
         u.close()
         text = text.decode("utf8")
@@ -192,9 +195,15 @@ class HTMLParser4Links(HTMLParser):
         """
         ends of a tag
         """
+        def clean_dashes(st):
+            b = st.encode('utf-8')
+            b = b.replace(b'\xe2\x80\x91', b'-')
+            b = b.replace(b'\xc2\xa0', b' ')
+            return b.decode('utf-8')
         if tag == "a":
             if self.current is not None and len(self.current) > 0:
-                app = (self.current, self.attrs)
+                app = (clean_dashes(self.current),
+                       [(clean_dashes(name), clean_dashes(link)) for name, link in self.attrs])
                 self.links.append(app)
             self.current = None
 
@@ -220,7 +229,7 @@ def extract_all_links(text):
 
 def enumerate_links_module(name, alls, version, plat):
     """
-    selects the links for a specific module
+    Selects the links for a specific module.
 
     @param      name        module name
     @param      alls        all links from @see fn extract_all_links
@@ -253,7 +262,7 @@ def enumerate_links_module(name, alls, version, plat):
         if js:
             js0 = js
             suf = '"javascript:dl("'
-            bs = ["javascript:", "javascript :"]
+            bs = ["javascript:", "javascript :", "javascript  :"]
             res = None
             for b in bs:
                 if js.startswith(b):
@@ -262,9 +271,9 @@ def enumerate_links_module(name, alls, version, plat):
                         js = js[:-len(suf) - 2]
                     if "javascript:" in js:
                         # Addition: 207-08-24
-                        js = js[:js.index('"javascript:')]
-                    js = js.strip('" \t ;')
+                        js = js[:js.index('javascript:')]
                     dl = _cg_dl
+                    js = js.strip('" \t ;\'')
                     if dl is not None:
                         try:
                             res = eval(js)

@@ -50,7 +50,8 @@ def unzip_files(zipf, whereTo, fLOG=print):
                         u.write(data)
                         u.close()
                         files.append(tos)
-                        fLOG("    unzipped ", info.filename, " to ", tos)
+                        if fLOG:
+                            fLOG("    unzipped ", info.filename, " to ", tos)
                 elif not tos.endswith("/"):
                     files.append(tos)
             elif not info.filename.endswith("/"):
