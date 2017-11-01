@@ -18,5 +18,6 @@
         :showcode:
         :rst:
 
+        from textwrap import dedent
         from pymyinstall.fix import fix_scipy10_for_statsmodels08
-        print(fix_scipy10_for_statsmodels08.__docstring__)
+        print(dedent(fix_scipy10_for_statsmodels08.__doc__))
