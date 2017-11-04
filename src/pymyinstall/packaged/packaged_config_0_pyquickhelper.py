@@ -29,6 +29,7 @@ def pyquickhelper_set():
         "docutils",
         "entrypoints",
         "et_xmlfile",
+        "filelock",
         "flake8",
         "funcparserlib",
         "git-pandas",

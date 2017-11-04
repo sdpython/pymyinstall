@@ -1,0 +1,25 @@
+
+.. blogpost::
+    :title: A few interesting modules
+    :keywords: scapy
+    :date: 2017-11-04
+    :categories: module
+
+    * `GPAW <https://gitlab.com/gpaw/gpaw>`_ :
+      GPAW is a density-functional theory (DFT) Python code based on the
+      projector-augmented wave (PAW) method and the atomic simulation environment
+      (ASE). It uses plane-waves, atom-centered basis-functions or real-space
+      uniform grids combined with multigrid methods.
+    * `mypy <http://mypy-lang.org/>`_ : an experimental optional
+      static type checker for Python that aims to combine the benefits
+      of dynamic (or "duck") typing and static typing.
+    * `scapy <http://scapy.readthedocs.io/en/latest/index.html>`_ :
+      netowrks, IP, protocols
+    * `sympy-live <https://github.com/sympy/sympy-live>`_ :
+      web server to run custom examples
+    * `wooey <https://github.com/wooey/wooey>`_ :
+      website to execute :epkg:`python` script
+    * `zc.async <https://github.com/zopefoundation/zc.async>`_ :
+      processus synchronization
+    * `zentyal <https://github.com/zentyal/zentyal>`_ :
+      small business server, includes mails
