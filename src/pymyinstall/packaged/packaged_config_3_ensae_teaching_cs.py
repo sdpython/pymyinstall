@@ -53,6 +53,7 @@ def ensae_teaching_cs_set():
         "python_utils",
         "rpy2",
         "seaborn",
+        "seasonal",
         "shapefile",
         "shapely",
         "smopy",

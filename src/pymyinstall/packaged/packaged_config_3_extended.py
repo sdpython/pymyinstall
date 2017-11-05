@@ -688,6 +688,10 @@ def extended_set():
                       purpose="Pypandoc provides a thin wrapper for pandoc, a universal document converter."),
         ModuleInstall('pocket', 'pip',
                       purpose="Access to pocket API."),
+        #
+        # November 2017
+        #
+        ModuleInstall('seasonal', 'pip', purpose="timeseries", usage="ML"),
     ]
 
     if sys.platform.startswith("win"):
