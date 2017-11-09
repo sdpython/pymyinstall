@@ -717,6 +717,13 @@ def ensae_set():
                       purpose="Matrix completion and feature imputation algorithms"),
         ModuleInstall('mnist', 'pip',
                       purpose="Python utilities to download and parse the MNIST dataset"),
+        #
+        # 2017-11
+        #
+        ModuleInstall('torch', 'wheel', source="2", usage="DEEP LEARNING",
+                      purpose="PyTorch is a deep learning framework that puts Python first."),
+        ModuleInstall('torchvision', 'pip', usage="DEEP LEARNING",
+                      purpose="image and video datasets and models for torch deep learning"),
     ]
 
     if sys.version_info[0] == 2:
