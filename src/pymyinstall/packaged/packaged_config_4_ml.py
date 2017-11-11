@@ -724,6 +724,37 @@ def ensae_set():
                       purpose="PyTorch is a deep learning framework that puts Python first."),
         ModuleInstall('torchvision', 'pip', usage="DEEP LEARNING",
                       purpose="image and video datasets and models for torch deep learning"),
+        ModuleInstall('fairtest', 'wheel', usage="ML", source="2",
+                      purpose="FairTest enables developers or auditing entities to discover and test " +
+                      "for unwarranted associations between an algorithm's outputs and certain user " +
+                      "subpopulations identified by protected features."),
+        ModuleInstall('libtiff', 'wheel',
+                      purpose="PyLibTiff is a package that provides: a wrapper to the libtiff library to " +
+                      "Python using ctypes, a pure Python module for reading and writing TIFF and LSM files. " +
+                      "The images are read as numpy.memmap objects so that it is possible to open images " +
+                      "that otherwise would not fit to computers RAM. Both TIFF strips and tiles are " +
+                      "supported for low-level data storage."),
+        ModuleInstall('OpenImageIO', 'wheel',
+                      purpose="A library for reading and writing images with emphasis on animation and visual effects."),
+        ModuleInstall('pyfm', 'wheel', usage="ML",
+                      purpose="Factorization Machine"),
+        ModuleInstall('indexed_gzip', 'wheel',
+                      purpose="Fast random access of gzip files."),
+        ModuleInstall(
+            'arctic', 'wheel', purpose="Arctic is a high performance datastore for numeric data."),
+        ModuleInstall(
+            'cobra', 'wheel', purpose="Constraint-based reconstruction and analysis in python."),
+        ModuleInstall('spectrum', 'wheel', purpose="Spectrum contains tools to estimate Power Spectral Densities using " +
+                      "methods based on Fourier transform, Parametric methods or eigenvalues analysis"),
+        ModuleInstall('discretize', 'wheel',
+                      purpose="A python package for finite volume discretization."),
+        ModuleInstall('recordclass', 'wheel',
+                      purpose="A mutable variant of collections.namedtuple, which supports assignments."),
+        ModuleInstall('pyeda', 'wheel',
+                      purpose="A library for electronic design automation."),
+        ModuleInstall('Polygon3', 'wheel', mname="polygon", purpose="Handles polygonal shapes in 2D. This library is free " +
+                      "for non-commercial use only."),
+
     ]
 
     if sys.version_info[0] == 2:

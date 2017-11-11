@@ -23,6 +23,7 @@ def ensae_teaching_cs_set():
         "cytoolz",
         "dask",
         "django",
+        "fairtest",
         "feedparser",
         "foolbox",
         "fuel",
