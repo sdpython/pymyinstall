@@ -447,9 +447,7 @@ class ModuleInstall:
         links = [(l.split("/")[-1], l) for l in links]
         links0 = links
 
-        if self.name == "PyQt":
-            links = [l for l in links if l[0].lower().startswith("pyqt4")]
-        elif self.name == "numpy":
+        if self.name == "numpy":
             links = [l for l in links if "unoptimized" not in l[
                 0].lower() and "vanilla" not in l[0].lower()]
 
@@ -527,9 +525,7 @@ class ModuleInstall:
                     "\n".join(str(_) for _ in links)))
         links0 = links
 
-        if self.name == "PyQt":
-            links = [l for l in links if l[0].lower().startswith("pyqt4")]
-        elif self.name == "numpy":
+        if self.name == "numpy":
             links = [l for l in links if "unoptimized" not in l[
                 0].lower() and "vanilla" not in l[0].lower()]
 

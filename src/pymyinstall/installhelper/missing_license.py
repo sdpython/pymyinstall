@@ -385,7 +385,6 @@ missing_module_licenses = {
     "PyPDF2": "BSD",
     "pypmc": "GPLv2",
     "pypng": "MIT",
-    "PyQt4": "GNU General Public License (GPL) + Other/Proprietary License",
     "pystan": "GNU General Public License v3 (GPLv3)",
     "PySide": "GNU Library or Lesser General Public License (LGPL)",
     "pytablereader": "MIT",

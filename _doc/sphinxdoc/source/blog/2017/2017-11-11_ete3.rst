@@ -1,0 +1,10 @@
+
+.. blogpost::
+    :title: ete3 and PyQt5
+    :keywords: ete3, pyqt5
+    :date: 2017-11-11
+    :categories: module
+
+    `ete3 <https://github.com/etetoolkit/ete>`_ now works with
+    `PyQt5 <https://pypi.python.org/pypi/PyQt5>`_ due to
+    the pull request `#284 <https://github.com/etetoolkit/ete/pull/284>`_.

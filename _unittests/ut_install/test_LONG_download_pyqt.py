@@ -61,7 +61,7 @@ class TestDownloadPyQt (unittest.TestCase):
 
         if sys.platform.startswith("win"):
             fLOG("install", "pyqt")
-            m = ModuleInstall("PyQt4", "wheel", mname="pyqt", fLOG=fLOG)
+            m = ModuleInstall("PyQt5", "wheel", mname="pyqt", fLOG=fLOG)
             exe = m.download(
                 temp_folder=temp,
                 file_save=os.path.join(
