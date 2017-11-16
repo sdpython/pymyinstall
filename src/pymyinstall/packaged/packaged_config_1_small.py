@@ -375,6 +375,8 @@ def small_set():
         ModuleInstall('falcon', 'pip', usage="NETWORK",
                       purpose="Falcon is a very fast, very minimal Python web framework for building microservices, " +
                       "app backends, and higher-level frameworks."),
+        ModuleInstall('falcon-auth', 'pip', mname='falcon_auth', usage="NETWORK",
+                      purpose="A falcon middleware + authentication backends that adds authentication layer to you app/api service."),
         ModuleInstall(
             'markdown', 'pip', purpose="markdown parser (for bokeh)"),
         ModuleInstall(
