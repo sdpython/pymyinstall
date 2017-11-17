@@ -59,6 +59,7 @@ def ensae_teaching_cs_set():
         "seasonal",
         "shapefile",
         "shapely",
+        "sip",
         "smopy",
         "statsmodels",
         "toolz",
