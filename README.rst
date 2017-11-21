@@ -22,10 +22,6 @@ README
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT
 
-.. image:: https://landscape.io/github/sdpython/pymyinstall/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/sdpython/pymyinstall/master
-   :alt: Code Health
-
 .. image:: https://requires.io/github/sdpython/pymyinstall/requirements.svg?branch=master
      :target: https://requires.io/github/sdpython/pymyinstall/requirements/?branch=master
      :alt: Requirements Status
