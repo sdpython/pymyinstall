@@ -191,6 +191,22 @@ class TestRegex (unittest.TestCase):
                 found += 1
         self.assertTrue(found > 0)
 
+    def test_7(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        raw = "xgboost-0.6+20171121-cp36-cp36m-win_amd64.whl"
+        found = 0
+        for pattern in regex_wheel_versions:
+            reg = re.compile(pattern)
+            r = reg.search(raw)
+            if r:
+                fLOG(r.groups())
+                found += 1
+        self.assertTrue(found > 0)
+
 
 if __name__ == "__main__":
     unittest.main()

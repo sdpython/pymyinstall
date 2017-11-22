@@ -12,7 +12,7 @@ from .module_install_version import numeric_version, compare_version, choose_mos
 from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_page_wheel, enumerate_links_module, extract_all_links
 from .missing_license import missing_module_licenses
 from .internet_settings import default_user_agent
-from .install_cmd_regex import regex_wheel_version, regex_wheel_version2, regex_wheel_version5
+from .install_cmd_regex import regex_wheel_version, regex_wheel_version2, regex_wheel_version5, regex_wheel_version6
 
 import sys
 import re
@@ -577,8 +577,13 @@ class ModuleInstall:
                 if res:
                     return res.groups()[0]
                 else:
-                    raise MissingVersionWheelException(
-                        "unable to extract version number from {0}".format(name))
+                    reg = re.compile(regex_wheel_version6)
+                    res = reg.search(name)
+                    if res:
+                        return ".".join(res.groups())
+                    else:
+                        raise MissingVersionWheelException(
+                            "unable to extract version number from {0}".format(name))
 
     def download(self, temp_folder=".", force=False, unzipFile=True,
                  file_save=None, deps=False, source=None):

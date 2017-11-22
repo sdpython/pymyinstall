@@ -5,7 +5,7 @@
 from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
 from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
-from .install_cmd_regex import regex_wheel_version, regex_wheel_version2, regex_wheel_version3, regex_wheel_version4, regex_wheel_version5
+from .install_cmd_regex import regex_wheel_version, regex_wheel_version2, regex_wheel_version3, regex_wheel_version4, regex_wheel_version5, regex_wheel_version6
 
 import sys
 import re
@@ -747,6 +747,7 @@ def choose_most_recent(list_name):
     version = re.compile(regex_wheel_version)
     version4 = re.compile(regex_wheel_version2)
     version5 = re.compile(regex_wheel_version5)
+    version6 = re.compile(regex_wheel_version6)
 
     def search_regex(_):
         try:
@@ -762,8 +763,12 @@ def choose_most_recent(list_name):
         if resv is None:
             resv = version5.search(_[0])
         if resv is None:
+            resv = version6.search(_[0])
+        if resv is None:
             raise MissingVersionWheelException(
-                "unable to get version number for regex {}:\n{}\n{}\n{}".format(_, regex_wheel_version, regex_wheel_version2, regex_wheel_version5))
+                "unable to get version number for regex {}:\n{}\n{}\n{}\n{}\n{}".format(_, regex_wheel_version,
+                                                                                        regex_wheel_version2, regex_wheel_version4, regex_wheel_version5,
+                                                                                        regex_wheel_version6))
         return resv
 
     list_name = [(search_regex(_).groups()[0], _[0], _[1])
@@ -799,10 +804,14 @@ def get_wheel_version(whlname):
         exp = re.compile(regex_wheel_version5)
         find = exp.findall(whlname)
     if len(find) == 0:
+        exp = re.compile(regex_wheel_version6)
+        find = exp.findall(whlname)
+    if len(find) == 0:
         mes = "[get_wheel_version] unable to extract version of {0}\n(pattern: '{1}' or\n'{2}' or\n'{3}' or\n'{4}' or\n'{5}')"
         raise ValueError(mes.format(whlname, regex_wheel_version,
                                     regex_wheel_version2, regex_wheel_version3,
-                                    regex_wheel_version4, regex_wheel_version5))
+                                    regex_wheel_version4, regex_wheel_version5,
+                                    regex_wheel_version6))
     if len(find) > 1:
         raise ValueError(
             "[get_wheel_version] unable to extract version of {0} (multiple version) (pattern: {1})".format(whlname, exp.pattern))
