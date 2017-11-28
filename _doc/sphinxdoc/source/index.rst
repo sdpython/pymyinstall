@@ -134,9 +134,29 @@ Galleries
 .. toctree::
     :maxdepth: 1
 
+    all_example
+    all_FAQ
+    all_notebooks
     gyexamples/index
     gynotebooks/index
     blog/blogindex
+
+Index and License
+-----------------
+
+.. toctree::
+    :maxdepth: 1
+
+    doctestunit
+    generatedoc
+    generatesetup
+    installation
+    glossary
+    index_module
+    license
+    README
+    HISTORY
+    filechanges
 
 Indices and tables
 ------------------
