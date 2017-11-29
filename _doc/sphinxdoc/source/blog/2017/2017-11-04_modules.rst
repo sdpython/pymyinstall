@@ -14,7 +14,7 @@
       static type checker for Python that aims to combine the benefits
       of dynamic (or "duck") typing and static typing.
     * `scapy <http://scapy.readthedocs.io/en/latest/index.html>`_ :
-      netowrks, IP, protocols
+      networks, IP, protocols
     * `sympy-live <https://github.com/sympy/sympy-live>`_ :
       web server to run custom examples
     * `wooey <https://github.com/wooey/wooey>`_ :

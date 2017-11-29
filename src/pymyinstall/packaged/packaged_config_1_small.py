@@ -295,8 +295,6 @@ def small_set():
                       purpose="Interactive Parallel Computing with IPython"),
         # end of ipython
         #
-        ModuleInstall("mpld3", "pip", usage="VIZ",
-                      purpose="mpld3 project brings together Matplotlib and D3js."),
         ModuleInstall("typing", "pip", purpose="Type Hints for Python") if sys.version_info[
             :2] < (3, 5) else None,
         ModuleInstall("typecheck-decorator", "pip", mname="typecheck",

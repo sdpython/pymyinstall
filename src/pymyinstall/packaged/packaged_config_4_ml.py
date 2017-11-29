@@ -424,10 +424,6 @@ def ensae_set():
                       purpose="Text progress bar library for Python. (fuel)"),
         ModuleInstall("fuel", "pip", usage="DATA/VIZ",
                       purpose="Fuel is a data pipeline framework which provides your machine learning models with the data they need."),
-        ModuleInstall("Lasagne", "pip", mname="lasagne", usage="DEEP LEARNING",
-                      purpose="Lasagne is a lightweight library to build and train neural networks in Theano."),
-        ModuleInstall("blocks", "github", "mila-udem",
-                      purpose="Blocks is a framework that helps you build neural network models on top of Theano."),
         ModuleInstall("gatspy", "pip",
                       purpose="General tools for Astronomical Time Series in Python"),
         ModuleInstall("supersmoother", "pip",
@@ -466,10 +462,6 @@ def ensae_set():
                       purpose="This package contains python code for pre-trained deep neural networks"),
         ModuleInstall("gnumpy", "pip",
                       purpose="Gnumpy: an easy way to use GPU boards in Python"),
-        ModuleInstall("nolearn", "pip", usage="ML",
-                      purpose="nolearn contains a number of wrappers and abstractions " +
-                      "around existing neural network libraries, most notably Lasagne, along with a " +
-                      "few machine learning utility modules. All code is written to be compatible with scikit-learn."),
         ModuleInstall("mlxtend", "pip", usage="ML",
                       purpose="A library consisting of useful tools and extensions for the day-to-day data science tasks."),
         ModuleInstall("jsonpickle", "pip",
@@ -709,8 +701,6 @@ def ensae_set():
         #
         ModuleInstall('climate', 'pip',
                       purpose="Command-line utilities (turn function into command line)"),
-        ModuleInstall('downhill', 'pip', usage='ML',
-                      purpose="Stochastic optimization routines for Theano"),
         ModuleInstall('knnimpute', 'pip', usage="ML",
                       purpose="k-Nearest Neighbor imputation"),
         ModuleInstall('fancyimpute', 'pip', usage="ML",

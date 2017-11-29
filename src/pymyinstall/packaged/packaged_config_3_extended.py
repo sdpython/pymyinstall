@@ -162,8 +162,8 @@ def extended_set():
         ModuleInstall('pyproj', 'wheel',
                       purpose="python interface to PROJ4 library for cartographic transformations " +
                       "https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
-        ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
-                      purpose="maps extension for matplotlib", usage="VIZ"),
+        # ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
+        #               purpose="maps extension for matplotlib", usage="VIZ"),
         ModuleInstall('Cartopy', 'wheel', mname="cartopy",
                       purpose="Cartopy is a Python package designed to make drawing maps for data analysis " +
                       "and visualisation as easy as possible (issue on Linux and Anaconda)", usage="VIZ"),
@@ -257,11 +257,7 @@ def extended_set():
             "PyOpenGL_accelerate", "wheel", mname="OpenGL_accelerate", purpose="Acceleration code for PyOpenGL"),
         ModuleInstall(
             "libpython", "wheel",
-            purpose="needed for theano (C++ compilation), compilation of libpython with mingw") if sys.version_info[:2] <= (3, 4) else None,
-        ModuleInstall(
-            "nose-parameterized", "pip", mname="nose_parameterized", purpose="for theano"),
-        ModuleInstall(
-            "Theano", "pip", mname="theano", purpose="deep learning, GPU", usage="DATA/ML"),
+            purpose="(C++ compilation), compilation of libpython with mingw") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall('pymc', 'wheel', web="https://github.com/pymc-devs/pymc",
                       purpose="Monte Carlo computation", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall('pymc3', 'github', "pymc-devs", web="https://github.com/pymc-devs/pymc3",

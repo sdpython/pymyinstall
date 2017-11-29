@@ -277,7 +277,6 @@ missing_module_licenses = {
     "luigi": "Apache 2.0",
     "ldap3": "LGPLv3",
     "lazy-object-proxy": "BSD",
-    "Lasagne": "MIT",
     "AnyQt": "GPLv3",
     "Automat": "MIT",
     "azure-datalake-store": "MIT",
