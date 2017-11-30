@@ -12,6 +12,7 @@ def ensae_teaching_cs_set():
     from .packaged_config_1_pyensae import pyensae_set
     names = pyensae_set()
     names += [
+        "basemap",
         "bayespy",
         "bkcharts",
         "bokeh",

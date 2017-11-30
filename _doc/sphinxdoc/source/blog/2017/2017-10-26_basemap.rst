@@ -11,4 +11,6 @@
     `cartopy <http://scitools.org.uk/cartopy/>`_.
     I wonder how long it will take me to replace
     that dependency by the new one in all the notebooks
-    using it.
+    using it. It won't disappear before a couple of
+    years but still...
+    `Cartopy, New Management, and EoL Announcement <https://matplotlib.org/basemap/users/intro.html#cartopy-new-management-and-eol-announcement>`_.

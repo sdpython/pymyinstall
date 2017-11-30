@@ -162,8 +162,8 @@ def extended_set():
         ModuleInstall('pyproj', 'wheel',
                       purpose="python interface to PROJ4 library for cartographic transformations " +
                       "https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
-        # ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
-        #               purpose="maps extension for matplotlib", usage="VIZ"),
+        ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
+                      purpose="maps extension for matplotlib", usage="VIZ"),
         ModuleInstall('Cartopy', 'wheel', mname="cartopy",
                       purpose="Cartopy is a Python package designed to make drawing maps for data analysis " +
                       "and visualisation as easy as possible (issue on Linux and Anaconda)", usage="VIZ"),

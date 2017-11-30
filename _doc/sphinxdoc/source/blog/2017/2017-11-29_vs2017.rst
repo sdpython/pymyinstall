@@ -1,0 +1,21 @@
+
+.. blogpost::
+    :title: Python 3.6 and Visual Studio 2017
+    :keywords: Visual Studio
+    :date: 2017-11-29
+    :categories: c++
+
+    It does not work unless you install the missing
+    parts. Python 3.6 is compiled with Visual Studio 2015
+    and this specific compiler needs to be installed.
+    There is a way with 2017, instructions are provided at
+    `Creating a C++ extension for Python <https://docs.microsoft.com/en-us/visualstudio/python/cpp-and-python>`_.
+    I copy paste the line:
+
+        If you're using Visual Studio 2017, run the Visual Studio installer,
+        select Modify, select Individual Components > Compilers,
+        build tools, and runtimes > Visual C++ 2015.3 v140 toolset.
+        This step is necessary because Python (for Windows) is itself
+        built with Visual Studio 2015 (version 14.0) and expects that
+        those tools are available when building an extension through
+        the method described here.
