@@ -13,7 +13,7 @@ jyquickhelper
 keyring
 Mako
 matplotlib
-memory_profiler
+memory_profiler!=0.48.0
 mistune
 natsort
 nbconvert>=5.0.0
