@@ -174,7 +174,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         # file
         if versioni >= (3, 6, 0):
             if custom:
-                if versioni > (3, 6, 2):
+                if versioni > (3, 6, 4):
                     raise ValueError(
                         "Not custom zip available for Python {0}".format(versioni))
                 url = "http://www.xavierdupre.fr/enseignement/setup/Python{0}{1}-{0}.{1}.{2}-amd64.zip".format(

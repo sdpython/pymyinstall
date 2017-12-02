@@ -1,7 +1,7 @@
 
 .. blogpost::
     :title: Building dlib for Python 3.6 and boost_python on Windows
-    :keywords: dlib, Windows, boost_python
+    :keywords: dlib, Windows, boost_python, vcpkg
     :date: 2017-07-10
     :categories: module
 
@@ -86,3 +86,10 @@
     `build_dlib.bat <https://github.com/sdpython/pymyinstall/blob/master/whl/windows/build_dlib.bat>`_.
     It was quite a long journey. You can find my build
     at `dlib-19.4.99-cp36-cp36m-win_amd64.whl <http://www.xavierdupre.fr/enseignement/setup/dlib-19.4.99-cp36-cp36m-win_amd64.whl>`_.
+
+    More about `vcpkg <https://docs.microsoft.com/en-us/cpp/vcpkg>`_:
+
+    * `Microsoft documentation <https://docs.microsoft.com/en-us/cpp/vcpkg>`_
+    * `github/vcpkg <https://github.com/Microsoft/vcpkg>`_
+    * `documentation vcpkg <https://vcpkg.readthedocs.io/en/latest/>`_
+    * `list of available packages <https://github.com/Microsoft/vcpkg/tree/master/ports>`_

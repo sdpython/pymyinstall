@@ -20,7 +20,7 @@
         those tools are available when building an extension through
         the method described here.
 
-    I recommand using 
+    I recommand using
     `Python 3.6.3 <https://www.python.org/downloads/release/python-363/>`_
     because of this change
     `Issue 30389 <https://bugs.python.org/issue30389>`_
