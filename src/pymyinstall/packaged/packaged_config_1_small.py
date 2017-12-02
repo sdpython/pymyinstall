@@ -375,6 +375,7 @@ def small_set():
                       "app backends, and higher-level frameworks."),
         ModuleInstall('falcon-auth', 'pip', mname='falcon_auth', usage="NETWORK",
                       purpose="A falcon middleware + authentication backends that adds authentication layer to you app/api service."),
+        ModuleInstall('waitress', 'pip', usage="NETWORK", purpose="Waitress WSGI server"),
         ModuleInstall(
             'markdown', 'pip', purpose="markdown parser (for bokeh)"),
         ModuleInstall(
