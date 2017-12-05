@@ -72,5 +72,7 @@ def sphinx_theme_set():
                       purpose="Releases is a Python 2+3 compatible Sphinx extension designed to help you keep " +
                       "a source control friendly, merge friendly changelog file & turn it into useful, " +
                       "human readable HTML output."),
+        ModuleInstall("sphinx-redactor-theme", "pip", mname="sphinx_redactor_theme",
+                      purpose="sphinx theme", usage="SPHINX"),
     ]
     return [_ for _ in mod if _ is not None]
