@@ -191,7 +191,7 @@ def small_set():
             "ipython_genutils", "pip", purpose="IPython utils (nbformat)", usage="JUPYTER"),
         ModuleInstall(
             "html5lib", "pip", purpose="pure-python library for parsing HTML"),
-        ModuleInstall("bleach", "github", "mozilla", usage="WEB",
+        ModuleInstall("bleach", "pip", usage="WEB",
                       purpose="An easy whitelist-based HTML-sanitizing tool."),
         ModuleInstall(
             "testpath", "pip", purpose="Test utilities for code working with files and commands"),
