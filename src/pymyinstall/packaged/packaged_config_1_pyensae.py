@@ -114,6 +114,7 @@ def pyensae_set():
         "scipy",
         "scikit-learn",
         "simplesqlite",
+        "tabledata",
         "toml",
         "typepy",
         "urllib3",
