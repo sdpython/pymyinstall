@@ -593,6 +593,8 @@ def ensae_set():
         #
         ModuleInstall("update_checker", "pip",
                       purpose="A python module that will check for package updates."),
+        ModuleInstall("stopit", "pip",
+                      purpose="Timeout control decorator and context managers, raise any exception in another thread."),
         ModuleInstall("TPOT", "pip", mname="tpot", usage="ML",
                       purpose="Consider TPOT your Data Science Assistant. TPOT is a Python tool that automatically " +
                       "creates and optimizes machine learning pipelines using genetic programming."),
@@ -669,6 +671,9 @@ def ensae_set():
                       "the interactive data analysis of multi-dimensional " +
                       "datasets that can be described as multi-dimensional arrays of a given " +
                       "signal (e.g. a 2D array of spectra a.k.a spectrum image)."),
+        ModuleInstall('emcee', 'pip',
+                      purpose="Kick ass affine-invariant ensemble MCMC sampling"),
+        ModuleInstall('h5netcdf', 'pip', purpose="netCDF4 via h5py"),
         ModuleInstall('HoloPy', 'wheel', mname="holopy",
                       purpose="Hologram processing and light scattering in python"),
         ModuleInstall('sounddevice', 'wheel',
@@ -703,8 +708,9 @@ def ensae_set():
                       purpose="Command-line utilities (turn function into command line)"),
         ModuleInstall('knnimpute', 'pip', usage="ML",
                       purpose="k-Nearest Neighbor imputation"),
-        ModuleInstall('fancyimpute', 'pip', usage="ML",
-                      purpose="Matrix completion and feature imputation algorithms"),
+        # Depends on theano - not maintained anymore.
+        # ModuleInstall('fancyimpute', 'pip', usage="ML",
+        #               purpose="Matrix completion and feature imputation algorithms"),
         ModuleInstall('mnist', 'pip',
                       purpose="Python utilities to download and parse the MNIST dataset"),
         #
@@ -787,6 +793,8 @@ def ensae_set():
                                  purpose="General utility modules that supply commonly-used functionality"))
         mod.append(ModuleInstall("jaraco.video", "pip",
                                  purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
+        mod.append(ModuleInstall("jaraco.classes", "pip",
+                                 purpose="Split from another package jaraco."))
 
     mod.append(ModuleInstall(
         "PyJWT", "pip", mname="jwt", purpose="JSON Web Token library for Python 3."))

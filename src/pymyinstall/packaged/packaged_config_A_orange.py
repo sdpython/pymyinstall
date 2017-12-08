@@ -34,18 +34,16 @@ def orange_set():
         ModuleInstall(
             "AnyQt", "pip",
             purpose="PyQt4/PyQt5 compatibility layer."),
-        ModuleInstall(
-            "hyperframe", "pip",
-            purpose="HTTP/2 framing layer for Python"),
-        ModuleInstall(
-            "hpack", "pip",
-            purpose="Pure-Python HPACK header compression"),
-        ModuleInstall(
-            "h2", "pip",
-            purpose="HTTP/2 State-Machine based protocol implementation"),
-        ModuleInstall(
-            "hyper", "pip",
-            purpose="HTTP/2 Client for Python"),
+        ModuleInstall("hyperframe", "pip",
+                      purpose="HTTP/2 framing layer for Python"),
+        ModuleInstall("hpack", "pip",
+                      purpose="Pure-Python HPACK header compression"),
+        ModuleInstall("h2", "pip",
+                      purpose="HTTP/2 State-Machine based protocol implementation"),
+        ModuleInstall("hyper", "pip",
+                      purpose="HTTP/2 Client for Python"),
+        ModuleInstall("serverfiles", "pip",
+                      purpose="An utility that accesses files on a HTTP server and stores them locally for reuse."),
         ModuleInstall(
             "orange3", "pip", mname="Orange",
             usage="ORANGE", purpose="Orange is a component-based data mining software. It includes a range of data visualization, exploration, " +

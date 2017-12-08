@@ -39,6 +39,8 @@ def extended_set():
             purpose="Python interface to NCAR natgrid library (for matplotlib)"),
         ModuleInstall(
             "py", "pip", purpose="library with cross-python path, ini-parsing, io, code, log facilities"),
+        ModuleInstall("pluggy", "pip",
+                      purpose="plugin and hook calling mechanisms for python"),
         ModuleInstall("pytest", "pip",
                       purpose="pytest: simple powerful testing with Python"),
         ModuleInstall(
@@ -260,13 +262,16 @@ def extended_set():
             purpose="(C++ compilation), compilation of libpython with mingw") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall('pymc', 'wheel', web="https://github.com/pymc-devs/pymc",
                       purpose="Monte Carlo computation", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
-        ModuleInstall('pymc3', 'github', "pymc-devs", web="https://github.com/pymc-devs/pymc3",
-                      purpose="Monte Carlo computation (Python 3 only)", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
-        ModuleInstall('pysterior', 'pip',
-                      purpose="pysterior is a machine learning library for Python which aims to make Bayesian parametric regression and " +
-                      "classification models accessible and easy to use. The library allows users to construct " +
-                      "supervised learning models using an intuitive interface similar to that used by scikit-learn.",
-                      usage="DATA/ML") if sys.version_info[0] >= 3 else None,
+        ModuleInstall('autograd', 'pip',
+                      purpose="Efficiently computes derivatives of numpy code."),
+        # The following package rely on theano (deprecated).
+        # ModuleInstall('pymc3', 'github', "pymc-devs", web="https://github.com/pymc-devs/pymc3",
+        #              purpose="Monte Carlo computation (Python 3 only)", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
+        # ModuleInstall('pysterior', 'pip',
+        #              purpose="pysterior is a machine learning library for Python which aims to make Bayesian parametric regression and " +
+        #               "classification models accessible and easy to use. The library allows users to construct " +
+        #               "supervised learning models using an intuitive interface similar to that used by scikit-learn.",
+        #               usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall(
             "pyqtgraph", "pip", purpose="Scientific Graphics and GUI Library for Python, depends on PySide", usage="GUI"),
         ModuleInstall("deap", "pip", purpose="deep learning"),
@@ -595,6 +600,8 @@ def extended_set():
                       purpose="Color math and conversion library."),
         ModuleInstall('arrow', 'pip',
                       purpose="Better dates and times for Python"),
+        ModuleInstall('custom_inherit', 'pip',
+                      purpose="A Python package that provides tools for inheriting docstrings in customizable ways."),
         ModuleInstall('toyplot', 'pip', usage="VIZ",
                       purpose="The kid-sized plotting toolkit for Python with grownup-sized goals."),
         ModuleInstall('images2gif', 'pip',
