@@ -66,9 +66,7 @@ def pyensae_set():
         "branca",
         "cffi",
         "colormap",
-        "chardet",
         "cryptography",
-        "DataProperty",
         "dbfread",
         "dominate",
         "easydev",
@@ -81,9 +79,7 @@ def pyensae_set():
         "ipaddress",
         "ipykernel",
         "isodate",
-        "keyring",
         "python3-linkedin",
-        "logbook",
         "markdown2",
         "more-itertools",
         "msrest",
@@ -96,7 +92,6 @@ def pyensae_set():
         "packaging",
         "pandas_datareader",
         "paramiko",  # ssh
-        "pathvalidate",
         "pyasn1",
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
         "pycryptodomex",
@@ -115,10 +110,6 @@ def pyensae_set():
         "scikit-learn",
         "simplesqlite",
         "toml",
-        "typepy",
-        "urllib3",
-        "xlsxwriter",
-        "xlwt",
     ]
 
     for m in ensae_set():
