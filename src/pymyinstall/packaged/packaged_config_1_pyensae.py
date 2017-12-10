@@ -84,7 +84,6 @@ def pyensae_set():
         "more-itertools",
         "msrest",
         "msrestazure",
-        "mbstrdecoder",
         "networkx",
         "ndg-httpsclient",  # quandl
         "oauthlib",

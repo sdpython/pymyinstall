@@ -62,6 +62,7 @@ def pyquickhelper_set():
         "logbook",
         "lxml",
         "matplotlib",
+        "mbstrdecoder",
         "metakernel",
         "micropython-libc" if not sys.platform.startswith("win") else None,
         "micropython-ffilib" if not sys.platform.startswith(
