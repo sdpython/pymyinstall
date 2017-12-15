@@ -754,6 +754,8 @@ def ensae_set():
                       purpose="Python wrapper of Intel MKL routines"),
         ModuleInstall('pymatsolver', 'pip',
                       purpose="A (sparse) matrix solver for python."),
+        ModuleInstall('vectormath', 'pip',
+                      purpose="Vector math utilities for python (used by discretize)."),
         ModuleInstall('discretize', 'wheel',
                       purpose="A python package for finite volume discretization."),
         ModuleInstall('recordclass', 'wheel',
