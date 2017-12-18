@@ -444,6 +444,8 @@ def extended_set():
                       purpose="Declarative Python programming using Parameters."),
         ModuleInstall("holoviews", "pip", usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
+        ModuleInstall("geoviews", "github", 'ioam', usage="VIZ",
+                      purpose="Composable, declarative data structures for building complex visualizations easily."),
         ModuleInstall("plotly", "pip", usage="VIZ",
                       purpose="Plotly's Python graphing library makes interactive, publication-quality graphs online. Examples of how to make line plots, " +
                               "scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, " +
