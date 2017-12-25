@@ -697,6 +697,11 @@ def extended_set():
         # November 2017
         #
         ModuleInstall('seasonal', 'pip', purpose="timeseries", usage="ML"),
+        #
+        # December 2017
+        #
+        ModuleInstall('gdown', 'pip',
+                      purpose="Google Drive direct download of big files."),
     ]
 
     if sys.platform.startswith("win"):

@@ -767,6 +767,11 @@ def ensae_set():
         ModuleInstall('Polygon3', 'wheel', mname="polygon", purpose="Handles polygonal shapes in 2D. This library is free " +
                       "for non-commercial use only."),
 
+        #
+        # 2017-12
+        #
+        ModuleInstall(
+            'fcn', 'pip', purpose="Fully Convolutional Networks", usage="ML"),
     ]
 
     if sys.version_info[0] == 2:
