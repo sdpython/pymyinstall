@@ -702,6 +702,8 @@ def extended_set():
         #
         ModuleInstall('gdown', 'pip',
                       purpose="Google Drive direct download of big files."),
+        ModuleInstall('pytube', 'pip',
+                      purpose="https://github.com/nficano/pytube"),
     ]
 
     if sys.platform.startswith("win"):
