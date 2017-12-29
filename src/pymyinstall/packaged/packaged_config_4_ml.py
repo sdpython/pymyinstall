@@ -642,6 +642,8 @@ def ensae_set():
                       purpose="A platform independent file lock."),
         ModuleInstall('fasttext', 'wheel', usage="DATA/ML",
                       purpose="fastText is a library for efficient learning of word representations and sentence classification."),
+        ModuleInstall('fastrlock', 'wheel',
+                      purpose="Fast, re-entrant optimistic lock implemented in Cython (cupy)"),
         ModuleInstall('cupy', 'wheel', usage="DATA/DML",
                       purpose="CuPy : NumPy-like API accelerated with CUDA"),
         ModuleInstall('chainer', 'pip', usage="DATA/DML",
