@@ -65,6 +65,7 @@ def pyensae_set():
         "beautifulsoup4",
         "branca",
         "cffi",
+        "colorlog",
         "colormap",
         "cryptography",
         "dbfread",

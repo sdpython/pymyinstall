@@ -360,6 +360,8 @@ def ensae_set():
         # biokit
         ModuleInstall("wrapt", "wheel",
                       purpose="A Python module for decorators, wrappers and monkey patching."),
+        ModuleInstall('colorlog', 'pip',
+                      purpose="Log formatting with colors!"),
         ModuleInstall("easydev", "pip",
                       purpose="Common utilities to ease the development of Python packages"),
         ModuleInstall("colormap", "pip", usage="VIZ",

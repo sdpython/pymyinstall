@@ -64,8 +64,6 @@ def iot_set():
                       purpose="A Python MPD client library"),
         ModuleInstall('hikvision', 'pip', usage="IoT",
                       purpose="Provides a python interface to interact with a hikvision camera"),
-        ModuleInstall('colorlog', 'pip',
-                      purpose="Log formatting with colors!"),
         ModuleInstall('jsonrpc-requests', 'pip', mname="jsonrpc_requests",
                       purpose="A JSON-RPC client library, backed by requests"),
         ModuleInstall(
