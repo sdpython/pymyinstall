@@ -13,8 +13,8 @@ from .status_helper import get_installed_modules
 
 def module_as_table(list_module, as_df=False):
     """
-    returns a list of dictionaries or a dataframe
-    for a list of modules
+    Returns a list of dictionaries or a dataframe
+    for a list of modules.
 
     @param      list_module     list of @see cl ModuleInstall
     @param      as_df           as a dataframe or not

@@ -114,19 +114,18 @@ Installation
 
 ``pip install pymyinstall``
 
-Quick start
------------
+Documentation
+-------------
 
 .. toctree::
     :maxdepth: 1
 
+    API/index
     i_ex
     all_notebooks
     i_faq
     name_set_table
     ensae_full_set_table
-    completed_todoextlist
-    issues_todoextlist
 
 Galleries
 ---------
@@ -141,8 +140,8 @@ Galleries
     gynotebooks/index
     blog/blogindex
 
-Index and License
------------------
+Index
+-----
 
 .. toctree::
     :maxdepth: 1

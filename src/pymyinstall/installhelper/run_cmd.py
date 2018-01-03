@@ -127,7 +127,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
     @return                         content of stdout, stdres  (only if wait is True)
 
     .. exref::
-        :title: Run a program using the command line)
+        :title: Run a program using the command line
 
         ::
 

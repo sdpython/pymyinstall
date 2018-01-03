@@ -3,4 +3,4 @@
 @brief Shortcut for ``setuphelper``
 """
 
-from .setup_creation import create_empty_folder_setup
+from .setup_creation import create_empty_folder_setup, create_folder_setup
