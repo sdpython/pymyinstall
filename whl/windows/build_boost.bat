@@ -5,7 +5,7 @@ set pythonexe=%1
 goto start_script:
 
 :default_value_python:
-set pythonexe=c:\Python36_x64
+set pythonexe=c:\Python363_x64
 
 :start_script:
 @echo [boost] %current%boost
@@ -15,8 +15,8 @@ if not exist boost mkdir boost
 pushd boost
 
 :download:
-set version=1_64_0
-set version2=1.64.0
+set version=1_66_0
+set version2=1.66.0
 if exist %current%boost\boost_%version%.7z goto unzip:
 @echo [boost] Download boost
 bitsadmin /transfer wcb /priority high https://dl.bintray.com/boostorg/release/%version2%/source/boost_%version%.7z %current%boost\boost_%version%.7z
