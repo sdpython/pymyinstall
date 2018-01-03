@@ -5,7 +5,7 @@ set pythonexe=%1
 goto start_script:
 
 :default_value_python:
-set pythonexe=c:\Python36_x64
+set pythonexe=c:\Python363_x64
 
 :start_script:
 @echo [boost] start building boost

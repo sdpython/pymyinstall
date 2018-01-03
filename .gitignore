@@ -278,3 +278,8 @@ src/.vscode/settings.json
 /whl/windows/dlib
 src/pymyinstall/.vscode/settings.json
 _unittests/ut_module/chromedriver.exe
+whl/windows/dynd/libdynd/
+whl/windows/dynd/dynd-python/
+whl/windows/fast_histogram/
+whl/windows/param/
+whl/windows/polylearn/

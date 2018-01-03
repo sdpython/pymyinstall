@@ -6,7 +6,7 @@ set pythonexe=%1
 goto start_script:
 
 :default_value_python:
-set pythonexe=c:\Python36_x64
+set pythonexe=c:\Python363_x64
 
 :start_script:
 set current=%~dp0
@@ -23,8 +23,8 @@ if not exist boost mkdir boost
 pushd boost
 
 :download:
-set version=1_64_0
-set version2=1.64.0
+set version=1_66_0
+set version2=1.66.0
 if exist %current%boost\boost_%version% goto booststrap:
 @echo [boost] Download
 bitsadmin /transfer wcb /priority high https://dl.bintray.com/boostorg/release/%version2%/source/boost_%version%.7z %current%boost\boost_%version%.7z
@@ -44,7 +44,7 @@ cmd /c b2 install --prefix=%current%boost\MYINST
 :python-config:
 @echo [boost] config in %current%boost\MYINST\share\boost-build\example\user-config.jam
 if not exist %current%boost\MYINST\share\boost-build\example\user-config.jam goto erroruser:
-@echo "using python : 3.6: c:/Python36_x64/python.exe : c:/Python36_x64/include : c:/Python36_x64/libs ;" >> %current%boost\MYINST\share\boost-build\example\user-config.jam
+@echo "using python : 3.6: c:/Python363_x64/python.exe : c:/Python363_x64/include : c:/Python363_x64/libs ;" >> %current%boost\MYINST\share\boost-build\example\user-config.jam
 goto build:
 
 :erroruser:
