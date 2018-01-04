@@ -22,7 +22,7 @@ else:
 @install_memoize2
 def download_page(url, is406=False):
     """
-    download a page from a url
+    Downloads a page from a url
 
     @param      url     url
     @param      is406   if the function raised *HTTP Error 406*, try *True*

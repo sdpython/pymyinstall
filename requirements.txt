@@ -33,7 +33,7 @@ pycryptodomex
 pydocstyle
 pyflakes
 pylzma
-pyquickhelper>=1.6
+pyquickhelper>=1.6.2346
 python-jenkins
 PyYAML
 semantic_version

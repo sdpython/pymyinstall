@@ -77,10 +77,6 @@ Install
 Tools
 +++++
 
-.. autosignature:: pymyinstall.installcustom.install_custom.download_page
-
-.. autosignature:: pymyinstall.installcustom.install_custom.download_page
-
 .. autosignature:: pymyinstall.installcustom.install_custom_7z.install_7z
 
 .. autosignature:: pymyinstall.installcustom.install_custom_chromedriver.install_chromedriver

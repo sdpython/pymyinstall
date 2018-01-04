@@ -97,7 +97,7 @@ def fix_termios_windows(path):
 
 def fix_resource_windows(path):
     """
-    Add a file resource.py on Windows (only available on Linux)
+    Adds a file resource.py on Windows (only available on Linux).
 
     @param   path       path to the python installation
     """
@@ -130,7 +130,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                                 custom is True means switching to a zip of the standard distribution,
                                 see below
     @param      latest          install this version of pymyinstall and not the pypi version
-    @param      download        download folder
+    @param      download_folder download folder
     @param      verbose         more display
     @return                     temporary file
 
@@ -144,7 +144,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
     In that case, you should consider using ``custom=True``.
 
-    .. versionmodified:: 1.1
+    .. versionchanged:: 1.1
         Add parameters *custom*, *latest*, *verbose*.
     """
     def clean_err(err):
