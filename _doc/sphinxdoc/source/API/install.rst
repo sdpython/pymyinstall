@@ -13,7 +13,7 @@ Modules
 
 .. autosignature:: pymyinstall.installhelper.module_install_version.get_module_dependencies
 
-.. autosignature:: pymyinstall.installhelper.from .status_helper.get_installed_modules
+.. autosignature:: pymyinstall.installhelper.status_helper.get_installed_modules
 
 .. autosignature:: pymyinstall.installhelper.module_install_version.get_module_metadata
 
