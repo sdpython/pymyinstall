@@ -9,7 +9,7 @@ Modules
 
 .. autosignature:: pymyinstall.installhelper.install_cmd_helper.add_shortcut_to_desktop_for_module
 
-.. autosignature:: pymyinstall.installhelper.install_cmd_helper.create_virtual_env
+.. autosignature:: pymyinstall.installhelper.install_venv_helper.create_virtual_env
 
 .. autosignature:: pymyinstall.installhelper.module_install_version.get_module_dependencies
 
