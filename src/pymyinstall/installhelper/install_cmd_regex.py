@@ -10,7 +10,7 @@ regex_wheel_version = "[-]([0-9]+[.][abc0-9]+([.][0-9]{1,2})?([.][0-9abdevcr]+)?
 regex_wheel_version2 = "[-]([0-9]+)[-]cp"
 regex_wheel_version3 = "[-](([0-9]+)[.]([0-9]+)[.]([0-9]+)(((rc)|(a)|(b))[0-9]+)?)[.]((zip)|(tar)|(gz)|(whl))"
 regex_wheel_version4 = "[-](([0-9]+)[.]([0-9]+)(((rc[0-9]?)|(a)|(b))[0-9]+)?[.])((zip)|(tar)|(gz)|(whl))"
-regex_wheel_version5 = "[-]([0-9]+[.][0-9]+([.][0-9][.]?)?([0-9abcrdev]+))[-]"
+regex_wheel_version5 = "[-]([0-9]+[.][0-9]+([.][0-9][.]?)?([0-9abcrdev+]+))[-]"
 regex_wheel_version6 = "[-]([0-9]+)[.]([0-9]+)[.+]([0-9]{8})[-]"
 
 regex_wheel_versions = [

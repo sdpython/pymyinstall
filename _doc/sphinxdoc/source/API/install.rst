@@ -39,7 +39,7 @@ Modules
 
 .. autosignature:: pymyinstall.installhelper.module_install.ModuleInstall
 
-.. autosignature:: pymyinstall.installhelper.install_cmd_helper.run_venv_script
+.. autosignature:: pymyinstall.installhelper.install_venv_helper.run_venv_script
 
 .. autosignature:: pymyinstall.installhelper.install_cmd_helper.update_pip
 
