@@ -29,5 +29,6 @@ blog_root = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/"
 
 
 epkg_dictionary['boost'] = "http://www.boost.org/"
-epkg_dictionary['dlib'] = "http://dlib.net/"
 epkg_dictionary['boost_python'] = "http://www.boost.org/doc/libs/release/libs/python/"
+epkg_dictionary['dlib'] = "http://dlib.net/"
+epkg_dictionary['statsmodels'] = "http://www.statsmodels.org/stable/index.html"
