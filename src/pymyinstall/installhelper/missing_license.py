@@ -127,7 +127,6 @@ missing_module_licenses = {
     "libpython": "Python",
     "pyowm": "MIT",
     "PyMySQL": "MIT",
-    "jaraco.video": "MIT",
     "osmapi": "GPLv3",
     "progressbar2": "BSD",
     "wordcloud": "MIT",

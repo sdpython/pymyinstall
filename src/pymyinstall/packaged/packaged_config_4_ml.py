@@ -802,10 +802,6 @@ def ensae_set():
                                  purpose="A Win32 Python Extension for Accessing Video Devices", usage="VIDEO"))
         mod.append(ModuleInstall("jaraco.structures", "pip",
                                  purpose="jaraco.structures"))
-        mod.append(ModuleInstall("jaraco.util", "pip",
-                                 purpose="General utility modules that supply commonly-used functionality"))
-        mod.append(ModuleInstall("jaraco.video", "pip",
-                                 purpose="jaraco.video implements a framegrabber inteface for Windows Video Capture devices.", usage="VIDEO"))
         mod.append(ModuleInstall("jaraco.classes", "pip",
                                  purpose="Split from another package jaraco."))
 
