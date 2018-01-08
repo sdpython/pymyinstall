@@ -54,9 +54,9 @@ class TestSetupFolder(ExtTestCase):
 
         temp = get_temp_folder(__file__, "temp_setup_folder", clean=False)
 
-        import pandas
-        self.assertTrue(pandas is not None)
-        st = create_folder_setup('pandas', fLOG=fLOG, output_path=temp)
+        import cairocffi
+        self.assertTrue(cairocffi is not None)
+        st = create_folder_setup('cairocffi', fLOG=fLOG, output_path=temp)
         self.assertEqual(len(st), 1)
         self.assertExists(st[0])
         exp = os.path.join(temp, 'dist')

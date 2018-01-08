@@ -225,7 +225,9 @@ def create_folder_setup(fold, wheel=True, output_path=None, fLOG=None, version=N
         if fold not in sys.modules:
             raise ValueError("Unable to find module '{0}'".format(fold))
         mod = sys.modules[fold]
-        info = dict(__VERSION__=mod.__version__,
+        version = mod.__version__ if hasattr(
+            mod, '__version__') else mod.VERSION
+        info = dict(__VERSION__=version,
                     __DESCRIPTION__=mod.__doc__,
                     __FOLDER__=fold)
         fold = os.path.dirname(mod.__file__)

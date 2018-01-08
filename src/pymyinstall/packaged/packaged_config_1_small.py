@@ -477,7 +477,7 @@ def small_set():
         ModuleInstall("defusedxml", "pip",
                       purpose="XML bomb protection for Python stdlib modules"),
         ModuleInstall(
-            "tqdm", "pip", purpose="A Simple Python Progress Meter (for moviepy)", usage="JUPYTER"),
+            "tqdm", "pip", purpose="A Simple Python Progress Meter", usage="JUPYTER"),
 
         ModuleInstall(
             'olefile', 'pip', purpose="Python package to parse, read and write Microsoft OLE2 files " +

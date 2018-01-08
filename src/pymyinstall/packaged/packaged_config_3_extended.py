@@ -381,6 +381,11 @@ def extended_set():
             "imageio", "pip", purpose="Library for reading and writing a wide range of image, video, " +
             "scientific, and volumetric data formats (for moviepy)", usage="VIDEO"),
         ModuleInstall(
+            "cairocffi", "wheel2", purpose="cairocffi is a CFFI-based drop-in replacement for Pycairo, " +
+            "a set of Python bindings and object-oriented API for cairo"),
+        ModuleInstall(
+            "gizeh", "pip", purpose="Simple Vector Graphics for Python"),
+        ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
             "xgboost", "wheel", purpose="Parallelized Stochastic Gradient Descent (only available on " +
