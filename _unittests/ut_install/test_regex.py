@@ -44,6 +44,8 @@ from pyquickhelper.loghelper import fLOG
 from src.pymyinstall.installhelper.module_install_page_wheel import extract_all_links, enumerate_links_module
 from src.pymyinstall.installhelper.install_cmd_helper import python_version
 from src.pymyinstall.installhelper.install_cmd_regex import regex_wheel_versions
+from src.pymyinstall.installhelper import get_wheel_version
+
 
 if sys.version_info[0] == 2:
     from codecs import open
@@ -206,6 +208,26 @@ class TestRegex (unittest.TestCase):
                 fLOG(r.groups())
                 found += 1
         self.assertTrue(found > 0)
+        vers = get_wheel_version(raw)
+        self.assertEqual(vers, "0.6+20171121")
+
+    def test_8(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        raw = "triangle-20170429-cp36-cp36m-win_amd64.whl"
+        found = 0
+        for pattern in regex_wheel_versions:
+            reg = re.compile(pattern)
+            r = reg.search(raw)
+            if r:
+                fLOG(r.groups())
+                found += 1
+        self.assertTrue(found > 0)
+        vers = get_wheel_version(raw)
+        self.assertEqual(vers, "20170429")
 
 
 if __name__ == "__main__":

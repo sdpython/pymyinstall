@@ -74,7 +74,7 @@ class TestCompareVersion(unittest.TestCase):
                 continue
 
             if i % 10 == 0:
-                fLOG(i, mod)
+                fLOG("[test_compare_versions]", i, '-', mod)
             try:
                 url1 = mod.get_exewheel_url_link(wheel=True)
             except MissingWheelException:
@@ -84,19 +84,27 @@ class TestCompareVersion(unittest.TestCase):
             except MissingWheelException:
                 url2 = None
             if url1 is None and url2 is None:
-                fLOG("missing package on both sides", mod)
-                clog("missing package on both sides", mod)
+                fLOG("[test_compare_versions] missing package on both sides", mod)
+                clog("[test_compare_versions] missing package on both sides", mod)
                 continue
-            # fLOG(i, url1, url2)
+
             n1 = url1[-1] if url1 is not None else None
             n2 = url2[-1] if url2 is not None else None
             v1 = get_wheel_version(n1) if n1 is not None else None
             v2 = get_wheel_version(n2) if n2 is not None else None
+            # might be just a date
+            if v1 is not None and '.' not in v1 and len(v1) != 8:
+                raise ValueError(
+                    "Wrong version number (1) '{0}' for '{1}' - version '{2}'".format(v1, mod.name, n1))
+            # might be just a date
+            if v2 is not None and '.' not in v2 and len(v2) != 8:
+                raise ValueError(
+                    "Wrong version number (2) '{0}' for '{1}' - version '{2}'".format(v2, mod.name, n2))
             cmp = compare_version(
                 v1, v2) if v1 is not None and v2 is not None else -2
             if cmp != 0:
-                fLOG("---", i, v1, v2, mod.name)
-                clog("---", i, v1, v2, mod.name)
+                fLOG("[test_compare_versions] ---", i, '-', v1, v2, mod.name)
+                clog("[test_compare_versions] ---", i, '-', v1, v2, mod.name)
                 if v1 is not None and v2 is not None and not ("rc1" in v1 or "rc1" in v2):
                     diff.append(mod)
 

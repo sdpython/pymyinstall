@@ -4,6 +4,7 @@
 """
 
 
+regex_wheel_version0 = "[-](triangle[-]([0-9]{8}))[-]"
 regex_wheel_version = "[-]([0-9]+[.][abc0-9]+([.][0-9]{1,2})?([.][0-9abdevcr]+)?)([+][a-z]+)?" + \
                       "([+]cuda[0-9]{2,5})?([+]cl[0-9]{2,5})?([+]git[0-9]{1})?([+]sdl[0-9])?([+]r33)?" + \
                       "([+]contrib_opencl)?([+]numpy[0-9]{1,2})?([+.]post[0-9]{1,2})?([.][0-9])?[-]"
@@ -12,14 +13,18 @@ regex_wheel_version3 = "[-](([0-9]+)[.]([0-9]+)[.]([0-9]+)(((rc)|(a)|(b))[0-9]+)
 regex_wheel_version4 = "[-](([0-9]+)[.]([0-9]+)(((rc[0-9]?)|(a)|(b))[0-9]+)?[.])((zip)|(tar)|(gz)|(whl))"
 regex_wheel_version5 = "[-]([0-9]+[.][0-9]+([.][0-9][.]?)?([0-9abcrdev+]+))[-]"
 regex_wheel_version6 = "[-]([0-9]+)[.]([0-9]+)[.+]([0-9]{8})[-]"
+# pylzma-0.4.9.4dev_r0-cp36-cp36m-win_amd64.whl
+regex_wheel_version7 = "[-](([0-9]+[.][0-9]+[.][0-9]+[.][0-9]+)[postdev_r0-9]+)[-]"
 
 regex_wheel_versions = [
+    regex_wheel_version0,
     regex_wheel_version,
     regex_wheel_version2,
     regex_wheel_version3,
     regex_wheel_version4,
     regex_wheel_version5,
-    regex_wheel_version6
+    regex_wheel_version6,
+    regex_wheel_version7
 ]
 
 
