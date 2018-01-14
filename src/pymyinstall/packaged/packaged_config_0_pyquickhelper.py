@@ -124,7 +124,6 @@ def pyquickhelper_set():
         "sphinx",
         "sphinx_gallery",
         "sphinxcontrib-blockdiag",
-        'sphinxcontrib-images',
         'sphinxcontrib-imagesvg',
         'sphinxcontrib-jsdemo',
         'snowballstemmer',
