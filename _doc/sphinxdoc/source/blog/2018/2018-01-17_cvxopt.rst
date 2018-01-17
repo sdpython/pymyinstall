@@ -1,0 +1,60 @@
+
+.. blogpost::
+    :title: Build cvxopt on Windows, cvxopt 1.1.9 not compatible with numpy 1.14
+    :keywords: Windows, cvxopt
+    :date: 2018-01-17
+    :categories: module
+
+    I recently started to have an issue with
+    :epkg:`cvxopt`.
+
+    ::
+
+        >>> import cvxopt
+        Traceback (most recent call last):
+          File "<stdin>", line 1, in <module>
+          File "C:\Python364_x64\lib\site-packages\cvxopt\__init__.py", line 34, in <module>
+            import cvxopt.base
+        ImportError: DLL load failed: Le module spécifié est introuvable.
+
+    It is due to the recent update :epkg:`numpy` 1.14 which seems to
+    be incompatible with :epkg:`numpy` 1.13.
+
+    Maybe I should switch to :epkg:`cvxpy`
+    as suggested in `dipy <http://nipy.org/dipy/>`_.
+    I also looked into
+    `Choosing a solver <http://www.cvxpy.org/en/latest/tutorial/advanced/#choosing-a-solver>`_
+    or `optlang <https://github.com/biosustain/optlang>`_.
+
+    Not sure if this package
+    is really maintained or if I should switch to
+    another one. Anyway, on Windows,
+    a file `.appveyor.yml <https://github.com/cvxopt/cvxopt/blob/master/.appveyor.yml>`_
+    defines the way to build it even though it is not up to date.
+    I updated `OpenBLAS <http://www.openblas.net/>`_,
+    `SuiteSparse <http://faculty.cse.tamu.edu/davis/suitesparse.html>`_.
+    `AppVeyor <https://www.appveyor.com/>`_ seems to have
+    `MinGW, MSYS, Cygwin <https://www.appveyor.com/docs/build-environment/#mingw-msys-cygwin>`_
+    installed by default.
+    Locally, I installed `mingw-w64 <http://mingw-w64.org/doku.php>`_
+    with all the packages.
+
+    I tried the file *x86_64-7.2.0-release-posix-seh-rt_v5-rev2.7z*
+    which you can find at the following location:
+    `sourceforge/mingw-w64/files <https://sourceforge.net/projects/mingw-w64/files/?source=navbar>`_.
+    It works if you can install lapack, blas, wincrt1400 too.
+
+    The file ``c:\Python364_x64\lib\distutils\cygwinccompiler.py``
+    must be modified too aroud line 86 to add the version
+    :epkg:`Python` was compiled with:
+
+    ::
+
+        elif msc_ver == '1900':
+            # VS2015 / MSVC 14.0
+            return ['vcruntime140']
+
+    I got *vcruntime140.dll* from
+    Visual Studio Community Edition but it seems an endless
+    path as I already know the build would fail with the
+    new version of :epkg:`numpy`. Let's drop.

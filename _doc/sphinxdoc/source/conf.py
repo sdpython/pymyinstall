@@ -30,5 +30,7 @@ blog_root = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/"
 
 epkg_dictionary['boost'] = "http://www.boost.org/"
 epkg_dictionary['boost_python'] = "http://www.boost.org/doc/libs/release/libs/python/"
+epkg_dictionary['cvxopt'] = "http://cvxopt.org/"
+epkg_dictionary['cvxpy'] = "http://www.cvxpy.org/en/latest/index.html"
 epkg_dictionary['dlib'] = "http://dlib.net/"
 epkg_dictionary['statsmodels'] = "http://www.statsmodels.org/stable/index.html"
