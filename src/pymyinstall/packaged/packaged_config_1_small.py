@@ -426,6 +426,12 @@ def small_set():
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
         ModuleInstall("appdirs", "pip",
                       purpose="A small Python module for determining appropriate platform-specific dirs"),
+        ModuleInstall("Send2Trash", "pip",
+                      purpose="Send file to trash natively under Mac OS X, Windows and Linux."),
+        ModuleInstall("pywinpty", "wheel",
+                      purpose="Python bindings for the winpty pseudo terminal library. It allows to create and " +
+                      "communicate with Windows processes that print outputs and recieve inputs via console input " +
+                      "and output pipes."),
         ModuleInstall("qgrid", "pip", usage="VIZ",
                       purpose="A Pandas DataFrame viewer for IPython Notebook."),
         ModuleInstall("ujson", "wheel",
