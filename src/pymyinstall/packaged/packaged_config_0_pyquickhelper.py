@@ -128,7 +128,6 @@ def pyquickhelper_set():
         'sphinxcontrib-jsdemo',
         'snowballstemmer',
         'sphinx-rtd-theme',
-        "sphinxjp.themes.revealjs",
         "tabledata",
         'tabulate',
         "terminado" if not sys.platform.startswith("win") else None,

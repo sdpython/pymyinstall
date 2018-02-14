@@ -400,8 +400,6 @@ def small_set():
                       "algorithms, needed by sphinx-rtd-theme."),
         ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
                       purpose="sphinx theme", usage="SPHINX"),
-        ModuleInstall("sphinxjp.themes.revealjs", "pip",
-                      purpose="slides based on revealjs, needed to convert notebook into slides"),
         ModuleInstall("feedparser", "pip", purpose="parse RSS streams"),
         ModuleInstall(
             "pbr", "pip", purpose="PBR is a library that injects some useful and sensible default behaviors into your setuptools run."),

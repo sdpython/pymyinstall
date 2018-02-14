@@ -88,7 +88,6 @@ missing_module_licenses = {
     "requests_oauthlib": "ISC",
     "rope_py3k": "GPL=OpenBSD",
     "smart_open": "Public Domain",
-    "sphinxjp.themes.revealjs": "MIT",
     "textblob": "MIT",
     "tzlocal": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
     "viscm": "MIT",
