@@ -776,6 +776,13 @@ def ensae_set():
         #
         ModuleInstall(
             'fcn', 'pip', purpose="Fully Convolutional Networks", usage="ML"),
+
+        #
+        # 2018-14
+        #
+        ModuleInstall(
+            'pyltr', 'pip', usage="ML", purpose="pyltr is a Python learning-to-rank toolkit "
+            "with ranking models, evaluation metrics, data wrangling helpers, and more."),
     ]
 
     if sys.version_info[0] == 2:
