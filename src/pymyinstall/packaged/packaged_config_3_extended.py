@@ -708,7 +708,13 @@ def extended_set():
         ModuleInstall('gdown', 'pip',
                       purpose="Google Drive direct download of big files."),
         ModuleInstall('pytube', 'pip',
-                      purpose="https://github.com/nficano/pytube"),
+                      purpose="play with youtube videos"),
+        #
+        # Janvier 2018
+        #
+        ModuleInstall('kartograph', 'pip', usage='VIZ',
+                      purpose="Kartograph is a simple and lightweight framework for building interactive map applications " +
+                      "without Google Maps or any other mapping service."),
     ]
 
     if sys.platform.startswith("win"):
