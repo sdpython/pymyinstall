@@ -267,7 +267,7 @@ def small_set():
                       "and output pipes."),
         ModuleInstall(
             "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets",
-            usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
+            usage="JUPYTER/LINUX"),
         ModuleInstall(
             "backports_abc", "pip", purpose="A backport of recent additions to the 'collections.abc' module",
             usage="JUPYTER"),
