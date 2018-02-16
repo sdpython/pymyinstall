@@ -119,7 +119,7 @@ def cloud_set():
                  'azure']:
 
         # azure part
-        mname = name.replace("-", ".")
+        mname = name.replace("-", ".").replace("_", ".")
         if mname in ("azure.nspkg", "azure.mgmt.nspkg",
                      "azure.servicemanagement.legacy"):
             skip_import = True
