@@ -41,6 +41,8 @@ def small_set():
                       "iterating, searching, and modifying the parse tree."),
         ModuleInstall(
             "coverage", "pip", purpose="measure the coverage of unit tests"),
+        ModuleInstall("urllib3", "pip",
+                      purpose="urllib2 extension"),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "codecov", "pip", purpose="submit coverage report to codecov"),
@@ -135,8 +137,6 @@ def small_set():
             "untokenize", "pip", purpose="Transforms tokens into original source code (while preserving whitespace).", usage="STYLE"),
         ModuleInstall(
             "pycodestyle", "pip", purpose="Python style guide checker", usage="STYLE"),
-        ModuleInstall(
-            "pydocstyle", "pip", purpose="Python docstring style checker", usage="STYLE"),
         ModuleInstall(
             "pep8", "pip", purpose="official guidelines on Python style"),
         ModuleInstall("autopep8", "pip",

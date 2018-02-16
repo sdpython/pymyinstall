@@ -102,7 +102,6 @@ def pyquickhelper_set():
         "psutil",
         "ptyprocess",  # if not sys.platform.startswith("win") else None,
         "pycodestyle",
-        "pydocstyle",
         "pycparser",
         "pyflakes",
         "pygments",

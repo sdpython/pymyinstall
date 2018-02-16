@@ -323,8 +323,6 @@ def ensae_set():
         ModuleInstall("tinydb", "pip",
                       purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) " +
                       "It's written in pure Python and has no external requirements.", usage="noSQL"),
-        ModuleInstall("urllib3", "pip",
-                      purpose="urllib2 extension"),
         ModuleInstall("gevent", "pip",
                       purpose="gevent is a coroutine-based Python networking library"),
         ModuleInstall("grequests", "pip",
