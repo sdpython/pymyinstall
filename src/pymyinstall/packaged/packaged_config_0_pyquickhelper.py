@@ -118,6 +118,7 @@ def pyquickhelper_set():
         "requests",
         "semantic_version",
         "simplegeneric",
+        "Send2Trash",
         "six",
         "smmap2",
         "sphinx",
