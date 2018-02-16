@@ -23,17 +23,18 @@ def get_default_ignore_modules():
         "keyrings.alt",      # weird this one on Windows
         # "guidata",
         # "monotonic",
-        "rope",             # for spyder
         "ordereddict",      # standard distribution (>= 3.4)
         "pathlib",          # standard distribution (>= 3.5)
         "pip",              # almost standard distribution, should be rare
         # manny names for this one (PTable, not maintained anymore)
         "prettytable",
         "pycryptodome",     # many names for this one
+        "pydocstyle",       # does not seem to be maintained
         "pyopengl",         # weird this one
         "pypiwin32",        # manny names for this one
         "pywin32",          # manny names for this one
         "pywin32_ctypes",   # manny names for this one
+        "rope",             # for spyder
         "setuptools",       # standard distribution
         "typing",           # standard distribution (>= 3.6)
     ]

@@ -433,7 +433,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         if len(miss) > 0:
             mes = "\n".join("Module '{0}' misses '{1}'".format(k, ", ".join(v))
                             for k, v in sorted(miss.items()))
-            warnings.warn("missing dependencies\n" + mes)
+            warnings.warn("[install_all] missing dependencies\n" + mes)
         fLOG("[install_all] end check dependencies")
 
     for k, v in sorted(out_streams_module.items()):
