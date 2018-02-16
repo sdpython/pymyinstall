@@ -41,18 +41,23 @@ except ImportError:
     import pyquickhelper as skip_
 
 
-from src.pymyinstall.installcustom import install_python
+from src.pymyinstall.installcustom import install_python, folder_older_than
 from pyquickhelper.loghelper import fLOG, CustomLog
 from pyquickhelper.pycode import get_temp_folder
 
 
-class TestDownloadPythonPyQuickHelper (unittest.TestCase):
+class TestDownloadPythonPyQuickHelper(unittest.TestCase):
 
     def test_install_python_pyquickhelper(self):
         fLOG(__file__, self._testMethodName, OutputPrint=True)
+
+        this = os.path.abspath(os.path.dirname(__file__))
+        res = folder_older_than(this)
+        self.assertIsInstance(res, bool)
+
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
-            __file__, "temp_py%s_pyq" % vers, clean=False, max_path=True)
+            __file__, "temp_py%s_pyq" % vers, clean=folder_older_than, max_path=True)
         down = get_temp_folder(
             __file__, "temp_py%s_pyq_download" % vers, clean=True, max_path=True)
         self.assertEqual(len(os.listdir(down)), 0)

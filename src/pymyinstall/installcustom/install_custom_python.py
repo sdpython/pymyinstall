@@ -5,6 +5,7 @@
 from __future__ import print_function
 import sys
 import os
+import datetime
 
 from ..installhelper.install_cmd_helper import run_cmd, unzip_files
 from .install_custom import download_page, download_file
@@ -306,4 +307,22 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
         return local
     else:
-        raise NotImplementedError("not available on platform " + sys.platform)
+        raise NotImplementedError("Not available on platform " + sys.platform)
+
+
+def folder_older_than(folder, delay=datetime.timedelta(30)):
+    """
+    Tells if a folder is older than a given timespan.
+
+    @param      folder      folder name
+    @param      delay       delay
+    @return                 boolean
+    """
+    folder = os.path.abspath(folder)
+    if not os.path.exists(folder):
+        return False
+    cre = os.stat(folder).st_ctime
+    dt = datetime.datetime.fromtimestamp(cre)
+    now = datetime.datetime.now()
+    delta = now - dt
+    return delta > delay
