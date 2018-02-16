@@ -112,6 +112,7 @@ def pyquickhelper_set():
         "pytz",
         "pywin32" if sys.platform.startswith("win") else None,
         "pywin32-ctypes" if sys.platform.startswith("win") else None,
+        'pywinpty',
         "pyzmq",
         "qtconsole",
         "releases",

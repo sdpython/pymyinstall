@@ -261,6 +261,10 @@ def small_set():
         ModuleInstall("pexpect", "pip",
                       purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications (needed by metakernel).",
                       usage="JUPYTER"),
+        ModuleInstall("pywinpty", "wheel",
+                      purpose="Python bindings for the winpty pseudo terminal library. It allows to create and " +
+                      "communicate with Windows processes that print outputs and recieve inputs via console input " +
+                      "and output pipes."),
         ModuleInstall(
             "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets",
             usage="JUPYTER/LINUX") if not sys.platform.startswith("win") else None,
@@ -428,10 +432,6 @@ def small_set():
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
         ModuleInstall("appdirs", "pip",
                       purpose="A small Python module for determining appropriate platform-specific dirs"),
-        ModuleInstall("pywinpty", "wheel",
-                      purpose="Python bindings for the winpty pseudo terminal library. It allows to create and " +
-                      "communicate with Windows processes that print outputs and recieve inputs via console input " +
-                      "and output pipes."),
         ModuleInstall("qgrid", "pip", usage="VIZ",
                       purpose="A Pandas DataFrame viewer for IPython Notebook."),
         ModuleInstall("ujson", "wheel",
