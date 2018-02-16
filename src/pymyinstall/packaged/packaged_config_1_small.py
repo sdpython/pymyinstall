@@ -169,6 +169,8 @@ def small_set():
             "requests-file", "pip", mname="requests_file", purpose="File transport adapter for Requests"),
         ModuleInstall(
             "requests-ftp", "pip", mname="requests_ftp", purpose="FTP Transport Adapter for Requests"),
+        ModuleInstall("wrapt", "wheel",
+                      purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall(
             "pandas-datareader", "pip", mname="pandas_datareader",
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),

@@ -90,7 +90,7 @@ def pyensae_set():
         "oauthlib",
         "osmapi",  # maps
         "packaging",
-        "pandas_datareader",
+        "pandas-datareader",
         "paramiko",  # ssh
         "pyasn1",
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
@@ -110,6 +110,7 @@ def pyensae_set():
         "scikit-learn",
         "simplesqlite",
         "toml",
+        "wrapt",
     ]
 
     for m in ensae_set():

@@ -356,8 +356,6 @@ def ensae_set():
         # purpose="Turn your Python and Javascript code into DOT flowcharts"),
 
         # biokit
-        ModuleInstall("wrapt", "wheel",
-                      purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall('colorlog', 'pip',
                       purpose="Log formatting with colors!"),
         ModuleInstall("easydev", "pip",
