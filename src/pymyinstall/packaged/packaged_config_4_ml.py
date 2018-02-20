@@ -408,7 +408,7 @@ def ensae_set():
                       purpose="Fixes some problems with Unicode text after the fact"),
         ModuleInstall("regex", "wheel",
                       purpose="Alternative regular expression module, to replace re."),
-        ModuleInstall("spacy", "pip", usage="NLP",
+        ModuleInstall("spacy", "wheel", usage="NLP",
                       purpose="Industrial-strength NLP") if sys.version_info[:2] >= (3, 5) else None,
 
         #
