@@ -1,0 +1,34 @@
+
+.. blogpost::
+    :title: Install spacy on Windows
+    :keywords: Windows, cvxopt
+    :date: 2018-02-21
+    :categories: module
+
+    It is not difficult to install
+    `spacy <https://spacy.io/>`_
+    on Windows. The site
+    `Unofficial Windows Binaries for Python Extension Packages <https://www.lfd.uci.edu/~gohlke/pythonlibs/>`_
+    hosted a compiled version.
+    But I tried:
+
+    ::
+
+        import spacy
+        spacy.load('fr')
+
+    And that did not work for an isue about utf-8.
+    It comes from the installation of module
+    `fr_core_news_sm <https://github.com/explosion/spacy-models/releases/tag/fr_core_news_sm-2.0.0>`_.
+    It needs to be decompressed and the setup needs to be modified
+    (remove the second line about utf-8). Finally:
+
+    ::
+
+        python setup.py install
+
+    Or to build it:
+
+    ::
+
+        python setup.py bdist_wheel

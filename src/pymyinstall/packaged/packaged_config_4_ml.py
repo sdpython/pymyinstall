@@ -410,6 +410,8 @@ def ensae_set():
                       purpose="Alternative regular expression module, to replace re."),
         ModuleInstall("spacy", "wheel", usage="NLP",
                       purpose="Industrial-strength NLP") if sys.version_info[:2] >= (3, 5) else None,
+        ModuleInstall("fr_core_news_sm", "wheel2", usage="NLP",
+                      purpose="French ressources for spacy") if sys.version_info[:2] >= (3, 5) else None,
 
         #
         #  2015-12
