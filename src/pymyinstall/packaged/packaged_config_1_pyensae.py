@@ -52,6 +52,7 @@ def pyensae_set():
         "pyasn1",
         "pycrypto",  # paramiko, cannot be replaced by pycryptodome
         "pycryptodomex",
+        "pycurl",  # markdown2
         "PyJWT",
         "pynacl",  # paramiko
         "pyopenssl",  # quandl

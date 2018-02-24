@@ -336,6 +336,8 @@ def extended_set():
         #
         ModuleInstall(
             "docopt", "pip", purpose="Pythonic argument parser, that will make you smile"),
+        ModuleInstall("pycurl", "wheel",
+                      purpose="PycURL, a interface to the libcurl library. (for grab)"),
         ModuleInstall("markdown2", "pip", purpose="markdown parser"),
         ModuleInstall(
             "structures", "pip", purpose="User-friendly library for creating data structures."),

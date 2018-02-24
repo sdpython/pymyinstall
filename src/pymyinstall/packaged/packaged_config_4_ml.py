@@ -327,8 +327,6 @@ def ensae_set():
                       purpose="gevent is a coroutine-based Python networking library"),
         ModuleInstall("grequests", "pip",
                       purpose="GRequests allows you to use Requests with Gevent to make asynchronous HTTP Requests easily."),
-        ModuleInstall("pycurl", "wheel",
-                      purpose="PycURL, a interface to the libcurl library. (for grab)"),
         ModuleInstall("pytils", "pip",
                       purpose="Russian-specific string utils (for selection, weblib)"),
         ModuleInstall("selection", "pip",
