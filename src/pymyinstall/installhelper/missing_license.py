@@ -69,7 +69,7 @@ missing_module_licenses = {
     "Mako": "MIT",
     "marisa_trie": "MIT",
     "mock": "BSD",
-    "msgpack-python": "Apache Software License",
+    "msgpack": "Apache Software License",
     "multimethods": "MIT",
     "multipledispatch": "BSD",
     "nodeenv": "BSD",
