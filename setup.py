@@ -203,8 +203,6 @@ if not r:
         pyquickhelper = import_pyquickhelper()
         from pyquickhelper.pycode import process_standard_options_for_setup_help
         process_standard_options_for_setup_help(sys.argv)
-    else:
-        pyquickhelper = import_pyquickhelper()
 
     if sys.version_info[0] >= 3:
         entry_points = {
@@ -229,9 +227,6 @@ if not r:
                 'pymy_deps = pymyinstall.cli.pymy_deps:main',
                 'pymy_status = pymyinstall.cli.pymy_status:main',
             ]}
-
-    from pyquickhelper.pycode import clean_readme
-    long_description = clean_readme(long_description)
 
     setup(
         name=project_var_name,
