@@ -117,6 +117,7 @@ def cloud_set():
                  'azure_storage_blob',
                  'azure_storage_file',
                  'azure_storage_queue',
+                 'azure-storage-nspkg',
                  # main package
                  'azure']:
 
