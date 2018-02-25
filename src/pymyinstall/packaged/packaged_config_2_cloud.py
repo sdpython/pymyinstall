@@ -82,6 +82,8 @@ def cloud_set():
                  "azure-mgmt-sql",
                  "azure-mgmt-monitor",
                  # addition 2018-02
+                 'azure_storage_common',
+                 'azure_cosmosdb_nspkg',
                  'azure_cosmosdb_table',
                  'azure_eventgrid',
                  'azure_mgmt_advisor',

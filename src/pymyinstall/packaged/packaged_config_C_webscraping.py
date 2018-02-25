@@ -36,6 +36,9 @@ def scraping_set():
             "yarl", "pip", usage="WEB",
             purpose="Yet another URL library"),
         ModuleInstall(
+            "idna_ssl", "pip", usage="WEB",
+            purpose="Patch ssl.match_hostname for Unicode(idna) domains support"),
+        ModuleInstall(
             "aiohttp", "wheel", usage="WEB",
             purpose="http client/server for asyncio"),
         ModuleInstall(

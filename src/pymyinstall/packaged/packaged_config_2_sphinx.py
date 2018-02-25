@@ -56,8 +56,6 @@ def sphinx_theme_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinxjp.themes.gopher", "pip",
                       purpose="sphinx theme", usage="SPHINX"),
-        ModuleInstall("sphinx-docs-theme", "pip", mname="sphinx_docs_theme",
-                      purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinx-gallery", "pip", mname="sphinx_gallery",
                       purpose="gallery for examples", usage="SPHINX"),
         ModuleInstall("docrepr", "pip",

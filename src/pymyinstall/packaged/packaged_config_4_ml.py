@@ -371,6 +371,8 @@ def ensae_set():
         #
         #
         #
+        ModuleInstall("deprecation", "pip",
+                      purpose="A library to handle automated deprecations"),
         ModuleInstall("lz4", "wheel",
                       purpose="LZ4 Bindings for Python (for dpark)"),
         ModuleInstall("fabric", "pip",
@@ -577,6 +579,8 @@ def ensae_set():
                       purpose="Battle-tested Apache Storm Multi-Lang implementation for Python."),
         ModuleInstall("Fabric3", "pip", mname="fabric",
                       purpose="Fabric is a simple, Pythonic tool for remote execution and deployment (py2.7/py3.4+ compatible fork)"),
+        ModuleInstall("texttable", "pip",
+                      purpose="module for creating simple ASCII tables"),
         ModuleInstall("streamparse", "pip",
                       purpose="Streamparse lets you run Python code against real-time streams of data via Apache Storm."),
         #
@@ -770,6 +774,8 @@ def ensae_set():
         #
         # 2017-12
         #
+        ModuleInstall('chainercv', 'pip', usage="DATA/DML",
+                      purpose="ChainerCV is a deep learning based computer vision library built on top of Chainer."),
         ModuleInstall(
             'fcn', 'pip', purpose="Fully Convolutional Networks", usage="ML"),
 

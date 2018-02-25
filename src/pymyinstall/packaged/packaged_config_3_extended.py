@@ -423,6 +423,8 @@ def extended_set():
                       usage="PROFILING"),
         ModuleInstall("memory-profiler", "pip", mname="memory_profiler",
                       purpose="A module for monitoring memory usage of a python program", usage="PROFILING"),
+        ModuleInstall("pyinstrument_cext", "pip", usage="PROFILING",
+                      purpose="Pyinstrument's C extensions - reducing the overhead of statistical profilers"),
         ModuleInstall("pyinstrument", "pip", usage="PROFILING",
                       purpose="A Python profiler that records the call stack of the executing code, " +
                       "instead of just the final function in it."),
