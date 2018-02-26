@@ -393,6 +393,9 @@ def extended_set():
             "xgboost", "wheel", purpose="Parallelized Stochastic Gradient Descent (only available on " +
             "Python 3 and x64)", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
         ModuleInstall(
+            "catboost", "pip", purpose="CatBoost is a machine learning method based on gradient boosting " +
+            "over decision trees.", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
+        ModuleInstall(
             "lightgbm", "pip", purpose="Parallelized Stochastic Gradient Descent (only available on " +
             "Python 3 and x64)", usage="DATA/ML") if sys.version_info[0] >= 3 and is_64bit() else None,
         ModuleInstall("pygling", "pip",
