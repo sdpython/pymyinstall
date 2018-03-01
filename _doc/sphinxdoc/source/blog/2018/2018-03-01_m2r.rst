@@ -1,0 +1,12 @@
+
+.. blogpost::
+    :title: m2r as a replacement of recommonmark
+    :keywords: m2r, recommonmark
+    :date: 2018-03-01
+    :categories: module
+
+    `recommonmark <https://pypi.python.org/pypi/recommonmark>`_ was not recently
+    updated and fails with the latest version
+    of :epkg:`Sphinx` (1.7.1). See
+    `'Values' object has no attribute 'pep_references' missing with 1.7.0b1 <https://github.com/sphinx-doc/sphinx/issues/4493>`_.
+    You should use `m2r <https://pypi.python.org/pypi/m2r>`_.

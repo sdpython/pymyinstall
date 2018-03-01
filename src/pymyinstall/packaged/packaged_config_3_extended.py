@@ -13,6 +13,8 @@ def extended_set():
     list of modules to install, an rich set, to work with data and more, it requires the modules in set *small*
     """
     mod = [
+        ModuleInstall("m2r", "pip",
+                      purpose="M2R converts a markdown file including reStructuredText (rst) markups to a valid rst format."),
         ModuleInstall("CommonMark", "pip", mname="commonmark",
                       purpose="Python parser for the CommonMark Markdown spec"),
         ModuleInstall("recommonmark", "pip",
