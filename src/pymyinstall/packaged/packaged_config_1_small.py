@@ -43,6 +43,9 @@ def small_set():
             "coverage", "pip", purpose="measure the coverage of unit tests"),
         ModuleInstall("urllib3", "pip",
                       purpose="urllib2 extension"),
+        ModuleInstall(
+            "chardet", "pip", usage="WEB",
+            purpose="Universal encoding detector."),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "codecov", "pip", purpose="submit coverage report to codecov"),

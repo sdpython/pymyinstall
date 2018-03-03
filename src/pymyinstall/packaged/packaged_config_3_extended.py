@@ -506,10 +506,6 @@ def extended_set():
         ModuleInstall("zict", "pip",
                       purpose="The dictionary / mutable mapping interface is powerful and multi-faceted."),
 
-        # mezzanine
-        ModuleInstall(
-            "chardet", "pip", usage="WEB",
-            purpose="Universal encoding detector."),
         # pdf
         ModuleInstall("pyPdf", "github", "sdpython", usage="PDF", pipgit=True,
                       branch="trunk", purpose="read PDF"),
