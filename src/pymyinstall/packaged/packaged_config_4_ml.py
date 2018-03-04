@@ -389,7 +389,7 @@ def ensae_set():
                       purpose="Cython .pxd files for some of the MurmurHash 2 and 3 hash functions, with a slightly more Pythonic API. " +
                       "The only access to these functions is via Cython — I don’t see why they should be " +
                       "useful from pure Python.") if sys.version_info[:2] >= (3, 5) else None,
-        ModuleInstall("preshed", "pip",
+        ModuleInstall("preshed", "wheel",
                       purpose="Cython hash table that trusts the keys are pre-hashed") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("text-unidecode", "pip", mname="text_unidecode",
                       purpose="The most basic Text::Unidecode port") if sys.version_info[:2] >= (3, 5) else None,
