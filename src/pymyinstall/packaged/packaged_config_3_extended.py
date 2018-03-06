@@ -118,6 +118,10 @@ def extended_set():
                       purpose="Pure Python read/write support for ESRI Shapefile format"),
         ModuleInstall('Shapely', 'wheel', mname='shapely',
                       purpose="Manipulation and analysis of geometric objects in the Cartesian plane."),
+        ModuleInstall('descartes', 'pip',
+                      purpose="Use Shapely or GeoJSON-like geometric objects as matplotlib paths and patches"),
+        ModuleInstall('geopandas', 'pip',
+                      purpose="GeoPandas is an open source project to make working with geospatial data in python easier. "),
         ModuleInstall(
             'vispy', 'pip', purpose="Vispy is a high-performance interactive 2D/3D data visualization library."),
         ModuleInstall(
