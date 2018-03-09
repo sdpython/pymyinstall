@@ -59,6 +59,7 @@ def pyquickhelper_set():
         "jupyter_sphinx",
         "jyquickhelper",
         "keyring",
+        "kiwisolver",
         "logbook",
         "lxml",
         "matplotlib",

@@ -97,6 +97,8 @@ def small_set():
                       "package is to allow the user to change the number of CPU's MKL is using at runtime.", usage="DATA/ML"),
         ModuleInstall("cycler", "pip",
                       purpose="dependency for matplotlib", usage="VIZ"),
+        ModuleInstall("kiwisolver", "wheel",
+                      purpose="Kiwi is an efficient C++ implementation of the Cassowary constraint solving algorithm."),
         ModuleInstall("matplotlib", "wheel",
                       purpose="most used plotting library", usage="VIZ"),
         ModuleInstall(
