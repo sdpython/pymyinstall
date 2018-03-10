@@ -17,6 +17,7 @@ def ensae_teaching_cs_set():
         "bkcharts",
         "bokeh",
         "cartopy",
+        "click",
         "click_plugins",
         "cligj",
         "cloudpickle",
