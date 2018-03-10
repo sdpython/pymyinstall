@@ -53,6 +53,8 @@ def pyquickhelper_set():
         "jsonschema",
         "jupyter-console",
         "jupyter",
+        "jupyterlab",
+        "jupyterlab-launcher",
         "jupyter_core",
         "jupyter_client",
         "jupyter-pip",

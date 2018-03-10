@@ -234,6 +234,11 @@ def small_set():
         ModuleInstall(
             "jupyter_sphinx", "pip", purpose="Jupyter Sphinx Extensions", usage="JUPYTER"),
         ModuleInstall(
+            "jupyterlab-launcher", "pip", mname="jupyterlab_launcher",
+            purpose="Jupyter Lab Launcher", usage="JUPYTER"),
+        ModuleInstall(
+            "jupyterlab", "pip", purpose="Jupyter Lab", usage="JUPYTER"),
+        ModuleInstall(
             "ipympl", "pip", purpose="Matplotlib Jupyter Extension", usage="JUPYTER"),
         ModuleInstall(
             "nbsphinx", "pip", purpose="nbsphinx is a Sphinx extension that provides a source parser for *.ipynb files.", usage="JUPYTER"),
