@@ -27,6 +27,7 @@ def ensae_teaching_cs_set():
         "ete3",
         "fairtest",
         "feedparser",
+        "fiona",
         "foolbox",
         "fuel",
         "geopandas",

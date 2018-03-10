@@ -101,6 +101,9 @@ def small_set():
                       purpose="Kiwi is an efficient C++ implementation of the Cassowary constraint solving algorithm."),
         ModuleInstall("matplotlib", "wheel",
                       purpose="most used plotting library", usage="VIZ"),
+        ModuleInstall("mpl_finance", "github", "matplotlib", usage="VIZ",
+                      purpose="This module consists of code extracted from the deprecated matplotlib.finance " +
+                      "module along with a few examples of usage."),
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall(

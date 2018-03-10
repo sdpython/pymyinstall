@@ -40,6 +40,7 @@ def pyensae_set():
         "python3-linkedin",
         "markdown2",
         "more-itertools",
+        "mpl_finance",
         "msrest",
         "msrestazure",
         "networkx",
