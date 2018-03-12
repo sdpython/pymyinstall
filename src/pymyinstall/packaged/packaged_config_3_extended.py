@@ -391,6 +391,12 @@ def extended_set():
         ModuleInstall(
             "cairocffi", "wheel2", purpose="cairocffi is a CFFI-based drop-in replacement for Pycairo, " +
             "a set of Python bindings and object-oriented API for cairo"),
+        ModuleInstall("tinycss2", "pip", purpose="tinycss2 is a complete yet simple CSS parser for Python. " +
+                      "It supports the full syntax and error handling for CSS 2.1 as well as some CSS 3 modules"),
+        ModuleInstall("cssselect2", "pip",
+                      purpose="CSS selectors for Python ElementTree"),
+        ModuleInstall(
+            "cairosvg", "pip", purpose="Convert your SVG files to PDF and PNG."),
         ModuleInstall(
             "gizeh", "pip", purpose="Simple Vector Graphics for Python"),
         ModuleInstall(
