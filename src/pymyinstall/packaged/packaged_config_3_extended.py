@@ -725,11 +725,12 @@ def extended_set():
         ModuleInstall('pytube', 'pip',
                       purpose="play with youtube videos"),
         #
-        # Janvier 2018
+        # Mars 2018
         #
-        ModuleInstall('kartograph', 'pip', usage='VIZ',
-                      purpose="Kartograph is a simple and lightweight framework for building interactive map applications " +
-                      "without Google Maps or any other mapping service."),
+        ModuleInstall('pyjsparser', 'pip',
+                      purpose="Fast javascript parser (based on esprima.js)"),
+        ModuleInstall('Js2Py', 'pip', mname="js2py",
+                      purpose="JavaScript to Python Translator & JavaScript interpreter written in 100% pure Python."),
     ]
 
     if sys.platform.startswith("win"):
