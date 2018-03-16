@@ -638,6 +638,8 @@ def extended_set():
                       "It is compatible with Python 2 and Python 3."),
         ModuleInstall('fasteners', 'pip',
                       purpose="A python package that provides useful locks."),
+        ModuleInstall('asciitree', 'pip',
+                      purpose="Draws ASCII trees."),
         ModuleInstall('zarr', 'pip',
                       purpose="A minimal implementation of chunked, compressed, N-dimensional arrays for Python."),
         ModuleInstall('rx', 'pip',
