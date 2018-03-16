@@ -21,6 +21,7 @@ def pyquickhelper_set():
         "cairocffi",
         "cairosvg",
         "certifi",
+        "cffi",
         "chardet",
         "codecov",
         "colorama",
