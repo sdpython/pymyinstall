@@ -31,6 +31,7 @@ def pyquickhelper_set():
         "cycler",
         "DataProperty",
         "decorator",
+        "defusedxml",  # cairosvg
         "docformatter",
         "docutils",
         "entrypoints",
