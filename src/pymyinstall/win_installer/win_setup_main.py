@@ -131,7 +131,7 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
 
     The setup will also contains `pandoc <http://pandoc.org/>`_,
     `7z <http://www.7-zip.org/>`_,
-    `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_,
+    `SQLiteSpy <https://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_,
     `Scite <http://www.scintilla.org/SciTE.html>`_,
     `MinGW <http://www.mingw.org/>`_,
     `Graphviz <http://www.graphviz.org/>`_.

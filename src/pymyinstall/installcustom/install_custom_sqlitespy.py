@@ -14,7 +14,7 @@ from .install_custom import download_page, download_from_sourceforge
 
 def IsSQLiteSpyInstalled(dest_folder):
     """
-    check if SQLiteSpy was already installed
+    Checks if :epkg:`SQLiteSpy` was already installed
 
     @param      dest_folder     where it was installed
     @return                     boolean
@@ -28,7 +28,7 @@ def IsSQLiteSpyInstalled(dest_folder):
 
 def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
     """
-    Install `SQLiteSpy <http://www.yunqa.de/delphi/products/sqlitespy/index>`_.
+    Install :epkg:`SQLiteSpy`.
     It does not do it a second time if it is already installed.
 
     @param      temp_folder     where to download the setup
@@ -42,7 +42,7 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
     if IsSQLiteSpyInstalled(temp_folder):
         return os.path.join(temp_folder, "SQLiteSpy.exe")
 
-    link = "http://www.yunqa.de/delphi/products/sqlitespy/index"
+    link = "https://www.yunqa.de/delphi/products/sqlitespy/index"
     page = download_page(link)
     if sys.platform.startswith("win"):
         reg = re.compile(
