@@ -9,7 +9,6 @@ from .install_cmd_regex import regex_wheel_versions
 
 import sys
 import re
-# import pip._vendor.pkg_resources
 import warnings
 import functools
 

@@ -5,7 +5,12 @@
 .. versionadded:: 1.1
 """
 import os
-import pip
+try:
+    from pip import get_installed_distributions
+except KeyError:
+    from pyquickhelper.pycode.pip_helper import fix_pip_902
+    fix_pip_902()
+    from pip import get_installed_distributions
 import time
 from .module_install_version import get_pypi_version
 from ..packaged import all_set
@@ -33,7 +38,7 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
     keys.update({mod["mname"].lower(): mod for mod in rows if mod["mname"]})
 
     all_installed = []
-    dists = pip.get_installed_distributions()
+    dists = get_installed_distributions()
     if short_list:
         dists = [_ for _ in dists if _.project_name in short_list]
     pack = map(lambda d: (d.project_name.lower(), d), dists)
