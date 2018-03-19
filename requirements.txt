@@ -3,6 +3,6 @@ coverage
 jyquickhelper
 keyring
 memory_profiler!=0.48.0
-pyquickhelper>=1.7.2438
+pyquickhelper>=1.7.2468
 wheel
 xgboost
