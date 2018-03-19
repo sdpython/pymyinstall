@@ -348,6 +348,15 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
             fLOG("update pip if needed")
         update_pip()
 
+    # More information.
+    sorted_names = ", ".join(sorted(_.name for _ in modules))
+    ordered_names = ", ".join(_.name for _ in modules)
+    fLOG('[install_all] sorted modules ----------------------------')
+    fLOG(wrap(sorted_names))
+    fLOG('[install_all] modules installation order ----------------')
+    fLOG(wrap(ordered_names))
+    fLOG('[install_all] begin ----------------------')
+
     modules = list_module
     again = []
     errors = []
