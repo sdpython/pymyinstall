@@ -17,6 +17,7 @@ from __future__ import print_function
 import sys
 import os
 import warnings
+from textwrap import wrap
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException, MissingReferenceException
 from ..installhelper.module_dependencies import missing_dependencies
@@ -349,12 +350,14 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         update_pip()
 
     # More information.
-    sorted_names = ", ".join(sorted(_.name for _ in modules))
-    ordered_names = ", ".join(_.name for _ in modules)
+    sorted_names = ", ".join(sorted(_.name.lower() for _ in list_module))
+    ordered_names = ", ".join(_.name for _ in list_module)
     fLOG('[install_all] sorted modules ----------------------------')
-    fLOG(wrap(sorted_names))
+    fLOG("\n".join(wrap(sorted_names, width=100,
+                        initial_indent='    ', subsequent_indent='    ')))
     fLOG('[install_all] modules installation order ----------------')
-    fLOG(wrap(ordered_names))
+    fLOG("\n".join(wrap(ordered_names, width=100,
+                        initial_indent='    ', subsequent_indent='    ')))
     fLOG('[install_all] begin ----------------------')
 
     modules = list_module
