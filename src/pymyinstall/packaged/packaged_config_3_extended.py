@@ -640,6 +640,9 @@ def extended_set():
                       purpose="A python package that provides useful locks."),
         ModuleInstall('asciitree', 'pip',
                       purpose="Draws ASCII trees."),
+        ModuleInstall('numcodecs', 'wheel',
+                      purpose="Numcodecs is a Python package providing buffer compression and transformation codecs for use " +
+                      "in data storage and communication applications."),
         ModuleInstall('zarr', 'pip',
                       purpose="A minimal implementation of chunked, compressed, N-dimensional arrays for Python."),
         ModuleInstall('rx', 'pip',
