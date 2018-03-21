@@ -22,7 +22,6 @@ KEYWORDS = project_var_name + ', installation, Xavier Dupré'
 DESCRIPTION = """Easy installation of modules for data scientists"""
 CLASSIFIERS = [
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 2.7',
     'Intended Audience :: Developers',
     'Topic :: Scientific/Engineering',
     'Topic :: Education',
