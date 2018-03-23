@@ -88,13 +88,13 @@ def small_set():
             "pycparser", "pip", purpose="pycparser is a complete parser of the C language, written in pure " +
             "Python using the PLY parsing library. It parses C code into " +
             "an AST and can serve as a front-end for C compilers or analysis tools."),
-        ModuleInstall("Cython", "wheel", mname="cython",
-                      purpose="pseudo C++ in python"),
         ModuleInstall("numpy", "wheel",
                       purpose="matrix computation", usage="DATA/ML"),
         ModuleInstall("mkl_service", "wheel", mname="mkl",
                       purpose="This package exposes a few functions which are declared in mkl_service.h. The main purpose of the " +
                       "package is to allow the user to change the number of CPU's MKL is using at runtime.", usage="DATA/ML"),
+        ModuleInstall("Cython", "wheel", mname="cython",
+                      purpose="pseudo C++ in python"),
         ModuleInstall("cycler", "pip",
                       purpose="dependency for matplotlib", usage="VIZ"),
         ModuleInstall("kiwisolver", "wheel",
