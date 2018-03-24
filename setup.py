@@ -11,6 +11,7 @@ from setuptools import find_packages
 #########
 
 project_var_name = "pymyinstall"
+project_owner = 'sdpython'
 sversion = "1.2"
 versionPython = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path = "Lib/site-packages/" + project_var_name
@@ -56,7 +57,7 @@ def is_local():
                   "copy27", "copy_dist", "local_pypi", "notebook", "publish", "publish_doc",
                   "register", "unittests", "unittests_LONG", "unittests_SKIP", "unittests_GUI",
                   "run27", "sdist", "setupdep", "test_local_pypi", "upload_docs", "setup_hook",
-                  "copy_sphinx", "write_version", "lab"}:
+                  "copy_sphinx", "write_version", "lab", 'history'}:
         if cname in sys.argv:
             try:
                 import_pyquickhelper()
@@ -184,7 +185,7 @@ if is_local():
         unittest_modules=["pyquickhelper"], fLOG=logging_function,
         covtoken=("b67b3051-8c5d-460b-b2fa-51d81ab7008c",
                   "'_UT_36_std' in outfile"),
-        file_filter_pep8=file_filter_pep8)
+        file_filter_pep8=file_filter_pep8, github_owner=project_owner)
     if not r and not ({"bdist_msi", "sdist",
                        "bdist_wheel", "publish", "publish_doc", "register",
                        "upload_docs", "bdist_wininst", "build_ext"} & set(sys.argv)):
