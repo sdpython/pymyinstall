@@ -26,7 +26,6 @@ def datascientistbase_set():
         "gensim",
         "idna",
         "jmespath",
-        "packaging",
         "pythonnet",
         "pywin32" if sys.platform.startswith("win") else None,
         "pywin32-ctypes" if sys.platform.startswith("win") else None,

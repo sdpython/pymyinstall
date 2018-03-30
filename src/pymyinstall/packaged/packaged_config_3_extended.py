@@ -203,8 +203,6 @@ def extended_set():
                       purpose="Cryptographic modules for Python (not available on x64 and Python 3)"),
         ModuleInstall("xxhash", "wheel",
                       purpose="xxHash is an Extremely fast Hash algorithm, running at RAM speed limits."),
-        ModuleInstall("packaging", "pip",
-                      purpose="helpers for packages"),
         ModuleInstall("cryptography", "pip",
                       purpose="cryptography is a package which provides cryptographic recipes and primitives to Python developers."),
         ModuleInstall(

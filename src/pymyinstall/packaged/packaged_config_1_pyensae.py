@@ -47,7 +47,6 @@ def pyensae_set():
         "ndg-httpsclient",  # quandl
         "oauthlib",
         "osmapi",  # maps
-        "packaging",
         "pandas-datareader",
         "paramiko",  # ssh
         "pyasn1",
