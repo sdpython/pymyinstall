@@ -133,6 +133,8 @@ def small_set():
             "prompt_toolkit", "pip", purpose="Library for building powerful interactive command lines in Python", usage="JUPYTER"),
         ModuleInstall("docutils", "pip",
                       purpose="interpret RST format", usage="SPHINX"),
+        ModuleInstall("packaging", "pip",
+                      purpose="Core utilities for Python packages"),
         ModuleInstall(
             "sphinx", "pip", purpose="documentation generation based on RST", usage="SPHINX"),
         ModuleInstall(

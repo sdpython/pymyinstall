@@ -95,6 +95,7 @@ def pyquickhelper_set():
         "openpyxl",
         "path.py",
         "pbr",
+        "packaging",
         "pandas",
         "pandoc-attributes",
         "pandocfilters",
