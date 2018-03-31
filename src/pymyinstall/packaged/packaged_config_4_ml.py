@@ -381,7 +381,7 @@ def ensae_set():
         ModuleInstall("invoke", "pip",
                       purpose="Invoke is a Python task execution tool & library, drawing inspiration " +
                       "from various sources to arrive at a powerful & clean feature set."),
-        ModuleInstall("msgpack", "pip",
+        ModuleInstall("msgpack", "wheel",
                       purpose="MessagePack (de)serializer."),
         ModuleInstall("cymem", "pip",
                       purpose="Manage calls to calloc/free through Cython") if sys.version_info[:2] >= (3, 5) else None,
@@ -393,9 +393,9 @@ def ensae_set():
                       purpose="Cython hash table that trusts the keys are pre-hashed") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("text-unidecode", "pip", mname="text_unidecode",
                       purpose="The most basic Text::Unidecode port") if sys.version_info[:2] >= (3, 5) else None,
-        ModuleInstall("termcolor", "pip", mname="msgpack_numpy",
+        ModuleInstall("termcolor", "pip",
                       purpose="ANSII Color formatting for output in terminal."),
-        ModuleInstall("msgpack-numpy", "pip",
+        ModuleInstall("msgpack-numpy", "pip", mname="msgpack_numpy",
                       purpose="Numpy data serialization using msgpack"),
         ModuleInstall("thinc", "wheel", usage="OPTIM",
                       purpose="Practical Machine Learning for NLP. Thinc is the machine learning " +

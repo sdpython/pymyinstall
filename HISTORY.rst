@@ -3,9 +3,10 @@
 History
 =======
 
-current - 2018-03-30 - 0.00Mb
+current - 2018-03-31 - 0.00Mb
 =============================
 
+* `38`: add module asteval (lmfit), ipydatawidgets (pythreejs) (2018-03-31)
 * `37`: add module packaging (2018-03-30)
 
 1.2.1527 - 2018-03-23 - 1.98Mb

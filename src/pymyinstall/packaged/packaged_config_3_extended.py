@@ -604,6 +604,8 @@ def extended_set():
         ModuleInstall("brythonmagic", "pip",
                       purpose="Magics to use brython in Jupyter notebook."),
         ModuleInstall(
+            "asteval", "pip", purpose="Safe, minimalistic evaluator of python expression using ast module"),
+        ModuleInstall(
             "lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usage="OPTIM"),
         #
         # August, September, October, December 2016
