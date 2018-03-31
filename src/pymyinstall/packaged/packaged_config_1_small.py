@@ -257,6 +257,8 @@ def small_set():
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
             "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="JUPYTER"),
+        ModuleInstall("ipyscales", "pip",
+                      purpose="A widget library for scales", usage="JUPYTER"),
         ModuleInstall("ipydatawidgets", "pip",
                       purpose="A set of widgets to help facilitate reuse of large datasets across widgets", usage="JUPYTER"),
         ModuleInstall(
