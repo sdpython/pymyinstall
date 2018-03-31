@@ -383,7 +383,7 @@ def ensae_set():
                       "from various sources to arrive at a powerful & clean feature set."),
         # ModuleInstall("msgpack", "wheel",
         #               purpose="MessagePack (de)serializer."),
-        ModuleInstall("msgpack-python", "wheel", mname="msgpack-python",
+        ModuleInstall("msgpack-python", "wheel", mname="msgpack_python",
                       purpose="MessagePack (de)serializer."),
         ModuleInstall("cymem", "pip",
                       purpose="Manage calls to calloc/free through Cython") if sys.version_info[:2] >= (3, 5) else None,
