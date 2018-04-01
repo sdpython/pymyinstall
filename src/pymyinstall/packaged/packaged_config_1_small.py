@@ -40,13 +40,16 @@ def small_set():
                       purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for " +
                       "iterating, searching, and modifying the parse tree."),
         ModuleInstall(
+            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
+            "of SSL certificates while verifying the identity of TLS hosts."),
+        ModuleInstall("requests", "pip", purpose="human interface for http"),
+        ModuleInstall(
             "coverage", "pip", purpose="measure the coverage of unit tests"),
         ModuleInstall("urllib3", "pip",
                       purpose="urllib2 extension"),
         ModuleInstall(
             "chardet", "pip", usage="WEB",
             purpose="Universal encoding detector."),
-        ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "codecov", "pip", purpose="submit coverage report to codecov"),
         ModuleInstall("nose", "pip", purpose="run unit tests"),
@@ -65,16 +68,6 @@ def small_set():
                       purpose="reads/writes Excel files, version is 1.8.6 due to pandas which does not work with more recent verrsions yet"),
         ModuleInstall("xlrd", "pip", purpose="reads Excel files"),
         ModuleInstall("xlwt", "pip", purpose="writes Excel files"),
-        ModuleInstall("pywin32", "wheel2",
-                      mname="win32com", purpose="call Windows DLL",
-                      post=dict(
-                          pre_cmd="module_install_preprocess",
-                          cmd_python="{0}\\Scripts\\pywin32_postinstall.py -install"),
-                      usage="WINDOWS") if sys.platform.startswith("win") else None,
-        ModuleInstall("pywin32-ctypes", "pip", mname="win32ctypes",
-                      purpose="call Windows DLL", usage="WINDOWS") if sys.platform.startswith("win") else None,
-        ModuleInstall("winshell", "pip", purpose="Windows shell functions",
-                      usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
             'XlsxWriter', 'pip', mname='xlsxwriter', purpose="writes Excel files"),
         ModuleInstall(
@@ -104,6 +97,16 @@ def small_set():
         ModuleInstall("mpl_finance", "github", "matplotlib", usage="VIZ",
                       purpose="This module consists of code extracted from the deprecated matplotlib.finance " +
                       "module along with a few examples of usage."),
+        ModuleInstall("pywin32", "wheel2",
+                      mname="win32com", purpose="call Windows DLL",
+                      post=dict(
+                          pre_cmd="module_install_preprocess",
+                          cmd_python="{0}\\Scripts\\pywin32_postinstall.py -install"),
+                      usage="WINDOWS") if sys.platform.startswith("win") else None,
+        ModuleInstall("pywin32-ctypes", "pip", mname="win32ctypes",
+                      purpose="call Windows DLL", usage="WINDOWS") if sys.platform.startswith("win") else None,
+        ModuleInstall("winshell", "pip", purpose="Windows shell functions",
+                      usage="WINDOWS") if sys.platform.startswith("win") else None,
         ModuleInstall(
             "brewer2mpl", "pip", purpose="Connect colorbrewer2.org color maps to Python and matplotlib"),
         ModuleInstall(
@@ -165,9 +168,6 @@ def small_set():
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
-        ModuleInstall(
-            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
-            "of SSL certificates while verifying the identity of TLS hosts."),
         ModuleInstall(
             "enum34", "pip", purpose="for ggplot, Object-oriented filesystem paths") if sys.version_info[:2] < (3, 4) else None,
         ModuleInstall("pathlib2", "pip",
@@ -256,12 +256,6 @@ def small_set():
         ModuleInstall(
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
-            "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="JUPYTER"),
-        ModuleInstall("ipyscales", "pip",
-                      purpose="A widget library for scales", usage="JUPYTER"),
-        ModuleInstall("ipydatawidgets", "pip",
-                      purpose="A set of widgets to help facilitate reuse of large datasets across widgets", usage="JUPYTER"),
-        ModuleInstall(
             "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="JUPYTER"),
         ModuleInstall(
             "path.py", "pip", mname="path", purpose="IPython, dependency", usage="JUPYTER"),
@@ -287,6 +281,12 @@ def small_set():
         ModuleInstall(
             "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets",
             usage="JUPYTER/LINUX"),
+        ModuleInstall(
+            "ipywidgets", "pip", purpose="IPython, Jupyter, widgets", usage="JUPYTER"),
+        ModuleInstall("ipyscales", "pip",
+                      purpose="A widget library for scales", usage="JUPYTER"),
+        ModuleInstall("ipydatawidgets", "pip",
+                      purpose="A set of widgets to help facilitate reuse of large datasets across widgets", usage="JUPYTER"),
         ModuleInstall(
             "backports_abc", "pip", purpose="A backport of recent additions to the 'collections.abc' module",
             usage="JUPYTER"),
