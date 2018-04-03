@@ -219,6 +219,8 @@ def small_set():
             "is also able to list multiple syntax errors in your python file."),
         ModuleInstall(
             "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
+        ModuleInstall("backcall", "pip", usage="JUPYTER",
+                      purpose="Specifications for callback functions passed in to an API (IPython, Jupyter)"),
         ModuleInstall(
             "ipython", "pip", mname="IPython", purpose="IPython, Jupyter", usage="JUPYTER"),
         ModuleInstall(

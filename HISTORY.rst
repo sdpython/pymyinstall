@@ -3,9 +3,11 @@
 History
 =======
 
-current - 2018-03-31 - 0.00Mb
+current - 2018-04-03 - 0.00Mb
 =============================
 
+* `40`: add module absl-py (tensorflow), backcall (ipython) (2018-04-03)
+* `39`: add ipyscales (2018-03-31)
 * `38`: add module asteval (lmfit), ipydatawidgets (pythreejs) (2018-03-31)
 * `37`: add module packaging (2018-03-30)
 

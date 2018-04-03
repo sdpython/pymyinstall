@@ -14,6 +14,7 @@ def pyquickhelper_set():
         "alabaster",
         "autopep8",
         "babel",
+        'backcall',
         "backports_abc",
         "backports.shutil-get-terminal-size",
         "bleach",
