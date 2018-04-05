@@ -48,28 +48,6 @@ package_data = {
 ############
 
 
-def is_local():
-    file = os.path.abspath(__file__).replace("\\", "/").lower()
-    if "/temp/" in file and "pip-" in file:
-        return False
-    for cname in {"bdist_msi", "build27", "build_script", "build_sphinx", "build_ext",
-                  "bdist_wheel", "bdist_egg", "bdist_wininst", "clean_pyd", "clean_space",
-                  "copy27", "copy_dist", "local_pypi", "notebook", "publish", "publish_doc",
-                  "register", "unittests", "unittests_LONG", "unittests_SKIP", "unittests_GUI",
-                  "run27", "sdist", "setupdep", "test_local_pypi", "upload_docs", "setup_hook",
-                  "copy_sphinx", "write_version", "lab", 'history'}:
-        if cname in sys.argv:
-            try:
-                import_pyquickhelper()
-            except ImportError:
-                return False
-            return True
-    else:
-        return False
-
-    return False
-
-
 def ask_help():
     return "--help" in sys.argv or "--help-commands" in sys.argv
 
@@ -96,6 +74,15 @@ def import_pyquickhelper():
                 os.getcwd())
             raise ImportError(message) from e
     return pyquickhelper
+
+
+def is_local():
+    file = os.path.abspath(__file__).replace("\\", "/").lower()
+    if "/temp/" in file and "pip-" in file:
+        return False
+    import_pyquickhelper()
+    from pyquickhelper.pycode.setup_helper import available_commands_list
+    return available_commands_list(sys.argv)
 
 
 def verbose():
@@ -177,7 +164,7 @@ if is_local():
     r = process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
         # not need for the regular setup, just for the documentation, unit
-        layout=["html"],
+        layout=["html"], github_owner='sdpython',
         # tests
         requirements=["pyquickhelper"],
         additional_notebook_path=["pyquickhelper", "jyquickhelper"],
@@ -185,7 +172,7 @@ if is_local():
         unittest_modules=["pyquickhelper"], fLOG=logging_function,
         covtoken=("b67b3051-8c5d-460b-b2fa-51d81ab7008c",
                   "'_UT_36_std' in outfile"),
-        file_filter_pep8=file_filter_pep8, github_owner=project_owner)
+        file_filter_pep8=file_filter_pep8)
     if not r and not ({"bdist_msi", "sdist",
                        "bdist_wheel", "publish", "publish_doc", "register",
                        "upload_docs", "bdist_wininst", "build_ext"} & set(sys.argv)):
