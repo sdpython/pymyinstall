@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 *pymyinstall* installs package on Windows and Linux.
 It automatically chooses a location for a

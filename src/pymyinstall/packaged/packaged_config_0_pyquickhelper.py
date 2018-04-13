@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 @file
 @brief Defines different a set of usual modules for Python.
@@ -39,7 +39,6 @@ def pyquickhelper_set():
         "entrypoints",
         "et_xmlfile",
         "filelock",
-        "flake8",
         "funcparserlib",
         "git-pandas",
         "gitdb2",
@@ -113,7 +112,6 @@ def pyquickhelper_set():
         "ptyprocess",
         "pycodestyle",
         "pycparser",
-        "pyflakes",
         "pygments",
         "pyparsing",
         'pypiserver',

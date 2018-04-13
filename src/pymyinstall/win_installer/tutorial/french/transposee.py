@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # il faut toujours ceci au début du programme pour
 # pouvoir mettre des accents dans le programme
 
