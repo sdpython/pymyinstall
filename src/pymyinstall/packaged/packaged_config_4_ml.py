@@ -226,7 +226,7 @@ def ensae_set():
         ModuleInstall(
             "lru_dict", "pip", purpose="An Dict like LRU container."),
         ModuleInstall(
-            "zipline", "pip",
+            "zipline", "wheel",
             purpose="A backtester for financial algorithms.") if sys.version_info[:2] >= (3, 5) else None,  # finance
         ModuleInstall("vincent", "pip", purpose="plotting",
                       usage="VIZ"),  # graph
