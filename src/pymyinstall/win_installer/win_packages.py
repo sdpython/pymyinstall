@@ -31,7 +31,7 @@ def get_modules_version(python_path):
     cmd = prog + " list"
     from pip import __version__
     if int(__version__.split(".")[0]) >= 9:
-        cmd += " --format=legacy"
+        cmd += " --format=columns"
 
     try:
         out, err = run_cmd(cmd, wait=True, fLOG=None, change_path=python_path)
@@ -47,7 +47,7 @@ def get_modules_version(python_path):
     lines = out.split("\n")
     res = {}
     for line in lines:
-        if "(" in line:
+        if "." in line:
             spl = line.split()
             if len(spl) == 2:
                 a = spl[0]
