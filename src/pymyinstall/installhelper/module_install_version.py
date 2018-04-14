@@ -50,9 +50,15 @@ def call_get_installed_distributions(local_only=True, skip=None, include_editabl
     # we disable this line, it fails on travis
     # reload(pip._vendor.pkg_resources)
     if skip is None:
-        from pip.compat import stdlib_pkgs
+        try:
+            # for pip>=10.0
+            from pip._internal.compat import stdlib_pkgs
+            from pip._internal.utils.misc import get_installed_distributions
+        except ImportError:
+            # for pip<10.0
+            from pip.compat import stdlib_pkgs
+            from pip.utils import get_installed_distributions
         skip = stdlib_pkgs
-    from pip.utils import get_installed_distributions
     return get_installed_distributions(local_only=local_only, skip=skip,
                                        include_editables=include_editables,
                                        editables_only=editables_only,

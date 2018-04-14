@@ -3,9 +3,10 @@
 History
 =======
 
-current - 2018-04-05 - 0.00Mb
+current - 2018-04-14 - 0.00Mb
 =============================
 
+* `41`: update for pip 10 (2018-04-14)
 * `40`: add module absl-py (tensorflow), backcall (ipython) (2018-04-03)
 * `39`: add ipyscales (2018-03-31)
 * `38`: add module asteval (lmfit), ipydatawidgets (pythreejs) (2018-03-31)
@@ -26,3 +27,11 @@ current - 2018-04-05 - 0.00Mb
 * `30`: compile dlib for python 3.6 (2017-08-05)
 * `27`: fix guidata (2017-08-05)
 * `29`: build dlib on Windows (2017-07-19)
+* `20`: refresh pystruct, polylearn, dlib, pythonnet (2017-03-22)
+* `18`: compile fastcache (2017-03-16)
+* `19`: add a test to check the installation of a portable version with many modules (2017-03-16)
+* `13`: add tensorflow (if it compiles on Windows) (2017-02-25)
+* `16`: add blog about rpy2 issue (2016-08-25)
+* `14`: wheel for module param (2016-08-25)
+* `11`: switch to https to communicate with pypi (2016-06-18)
+* `10`: switch from http to https to communicate with pypi (2016-06-18)

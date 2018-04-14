@@ -18,7 +18,7 @@ if sys.version_info[0] == 2:
 
 def python_version():
     """
-    retrieve the platform and version of this python
+    Retrieves the platform and version of this :epkg:`python`.
 
     @return     tuple, example: ("win32","32bit") or ("win32","64bit")
     """
@@ -27,7 +27,7 @@ def python_version():
 
 def unzip_files(zipf, whereTo, fLOG=print):
     """
-    unzip files from a zip archive
+    Unzip files from a :epkg:`zip` archive.
 
     @param      zipf        archive
     @param      whereTo     destination folder
@@ -61,7 +61,7 @@ def unzip_files(zipf, whereTo, fLOG=print):
 
 def add_shortcut_to_desktop_for_module(name):
     """
-    add a shortcut on a module which includes a script
+    Adds a shortcut on a module which includes a script.
 
     @param      name        name of the module
     @return                 shortcut was added or not
@@ -84,7 +84,8 @@ def add_shortcut_to_desktop_for_module(name):
 
 def get_pip_program(exe=None):
     """
-    get pip executable + fix an issue with PANDOC
+    Gets :epkg:`pip` executable and
+    fixes an issue with :epkg:`Pandoc`.
 
     @param      exe             path to python executable
     @return                     pip executable
@@ -204,7 +205,7 @@ def get_pip_program(exe=None):
 
 def get_python_program():
     """
-    return the executable
+    Returns the executable for :epkg:`python`.
 
     .. versionadded:: 1.1
     """
@@ -223,7 +224,8 @@ def get_python_program():
 
 def get_conda_program(exe=None):
     """
-    get conda executable + fix an issue with PANDOC
+    Gets :epkg:`conda` executable and
+    fixes an issue with :epkg:`Pandoc`.
 
     @param      exe             path to python executable
     @return                     conda executable
@@ -263,7 +265,7 @@ def get_conda_program(exe=None):
 
 def get_file_modification_date(filename):
     """
-    get the date modification for a time
+    Gets the date modification for a filename.
 
     @param      filename        filename
     @return                     datetime
@@ -274,7 +276,7 @@ def get_file_modification_date(filename):
 
 def update_pip(python_path=None, fLOG=print):
     """
-    update pip for a specific distribution
+    Updates :epkg:`pip` for a specific distribution.
 
     @param      python_path     python path (or sys.executable if None)
     @param      fLOG            logging function
@@ -336,17 +338,22 @@ def update_pip(python_path=None, fLOG=print):
             lines = err.split("\n")
             keep = []
             for line in lines:
-                if not line.startswith(" ") and "RuntimeWarning: Config variable" not in line:
+                if not line.startswith(" ") and "RuntimeWarning: Config variable" not in line and \
+                    not(" which is incompatible." in line and " has requirement " in line) and \
+                        not(" requires " in line and " which is not installed." in line) and \
+                        len(line.strip()) > 3:
                     keep.append(line)
             if len(keep) > 0:
+                for _ in keep:
+                    print("++", _)
                 raise UpdatePipError(
-                    "unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR-F:\n{2}".format(cmd, out, err))
+                    "Unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR-F:\n{2}".format(cmd, out, err))
     return out
 
 
 def has_pip():
     """
-    tells if pip is installed
+    Tells if :epkg:`pip` is installed.
 
     @return     boolean
     """
@@ -359,7 +366,7 @@ def has_pip():
 
 def is_conda_distribution():
     """
-    tells if it is a conda distribution or not,
+    Tells if it is a :epkg:`conda` distribution or not,
     check the presence of ``Continuum Analytics``
     or ``|Anaconda`` in ``sys.version``.
 
@@ -376,8 +383,8 @@ def run_cmd(cmd, sin="", shell=sys.platform.startswith("win"), wait=False, log_e
             preprocess=True, timeout=None, catch_exit=False, fLOG=None,
             tell_if_no_output=None, old_behavior=False):
     """
-    run a command line and wait for the result,
-    @see fn run_cmd_private
+    Runs a command line and waits for the results,
+    @see fn run_cmd_private.
     """
     if old_behavior or not sys.platform.startswith("win"):
         return run_cmd_old(cmd=cmd, sin=sin, shell=shell, wait=wait, log_error=log_error,
