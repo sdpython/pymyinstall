@@ -1,0 +1,21 @@
+
+.. blogpost::
+    :title: Build onnx for Windows
+    :keywords: onnx
+    :date: 2018-04-16
+    :categories: module
+
+    `onnx <https://github.com/onnx/onnx>`_ is not
+    necessarily up to date on
+    `PyPI <https://pypi.python.org/pypi/onnx/>`_.
+    To get the latest version, the simplest is to clone
+    the project on github and set up a build like this one
+    on `appveyor <https://ci.appveyor.com/project/sdpython/onnx>`_.
+    But before that, you need to mofiy file ``appveyor.yml``
+    and a section for artifacts:
+
+    ::
+
+        artifacts:
+          - path: '*.whl'
+            name: onnx

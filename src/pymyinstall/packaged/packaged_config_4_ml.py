@@ -786,9 +786,14 @@ def ensae_set():
         #
         # 2018-14
         #
-        ModuleInstall(
-            'pyltr', 'pip', usage="ML", purpose="pyltr is a Python learning-to-rank toolkit "
-            "with ranking models, evaluation metrics, data wrangling helpers, and more."),
+        ModuleInstall('pyltr', 'pip', usage="ML", purpose="pyltr is a Python learning-to-rank toolkit "
+                      "with ranking models, evaluation metrics, data wrangling helpers, and more."),
+        ModuleInstall('onnx', 'pip', usage="ML",
+                      purpose="Open Neural Network Exchange"),
+        ModuleInstall('onnxmltools', 'pip', usage="ML",
+                      purpose="Converts Machine Learning models to ONNX"),
+        ModuleInstall('winmltools', 'pip', usage="ML", purpose="Microsoft ML Tool to convert machine learning " +
+                      "models to ONNX for use with Windows Machine Learning"),
     ]
 
     if sys.version_info[0] == 2:
