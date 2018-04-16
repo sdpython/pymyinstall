@@ -13,6 +13,7 @@ def pyensae_set():
     from .packaged_config_4_ml import ensae_set
     names = pyquickhelper_set()
     names += [
+        "absl-py",
         "adal",
         "ansi2html",  # ssh
         "ansiconv",  # ssh
