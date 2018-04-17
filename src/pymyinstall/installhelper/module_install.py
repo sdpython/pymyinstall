@@ -21,6 +21,7 @@ import time
 import importlib
 import datetime
 import warnings
+from pip import __version__ as pip_version
 
 if sys.version_info[0] == 2:
     from urlparse import urlsplit
@@ -71,8 +72,6 @@ class ModuleInstall:
                  branch="master", pip_options=None, overwrite=None, post=None,
                  skip_import=False, pipgit=False):
         """
-        Constructor.
-
         @param      name            name
         @param      kind            kind of installation (*pip*, *github*, *wheel*)
         @param      gitrepo         github repository (example: sdpython)
@@ -108,6 +107,9 @@ class ModuleInstall:
         if kind != "pip" and version is not None:
             raise NotImplementedError(
                 "version can be only specified if kind=='pip'")
+
+        if pip_options is None and compare_version(pip_version, "10.0.0") >= 0:
+            pip_options = ['--no-warn-script-location']
 
         self.name = name
         self.kind = kind
@@ -624,6 +626,7 @@ class ModuleInstall:
                 cmd += ' --dest={0}'.format(temp_folder)
             else:
                 cmd += ' --dest={0} --no-deps'.format(temp_folder)
+
             if self.index_url is not None:
                 slash = '' if self.index_url.endswith('/') else '/'
                 cmd += ' --no-cache-dir --index={0}{1}simple/'.format(
@@ -1154,6 +1157,7 @@ class ModuleInstall:
                         cmd += " " + " ".join(opts)
                 if not deps:
                     cmd += ' --no-deps'
+
                 out, err = run_cmd(
                     cmd, wait=True, fLOG=self.fLOG)
                 if out_streams is not None:
@@ -1424,7 +1428,8 @@ class ModuleInstall:
     def update(self, force_kind=None, force=False, temp_folder=".",
                log=False, options=None, deps=False, source=None):
         """
-        update the package if necessary, we use ``pip install <module_name> --upgrade --no-deps``,
+        Updates the package if necessary, we use
+        ``pip install <module_name> --upgrade --no-deps --no-warn-script-location``,
 
         @param      force_kind      overwrite self.kind
         @param      force           force the installation even if not need to update
@@ -1457,7 +1462,7 @@ class ModuleInstall:
         self.fLOG("[pymy] update of ", self)
 
         options = [] if options is None else list(options)
-        for opt in ["--upgrade", "--no-deps"]:
+        for opt in ["--upgrade", "--no-deps", '--no-warn-script-location']:
             if opt not in options:
                 if not deps or opt == "--no-deps":
                     options.append(opt)
