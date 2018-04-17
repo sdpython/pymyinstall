@@ -43,7 +43,7 @@ except ImportError:
 from pyquickhelper.loghelper import fLOG
 
 
-class TestScriptInstall(unittest.TestCase):
+class TestLONGScriptInstall(unittest.TestCase):
 
     def test_pypi(self):
         fLOG(
