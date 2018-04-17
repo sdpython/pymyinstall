@@ -590,15 +590,11 @@ class ModuleInstall:
                                     see @see me get_exewheel_url_link2
         @return                     downloaded files
 
-        .. versionchanged:: 0.9
-            Parameter *deps* was added, the function now downloads a module using pip.
-
-        .. versionchanged:: 1.0
-            *deps* is overwritten by *self.deps* if not None
-
-        .. versionchanged:: 1.1
-            Parameter *source* was added, if None, it is overwritten by *self.source*.
+        *deps* is overwritten by *self.deps* if not None
+        If *source* is None, it is overwritten by *self.source*.
         """
+        disable_options = {'--no-warn-script-location'}
+
         if source is None:
             source = self.source
         kind = self.kind
@@ -634,7 +630,8 @@ class ModuleInstall:
                 parsed_uri = urlsplit(self.index_url)
                 cmd += " --trusted-host " + parsed_uri.hostname
             if self.pip_options is not None:
-                cmd += " " + " ".join(self.pip_options)
+                diff = [_ for _ in self.pip_options if _ not in disable_options]
+                cmd += " " + " ".join(diff)
 
             out, err = run_cmd(
                 cmd, wait=True, fLOG=self.fLOG)
