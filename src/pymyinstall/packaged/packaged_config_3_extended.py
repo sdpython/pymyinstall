@@ -730,12 +730,14 @@ def extended_set():
         ModuleInstall('pytube', 'pip',
                       purpose="play with youtube videos"),
         #
-        # Mars 2018
+        # Mars, Avril 2018
         #
         ModuleInstall('pyjsparser', 'pip',
                       purpose="Fast javascript parser (based on esprima.js)"),
         ModuleInstall('Js2Py', 'pip', mname="js2py",
                       purpose="JavaScript to Python Translator & JavaScript interpreter written in 100% pure Python."),
+        ModuleInstall('x86cpu', 'wheel', purpose="Uses cpuid instruction to get information about CPU. " +
+                      "Queries OS as well as cpuid to see if the OS / CPU supports AVX instructions."),
     ]
 
     if sys.platform.startswith("win"):
