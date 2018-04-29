@@ -165,6 +165,9 @@ def extended_set():
                       "library in the future."),
         ModuleInstall(
             'osmapi', 'pip', purpose="Python wrapper for the OSM API", usage="VIZ"),
+        ModuleInstall('geographiclib', 'pip',
+                      purpose="This implements algorithms for geodesics (Karney, 2013) for solving " +
+                      "the direct and inverse problems for an ellipsoid of revolution."),
         ModuleInstall('geopy', 'pip',
                       purpose="Python Geocoding Toolbox", usage="VIZ"),
         ModuleInstall('pyproj', 'wheel',
