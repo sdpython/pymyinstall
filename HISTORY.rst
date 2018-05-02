@@ -1,10 +1,19 @@
 
+.. _l-HISTORY:
+
 =======
 History
 =======
 
-current - 2018-04-14 - 0.00Mb
+current - 2018-05-02 - 0.00Mb
 =============================
+
+* `44`: rename tensorboard (2018-05-02)
+* `43`: fix param - no longer require C compilation (2018-05-02)
+* `42`: add options --no-warn-script-location by default for pip >= 10.0 (2018-04-19)
+
+1.2.1543 - 2018-04-14 - 1.98Mb
+==============================
 
 * `41`: update for pip 10 (2018-04-14)
 * `40`: add module absl-py (tensorflow), backcall (ipython) (2018-04-03)

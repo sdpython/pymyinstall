@@ -465,7 +465,7 @@ def extended_set():
         #               purpose="Alternate keyring implementations"),
         ModuleInstall("pyotp", "pip",
                       purpose="PyOTP is a Python library for generating and verifying one-time passwords."),
-        ModuleInstall("param", "wheel", source="2",
+        ModuleInstall("param", "pip",
                       purpose="Declarative Python programming using Parameters."),
         ModuleInstall("holoviews", "pip", usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
