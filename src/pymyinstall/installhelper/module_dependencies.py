@@ -20,6 +20,8 @@ def get_default_ignore_modules():
         "enum_compat",       # standard distribution (>= 3.4)
         "enum-compat",       # standard distribution (>= 3.4)
         "futures",           # standard distribution (>= 3.5)
+        "holoviews",        # needed by geoviews but still marked as missing
+        "hypertemp",        # temporary solution, should disappear
         "keyrings.alt",      # weird this one on Windows
         # "guidata",
         # "monotonic",
@@ -52,7 +54,7 @@ def _main_pipdeptree(local_only=False):
         # pip < 10.0
         from pip import get_installed_distributions
 
-    default_skip = ['setuptools', 'pip', 'python', 'distribute']
+    default_skip = ['setuptools', 'pip', 'python', 'distribute', 'hypertemp']
     skip = default_skip + ['pipdeptree']
     pkgs = get_installed_distributions(local_only=local_only, skip=skip)
     req_map = dict((p.key, (p, p.requires())) for p in pkgs)
