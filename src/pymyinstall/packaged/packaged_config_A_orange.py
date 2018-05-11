@@ -46,13 +46,15 @@ def orange_set():
                       purpose="An utility that accesses files on a HTTP server and stores them locally for reuse."),
         ModuleInstall(
             "orange3", "pip", mname="Orange",
-            usage="ORANGE", purpose="Orange is a component-based data mining software. It includes a range of data visualization, exploration, " +
+            usage="ORANGE", purpose="Orange is a component-based data mining software. It includes a range of " +
+            "data visualization, exploration, " +
             "preprocessing and modeling techniques. It can be used through a nice and intuitive user interface or, for more advanced users, " +
             "as a module for the Python programming language."),
         ModuleInstall(
             "orange3-text", "pip", mname="orangecontrib.text", usage="ORANGE",
             purpose="Orange3 Text extends Orange3, a data mining software package, with common functionality for text mining. " +
-            "It provides access to publicly available data, like NY Times, Twitter and PubMed. Further, it provides tools for preprocessing, " +
+            "It provides access to publicly available data, like NY Times, Twitter and PubMed. Further, " +
+            "it provides tools for preprocessing, " +
             "constructing vector spaces (like bag-of-words, topic modeling and word2vec) and visualizations like word cloud end geo map. " +
             "All features can be combined with powerful data mining techniques from the Orange data mining framework."),
         ModuleInstall(
@@ -71,7 +73,8 @@ def orange_set():
         # package. It provides network visualization and analysis tools."),
         ModuleInstall(
             "Orange3-Network", "pip", mname="orangecontrib.network", usage="ORANGE",
-            purpose="Orange Network is an add-on for Orange data mining software package. It provides network visualization and analysis tools."),
+            purpose="Orange Network is an add-on for Orange data mining software package. It provides " +
+            "network visualization and analysis tools."),
         ModuleInstall(
             "CacheControl", "pip", mname="cachecontrol",
             purpose="httplib2 caching for requests"),

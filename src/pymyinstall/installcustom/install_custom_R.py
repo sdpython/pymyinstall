@@ -30,7 +30,7 @@ def get_R_version():
             if not os.path.exists(bin):
                 return None
             return (bin, vers)
-        return
+        return None
     else:
         raise NotImplementedError("not available on platform " + sys.platform)
 

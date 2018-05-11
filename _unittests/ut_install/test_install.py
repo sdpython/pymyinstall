@@ -54,6 +54,8 @@ class TestInstall (unittest.TestCase):
             # disabled on python 2.7
             return
         out, err = run_cmd("find", wait=True, fLOG=fLOG)
+        self.assertTrue(out is not None)
+        self.assertTrue(err is not None)
 
     def test_install(self):
         fLOG(

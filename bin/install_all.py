@@ -4,7 +4,7 @@ sys.path.append("../src")
 skip = ["actuariat_python", "code_beatrix", "ensae_teaching_cs",
         "jupytalk", "jyquickhelper", "mlstatpy",
         "pyquickhelper", "pyensae", "pyrsslocal", "pymyinstall",
-        "pymmails", "teachpyx", "pythonnet",
+        "pymmails", "teachpyx",
         # 2017
         'mlprodict', 'lightmlrestapi', 'lightmlboard', 'pandas_streaaming',
         'pyenbc', 'mlinsights', 'cpyquickhelper', 'tkinterquickhelper',

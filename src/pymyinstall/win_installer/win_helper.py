@@ -257,7 +257,8 @@ def patch_sourcelines(fname, in_line_start, out_line, endline='\n', silent_mode=
                           "to", new_content, " --- ", str(e).replace("\n", "--"))
 
 
-WININST_PATTERN = r'([a-zA-Z0-9\-\_]*|[a-zA-Z\-\_\.]*)-([0-9\.\-]*[a-z]*[0-9]?)(-Qt-([0-9\.]+))?.(win32|win\-amd64)(-py([0-9\.]+))?(-setup)?\.exe'
+WININST_PATTERN = (r'([a-zA-Z0-9\-\_]*|[a-zA-Z\-\_\.]*)-([0-9\.\-]*[a-z]*[0-9]?)(-Qt-([0-9\.]+))?.(win32|win\-amd64)' +
+                   r'(-py([0-9\.]+))?(-setup)?\.exe')
 
 # SOURCE_PATTERN defines what an acceptable source package name is
 # As of 2014-09-08 :

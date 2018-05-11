@@ -84,14 +84,12 @@ def extended_set():
                       "is the Python exposure of the DyND dynamic multi-dimensional array library.")
         if sys.version_info[0] >= 3 else None,
         ModuleInstall("mpmath", "pip",
-                      purpose="mpmath is a free (BSD licensed) Python library for real and complex floating-point arithmetic with arbitrary precision."),
+                      purpose="mpmath is a free (BSD licensed) Python library for real and complex " +
+                      "floating-point arithmetic with arbitrary precision."),
         ModuleInstall(
             'sympy', 'pip', purpose="SymPy is a Python library for symbolic mathematics."),
         ModuleInstall('gmpy2', 'wheel',
                       purpose="big real numbers (issue on Linux and Anaconda)"),
-        ModuleInstall('llvmpy', 'wheel', mname='llvm',
-                      purpose="Python bindings for LLVM, C++ library which allows simple access to compiler tools, not maintained anymore, use llvmlite instead")
-        if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall('llvmlite', 'wheel',
                       purpose="lightweight wrapper around basic LLVM functionality, check issue " +
                       "https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll"),
@@ -131,7 +129,8 @@ def extended_set():
         ModuleInstall(
             'pygame', 'wheel', purpose="GUI, interface for games (needs to be installed from www.pygame.org on Linux)", usage="GUI"),
         ModuleInstall(
-            'Kivy', 'wheel', mname='kivy', purpose="GUI, interface for games, mobile (use sudo apt-get install python3-kivy on Linux)", usage="GUI"),
+            'Kivy', 'wheel', mname='kivy', usage="GUI",
+            purpose="GUI, interface for games, mobile (use sudo apt-get install python3-kivy on Linux)"),
         ModuleInstall('kivy-garden', 'pip', mname='kivy.garden',
                       purpose="Garden tool for kivy flowers.", usage="GUI"),
         ModuleInstall(
@@ -222,8 +221,6 @@ def extended_set():
         ModuleInstall("paramiko", "pip",
                       purpose="SSH2 protocol library", usage="NETWORK"),
         #
-        # ModuleInstall("pattern", "pip", purpose="Web mining module for Python, with tools for scraping, natural language processing, machine learning, network analysis and visualization.") #only works on Python 2.7
-        #
         #
         # 2015-02-05
         #
@@ -257,7 +254,8 @@ def extended_set():
         ModuleInstall(
             "mlpy", "wheel", purpose="mlpy is a Python module for Machine Learning built on top of NumPy/SciPy, has wavelets"),
         ModuleInstall(
-            "pygit2", "wheel", purpose="Pygit2 is a set of Python bindings to the libgit2 shared library, libgit2 implements the core of Git."),
+            "pygit2", "wheel", purpose="Pygit2 is a set of Python bindings to the libgit2 shared library, " +
+            "libgit2 implements the core of Git."),
         ModuleInstall(
             "pymongo", "wheel", purpose="Python wrapper for MongoDB", usage="NoSQL"),
         ModuleInstall("psycopg2", "wheel",
@@ -266,9 +264,6 @@ def extended_set():
             "PyOpenGL", "wheel", mname="OpenGL", purpose="use OpenGL in Python"),
         ModuleInstall(
             "PyOpenGL_accelerate", "wheel", mname="OpenGL_accelerate", purpose="Acceleration code for PyOpenGL"),
-        ModuleInstall(
-            "libpython", "wheel",
-            purpose="(C++ compilation), compilation of libpython with mingw") if sys.version_info[:2] <= (3, 4) else None,
         ModuleInstall('pymc', 'wheel', web="https://github.com/pymc-devs/pymc",
                       purpose="Monte Carlo computation", usage="DATA/ML") if sys.version_info[0] >= 3 else None,
         ModuleInstall('autograd', 'pip',
@@ -296,8 +291,9 @@ def extended_set():
         ModuleInstall("gensim", "wheel", purpose="genetic algorithm"),
         # ModuleInstall("pybrain", "pip"),   # some issues with the code
         # (relative import are not well handled in version 0.3.3
-        ModuleInstall(
-            "h5py", "wheel", purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. Trillion-Particle Simulation.", usage="DATA/ML"),
+        ModuleInstall("h5py", "wheel", usage="DATA/ML",
+                      purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. " +
+                      "Trillion-Particle Simulation."),
         ModuleInstall("keras", "pip", purpose="deep learning",
                       usage="DATA/ML"),
         ModuleInstall("keras-vis", "pip", mname="vis", usage="DATA/ML",
@@ -351,12 +347,6 @@ def extended_set():
         ModuleInstall(
             "structures", "pip", purpose="User-friendly library for creating data structures."),
         ModuleInstall(
-            "py2exe", "wheel",
-            purpose="convert a python program into an exe program") if sys.platform.startswith("win") and sys.version_info[:2] <= (3, 4) else None,
-        # rodeo disappeared from pipy
-        # ModuleInstall(
-        #     "rodeo", "pip", purpose="Scientific IDE, mixed between Spyder and IPython", usage="VIZ"),
-        ModuleInstall(
             "tzlocal", "pip", purpose="tzinfo object for the local timezone"),
         ModuleInstall(
             "funcsigs", "pip", purpose="Python function signatures from PEP362"),
@@ -387,7 +377,8 @@ def extended_set():
             "pysnmp", "pip", purpose="A pure-Python SNMPv1/v2c/v3 library", usage="NETWORK"),
         # pyinstaller does not install properly on Windows
         # ModuleInstall(
-        #    "pyinstaller", "pip", purpose="Converts (packages) Python programs into stand-alone executables, under Windows, Linux, Mac OS X, AIX and Solaris."),
+        #    "pyinstaller", "pip", purpose="Converts (packages) Python programs into stand-alone
+        #    executables, under Windows, Linux, Mac OS X, AIX and Solaris."),
         ModuleInstall(
             "imageio", "pip", purpose="Library for reading and writing a wide range of image, video, " +
             "scientific, and volumetric data formats (for moviepy)", usage="VIDEO"),
@@ -474,9 +465,10 @@ def extended_set():
         ModuleInstall("geoviews", "github", 'ioam', usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
         ModuleInstall("plotly", "pip", usage="VIZ",
-                      purpose="Plotly's Python graphing library makes interactive, publication-quality graphs online. Examples of how to make line plots, " +
-                              "scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, " +
-                              "polar charts and bubble charts."),
+                      purpose="Plotly's Python graphing library makes interactive, publication-quality graphs online. " +
+                      "Examples of how to make line plots, " +
+                      "scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, " +
+                      "polar charts and bubble charts."),
         ModuleInstall("colorlover", "pip", usage="VIZ",
                       purpose="Color scales for IPython notebook"),
         ModuleInstall("TA_Lib", "wheel", mname="talib",
@@ -552,7 +544,8 @@ def extended_set():
         ModuleInstall("pybars3", "pip", mname="pybar",
                       purpose="Handlebars.js templating"),
         ModuleInstall("db.py", "pip", mname="db.tables",
-                      purpose="db.py is an easier way to interact with your databases. It makes it easier to explore tables, columns, views, etc. " +
+                      purpose="db.py is an easier way to interact with your databases. It makes it easier " +
+                      "to explore tables, columns, views, etc. " +
                       "It puts the emphasis on user interaction, information display, and providing easy to use helper functions."),
         ModuleInstall("clyent", "pip",
                       purpose="Command line client Library for windows and posix"),
@@ -743,11 +736,7 @@ def extended_set():
                       purpose="JavaScript to Python Translator & JavaScript interpreter written in 100% pure Python."),
         ModuleInstall('x86cpu', 'wheel', purpose="Uses cpuid instruction to get information about CPU. " +
                       "Queries OS as well as cpuid to see if the OS / CPU supports AVX instructions."),
+        ModuleInstall('pythonnet', 'pip', mname="clr", purpose="Python binding for C#"),
     ]
-
-    if sys.platform.startswith("win"):
-        mod.append(ModuleInstall('pythonnet', 'wheel',
-                                 mname="clr", source="2" if sys.version_info[:2] >= (3, 5) else None,
-                                 purpose="Python binding for C#"))
 
     return [_ for _ in mod if _ is not None]

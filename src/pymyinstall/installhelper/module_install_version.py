@@ -2,15 +2,14 @@
 @file
 @brief Functions to get module version, license, dependencies
 """
-from .install_cmd_helper import run_cmd, get_pip_program
-from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
-from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
-from .install_cmd_regex import regex_wheel_versions
-
 import sys
 import re
 import warnings
 import functools
+from .install_cmd_helper import run_cmd, get_pip_program
+from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
+from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
+from .install_cmd_regex import regex_wheel_versions
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
@@ -118,8 +117,9 @@ def get_module_version(module, use_cmd=False):
         # not only the ones installed in the virtual environment
         dist = call_get_installed_distributions(local_only=False)
         if len(dist) == 0:
-            raise ConfigurationError("no installed module, unexpected (pip should be there): sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
-                sys.executable, sys.prefix, sys.base_prefix))
+            raise ConfigurationError("no installed module, unexpected (pip should be there): " +
+                                     "sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
+                                         sys.executable, sys.prefix, sys.base_prefix))
         for mod in dist:
             al = mod.key.lower()
             a = mod.key
@@ -170,8 +170,9 @@ def get_module_metadata(module, use_cmd=False, refresh_cache=False):
     # not only the ones installed in the virtual environment
     dist = call_get_installed_distributions(local_only=False, use_cmd=use_cmd)
     if len(dist) == 0:
-        raise ConfigurationError("no installed module, unexpected (pip should be there): sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
-            sys.executable, sys.prefix, sys.base_prefix))
+        raise ConfigurationError("no installed module, unexpected (pip should be there): " +
+                                 "sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
+                                     sys.executable, sys.prefix, sys.base_prefix))
     res = {}
     for mod in dist:
         d = {}
@@ -492,9 +493,9 @@ def version_consensus(v1, v2):
         s2, n2 = process_version(v2)
 
         if s1 not in ('<=', '==', '<', '>', '>='):
-            raise ValueError("wrong sign {0} for v1={1}", s1, v1)
+            raise ValueError("wrong sign {0} for v1={1}".format(s1, v1))
         if s2 not in ('<=', '==', '<', '>', '>='):
-            raise ValueError("wrong sign {0} for v1={1}", s2, v2)
+            raise ValueError("wrong sign {0} for v1={1}".format(s2, v2))
 
         if s1 == "==":
             if s2 == "==":
@@ -622,7 +623,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         sys_platform = sys.platform
         try:
             return eval(cond)
-        except Exception as e:
+        except Exception:
             if "python_version" not in cond and "extra" not in cond:
                 # probably something like cycler (>=0.10)
                 # we don't check that
@@ -642,7 +643,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         if module not in _get_module_dependencies_deps:
             raise ValueError("module {0} was not installed".format(module))
         res = []
-        dist, req = _get_module_dependencies_deps[module]
+        req = _get_module_dependencies_deps[module][1]
         if isinstance(req, list):
             for r in req:
                 res.append((r.key, None, module))
@@ -766,7 +767,6 @@ def choose_most_recent(list_name):
                 return resv
         raise MissingVersionWheelException(
             "Unable to get version number for module '{}':\nREGEX\n{}".format(_, "\n".join(regex_wheel_versions)))
-        return resv
 
     list_name = [(search_regex(_).groups()[0], _[0], _[1])
                  for _ in list_name]

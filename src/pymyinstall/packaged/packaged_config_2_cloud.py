@@ -23,7 +23,8 @@ def cloud_set():
         ModuleInstall("boto", "pip",
                       purpose="Amazon Web Services Library"),
         ModuleInstall("google-api-python-client", "pip", mname="googleapiclient",
-                      purpose="The Google API Client for Python is a client library for accessing the Plus, Moderator, and many other Google APIs."),
+                      purpose="The Google API Client for Python is a client library for accessing the Plus, " +
+                      "Moderator, and many other Google APIs."),
         ModuleInstall("googlemaps", "pip",
                       purpose="Python client library for Google Maps API Web Services"),
         ModuleInstall("python-gmaps", "pip", mname="gmaps",

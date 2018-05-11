@@ -66,7 +66,7 @@ class TestPackageListPrint(unittest.TestCase):
 
         fLOG(len(every))
         couples = [(k.lower(), k) for k in every]
-        for kn, k in sorted(couples):
+        for _, k in sorted(couples):
             fLOG("'{0}',".format(k))
 
 

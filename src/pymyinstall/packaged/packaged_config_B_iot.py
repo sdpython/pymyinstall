@@ -28,7 +28,8 @@ def iot_set():
         ModuleInstall('python-xlib', 'pip', mname="Xlib",
                       purpose="Python X Library"),
         ModuleInstall('pyHook', 'wheel',
-                      purpose="Python wrapper for global input hooks in Windows. The package provides callbacks for mouse and keyboard events;" +
+                      purpose="Python wrapper for global input hooks in Windows. The package provides callbacks " +
+                      "for mouse and keyboard events;" +
                       " events can be monitored and filtered."),
         ModuleInstall('pyuserinput', 'pip', mname="pykeyboard",
                       purpose="A simple, cross-platform module for mouse and keyboard control"),
@@ -115,7 +116,8 @@ def iot_set():
 
         ModuleInstall('homeassistant', 'pip',
                       purpose="Home Assistant is a home automation platform running on Python 3. " +
-                      "The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control.",
+                      "The goal of Home Assistant is to be able to track and control all devices at " +
+                      "home and offer a platform for automating control.",
                       web="https://github.com/balloob/home-assistant/",
                       usage="IoT"),
     ]

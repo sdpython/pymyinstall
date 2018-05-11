@@ -58,9 +58,11 @@ def ensae_set():
         ModuleInstall('django-uuidfield', 'pip', mname="uuidfield",
                       purpose="localshop dependency, UUIDField in Django"),
         ModuleInstall("grappelli_safe", "pip", usage="WEB",
-                      purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency for the Mezzanine CMS for Django."),
+                      purpose="A snapshot of the grappelli_2 branch of django-grappelli, packaged as a dependency " +
+                      "for the Mezzanine CMS for Django."),
         ModuleInstall("filebrowser_safe", "pip", usage="WEB",
-                      purpose="A snapshot of the filebrowser_3 branch of django-filebrowser, packaged as a dependency for the Mezzanine CMS for Django."),
+                      purpose="A snapshot of the filebrowser_3 branch of django-filebrowser, packaged as a " +
+                      "dependency for the Mezzanine CMS for Django."),
         ModuleInstall("django-contrib-comments", "pip", usage="WEB", mname="django_comments",
                       purpose="Django used to include a comments framework; since Django 1.6 it’s " +
                       "been separated to a separate project. This is that project."),
@@ -271,7 +273,8 @@ def ensae_set():
         # purpose="recommendation system", usage="DATA/ML"), #only works on
         # Python 2.7 + csc-pysparse + dividi2 (not maintained anymore)
         ModuleInstall(
-            "colorspacious", "pip", purpose="A powerful, accurate, and easy-to-use Python library for doing colorspace conversions (for viscm)"),
+            "colorspacious", "pip", purpose="A powerful, accurate, and easy-to-use Python library for doing " +
+            "colorspace conversions (for viscm)"),
         ModuleInstall(
             "viscm", "pip", purpose="tool for analyzing colormaps and creating new colormaps."),
         # ModuleInstall("cubehelix", "github", "jradavenport",
@@ -288,7 +291,8 @@ def ensae_set():
         ModuleInstall("planar", "wheel",
                       purpose="2D planar geometry library for Python."),
         ModuleInstall("GDAL", "wheel", mname="osgeo",
-                      purpose="GDAL is a translator library for raster and vector geospatial data formats that is released under an X/MIT style " +
+                      purpose="GDAL is a translator library for raster and vector geospatial data formats " +
+                      "that is released under an X/MIT style " +
                       "Open Source license by the Open Source Geospatial Foundation."),
         # ModuleInstall("rasterio", "wheel",
         # purpose="Fast and direct raster I/O for use with Numpy and SciPy,
@@ -319,7 +323,8 @@ def ensae_set():
         # purpose="A library to identify devices (phones, tablets) and their
         # capabilities by parsing (browser/HTTP) user agent strings"),
         ModuleInstall("user-agent", "pip", mname="user_agent",
-                      purpose="A library to identify devices (phones, tablets) and their capabilities by parsing (browser/HTTP) user agent strings"),
+                      purpose="A library to identify devices (phones, tablets) and their capabilities by " +
+                      "parsing (browser/HTTP) user agent strings"),
         ModuleInstall("tinydb", "pip",
                       purpose="TinyDB is a tiny, document oriented database optimized for your happiness :) " +
                       "It's written in pure Python and has no external requirements.", usage="noSQL"),
@@ -419,7 +424,8 @@ def ensae_set():
         #  2015-12
         #
         ModuleInstall("picklable-itertools", "pip", mname="picklable_itertools",
-                      purpose="A reimplementation of the Python standard library's itertools, in Python, using picklable iterator objects. (fuel)"),
+                      purpose="A reimplementation of the Python standard library's itertools, in Python, " +
+                      "using picklable iterator objects. (fuel)"),
         ModuleInstall("python-utils", "pip", mname="python_utils",
                       purpose="Python Utils is a module with some convenient utilities not included with the standard Python install"),
         ModuleInstall("progressbar2", "pip", usage="VIZ",
@@ -436,9 +442,11 @@ def ensae_set():
         # 2016-03
         #
         ModuleInstall("PTable", "pip", mname="prettytable",
-                      purpose="A simple Python library for easily displaying tabular data in a visually appealing ASCII table format. (for streamparse)"),
+                      purpose="A simple Python library for easily displaying tabular data in a visually " +
+                      "appealing ASCII table format. (for streamparse)"),
         ModuleInstall("ruamel.yaml", "pip",
-                      purpose="ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"),
+                      purpose="ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, " +
+                      "seq/map flow style, and map key order"),
         ModuleInstall("logutils", "pip",
                       purpose="Logging utilities"),
         ModuleInstall("skll", "pip", usage="ML",
@@ -450,7 +458,8 @@ def ensae_set():
         ModuleInstall("pystruct", "wheel", usage="ML", source="2",
                       purpose="Learning Structured Prediction in Python"),
         ModuleInstall("py_earth", "wheel", mname="pyearth", usage="ML", source="2",
-                      purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression Splines algorithm, in the style of " +
+                      purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression " +
+                      "Splines algorithm, in the style of " +
                       "scikit-learn. The py-earth package implements Multivariate Adaptive Regression Splines using Cython and provides an " +
                       "interface that is compatible with scikit-learn's Estimator, Predictor, Transformer, and Model interfaces. For more " +
                       "information about Multivariate Adaptive Regression Splines, see the references below."),
@@ -479,7 +488,8 @@ def ensae_set():
         # June 2016
         #
         ModuleInstall("kabuki", "pip", usage="ML",
-                      purpose="kabuki is a python toolbox that allows easy creation of hierarchical bayesian models for the cognitive sciences."),
+                      purpose="kabuki is a python toolbox that allows easy creation of hierarchical bayesian " +
+                      "models for the cognitive sciences."),
         ModuleInstall("HDDM", "wheel", mname="hddm", usage="ML",
                       purpose="HDDM is a python module that implements Hierarchical Bayesian estimation of Drift Diffusion Models."),
         ModuleInstall("reportlab", "wheel",
@@ -492,10 +502,13 @@ def ensae_set():
                       purpose="Grako (for grammar compiler) is a tool that takes grammars in a variation of EBNF " +
                       "as input, and outputs memoizing (Packrat) PEG parsers in Python."),
         ModuleInstall("expressions", "pip",
-                      purpose="Arithmetic expression parser library. Embed customized expression evaluation into your application or library."),
+                      purpose="Arithmetic expression parser library. Embed customized expression evaluation " +
+                      "into your application or library."),
         ModuleInstall("cubes", "pip",
-                      purpose="Cubes is a light-weight Python framework and set of tools for development of reporting and analytical applications, " +
-                      "Online Analytical Processing (OLAP), multidimensional analysis and browsing of aggregated data. It is part of Data Brewery."),
+                      purpose="Cubes is a light-weight Python framework and set of tools for development of reporting and " +
+                      "analytical applications, " +
+                      "Online Analytical Processing (OLAP), multidimensional analysis and browsing of aggregated data. " +
+                      "It is part of Data Brewery."),
         ModuleInstall("MDP", "pip", usage="ML",
                       purpose="Python data processing framework."),
         ModuleInstall("pyamg", "wheel", usage="OPTIM",
@@ -542,7 +555,8 @@ def ensae_set():
                       "techniques commonly used in datasets showing strong between-class imbalance. " +
                       "It is compatible with scikit-learn and is part of scikit-learn-contrib projects."),
         ModuleInstall("forestci", "pip", usage="ML",
-                      purpose="Python module for calculating variance and adding confidence intervals to scikit-learn random forest regression " +
+                      purpose="Python module for calculating variance and adding confidence intervals " +
+                      "to scikit-learn random forest regression " +
                       "or classification objects. The core functions calculate an in-bag and error bars for random forest objects"),
         ModuleInstall("polylearn", "wheel", source="2", usage="ML",
                       purpose="A library for factorization machines and polynomial networks for classification and regression in Python."),
@@ -564,7 +578,8 @@ def ensae_set():
         ModuleInstall("zodbpickle", "wheel",
                       purpose="This package presents a uniform pickling interface for ZODB."),
         ModuleInstall("ZODB", "pip",
-                      purpose="The Zope Object Database provides an object-oriented database for Python that provides a high-degree of transparency."),
+                      purpose="The Zope Object Database provides an object-oriented database for Python that " +
+                      "provides a high-degree of transparency."),
         ModuleInstall("zdaemon", "pip",
                       purpose="Daemon process control library and tools for Unix-based systems"),
         ModuleInstall("trollius", "pip",

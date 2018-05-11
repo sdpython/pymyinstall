@@ -117,10 +117,12 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
     @param      encerror            encoding errors (ignore by default) while converting the output into a string
     @param      encoding            encoding of the output
     @param      change_path         change the current path if not None (put it back after the execution)
-    @param      communicate         use method `communicate <https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate>`_ which is supposed to be safer,
+    @param      communicate         use method `communicate <https://docs.python.org/3/library/subprocess.html#subprocess.Popen.communicate>`_
+                                    which is supposed to be safer,
                                     parameter ``wait`` must be True
     @param      preprocess          preprocess the command line if necessary (not available on Windows) (False to disable that option)
-    @param      timeout             when data is sent to stdin (``sin``), a timeout is needed to avoid waiting for ever (*timeout* is in seconds)
+    @param      timeout             when data is sent to stdin (``sin``), a timeout is needed to avoid
+                                    waiting for ever (*timeout* is in seconds)
     @param      catch_exit          catch *SystemExit* exception
     @param      fLOG                logging function (if not None, bypass others parameters)
     @param      tell_if_no_output   tells if there is no output every *tell_if_no_output* seconds

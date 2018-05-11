@@ -74,7 +74,8 @@ def small_set():
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
             "sockjs-tornado", "pip", mname="sockjs.tornado", usage="NETWORK",
-            purpose="SockJS-tornado is a Python server side counterpart of SockJS-client browser library running on top of Tornado framework."),
+            purpose="SockJS-tornado is a Python server side counterpart of SockJS-client browser library running " +
+            "on top of Tornado framework."),
         ModuleInstall(
             "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz (pipy distributes the binaries)", usage="NETWORK"),
         ModuleInstall(
@@ -143,7 +144,8 @@ def small_set():
         ModuleInstall(
             'imagesize', 'pip', usage="SPHINX", purpose="Getting image size from png/jpeg/jpeg2000/gif file"),
         # ModuleInstall(
-        #     'sphinxcontrib-images', 'github', "sdpython", mname='sphinxcontrib.images', usage="SPHINX", purpose="include images in Sphinx documentation"),
+        #     'sphinxcontrib-images', 'github', "sdpython", mname='sphinxcontrib.images',
+        #      usage="SPHINX", purpose="include images in Sphinx documentation"),
         ModuleInstall('pypiserver', 'pip',
                       purpose="run a local pypi server"),
         ModuleInstall(
@@ -275,9 +277,9 @@ def small_set():
         ModuleInstall(
             "ptyprocess", "pip", purpose="dependency for the terminado, Run a subprocess in a pseudo terminal",
             usage="JUPYTER/LINUX"),
-        ModuleInstall("pexpect", "pip",
-                      purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling other applications (needed by metakernel).",
-                      usage="JUPYTER"),
+        ModuleInstall("pexpect", "pip", usage="JUPYTER",
+                      purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling " +
+                      "other applications (needed by metakernel)."),
         ModuleInstall("pywinpty", "wheel",
                       purpose="Python bindings for the winpty pseudo terminal library. It allows to create and " +
                       "communicate with Windows processes that print outputs and recieve inputs via console input " +
@@ -396,11 +398,13 @@ def small_set():
         ModuleInstall('Flask-Login', 'pip', mname="flask_login",
                       usage="NETWORK"),
         ModuleInstall("Flask-Cors", "pip", mname="flask_cors",
-                      purpose="A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible."),
+                      purpose="A Flask extension for handling Cross Origin Resource Sharing (CORS), " +
+                      "making cross-origin AJAX possible."),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
         ModuleInstall('python-mimeparse', 'pip',
-                      purpose="A module provides basic functions for parsing mime-type names and matching them against a list of media-ranges. (falcon)"),
+                      purpose="A module provides basic functions for parsing mime-type names and matching " +
+                      "them against a list of media-ranges. (falcon)"),
         ModuleInstall('falcon', 'pip', usage="NETWORK",
                       purpose="Falcon is a very fast, very minimal Python web framework for building microservices, " +
                       "app backends, and higher-level frameworks."),
@@ -498,7 +502,8 @@ def small_set():
         ModuleInstall("SimpleSQLite", "pip", mname="simplesqlite",
                       purpose="SimpleSQLite is a Python library to simplify the table creation and data insertion into SQLite database."),
         ModuleInstall("pytablereader", "pip",
-                      purpose="A python library to load structured table data from files/URL with various data format: CSV/Excel/HTML/JSON/LTSV/Markdown/TSV."),
+                      purpose="A python library to load structured table data from files/URL with various data format: " +
+                      "CSV/Excel/HTML/JSON/LTSV/Markdown/TSV."),
         ModuleInstall("elasticsearch", "pip",
                       purpose="Python client for Elasticsearch"),
         ModuleInstall("pytablewriter", "pip",

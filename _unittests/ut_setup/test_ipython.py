@@ -5,7 +5,6 @@
 import sys
 import os
 import unittest
-import warnings
 
 try:
     import src
@@ -50,17 +49,13 @@ class TestSetupIPython (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        warnings.warn("not implemented for jupyter 4.0")
-        return
         if sys.platform.startswith("win"):
             r = setup_ipython(r"C:\temp", [], apply_modification=False)
             assert len(r) > 0
             fLOG(r)
             for _ in r:
                 assert os.path.exists(_)
-        else:
-            return
-
+        elif 'HOME' in os.environ:
             fold = os.environ["HOME"]
             fold = os.path.join(fold, "temp")
             if not os.path.exists(fold):

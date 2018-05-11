@@ -18,15 +18,10 @@ def add_shortcut_to_desktop(file, name, description="", arguments="", icon=None,
     return add_shortcut(file, name, description, arguments, icon, workdir)
 
 
-def add_shortcut(target,
-                 name,
-                 description="",
-                 arguments="",
-                 icon=None,
-                 workdir=None,
-                 folder=None):
+def add_shortcut(target, name, description="", arguments="",
+                 icon=None, workdir=None, folder=None):
     """
-    Add a shortcut to the desktop.
+    Adds a shortcut to the desktop.
 
     @param      target      target
     @param      name        name of the shortcut

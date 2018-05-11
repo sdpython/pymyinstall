@@ -60,7 +60,7 @@ class TestBatch(unittest.TestCase):
         for _ in op:
             fLOG(_)
         assert len(op) > 0
-        for a, b in op:
+        for _, b in op:
             assert os.path.exists(b)
 
 

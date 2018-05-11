@@ -43,20 +43,18 @@ def get_parser():
 
 def do_main(list_module=None, outfile="python_module.xlsx", pypi=True):
     """
-    calls function @see fn update_all but is meant to be added to scripts folder
+    Calls function @see fn update_all but is meant to be added to scripts folder.
 
     @param      list_module     list of modules to update or None for all
     @param      outfile         output the results into a flat file or an excel file (required pandas)
     @param      pypi            check version on PyPi
     """
     try:
-        from pymyinstall import is_travis_or_appveyor
+        from pyquickhelper.pycode import is_travis_or_appveyor
     except ImportError:
         def is_travis_or_appveyor():
-            import sys
             if "travis" in sys.executable:
                 return "travis"
-            import os
             if os.environ.get("USERNAME", os.environ.get("USER", None)) == "appveyor":
                 return "appveyor"
             return None

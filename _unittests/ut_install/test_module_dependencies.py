@@ -53,7 +53,12 @@ class TestModuleDependencies (unittest.TestCase):
             assert isinstance(v, tuple)
             fLOG(k, "-->", v)
         if len(res) < 3:
-            from pip import get_installed_distributions
+            try:
+                # pip >= 10.0
+                from pip._internal.utils.misc import get_installed_distributions
+            except ImportError:
+                # pip < 10.0
+                from pip import get_installed_distributions
             pkgs = get_installed_distributions(
                 local_only=False, skip=[])
             req_map = dict((p.key, (p, p.requires())) for p in pkgs)

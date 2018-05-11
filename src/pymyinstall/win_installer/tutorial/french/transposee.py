@@ -4,8 +4,8 @@
 
 # python ne fait pas grand chose mais il a plein de librairie
 # en voici deux
-import pandas
 import os
+import pandas
 
 ###################
 # retourner la matrice

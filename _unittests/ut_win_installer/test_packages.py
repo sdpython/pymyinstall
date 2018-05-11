@@ -52,9 +52,11 @@ class TestPackages(unittest.TestCase):
 
         mods = get_modules_version(os.path.dirname(sys.executable))
         assert len(mods) > 0
-        for k, v in mods.items():
+        lastv = ""
+        for v in mods.values():
+            lastv = v
             break
-        self.assertIn(".", v)
+        self.assertIn(".", lastv)
 
     def test_modules_list_ext(self):
         fLOG(

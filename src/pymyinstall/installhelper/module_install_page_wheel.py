@@ -279,7 +279,7 @@ def enumerate_links_module(name, alls, version, plat):
                             res = eval(js)
                         except SyntaxError as e:
                             raise SyntaxError(
-                                "Unable to evaluate '{0}'\njs0='{1}'.".format(js, js0))
+                                "Unable to evaluate '{0}'\njs0='{1}'.".format(js, js0)) from e
                         break
             if res is None:
                 raise InternalJsException(

@@ -46,38 +46,34 @@ def setup_ipython(current_path=None,
 
     ::
 
-        set path=%path%;c:\\Python34;c:\\Python34\\Scripts
+        set path=%path%;c:\\Python364_x64;c:\\Python364_x64\\Scripts
         jupyter-notebook --notebook-dir=_doc\\notebooks
     """
-    raise NotImplementedError("not implemented for jupyter 4.0")
     if sys.platform.startswith("win"):
         user_profile = os.environ['USERPROFILE']
-        profile = os.path.join(user_profile, ".jupyter", "profile_default")
-        ipython_config = os.path.join(profile, "ipython_config.py")
+        profile = os.path.join(user_profile, ".jupyter")
         ipython_notebook_config = os.path.join(
             profile,
-            "ipython_kernel_config.py")
+            "jupyter_notebook_config.py")
 
         checkpath = os.path.join(profile, "checkspoints")
         if not os.path.exists(checkpath):
             os.mkdir(checkpath)
 
-        if not os.path.exists(ipython_config):
+        if not os.path.exists(ipython_notebook_config):
             from ..installhelper.install_cmd_helper import run_cmd
             exe = os.path.join(
                 os.path.split(
                     sys.executable)[0],
                 "Scripts",
                 "jupyter-notebook.exe")
-            cmd = exe + " profile create"
+            cmd = exe + " -y --generate-config"
             out, err = run_cmd(cmd, wait=True, fLOG=noLOG)
 
-            if not os.path.exists(ipython_config):
+            if not os.path.exists(ipython_notebook_config):
                 raise Exception(
-                    "unable to create jupyter configuration because of:\n{0}\nERR-4:\n{1}\ncmd={2}".format(
-                        out,
-                        err,
-                        cmd))
+                    "unable to create jupyter configuration in \n'{0}'\nbecause of:\n{1}\nERR-4:\n{2}\ncmd={3}".format(
+                        ipython_notebook_config, out, err, cmd))
 
         with open(ipython_notebook_config, "r") as f:
             text = f.read()
@@ -156,7 +152,7 @@ def setup_ipython(current_path=None,
             with open(os.path.join(current_path, "jupyter_startup.py"), "w") as f:
                 f.write(s)
 
-        return [ipython_notebook_config, ipython_config]
+        return [ipython_notebook_config]
 
     else:
         raise NotImplementedError("implemented only for Windows")

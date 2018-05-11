@@ -247,7 +247,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     raise NotImplementedError(
                         "Not implemented for a list of modules.")
 
-                # cmd = '"{0}" -u -c "import pip;pip.main([\'install\', \'https://github.com/sdpython/pymyinstall/archive/master.zip\'])"'.format(pyexe)
+                # cmd = '"{0}" -u -c "import pip;pip.main([\'install\',
+                #        \'https://github.com/sdpython/pymyinstall/archive/master.zip\'])"'.format(pyexe)
                 if latest:
                     folder = os.path.normpath(os.path.join(os.path.abspath(
                         os.path.dirname(__file__)), "..", "..", ".."))

@@ -43,7 +43,8 @@ def scraping_set():
             purpose="http client/server for asyncio"),
         ModuleInstall(
             "sky", "pip", usage="WEB",
-            purpose="sky is a web scraping framework, implemented with the latest python versions in mind (3.4+). It uses the asynchronous asyncio framework, " +
+            purpose="sky is a web scraping framework, implemented with the latest python versions in mind (3.4+). " +
+            "It uses the asynchronous asyncio framework, " +
             "as well as many popular modules and extensions."),
     ]
 

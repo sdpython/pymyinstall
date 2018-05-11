@@ -3,11 +3,11 @@
 @brief Various functions to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
 from __future__ import print_function
+import os
+import sys
 from ..installhelper.install_memoize import install_memoize2
 from ..installhelper.internet_settings import default_user_agent
 
-import os
-import sys
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
     import urllib2 as urllib_request

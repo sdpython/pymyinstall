@@ -113,10 +113,8 @@ def do_main(temp_folder="build/update_modules",
         from pymyinstall import is_travis_or_appveyor
     except ImportError:
         def is_travis_or_appveyor():
-            import sys
             if "travis" in sys.executable:
                 return "travis"
-            import os
             if os.environ.get("USERNAME", os.environ.get("USER", None)) == "appveyor":
                 return "appveyor"
             return None

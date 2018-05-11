@@ -266,6 +266,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
             fLOG("failed modules")
             for m in errors:
                 fLOG("  ", m[0], m[1])
+    return None
 
 
 def install_all(temp_folder=".", fLOG=print, verbose=True,
@@ -327,7 +328,6 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         skip_module = []
 
     if list_module is None:
-        from ..packaged import all_set
         list_module = all_set()
     elif isinstance(list_module, str  # unicode#
                     ):

@@ -3,6 +3,14 @@
 @brief Various function to install various python module from various location.
 """
 from __future__ import print_function
+import sys
+import re
+import os
+import time
+import importlib
+import datetime
+import warnings
+from pip import __version__ as pip_version
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program
 from .install_cmd_helper import get_python_program, get_file_modification_date, get_conda_program, is_conda_distribution
 from .module_install_exceptions import MissingPackageOnPyPiException, MissingInstalledPackageException, InstallError
@@ -13,15 +21,6 @@ from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_pag
 from .missing_license import missing_module_licenses
 from .internet_settings import default_user_agent
 from .install_cmd_regex import regex_wheel_versions
-
-import sys
-import re
-import os
-import time
-import importlib
-import datetime
-import warnings
-from pip import __version__ as pip_version
 
 if sys.version_info[0] == 2:
     from urlparse import urlsplit
@@ -49,7 +48,8 @@ class ModuleInstall:
 
         ::
 
-            ModuleInstall("pyquickhelper", "github", "sdpython").install(temp_folder="temp")
+            ModuleInstall("pyquickhelper", "github",
+                          "sdpython").install(temp_folder="temp")
     """
 
     allowedKind = ["pip", "github", "exe", "exe2", "wheel", "wheel2"]
@@ -346,7 +346,8 @@ class ModuleInstall:
                 out, err = run_cmd(cmd, fLOG=self.fLOG)
                 if err:
                     if sys.platform.startswith("win") and sys.version_info[:2] >= (3, 5) and "DLL" in err:
-                        mes = "scipy.sparse is failing, you should check that Visual Studio 2015 is installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-M:\n{3}"
+                        mes = ("scipy.sparse is failing, you should check that Visual Studio 2015 is " +
+                               "installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-M:\n{3}")
                         raise InstallError(mes.format(
                             self.ImportName, cmd, out, err))
                     else:
@@ -792,7 +793,7 @@ class ModuleInstall:
             available = pypi.package_releases(self.name)
             if available is None or len(available) == 0:
                 available = pypi.package_releases(self.name.capitalize())
-            if (available is None or len(available) == 0) and self.mnane is not None:
+            if (available is None or len(available) == 0) and self.mname is not None:
                 available = pypi.package_releases(self.mname)
 
             if available is None:
@@ -1266,15 +1267,8 @@ class ModuleInstall:
                     self.fLOG(
                         "warning: ``Successfully installed`` or ``install  C`` not found")
                 if "Permission denied" in out:
-                    raise PermissionError(
-                        "(12) unable to install with github " +
-                        str(self) +
-                        "\nCMD:\n" +
-                        cmd +
-                        "\nOUT:\n" +
-                        out +
-                        "\nERR-Y:\n" +
-                        err)
+                    raise PermissionError(" ".join(["(12) unable to install with github", str(self), "\n--CMD--:\n",
+                                                    "\n".join(cmds), "\n--OUT--\n", out, "\n--ERR-Y--\n", err]))
             ret = True
 
         elif kind == "exe":
@@ -1386,7 +1380,8 @@ class ModuleInstall:
 
         ::
 
-            post = dict(cmd_python="Scripts\\\\pywin32_postinstall.py -install")
+            post = dict(
+                cmd_python="Scripts\\\\pywin32_postinstall.py -install")
 
         .. versionadded:: 1.1
         """

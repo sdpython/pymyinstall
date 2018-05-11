@@ -94,7 +94,9 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
     @param      selection       selection of tools to install
     @param      last_function   function to execute just before running InnoSetup,
-                                see `win_setup_helper.py <https://github.com/sdpython/ensae_teaching_cs/blob/master/src/ensae_teaching_cs/automation/win_setup_helper.py>`_
+                                see `win_setup_helper.py
+                                <https://github.com/sdpython/ensae_teaching_cs/blob/master/src/
+                                ensae_teaching_cs/automation/win_setup_helper.py>`_
                                 for an example
     @param      r_packages      install R packages
     @param      julia_packages  install Julia packages
