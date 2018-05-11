@@ -58,6 +58,8 @@ class TestCodeStyle(ExtTestCase):
                          "pymy_status.py:53: W0612",
                          "module_install.py:26: E0401",
                          "ipython_helper.py:24: E1101",
+                         "Unable to import 'selenium.webdriver'",
+                         "Unable to import 'Queue'",
                          ])
 
     def test_style_test(self):
@@ -76,6 +78,8 @@ class TestCodeStyle(ExtTestCase):
                          "imported as skip_",
                          "Imports from package src are not grouped",
                          "test_is_installed.py:57: E1101",
+                         "Unable to import 'selenium.webdriver'",
+                         "Unable to import 'Queue'",
                          ])
 
 
