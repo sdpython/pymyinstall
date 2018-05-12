@@ -38,7 +38,8 @@ class TestSetupIPython (unittest.TestCase):
             try:
                 r = setup_ipython(r"C:\temp", [], apply_modification=False)
             except FileNotFoundError as e:
-                warnings.warn('[test_setup_ipython] failed due to {0}'.format(e))
+                warnings.warn(
+                    '[test_setup_ipython] failed due to {0}'.format(e))
                 return
             assert len(r) > 0
             fLOG(r)

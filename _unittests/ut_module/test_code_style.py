@@ -73,13 +73,11 @@ class TestCodeStyle(ExtTestCase):
                          "skip__' imported but unused",
                          "skip___' imported but unused",
                          "Unused variable 'skip_'",
-                         "Unused import src",
-                         "Unused variable 'skip_",
                          "imported as skip_",
-                         "Imports from package src are not grouped",
                          "test_is_installed.py:57: E1101",
                          "Unable to import 'selenium.webdriver'",
                          "Unable to import 'Queue'",
+                         "Unused import src",
                          ])
 
 
