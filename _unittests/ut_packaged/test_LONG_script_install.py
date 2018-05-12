@@ -22,7 +22,6 @@ except ImportError:
     import src
 
 
-
 class TestLONGScriptInstall(unittest.TestCase):
 
     def test_pypi(self):

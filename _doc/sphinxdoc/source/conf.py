@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-import datetime
-import re
 import sphinx_readable_theme
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.split(__file__)[0])))
