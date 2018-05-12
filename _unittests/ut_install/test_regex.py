@@ -7,6 +7,7 @@ import sys
 import os
 import unittest
 import re
+from pyquickhelper.loghelper import fLOG
 
 try:
     import src
@@ -21,26 +22,6 @@ except ImportError:
         sys.path.append(path)
     import src
 
-try:
-    import pyquickhelper as skip_
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..",
-                "..",
-                "pyquickhelper",
-                "src")))
-    if path not in sys.path:
-        sys.path.append(path)
-    if "PYQUICKHELPER" in os.environ and len(os.environ["PYQUICKHELPER"]) > 0:
-        sys.path.append(os.environ["PYQUICKHELPER"])
-    import pyquickhelper as skip_
-
-
-from pyquickhelper.loghelper import fLOG
 from src.pymyinstall.installhelper.module_install_page_wheel import extract_all_links, enumerate_links_module
 from src.pymyinstall.installhelper.install_cmd_helper import python_version
 from src.pymyinstall.installhelper.install_cmd_regex import regex_wheel_versions
