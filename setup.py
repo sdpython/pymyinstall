@@ -52,30 +52,6 @@ def ask_help():
     return "--help" in sys.argv or "--help-commands" in sys.argv
 
 
-def import_pyquickhelper():
-    try:
-        import pyquickhelper
-    except ImportError:
-        sys.path.append(
-            os.path.normpath(
-                os.path.abspath(
-                    os.path.join(
-                        os.path.dirname(__file__),
-                        "..",
-                        "pyquickhelper" if sys.version_info[
-                            0] >= 3 else "py27_pyquickhelper_27",
-                        "src"))))
-        try:
-            import pyquickhelper
-        except ImportError as e:
-            message = "Module pyquickhelper is needed to build the documentation ({0}), not found in path {1} - current {2}".format(
-                sys.executable,
-                sys.path[-1],
-                os.getcwd())
-            raise ImportError(message) from e
-    return pyquickhelper
-
-
 def is_local():
     file = os.path.abspath(__file__).replace("\\", "/").lower()
     if "/temp/" in file and "pip-" in file:
@@ -85,10 +61,10 @@ def is_local():
                   "copy27", "copy_dist", "local_pypi", "notebook", "publish", "publish_doc",
                   "register", "unittests", "unittests_LONG", "unittests_SKIP", "unittests_GUI",
                   "run27", "sdist", "setupdep", "test_local_pypi", "upload_docs", "setup_hook",
-                  "copy_sphinx", "write_version", "lab", "history"}:
+                  "copy_sphinx", "write_version", "lab", "history", "run_pylint"}:
         if cname in sys.argv:
             try:
-                import_pyquickhelper()
+                import pyquickhelper
             except ImportError:
                 return False
             return True
@@ -112,12 +88,10 @@ def verbose():
 
 if is_local() and not ask_help():
     def write_version():
-        pyquickhelper = import_pyquickhelper()
         from pyquickhelper.pycode import write_version_for_setup
         return write_version_for_setup(__file__)
 
-    if sys.version_info[0] != 2:
-        write_version()
+    write_version()
 
     versiontxt = os.path.join(os.path.dirname(__file__), "version.txt")
     if os.path.exists(versiontxt):
@@ -125,7 +99,7 @@ if is_local() and not ask_help():
             lines = f.readlines()
         subversion = "." + lines[0].strip("\r\n ")
         if subversion == ".0":
-            raise Exception("Subversion is wrong: '{0}'.".format(subversion))
+            raise Exception("Git version is wrong: '{0}'.".format(subversion))
     else:
         raise FileNotFoundError(versiontxt)
 else:
@@ -134,28 +108,19 @@ else:
 
 if "upload" in sys.argv and not subversion and not ask_help():
     # avoid uploading with a wrong subversion number
-    try:
-        import pyquickhelper
-        pyq = True
-    except ImportError:
-        pyq = False
     raise Exception(
-        "subversion is empty, cannot upload, is_local()={0}, pyquickhelper={1}".format(is_local(), pyq))
+        "Git version is empty, cannot upload, is_local()={0}, pyquickhelper={1}".format(is_local()))
 
 ##############
 # common part
 ##############
 
 if os.path.exists(readme):
-    if sys.version_info[0] == 2:
-        from codecs import open
     with open(readme, "r", encoding='utf-8-sig') as f:
         long_description = f.read()
 else:
     long_description = ""
 if os.path.exists(history):
-    if sys.version_info[0] == 2:
-        from codecs import open
     with open(history, "r", encoding='utf-8-sig') as f:
         long_description += f.read()
 
@@ -169,7 +134,7 @@ def file_filter_pep8(filename):
 
 
 if is_local():
-    pyquickhelper = import_pyquickhelper()
+    import pyquickhelper
     logging_function = pyquickhelper.get_fLOG()
     from pyquickhelper.pycode import process_standard_options_for_setup
     logging_function(OutputPrint=True)
@@ -193,39 +158,28 @@ else:
     r = False
 
 if ask_help():
-    pyquickhelper = import_pyquickhelper()
     from pyquickhelper.pycode import process_standard_options_for_setup_help
     process_standard_options_for_setup_help(sys.argv)
 
 if not r:
     if len(sys.argv) in (1, 2) and sys.argv[-1] in ("--help-commands",):
-        pyquickhelper = import_pyquickhelper()
         from pyquickhelper.pycode import process_standard_options_for_setup_help
         process_standard_options_for_setup_help(sys.argv)
 
-    if sys.version_info[0] >= 3:
-        entry_points = {
-            'console_scripts': [
-                'pymy_update3 = pymyinstall.cli.pymy_update:main',
-                'pymy_install3 = pymyinstall.cli.pymy_install:main',
-                'pymy_deps3 = pymyinstall.cli.pymy_deps:main',
-                'pymy_status3 = pymyinstall.cli.pymy_status:main',
-            ]}
-        if sys.platform.startswith("win"):
-            entry_points['console_scripts'].extend([
-                'pymy_update = pymyinstall.cli.pymy_update:main',
-                'pymy_install = pymyinstall.cli.pymy_install:main',
-                'pymy_deps = pymyinstall.cli.pymy_deps:main',
-                'pymy_status = pymyinstall.cli.pymy_status:main',
-            ])
-    else:
-        entry_points = {
-            'console_scripts': [
-                'pymy_update = pymyinstall.cli.pymy_update:main',
-                'pymy_install = pymyinstall.cli.pymy_install:main',
-                'pymy_deps = pymyinstall.cli.pymy_deps:main',
-                'pymy_status = pymyinstall.cli.pymy_status:main',
-            ]}
+    entry_points = {
+        'console_scripts': [
+            'pymy_update3 = pymyinstall.cli.pymy_update:main',
+            'pymy_install3 = pymyinstall.cli.pymy_install:main',
+            'pymy_deps3 = pymyinstall.cli.pymy_deps:main',
+            'pymy_status3 = pymyinstall.cli.pymy_status:main',
+        ]}
+    if sys.platform.startswith("win"):
+        entry_points['console_scripts'].extend([
+            'pymy_update = pymyinstall.cli.pymy_update:main',
+            'pymy_install = pymyinstall.cli.pymy_install:main',
+            'pymy_deps = pymyinstall.cli.pymy_deps:main',
+            'pymy_status = pymyinstall.cli.pymy_status:main',
+        ])
 
     setup(
         name=project_var_name,
