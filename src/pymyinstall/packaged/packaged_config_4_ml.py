@@ -457,7 +457,7 @@ def ensae_set():
                       purpose="AD3 (approximate MAP decoder with Alternating Direction Dual Decomposition)"),
         ModuleInstall("pystruct", "wheel", usage="ML", source="2",
                       purpose="Learning Structured Prediction in Python"),
-        ModuleInstall("py_earth", "wheel", mname="pyearth", usage="ML", source="2",
+        ModuleInstall("sklearn_contrib_py_earth", "wheel", mname="pyearth", usage="ML", source="2",
                       purpose="A Python implementation of Jerome Friedman's Multivariate Adaptive Regression " +
                       "Splines algorithm, in the style of " +
                       "scikit-learn. The py-earth package implements Multivariate Adaptive Regression Splines using Cython and provides an " +
