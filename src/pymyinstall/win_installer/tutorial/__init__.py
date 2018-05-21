@@ -17,7 +17,7 @@ def copy_tutorial(name, destination):
     using *name* or the last folder name in *name*.
 
     This function requires modules
-    `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/>`_.
+    `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/>`_.
     """
     from pyquickhelper.filehelper import synchronize_folder
     if os.path.exists(name):
