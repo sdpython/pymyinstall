@@ -24,12 +24,8 @@ def install_mathjax():
     mathjax.install_mathjax()
 
 
-def setup_ipython(current_path=None,
-                  additional_path=None,
-                  apply_modification=True,
-                  shortcut=True,
-                  browser=None
-                  ):
+def setup_ipython(current_path=None, additional_path=None, apply_modification=True,
+                  shortcut=True, browser=None):
     """
     The function applies the modification suggested in this blog post:
     `Travailler avec IPython notebook <http://www.xavierdupre.fr/blog/2014-02-24_nojs.html>`_ (written in French).
@@ -41,12 +37,13 @@ def setup_ipython(current_path=None,
     @param      browser             if not None, tries to change if it finds it (IE, Chrome, Firefox, on Windows)
     @return                         path the config file
 
-    If you need to create a shortcut with the appropriate paths, you can use the following instructions
-    to open Jupyter notebook on a specific folder:
+    If you need to create a shortcut with the appropriate paths,
+    you can use the following instructions
+    to open :epkg:`Jupyter` notebook on a specific folder:
 
     ::
 
-        set path=%path%;c:\\Python364_x64;c:\\Python364_x64\\Scripts
+        set path=%path%;c:\\Python364_x64;c:\\Python365_x64\\Scripts
         jupyter-notebook --notebook-dir=_doc\\notebooks
     """
     if sys.platform.startswith("win"):
@@ -62,11 +59,11 @@ def setup_ipython(current_path=None,
 
         if not os.path.exists(ipython_notebook_config):
             from ..installhelper.install_cmd_helper import run_cmd
-            exe = os.path.join(
-                os.path.split(
-                    sys.executable)[0],
-                "Scripts",
-                "jupyter-notebook.exe")
+            exe_exe = os.path.dirname(sys.executable)
+            if exe_exe.lower().endswith("scripts"):
+                exe = os.path.join(exe_exe, "jupyter-notebook.exe")
+            else:
+                exe = os.path.join(exe_exe, "Scripts", "jupyter-notebook.exe")
             cmd = exe + " -y --generate-config"
             out, err = run_cmd(cmd, wait=True, fLOG=noLOG)
 
