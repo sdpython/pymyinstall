@@ -32,7 +32,6 @@ def pyensae_set():
         "ecdsa",  # paramiko
         "elasticsearch",
         "folium",  # maps
-        "idna",
         "ijson",
         "inflection",  # quandl
         "ipaddress",

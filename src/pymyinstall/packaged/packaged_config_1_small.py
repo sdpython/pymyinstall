@@ -32,6 +32,8 @@ def small_set():
             "pygments", "pip", purpose="syntax highlighting package written in Python"),
         ModuleInstall(
             "pyparsing", "pip", purpose="alternative approach to creating and executing simple grammars"),
+        ModuleInstall("idna", "pip", usage="WEB",
+                      purpose="Internationalized Domain Names in Applications (IDNA)"),
         ModuleInstall(
             "python-dateutil", "pip", "dateutil", purpose="helpers to manipulate dates"),
         ModuleInstall(

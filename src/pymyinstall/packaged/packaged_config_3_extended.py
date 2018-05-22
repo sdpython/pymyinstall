@@ -481,8 +481,6 @@ def extended_set():
                       purpose="comprehensive password hashing framework supporting over 30 schemes"),
         ModuleInstall("plac", "pip",
                       purpose="The smartest command line arguments parser in the world"),
-        ModuleInstall("idna", "pip", usage="WEB",
-                      purpose="Internationalized Domain Names in Applications (IDNA)"),
         ModuleInstall("pyOpenSSL", "pip", mname="OpenSSL",
                       purpose="Python wrapper module around the OpenSSL library"),
         ModuleInstall("w3lib", "pip",
