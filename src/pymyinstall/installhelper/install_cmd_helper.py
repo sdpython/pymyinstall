@@ -341,6 +341,7 @@ def update_pip(python_path=None, fLOG=print):
                 if not line.startswith(" ") and "RuntimeWarning: Config variable" not in line and \
                     not(" which is incompatible." in line and " has requirement " in line) and \
                         not(" requires " in line and " which is not installed." in line) and \
+                        not("Cache entry deserialization failed, entry ignored" in line) and \
                         len(line.strip()) > 3:
                     keep.append(line)
             if len(keep) > 0:
