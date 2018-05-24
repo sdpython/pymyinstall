@@ -22,6 +22,8 @@ def teachings_set():
         ModuleInstall("pymmails", "pip",
                       purpose="read/send emails", usage="TEACH"),
         ModuleInstall(
+            "pyenbc", "pip", purpose="Helpers for remote work, clusters, hadoop", usage="TEACH"),
+        ModuleInstall(
             "pyensae", "pip", purpose="helpers, Hadoop, SQL, financial times series, ...", usage="TEACH"),
         ModuleInstall("pyrsslocal", "pip",
                       purpose="RSS readers", usage="TEACH"),
@@ -51,6 +53,10 @@ def teachings_set():
                       purpose="pandas_streaming aims at processing big files with pandas, too big to hold in memory," +
                       "too small to be parallelized with a significant gain. The module replicates a subset of pandas " +
                       "API and implements other functionalities for machine learning.", usage="TEACH"),
+        ModuleInstall("manydataapi", "pip",
+                      purpose="Helpers to access APIs", usage="TEACH"),
+        ModuleInstall("csharpy", "pip",
+                      purpose="Helpers for C#and Python", usage="TEACH"),
     ]
     #
     return [_ for _ in mod if _ is not None]
