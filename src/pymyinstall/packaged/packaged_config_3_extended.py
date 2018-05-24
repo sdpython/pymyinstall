@@ -43,6 +43,7 @@ def extended_set():
             "py", "pip", purpose="library with cross-python path, ini-parsing, io, code, log facilities"),
         ModuleInstall("pluggy", "pip",
                       purpose="plugin and hook calling mechanisms for python"),
+        ModuleInstall("atomicwrites", "pip", purpose="Atomic file writes."),
         ModuleInstall("pytest", "pip",
                       purpose="pytest: simple powerful testing with Python"),
         ModuleInstall(
@@ -242,6 +243,9 @@ def extended_set():
             "fastcache", "wheel", purpose="C implementation of Python 3 lru_cache for Python."),
         ModuleInstall(
             "multiprocess", "wheel", purpose="better multiprocessing and multithreading in python"),
+        ModuleInstall("osqp", "wheel",
+                      purpose="The OSQP (Operator Splitting Quadratic Program) solver is a numerical optimization package for solving " +
+                      "quadratic problems") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("cvxpy", "pip", usage="OPTIM",
                       purpose="linear, quadratic optimization, depends on cvxopt") if sys.version_info[:2] >= (3, 5) else None,
         # to install packages with conda
@@ -601,6 +605,9 @@ def extended_set():
                       purpose="Magics to use brython in Jupyter notebook."),
         ModuleInstall(
             "asteval", "pip", purpose="Safe, minimalistic evaluator of python expression using ast module"),
+        ModuleInstall(
+            "uncertainties", "pip", purpose="uncertainties allows calculations such as (2 +/- 0.1)*2 = 4 " +
+            "+/- 0.2 to be performed transparently."),
         ModuleInstall(
             "lmfit", "pip", purpose="Least-Squares Minimization with Bounds and Constraints", usage="OPTIM"),
         #

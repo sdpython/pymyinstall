@@ -477,6 +477,10 @@ def ensae_set():
                       purpose="A library consisting of useful tools and extensions for the day-to-day data science tasks."),
         ModuleInstall("jsonpickle", "pip",
                       purpose="Python library for serializing any arbitrary object graph into JSON."),
+        ModuleInstall("py-cpuinfo", "pip", mname="py_cpuinfo",
+                      purpose="Py-cpuinfo gets CPU info with pure Python. Py-cpuinfo should work without " +
+                      "any extra programs or libraries, beyond what your OS provides. It does not " +
+                      "require any compilation(C/C++, assembly, et cetera) to use. It works with Python 2 and 3."),
         ModuleInstall("sacred", "pip", usage="ML",
                       purpose="Facilitates automated and reproducible experimental research"),
         ModuleInstall("astropy", "wheel",
