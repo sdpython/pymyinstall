@@ -9,7 +9,7 @@ import os
 
 from ..installhelper.install_cmd_helper import unzip_files
 from ..installhelper.link_shortcuts import add_shortcut_to_desktop
-from .install_custom import download_page, download_from_sourceforge
+from .install_custom import download_page, download_from_sourceforge, DownloadException, download_file
 
 
 def IsSQLiteSpyInstalled(dest_folder):
@@ -26,9 +26,9 @@ def IsSQLiteSpyInstalled(dest_folder):
         raise NotImplementedError("not available on platform " + sys.platform)
 
 
-def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
+def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None, backup=False):
     """
-    Install :epkg:`SQLiteSpy`.
+    Installs :epkg:`SQLiteSpy`.
     It does not do it a second time if it is already installed.
 
     @param      temp_folder     where to download the setup
@@ -43,31 +43,38 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None):
         return os.path.join(temp_folder, "SQLiteSpy.exe")
 
     link = "https://www.yunqa.de/delphi/products/sqlitespy/index"
-    page = download_page(link)
-    if sys.platform.startswith("win"):
-        reg = re.compile(
-            "href=[\\\"'](https://www.yunqa.de/delphi/downloads/SQLiteSpy.*?[.]zip)[\\\"']")
-        alls = reg.findall(page)
-        if len(alls) == 0:
-            raise Exception(
-                "unable to find a link on a .zip file on page: " +
-                page)
+    outfile = None
+    try:
+        page = download_page(link)
+    except DownloadException as e:
+        if backup and sys.platform.startswith("win"):
+            link = "http://www.xavierdupre.fr/enseignement/setup/SQLiteSpy_1.9.12.zip"
+            fLOG("[pymy] download ", link)
+            outfile = os.path.join(temp_folder, "SQLiteSpy_1.9.12.zip")
+            download_file(link, outfile)
+            version = "1.9.12"
+            fLOG("[pymy] SQLiteSpy, version ", version)
+        else:
+            raise e
 
-        file = alls[0].replace("&amp;", "&")
-        full = file
-        version = file.split("_")[-1].replace(".zip", "")
-        fLOG("[pymy] SQLiteSpy, version ", version)
-        outfile = os.path.join(
-            temp_folder,
-            "{0}_{1}.zip".format(
-                "SQLiteSpy",
-                version))
-        fLOG("[pymy] download ", full)
-        download_from_sourceforge(
-            full,
-            outfile,
-            temp_folder=temp_folder,
-            fLOG=fLOG)
+    if sys.platform.startswith("win"):
+        if outfile is None:
+            reg = re.compile(
+                "href=[\\\"'](https://www.yunqa.de/delphi/downloads/SQLiteSpy.*?[.]zip)[\\\"']")
+            alls = reg.findall(page)
+            if len(alls) == 0:
+                raise Exception(
+                    "Unable to find a link on a .zip file on page: " + page)
+
+            file = alls[0].replace("&amp;", "&")
+            full = file
+            version = file.split("_")[-1].replace(".zip", "")
+            fLOG("[pymy] SQLiteSpy, version ", version)
+            outfile = os.path.join(
+                temp_folder, "{0}_{1}.zip".format("SQLiteSpy", version))
+            fLOG("[pymy] download ", full)
+            download_from_sourceforge(
+                full, outfile, temp_folder=temp_folder, fLOG=fLOG)
         if install:
             files = unzip_files(outfile, temp_folder, fLOG=fLOG)
             local = [f for f in files if f.endswith(".exe")][0]

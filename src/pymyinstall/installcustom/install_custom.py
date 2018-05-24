@@ -19,10 +19,17 @@ else:
     import http.client as http_client
 
 
+class DownloadException(Exception):
+    """
+    Cannot download.
+    """
+    pass
+
+
 @install_memoize2
 def download_page(url, is406=False):
     """
-    Downloads a page from a url
+    Downloads a page from a url.
 
     @param      url     url
     @param      is406   if the function raised *HTTP Error 406*, try *True*
@@ -40,11 +47,11 @@ def download_page(url, is406=False):
         text = u.read()
         u.close()
     except urllib_error.HTTPError as e:
-        raise Exception("unable to get archive from: " + url) from e
+        raise DownloadException("unable to get archive from: " + url) from e
     except urllib_error.URLError as e:
-        raise Exception("unable to get archive from: " + url) from e
+        raise DownloadException("unable to get archive from: " + url) from e
     except ConnectionResetError as e:
-        raise Exception("unable to get archive from: " + url) from e
+        raise DownloadException("unable to get archive from: " + url) from e
 
     typstr = str  # unicode#
     return typstr(text, encoding="utf8")
@@ -52,8 +59,8 @@ def download_page(url, is406=False):
 
 def download_file(url, outfile, fLOG=None):
     """
-    download a file from a url, the function does not download the file
-    again if outfile already exists
+    Downloads a file from a url, the function does not download the file
+    again if outfile already exists.
 
     @param      url         url
     @param      outfile     outfile
@@ -75,11 +82,12 @@ def download_file(url, outfile, fLOG=None):
         text = u.read()
         u.close()
     except urllib_error.HTTPError as e:
-        raise Exception("unable to get archive from: " + url) from e
+        raise DownloadException("unable to get archive from: " + url) from e
     except urllib_error.URLError as e:
-        raise Exception("unable to get archive from: " + url) from e
+        raise DownloadException("unable to get archive from: " + url) from e
     except http_client.IncompleteRead as ee:
-        raise Exception("unable to complete reading from: " + url) from ee
+        raise DownloadException(
+            "unable to complete reading from: " + url) from ee
 
     with open(outfile, "wb") as f:
         f.write(text)
@@ -89,9 +97,9 @@ def download_file(url, outfile, fLOG=None):
 
 def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
     """
-    download a file from a url using redirection,
+    Downloads a file from a url using redirection,
     the function does not download the file
-    again if outfile already exists
+    again if outfile already exists.
 
     @param      url         url
     @param      outfile     outfile
@@ -118,9 +126,9 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
         text = req.raw.read()
         fLOG("[pymy] len ", len(text))
     except urllib_error.HTTPError as e:
-        raise Exception("unable to get archive from: " + url) from e
+        raise DownloadException("unable to get archive from: " + url) from e
     except requests.exceptions.ConnectionError as ee:
-        raise Exception("unable to get archive from: " + url) from ee
+        raise DownloadException("unable to get archive from: " + url) from ee
 
     if len(text) < 20 and text.decode(
             "ascii").lower().startswith("bad request"):
@@ -134,7 +142,7 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
 
 def where_in_path(name):
     """
-    Look for a file in current directory and in every path in PATH
+    Looks for a file in current directory and in every path in ``PATH``.
 
     @param      name        name of the file to look for
     @return                 None if not found, the absolute filename otherwise
