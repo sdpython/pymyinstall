@@ -53,11 +53,11 @@ def install_pandoc(
                 page)
 
         file = alls[0].split("/")[-1]
-        filel = "https://github.com/jgm/pandoc/releases/download/{0}/pandoc-{1}-windows.msi"
+        filel = "https://github.com/jgm/pandoc/releases/download/{0}/pandoc-{0}-windows-x86_64.msi"
         version = file.replace("pandoc-", "").replace("-windows.msi", "")
-        fLOG("[pymy] pandoc, version ", version)
         vershort = version.split("-")[0]
-        full = filel.format(vershort, version)
+        fLOG("[pymy] pandoc, version ", vershort)
+        full = filel.format(vershort)
         outfile = os.path.join(temp_folder, full.split("/")[-1])
         fLOG("[pymy] download ", full)
         local = download_file(full, outfile)

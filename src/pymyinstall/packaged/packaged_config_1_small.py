@@ -141,6 +141,8 @@ def small_set():
                       purpose="interpret RST format", usage="SPHINX"),
         ModuleInstall("packaging", "pip",
                       purpose="Core utilities for Python packages"),
+        ModuleInstall("sphinxcontrib-websupport", "pip", mname="sphinxcontrib.websupport",
+                      purpose="wepsupport for Sphinx", usage="SPHINX"),
         ModuleInstall(
             "sphinx", "pip", purpose="documentation generation based on RST", usage="SPHINX"),
         ModuleInstall(
@@ -501,6 +503,8 @@ def small_set():
                       purpose="Python library for extract property from data."),
         ModuleInstall("tabledata", "pip",
                       purpose="A Python library to represent tabular data for pytablewriter/pytablereader/SimpleSQLite."),
+        ModuleInstall("msgfy", "pip",
+                      purpose="msgfy is a Python library for convert Exception instance to a human-readable error message."),
         ModuleInstall("SimpleSQLite", "pip", mname="simplesqlite",
                       purpose="SimpleSQLite is a Python library to simplify the table creation and data insertion into SQLite database."),
         ModuleInstall("pytablereader", "pip",
