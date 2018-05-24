@@ -41,6 +41,7 @@ def pyensae_set():
         "markdown2",
         "more-itertools",
         "mpl_finance",
+        "msgfy",
         "msrest",
         "msrestazure",
         "networkx",
