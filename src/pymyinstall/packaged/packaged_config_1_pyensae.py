@@ -68,7 +68,6 @@ def pyensae_set():
         "scikit-learn",
         "simplesqlite",
         "toml",
-        "wrapt",
     ]
 
     for m in ensae_set():

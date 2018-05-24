@@ -71,6 +71,7 @@ def pyquickhelper_set():
         "jyquickhelper",
         "keyring",
         "kiwisolver",
+        "lazy_object_proxy",
         "logbook",
         "lxml",
         "matplotlib",
@@ -165,6 +166,7 @@ def pyquickhelper_set():
         "win_unicode_console",
         "winrandom" if sys.platform.startswith("win") else None,
         "winshell" if sys.platform.startswith("win") else None,
+        "wrapt",  # astroid
     ]
 
     from .automate_install import find_module_install

@@ -185,8 +185,6 @@ def small_set():
             "requests-file", "pip", mname="requests_file", purpose="File transport adapter for Requests"),
         ModuleInstall(
             "requests-ftp", "pip", mname="requests_ftp", purpose="FTP Transport Adapter for Requests"),
-        ModuleInstall("wrapt", "wheel",
-                      purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall(
             "pandas-datareader", "pip", mname="pandas_datareader",
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
@@ -361,6 +359,8 @@ def small_set():
             purpose="backports.functools_lru_cache"),
         ModuleInstall("lazy-object-proxy", "pip", mname="lazy_object_proxy",
                       purpose="A fast and thorough lazy object proxy"),
+        ModuleInstall("wrapt", "wheel",
+                      purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall(
             "astroid", "pip",
             purpose="A abstract syntax tree for Python with inference support."),
