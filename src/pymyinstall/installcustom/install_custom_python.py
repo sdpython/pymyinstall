@@ -227,6 +227,20 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 cmd = '"{0}" -u "{1}"'.format(pyexe, outfile_pip)
                 out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
                 if len(err) > 0:
+                    skip = ['Consider adding this directory to PATH',
+                            'which is not on PATH.']
+                    lines = err.split('\n')
+                    errs = []
+                    for line in lines:
+                        zoo = True
+                        for sk in skip:
+                            if sk in line:
+                                zoo = False
+                                break
+                        if zoo:
+                            errs.append(line)
+                    err = "\n".join(errs).strip(' \n\r')
+                if len(err) > 0:
                     raise Exception(
                         "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-B\n{2}".format(cmd, out, err))
             else:
