@@ -47,7 +47,7 @@ def teachings_set():
                       purpose="lightmlrestapi implements a light machine learning REST API based on falcon.", usage="TEACH"),
         ModuleInstall("lightmlboard", "pip",
                       purpose="lightmlboard implements a light machine learning leaderboard based on tornado.", usage="TEACH"),
-        ModuleInstall("mlprodicts", "pip",
+        ModuleInstall("mlprodict", "pip",
                       purpose="mlprodict implements a couple of ways to productionize machine learning predictions.", usage="TEACH"),
         ModuleInstall("pandas_streaming", "pip",
                       purpose="pandas_streaming aims at processing big files with pandas, too big to hold in memory," +
