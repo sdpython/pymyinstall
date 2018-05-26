@@ -148,7 +148,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     """
     Updates modules in *list_module*
     if None, this list will be returned by @see fn ensae_fullset,
-    the function starts by updating pip.
+    the function starts by updating :epkg:`pip`.
 
     @param      temp_folder     temporary folder
     @param      verbose         more display

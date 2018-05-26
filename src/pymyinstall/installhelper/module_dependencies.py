@@ -10,6 +10,7 @@ def get_default_ignore_modules():
     or modules integrated to the standard distributiion such
     `enum34 <https://pypi.python.org/pypi/enum34>`_.
     This function returns this list.
+    Skips errors such as ``Module 'cachecontrol' misses 'msgpack_python'``.
     """
     return [
         "argparse",          # standard distribution (>= 3.5)
@@ -25,6 +26,7 @@ def get_default_ignore_modules():
         "keyrings.alt",      # weird this one on Windows
         # "guidata",
         # "monotonic",
+        "msgpack_python",   # Called msgpack now.
         "ordereddict",      # standard distribution (>= 3.4)
         "pathlib",          # standard distribution (>= 3.5)
         "pip",              # almost standard distribution, should be rare
@@ -63,7 +65,7 @@ def _main_pipdeptree(local_only=False):
 
 def missing_dependencies(specific=None, ignore_module=get_default_ignore_modules()):
     """
-    return the list of missing dependencies for the installed modules
+    Returns the list of missing dependencies for the installed modules
 
     @param      specific        look dependencies only for a specific module
     @param      ignore_module   list of modules not to consider as a missing dependency
