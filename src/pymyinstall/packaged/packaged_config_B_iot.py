@@ -43,6 +43,9 @@ def iot_set():
                       purpose="WebSocket client for python. hybi13 is supported."),
         ModuleInstall('pushbullet.py', 'pip', usage="IoT",
                       purpose="A simple python client for pushbullet.com"),
+        ModuleInstall('sseclient-py', 'pip', mname="sseclient",
+                      purpose="A Python client for SSE event sources that seamlessly " +
+                      "integrates with urllib3 and requests."),
         ModuleInstall('python-nest', 'pip', usage="IoT",
                       purpose="Python API and command line tool for talking to the Nest™ Thermostat"),
         ModuleInstall('VarEvents', 'pip', usage="IoT",

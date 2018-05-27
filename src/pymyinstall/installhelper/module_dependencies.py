@@ -27,6 +27,7 @@ def get_default_ignore_modules():
         # "guidata",
         # "monotonic",
         "msgpack_python",   # Called msgpack now.
+        "msgpack-python",   # Called msgpack now.
         "ordereddict",      # standard distribution (>= 3.4)
         "pathlib",          # standard distribution (>= 3.5)
         "pip",              # almost standard distribution, should be rare
