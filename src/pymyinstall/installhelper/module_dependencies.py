@@ -65,7 +65,7 @@ def _main_pipdeptree(local_only=False):
 
 def missing_dependencies(specific=None, ignore_module=get_default_ignore_modules()):
     """
-    Returns the list of missing dependencies for the installed modules
+    Returns the list of missing dependencies for the installed modules.
 
     @param      specific        look dependencies only for a specific module
     @param      ignore_module   list of modules not to consider as a missing dependency
