@@ -47,9 +47,6 @@ def extended_set():
         ModuleInstall("pytest", "pip",
                       purpose="pytest: simple powerful testing with Python"),
         ModuleInstall(
-            "bitarray", "wheel",
-            purpose="efficient arrays of booleans -- C extension"),
-        ModuleInstall(
             "blist", "wheel",
             purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
         ModuleInstall(

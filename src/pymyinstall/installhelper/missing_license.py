@@ -134,7 +134,6 @@ missing_module_licenses = {
     "grappelli_safe": "~MIT",
     "mezzanine": "BSD",
     "affine": "BSD",
-    "bitarray": "Python",
     "blocks": "GPL",
     "blz": "BSD",
     "chest": "BSD",
