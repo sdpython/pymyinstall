@@ -773,8 +773,6 @@ def ensae_set():
         ModuleInstall(
             'mockextras', 'pip', purpose="Extensions to the mock library"),
         ModuleInstall(
-            'arctic', 'wheel', purpose="Arctic is a high performance datastore for numeric data."),
-        ModuleInstall(
             'swiglpk', 'pip', purpose="swiglpk - Simple swig bindings for the GNU Linear Programming Kit"),
         ModuleInstall('optlang', 'pip', purpose="Formulate optimization problems using sympy expressions " +
                       "and solve them using interfaces to third-party optimization software (e.g. GLPK)."),
