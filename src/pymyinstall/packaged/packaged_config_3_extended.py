@@ -104,8 +104,6 @@ def extended_set():
             'cvxopt', 'wheel', purpose="linear, quadratique optimization", usage="OPTIM"),
         ModuleInstall(
             'PyWavelets', 'wheel', mname='pywt', purpose="wavelets computation", usage="DATA/ML"),
-        ModuleInstall('fastcluster', 'wheel',
-                      purpose="clustering, AHC, ... (issue on Linux and Anaconda)", usage="DATA/ML"),
         ModuleInstall('pyclustering', 'pip',
                       purpose="many kinds of clustering (Optics, DBScan, x-means, ...)", usage="DATA/ML"),
         ModuleInstall(
