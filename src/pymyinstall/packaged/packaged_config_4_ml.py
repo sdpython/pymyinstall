@@ -664,8 +664,6 @@ def ensae_set():
                       overwrite="https://cntk.ai/PythonWheel/CPU-Only/cntk-2.0-cp{0}{1}-cp{0}{1}m-win_amd64.whl",
                       purpose="Deep Learning from Microsoft " +
                       "see https://docs.microsoft.com/en-us/cognitive-toolkit/setup-windows-python"),
-        ModuleInstall("torch", "wheel", mname='torch', usage="DATA/DL",
-                      purpose="PyTorch is a deep learning framework for fast, flexible experimentation."),
 
         #
         # 2017-05/23
