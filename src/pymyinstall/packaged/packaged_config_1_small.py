@@ -59,7 +59,6 @@ def small_set():
             "pytz", "pip", purpose="World timezone definitions, modern and historical"),
         ModuleInstall("pyreadline", "pip",
                       purpose="python implementation of GNU readline functionality"),
-        ModuleInstall("husl", "pip", purpose="Python implementation of HUSL"),
         ModuleInstall(
             "pipdeptree", "pip", purpose="displays module dependencies as a tree"),
         ModuleInstall("jdcal", "pip",

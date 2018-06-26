@@ -44,7 +44,6 @@ def pyquickhelper_set():
         "git-pandas",
         "gitdb2",
         "gitpython",
-        "husl",
         "html5lib",
         "idna",
         "imagesize",
