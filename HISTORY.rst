@@ -5,9 +5,10 @@
 History
 =======
 
-current - 2018-05-02 - 0.00Mb
+current - 2018-06-27 - 0.00Mb
 =============================
 
+* `45`: filter out warnings added by pip 10 (2018-06-16)
 * `44`: rename tensorboard (2018-05-02)
 * `43`: fix param - no longer require C compilation (2018-05-02)
 * `42`: add options --no-warn-script-location by default for pip >= 10.0 (2018-04-19)
@@ -37,8 +38,8 @@ current - 2018-05-02 - 0.00Mb
 * `27`: fix guidata (2017-08-05)
 * `29`: build dlib on Windows (2017-07-19)
 * `20`: refresh pystruct, polylearn, dlib, pythonnet (2017-03-22)
-* `18`: compile fastcache (2017-03-16)
 * `19`: add a test to check the installation of a portable version with many modules (2017-03-16)
+* `18`: compile fastcache (2017-03-16)
 * `13`: add tensorflow (if it compiles on Windows) (2017-02-25)
 * `16`: add blog about rpy2 issue (2016-08-25)
 * `14`: wheel for module param (2016-08-25)
