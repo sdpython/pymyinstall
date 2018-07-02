@@ -286,6 +286,14 @@ def extended_set():
         ModuleInstall("h5py", "wheel", usage="DATA/ML",
                       purpose="The h5py package is a Pythonic interface to the HDF5 binary data format. " +
                       "Trillion-Particle Simulation."),
+        ModuleInstall("Keras-Applications", "pip", mname="keras_applications", usage="DATA/ML",
+                      purpose="Keras Applications is the applications module of the Keras deep learning " +
+                      "library. It provides model definitions and pre-trained weights for a number of " +
+                      "popular archictures, such as VGG16, ResNet50, Xception, MobileNet, and more."),
+        ModuleInstall("Keras-Preprocessing", "pip", mname="keras_processing", usage="DATA/ML",
+                      purpose="Keras Preprocessing is the data preprocessing and data augmentation module " +
+                      "of the Keras deep learning library. It provides utilities for working with image " +
+                      "data, text data, and sequence data."),
         ModuleInstall("keras", "pip", purpose="deep learning",
                       usage="DATA/ML"),
         ModuleInstall("keras-vis", "pip", mname="vis", usage="DATA/ML",

@@ -22,6 +22,11 @@ def cloud_set():
                       purpose="Convenient Filesystem interface over S3"),
         ModuleInstall("boto", "pip",
                       purpose="Amazon Web Services Library"),
+        ModuleInstall("google-auth-httplib2", "pip", mname="google_auth_httplib2",
+                      purpose="This library provides an httplib2 transport for google-auth."),
+        ModuleInstall("google-auth", "pip", mname="google_auth",
+                      purpose="This library simplifies using Google’s various server-to-server " +
+                      "authentication mechanisms to access Google APIs."),
         ModuleInstall("google-api-python-client", "pip", mname="googleapiclient",
                       purpose="The Google API Client for Python is a client library for accessing the Plus, " +
                       "Moderator, and many other Google APIs."),

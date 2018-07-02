@@ -376,6 +376,9 @@ def ensae_set():
         #
         #
         #
+        ModuleInstall("unittest2", "pip",
+                      purpose="unittest2 is a backport of the new features added to the unittest " +
+                      "testing framework in Python 2.7 and onwards."),
         ModuleInstall("deprecation", "pip",
                       purpose="A library to handle automated deprecations"),
         ModuleInstall("lz4", "wheel",
