@@ -89,11 +89,6 @@ def extended_set():
         ModuleInstall('llvmlite', 'wheel',
                       purpose="lightweight wrapper around basic LLVM functionality, check issue " +
                       "https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll"),
-        ModuleInstall(
-            'blaze', 'pip', purpose="separate expression from computation (works with iterators), used with odo, " +
-            "avoids doing everything in memory, handle better large datasets, check " +
-            "issue https://github.com/cmderdev/cmder/issues/490 for missing api-ms-win-crt-runtime-l1-1-0.dll",
-            usage="DATA/ML"),
         ModuleInstall('numba', 'wheel', usage="C++",
                       purpose="Numba is an Open Source NumPy-aware optimizing compiler for Python sponsored by Continuum Analytics, Inc."),
         ModuleInstall('scikit-image', 'wheel', mname='skimage',

@@ -19,7 +19,6 @@ missing_module_licenses = {
     "ete": "GNU v3",
     "ete3": "GNU v3",
     "datrie": "LGPL v2.1",
-    "blaze": "BSD",
     "glueviz": "BSD",
     "h5py": "BSD",
     "statsmodels": "BSD",

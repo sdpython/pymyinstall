@@ -220,11 +220,11 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
       The second one succeeds. You should run Spyder from the installation setup before
       compiling the setup.
 
-    .. index:: missing modules, vcomp110.dll, llvmlite, numba, blaze, issue, theano, xgboost
+    .. index:: missing modules, vcomp110.dll, llvmlite, numba, issue, theano, xgboost
 
     **Known extra steps needed by some modules**
 
-    * **llvmlite**, **numba**, **blaze**, on Windows, if the dll
+    * **llvmlite**, **numba**, on Windows, if the dll
       *api-ms-win-crt-runtime-l1-1-0.dll* is missing, it is explained
       in `api-ms-win-crt-runtime-l1-1-0.dll error <https://github.com/cmderdev/cmder/issues/490>`_,
       `Visual C++ Redistributable for Visual Studio 2015 <https://www.microsoft.com/en-us/download/details.aspx?id=48145>`_
