@@ -72,8 +72,6 @@ def extended_set():
         ModuleInstall(
             'datashape', 'pip', purpose="A data description language."),
         ModuleInstall(
-            'odo', 'pip', purpose="usually used with blaze, handles dataframe in various type of containers", usage="DATA/ML"),
-        ModuleInstall(
             'ordereddict', 'pip', purpose="Python's collections.OrderedDict") if sys.version_info[0] == 2 else None,
         ModuleInstall(
             'cyordereddict', 'wheel', purpose="Cython implementation of Python's collections.OrderedDict"),
