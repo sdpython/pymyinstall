@@ -738,7 +738,7 @@ def ensae_set():
         ModuleInstall('colander', 'pip',
                       purpose="A simple schema-based serialization and deserialization library"),
         #
-        ModuleInstall('climate', 'pip',
+        ModuleInstall('climate-toolbox', 'pip', mname="climate_toolbox",
                       purpose="Command-line utilities (turn function into command line)"),
         ModuleInstall('knnimpute', 'pip', usage="ML",
                       purpose="k-Nearest Neighbor imputation"),
