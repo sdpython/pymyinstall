@@ -376,6 +376,9 @@ def ensae_set():
         #
         #
         #
+        ModuleInstall("traceback2", "pip",
+                      purpose="traceback2 is a backport of the new features added to the traceback " +
+                      "testing framework in Python 2.7 and onwards."),
         ModuleInstall("unittest2", "pip",
                       purpose="unittest2 is a backport of the new features added to the unittest " +
                       "testing framework in Python 2.7 and onwards."),
