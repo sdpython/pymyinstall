@@ -739,6 +739,38 @@ def extended_set():
                       "Queries OS as well as cpuid to see if the OS / CPU supports AVX instructions."),
         ModuleInstall('pythonnet', 'pip', mname="clr",
                       purpose="Python binding for C#"),
+        #
+        # July 2018
+        #
+        ModuleInstall('lml', 'pip',
+                      purpose="lml seamlessly finds the lml based plugins from your current python " +
+                      "environment but loads your plugins on demand. It is designed to support plugins " +
+                      "that have external dependencies, especially bulky and/or memory hungry ones. " +
+                      "lml provides the plugin management system only and the plugin interface is on your shoulder."),
+        ModuleInstall('macropy3', 'pip',
+                      purpose='MacroPy is an implementation of Syntactic Macros in the Python Programming ' +
+                      'Language. MacroPy provides a mechanism for user-defined functions (macros) to perform ' +
+                      'transformations on the abstract syntax tree (AST) of a Python program at import time. This ' +
+                      'is an easy way to enhance the semantics of a Python program in ways which are otherwise ' +
+                      'impossible, for example providing an extremely concise way of declaring classes.'),
+        ModuleInstall('dukpy', 'pip',
+                      purpose='DukPy is a simple javascript interpreter for Python built on top of duktape ' +
+                      'engine without any external dependency. It comes with a bunch of common transpilers ' +
+                      'built-in for convenience.'),
+        ModuleInstall('javascripthon', 'pip',
+                      purpose='a Python 3 to ES6 JavaScript translator'),
+        ModuleInstall('pyecharts', 'pip',
+                      purpose='pyecharts is a library to generate charts using Echarts. It simply provides ' +
+                      'the interface of 28+ kinds of charts between Echarts and Python.'),
+        ModuleInstall('pyecharts-javascripthon', 'pip', mname='pyecharts_javascripthon',
+                      purpose='pyecharts-javascripthon helps translate Python functions into javascript ones. ' +
+                      'It uses javascripthon and dukpy to blend Python codes into javascript runtime. It supports ' +
+                      'python 2.7, 3.4, 3.5 and 3.6. It works on Linux, MacOS and Windows platforms.'),
+        ModuleInstall('pyecharts-snapshot', 'pip', mname='pyecharts_snapshot',
+                      purpose='pyecharts-snapshot renders the output of pyecharts as a png, jpeg, gif, svg image ' +
+                      'or a pdf file at command line or in your code.'),
+        ModuleInstall('jupyter-echarts-pypkg', 'pip', mname='jupyter_echarts_pypkg',
+                      purpose='The project packages jupyter-echarts and distributes it via pypi.'),
     ]
 
     return [_ for _ in mod if _ is not None]
