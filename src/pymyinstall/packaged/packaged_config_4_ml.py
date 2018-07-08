@@ -376,6 +376,8 @@ def ensae_set():
         #
         #
         #
+        ModuleInstall("linecache2", "pip",
+                      purpose="A backport of linecache to older supported Pythons."),
         ModuleInstall("traceback2", "pip",
                       purpose="traceback2 is a backport of the new features added to the traceback " +
                       "testing framework in Python 2.7 and onwards."),
