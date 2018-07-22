@@ -43,7 +43,7 @@ def setup_ipython(current_path=None, additional_path=None, apply_modification=Tr
 
     ::
 
-        set path=%path%;c:\\Python364_x64;c:\\Python365_x64\\Scripts
+        set path=%path%;c:\\Python370_x64;c:\\Python370_x64\\Scripts
         jupyter-notebook --notebook-dir=_doc\\notebooks
     """
     if sys.platform.startswith("win"):

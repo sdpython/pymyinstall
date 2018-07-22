@@ -210,7 +210,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
                 # following issue https://github.com/pypa/get-pip/issues/7
                 vers = "%d%d" % sys.version_info[:2]
-                if vers == "36":
+                if vers in ("36", "37"):
                     pth = os.path.join(temp_folder, "python%s._pth" % vers)
                     with open(pth, "r") as f:
                         content = f.read()

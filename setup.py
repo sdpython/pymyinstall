@@ -148,7 +148,7 @@ if is_local():
         additional_local_path=["pyquickhelper"],
         unittest_modules=["pyquickhelper"], fLOG=logging_function,
         covtoken=("b67b3051-8c5d-460b-b2fa-51d81ab7008c",
-                  "'_UT_36_std' in outfile"),
+                  "'_UT_37_std' in outfile"),
         file_filter_pep8=file_filter_pep8)
     if not r and not ({"bdist_msi", "sdist",
                        "bdist_wheel", "publish", "publish_doc", "register",
