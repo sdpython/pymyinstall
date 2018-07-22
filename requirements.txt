@@ -3,7 +3,10 @@ coverage
 jyquickhelper
 keyring
 memory_profiler!=0.48.0
+openpyxl
 Pillow
+pivottablejs
 pyquickhelper>=1.8.2602
+version_information
 wheel
 xgboost

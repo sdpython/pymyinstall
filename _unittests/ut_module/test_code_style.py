@@ -33,7 +33,7 @@ class TestCodeStyle(ExtTestCase):
                                   'W0703', 'W0622', 'C0412', 'R0912',
                                   'W0603', 'W0212', 'W0123', 'W0201',
                                   'C0200', 'W0122', 'C0302', 'W0102',
-                                  'W0621', 'R1710', 'R0401'),
+                                  'W0621', 'R1710', 'R0401', 'R1714'),
                    skip=["__init__.py:1: R0401",
                          "win_installer",
                          "Redefining built-in ",
@@ -60,6 +60,8 @@ class TestCodeStyle(ExtTestCase):
                          "ipython_helper.py:24: E1101",
                          "Unable to import 'selenium.webdriver'",
                          "Unable to import 'Queue'",
+                         "module_install.py:954: R0915",
+                         "Unable to import 'src.pymyinstall.installhelper.status_helper'",
                          ])
 
     def test_style_test(self):

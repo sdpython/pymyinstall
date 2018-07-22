@@ -48,7 +48,7 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
         dists = [_ for _ in dists if _.project_name in short_list]
     pack = map(lambda d: (d.project_name.lower(), d), dists)
     for i, (_, dist) in enumerate(sorted(pack)):
-        if stop >= 0 and i >= stop:
+        if i >= stop >= 0:
             break
         res = {}
         key = dist.project_name.lower()

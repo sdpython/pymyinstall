@@ -63,29 +63,6 @@ class TestModuleDependencies (unittest.TestCase):
             # issue with Anaconda, not investigated
             return
 
-    def test_dependencies_ggplot(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-        if "travis" not in sys.executable:
-            try:
-                self.common_function("ggplot")
-            except ImportError as e:
-                if "unable to get metadata for ipykernel;" in str(e):
-                    warnings.warn(
-                        "Unable to test ggplot dependencies due to ipykernel")
-                else:
-                    raise e
-
-    def test_dependencies_ggplot_pip(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-        if "travis" not in sys.executable:
-            self.common_function("ggplot", use_pip=True)
-
     def test_version_consensus(self):
         fLOG(
             __file__,
