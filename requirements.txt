@@ -7,6 +7,7 @@ openpyxl
 Pillow
 pivottablejs
 pyquickhelper>=1.8.2602
+sphinx_readable_theme
 version_information
 wheel
 xgboost
