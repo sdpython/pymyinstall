@@ -5,8 +5,21 @@
 History
 =======
 
-current - 2018-06-27 - 0.00Mb
+current - 2018-07-22 - 0.00Mb
 =============================
+
+* `54`: remove basemap (deprecated) (2018-07-22)
+* `53`: remove arctic, bitarray (2018-07-06)
+* `52`: remove fastcluster (2018-07-06)
+* `51`: fix issue with torch (2018-07-06)
+* `50`: rename climate into climate_toolbox (2018-07-06)
+* `49`: remove blaze, odo, not maintained (2018-07-06)
+* `48`: add missing modules for keras (2018-07-06)
+* `47`: add traceback2 (2018-07-06)
+* `46`: add pyecharts (2018-07-06)
+
+1.2.1598 - 2018-06-27 - 1.98Mb
+==============================
 
 * `45`: filter out warnings added by pip 10 (2018-06-16)
 * `44`: rename tensorboard (2018-05-02)

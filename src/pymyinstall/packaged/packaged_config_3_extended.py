@@ -163,8 +163,9 @@ def extended_set():
                       "https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
         ModuleInstall('geojson', 'pip',
                       purpose="Functions for encoding and decoding GeoJSON formatted data"),
-        ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
-                      purpose="maps extension for matplotlib", usage="VIZ"),
+        # Deprecated
+        # ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
+        #               purpose="maps extension for matplotlib", usage="VIZ"),
         ModuleInstall('Cartopy', 'wheel', mname="cartopy",
                       purpose="Cartopy is a Python package designed to make drawing maps for data analysis " +
                       "and visualisation as easy as possible (issue on Linux and Anaconda)", usage="VIZ"),
