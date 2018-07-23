@@ -3,6 +3,7 @@ coverage
 jyquickhelper
 keyring
 memory_profiler!=0.48.0
+natsort
 openpyxl
 Pillow
 pivottablejs

@@ -152,7 +152,7 @@ def ensae_set():
         # ModuleInstall("scikits.cuda", "pip", mname="skcuda"), # no stable
         # version
         ModuleInstall(
-            "pylzma", "wheel", purpose="Python bindings for the LZMA library by Igor Pavlov."),
+            "pylzma", "wheel2", purpose="Python bindings for the LZMA library by Igor Pavlov."),
         ModuleInstall("pymvpa2", "wheel", mname="mvpa2",
                       purpose="PyMVPA is a Python module intended to ease pattern classification analyses of large datasets."),
         ModuleInstall(
@@ -638,9 +638,9 @@ def ensae_set():
         # ModuleInstall(
         #    'backports.wearkef', 'pip', purpose="This package provides backports of new features in Python's weakref " +
         #    "module under the backports namespace. (for tensorflow)"),
-        ModuleInstall('absl-py', 'pip',
+        ModuleInstall('absl-py', 'pip', mname="absl"
                       purpose="Collection of Python library code for building Python applications."),
-        ModuleInstall('protobuf', 'pip', mname='absl',
+        ModuleInstall('protobuf', 'pip',
                       purpose="Protocol Buffers are Google's data interchange format"),
         ModuleInstall("gast", "pip",
                       purpose="A generic AST to represent Python2 and Python3’s Abstract Syntax Tree(AST)."),
