@@ -638,7 +638,7 @@ def ensae_set():
         # ModuleInstall(
         #    'backports.wearkef', 'pip', purpose="This package provides backports of new features in Python's weakref " +
         #    "module under the backports namespace. (for tensorflow)"),
-        ModuleInstall('absl-py', 'pip', mname="absl"
+        ModuleInstall('absl-py', 'pip', mname="absl",
                       purpose="Collection of Python library code for building Python applications."),
         ModuleInstall('protobuf', 'pip',
                       purpose="Protocol Buffers are Google's data interchange format"),
