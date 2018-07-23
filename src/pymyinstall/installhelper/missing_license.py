@@ -206,7 +206,6 @@ missing_module_licenses = {
     "bleach": "Apache",
     "blist": "BSD",
     "blosc": "MIT",
-    "bottlechest": "BSD",
     "bqplot": "Apache",
     "btrees": "Zope Public License",
     "bz2file": "Apache",

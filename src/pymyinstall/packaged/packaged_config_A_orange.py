@@ -20,9 +20,9 @@ def orange_set():
         ModuleInstall(
             "odfpy", "pip",
             purpose="Python API and tools to manipulate OpenDocument files"),
-        ModuleInstall(
-            "Bottlechest", "wheel2", mname="bottlechest",
-            purpose="Bottlechest is a fork of bottleneck specialized for use in Orange", usage="ORANGE"),
+        # ModuleInstall(
+        #     "Bottlechest", "wheel2", mname="bottlechest",
+        #     purpose="Bottlechest is a fork of bottleneck specialized for use in Orange", usage="ORANGE"),
         ModuleInstall(
             "setuptools-git", "pip", mname="setuptools_git",
             purpose="This is a plugin for setuptools that enables git integration. Once installed, Setuptools " +
