@@ -61,7 +61,6 @@ missing_module_licenses = {
     "gmpy2": "LGPLv3+",
     "itsdangerous": "BSD",
     "kombu": "BSD",
-    "la": "BSD",
     "lifelines": "MIT",
     "line_profiler": "BSD",
     "lxml": "BSD",
