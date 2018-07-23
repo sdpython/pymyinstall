@@ -5,9 +5,11 @@
 History
 =======
 
-current - 2018-07-22 - 0.00Mb
+current - 2018-07-24 - 0.00Mb
 =============================
 
+* `55`: move circleci to python 3.7 (2018-07-23)
+* `56`: fix bug in c:\Python37-x64\lib\site-packages\win32ctypes\core\cffi\_advapi32.py (2018-07-23)
 * `54`: remove basemap (deprecated) (2018-07-22)
 * `53`: remove arctic, bitarray (2018-07-06)
 * `52`: remove fastcluster (2018-07-06)
