@@ -5,7 +5,6 @@
 import sys
 import os
 import unittest
-import warnings
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 
@@ -24,7 +23,6 @@ except ImportError:
 
 
 from src.pymyinstall.packaged import find_module_install
-from src.pymyinstall.installhelper.module_install_exceptions import MissingWheelException
 
 
 class TestDownloadPylzma(unittest.TestCase):
