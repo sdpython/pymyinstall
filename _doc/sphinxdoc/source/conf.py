@@ -19,5 +19,7 @@ epkg_dictionary['boost_python'] = "http://www.boost.org/doc/libs/release/libs/py
 epkg_dictionary['cvxopt'] = "http://cvxopt.org/"
 epkg_dictionary['cvxpy'] = "http://www.cvxpy.org/en/latest/index.html"
 epkg_dictionary['dlib'] = "http://dlib.net/"
+epkg_dictionary['pip'] = 'https://pip.pypa.io/en/stable/'
+epkg_dictionary['pypi'] = 'https://pypi.org/'
 epkg_dictionary['SQLiteSpy'] = "https://www.yunqa.de/delphi/products/sqlitespy/index"
 epkg_dictionary['statsmodels'] = "http://www.statsmodels.org/stable/index.html"

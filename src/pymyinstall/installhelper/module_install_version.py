@@ -28,8 +28,7 @@ annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",
 def call_get_installed_distributions(local_only=True, skip=None, include_editables=True,
                                      editables_only=False, user_only=False, use_cmd=False):
     """
-    Direct call to function *get_installed_distributions* from
-    `pip <https://pip.pypa.io/en/stable/>`_
+    Directs call to function *get_installed_distributions* from :epkg:`pip`.
 
     Return a list of installed Distribution objects.
 
@@ -73,7 +72,7 @@ _get_module_version_manual_memoize = {}
 
 def get_module_version(module, use_cmd=False):
     """
-    return a dictionary { module:version }
+    Returns a dictionary ``{ module: version }``.
 
     @param      module      unused, None
     @param      use_cmd     use command line
@@ -137,7 +136,7 @@ def get_module_version(module, use_cmd=False):
 
 def is_installed(name):
     """
-    tells if a module is installed or not
+    Tells if a module is installed or not.
 
     @param      name        module name
     @return                 boolean
@@ -150,7 +149,7 @@ _get_module_metadata_manual_memoize = {}
 
 def get_module_metadata(module, use_cmd=False, refresh_cache=False):
     """
-    return a dictionary { module:metadata }
+    Returns a dictionary ``{ module: metadata }``.
 
     @param      module          unused, None
     @param      refresh_cache   refresh the cache before getting metadata
@@ -222,8 +221,8 @@ _get_pypi_version_memoize = {}
 
 def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/pypi", skip_betas=True):
     """
-    returns the version of a package on pypi,
-    we skip alpha, beta or dev version
+    Returns the version of a package on :epkg:`pypi`,
+    we skip alpha, beta or dev version.
 
     @param      module_name     module name
     @param      url             pypi server
@@ -408,7 +407,7 @@ def numeric_version(vers):
 
 def compare_version(num, vers):
     """
-    compare two versions
+    Compares two versions.
 
     @param      num     first version
     @param      vers    second version
@@ -595,7 +594,7 @@ _get_module_dependencies_deps = None
 
 def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, use_pip=None, refresh_cache=False):
     """
-    return the dependencies for a module
+    Returns the dependencies for a module.
 
     @param      module          unused, None
     @param      use_cmd         use command line
@@ -608,8 +607,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
 
     The function which uses *use_pip=True* is not fully tested, it does not
     return contraints (== 2.4). The function caches the results to avoid doing it again
-    during a second execution unless *refresh_cache* is True
-
+    during a second execution unless *refresh_cache* is True.
     This function is not tested on Python 2.7.
     """
     if use_pip is None:
@@ -732,7 +730,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
 
 def choose_most_recent(list_name):
     """
-    choose the most recent version for a list of module names
+    Chooses the most recent version for a list of module names.
 
     @param      list_name       list of names
     @return                     most recent version or None if the input list is empty

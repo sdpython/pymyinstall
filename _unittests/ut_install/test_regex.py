@@ -46,25 +46,21 @@ class TestRegex (unittest.TestCase):
             content = f.read()
 
         links = extract_all_links(content)
-        for l in links:
-            if "heatmap" in l[0]:
-                fLOG(l)
         self.assertTrue(len(links) > 0)
 
         if not sys.platform.startswith("win"):
             return
 
         version = python_version()
-        fLOG(version)
         plat = version[0] if version[0] == "win32" else version[1]
         if version[1] == '64bit' and version[0] == 'win32':
             plat = "amd64"
         version = sys.version_info
 
         ll = list(enumerate_links_module("heatmap", links, version, plat))
-        fLOG(ll)
         if len(ll) != 1:
-            raise Exception(str(ll))
+            raise Exception("issue for heatmap {0}-{1}\n{2}\n---\n{3}".format(
+                version, plat, ll, "\n".join(_ for _ in map(str, links) if 'heatmap' in _)))
 
     def test_1(self):
         fLOG(
@@ -82,9 +78,7 @@ class TestRegex (unittest.TestCase):
         raw = raw.replace("&#8209;", "-")
         reg = re.compile(pattern)
         r = reg.search(raw)
-        if r:
-            fLOG(r.groups())
-        else:
+        if not r:
             raise AssertionError()
 
     def test_2(self):
@@ -101,9 +95,7 @@ class TestRegex (unittest.TestCase):
                """title='[1.4&#160;MB] [Nov 30, 2015]'>lxml-3.5.0-cp34-none-win_amd64.whl</a></li>""")
         reg = re.compile(pattern)
         r = reg.search(raw)
-        if r:
-            fLOG(r.groups())
-        else:
+        if not r:
             raise AssertionError()
 
     def test_3(self):
@@ -119,9 +111,7 @@ class TestRegex (unittest.TestCase):
                """title='[1.6&#160;MB] [Nov 30, 2015]'>lxml-3.5.0-cp34-win_amd64</a></li>""")
         reg = re.compile(pattern)
         r = reg.search(raw)
-        if r:
-            fLOG(r.groups())
-        else:
+        if not r:
             raise AssertionError()
 
     def test_4(self):
@@ -138,9 +128,7 @@ class TestRegex (unittest.TestCase):
                """CVXcanon-0.0.23.4-cp35-cp35m-win_amd64.whl</a></li>""")
         reg = re.compile(pattern)
         r = reg.search(raw)
-        if r:
-            fLOG(r.groups())
-        else:
+        if not r:
             raise AssertionError()
 
     def test_5(self):
@@ -157,9 +145,7 @@ class TestRegex (unittest.TestCase):
                """Assimulo-2.9-cp36-cp36m-win_amd64.whl</a></li>""")
         reg = re.compile(pattern)
         r = reg.search(raw)
-        if r:
-            fLOG(r.groups())
-        else:
+        if not r:
             raise AssertionError()
 
     def test_6(self):
@@ -178,7 +164,6 @@ class TestRegex (unittest.TestCase):
             reg = re.compile(pattern)
             r = reg.search(raw)
             if r:
-                fLOG(r.groups())
                 found += 1
         self.assertTrue(found > 0)
 
@@ -194,7 +179,6 @@ class TestRegex (unittest.TestCase):
             reg = re.compile(pattern)
             r = reg.search(raw)
             if r:
-                fLOG(r.groups())
                 found += 1
         self.assertTrue(found > 0)
         vers = get_wheel_version(raw)
@@ -212,7 +196,6 @@ class TestRegex (unittest.TestCase):
             reg = re.compile(pattern)
             r = reg.search(raw)
             if r:
-                fLOG(r.groups())
                 found += 1
         self.assertTrue(found > 0)
         vers = get_wheel_version(raw)
