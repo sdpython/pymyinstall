@@ -5,14 +5,15 @@
 History
 =======
 
-current - 2018-07-24 - 0.00Mb
+current - 2018-07-27 - 0.00Mb
 =============================
 
-* `58`: fix issue with pylzma on Python 3.7 (2018-07-24)
+* `59`: install pythonnet from wheel and not from pip (2018-07-27)
 
-1.2.1616 - 2018-07-23 - 1.98Mb
+1.2.1619 - 2018-07-24 - 1.98Mb
 ==============================
 
+* `58`: fix issue with pylzma on Python 3.7 (2018-07-24)
 * `56`: fix bug in c:\Python37-x64\lib\site-packages\win32ctypes\core\cffi\_advapi32.py (2018-07-23)
 * `55`: move circleci to python 3.7 (2018-07-23)
 * `54`: remove basemap (deprecated) (2018-07-22)
