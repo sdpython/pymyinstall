@@ -738,7 +738,7 @@ def extended_set():
                       purpose="JavaScript to Python Translator & JavaScript interpreter written in 100% pure Python."),
         ModuleInstall('x86cpu', 'wheel', purpose="Uses cpuid instruction to get information about CPU. " +
                       "Queries OS as well as cpuid to see if the OS / CPU supports AVX instructions."),
-        ModuleInstall('pythonnet', 'pip', mname="clr",
+        ModuleInstall('pythonnet', 'wheel', mname="clr",
                       purpose="Python binding for C#"),
         #
         # July 2018

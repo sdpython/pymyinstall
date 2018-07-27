@@ -157,7 +157,7 @@ missing_module_licenses = {
     "pyOpenSSL": "Apache 2.0",
     "pyRFXtrx": "LGPLv3+",
     "pysmi": "BSD",
-    "pythonnet": "Zope Public License",
+    "pythonnet": "MIT",
     "pythonqwt": "MIT",
     "queuelib": "BSD",
     "semantic_version": "BSD",
