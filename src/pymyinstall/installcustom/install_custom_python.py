@@ -173,7 +173,17 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         # the setup for Python 3.5 does not accept multiple versions
         # it was installed on one machine and then compressed into a 7z
         # file
-        if versioni >= (3, 6, 0):
+        if versioni >= (3, 7, 0):
+            if custom:
+                if versioni > (3, 7, 0):
+                    raise ValueError(
+                        "Not custom zip available for Python {0}".format(versioni))
+                url = "http://www.xavierdupre.fr/enseignement/setup/Python{0}{1}-{0}.{1}.{2}-amd64.zip".format(
+                    *sys.version_info[:3])
+            else:
+                url = "https://www.python.org/ftp/python/{0}.{1}.{2}/python-{0}.{1}.{2}-embed-amd64.zip".format(
+                    *sys.version_info[:3])
+        elif versioni >= (3, 6, 0):
             if custom:
                 if versioni > (3, 6, 5):
                     raise ValueError(
