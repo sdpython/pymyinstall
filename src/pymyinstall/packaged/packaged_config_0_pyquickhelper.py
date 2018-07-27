@@ -109,6 +109,7 @@ def pyquickhelper_set():
         "pickleshare",
         "Pillow",
         "pipdeptree",
+        "prometheus_client",
         "prompt_toolkit",
         "psutil",
         "ptyprocess",

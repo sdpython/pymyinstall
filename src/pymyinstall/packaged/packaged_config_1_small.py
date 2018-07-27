@@ -310,6 +310,8 @@ def small_set():
             "backports.shutil-get-terminal-size", "pip", mname="backports", purpose="needed for Jupyter",
             usage="JUPYTER"),
         ModuleInstall(
+            "prometheus_client", "pip", purpose="The official Python 2 and 3 client for Prometheus.", usage="JUPYTER"),
+        ModuleInstall(
             "notebook", "pip", purpose="Jupyter notebooks, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "nbpresent", "pip", purpose="Next generation slides from Jupyter Notebooks", usage="JUPYTER"),
