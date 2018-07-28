@@ -189,8 +189,6 @@ def small_set():
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
         ModuleInstall("cftime", "wheel",
                       purpose="Time-handling functionality from netcdf4-python."),
-        ModuleInstall("cftime", "wheel",
-                      purpose="Time-handling functionality from netcdf4-python."),
         ModuleInstall("netCDF4", "wheel",
                       purpose="xarray uses this module to save and read data (netCDF=Unidata network Common Data Form)"),
         ModuleInstall(

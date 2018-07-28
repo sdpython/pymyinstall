@@ -654,8 +654,6 @@ def ensae_set():
                       purpose="astor is designed to allow easy manipulation of Python source via the AST."),
         ModuleInstall("tensorboard", "pip", usage="DATA/ML",
                       purpose="TensorBoard lets you watch Tensors Flow"),
-        ModuleInstall("grpcio", "wheel",
-                      purpose="Package for gRPC Python."),
         ModuleInstall("tensorflow", "wheel", usage="DATA/ML",
                       purpose="Deep Learning from Google"),
         ModuleInstall("edward", "pip", usage="DATA/ML",
