@@ -57,6 +57,7 @@ def ensae_teaching_cs_set():
         "pylzma",
         "pyproj",
         "PyQt5",
+        "PyQt5-sip",
         "pytables",
         "python_utils",
         "rpy2",

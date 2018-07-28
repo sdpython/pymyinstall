@@ -461,10 +461,14 @@ def extended_set():
                       purpose="PyOTP is a Python library for generating and verifying one-time passwords."),
         ModuleInstall("param", "pip",
                       purpose="Declarative Python programming using Parameters."),
+        ModuleInstall("pyviz_comms", "pip", usage="VIZ",
+                      purpose="Bidirectional communication for PyViz."),
         ModuleInstall("holoviews", "pip", usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
         ModuleInstall("geoviews", "github", 'ioam', usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
+        ModuleInstall("retrying", "pip", purpose="Retrying is an Apache 2.0 licensed general-purpose retrying library, " +
+                      "written in Python, to simplify the task of adding retry behavior to just about anything."),
         ModuleInstall("plotly", "pip", usage="VIZ",
                       purpose="Plotly's Python graphing library makes interactive, publication-quality graphs online. " +
                       "Examples of how to make line plots, " +

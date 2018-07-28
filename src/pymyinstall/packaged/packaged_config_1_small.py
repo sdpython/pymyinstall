@@ -187,7 +187,7 @@ def small_set():
         ModuleInstall(
             "pandas-datareader", "pip", mname="pandas_datareader",
             purpose="Up to date remote data access for pandas, works for multiple versions of pandas.", usage="DATA/ML"),
-        ModuleInstall("netcdftime", "wheel",
+        ModuleInstall("cftime", "wheel",
                       purpose="Time-handling functionality from netcdf4-python."),
         ModuleInstall("cftime", "wheel",
                       purpose="Time-handling functionality from netcdf4-python."),
@@ -343,6 +343,7 @@ def small_set():
                       usage="GUI", purpose="For PyQt5"),
         ModuleInstall("ete3", "pip", "http://etetoolkit.org/", usage="VIZ",
                       purpose="tree visualisation, ete3 does not work with PyQt4 (2017-11)."),
+        ModuleInstall("PyQt5-sip", "pip", usage="GUI"),
         ModuleInstall("PyQt5", "pip", usage="GUI"),
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
@@ -371,6 +372,8 @@ def small_set():
             "pylint", "pip", purpose="statistics on Python script style"),  #
         ModuleInstall(
             "pythonqwt", "pip", purpose="Qt plotting widgets (Spyder)"),
+        ModuleInstall(
+            "spyder_kernels", "pip", purpose="Jupyter Kernels for the Spyder console"),
         ModuleInstall(
             "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),

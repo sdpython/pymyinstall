@@ -27,6 +27,7 @@ from src.pymyinstall.packaged import find_module_install
 
 class TestLONGDownloadCntk(unittest.TestCase):
 
+    @unittest.skipIf(sys.version_info[:2] == (3, 7), reason="not released yet on python 3.7")
     def test_install_cntk(self):
         fLOG(
             __file__,

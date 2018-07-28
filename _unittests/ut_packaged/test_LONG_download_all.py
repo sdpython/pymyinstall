@@ -70,6 +70,7 @@ class TestDownloadAll (unittest.TestCase):
         pack = all_set()
         self._download_all(pack[1:], temp)
 
+    @unittest.skipIf(sys.version_info[:2] == (3, 7), reason="not released yet on Python 3.7")
     def test_download_ad3(self):
         fLOG(
             __file__,

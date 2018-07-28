@@ -153,6 +153,8 @@ def ensae_set():
         # version
         ModuleInstall(
             "pylzma", "wheel2", purpose="Python bindings for the LZMA library by Igor Pavlov."),
+        ModuleInstall("nibabel", "pip",
+                      purpose="Access a multitude of neuroimaging data formats."),
         ModuleInstall("pymvpa2", "wheel", mname="mvpa2",
                       purpose="PyMVPA is a Python module intended to ease pattern classification analyses of large datasets."),
         ModuleInstall(
@@ -259,6 +261,8 @@ def ensae_set():
         #
         # pydata
         #
+        ModuleInstall("jaraco.functools", "pip",
+                      purpose="Additional functools in the spirit of stdlib’s functools."),
         ModuleInstall("tempora", "pip",
                       purpose="Objects and routines pertaining to date and time (tempora)"),
         ModuleInstall("portend", "pip",
@@ -650,6 +654,8 @@ def ensae_set():
                       purpose="astor is designed to allow easy manipulation of Python source via the AST."),
         ModuleInstall("tensorboard", "pip", usage="DATA/ML",
                       purpose="TensorBoard lets you watch Tensors Flow"),
+        ModuleInstall("grpcio", "wheel",
+                      purpose="Package for gRPC Python."),
         ModuleInstall("tensorflow", "wheel", usage="DATA/ML",
                       purpose="Deep Learning from Google"),
         ModuleInstall("edward", "pip", usage="DATA/ML",
