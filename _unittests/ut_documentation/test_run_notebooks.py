@@ -34,14 +34,6 @@ import src.pymyinstall
 class TestRunNotebooks(unittest.TestCase):
 
     def a_test_run_notebook(self, name):
-        if sys.version_info[0] == 2:
-            # notebooks are not converted into python 2.7, so not tested
-            return
-
-        if "travis" in sys.executable:
-            # requires too many dependencies
-            return
-
         kernel_name = None if is_travis_or_appveyor() else install_python_kernel_for_unittest(
             "pymyinstall")
 
@@ -84,6 +76,7 @@ class TestRunNotebooks(unittest.TestCase):
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=src.pymyinstall)
 
+    @unittest.skipIf(sys.version_info[0] == 2, reason="notebook for python 3")
     def test_notebook_example_profiling(self):
         fLOG(
             __file__,

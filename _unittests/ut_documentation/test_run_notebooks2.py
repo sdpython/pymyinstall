@@ -33,19 +33,11 @@ import src.pymyinstall
 
 class TestRunNotebooks2(unittest.TestCase):
 
-    def a_test_run_notebook(self, name):
-        if sys.version_info[0] == 2:
-            # notebooks are not converted into python 2.7, so not tested
-            return
-
-        if "travis" in sys.executable:
-            # requires too many dependencies
-            return
-
+    def a_test_run_notebook2(self, name):
         kernel_name = None if is_travis_or_appveyor() else install_python_kernel_for_unittest(
             "pymyinstall")
 
-        temp = get_temp_folder(__file__, "temp_run_notebooks_{0}".format(name))
+        temp = get_temp_folder(__file__, "temp_run_notebooks2_{0}".format(name))
 
         fnb = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", "..", "_doc", "notebooks"))
@@ -84,6 +76,7 @@ class TestRunNotebooks2(unittest.TestCase):
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=src.pymyinstall)
 
+    @unittest.skipIf(sys.version_info[0] == 2, reason="notebook for python 3")
     def test_notebook_pivottablejs(self):
         fLOG(
             __file__,
