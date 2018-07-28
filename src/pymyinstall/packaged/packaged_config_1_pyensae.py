@@ -67,6 +67,8 @@ def pyensae_set():
         "requests_oauthlib",
         "scipy",
         "scikit-learn",
+        "simplejson",
+        "sqliteschema",
         "simplesqlite",
         "toml",
     ]

@@ -510,6 +510,8 @@ def small_set():
                       purpose="msgfy is a Python library for convert Exception instance to a human-readable error message."),
         ModuleInstall("SimpleSQLite", "pip", mname="simplesqlite",
                       purpose="SimpleSQLite is a Python library to simplify the table creation and data insertion into SQLite database."),
+        ModuleInstall("sqliteschema", "pip",
+                      purpose="sqliteschema is a Python library to dump table schema of a SQLite database file."),
         ModuleInstall("pytablereader", "pip",
                       purpose="A python library to load structured table data from files/URL with various data format: " +
                       "CSV/Excel/HTML/JSON/LTSV/Markdown/TSV."),
