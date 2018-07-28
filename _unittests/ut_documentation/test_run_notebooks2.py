@@ -33,7 +33,7 @@ import src.pymyinstall
 
 class TestRunNotebooks2(unittest.TestCase):
 
-    def a_test_run_notebook2(self, name):
+    def a_test_run_notebook(self, name):
         kernel_name = None if is_travis_or_appveyor() else install_python_kernel_for_unittest(
             "pymyinstall")
 
