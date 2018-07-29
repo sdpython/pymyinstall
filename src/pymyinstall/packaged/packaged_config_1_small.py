@@ -341,7 +341,7 @@ def small_set():
                       usage="GUI", purpose="For PyQt5"),
         ModuleInstall("ete3", "pip", "http://etetoolkit.org/", usage="VIZ",
                       purpose="tree visualisation, ete3 does not work with PyQt4 (2017-11)."),
-        ModuleInstall("PyQt5-sip", "pip", usage="GUI"),
+        ModuleInstall("PyQt5-sip", "pip", mname="PyQt5_sip", usage="GUI"),
         ModuleInstall("PyQt5", "pip", usage="GUI"),
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
