@@ -465,7 +465,7 @@ def extended_set():
                       purpose="Bidirectional communication for PyViz."),
         ModuleInstall("holoviews", "pip", usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
-        ModuleInstall("geoviews", "github", 'ioam', usage="VIZ",
+        ModuleInstall("geoviews", "pip", usage="VIZ",
                       purpose="Composable, declarative data structures for building complex visualizations easily."),
         ModuleInstall("retrying", "pip", purpose="Retrying is an Apache 2.0 licensed general-purpose retrying library, " +
                       "written in Python, to simplify the task of adding retry behavior to just about anything."),

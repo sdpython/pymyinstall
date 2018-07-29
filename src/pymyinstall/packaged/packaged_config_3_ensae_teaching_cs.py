@@ -31,7 +31,6 @@ def ensae_teaching_cs_set():
         "feedparser",
         "fiona",
         "foolbox",
-        "fuel",
         "geopandas",
         "ggplot",
         "graphviz",

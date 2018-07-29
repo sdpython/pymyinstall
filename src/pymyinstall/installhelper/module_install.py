@@ -591,6 +591,7 @@ class ModuleInstall:
         *deps* is overwritten by *self.deps* if not None
         If *source* is None, it is overwritten by *self.source*.
         """
+        disable_options = {}
         if source is None:
             source = self.source
         kind = self.kind

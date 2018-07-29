@@ -100,9 +100,6 @@ def ensae_set():
             "textblob", "pip", purpose="TextBlob is a Python (2 and 3) library for processing textual data. It provides a simple API for " +
             "diving into common natural language processing (NLP) tasks such as part-of-speech tagging, " +
             "noun phrase extraction, sentiment analysis, classification, translation, and more."),
-        ModuleInstall("dev", "pip",
-                      purpose="Header files, a static library and development tools for building Python modules, " +
-                      "extending the Python interpreter or embedding Python in applications."),
         ModuleInstall(
             "opencv_python", "wheel", mname="cv2", purpose="OpenVC wrapper",
             web="https://opencv-python-tutroals.readthedocs.org/en/latest/"),
@@ -442,8 +439,6 @@ def ensae_set():
                       purpose="Python Utils is a module with some convenient utilities not included with the standard Python install"),
         ModuleInstall("progressbar2", "pip", usage="VIZ",
                       purpose="Text progress bar library for Python. (fuel)"),
-        ModuleInstall("fuel", "pip", usage="DATA/VIZ",
-                      purpose="Fuel is a data pipeline framework which provides your machine learning models with the data they need."),
         ModuleInstall("gatspy", "pip",
                       purpose="General tools for Astronomical Time Series in Python"),
         ModuleInstall("supersmoother", "pip",
@@ -574,13 +569,6 @@ def ensae_set():
                       purpose="Python module for calculating variance and adding confidence intervals " +
                       "to scikit-learn random forest regression " +
                       "or classification objects. The core functions calculate an in-bag and error bars for random forest objects"),
-        ModuleInstall("polylearn", "wheel", source="2", usage="ML",
-                      purpose="A library for factorization machines and polynomial networks for classification and regression in Python."),
-        #
-        # 2015-08-18: weidelin.core
-        #
-        ModuleInstall("lda", "pip", usage="ML",
-                      purpose="lda implements latent Dirichlet allocation (LDA) using collapsed Gibbs sampling."),
         #
         # 2015-08-18: weidelin.core
         #
@@ -732,8 +720,6 @@ def ensae_set():
                       purpose="An open source time series library for the Python Programming Language"),
         ModuleInstall('Rtree', 'wheel', usage="MATHS", mname="rtree",
                       purpose="R-Tree spatial index for Python GIS"),
-        ModuleInstall('sima', 'wheel', usage="MATHS",
-                      purpose="Software for analysis of sequential imaging data"),
         #
         # 2017-08/10
         #
@@ -785,7 +771,7 @@ def ensae_set():
         ModuleInstall(
             'mockextras', 'pip', purpose="Extensions to the mock library"),
         ModuleInstall(
-            'swiglpk', 'pip', purpose="swiglpk - Simple swig bindings for the GNU Linear Programming Kit"),
+            'swiglpk', 'wheel', purpose="swiglpk - Simple swig bindings for the GNU Linear Programming Kit"),
         ModuleInstall('optlang', 'pip', purpose="Formulate optimization problems using sympy expressions " +
                       "and solve them using interfaces to third-party optimization software (e.g. GLPK)."),
         ModuleInstall(
