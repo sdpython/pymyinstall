@@ -108,9 +108,6 @@ class ModuleInstall:
             raise NotImplementedError(
                 "version can be only specified if kind=='pip'")
 
-        if pip_options is None and compare_version(pip_version, "10.0.0") >= 0:
-            pip_options = ['--no-warn-script-location']
-
         self.name = name
         self.kind = kind
         self.gitrepo = gitrepo
@@ -594,8 +591,6 @@ class ModuleInstall:
         *deps* is overwritten by *self.deps* if not None
         If *source* is None, it is overwritten by *self.source*.
         """
-        disable_options = {'--no-warn-script-location'}
-
         if source is None:
             source = self.source
         kind = self.kind
@@ -1421,7 +1416,7 @@ class ModuleInstall:
                log=False, options=None, deps=False, source=None):
         """
         Updates the package if necessary, we use
-        ``pip install <module_name> --upgrade --no-deps --no-warn-script-location``,
+        ``pip install <module_name> --upgrade --no-deps``,
 
         @param      force_kind      overwrite self.kind
         @param      force           force the installation even if not need to update
@@ -1454,7 +1449,7 @@ class ModuleInstall:
         self.fLOG("[pymy] update of ", self)
 
         options = [] if options is None else list(options)
-        for opt in ["--upgrade", "--no-deps", '--no-warn-script-location']:
+        for opt in ["--upgrade", "--no-deps"]:
             if opt not in options:
                 if not deps or opt == "--no-deps":
                     options.append(opt)
