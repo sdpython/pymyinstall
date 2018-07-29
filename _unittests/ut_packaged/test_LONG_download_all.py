@@ -67,10 +67,9 @@ class TestDownloadAll (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         temp = get_temp_folder(__file__, "temp_download_all")
-        pack = [_ for _ in all_set() if "blz" not in _.name]
-        for rem in ['dynd-']:
-            pack = [_ for _ in pack if rem not in _.name]
-        self._download_all(pack[1:], temp)
+        skip_set = {'blz', 'dynd'}
+        pack = [_ for _ in all_set() if _.name not in skip_set]
+        self._download_all(pack, temp)
 
     @unittest.skipIf(sys.version_info[:2] == (3, 7), reason="not released yet on Python 3.7")
     def test_download_ad3(self):
