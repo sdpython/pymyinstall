@@ -346,8 +346,8 @@ def small_set():
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
         ModuleInstall(
-            "PySide", "wheel",
-            purpose="open source version of PyQt (issue on Linux and Anaconda)",
+            "PySide2", "pip",
+            purpose="The Qt for Python project aims to provide a complete port of the PySide module to Qt 5. ",
             usage="GUI"),
         ModuleInstall(
             "psutil", "wheel", purpose="cross-platform library for retrieving information " +

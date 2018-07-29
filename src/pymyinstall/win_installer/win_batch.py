@@ -336,13 +336,10 @@ def create_win_spyder(folders):
     @param      folders     see @see fn create_win_batches
     @return                 operations (list of what was done)
 
-    .. index:: Spyder, PySide, PyQt
+    .. index:: Spyder, PySide, PyQt, PySide2
 
-    This installation uses `PySide <https://pypi.python.org/pypi/PySide/>`_
+    This installation uses `PySide2 <https://pypi.python.org/pypi/PySide2/>`_
     instead of `PyQt <https://www.riverbankcomputing.com/software/pyqt/intro>`_.
-    The environment variable ``QT_API`` could to be set to ``pyside`` before
-    running Spyder but PySide does not seem to be under active development.
-    To set PySide as the default viewer for Spyder, you should set::
 
         set QT_API=pyside
     """
