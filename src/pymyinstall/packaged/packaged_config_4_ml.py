@@ -549,7 +549,7 @@ def ensae_set():
                       purpose="Multi-producer-multi-consumer signal dispatching mechanism"),
         ModuleInstall('hyperlink', 'pip',
                       purpose="A featureful, correct URL for Python."),
-        ModuleInstall('twisted', 'pip',
+        ModuleInstall('Twisted', 'wheel', mname="twisted",
                       purpose="An asynchronous networking framework written in Python"),
         ModuleInstall('parsel', 'pip',
                       purpose="Parsel is a library to extract data from HTML and XML using XPath and CSS selectors."),

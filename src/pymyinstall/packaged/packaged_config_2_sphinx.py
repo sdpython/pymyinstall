@@ -68,5 +68,15 @@ def sphinx_theme_set():
                       purpose="A Sphinx theme for the Mozilla Developer Network", usage="SPHINX"),
         ModuleInstall("sphinx-redactor-theme", "pip", mname="sphinx_redactor_theme",
                       purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("sphinx-ioam-theme", "pip", mname="sphinx_ioam_theme",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("sphinx-bulma-theme", "pip", mname="sphinx_bulma_theme",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("yummy-sphinx-theme", "pip", mname="yummy_sphinx_theme",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("sphinx-modern-theme", "pip", mname="sphinx_modern_theme",
+                      purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("sphinx-materialdesign-theme", "pip", mname="sphinx_materialdesign_theme",
+                      purpose="sphinx theme", usage="SPHINX"),
     ]
     return [_ for _ in mod if _ is not None]

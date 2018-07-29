@@ -558,7 +558,7 @@ def extended_set():
         ModuleInstall("colorcet", "pip",
                       purpose="colorcet is a collection of perceptually uniform colormaps for use with Python plotting programs " +
                       "like bokeh, matplotlib, holoviews, and datashader."),
-        ModuleInstall("datashader", "github", "bokeh", usage="VIZ",
+        ModuleInstall("datashader", "pip", usage="VIZ",
                       purpose="Datashader is a graphics pipeline system for creating meaningful representations " +
                       "of large amounts of data.") if sys.version_info[:2] >= (3, 5) else None,
         ModuleInstall("dnspython", "pip", usage="WEB",
