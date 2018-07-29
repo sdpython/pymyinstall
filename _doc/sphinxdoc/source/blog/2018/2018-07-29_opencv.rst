@@ -1,0 +1,27 @@
+
+.. blogpost::
+    :title: opencv, cannot find DLL
+    :keywords: opencv
+    :date: 2018-07-29
+    :categories: module
+
+    I recently faced an issue with
+    `opencv-python <http://opencv-python-tutroals.readthedocs.io/en/latest/>`_ and
+    :epkg:`python` 3.7:
+    ``import cv2`` returned the following error:
+
+    ::
+
+        ImportError: DLL load failed: Le module spécifié est introuvable.
+
+    Too configurations are working for me:
+
+    * Python 3.6, OpenCV-Python 3.4.1, Windows Server 2012.
+    * Python 3.7, OpenCV-Python 3.4.2, Windows 10.
+
+    Not working :
+
+    * Python 3.6, OpenCV-Python 3.4.2, Windows Server 2012.
+    * Python 3.7, OpenCV-Python 3.4.2, Windows Server 2012.
+
+    I guess I'll have to recompile it to understand what is different.
