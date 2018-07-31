@@ -34,8 +34,6 @@ def cloud_set():
                       purpose="Python client library for Google Maps API Web Services"),
         ModuleInstall("python-gmaps", "pip", mname="gmaps",
                       purpose="Google Maps API client http://python-gmaps.readthedocs.org"),
-        # ModuleInstall("gdata", "pip", usage="GOOGLE",
-        #               purpose="Python client library for Google data APIs"),
     ]
 
     mod.append(ModuleInstall("adal", "pip",

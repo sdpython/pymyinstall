@@ -239,7 +239,6 @@ missing_module_licenses = {
     "Flask-Login": "MIT",
     "Flask-SQLAlchemy": "BSD",
     "GDAL": "MIT",
-    "gdata": "Apache 2.0",
     "gensim": "LGPLv2+",
     "geoplotlib": "MIT",
     "geopy": "MIT",
