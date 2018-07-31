@@ -776,6 +776,8 @@ def extended_set():
                       'or a pdf file at command line or in your code.'),
         ModuleInstall('jupyter-echarts-pypkg', 'pip', mname='jupyter_echarts_pypkg',
                       purpose='The project packages jupyter-echarts and distributes it via pypi.'),
+        ModuleInstall('yahoo-historical', 'pip',
+                      purpose='Python module to get stock data from Yahoo! Finance'),
     ]
 
     return [_ for _ in mod if _ is not None]

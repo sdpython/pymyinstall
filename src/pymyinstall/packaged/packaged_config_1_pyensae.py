@@ -71,7 +71,7 @@ def pyensae_set():
         "sqliteschema",
         "simplesqlite",
         "toml",
-        "yahoo_historical",
+        "yahoo-historical",
     ]
 
     for m in ensae_set():
