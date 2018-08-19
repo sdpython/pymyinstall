@@ -1,0 +1,163 @@
+
+.. blogpost::
+    :title: Install Python 3.7 on Linux
+    :keywords: python 3.7
+    :date: 2018-08-19
+    :categories: python
+
+    Start.
+
+    ::
+
+        apt-get sudo
+        apt-get update
+
+    Install everything to generate documentation with :epkg:`Sphinx`.
+
+    ::
+
+        wget https://github.com/jgm/pandoc/releases/download/2.2.3.2/pandoc-2.2.3.2-1-amd64.deb
+        dpkg -i pandoc-2.2.3.2-1-amd64.deb
+        apt-get install texlive texlive-latex-extra texlive-xetex
+        apt-get install p7zip-full
+        apt-get install inkscape
+        apt-get install graphviz
+
+    Install :epkg:`git`.
+
+    ::
+
+        apt-get install git
+
+    Install :epkg:`Python` dependencies.
+
+    ::
+
+        apt-get install make build-essential libssl-dev zlib1g-dev
+        apt-get install libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
+        apt-get install libncurses5-dev libncursesw5-dev xz-utils tk-dev
+
+    Install packages for :epkg:`keyring`.
+
+    ::
+
+        apt-get install libsecret-1-dev
+
+    Install and make :epkg:`Python`.
+    It must be installed in ``/usr/local`` otherwise
+    :epkg:`virtualenv` fails to create a vitual
+    environment.
+
+    ::
+
+        cd /usr/local
+        wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
+        tar xzf Python-3.7.0.tgz
+        cd Python-3.7.0
+        ./configure --enable-optimizations
+        make
+        cd ..
+        cd ~
+
+    Install :epkg:`pip`.
+
+    ::
+
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        Python-3.7.0/python get-pip.py
+
+    Install packages.
+
+    ::
+
+        curl https://raw.githubusercontent.com/sdpython/pyquickhelper/master/requirements.txt -o requirements.txt
+        ./python -c "from pip._internal import main;main('install -r requirements.txt'.split())"
+
+    Uninstall packages.
+
+    ::
+
+        ./python -c "from pip._internal import main;main('uninstall jyquickhelper'.split())"
+
+    Intall *java*.
+
+    ::
+
+        apt-get install default-jre default-jdk
+
+    Install :epkg:`Jenkins`.
+
+    ::
+
+        apt-get install daemon
+        wget https://pkg.jenkins.io/debian/binary/jenkins_2.138_all.deb
+        dpkg -i jenkins_2.138_all.deb
+
+    Install *ufw*.
+
+    ::
+
+        apt-get install ufw
+
+    Allows connection to port 8080 (:epkg:`Jenkins` default port).
+
+    ::
+
+        ufw enable
+        ufw allow ssh
+        ufw allow 8080/tcp
+
+    Go to ``http://<ip_address>:8080`` and follow the instructions,
+    install also extensions
+    `Build-timeout Plugin <https://wiki.jenkins.io/display/JENKINS/Build-timeout+Plugin>`_,
+    `Console Column Plugin <https://wiki.jenkins.io/display/JENKINS/Console+Column+Plugin>`_,
+    `Next Executions <https://wiki.jenkins.io/display/JENKINS/Next+Executions>`_,
+    `Collapsing Console Sections Plugin <https://wiki.jenkins.io/display/JENKINS/Collapsing+Console+Sections+Plugin>`_,
+    `Credentials Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Credentials+Plugin>`_.
+
+    Fix dependencies.
+
+    ::
+
+        apt --fix-broken install
+
+    To reboot:
+
+    ::
+
+        reboot
+
+    To complete :epkg:`Jenkins` install, go to
+    `Default Jenkins User Password <https://stackoverflow.com/questions/25041125/default-jenkins-user-password>`_.
+    You can use `nano <https://www.nano-editor.org/>`_
+    to edit.
+
+    Install weird packages.
+
+    ::
+
+        ./python -c "from pip._internal import main;main('install git+https://github.com/fancycode/pylzma.git --upgrade --no-deps'.split())"
+        ./python -c "from pip._internal import main;main('install git+https://github.com/sdpython/sphinxcontrib-images.git --upgrade --no-deps'.split())"
+
+    Setup one job on :epkg:`Jenkins`
+    with a :epkg:`Python` script.
+
+    ::
+
+        user = "<user>"
+        password = "<password>"
+
+        from pyquickhelper.jenkinshelper import JenkinsExt, setup_jenkins_server_yml, default_jenkins_jobs, default_engines
+        modules = default_jenkins_jobs()
+        engines = default_engines()
+        # or
+        # engines = dict(Python37="/home/ensaegithubxd/Python-3.7.0")
+        js = JenkinsExt('http://localhost:8080/', user, password, engines=engines)
+        setup_jenkins_server_yml(js, github="sdpython", modules=modules, fLOG=print, overwrite=True,
+                                 delete_first=False, location="/var/lib/jenkins/workspace")
+
+    Or if it is about :epkg:`pyquickhelper`.
+
+    ::
+
+        python setup.py jenkins <user> <password>
