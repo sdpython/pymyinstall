@@ -11,7 +11,6 @@ from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
 from pyquickhelper.pycode import is_travis_or_appveyor
-from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 
 
 try:
@@ -33,9 +32,6 @@ import src.pymyinstall
 class TestRunNotebooks4(unittest.TestCase):
 
     def a_test_run_notebook(self, name):
-        kernel_name = None if is_travis_or_appveyor() else install_python_kernel_for_unittest(
-            "pymyinstall")
-
         temp = get_temp_folder(
             __file__, "temp_run_notebooks4_{0}".format(name))
 
@@ -77,8 +73,7 @@ class TestRunNotebooks4(unittest.TestCase):
             return
 
         res = execute_notebook_list(
-            temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths,
-            kernel_name=kernel_name)
+            temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths)
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=src.pymyinstall)
 
