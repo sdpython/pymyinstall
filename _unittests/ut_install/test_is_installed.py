@@ -28,7 +28,7 @@ from src.pymyinstall.win_installer import is_package_installed
 
 class TestIsInstalled(unittest.TestCase):
 
-    def test_is_installed(self):
+    def test_is_installed_imbalanced_learn(self):
         fLOG(
             __file__,
             self._testMethodName,

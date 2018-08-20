@@ -24,6 +24,7 @@ except ImportError:
 
 
 from src.pymyinstall.win_installer.win_ipython_helper import ipython_create_profile, ipython_update_profile
+from src.pymyinstall.installhelper.run_cmd import RunCmdException
 
 if sys.version_info[0] < 3:
     from codecs import open
@@ -43,7 +44,7 @@ class TestIPythonProfile(unittest.TestCase):
         try:
             path = ipython_create_profile(
                 temp, python_path, name="ZZZ", fLOG=fLOG)
-        except FileNotFoundError as e:
+        except (FileNotFoundError, RunCmdException) as e:
             if "_venv" in str(e) and ".exe" in str(e):
                 # ipython.exe not present in virtual environment
                 warnings.warn("needs to add custom command line")
