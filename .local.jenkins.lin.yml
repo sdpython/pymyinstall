@@ -1,0 +1,35 @@
+
+language: python
+
+python:
+  - { PATH: "{{Python37}}", VERSION: 3.7, DIST: std, PYINT: python3.7 }
+  
+virtualenv:
+  - path: {{ospathjoin(root_path, pickname("$NAME_JENKINS", project_name + "_$VERSION_$DIST_$NAME"), "_venv")}}
+  
+install:
+  - $PYINT -c "from pip._internal import main;main(\"install --no-cache-dir --no-deps --index http://localhost:8067/simple/ jyquickhelper pyquickhelper --extra-index-url=https://pypi.python.org/simple/\".split())"
+  - $PYINT -c "from pip._internal import main;main(\"install -r requirements.txt\".split())"
+  - $PYINT --version
+  - $PYINT -c "from pip._internal import main;main([\"freeze\"])"
+
+script:
+  - { CMD: "$PYINT -u setup.py unittests", NAME: "UT" }
+  - { CMD: "$PYINT -u setup.py unittests_LONG", NAME: "UT_LONG" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*base.*\" -g \".*datascientist.*\"", NAME: "UT_SKIP_BASE" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*sqlitespy.*\"", NAME: "UT_SKIP_SQLLITE" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*pywin32.*\"", NAME: "UT_SKIP_PYWIN32" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*pyquickhelper.*\"", NAME: "UT_SKIP_PYQUICKHELPER" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE", TIMEOUT: 3600 }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*teaching.*\"", NAME: "UT_SKIP_TEACHING", TIMEOUT: 7200 }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*datascientist.*\"", NAME: "UT_SKIP_DATASCIENTIST", TIMEOUT: 7200 }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*every.*\"", NAME: "UT_SKIP_ALL", TIMEOUT: 20000 }
+
+after_script:
+  - $PYINT -u setup.py bdist_wheel
+  - if [ ${VERSION} == "3.7" and ${DIST} != "conda" and ${NAME} == "UT" ] then cp dist/*.whl {{root_path}}/../local_pypi/local_pypi_server fi
+
+documentation:
+  - if [ ${NAME} == "UT" ] then $PYINT -u setup.py build_sphinx fi
+  - if [ ${NAME} == "UT" ] then cp -R -f _doc/sphinxdoc/build/html dist/html fi

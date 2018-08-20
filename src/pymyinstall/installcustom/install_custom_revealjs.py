@@ -48,7 +48,8 @@ def download_revealjs(
             page)
 
     filename = alls[0].split("/")[-1]
-    filel = location.replace("releases", "") + "/archive/{0}".format(filename)
+    filel = location.replace("releases", "").rstrip(
+        "/") + "/archive/{0}".format(filename)
     outfile = os.path.join(temp_folder, "reveal.js." + filename)
     version = ".".join(filel.split("/")[-1].split(".")[:-1])
     fLOG("[pymy] download ", filel, "to", outfile, "version", version)

@@ -47,6 +47,7 @@
     It must be installed in ``/usr/local`` otherwise
     :epkg:`virtualenv` fails to create a vitual
     environment.
+    See `Building Python <https://docs.python.org/3/using/unix.html#building-python>`_
 
     ::
 
@@ -54,8 +55,10 @@
         wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
         tar xzf Python-3.7.0.tgz
         cd Python-3.7.0
-        ./configure --enable-optimizations
+        ./configure --enable-optimizations --with-ensurepip=install
         make
+        make altinstall
+        chmod +x python3.7
         cd ..
         cd ~
 
@@ -161,3 +164,35 @@
     ::
 
         python setup.py jenkins <user> <password>
+
+    Checks that :epkg:`Jenkins` user is present.
+
+    ::
+
+        cut -d: -f1 /etc/passwd
+
+    Stores password with :epkg:`keyring`.
+    First switch to :epkg:`Jenkins` user.
+
+    ::
+
+        su
+        su - jenkins
+
+    Then.
+
+    ::
+
+        import keyring
+        import os
+        keyring.set_password("web", "pyquickhelper,user", "...")
+        keyring.set_password("web", "pyquickhelper,pwd", "...")
+        mkdir -p /var/lib/jenkins/workspace/local_pypi/local_pypi_server
+
+    Additional dependencies.
+
+    ::
+
+        apt-get install unrar
+        curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+        apt-get install -y nodejs
