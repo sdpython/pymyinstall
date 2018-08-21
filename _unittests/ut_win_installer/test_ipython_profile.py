@@ -45,7 +45,7 @@ class TestIPythonProfile(unittest.TestCase):
             path = ipython_create_profile(
                 temp, python_path, name="ZZZ", fLOG=fLOG)
         except (FileNotFoundError, RunCmdException) as e:
-            if "_venv" in str(e) and ".exe" in str(e):
+            if "_venv" in str(e) and (".exe" in str(e) or "/_venv/" in str(e)):
                 # ipython.exe not present in virtual environment
                 warnings.warn("needs to add custom command line")
                 return
