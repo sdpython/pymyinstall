@@ -43,7 +43,7 @@ epkg_dictionary.update({
     'SQLiteSpy': "https://www.yunqa.de/delphi/products/sqlitespy/index",
     'statsmodels': "http://www.statsmodels.org/stable/index.html",
     'tables': 'https://www.pytables.org/usersguide/tutorials.html',
-    'TensorFlow'='https://www.tensorflow.org/',
+    'TensorFlow': 'https://www.tensorflow.org/',
     'ufw': 'https://doc.ubuntu-fr.org/ufw',
     'unrar': 'https://en.wikipedia.org/wiki/Unrar',
     'virtualenv': 'https://virtualenv.pypa.io/en/stable/',
