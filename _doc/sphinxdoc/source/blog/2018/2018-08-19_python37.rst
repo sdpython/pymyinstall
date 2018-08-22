@@ -218,6 +218,12 @@
         pip3.7 install git+https://github.com/jswhit/pyproj.git
         pip3.7 install geopandas
 
+    Install :epkg:`avconv` for :epkg:`ffmpeg` :
+
+    ::
+
+        apt-get install libav-tools
+
     Install :epkg:`protobuf`:
 
     ::
@@ -252,7 +258,7 @@
         pip3.7 install version_information xgboost natsort pivottablejs prettytable
         pip3.7 install colormap easydev dbfread quandl seaborn requests-file requests-ftp lxml opencv-python python-pptx
         pip3.7 install http://www.xavierdupre.fr/enseignement/setup/fairtest-0.1-py3-none-any.whl
-        pip3.7 install reportlab sympy vispy cufflinks brythonmagic
+        pip3.7 install reportlab sympy vispy cufflinks brythonmagic pydy
 
     For :epkg:`spacy`:
 

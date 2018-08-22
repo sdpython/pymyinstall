@@ -15,6 +15,7 @@ blog_root = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/"
 
 
 epkg_dictionary.update({
+    'avconv': 'http://debian-facile.org/doc:media:avconv',
     'boost': "http://www.boost.org/",
     'boost_python': "http://www.boost.org/doc/libs/release/libs/python/",
     'clang': 'https://clang.llvm.org/get_started.html',
@@ -23,6 +24,7 @@ epkg_dictionary.update({
     'Debian 9': 'https://www.debian.org/News/2017/20170617',
     'dlib': "http://dlib.net/",
     'dotnet': 'https://www.microsoft.com/net',
+    'ffmpeg': 'https://www.ffmpeg.org/',
     'java': 'https://www.java.com/',
     'imageio': 'https://imageio.github.io/',
     'keyring': 'https://github.com/jaraco/keyring',
