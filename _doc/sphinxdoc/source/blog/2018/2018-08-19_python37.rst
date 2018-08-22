@@ -248,10 +248,11 @@
 
         pip3.7 install sphinxcontrib.blockdiag sphinx_bootstrap_theme moviepy mutagen vprof solar-theme guzzle_sphinx_theme
         pip3.7 install sphinxjp.themes.basicstrap sphinx_readable_theme
-        pip3.7 install pyspark qgrid yahoo_historical py4j
-        pip3.7 install version_information xgboost natsort pivottablejs
-        pip3.7 install colormap easydev dbfread quandl seaborn requests-file requests-ftp lxml opencv-python
+        pip3.7 install pyspark qgrid yahoo_historical py4j bayespy
+        pip3.7 install version_information xgboost natsort pivottablejs prettytable
+        pip3.7 install colormap easydev dbfread quandl seaborn requests-file requests-ftp lxml opencv-python python-pptx
         pip3.7 install http://www.xavierdupre.fr/enseignement/setup/fairtest-0.1-py3-none-any.whl
+        pip3.7 install reportlab sympy vispy cufflinks brythonmagic
 
     For :epkg:`spacy`:
 
