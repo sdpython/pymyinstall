@@ -14,12 +14,37 @@ set_sphinx_variables(__file__, "pymyinstall", "Xavier Dupré", 2018,
 blog_root = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/"
 
 
-epkg_dictionary['boost'] = "http://www.boost.org/"
-epkg_dictionary['boost_python'] = "http://www.boost.org/doc/libs/release/libs/python/"
-epkg_dictionary['cvxopt'] = "http://cvxopt.org/"
-epkg_dictionary['cvxpy'] = "http://www.cvxpy.org/en/latest/index.html"
-epkg_dictionary['dlib'] = "http://dlib.net/"
-epkg_dictionary['pip'] = 'https://pip.pypa.io/en/stable/'
-epkg_dictionary['pypi'] = 'https://pypi.org/'
-epkg_dictionary['SQLiteSpy'] = "https://www.yunqa.de/delphi/products/sqlitespy/index"
-epkg_dictionary['statsmodels'] = "http://www.statsmodels.org/stable/index.html"
+epkg_dictionary.update({
+    'boost': "http://www.boost.org/",
+    'boost_python': "http://www.boost.org/doc/libs/release/libs/python/",
+    'clang': 'https://clang.llvm.org/get_started.html',
+    'cvxopt': "http://cvxopt.org/",
+    'cvxpy': "http://www.cvxpy.org/en/latest/index.html",
+    'Debian 9': 'https://www.debian.org/News/2017/20170617',
+    'dlib': "http://dlib.net/",
+    'dotnet': 'https://www.microsoft.com/net',
+    'java': 'https://www.java.com/',
+    'imageio': 'https://imageio.github.io/',
+    'keyring': 'https://github.com/jaraco/keyring',
+    'line_profiler': 'https://github.com/rkern/line_profiler',
+    'minepy': 'https://github.com/minepy/minepy',
+    'MKL': 'https://software.intel.com/en-us/mkl',
+    'ML.net': 'https://www.microsoft.com/net/learn/apps/machine-learning-and-ai/ml-dotnet',
+    'mono': 'https://www.mono-project.com/',
+    'nodejs': 'https://nodejs.org/en/',
+    'pip': 'https://pip.pypa.io/en/stable/',
+    'protobuf': 'https://github.com/protocolbuffers/protobuf',
+    'pypi': 'https://pypi.org/',
+    'pycuda': 'https://mathema.tician.de/software/pycuda/',
+    'pycurl': 'http://pycurl.io/',
+    'pyopencl': 'https://documen.tician.de/pyopencl/',
+    'pythonnet': 'https://github.com/pythonnet/pythonnet',
+    'spacy': 'https://spacy.io/',
+    'SQLiteSpy': "https://www.yunqa.de/delphi/products/sqlitespy/index",
+    'statsmodels': "http://www.statsmodels.org/stable/index.html",
+    'tables': 'https://www.pytables.org/usersguide/tutorials.html',
+    'TensorFlow'='https://www.tensorflow.org/',
+    'ufw': 'https://doc.ubuntu-fr.org/ufw',
+    'unrar': 'https://en.wikipedia.org/wiki/Unrar',
+    'virtualenv': 'https://virtualenv.pypa.io/en/stable/',
+})

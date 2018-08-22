@@ -1,35 +1,39 @@
 
 .. blogpost::
-    :title: Install Python 3.7 on Linux
+    :title: Install Python 3.7 and many packages on Linux Debian 9
     :keywords: python 3.7
     :date: 2018-08-19
     :categories: python
 
-    Start.
+    Below you can find the instruction to get many modules
+    on :epkg:`Debian 9` on :epkg:`Python` 3.7.
+    The first packages are quite common but the last instructions
+    are needed to build all the content for my teachings.
+    It begins with:
 
     ::
 
         apt-get sudo
         apt-get update
 
-    Install everything to generate documentation with :epkg:`Sphinx`.
+    Install everything to generate documentation with :epkg:`Sphinx`:
 
     ::
 
         wget https://github.com/jgm/pandoc/releases/download/2.2.3.2/pandoc-2.2.3.2-1-amd64.deb
         dpkg -i pandoc-2.2.3.2-1-amd64.deb
-        apt-get install texlive texlive-latex-extra texlive-xetex
+        apt-get install texlive texlive-latex-extra texlive-xetex texlive-lang-european texlive-lang-french
         apt-get install p7zip-full
         apt-get install inkscape
         apt-get install graphviz
 
-    Install :epkg:`git`.
+    Install :epkg:`git`:
 
     ::
 
         apt-get install git
 
-    Install :epkg:`Python` dependencies.
+    Install :epkg:`Python` dependencies:
 
     ::
 
@@ -37,17 +41,17 @@
         apt-get install libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
         apt-get install libncurses5-dev libncursesw5-dev xz-utils tk-dev
 
-    Install packages for :epkg:`keyring`.
+    Install packages for :epkg:`keyring`:
 
     ::
 
         apt-get install libsecret-1-dev
 
-    Install and make :epkg:`Python`.
-    It must be installed in ``/usr/local`` otherwise
+    Install and make :epkg:`Python`,
+    tt must be installed in ``/usr/local`` otherwise
     :epkg:`virtualenv` fails to create a vitual
     environment.
-    See `Building Python <https://docs.python.org/3/using/unix.html#building-python>`_
+    See `Building Python <https://docs.python.org/3/using/unix.html#building-python>`_:
 
     ::
 
@@ -62,33 +66,33 @@
         cd ..
         cd ~
 
-    Install :epkg:`pip`.
+    Install :epkg:`pip`:
 
     ::
 
         curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
         Python-3.7.0/python get-pip.py
 
-    Install packages.
+    Install packages:
 
     ::
 
         curl https://raw.githubusercontent.com/sdpython/pyquickhelper/master/requirements.txt -o requirements.txt
         ./python -c "from pip._internal import main;main('install -r requirements.txt'.split())"
 
-    Uninstall packages.
+    Uninstall packages:
 
     ::
 
         ./python -c "from pip._internal import main;main('uninstall jyquickhelper'.split())"
 
-    Intall *java*.
+    Intall :epkg:`java`:
 
     ::
 
         apt-get install default-jre default-jdk
 
-    Install :epkg:`Jenkins`.
+    Install :epkg:`Jenkins`:
 
     ::
 
@@ -96,13 +100,13 @@
         wget https://pkg.jenkins.io/debian/binary/jenkins_2.138_all.deb
         dpkg -i jenkins_2.138_all.deb
 
-    Install *ufw*.
+    Install :epkg:`ufw`:
 
     ::
 
         apt-get install ufw
 
-    Allows connection to port 8080 (:epkg:`Jenkins` default port).
+    Allows connection to port 8080 (:epkg:`Jenkins` default port):
 
     ::
 
@@ -117,8 +121,7 @@
     `Next Executions <https://wiki.jenkins.io/display/JENKINS/Next+Executions>`_,
     `Collapsing Console Sections Plugin <https://wiki.jenkins.io/display/JENKINS/Collapsing+Console+Sections+Plugin>`_,
     `Credentials Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Credentials+Plugin>`_.
-
-    Fix dependencies.
+    Fix dependencies:
 
     ::
 
@@ -133,9 +136,7 @@
     To complete :epkg:`Jenkins` install, go to
     `Default Jenkins User Password <https://stackoverflow.com/questions/25041125/default-jenkins-user-password>`_.
     You can use `nano <https://www.nano-editor.org/>`_
-    to edit.
-
-    Install weird packages.
+    to edit. Install weird packages:
 
     ::
 
@@ -143,7 +144,7 @@
         ./python -c "from pip._internal import main;main('install git+https://github.com/sdpython/sphinxcontrib-images.git --upgrade --no-deps'.split())"
 
     Setup one job on :epkg:`Jenkins`
-    with a :epkg:`Python` script.
+    with a :epkg:`Python` script:
 
     ::
 
@@ -159,27 +160,27 @@
         setup_jenkins_server_yml(js, github="sdpython", modules=modules, fLOG=print, overwrite=True,
                                  delete_first=False, location="/var/lib/jenkins/workspace")
 
-    Or if it is about :epkg:`pyquickhelper`.
+    Or if it is about :epkg:`pyquickhelper`:
 
     ::
 
         python setup.py jenkins <user> <password>
 
-    Checks that :epkg:`Jenkins` user is present.
+    Checks that :epkg:`Jenkins` user is present:
 
     ::
 
         cut -d: -f1 /etc/passwd
 
     Stores password with :epkg:`keyring`.
-    First switch to :epkg:`Jenkins` user.
+    First switch to :epkg:`Jenkins` user:
 
     ::
 
         su
         su - jenkins
 
-    Then.
+    Then:
 
     ::
 
@@ -189,10 +190,191 @@
         keyring.set_password("web", "pyquickhelper,pwd", "...")
         mkdir -p /var/lib/jenkins/workspace/local_pypi/local_pypi_server
 
-    Additional dependencies.
+    Additional dependencies :epkg:`unrar`, :epkg:`nodejs`:
 
     ::
 
         apt-get install unrar
         curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
         apt-get install -y nodejs
+
+    Additional dependencies *geos*, *geopandas*
+    (current version of *pyproj* does not compile
+    for Python 3.7, the latest sources must be used):
+
+    ::
+
+        apt-get install libproj-dev proj-bin proj-data
+        pip3.7 install cython
+        pip3.7 install git+https://github.com/jswhit/pyproj.git
+        apt-get install libc6
+        apt-get install libgeos-dev
+        apt-get install python-gdal gdal-bin
+        export PYPROJ_VERSION=4.9.3-2
+        wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj9_$PYPROJ_VERSION_amd64.deb
+        dpkg -i libproj9_$PYPROJ_VERSION_amd64.deb
+        wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj-dev_$PYPROJ_VERSION_amd64.deb
+        dpkg -i libproj-dev_$PYPROJ_VERSION_amd64.deb
+        pip3.7 install git+https://github.com/jswhit/pyproj.git
+        pip3.7 install geopandas
+
+    Install :epkg:`protobuf`:
+
+    ::
+
+        apt-get -y install protobuf-compiler
+
+    Other missing dependencies:
+
+    ::
+
+        pip3.7 install nltk statsmodels cartopy imbalanced-learn seaborn gensim descartes networkx
+        pip3.7 install bqplot memory_profiler xarray folium antlr4-python3-runtime
+        pip3.7 install category_encoders --no-deps
+        pip3.7 install torchvision chainer fcn
+        pip3.7 install spacy
+        pip3.7 install xlwt xlrd wikipedia pycurl xlsxwriter pyinstrument wptools flask dask bcolz pygame
+
+    For :epkg:`tables` :
+
+    ::
+
+        apt-get install libhdf5-dev libblosc-dev liblzo2-dev
+        pip3.7 install tables
+
+    Optional dependencies:
+
+    ::
+
+        pip3.7 install sphinxcontrib.blockdiag sphinx_bootstrap_theme moviepy mutagen vprof solar-theme guzzle_sphinx_theme
+        pip3.7 install sphinxjp.themes.basicstrap sphinx_readable_theme
+        pip3.7 install pyspark qgrid yahoo_historical py4j
+        pip3.7 install version_information xgboost natsort pivottablejs
+        pip3.7 install colormap easydev dbfread quandl seaborn requests-file requests-ftp lxml opencv-python
+        pip3.7 install http://www.xavierdupre.fr/enseignement/setup/fairtest-0.1-py3-none-any.whl
+
+    For :epkg:`spacy`:
+
+    ::
+
+        pip3.7 install http://www.xavierdupre.fr/enseignement/setup/fr_core_news_sm-2.0.0-py3-none-any.whl
+
+    For module :epkg:`imageio`, the second instruction must be executed
+    with every disinct user once:
+
+    ::
+
+        pip3.7 install imageio
+        python3.7 -c "import imageio;imageio.plugins.ffmpeg.download()"
+
+    For :epkg:`pycurl` :
+
+    ::
+
+        apt-get install libcurl4-openssl-dev
+        pip3.7 install pycurl
+
+    Install :epkg:`mono` (for :epkg:`pythonnet`):
+
+    ::
+
+        apt-get install apt-transport-https
+        apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+        echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+        apt-get update
+        apt-get install mono-devel ca-certificates-mono
+
+    And for :epkg:`dotnet`
+    (see `Install .NET Core SDK on Linux Debian 9 <https://www.microsoft.com/net/download/linux-package-manager/debian9/sdk-current>`_):
+
+    ::
+
+        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+        mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+        wget -q https://packages.microsoft.com/config/debian/9/prod.list
+        mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+        chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+        chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+
+        apt-get update
+        apt-get install dotnet-sdk-2.1
+
+    Deal with permissions issues for nugets:
+
+    ::
+
+        chown -R jenkins:jenkins /tmp/NuGetScratch/
+
+    Install :epkg:`clang` 6 (for :epkg:`pythonnet`):
+
+    ::
+
+        echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/clang-stable.list
+        apt-get update
+        apt-get install clang-6.0
+        alias clang='clang-6.0'
+
+    Install :epkg:`line_profiler` :
+
+    ::
+
+        pip3.7 install git+https://github.com/rkern/line_profiler.git
+
+    Install :epkg:`pythonnet`:
+
+    ::
+
+        git clone -b py37 https://github.com/pythonnet/pythonnet.git
+        cd pythonnet
+        python3.7 setup.py install --xplat
+
+    For :epkg:`ML.net`
+    (see `Building ML.NET on Linux and macOS <https://github.com/dotnet/machinelearning/blob/master/docs/building/unix-instructions.md>`_):
+
+    ::
+
+        apt-get update
+        apt-get install libunwind8
+
+    For :epkg:`cvxopt` :
+
+    ::
+
+        apt-get install libblas-dev liblapack-dev libsuitesparse-dev
+        pip3.7 install git+https://github.com/cvxopt/cvxopt.git@dev
+
+    Missing :epkg:`MKL` :
+    `MKL for .deb-based systems: An easy recipe <https://github.com/eddelbuettel/mkl4deb>`_.
+
+    About :epkg:`pyopencl`...
+
+    ::
+
+        apt-get install ocl-icd-opencl-dev
+        pip3.7 install pyopencl
+
+    For :epkg:`minepy` :
+
+    ::
+
+        pip3.7 install git+https://github.com/sdpython/minepy.git
+
+    About :epkg:`pycuda` :
+
+    ::
+
+        apt-get install libcuda1
+
+    Misc:
+
+    ::
+
+        pip3.7 install git+https://github.com/sdpython/pyPdf --upgrade --no-deps
+
+    About :epkg:`TensorFlow`, it does not compile yet
+    on :epkg:`Python` 3.7, see pull request
+    `Quick Fix for Python 3.7 <https://github.com/tensorflow/tensorflow/pull/21202>`_.
+
+    ::
+
+        git clone https://github.com/tensorflow/tensorflow
