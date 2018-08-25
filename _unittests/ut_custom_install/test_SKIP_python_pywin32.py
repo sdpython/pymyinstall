@@ -34,9 +34,9 @@ class TestDownloadPythonPyWin32 (unittest.TestCase):
         fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
-            __file__, "temp_py%s_pywin32" % vers, clean=True, max_path=True)
+            __file__, "temp_py%s_pywin32" % vers, clean=True, persistent=True)
         down = get_temp_folder(
-            __file__, "temp_py%s_pywin32_download" % vers, clean=True, max_path=True)
+            __file__, "temp_py%s_pywin32_download" % vers, clean=True, persistent=True)
         self.assertEqual(len(os.listdir(down)), 0)
 
         clog = CustomLog(temp)

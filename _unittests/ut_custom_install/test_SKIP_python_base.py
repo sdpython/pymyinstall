@@ -35,9 +35,9 @@ class TestDownloadPythonBase(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(__file__, "temp_py%s_base" %
-                               vers, max_path=True, clean=folder_older_than)
+                               vers, persistent=True, clean=folder_older_than)
         down = get_temp_folder(
-            __file__, "temp_py%s_base_download" % vers, clean=True, max_path=True)
+            __file__, "temp_py%s_base_download" % vers, clean=True, persistent=True)
         self.assertEqual(len(os.listdir(down)), 0)
 
         clog = CustomLog(temp)
