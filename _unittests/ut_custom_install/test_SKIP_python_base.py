@@ -40,16 +40,15 @@ class TestDownloadPythonBase(unittest.TestCase):
             __file__, "temp_py%s_base_download" % vers, clean=True, max_path=True)
         self.assertEqual(len(os.listdir(down)), 0)
 
-        if sys.platform.startswith("win"):
-            clog = CustomLog(temp)
-            install_python(install=True, temp_folder=temp, fLOG=clog,
-                           download_folder=temp + "_download")
-            pyt = os.path.join(temp, "python.exe")
-            pip = os.path.join(temp, "Scripts", "pip.exe")
-            if not os.path.exists(pyt):
-                raise FileNotFoundError(pyt)
-            if not os.path.exists(pip):
-                raise FileNotFoundError(pip)
+        clog = CustomLog(temp)
+        install_python(install=True, temp_folder=temp, fLOG=clog,
+                       download_folder=temp + "_download")
+        pyt = os.path.join(temp, "python.exe")
+        pip = os.path.join(temp, "Scripts", "pip.exe")
+        if not os.path.exists(pyt):
+            raise FileNotFoundError(pyt)
+        if not os.path.exists(pip):
+            raise FileNotFoundError(pip)
 
 
 if __name__ == "__main__":

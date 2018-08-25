@@ -1,0 +1,20 @@
+
+.. blogpost::
+    :title: Build protobuf and onnx for Windows
+    :keywords: protobuf
+    :date: 2018-08-23
+    :categories: libraries
+
+    A good way to build it is to look into the file
+    ``appveyor.yml``. You should end up with something
+    like this:
+    `build_protobuf.bat <https://github.com/sdpython/pymyinstall/blob/master/whl/windows/build_protobuf.bat>`_.
+    `onnx <https://github.com/onnx/onnx>`_ was a little bit more complex to build as 
+    the current build system is based on :epkg:`Miniconda`
+    and there is still no version for :epkg:`Python` 3.7.
+    I had to start with the standard distribution
+    which I did. The release is available as artifacts on
+    `appveyor/onnx <https://ci.appveyor.com/project/sdpython/onnx/build/0.3.17/artifacts>`_.
+    Instructions can be found in
+    `appveyor.yml <https://github.com/sdpython/onnx/blob/master/appveyor.yml>`_.
+

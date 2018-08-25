@@ -39,23 +39,22 @@ class TestDownloadPythonPyWin32 (unittest.TestCase):
             __file__, "temp_py%s_pywin32_download" % vers, clean=True, max_path=True)
         self.assertEqual(len(os.listdir(down)), 0)
 
-        if sys.platform.startswith("win"):
-            clog = CustomLog(temp)
-            install_python(install=True, temp_folder=temp,
-                           fLOG=clog, modules="pywin32", custom=True, latest=True,
-                           download_folder=temp + "_download")
-            pyt = os.path.join(temp, "python.exe")
-            pip = os.path.join(temp, "Scripts", "pip.exe")
-            if not os.path.exists(pyt):
-                raise FileNotFoundError(pyt)
-            if not os.path.exists(pip):
-                raise FileNotFoundError(pip)
-            post = os.path.join(temp, "Scripts", "pywin32_postinstall.py")
-            with open(post, "r") as f:
-                content = f.read()
-            if "os.path.exists(dest)" not in content:
-                raise Exception(
-                    "'os.path.exists(dest)' not found in '{0}'".format(post))
+        clog = CustomLog(temp)
+        install_python(install=True, temp_folder=temp,
+                       fLOG=clog, modules="pywin32", custom=True, latest=True,
+                       download_folder=temp + "_download")
+        pyt = os.path.join(temp, "python.exe")
+        pip = os.path.join(temp, "Scripts", "pip.exe")
+        if not os.path.exists(pyt):
+            raise FileNotFoundError(pyt)
+        if not os.path.exists(pip):
+            raise FileNotFoundError(pip)
+        post = os.path.join(temp, "Scripts", "pywin32_postinstall.py")
+        with open(post, "r") as f:
+            content = f.read()
+        if "os.path.exists(dest)" not in content:
+            raise Exception(
+                "'os.path.exists(dest)' not found in '{0}'".format(post))
 
 
 if __name__ == "__main__":

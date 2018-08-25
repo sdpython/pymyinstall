@@ -239,7 +239,7 @@
         pip3.7 install category_encoders --no-deps
         pip3.7 install torchvision chainer fcn
         pip3.7 install spacy
-        pip3.7 install xlwt xlrd wikipedia pycurl xlsxwriter pyinstrument wptools flask dask bcolz pygame
+        pip3.7 install xlwt xlrd wikipedia pycurl xlsxwriter pyinstrument wptools flask dask bcolz
 
     For :epkg:`tables` :
 
@@ -254,11 +254,15 @@
 
         pip3.7 install sphinxcontrib.blockdiag sphinx_bootstrap_theme moviepy mutagen vprof solar-theme guzzle_sphinx_theme
         pip3.7 install sphinxjp.themes.basicstrap sphinx_readable_theme
-        pip3.7 install pyspark qgrid yahoo_historical py4j bayespy
+        pip3.7 install pyspark qgrid yahoo_historical py4j bayespy lightgbm
         pip3.7 install version_information xgboost natsort pivottablejs prettytable
         pip3.7 install colormap easydev dbfread quandl seaborn requests-file requests-ftp lxml opencv-python python-pptx
         pip3.7 install http://www.xavierdupre.fr/enseignement/setup/fairtest-0.1-py3-none-any.whl
-        pip3.7 install reportlab sympy vispy cufflinks brythonmagic pydy
+        pip3.7 install reportlab sympy vispy cufflinks brythonmagic pydy seasonal
+        pip3.7 install treeinterpreter tutormagic pympler selenium httplib2
+        pip3.7 install tpot pygal google-api-python-client
+        
+        apt-get install chromium-driver
 
     For :epkg:`spacy`:
 
@@ -349,22 +353,43 @@
 
         apt-get install libblas-dev liblapack-dev libsuitesparse-dev
         pip3.7 install git+https://github.com/cvxopt/cvxopt.git@dev
-
-    Missing :epkg:`MKL` :
-    `MKL for .deb-based systems: An easy recipe <https://github.com/eddelbuettel/mkl4deb>`_.
-
-    About :epkg:`pyopencl`...
-
+        
+    For :epkg:`pygame`:
+    
     ::
 
-        apt-get install ocl-icd-opencl-dev
-        pip3.7 install pyopencl
+        apt-get install libasound2-dev
+        apt-get install libx11-dev
+        apt-get -y install xvfb pulseaudio
+        apt-get install -y python-pygame
+        pip3.7 install pygame
 
     For :epkg:`minepy` :
 
     ::
 
         pip3.7 install git+https://github.com/sdpython/minepy.git
+        
+    For :epkg:`onnx`:
+    
+    ::
+    
+        apt-get install cmake
+        pip3.7 install onnx
+
+
+    **MKL** and **deep leanring**
+
+    The machine I used does not have GPU.
+    Missing :epkg:`MKL` :
+    `MKL for .deb-based systems: An easy recipe <https://github.com/eddelbuettel/mkl4deb>`_.
+
+    About :epkg:`pyopencl` ...
+
+    ::
+
+        apt-get install ocl-icd-opencl-dev
+        pip3.7 install pyopencl
 
     About :epkg:`pycuda` :
 
