@@ -261,7 +261,7 @@
         pip3.7 install reportlab sympy vispy cufflinks brythonmagic pydy seasonal
         pip3.7 install treeinterpreter tutormagic pympler selenium httplib2
         pip3.7 install tpot pygal google-api-python-client
-        
+
         apt-get install chromium-driver
 
     For :epkg:`spacy`:
@@ -353,9 +353,9 @@
 
         apt-get install libblas-dev liblapack-dev libsuitesparse-dev
         pip3.7 install git+https://github.com/cvxopt/cvxopt.git@dev
-        
+
     For :epkg:`pygame`:
-    
+
     ::
 
         apt-get install libasound2-dev
@@ -369,14 +369,13 @@
     ::
 
         pip3.7 install git+https://github.com/sdpython/minepy.git
-        
+
     For :epkg:`onnx`:
-    
+
     ::
-    
+
         apt-get install cmake
         pip3.7 install onnx
-
 
     **MKL** and **deep leanring**
 

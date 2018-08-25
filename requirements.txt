@@ -7,7 +7,7 @@ natsort
 openpyxl
 Pillow
 pivottablejs
-pyquickhelper>=1.8.2602
+pyquickhelper>=1.8.2747
 sphinx_readable_theme
 version_information
 wheel
