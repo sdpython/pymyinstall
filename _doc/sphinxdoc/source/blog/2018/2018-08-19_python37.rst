@@ -260,7 +260,9 @@
         pip3.7 install http://www.xavierdupre.fr/enseignement/setup/fairtest-0.1-py3-none-any.whl
         pip3.7 install reportlab sympy vispy cufflinks brythonmagic pydy seasonal
         pip3.7 install treeinterpreter tutormagic pympler selenium httplib2
-        pip3.7 install tpot pygal google-api-python-client
+        pip3.7 install tpot pygal google-api-python-client datashader PyQt5
+        pip3.7 install pyecharts pygal-maps-fr pythreejs vega yahoo-historical lifelines fast-histogram geoplotlib
+        pip3.7 install missingno mpl-scatter-density mizani lml macropy3 plotnine geopy
 
         apt-get install chromium-driver
 
@@ -277,6 +279,14 @@
 
         pip3.7 install imageio
         python3.7 -c "import imageio;imageio.plugins.ffmpeg.download()"
+
+    For :epkg:`pyaudio`:
+
+    ::
+
+        apt-get install portaudio19-dev
+
+        pip3.7 install pyaudio
 
     For :epkg:`pycurl` :
 
@@ -347,6 +357,10 @@
         apt-get update
         apt-get install libunwind8
 
+    You might need to run ``chmod 777 -R /tmp/NuGetScratch;chmod 777 -R /tmp/NuGet``.
+    I got the following issue
+    `Restore task fails in an multi user scenario <https://github.com/NuGet/Home/issues/3897>_`.
+
     For :epkg:`cvxopt` :
 
     ::
@@ -387,14 +401,17 @@
 
     ::
 
-        apt-get install ocl-icd-opencl-dev
+        # apt-get install ocl-icd-opencl-dev
+        apt-get install beignet-opencl-icd
+        apt-get install libpocl-dev
         pip3.7 install pyopencl
 
     About :epkg:`pycuda` :
 
     ::
 
-        apt-get install libcuda1
+        apt-get install nvidia-cuda-toolkit
+        pip3.7 install pycuda
 
     Misc:
 

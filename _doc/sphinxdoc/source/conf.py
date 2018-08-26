@@ -36,6 +36,7 @@ epkg_dictionary.update({
     'nodejs': 'https://nodejs.org/en/',
     'pip': 'https://pip.pypa.io/en/stable/',
     'protobuf': 'https://github.com/protocolbuffers/protobuf',
+    'pyaudio': 'https://people.csail.mit.edu/hubert/pyaudio/docs/',
     'pypi': 'https://pypi.org/',
     'pycuda': 'https://mathema.tician.de/software/pycuda/',
     'pycurl': 'http://pycurl.io/',
