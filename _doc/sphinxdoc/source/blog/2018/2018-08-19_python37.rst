@@ -23,6 +23,7 @@
         wget https://github.com/jgm/pandoc/releases/download/2.2.3.2/pandoc-2.2.3.2-1-amd64.deb
         dpkg -i pandoc-2.2.3.2-1-amd64.deb
         apt-get install texlive texlive-latex-extra texlive-xetex texlive-lang-european texlive-lang-french
+        apt-get install dvipng
         apt-get install p7zip-full
         apt-get install inkscape
         apt-get install graphviz
@@ -426,3 +427,9 @@
     ::
 
         git clone https://github.com/tensorflow/tensorflow
+
+    For :epkg:`Azure` :
+
+    ::
+
+        pip3.7 install azure
