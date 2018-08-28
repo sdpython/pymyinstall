@@ -263,8 +263,13 @@
         pip3.7 install treeinterpreter tutormagic pympler selenium httplib2
         pip3.7 install tpot pygal google-api-python-client datashader PyQt5
         pip3.7 install pyecharts pygal-maps-fr pythreejs vega yahoo-historical lifelines fast-histogram geoplotlib
-        pip3.7 install missingno mpl-scatter-density mizani lml macropy3 plotnine geopy
+        pip3.7 install missingno mpl-scatter-density mizani lml macropy3 plotnine geopy zarr
 
+        apt-get install  libappindicator3-1
+        apt --fix-broken install
+        apt-get install  libappindicator3-1
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
+        dpkg -i google-chrome-stable_current_amd64.deb
         apt-get install chromium-driver
 
     For :epkg:`spacy`:
