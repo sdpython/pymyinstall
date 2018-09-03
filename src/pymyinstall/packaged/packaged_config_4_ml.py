@@ -302,8 +302,6 @@ def ensae_set():
                       purpose="The CGAL Bindings project allows to use some packages of CGAL, the Computational Algorithms Library, " +
                       "in languages other than C++, as for example Java and Python.",
                       web="https://github.com/cgal/cgal-swig-bindings") if sys.version_info[:2] <= (3, 4) else None,
-        ModuleInstall("tifffile", "wheel",
-                      purpose="Read and write image data from and to TIFF files. (for pims)"),
         ModuleInstall("slicerator", "pip",
                       purpose="A lazy-loading, fancy-sliceable iterable."),
         ModuleInstall("PIMS", "pip", mname="pims",
