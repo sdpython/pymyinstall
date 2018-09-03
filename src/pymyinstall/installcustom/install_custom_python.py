@@ -17,7 +17,7 @@ if sys.version_info[0] == 2:
 def unzip7_files(filename_7z, fLOG=print, dest="."):
     """
     If `7z <http://www.7-zip.org/>`_ is installed, the function uses it
-    to uncompress file into 7z format. The file *filename_7z* must not exist.
+    to uncompress file into *7z* format. The file *filename_7z* must not exist.
 
     .. index:: 7zip, 7z
 
@@ -50,7 +50,8 @@ def unzip7_files(filename_7z, fLOG=print, dest="."):
 
 def fix_fcntl_windows(path):
     """
-    Add a file fnctl.py on Windows (only available on Linux)
+    Adds a file `fnctl.py` on :epkg:`Windows`
+    (only available on :epkg:`Linux`).
 
     @param   path       path to the python installation
     """
@@ -79,7 +80,8 @@ def fix_fcntl_windows(path):
 
 def fix_termios_windows(path):
     """
-    Add a file termios.py on Windows (only available on Linux)
+    Adds a file `termios.py` on :epkg:`Windows`
+    (only available on :epkg:`Linux`).
 
     @param   path       path to the python installation
     """
@@ -98,7 +100,8 @@ def fix_termios_windows(path):
 
 def fix_resource_windows(path):
     """
-    Adds a file resource.py on Windows (only available on Linux).
+    Adds a file `resource.py` on :epkg:`Windows`
+    (only available on :epkg:`Linux`).
 
     @param   path       path to the python installation
     """
@@ -118,7 +121,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                    version=None, modules=None, custom=False, latest=False,
                    download_folder="download", verbose=False):
     """
-    Installs `python <http://www.python.org/>`_.
+    Installs :epkg:`python`.
     It does not do it a second time if it is already installed.
 
     @param      temp_folder     where to download the setup
@@ -131,7 +134,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                                 custom is True means switching to a zip of the standard distribution,
                                 see below
     @param      latest          install this version of pymyinstall and not the pypi version
-    @param      download_folder download folder
+    @param      download_folder download folder for packages
     @param      verbose         more display
     @return                     temporary file
 
@@ -147,6 +150,9 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
     .. versionchanged:: 1.1
         Add parameters *custom*, *latest*, *verbose*.
+
+    .. versionchanged:: 1.2
+        Implements the version for :epkg:`Linux`.
     """
     def clean_err(err):
         # remove a couple of warnings.
@@ -165,12 +171,13 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         ".", "")
     page = download_page(link)
     if page is None:
-        raise ValueError("page is None fir link '{0}'".format(link))
+        raise ValueError("page is None for link '{0}'".format(link))
+
     if sys.platform.startswith("win"):
         if versioni[:2] <= (3, 4):
             raise NotImplementedError(
                 "Python <= 3.4 is not supported anymore.")
-        # the setup for Python 3.5 does not accept multiple versions
+        # The setup for Python 3.5 does not accept multiple versions,
         # it was installed on one machine and then compressed into a 7z
         # file
         if versioni >= (3, 7, 0):
@@ -203,136 +210,172 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 url = "https://www.python.org/ftp/python/3.5.3/python-3.5.3-embed-amd64.zip"
         else:
             raise Exception(
-                "unable to find a proper version for version {0}".format(version))
-        full = url.split("/")[-1]
-        outfile = os.path.join(temp_folder, full)
-        fLOG("[install_python] download", url)
-        local = download_file(url, outfile, fLOG=fLOG)
-        if install:
-            # unzip files
-            unzip_files(local, temp_folder, fLOG=fLOG)
-
-            # get-pip
-            if not custom:
-                get_pip = "https://bootstrap.pypa.io/get-pip.py"
-                outfile_pip = os.path.join(temp_folder, "get-pip.py")
-                download_file(get_pip, outfile_pip, fLOG=fLOG)
-
-                # following issue https://github.com/pypa/get-pip/issues/7
-                vers = "%d%d" % sys.version_info[:2]
-                if vers in ("36", "37"):
-                    pth = os.path.join(temp_folder, "python%s._pth" % vers)
-                    with open(pth, "r") as f:
-                        content = f.read()
-                    content = content.replace("#import site", "import site")
-                    with open(pth, "w") as f:
-                        f.write(content)
-
-            # run get-pip.py
-            pyexe = os.path.join(temp_folder, "python.exe")
-            if not os.path.exists(pyexe):
-                raise FileNotFoundError(pyexe)
-
-            if not custom:
-                cmd = '"{0}" -u "{1}"'.format(pyexe, outfile_pip)
-                out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
-                if len(err) > 0:
-                    skip = ['Consider adding this directory to PATH',
-                            'which is not on PATH.']
-                    lines = err.split('\n')
-                    errs = []
-                    for line in lines:
-                        zoo = True
-                        for sk in skip:
-                            if sk in line:
-                                zoo = False
-                                break
-                        if zoo:
-                            errs.append(line)
-                    err = "\n".join(errs).strip(' \n\r')
-                if len(err) > 0:
-                    raise Exception(
-                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-B\n{2}".format(cmd, out, err))
-            else:
-                from ..win_installer.win_patch import win_patch_paths
-                fLOG("[install_python] Patch scripts .exe")
-                patched = win_patch_paths(temp_folder, pyexe, fLOG=fLOG)
-                for pat in patched:
-                    fLOG("  - ", pat)
-
-            # fix fcntl
-            fix_fcntl_windows(temp_folder)
-            fix_termios_windows(temp_folder)
-            fix_resource_windows(temp_folder)
-
-            # modules
-            if modules is not None:
-                if isinstance(modules, list):
-                    raise NotImplementedError(
-                        "Not implemented for a list of modules.")
-
-                # cmd = '"{0}" -u -c "import pip;pip.main([\'install\',
-                #        \'https://github.com/sdpython/pymyinstall/archive/master.zip\'])"'.format(pyexe)
-                if latest:
-                    folder = os.path.normpath(os.path.join(os.path.abspath(
-                        os.path.dirname(__file__)), "..", "..", ".."))
-                    setup = os.path.join(folder, "setup.py")
-                    if not os.path.exists(setup):
-                        raise FileNotFoundError(setup)
-                    cmd = '"{0}" -u "{1}\\setup.py" install'.format(
-                        pyexe, folder)
-                    change_path = folder
-                else:
-                    cmd = '"{0}" -u -c "import pip;pip.main([\'install\', \'pymyinstall\'])"'.format(
-                        pyexe)
-                    change_path = None
-                fLOG("[install_python] " + cmd)
-                out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
-                                   change_path=change_path)
-                err_keep = err
-                err = [_ for _ in err.split("\n") if not _.startswith("pymyinstall.") and not _.startswith(
-                    "zip_safe flag not set; analyzing archive contents...") and not _.startswith("error removing build")]
-                err = "\n".join(_ for _ in err if _)
-
-                exp = ".zip/lib2to3/Grammar.txt"
-                if len(err) > 0 and exp not in out.replace("\\", "/").replace("//", "/"):
-                    raise Exception(
-                        "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-C\n{2}".format(cmd, out, err_keep))
-                fLOG(out)
-
-                dirpyexe = os.path.dirname(pyexe)
-                fLOG(
-                    "[install_python] add python to PATH='{0}'".format(dirpyexe))
-                path = os.environ['PATH']
-                path = ";".join([dirpyexe, path])
-                os.environ['PATH'] = path
-
-                fLOG("[install_python] install modules")
-                cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\', ' +
-                       'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe,
-                                                                                   modules, download_folder.replace("\\", "/"))
-                out, err = run_cmd(
-                    cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=True)
-                fLOG("[install_python] end installed modules.")
-                if len(err) > 0:
-                    # We try a second time to make sure a second pass does not help.
-                    fLOG("[install_python2] install modules")
-                    out_, err_ = run_cmd(
-                        cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=False)
-                    err__ = clean_err(err_)
-                    if len(err__) > 0:
-                        mes = "[install_python2] end installed modules. Something went wrong:\n"
-                        raise Exception(
-                            mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\nERR2-Dc\n{5}\n**CMD**\n{0}".format(
-                                cmd, out, err, out_, err_, err__))
-                    else:
-                        out += ("\n-------------" * 5) + "\n" + out_
-                    fLOG("[install_python2] end installed modules.")
-                fLOG(out)
-
-        return local
+                "Unable to find a proper version for version {0}".format(version))
     else:
-        raise NotImplementedError("Not available on platform " + sys.platform)
+        url = "https://www.python.org/ftp/python/{0}.{1}.{2}/Python-{0}.{1}.{2}.tgz".format(
+            *versioni)
+
+    full = url.split("/")[-1]
+    outfile = os.path.join(temp_folder, full)
+    fLOG("[install_python] download", url)
+    local = download_file(url, outfile, fLOG=fLOG)
+
+    # Install
+    if install:
+        # unzip files
+        if sys.platform.startswith("win"):
+            unzip_files(local, temp_folder, fLOG=fLOG)
+        else:
+            cmd = "tar xzf {0}".format(outfile)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                               change_path=temp_folder)
+            if err:
+                raise RuntimeError(
+                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
+            config = os.path.join(temp_folder, "configure")
+
+            cmd = "{0} --enable-optimizations --with-ensurepip=install --prefix={1}/inst --exec/prefix={1}/bin".format(
+                config, temp_folder)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            if err:
+                raise RuntimeError(
+                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
+
+            cmd = "{0}/make".format(temp_folder)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            if err:
+                raise RuntimeError(
+                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
+
+            cmd = "{0}/make altinstall".format(temp_folder)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            if err:
+                raise RuntimeError(
+                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
+
+        # get-pip
+        if not custom:
+            get_pip = "https://bootstrap.pypa.io/get-pip.py"
+            outfile_pip = os.path.join(temp_folder, "get-pip.py")
+            download_file(get_pip, outfile_pip, fLOG=fLOG)
+
+            # following issue https://github.com/pypa/get-pip/issues/7
+            vers = "%d%d" % sys.version_info[:2]
+            if vers in ("36", "37"):
+                pth = os.path.join(temp_folder, "python%s._pth" % vers)
+                with open(pth, "r") as f:
+                    content = f.read()
+                content = content.replace("#import site", "import site")
+                with open(pth, "w") as f:
+                    f.write(content)
+
+        # run get-pip.py
+        if sys.platform.startswith("win"):
+            pyexe = os.path.join(temp_folder, "python.exe")
+        else:
+            pyexe = os.path.join(temp_folder, "bin", "python")
+        if not os.path.exists(pyexe):
+            raise FileNotFoundError(pyexe)
+
+    # Install pip.
+    if install and sys.platform.startswith("win"):
+        if not custom:
+            cmd = '"{0}" -u "{1}"'.format(pyexe, outfile_pip)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            if len(err) > 0:
+                skip = ['Consider adding this directory to PATH',
+                        'which is not on PATH.']
+                lines = err.split('\n')
+                errs = []
+                for line in lines:
+                    zoo = True
+                    for sk in skip:
+                        if sk in line:
+                            zoo = False
+                            break
+                    if zoo:
+                        errs.append(line)
+                err = "\n".join(errs).strip(' \n\r')
+            if len(err) > 0:
+                raise Exception(
+                    "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-B\n{2}".format(cmd, out, err))
+        else:
+            from ..win_installer.win_patch import win_patch_paths
+            fLOG("[install_python] Patch scripts .exe")
+            patched = win_patch_paths(temp_folder, pyexe, fLOG=fLOG)
+            for pat in patched:
+                fLOG("  - ", pat)
+
+        # fix fcntl
+        fix_fcntl_windows(temp_folder)
+        fix_termios_windows(temp_folder)
+        fix_resource_windows(temp_folder)
+
+    # modules
+    if install and modules is not None:
+        if isinstance(modules, list):
+            raise NotImplementedError(
+                "Not implemented for a list of modules.")
+
+        # cmd = '"{0}" -u -c "import pip;pip.main([\'install\',
+        #        \'https://github.com/sdpython/pymyinstall/archive/master.zip\'])"'.format(pyexe)
+        if latest:
+            folder = os.path.normpath(os.path.join(os.path.abspath(
+                os.path.dirname(__file__)), "..", "..", ".."))
+            setup = os.path.join(folder, "setup.py")
+            if not os.path.exists(setup):
+                raise FileNotFoundError(setup)
+            sep = "\\" if sys.platform.startswith("win") else "/"
+            cmd = '"{0}" -u "{1}{2}setup.py" install'.format(
+                pyexe, folder, sep)
+            change_path = folder
+        else:
+            cmd = '"{0}" -u -c "import pip;pip.main([\'install\', \'pymyinstall\'])"'.format(
+                pyexe)
+            change_path = None
+        fLOG("[install_python] " + cmd)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=change_path)
+        err_keep = err
+        err = [_ for _ in err.split("\n") if not _.startswith("pymyinstall.") and not _.startswith(
+            "zip_safe flag not set; analyzing archive contents...") and not _.startswith("error removing build")]
+        err = "\n".join(_ for _ in err if _)
+
+        exp = ".zip/lib2to3/Grammar.txt"
+        if len(err) > 0 and exp not in out.replace("\\", "/").replace("//", "/"):
+            raise Exception(
+                "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-C\n{2}".format(cmd, out, err_keep))
+        fLOG(out)
+
+        dirpyexe = os.path.dirname(pyexe)
+        fLOG(
+            "[install_python] add python to PATH='{0}'".format(dirpyexe))
+        path = os.environ['PATH']
+        path = ";".join([dirpyexe, path])
+        os.environ['PATH'] = path
+
+        fLOG("[install_python] install modules")
+        cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\', ' +
+               'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe, modules, download_folder.replace("\\", "/"))
+        out, err = run_cmd(
+            cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=True)
+        fLOG("[install_python] end installed modules.")
+        if len(err) > 0:
+            # We try a second time to make sure a second pass does not help.
+            fLOG("[install_python2] install modules")
+            out_, err_ = run_cmd(
+                cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=False)
+            err__ = clean_err(err_)
+            if len(err__) > 0:
+                mes = "[install_python2] end installed modules. Something went wrong:\n"
+                raise Exception(
+                    mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\nERR2-Dc\n{5}\n**CMD**\n{0}".format(
+                        cmd, out, err, out_, err_, err__))
+            else:
+                out += ("\n-------------" * 5) + "\n" + out_
+            fLOG("[install_python2] end installed modules.")
+        fLOG(out)
+
+    return local
 
 
 def folder_older_than(folder, delay=datetime.timedelta(30)):

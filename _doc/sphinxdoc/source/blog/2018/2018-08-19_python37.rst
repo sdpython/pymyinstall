@@ -241,6 +241,7 @@
         pip3.7 install torchvision chainer fcn
         pip3.7 install spacy
         pip3.7 install xlwt xlrd wikipedia pycurl xlsxwriter pyinstrument wptools flask dask bcolz
+        pip3.7 install jsonpickle forestci
 
     For :epkg:`tables` :
 
@@ -268,7 +269,7 @@
         apt-get install  libappindicator3-1
         apt --fix-broken install
         apt-get install  libappindicator3-1
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         dpkg -i google-chrome-stable_current_amd64.deb
         apt-get install chromium-driver
 
