@@ -241,7 +241,6 @@
         pip3.7 install torchvision chainer fcn
         pip3.7 install spacy
         pip3.7 install xlwt xlrd wikipedia pycurl xlsxwriter pyinstrument wptools flask dask bcolz
-        pip3.7 install jsonpickle forestci
 
     For :epkg:`tables` :
 
@@ -265,6 +264,7 @@
         pip3.7 install tpot pygal google-api-python-client datashader PyQt5
         pip3.7 install pyecharts pygal-maps-fr pythreejs vega yahoo-historical lifelines fast-histogram geoplotlib
         pip3.7 install missingno mpl-scatter-density mizani lml macropy3 plotnine geopy zarr
+        pip3.7 install jsonpickle forestci psycopg2
 
         apt-get install  libappindicator3-1
         apt --fix-broken install

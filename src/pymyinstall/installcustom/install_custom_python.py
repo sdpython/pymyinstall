@@ -232,7 +232,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
-            config = os.path.join(temp_folder, "configure")
+            pyinstall = os.path.join(temp_folder, "Python-{0}.{1}.{2}".format(*versioni))
+            config = os.path.join(pyinstall, "configure")
 
             cmd = "{0} --enable-optimizations --with-ensurepip=install --prefix={1}/inst --exec/prefix={1}/bin".format(
                 config, temp_folder)
@@ -241,14 +242,14 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
-            cmd = "{0}/make".format(temp_folder)
-            out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            cmd = "{0}/make".format(pyinstall)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
-            cmd = "{0}/make altinstall".format(temp_folder)
-            out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            cmd = "{0}/make altinstall".format(pyinstall)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
