@@ -117,7 +117,7 @@ def fix_resource_windows(path):
         f.write(module)
 
 
-def install_python(temp_folder=".", fLOG=print, install=True, force_download=False,
+def install_python(temp_folder=".", fLOG=print, install=True, force_download=False,  # pylint: disable=R0914
                    version=None, modules=None, custom=False, latest=False,
                    download_folder="download", verbose=False):
     """
@@ -232,7 +232,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
-            pyinstall = os.path.join(temp_folder, "Python-{0}.{1}.{2}".format(*versioni))
+            pyinstall = os.path.join(
+                temp_folder, "Python-{0}.{1}.{2}".format(*versioni))
             config = os.path.join(pyinstall, "configure")
 
             cmd = "{0} --enable-optimizations --with-ensurepip=install --prefix={1}/inst --exec/prefix={1}/bin".format(
@@ -243,13 +244,15 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
             cmd = "{0}/make".format(pyinstall)
-            out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                               change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
             cmd = "{0}/make altinstall".format(pyinstall)
-            out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                               change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
