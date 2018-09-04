@@ -235,20 +235,21 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             pyinstall = os.path.join(
                 temp_folder, "Python-{0}.{1}.{2}".format(*versioni))
 
-            cmd = "./configure --enable-optimizations --with-ensurepip=install --prefix={0}/inst --exec-prefix={0}/bin".format(temp_folder)
+            cmd = "./configure --enable-optimizations --with-ensurepip=install --prefix={0}/inst --exec-prefix={0}/bin --datadir={0}/data"
+            cmd = cmd.format(temp_folder)
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
-            cmd = "make".format(pyinstall)
+            cmd = "make"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}".format(cmd, out, err, pyinstall))
 
-            cmd = "make altinstall".format(pyinstall)
+            cmd = "make altinstall"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             if err:
