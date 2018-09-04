@@ -235,8 +235,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             pyinstall = os.path.join(
                 temp_folder, "Python-{0}.{1}.{2}".format(*versioni))
 
-            cmd = "./configure --enable-optimizations --with-ensurepip=install --prefix={0}/inst --exec-prefix={0}/bin".format(
-                temp_folder)
+            cmd = "./configure --enable-optimizations --with-ensurepip=install --prefix={0}/inst --exec-prefix={0}/bin".format(temp_folder)
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
             if err:
                 raise RuntimeError(
