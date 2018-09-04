@@ -234,11 +234,10 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}".format(cmd, out, err, temp_folder))
             pyinstall = os.path.join(
                 temp_folder, "Python-{0}.{1}.{2}".format(*versioni))
-            config = os.path.join(pyinstall, "configure")
 
-            cmd = "{0} --enable-optimizations --with-ensurepip=install --prefix={1}/inst --exec-prefix={1}/bin".format(
+            cmd = "./configure --enable-optimizations --with-ensurepip=install --prefix={1}/inst --exec-prefix={1}/bin".format(
                 config, temp_folder, pyinstall)
-            out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
