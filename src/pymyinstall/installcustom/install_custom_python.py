@@ -243,14 +243,14 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
-            cmd = "{0}/make".format(pyinstall)
+            cmd = "make".format(pyinstall)
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
-            cmd = "{0}/make altinstall".format(pyinstall)
+            cmd = "make altinstall".format(pyinstall)
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             if err:
