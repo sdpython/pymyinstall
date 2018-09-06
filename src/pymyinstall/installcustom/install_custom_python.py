@@ -237,7 +237,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
             cmd = "./configure --enable-optimizations --with-ensurepip=install --prefix={0}/inst --exec-prefix={0}/bin --datadir={0}/data"
             cmd = cmd.format(temp_folder)
-            out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=pyinstall)
+            out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                               change_path=pyinstall)
             if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))

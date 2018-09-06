@@ -439,3 +439,12 @@
     ::
 
         pip3.7 install azure
+
+    Install a newer version of :epkg:`cmake`:
+
+    ::
+
+        wget https://cmake.org/files/v3.12/cmake-3.12.1.tar.gz
+        tar xzf cmake-3.12.1
+        ./configure
+        make
