@@ -5,8 +5,14 @@
 History
 =======
 
-current - 2018-07-27 - 0.00Mb
+current - 2018-10-06 - 0.00Mb
 =============================
+
+* `61`: fix import issue for pip 0.18.1 (2018-10-06)
+* `33`: add code to remove unneeded packages such as gdata (2018-07-31)
+
+1.2.1621 - 2018-07-27 - 1.98Mb
+==============================
 
 * `59`: install pythonnet from wheel and not from pip (2018-07-27)
 

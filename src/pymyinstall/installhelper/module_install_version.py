@@ -55,11 +55,15 @@ def call_get_installed_distributions(local_only=True, skip=None, include_editabl
         from pip.utils import get_installed_distributions
     if skip is None:
         try:
-            # for pip>=10.0
-            from pip._internal.compat import stdlib_pkgs
+            # for pip >= 0.18.1
+            from pip._internal.utils.compat import stdlib_pkgs
         except ImportError:
-            # for pip<10.0
-            from pip.compat import stdlib_pkgs
+            try:
+                # for pip>=10.0 and pip < 0.18.1
+                from pip._internal.compat import stdlib_pkgs
+            except ImportError:
+                # for pip<10.0
+                from pip.compat import stdlib_pkgs
         skip = stdlib_pkgs
     return get_installed_distributions(local_only=local_only, skip=skip,
                                        include_editables=include_editables,
