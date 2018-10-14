@@ -60,6 +60,7 @@ def ensae_teaching_cs_set():
         "pytables",
         "python_utils",
         "rpy2",
+        "scikit-plot",
         "seaborn",
         "seasonal",
         "shapefile",

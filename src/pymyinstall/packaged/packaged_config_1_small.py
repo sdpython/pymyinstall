@@ -435,6 +435,8 @@ def small_set():
         ModuleInstall(
             'seaborn', 'pip', purpose="nicer graphs than matplotlib for statistical purposes", usage="VIZ"),
         ModuleInstall(
+            'scikit-plot', 'pip', purpose="nicer graphs than matplotlib for datascientist", usage="VIZ"),
+        ModuleInstall(
             'toolz', 'pip', purpose="Toolz provides a set of utility functions for iterators, functions, and dictionaries.", usage="DATA/ML"),
         ModuleInstall(
             'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
