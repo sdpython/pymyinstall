@@ -13,64 +13,15 @@ def pyensae_set():
     from .packaged_config_4_ml import ensae_set
     names = pyquickhelper_set()
     names += [
-        "absl-py",
-        "adal",
-        "ansi2html",  # ssh
-        "ansiconv",  # ssh
         "antlr4-python3-runtime",
-        "asn1crypto",
-        "bcrypt",
         "beautifulsoup4",
         "branca",
         "cffi",
-        "colorlog",
-        "colormap",
-        "cryptography",
         "dbfread",
-        "dominate",
-        "easydev",
-        "ecdsa",  # paramiko
-        "elasticsearch",
         "folium",  # maps
         "ijson",
-        "inflection",  # quandl
-        "ipaddress",
-        "ipykernel",
-        "isodate",
-        "python3-linkedin",
-        "markdown2",
-        "more-itertools",
         "mpl_finance",
-        "msgfy",
-        "msrest",
-        "msrestazure",
-        "networkx",
-        "ndg-httpsclient",  # quandl
-        "oauthlib",
-        "osmapi",  # maps
-        "pandas-datareader",
-        "paramiko",  # ssh
-        "pyasn1",
-        "pycrypto",  # paramiko, cannot be replaced by pycryptodome
-        "pycryptodomex",
-        "pycurl",  # markdown2
-        "PyJWT",
-        "pynacl",  # paramiko
-        "pyopenssl",  # quandl
         "pyquickhelper",
-        "pytablereader",
-        "pytablewriter",
-        "qgrid",  # magic command
-        "quandl",
-        "requests_file",
-        "requests-ftp",
-        "requests_oauthlib",
-        "scipy",
-        "scikit-learn",
-        "simplejson",
-        "sqliteschema",
-        "simplesqlite",
-        "toml",
         "yahoo-historical",
     ]
 
