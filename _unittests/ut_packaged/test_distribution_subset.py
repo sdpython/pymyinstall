@@ -22,7 +22,7 @@ except ImportError:
 
 
 from src.pymyinstall.packaged import find_module_install
-from src.pymyinstall.packaged import ensae_set, pyensae_set, ensae_teaching_cs_set, all_set, ensae_fullset
+from src.pymyinstall.packaged import ensae_set, pyensae_set, all_set, ensae_fullset
 
 
 class TestDisributionSubSet(unittest.TestCase):
@@ -53,15 +53,6 @@ class TestDisributionSubSet(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         nb = self.walk_text(pyensae_set())
-        fLOG(self._testMethodName, nb)
-
-    def test_ensae_teaching_cs_set(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
-        nb = self.walk_text(ensae_teaching_cs_set())
         fLOG(self._testMethodName, nb)
 
     def test_all_set(self):
