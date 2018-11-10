@@ -5,8 +5,13 @@
 History
 =======
 
-current - 2018-10-06 - 0.00Mb
+current - 2018-11-10 - 0.00Mb
 =============================
+
+* `62`: simplify sets of modules to install (2018-11-10)
+
+1.2.1671 - 2018-10-06 - 1.98Mb
+==============================
 
 * `61`: fix import issue for pip 0.18.1 (2018-10-06)
 * `33`: add code to remove unneeded packages such as gdata (2018-07-31)
