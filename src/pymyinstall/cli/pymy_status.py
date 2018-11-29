@@ -50,16 +50,6 @@ def do_main(list_module=None, outfile="python_module.xlsx", pypi=True):
     @param      pypi            check version on PyPi
     """
     try:
-        from pyquickhelper.pycode import is_travis_or_appveyor
-    except ImportError:
-        def is_travis_or_appveyor():
-            if "travis" in sys.executable:
-                return "travis"
-            if os.environ.get("USERNAME", os.environ.get("USER", None)) == "appveyor":
-                return "appveyor"
-            return None
-
-    try:
         from pymyinstall.installhelper import get_installed_modules
     except ImportError:
         pfolder = os.path.normpath(os.path.join(
