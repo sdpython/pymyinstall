@@ -284,3 +284,5 @@ whl/windows/fast_histogram/
 whl/windows/param/
 whl/windows/polylearn/
 whl/windows/libsvm/
+whl/windows/gevent/
+whl/windows/libev/
