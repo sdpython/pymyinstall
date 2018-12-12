@@ -14,18 +14,17 @@ set PATH=%pythonexe%;%pythonexe%\Scripts;%PATH%
 if not exist %current%..\..\dist mkdir %current%..\..\dist
 
 :clone:
-if exist bottlechest goto update:
-git clone --recursive https://github.com/biolab/bottlechest %current%bottlechest
+if exist gmpy goto update:
+git clone --recursive https://github.com/aleaxit/gmpy %current%gmpy
 goto build:
 
-
 :update:
-git pull %current%bottlechest
+git pull %current%gmpy
 
 :build:
-pushd %current%bottlechest
+pushd %current%gmpy
 python -u setup.py bdist_wheel
 popd
 
 :copy:
-copy %current%bottlechest\dist\*.whl %current%..\..\dist
+copy %current%gmpy\dist\*.whl %current%..\..\dist

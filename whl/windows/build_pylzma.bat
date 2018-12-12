@@ -5,7 +5,7 @@ set pythonexe=%1
 goto start_script:
 
 :default_value_python:
-set pythonexe=c:\Python364_x64
+set pythonexe=c:\Python370_x64
 
 :start_script:
 set current=%~dp0

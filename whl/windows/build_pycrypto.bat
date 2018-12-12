@@ -14,18 +14,18 @@ set PATH=%pythonexe%;%pythonexe%\Scripts;%PATH%
 if not exist %current%..\..\dist mkdir %current%..\..\dist
 
 :clone:
-if exist bottlechest goto update:
-git clone --recursive https://github.com/biolab/bottlechest %current%bottlechest
+if exist pycrypto goto update:
+git clone --recursive https://github.com/sdpython/pycrypto %current%pycrypto
 goto build:
 
-
 :update:
-git pull %current%bottlechest
+git pull %current%pycrypto
 
 :build:
-pushd %current%bottlechest
-python -u setup.py bdist_wheel
+rem see https://github.com/aleaxit/gmpy
+pushd %current%pycrypto
+python -u setup.py -q build
 popd
 
 :copy:
-copy %current%bottlechest\dist\*.whl %current%..\..\dist
+copy %current%polylearn\dist\*.whl %current%..\..\dist
