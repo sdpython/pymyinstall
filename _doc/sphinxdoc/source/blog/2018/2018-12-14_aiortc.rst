@@ -1,0 +1,10 @@
+
+.. blogpost::
+    :title: Real time communication
+    :keywords: aiortc
+    :date: 2018-12-14
+    :categories: libraries
+
+    I was looking into something to handle real time communication.
+    I found this one: `aiortc <https://github.com/jlaine/aiortc>`_
+    written in Python and still maintained.
