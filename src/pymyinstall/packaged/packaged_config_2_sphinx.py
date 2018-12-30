@@ -78,5 +78,7 @@ def sphinx_theme_set():
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinx-materialdesign-theme", "pip", mname="sphinx_materialdesign_theme",
                       purpose="sphinx theme", usage="SPHINX"),
+        ModuleInstall("sphinx_modern_theme_modified", "pip",
+                      purpose="sphinx theme", usage="SPHINX"),
     ]
     return [_ for _ in mod if _ is not None]

@@ -4,6 +4,7 @@
     :keywords: python 3.7
     :date: 2018-08-19
     :categories: python
+    :lid: blog-2018-python37-linux
 
     Below you can find the instruction to get many modules
     on :epkg:`Debian 9` on :epkg:`Python` 3.7.
@@ -49,7 +50,7 @@
         apt-get install libsecret-1-dev
 
     Install and make :epkg:`Python`,
-    tt must be installed in ``/usr/local`` otherwise
+    it must be installed in ``/usr/local`` otherwise
     :epkg:`virtualenv` fails to create a vitual
     environment.
     See `Building Python <https://docs.python.org/3/using/unix.html#building-python>`_:
@@ -398,7 +399,7 @@
         apt-get install cmake
         pip3.7 install onnx
 
-    **MKL** and **deep leanring**
+    **MKL** and **deep learning**
 
     The machine I used does not have GPU.
     Missing :epkg:`MKL` :
