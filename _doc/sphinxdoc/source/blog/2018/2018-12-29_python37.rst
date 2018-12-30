@@ -189,6 +189,9 @@
         pip3.7 install jsonpickle forestci psycopg2 pypi-server jupyterlab
         pip3.7 install imageio pyaudio pygame pybind11
         pip3.7 install git+https://github.com/cvxopt/cvxopt.git@dev
+        pip3.7 install mpl-finance
+        pip3.7 install git+https://github.com/sdpython/minepy.git
+        pip3.7 install git+https://github.com/sdpython/pyPdf --upgrade --no-deps
 
     ::
 
@@ -213,7 +216,7 @@
 
         echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /etc/apt/sources.list.d/clang-stable.list
         apt-get update
-        apt-get install -y clang clang-6.0
+        apt-get install -y clang clang-6.0 clang-3.8
         alias clang='clang-6.0'
 
     Install :epkg:`mono` (for :epkg:`pythonnet`, skip?):
