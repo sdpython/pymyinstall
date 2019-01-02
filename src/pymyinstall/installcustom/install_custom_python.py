@@ -243,6 +243,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
+            # See https://stackoverflow.com/questions/44708262/make-install-from-source-python-without-running-tests.
+            os.environ["EXTRATESTOPTS"] = "--list-tests"
             cmd = "make"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
