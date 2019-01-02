@@ -40,7 +40,7 @@ class TestDownloadPythonBase(unittest.TestCase):
             __file__, "temp_py%s_base_download" % vers, clean=True, persistent=True)
         self.assertEqual(len(os.listdir(down)), 0)
 
-        clog = CustomLog(temp)
+        clog = CustomLog(temp) if __name__ != "__main__" else fLOG
         install_python(install=True, temp_folder=temp, fLOG=clog,
                        download_folder=temp + "_download")
         pyt = os.path.join(temp, "python.exe")
