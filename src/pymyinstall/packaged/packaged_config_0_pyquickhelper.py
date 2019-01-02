@@ -88,7 +88,6 @@ def pyquickhelper_set():
         "nbformat",
         "nbconvert",
         "nbpresent",
-        "nbsphinx",
         "nose",
         "notebook",
         "notedown",

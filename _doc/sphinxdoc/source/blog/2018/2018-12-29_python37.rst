@@ -189,7 +189,7 @@
         pip3.7 install jsonpickle forestci psycopg2 pypi-server jupyterlab
         pip3.7 install imageio pyaudio pygame pybind11
         pip3.7 install git+https://github.com/cvxopt/cvxopt.git@dev
-        pip3.7 install mpl-finance
+        pip3.7 install mpl-finance smopy
         pip3.7 install git+https://github.com/sdpython/minepy.git
         pip3.7 install git+https://github.com/sdpython/pyPdf --upgrade --no-deps
 
