@@ -310,11 +310,12 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         if sys.platform.startswith("win"):
             pyexe = os.path.join(temp_folder, "python.exe")
         else:
-            pyexe = os.path.join(temp_folder, "bin", "python")
+            versioni3 = versioni[:3]
+            pyexe = os.path.join(temp_folder, "bin", "Python-{}.{}.{}".format(*versioni3), "python")
         if not os.path.exists(pyexe):
             raise FileNotFoundError(pyexe)
 
-    # Install pip.
+    # Patches for windows.
     if install and sys.platform.startswith("win"):
         if not custom:
             cmd = '"{0}" -u "{1}"'.format(pyexe, outfile_pip)
@@ -367,7 +368,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 pyexe, folder, sep)
             change_path = folder
         else:
-            cmd = '"{0}" -u -c "import pip;pip.main([\'install\', \'pymyinstall\'])"'.format(
+            cmd = '"{0}" -u -c "import pip._internal;pip._internal.main([\'install\', \'pymyinstall\'])"'.format(
                 pyexe)
             change_path = None
         fLOG("[install_python] " + cmd)
