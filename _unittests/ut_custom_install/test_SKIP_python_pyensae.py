@@ -42,12 +42,16 @@ class TestDownloadPythonPyEnsae(unittest.TestCase):
         install_python(install=True, temp_folder=temp,
                        fLOG=clog, modules="pyensae", custom=True, latest=True,
                        download_folder=temp + "_download")
-        pyt = os.path.join(temp, "python.exe")
-        pip = os.path.join(temp, "Scripts", "pip.exe")
-        if not os.path.exists(pyt):
-            raise FileNotFoundError(pyt)
-        if not os.path.exists(pip):
-            raise FileNotFoundError(pip)
+        if sys.platform.startswith("win"):
+            pyt = os.path.join(temp, "python.exe")
+            pip = os.path.join(temp, "Scripts", "pip.exe")
+            if not os.path.exists(pyt):
+                raise FileNotFoundError(pyt)
+            if not os.path.exists(pip):
+                raise FileNotFoundError(pip)
+        else:
+            # already checked
+            pass
 
 
 if __name__ == "__main__":

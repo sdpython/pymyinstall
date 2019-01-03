@@ -45,18 +45,22 @@ class TestDownloadPythonMinimal(unittest.TestCase):
                        fLOG=clog, modules="minimal", custom=True, latest=True,
                        download_folder=temp + "_download")
         fLOG("END")
-        pyt = os.path.join(temp, "python.exe")
-        pip = os.path.join(temp, "Scripts", "pip.exe")
-        if not os.path.exists(pyt):
-            raise FileNotFoundError(pyt)
-        if not os.path.exists(pip):
-            raise FileNotFoundError(pip)
-        post = os.path.join(temp, "Scripts", "pywin32_postinstall.py")
-        with open(post, "r") as f:
-            content = f.read()
-        if "os.path.exists(dest)" not in content:
-            raise Exception(
-                "'os.path.exists(dest)' not found in '{0}'".format(post))
+        if sys.platform.startswith("win"):
+            pyt = os.path.join(temp, "python.exe")
+            pip = os.path.join(temp, "Scripts", "pip.exe")
+            if not os.path.exists(pyt):
+                raise FileNotFoundError(pyt)
+            if not os.path.exists(pip):
+                raise FileNotFoundError(pip)
+            post = os.path.join(temp, "Scripts", "pywin32_postinstall.py")
+            with open(post, "r") as f:
+                content = f.read()
+            if "os.path.exists(dest)" not in content:
+                raise Exception(
+                    "'os.path.exists(dest)' not found in '{0}'".format(post))
+        else:
+            # already checked
+            pass
 
 
 if __name__ == "__main__":

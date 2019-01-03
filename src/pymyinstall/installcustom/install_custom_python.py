@@ -315,7 +315,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             pyexe = os.path.join(temp_folder, "python.exe")
         else:
             versioni3 = versioni[:3]
-            pyexe = os.path.join(temp_folder, "Python-{}.{}.{}".format(*versioni3), "python")
+            pyexe = os.path.join(
+                temp_folder, "Python-{}.{}.{}".format(*versioni3), "python")
         if not os.path.exists(pyexe):
             raise FileNotFoundError(pyexe)
 
@@ -396,10 +397,10 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         os.environ['PATH'] = path
 
         fLOG("[install_python] install modules")
-        cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\', ' +
-               'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe, modules, download_folder.replace("\\", "/"))
-        out, err = run_cmd(
-            cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=True)
+        cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\', '
+               + 'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe, modules, download_folder.replace("\\", "/"))
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                           communicate=False, catch_exit=True)
         fLOG("[install_python] end installed modules.")
         if len(err) > 0:
             # We try a second time to make sure a second pass does not help.

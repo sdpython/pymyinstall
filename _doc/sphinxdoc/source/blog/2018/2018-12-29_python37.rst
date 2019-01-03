@@ -312,5 +312,5 @@
         mkdir -p /var/lib/jenkins/workspace/local_pypi/local_pypi_server
 
     About *Jenkins*:
-    
+
     * `How do I change the Jenkins service account user? <https://community.talend.com/t5/Migration-Configuration-and/How-do-I-change-the-Jenkins-service-account-user/ta-p/45164>`_

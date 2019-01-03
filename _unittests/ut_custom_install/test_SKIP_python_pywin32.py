@@ -30,6 +30,7 @@ from src.pymyinstall.installcustom import install_python
 
 class TestDownloadPythonPyWin32 (unittest.TestCase):
 
+    @unittest.skipIf(not sys.platform.startswith("win"), reason="irrelevant on linux")
     def test_install_python_pywin32(self):
         fLOG(__file__, self._testMethodName, OutputPrint=True)
         vers = "%d%d" % sys.version_info[:2]
