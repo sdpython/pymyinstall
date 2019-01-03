@@ -311,7 +311,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             pyexe = os.path.join(temp_folder, "python.exe")
         else:
             versioni3 = versioni[:3]
-            pyexe = os.path.join(temp_folder, "bin", "Python-{}.{}.{}".format(*versioni3), "python")
+            pyexe = os.path.join(temp_folder, "Python-{}.{}.{}".format(*versioni3), "python")
         if not os.path.exists(pyexe):
             raise FileNotFoundError(pyexe)
 
