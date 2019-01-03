@@ -453,6 +453,9 @@ def extended_set():
                       purpose="The oauth2client is a client library for OAuth 2.0."),
         ModuleInstall("uritemplate", "pip",
                       purpose="URI templates"),
+        ModuleInstall("jeepney", "pip",
+                      purpose="This is a low-level, pure Python DBus protocol client. It has an I/O-free core, and " + \
+                      "integration modules for different event loops."),
         ModuleInstall("secretstorage", "pip",
                       purpose="This module provides a way for securely storing passwords and other secrets."),
         ModuleInstall("keyring", "pip",

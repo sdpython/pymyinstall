@@ -266,6 +266,8 @@ def small_set():
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
             "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="JUPYTER"),
+        ModuleInstall("zipp", "pip",
+                      purpose="A pathlib-compatible Zipfile object wrapper."),
         ModuleInstall("importlib-metadata", "pip", mname="importlib_metadata",
                       purpose="library to access the metadata for a Python package. It is intended to be ported to Python 3.8.",
                       usage="JUPYTER"),

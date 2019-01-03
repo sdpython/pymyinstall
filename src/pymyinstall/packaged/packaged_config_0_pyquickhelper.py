@@ -29,6 +29,7 @@ def pyquickhelper_set():
         "codecov",
         "colorama",
         "coverage",
+        "cryptography",
         "cssselect2",
         "Cython",
         "cycler",
@@ -47,6 +48,7 @@ def pyquickhelper_set():
         "html5lib",
         "idna",
         "imagesize",
+        "importlib_metadata",
         "ipython",
         "ipykernel",
         "ipympl",
@@ -56,6 +58,7 @@ def pyquickhelper_set():
         "isort",
         "jdcal",
         "jedi",
+        "jeepney",
         "jinja2",
         "jsonschema",
         "jupyter-console",
@@ -94,7 +97,6 @@ def pyquickhelper_set():
         "numpy",
         "olefile",
         "openpyxl",
-        "importlib_metadata",
         "path.py",
         "pbr",
         "packaging",
@@ -168,6 +170,7 @@ def pyquickhelper_set():
         "winrandom" if sys.platform.startswith("win") else None,
         "winshell" if sys.platform.startswith("win") else None,
         "wrapt",  # astroid
+        "zipp",
     ]
 
     from .automate_install import find_module_install
