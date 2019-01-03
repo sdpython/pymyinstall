@@ -277,21 +277,34 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}".format(cmd, out, err, pyinstall))
 
+        # has pip?
+        if sys.platform.startswith("win"):
+            pyexe = os.path.join(temp_folder, "python.exe")
+        else:
+            pyexe = os.path.join(temp_folder, "bin", "python")
+        cmd = "{0} -m pip --help"
+        try:
+            _, err = run_cmd(cmd, wait=True)
+            has_pip = not err
+        except Exception:
+            has_pip = False
+
         # get-pip
-        if not custom:
+        if not has_pip:
             get_pip = "https://bootstrap.pypa.io/get-pip.py"
             outfile_pip = os.path.join(temp_folder, "get-pip.py")
             download_file(get_pip, outfile_pip, fLOG=fLOG)
 
             # following issue https://github.com/pypa/get-pip/issues/7
-            vers = "%d%d" % sys.version_info[:2]
-            if vers in ("36", "37"):
-                pth = os.path.join(temp_folder, "python%s._pth" % vers)
-                with open(pth, "r") as f:
-                    content = f.read()
-                content = content.replace("#import site", "import site")
-                with open(pth, "w") as f:
-                    f.write(content)
+            if sys.platform.startswith("win"):
+                vers = "%d%d" % sys.version_info[:2]
+                if vers in ("36", "37"):
+                    pth = os.path.join(temp_folder, "python%s._pth" % vers)
+                    with open(pth, "r") as f:
+                        content = f.read()
+                    content = content.replace("#import site", "import site")
+                    with open(pth, "w") as f:
+                        f.write(content)
 
         # run get-pip.py
         if sys.platform.startswith("win"):
