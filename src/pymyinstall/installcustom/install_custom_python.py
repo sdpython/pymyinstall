@@ -397,8 +397,10 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         os.environ['PATH'] = path
 
         fLOG("[install_python] install modules")
-        cmd = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\', '
-               + 'verbose=True, source=\'2\', list_module=\'{1}\')"').format(pyexe, modules, download_folder.replace("\\", "/"))
+        pattern = '"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\',' + \
+                  'verbose=True, source=\'2\', list_module=\'{1}\')"'
+        cmd = pattern.format(
+            pyexe, modules, download_folder.replace("\\", "/"))
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                            communicate=False, catch_exit=True)
         fLOG("[install_python] end installed modules.")
