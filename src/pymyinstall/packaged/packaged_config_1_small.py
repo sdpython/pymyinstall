@@ -38,6 +38,8 @@ def small_set():
             "python-dateutil", "pip", "dateutil", purpose="helpers to manipulate dates"),
         ModuleInstall(
             "webencodings", "pip", purpose="Character encoding aliases for legacy web content"),
+        ModuleInstall("soupsieve", "pip",
+                      purpose="Soup Sieve is a CSS selector library designed to be used with Beautiful Soup 4."),
         ModuleInstall("beautifulsoup4", "pip", mname="bs4",
                       purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for " +
                       "iterating, searching, and modifying the parse tree."),

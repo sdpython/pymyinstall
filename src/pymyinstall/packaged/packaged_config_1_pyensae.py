@@ -22,6 +22,7 @@ def pyensae_set():
         "ijson",
         "mpl_finance",
         "pyquickhelper",
+        "soupsieve",
         "yahoo-historical",
     ]
 
