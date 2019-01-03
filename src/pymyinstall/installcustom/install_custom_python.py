@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 @file
 @brief Various functions to install `python <http://www.python.org/>`_.
@@ -249,8 +250,25 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             if err:
+                lines = []
+                for line in err.split("\n"):
+                    if "find: ‘build’: No such file or directory" in line:
+                        continue
+                    if "(ignored)" in line:
+                        continue
+                    if "Task was destroyed but it is pending!" in line:
+                        continue
+                    if "task: <Task pending coro=<<async_generator_athrow without __name__>()>>" in line:
+                        continue
+                    if "unhandled exception during asyncio.run() shutdown" in line:
+                        continue
+                    if "RuntimeError: can't send non-None value to a just-started coroutine" in line:
+                        continue
+                    lines.append(line)
+                err = "\n".join(lines) if lines else None
+            if err:
                 raise RuntimeError(
-                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}".format(cmd, out, err, pyinstall))
+                    "Issue with running '{0}'\n---OUT---\n{1}\n---ERR---\n{2}\n---IN---\n{3}".format(cmd, out, err, pyinstall))
 
             cmd = "make altinstall"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
