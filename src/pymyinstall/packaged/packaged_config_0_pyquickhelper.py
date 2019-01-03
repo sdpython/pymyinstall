@@ -11,6 +11,7 @@ def pyquickhelper_set():
     list of modules needed to run unit test of module *pyquickhelper*
     """
     names = [
+        "asn1crypto",
         "astroid",
         "alabaster",
         "autopep8",
