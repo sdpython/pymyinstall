@@ -453,6 +453,8 @@ def extended_set():
                       purpose="The oauth2client is a client library for OAuth 2.0."),
         ModuleInstall("uritemplate", "pip",
                       purpose="URI templates"),
+        ModuleInstall("secretstorage", "pip",
+                      purpose="This module provides a way for securely storing passwords and other secrets."),
         ModuleInstall("keyring", "pip",
                       purpose="Store and access your passwords safely."),
         # ModuleInstall("keyrings.alt", "pip", mname="keyrings.alt",

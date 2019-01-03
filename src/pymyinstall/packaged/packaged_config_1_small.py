@@ -245,6 +245,8 @@ def small_set():
         ModuleInstall(
             "jupyterlab-launcher", "pip", mname="jupyterlab_launcher",
             purpose="Jupyter Lab Launcher", usage="JUPYTER"),
+        ModuleInstall("jupyterlab-server", "pip", mname="jupyterlab_server",
+                      purpose="Jupyter Lab", usage="JUPYTER"),
         ModuleInstall(
             "jupyterlab", "pip", purpose="Jupyter Lab", usage="JUPYTER"),
         ModuleInstall(
@@ -264,6 +266,9 @@ def small_set():
             "ipykernel", "pip", purpose="IPython, Jupyter, kernels", usage="JUPYTER"),
         ModuleInstall(
             "qtconsole", "pip", purpose="IPython, notebooks, qtconsole", usage="JUPYTER"),
+        ModuleInstall("importlib-metadata", "pip", mname="importlib_metadata",
+                      purpose="library to access the metadata for a Python package. It is intended to be ported to Python 3.8.",
+                      usage="JUPYTER"),
         ModuleInstall(
             "path.py", "pip", mname="path", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
