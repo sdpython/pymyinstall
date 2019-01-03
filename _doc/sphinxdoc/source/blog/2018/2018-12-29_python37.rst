@@ -314,3 +314,18 @@
     About *Jenkins*:
 
     * `How do I change the Jenkins service account user? <https://community.talend.com/t5/Migration-Configuration-and/How-do-I-change-the-Jenkins-service-account-user/ta-p/45164>`_
+
+    A few useful lines maybe:
+
+    ::
+
+        nano /etc/init.d/jenkins
+        chown -R dupre:dupre /var/lib/jenkins
+        chown -R dupre:dupre /var/cache/jenkins
+        chown -R dupre:dupre /var/log/jenkins
+
+        chown -R jenkins:jenkins /var/lib/jenkins
+        chown -R jenkins:jenkins /var/cache/jenkins
+        chown -R jenkins:jenkins /var/log/jenkins
+
+        /etc/init.d/jenkins restart

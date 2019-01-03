@@ -22,7 +22,6 @@ script:
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL", TIMEOUT: 7200 }
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*pyquickhelper.*\"", NAME: "UT_SKIP_PYQUICKHELPER", TIMEOUT: 7200 }
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE", TIMEOUT: 7200 }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*teaching.*\"", NAME: "UT_SKIP_TEACHING", TIMEOUT: 10000 }
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*datascientist.*\"", NAME: "UT_SKIP_DATASCIENTIST", TIMEOUT: 10000 }
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*every.*\"", NAME: "UT_SKIP_ALL", TIMEOUT: 20000 }
 

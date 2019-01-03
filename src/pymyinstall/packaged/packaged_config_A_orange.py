@@ -50,6 +50,7 @@ def orange_set():
             "data visualization, exploration, " +
             "preprocessing and modeling techniques. It can be used through a nice and intuitive user interface or, for more advanced users, " +
             "as a module for the Python programming language."),
+        ModuleInstall("ufal.udpipe", "pip", purpose="for orange3-text"),
         ModuleInstall(
             "orange3-text", "pip", mname="orangecontrib.text", usage="ORANGE",
             purpose="Orange3 Text extends Orange3, a data mining software package, with common functionality for text mining. " +

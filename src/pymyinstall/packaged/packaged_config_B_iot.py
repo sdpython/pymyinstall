@@ -21,16 +21,18 @@ def iot_set():
                       purpose="enum/enum34 compatibility package") if sys.version_info[0] == 2 else None,
         ModuleInstall('netifaces', 'pip',
                       purpose="Portable network interface information."),
+        ModuleInstall('ifaddr', 'pip', purpose="for zero conf"),
         ModuleInstall('zeroconf', 'pip',
                       purpose="Multicast DNS Service Discovery for Python, originally by Paul Scott-Murphy."),
+        ModuleInstall('casttube', 'pip', purpose="for pychromecast"),
         ModuleInstall('pychromecast', 'pip',
                       purpose="Library for Python 2 and 3 to communicate with the Google Chromecast."),
         ModuleInstall('python-xlib', 'pip', mname="Xlib",
                       purpose="Python X Library"),
         ModuleInstall('pyHook', 'wheel',
-                      purpose="Python wrapper for global input hooks in Windows. The package provides callbacks " +
-                      "for mouse and keyboard events;" +
-                      " events can be monitored and filtered."),
+                      purpose="Python wrapper for global input hooks in Windows. The package provides callbacks "
+                      + "for mouse and keyboard events;"
+                      + " events can be monitored and filtered."),
         ModuleInstall('pyuserinput', 'pip', mname="pykeyboard",
                       purpose="A simple, cross-platform module for mouse and keyboard control"),
         ModuleInstall('tellcore-py', 'pip', mname="tellcore", usage="IoT",
@@ -44,8 +46,8 @@ def iot_set():
         ModuleInstall('pushbullet.py', 'pip', usage="IoT",
                       purpose="A simple python client for pushbullet.com"),
         ModuleInstall('sseclient-py', 'pip', mname="sseclient",
-                      purpose="A Python client for SSE event sources that seamlessly " +
-                      "integrates with urllib3 and requests."),
+                      purpose="A Python client for SSE event sources that seamlessly "
+                      + "integrates with urllib3 and requests."),
         ModuleInstall('python-nest', 'pip', usage="IoT",
                       purpose="Python API and command line tool for talking to the Nest™ Thermostat"),
         ModuleInstall('VarEvents', 'pip', usage="IoT",
@@ -116,11 +118,13 @@ def iot_set():
                       purpose="Voluptuous is a Python data validation library"),
         ModuleInstall('astral', 'pip',
                       purpose="Calculations for the position of the sun and moon."),
+        ModuleInstall('voluptuous_serialize', 'pip',
+                      purpose="for homeassistant"),
 
         ModuleInstall('homeassistant', 'pip',
-                      purpose="Home Assistant is a home automation platform running on Python 3. " +
-                      "The goal of Home Assistant is to be able to track and control all devices at " +
-                      "home and offer a platform for automating control.",
+                      purpose="Home Assistant is a home automation platform running on Python 3. "
+                      + "The goal of Home Assistant is to be able to track and control all devices at "
+                      + "home and offer a platform for automating control.",
                       web="https://github.com/balloob/home-assistant/",
                       usage="IoT"),
     ]

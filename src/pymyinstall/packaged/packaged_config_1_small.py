@@ -41,11 +41,11 @@ def small_set():
         ModuleInstall("soupsieve", "pip",
                       purpose="Soup Sieve is a CSS selector library designed to be used with Beautiful Soup 4."),
         ModuleInstall("beautifulsoup4", "pip", mname="bs4",
-                      purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for " +
-                      "iterating, searching, and modifying the parse tree."),
+                      purpose="Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for "
+                      + "iterating, searching, and modifying the parse tree."),
         ModuleInstall(
-            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness " +
-            "of SSL certificates while verifying the identity of TLS hosts."),
+            "certifi", "pip", purpose="Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness "
+            + "of SSL certificates while verifying the identity of TLS hosts."),
         ModuleInstall("requests", "pip", purpose="human interface for http"),
         ModuleInstall(
             "coverage", "pip", purpose="measure the coverage of unit tests"),
@@ -77,19 +77,19 @@ def small_set():
             "tornado", "wheel", purpose="python server, IPython relies on it", usage="NETWORK"),
         ModuleInstall(
             "sockjs-tornado", "pip", mname="sockjs.tornado", usage="NETWORK",
-            purpose="SockJS-tornado is a Python server side counterpart of SockJS-client browser library running " +
-            "on top of Tornado framework."),
+            purpose="SockJS-tornado is a Python server side counterpart of SockJS-client browser library running "
+            + "on top of Tornado framework."),
         ModuleInstall(
             "pyzmq", "wheel", mname="zmq", purpose="python librairies for Omz (pipy distributes the binaries)", usage="NETWORK"),
         ModuleInstall(
-            "pycparser", "pip", purpose="pycparser is a complete parser of the C language, written in pure " +
-            "Python using the PLY parsing library. It parses C code into " +
-            "an AST and can serve as a front-end for C compilers or analysis tools."),
+            "pycparser", "pip", purpose="pycparser is a complete parser of the C language, written in pure "
+            + "Python using the PLY parsing library. It parses C code into "
+            + "an AST and can serve as a front-end for C compilers or analysis tools."),
         ModuleInstall("numpy", "wheel",
                       purpose="matrix computation", usage="DATA/ML"),
         ModuleInstall("mkl_service", "wheel", mname="mkl",
-                      purpose="This package exposes a few functions which are declared in mkl_service.h. The main purpose of the " +
-                      "package is to allow the user to change the number of CPU's MKL is using at runtime.", usage="DATA/ML"),
+                      purpose="This package exposes a few functions which are declared in mkl_service.h. The main purpose of the "
+                      + "package is to allow the user to change the number of CPU's MKL is using at runtime.", usage="DATA/ML"),
         ModuleInstall("Cython", "wheel", mname="cython",
                       purpose="pseudo C++ in python"),
         ModuleInstall("cycler", "pip",
@@ -99,8 +99,8 @@ def small_set():
         ModuleInstall("matplotlib", "wheel",
                       purpose="most used plotting library", usage="VIZ"),
         ModuleInstall("mpl_finance", "github", "matplotlib", usage="VIZ",
-                      purpose="This module consists of code extracted from the deprecated matplotlib.finance " +
-                      "module along with a few examples of usage."),
+                      purpose="This module consists of code extracted from the deprecated matplotlib.finance "
+                      + "module along with a few examples of usage."),
         ModuleInstall("pywin32", "wheel2",
                       mname="win32com", purpose="call Windows DLL",
                       post=dict(
@@ -221,9 +221,9 @@ def small_set():
         ModuleInstall(
             "simplegeneric", "pip", purpose="IPython, dependency", usage="JUPYTER"),
         ModuleInstall(
-            "parso", "pip", purpose="Parso is a Python parser that supports error recovery and " +
-            "round-trip parsing for different Python versions (in multiple Python versions). Parso " +
-            "is also able to list multiple syntax errors in your python file."),
+            "parso", "pip", purpose="Parso is a Python parser that supports error recovery and "
+            + "round-trip parsing for different Python versions (in multiple Python versions). Parso "
+            + "is also able to list multiple syntax errors in your python file."),
         ModuleInstall(
             "jedi", "pip", purpose="An autocompletion tool for Python that can be used for text editors."),
         ModuleInstall("backcall", "pip", usage="JUPYTER",
@@ -288,12 +288,12 @@ def small_set():
             "ptyprocess", "pip", purpose="dependency for the terminado, Run a subprocess in a pseudo terminal",
             usage="JUPYTER/LINUX"),
         ModuleInstall("pexpect", "pip", usage="JUPYTER",
-                      purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling " +
-                      "other applications (needed by metakernel)."),
+                      purpose="needed by ipykernel on Linux, Pexpect makes Python a better tool for controlling "
+                      + "other applications (needed by metakernel)."),
         ModuleInstall("pywinpty", "wheel",
-                      purpose="Python bindings for the winpty pseudo terminal library. It allows to create and " +
-                      "communicate with Windows processes that print outputs and recieve inputs via console input " +
-                      "and output pipes."),
+                      purpose="Python bindings for the winpty pseudo terminal library. It allows to create and "
+                      + "communicate with Windows processes that print outputs and recieve inputs via console input "
+                      + "and output pipes."),
         ModuleInstall(
             "terminado", "pip", purpose="dependency for the notebooks, Terminals served to term.js using Tornado websockets",
             usage="JUPYTER/LINUX"),
@@ -352,6 +352,7 @@ def small_set():
                       purpose="tree visualisation, ete3 does not work with PyQt4 (2017-11)."),
         ModuleInstall("PyQt5-sip", "pip", mname="PyQt5_sip", usage="GUI"),
         ModuleInstall("PyQt5", "pip", usage="GUI"),
+        ModuleInstall("shiboken2", "pip", purpose="for PySide"),
         ModuleInstall("qtpy", "pip", usage="GUI",
                       purpose="single interface for QtPy4, 5, PySide"),
         ModuleInstall(
@@ -359,8 +360,8 @@ def small_set():
             purpose="The Qt for Python project aims to provide a complete port of the PySide module to Qt 5. ",
             usage="GUI"),
         ModuleInstall(
-            "psutil", "wheel", purpose="cross-platform library for retrieving information " +
-            "onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
+            "psutil", "wheel", purpose="cross-platform library for retrieving information "
+            + "onrunning processes and system utilization (CPU, memory, disks, network)in Python."),  #
         ModuleInstall(
             "rope_py3k", "pip", mname="rope", purpose="refactoring library") if sys.version_info[0] >= 3 else None,  #
         ModuleInstall(
@@ -379,8 +380,9 @@ def small_set():
             "pylint", "pip", purpose="statistics on Python script style"),  #
         ModuleInstall(
             "pythonqwt", "pip", purpose="Qt plotting widgets (Spyder)"),
-        ModuleInstall(
-            "spyder_kernels", "pip", purpose="Jupyter Kernels for the Spyder console"),
+        ModuleInstall("wurlitzer", "pip", purpose="for spyder"),
+        ModuleInstall("spyder-kernels", "pip", mname="spyder_kernels",
+                      purpose="Jupyter Kernels for the Spyder console"),
         ModuleInstall(
             "spyder", "pip", mname="spyderlib", purpose="scientific IDE"),
         ModuleInstall("dbfread", "pip", purpose="access DBase format"),
@@ -408,23 +410,23 @@ def small_set():
         ModuleInstall("click", "pip",
                       purpose="A simple wrapper around optparse for powerful command line utilities."),
         ModuleInstall('flask', 'pip', usage="NETWORK",
-                      purpose="Flask is a microframework for Python based on Werkzeug, " +
-                      "Jinja 2 and good intentions. And before you ask: It's BSD licensed!"),
+                      purpose="Flask is a microframework for Python based on Werkzeug, "
+                      + "Jinja 2 and good intentions. And before you ask: It's BSD licensed!"),
         ModuleInstall('flask-sqlalchemy', 'pip',
                       mname='flask.ext.sqlalchemy', usage="NETWORK"),
         ModuleInstall('Flask-Login', 'pip', mname="flask_login",
                       usage="NETWORK"),
         ModuleInstall("Flask-Cors", "pip", mname="flask_cors",
-                      purpose="A Flask extension for handling Cross Origin Resource Sharing (CORS), " +
-                      "making cross-origin AJAX possible."),
+                      purpose="A Flask extension for handling Cross Origin Resource Sharing (CORS), "
+                      + "making cross-origin AJAX possible."),
         ModuleInstall('PyYAML', 'wheel', mname='yaml',
                       purpose=" YAML parser and emitter for Python"),
         ModuleInstall('python-mimeparse', 'pip',
-                      purpose="A module provides basic functions for parsing mime-type names and matching " +
-                      "them against a list of media-ranges. (falcon)"),
+                      purpose="A module provides basic functions for parsing mime-type names and matching "
+                      + "them against a list of media-ranges. (falcon)"),
         ModuleInstall('falcon', 'pip', usage="NETWORK",
-                      purpose="Falcon is a very fast, very minimal Python web framework for building microservices, " +
-                      "app backends, and higher-level frameworks."),
+                      purpose="Falcon is a very fast, very minimal Python web framework for building microservices, "
+                      + "app backends, and higher-level frameworks."),
         ModuleInstall('falcon-auth', 'pip', mname='falcon_auth', usage="NETWORK",
                       purpose="A falcon middleware + authentication backends that adds authentication layer to you app/api service."),
         ModuleInstall('waitress', 'pip', usage="NETWORK",
@@ -450,8 +452,8 @@ def small_set():
         ModuleInstall(
             'cytoolz', 'wheel', purpose="Cython implementation of Toolz: High performance functional utilities", usage="DATA/ML"),
         ModuleInstall('snowballstemmer', 'pip',
-                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball " +
-                      "algorithms, needed by sphinx-rtd-theme."),
+                      purpose="This package provides 16 stemmer algorithms (15 + Porter English stemmer) generated from Snowball "
+                      + "algorithms, needed by sphinx-rtd-theme."),
         ModuleInstall('sphinx-rtd-theme', 'pip', mname='sphinx_rtd_theme',
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("feedparser", "pip", purpose="parse RSS streams"),
@@ -472,8 +474,8 @@ def small_set():
         ModuleInstall("future", "pip",
                       purpose="Clean single-source support for Python 3 and 2"),
         ModuleInstall("mock", "pip",
-                      purpose="mock is a library for testing in Python. It allows you to replace parts of your system " +
-                      "under test with mock objects and make assertions about how they have been used."),
+                      purpose="mock is a library for testing in Python. It allows you to replace parts of your system "
+                      + "under test with mock objects and make assertions about how they have been used."),
         ModuleInstall("multimethods", "pip",
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
         ModuleInstall("appdirs", "pip",
@@ -525,8 +527,8 @@ def small_set():
         ModuleInstall("sqliteschema", "pip",
                       purpose="sqliteschema is a Python library to dump table schema of a SQLite database file."),
         ModuleInstall("pytablereader", "pip",
-                      purpose="A python library to load structured table data from files/URL with various data format: " +
-                      "CSV/Excel/HTML/JSON/LTSV/Markdown/TSV."),
+                      purpose="A python library to load structured table data from files/URL with various data format: "
+                      + "CSV/Excel/HTML/JSON/LTSV/Markdown/TSV."),
         ModuleInstall("elasticsearch", "pip",
                       purpose="Python client for Elasticsearch"),
         ModuleInstall("pytablewriter", "pip",
@@ -537,15 +539,15 @@ def small_set():
             "tqdm", "pip", purpose="A Simple Python Progress Meter", usage="JUPYTER"),
 
         ModuleInstall(
-            'olefile', 'pip', purpose="Python package to parse, read and write Microsoft OLE2 files " +
-            "(Structured Storage or Compound Document, Microsoft Office) - Improved version of the " +
-            "OleFileIO module from PIL, the Python Image Library."),
+            'olefile', 'pip', purpose="Python package to parse, read and write Microsoft OLE2 files "
+            + "(Structured Storage or Compound Document, Microsoft Office) - Improved version of the "
+            + "OleFileIO module from PIL, the Python Image Library."),
         ModuleInstall(
             'Pillow', 'wheel', mname='PIL', purpose="read/create images"),
         # Sphinx extension to draw graphs.
         ModuleInstall(
-            "webcolors", "pip", purpose="A library for working with color names and color value formats defined " +
-            "by the HTML and CSS specifications for use in documents on the Web."),
+            "webcolors", "pip", purpose="A library for working with color names and color value formats defined "
+            + "by the HTML and CSS specifications for use in documents on the Web."),
         ModuleInstall(
             "funcparserlib", "pip", purpose="Recursive descent parsing library based on functional combinators"),
         ModuleInstall(

@@ -34,7 +34,7 @@ class TestCodeStyle(ExtTestCase):
                                   'W0603', 'W0212', 'W0123', 'W0201',
                                   'C0200', 'W0122', 'C0302', 'W0102',
                                   'W0621', 'R1710', 'R0401', 'R1714',
-                                  'R0915', 'W0107'),
+                                  'R0915', 'W0107', 'W503'),
                    skip=["__init__.py:1: R0401",
                          "win_installer",
                          "Redefining built-in ",
@@ -62,6 +62,7 @@ class TestCodeStyle(ExtTestCase):
                          "Unable to import 'selenium.webdriver'",
                          "Unable to import 'Queue'",
                          "Unable to import 'src.pymyinstall.installhelper.status_helper'",
+                         "[W503] line break before binary operator",
                          ])
 
     def test_style_test(self):
@@ -70,7 +71,7 @@ class TestCodeStyle(ExtTestCase):
         check_pep8(test, fLOG=fLOG, neg_pattern="temp_.*",
                    pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
                                   'C0111', 'W0703', 'W0622', 'W0621', 'C0412', 'C0411',
-                                  'R0915', 'W0107'),
+                                  'R0915', 'W0107', 'W503'),
                    skip=["src' imported but unused",
                          "skip_' imported but unused",
                          "skip__' imported but unused",

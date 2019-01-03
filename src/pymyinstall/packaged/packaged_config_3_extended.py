@@ -56,6 +56,8 @@ def extended_set():
                       purpose="An interface to the Pluggable Authentication Modules (PAM) " +
                       "library on linux, written in pure python (using ctypes)")
         if not sys.platform.startswith("win") else None,
+        ModuleInstall("async_generator", "pip", purpose="for jupyterhup"),
+        ModuleInstall("python_oauth2", "pip", purpose="for jupyterhup"),
         ModuleInstall(
             "jupyterhub", "pip", purpose="JupyterHub: A multi-user server for Jupyter notebooks", usage="JUPYTER")
         if not sys.platform.startswith("win") else None,
@@ -560,6 +562,7 @@ def extended_set():
         ModuleInstall("chalmers", "pip",
                       purpose="Chalmers is an application that allows its users to monitor and control a number of processes on any " +
                       "operating system (Posix and Win32 included)"),
+        ModuleInstall("pyct", "pip", purpose="A utility package"),
         ModuleInstall("colorcet", "pip",
                       purpose="colorcet is a collection of perceptually uniform colormaps for use with Python plotting programs " +
                       "like bokeh, matplotlib, holoviews, and datashader."),
@@ -621,6 +624,9 @@ def extended_set():
         #
         ModuleInstall('QInfer', 'pip', mname="qinfer", usage="DATA/ML",
                       purpose="QInfer is a library using Bayesian sequential Monte Carlo for quantum parameter estimation."),
+        ModuleInstall('pscript', 'pip', purpose="for flexx"),
+        ModuleInstall('webruntime', 'pip', purpose="for flexx"),
+        ModuleInstall('dialite', 'pip', purpose="for flexx"),
         ModuleInstall('flexx', 'pip', usage="GUI",
                       purpose="Flexx is a pure Python toolkit for creating graphical user interfaces (GUI's), " +
                       "that uses web technology for its rendering. Apps are written purely in Python; Flexx' " +
@@ -673,6 +679,9 @@ def extended_set():
         ModuleInstall('pystan', 'pip', usage="DATA/ML",
                       purpose="PyStan provides an interface to Stan, a package for Bayesian inference using " +
                       "the No-U-Turn sampler, a variant of Hamiltonian Monte Carlo."),
+        ModuleInstall('convertdate', 'pip', purpose="for fbprophet"),
+        ModuleInstall('holidays', 'pip', purpose="for fbprophet"),
+        ModuleInstall('lunardate', 'pip', purpose="for fbprophet"),
         ModuleInstall('fbprophet', 'pip', usage="DATA/ML",
                       purpose="Prophet is a procedure for forecasting time series data. It is based on an additive " +
                       "model where non-linear trends are fit with yearly and weekly seasonality, plus holidays. " +
@@ -689,6 +698,8 @@ def extended_set():
         #
         # June 2017
         #
+        ModuleInstall('pytest_runner', 'pip',
+                      purpose="Setup scripts can use pytest-runner to add setup.py test support for pytest runner."),
         ModuleInstall('fastparquet', 'wheel',
                       purpose="fastparquet is a python implementation of the parquet format, aiming integrate " +
                       "into python-based big data work-flows."),
@@ -720,6 +731,7 @@ def extended_set():
         ModuleInstall('typed_ast', 'pip',
                       purpose="typed_ast is a Python 3 package that provides a Python 2.7 and Python 3 parser " +
                       "similar to the standard ast library."),
+        ModuleInstall('mypy_extensions', 'pip', purpose="for mypy"),
         ModuleInstall('mypy', 'pip',
                       purpose="Mypy is an experimental optional static type checker for Python that aims to combine the benefits of " +
                       "dynamic (or 'duck') typing and static typing."),

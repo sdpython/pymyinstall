@@ -122,6 +122,16 @@ def cloud_set():
                  'azure_storage_file',
                  'azure_storage_queue',
                  'azure-storage-nspkg',
+                 # addition 2019-01
+                 'azure_loganalytics',
+                 'azure_applicationinsights',
+                 'azure_mgmt_iotcentral',
+                 'azure_mgmt_datamigration',
+                 'azure_mgmt_maps',
+                 'azure_mgmt_policyinsights',
+                 'azure_mgmt_managementgroups',
+                 'azure_mgmt_devspaces',
+                 'azure_mgmt_signalr',
                  # main package
                  'azure']:
 
