@@ -287,6 +287,13 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             if err:
+                lines = []
+                for line in err.split("\n"):
+                    if "[libinstall] Error 1 (ignored)" in line:
+                        continue
+                    lines.append(line)
+                err = "\n".join(lines).strip() if lines else None
+            if err:
                 raise RuntimeError(
                     "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}".format(cmd, out, err, pyinstall))
 
