@@ -258,6 +258,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                         continue
                     if "Task was destroyed but it is pending!" in line:
                         continue
+                    if "[libinstall] Error 1 (ignored)" in line:
+                        continue
                     if "task: <Task finished coro=<<async_generator_athrow without __name__>()" in line:
                         continue
                     if "stty: 'standard input': Inappropriate ioctl for device" in line:
