@@ -819,13 +819,11 @@ def ensae_set():
                       purpose="Open Neural Network Exchange"),
         ModuleInstall('onnxmltools', 'pip', usage="ML",
                       purpose="Converts Machine Learning models to ONNX"),
-        ModuleInstall('winmltools', 'pip', usage="ML", purpose="Microsoft ML Tool to convert machine learning "
-                      + "models to ONNX for use with Windows Machine Learning"),
 
         #
         # 2019-01
         #
-        ModuleInstall('fastsne', 'wheel', usage="ML", purpose="Fast t-SNE"),
+        ModuleInstall('openTSNE', 'wheel', usage="ML", purpose="Fast t-SNE"),
         ModuleInstall('python-louvain', 'pip', usage="ML",
                       purpose="Louvain algorithm"),
     ]

@@ -679,6 +679,7 @@ def extended_set():
         ModuleInstall('pystan', 'pip', usage="DATA/ML",
                       purpose="PyStan provides an interface to Stan, a package for Bayesian inference using " +
                       "the No-U-Turn sampler, a variant of Hamiltonian Monte Carlo."),
+        ModuleInstall('ephem', 'pip', purpose="for fbprophet"),
         ModuleInstall('convertdate', 'pip', purpose="for fbprophet"),
         ModuleInstall('holidays', 'pip', purpose="for fbprophet"),
         ModuleInstall('lunardate', 'pip', purpose="for fbprophet"),
