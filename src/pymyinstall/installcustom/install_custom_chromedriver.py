@@ -13,7 +13,7 @@ from ..installhelper.install_cmd_helper import unzip_files
 
 def install_chromedriver(dest_folder=".", fLOG=print, install=True, version=None):
     """
-    install `chromedriver <https://sites.google.com/a/chromium.org/chromedriver/>`_ (only on Windows)
+    Installs `chromedriver <https://sites.google.com/a/chromium.org/chromedriver/>`_.
 
     @param      dest_folder     where to download the setup
     @param      fLOG            logging function
@@ -21,7 +21,7 @@ def install_chromedriver(dest_folder=".", fLOG=print, install=True, version=None
     @param      version         version to install (unused)
     @return                     zip file in a list or list of unzipped files
 
-    This is required for Selenium.
+    This is required for `Selenium <https://selenium-python.readthedocs.io/>`_.
     """
     if version is None:
         content = download_page(
@@ -40,7 +40,7 @@ def install_chromedriver(dest_folder=".", fLOG=print, install=True, version=None
         url = "http://chromedriver.storage.googleapis.com/{0}/chromedriver_mac32.zip".format(
             version)
     else:
-        url = "http://chromedriver.storage.googleapis.com/{0}/chromedriver_linux32.zip".format(
+        url = "http://chromedriver.storage.googleapis.com/{0}/chromedriver_linux64.zip".format(
             version)
     name = url.split("/")[-1]
 

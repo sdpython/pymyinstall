@@ -52,8 +52,8 @@ class TestChromeDriver(unittest.TestCase):
             fLOG(_)
         if sys.platform.startswith("win"):
             found = os.path.join(temp, "chromedriver.exe")
-        if not os.path.exists(found):
-            raise FileNotFoundError(found)
+            if not os.path.exists(found):
+                raise FileNotFoundError(found)
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@ from ..installhelper.install_cmd_helper import unzip_files
 
 def install_operadriver(dest_folder=".", fLOG=print, install=True, version=None):
     """
-    install `operadriver <https://github.com/operasoftware/operachromiumdriver/releases>`_ (only on Windows)
+    Installs `operadriver <https://github.com/operasoftware/operachromiumdriver/releases>`_.
 
     @param      dest_folder     where to download the setup
     @param      fLOG            logging function
@@ -21,17 +21,17 @@ def install_operadriver(dest_folder=".", fLOG=print, install=True, version=None)
     @param      version         version to install (unused)
     @return                     zip file in a list or list of unzipped files
 
-    This is required for Selenium.
+    This is required for `Selenium <https://selenium-python.readthedocs.io/>`_.
     """
     if version is None:
         content = download_page(
             "https://github.com/operasoftware/operachromiumdriver/releases")
         reg = re.compile(
-            "/tag/v([0-9]+[.][0-9]+[.][0-9])")
+            "/tag/v([.][0-9]+[.][0-9]+)")
         f = reg.findall(content)
         if not f:
             raise Exception(
-                "unable to get the last version number for ChromeDriver")
+                "unable to get the last version number for OperaDriver")
         version = f[0]
     if sys.platform.startswith("win"):
         url = "https://github.com/operasoftware/operachromiumdriver/releases/download/v{0}/operadriver_win64.zip".format(

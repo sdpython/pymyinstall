@@ -25,6 +25,7 @@ from src.pymyinstall.installcustom import install_scala_sbt, ManualDownloadExcep
 
 class TestScalaSbt(unittest.TestCase):
 
+    @unittest.skipIf(not sys.platform.startswith("win"), reason="not implemented on linux")
     def test_install_scala_sbt(self):
         fLOG(
             __file__,
