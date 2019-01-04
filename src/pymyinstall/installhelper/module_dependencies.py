@@ -20,23 +20,27 @@ def get_default_ignore_modules():
         "enum34",            # standard distribution (>= 3.4)
         "enum_compat",       # standard distribution (>= 3.4)
         "enum-compat",       # standard distribution (>= 3.4)
+        "fasttsne",          # deprecated module
         "futures",           # standard distribution (>= 3.5)
-        "holoviews",        # needed by geoviews but still marked as missing
-        "hypertemp",        # temporary solution, should disappear
+        "holoviews",         # needed by geoviews but still marked as missing
+        "hypertemp",         # temporary solution, should disappear
         "keyrings.alt",      # weird this one on Windows
         # "guidata",
         # "monotonic",
         "msgpack_python",   # Called msgpack now.
         "msgpack-python",   # Called msgpack now.
+        "onnx",             # working on it
         "ordereddict",      # standard distribution (>= 3.4)
         "pathlib",          # standard distribution (>= 3.5)
         "pip",              # almost standard distribution, should be rare
+        "pipdeptree",       # weird
         # manny names for this one (PTable, not maintained anymore)
         "prettytable",
         "pycryptodome",     # many names for this one
         "pydocstyle",       # does not seem to be maintained
         "pyopengl",         # weird this one
         "pypiwin32",        # manny names for this one
+        "pythonnet",        # weird
         "pywin32",          # manny names for this one
         "pywin32_ctypes",   # manny names for this one
         "rope",             # for spyder
