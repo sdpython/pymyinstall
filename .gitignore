@@ -286,3 +286,4 @@ whl/windows/polylearn/
 whl/windows/libsvm/
 whl/windows/gevent/
 whl/windows/libev/
+whl/windows/cupy/
