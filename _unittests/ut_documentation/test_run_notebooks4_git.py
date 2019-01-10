@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@brief      test log(time=27s)
+@brief      test log(time=10s)
 """
 
 import sys
@@ -10,7 +10,6 @@ import pyquickhelper
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
-from pyquickhelper.pycode import is_travis_or_appveyor
 
 
 try:
@@ -62,22 +61,14 @@ class TestRunNotebooks4(unittest.TestCase):
                 os.path.abspath(os.path.dirname(__file__)), "..", "..", "..", "jyquickhelper", "src"))
         ]
 
-        if is_travis_or_appveyor() == "travis":
-            keepnote = [_ for _ in keepnote if "javascript_extension" not in _[0] and
-                        (not is_travis_or_appveyor() or "example_xgboost" not in _[0])]
-        if not sys.platform.startswith("win"):
-            # seems stuck on circleci
-            keepnote = [_ for _ in keepnote if "example_xgboost" not in _[0]]
-
         if len(keepnote) == 0:
-            return
+            raise ValueError("No notebook for name='{0}'".format(name))
 
         res = execute_notebook_list(
             temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths)
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=src.pymyinstall)
 
-    @unittest.skipIf(sys.version_info[0] == 2, reason="notebook for python 3")
     def test_notebook_example_xgboost(self):
         fLOG(
             __file__,

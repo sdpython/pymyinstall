@@ -24,6 +24,7 @@ script:
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*pyensae.*\"", NAME: "UT_SKIP_PYENSAE", TIMEOUT: 7200 }
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*datascientist.*\"", NAME: "UT_SKIP_DATASCIENTIST", TIMEOUT: 10000 }
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*every.*\"", NAME: "UT_SKIP_ALL", TIMEOUT: 20000 }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*notebook.*\"", NAME: "UT_SKIP_NB" }
 
 after_script:
   - $PYINT -u setup.py bdist_wheel
