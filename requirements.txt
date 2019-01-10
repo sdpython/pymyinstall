@@ -1,5 +1,6 @@
 cairocffi
 coverage
+joblib
 jyquickhelper
 keyring
 memory_profiler!=0.48.0
