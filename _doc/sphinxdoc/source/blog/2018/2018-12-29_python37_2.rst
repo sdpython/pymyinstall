@@ -331,3 +331,10 @@
         chown -R jenkins:jenkins /var/log/jenkins
 
         /etc/init.d/jenkins restart
+
+    For :epkg:`spacy`, to download the ressources
+    for a particular language:
+
+    ::
+
+        python3.7 -m spacy download en
