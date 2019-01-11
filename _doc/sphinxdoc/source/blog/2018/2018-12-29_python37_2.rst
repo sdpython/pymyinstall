@@ -1,9 +1,10 @@
 
 .. blogpost::
     :title: Install Python 3.7 and many packages on Linux Debian 9
-    :keywords: python 3.7
-    :date: 2018-08-19
+    :keywords: python 3.7, debian
+    :date: 2018-12-29
     :categories: python
+    :lid: blog-2018-python37-linux2
 
     Same steps four months later:
     :ref:`Install Python 3.7 and many packages on Linux Debian 9 <blog-2018-python37-linux>`.
@@ -313,7 +314,8 @@
 
     About *Jenkins*:
 
-    * `How do I change the Jenkins service account user? <https://community.talend.com/t5/Migration-Configuration-and/How-do-I-change-the-Jenkins-service-account-user/ta-p/45164>`_
+    * `How do I change the Jenkins service account user?
+      <https://community.talend.com/t5/Migration-Configuration-and/How-do-I-change-the-Jenkins-service-account-user/ta-p/45164>`_
 
     A few useful lines maybe:
 
