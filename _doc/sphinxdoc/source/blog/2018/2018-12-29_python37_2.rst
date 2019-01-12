@@ -338,3 +338,6 @@
     ::
 
         python3.7 -m spacy download en
+
+    Server FTP,
+    look into `How to Configure VSFTPD FTPS with SSL/TLS on Ubuntu 18.04 <https://linoxide.com/linux-how-to/configure-vsftpd-sftp-ubuntu/>`_.
