@@ -1168,7 +1168,7 @@ class ModuleInstall:
                         mes = "(8) unable to install with wheel {0}\nread:\n{1}\nCMD:\n{2}\nOUT:\n{3}\nERR-V:\n{4}".format(
                             str(self), url, cmd, out, err)
                         raise InstallError(mes)
-                    if "Requirement already satisfied" not in out:
+                    if "Requirement already satisfied" not in out and "Requirement already up-to-date" not in out:
                         mes = "(9) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-W:\n{3}".format(
                             str(self), cmd, out, err)
                         raise InstallError(mes)
