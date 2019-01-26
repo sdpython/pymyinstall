@@ -34,6 +34,7 @@ rem set PROTOBUF_LIBRARIES=<PROTOBUF>\build_msvc\Release
 rem set PROTOBUF_INCLUDE_DIRS=<PROTOBUF>\src
 rem set ONNX_PROTOC_EXECUTABLE=<PROTOBUF>\build_msvc\Release\protoc.exe
 rem set pybind11_DIR=<ONNX>\third_party\pybind11\tools
+rem set CMAKE_ARGS=-Dpybind11_DIR=<GITHUBROOTWITH\\>\\onnx\\third_party\\pybind11\\tools -DPROTOBUF_INCLUDE_DIRS=<GITHUBROOTWITH\\>\\protobuf\\src -DPROTOBUF_LIBRARIES=<GITHUBROOTWITH\\>\\protobuf\\build_msvc\\Release -DONNX_PROTOC_EXECUTABLE=<GITHUBROOTWITH\\>\\protobuf\\build_msvc\\Release\\protoc.exe
 set CMAKE_ARGS=-Dpybind11_DIR=<GITHUBROOTWITH\\>\\onnx\\third_party\\pybind11\\tools -DPROTOBUF_INCLUDE_DIRS=<GITHUBROOTWITH\\>\\protobuf\\src -DPROTOBUF_LIBRARIES=<GITHUBROOTWITH\\>\\protobuf\\build_msvc\\Release -DONNX_PROTOC_EXECUTABLE=<GITHUBROOTWITH\\>\\protobuf\\build_msvc\\Release\\protoc.exe
 python setup.py bdist_wheel --universal
 
