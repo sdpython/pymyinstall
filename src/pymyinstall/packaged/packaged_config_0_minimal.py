@@ -12,6 +12,7 @@ def minimal_set():
     """
     names = [
         "autopep8",
+        'entrypoints',
         "flake8",
         'markupsafe',
         "mccabe",
