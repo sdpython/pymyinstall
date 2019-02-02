@@ -10,6 +10,8 @@ skip = ["actuariat_python", "code_beatrix", "ensae_teaching_cs",
         'pyenbc', 'mlinsights', 'cpyquickhelper', 'tkinterquickhelper',
         # 2018
         'manydataapi', 'ensae_traching_dl', 'sparkouille', 'csharpy', 'chsarpyml',
+        # 2019
+        'lecture_citation', 'skl2onnx', 'onnxmltoosl', 'onnxruntime', 'mathenjeu',
         ]
 from pymyinstall.packaged import install_all
 install_all(temp_folder="build/update_modules{0}{1}{2}".format(*sys.version_info[:3]),

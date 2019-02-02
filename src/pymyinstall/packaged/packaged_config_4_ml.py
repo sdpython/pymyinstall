@@ -826,6 +826,7 @@ def ensae_set():
         ModuleInstall('openTSNE', 'wheel', usage="ML", purpose="Fast t-SNE"),
         ModuleInstall('python-louvain', 'pip', usage="ML",
                       purpose="Louvain algorithm"),
+
     ]
 
     if sys.version_info[0] == 2:
