@@ -283,7 +283,7 @@ def update_pip(python_path=None, fLOG=print):
     @return                     output
 
     The command ``python -m pip install -U pip`` or
-    ``pip install --upgrade pip`` might fails on Windows due to very long paths
+    ``pip install --upgrade pip`` might fail on Windows due to very long paths
     (see `Upgrading pip fails on Windows when install path is too long <https://github.com/pypa/pip/issues/3055>`_).
     If that happens,
     assuming the module *pymyinstall* was installed with pip, we can now remove
@@ -344,7 +344,7 @@ def update_pip(python_path=None, fLOG=print):
                         not("Cache entry deserialization failed, entry ignored" in line) and \
                         len(line.strip()) > 3:
                     keep.append(line)
-            if len(keep) > 0:
+            if len(keep) > 0 and "Requirement already up-to-date" not in out:
                 for _ in keep:
                     print("++", _)
                 raise UpdatePipError(
