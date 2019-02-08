@@ -761,11 +761,10 @@ class ModuleInstall:
                 f.write(text)
             return exename
 
-        else:
-            raise ImportError(
-                "unknown kind: {0} for module {1}".format(
-                    kind,
-                    self.name))
+        raise ImportError(
+            "unknown kind: {0} for module {1}".format(
+                kind,
+                self.name))
 
     def get_pypi_version(self, url='https://pypi.python.org/pypi'):
         """
@@ -1052,7 +1051,7 @@ class ModuleInstall:
                 mes = "(1) unable to install with pip {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-P:\n{3}".format(
                     str(self), cmd, out, err)
                 raise InstallError(mes)
-            elif "Testing of typecheck-decorator passed without failure." in out:
+            if "Testing of typecheck-decorator passed without failure." in out:
                 ret = True
             elif "Successfully installed" not in out and not uptodate:
                 if "error: Unable to find vcvarsall.bat" in out:
@@ -1096,7 +1095,7 @@ class ModuleInstall:
                 mes = "(4) unable to install with conda {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-R:\n{3}".format(
                     str(self), cmd, out, err)
                 raise InstallError(mes)
-            elif "Testing of typecheck-decorator passed without failure." in out:
+            if "Testing of typecheck-decorator passed without failure." in out:
                 ret = True
             elif "Successfully installed" not in out:
                 if "error: Unable to find vcvarsall.bat" in out:
@@ -1156,7 +1155,7 @@ class ModuleInstall:
                     mes = "(7) unable to install with wheel {0}\nCMD:\n{1}\nOUT:\n{2}\nERR-U:\n{3}".format(
                         str(self), cmd, out, err)
                     raise InstallError(mes)
-                elif "Testing of typecheck-decorator passed without failure." in out:
+                if "Testing of typecheck-decorator passed without failure." in out:
                     ret = True
                 elif "Successfully installed" not in out:
                     if "error: Unable to find vcvarsall.bat" in out:
@@ -1188,7 +1187,7 @@ class ModuleInstall:
                 raise Exception(
                     "unable to find setup.py for module " +
                     self.name)
-            elif len(setu) > 1:
+            if len(setu) > 1:
                 setu = [(len(_), _) for _ in setu]
                 setu.sort()
                 if setu[0][0] == setu[1][0]:

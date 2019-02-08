@@ -59,5 +59,4 @@ def install_mingw(dest_folder=".", fLOG=print, install=True, version=None):
 
     if install:
         raise NotImplementedError()
-    else:
-        return file
+    return file
