@@ -88,8 +88,7 @@ def find_module_install(name, must_exist=False):
         if must_exist:
             raise MissingReferenceException(
                 "Unable to find reference for module '{0}'\nCheck '{0}'".format(name))
-        else:
-            mod = ModuleInstall(name, "pip")
+        mod = ModuleInstall(name, "pip")
 
     if version is not None:
         mod.version = version

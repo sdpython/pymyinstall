@@ -55,5 +55,4 @@ def install_tdm_gcc(dest_folder=".", fLOG=print, install=False, version=None):
 
     if install:
         raise NotImplementedError()
-    else:
-        return file
+    return file

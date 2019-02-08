@@ -38,5 +38,4 @@ def install_jenkins(dest_folder=".", fLOG=print, install=True, version=None):
 
     if install:
         raise NotImplementedError("Does not install jenkins.war")
-    else:
-        return outfile
+    return outfile

@@ -220,14 +220,13 @@ def do_main(temp_folder="build/update_modules",
             from pymyinstall.installcustom import install_graphviz
         if list_module is None:
             raise ValueError("A tool must be precised, list cannot be empty.")
-        else:
-            low = [_.lower() for _ in list_module]
-            for tool in low:
-                if tool == "graphviz":
-                    install_graphviz(temp_folder, install=task ==
-                                     "tool", fLOG=print, source=source)
-                else:
-                    raise NameError("unable to install '{0}'".format(tool))
+        low = [_.lower() for _ in list_module]
+        for tool in low:
+            if tool == "graphviz":
+                install_graphviz(temp_folder, install=task ==
+                                 "tool", fLOG=print, source=source)
+            else:
+                raise NameError("unable to install '{0}'".format(tool))
     else:
         raise ValueError("unable to interpret task: " + task)
 

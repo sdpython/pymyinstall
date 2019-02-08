@@ -431,8 +431,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 raise Exception(
                     mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\nERR2-Dc\n{5}\n**CMD**\n{0}".format(
                         cmd, out, err, out_, err_, err__))
-            else:
-                out += ("\n-------------" * 5) + "\n" + out_
+            out += ("\n-------------" * 5) + "\n" + out_
             fLOG("[install_python2] end installed modules.")
         fLOG(out)
 

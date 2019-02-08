@@ -347,9 +347,8 @@ class ModuleInstall:
                                "installed\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-M:\n{3}")
                         raise InstallError(mes.format(
                             self.ImportName, cmd, out, err))
-                    else:
-                        raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-L:\n{3}".format(
-                            self.ImportName, cmd, out, err))
+                    raise InstallError("scipy.sparse is failing\n{0}\nCMD:\n{1}\nOUT:\n{2}\nERR-L:\n{3}".format(
+                        self.ImportName, cmd, out, err))
             return True
 
     _page_cache_html2 = os.path.join(
@@ -518,11 +517,10 @@ class ModuleInstall:
                     f.write(page)
             raise MissingWheelException(
                 "Unable to find a single link for " + self.name)
-        else:
-            nbnone = [l for l in links if l[2] is None]
-            if len(nbnone) * 2 > len(links):
-                raise WrongWheelException("Unable to find any version in\n{0}".format(
-                    "\n".join(str(_) for _ in links)))
+        nbnone = [l for l in links if l[2] is None]
+        if len(nbnone) * 2 > len(links):
+            raise WrongWheelException("Unable to find any version in\n{0}".format(
+                "\n".join(str(_) for _ in links)))
         links0 = links
 
         if self.name == "numpy":
@@ -639,19 +637,18 @@ class ModuleInstall:
                     cmd + "\nOUT:\n" +
                     out + "\nERR-N:\n" +
                     err)
-            else:
-                lines = out.split("\n")
-                for line in lines:
-                    if line.strip().startswith("Saved "):
-                        return line.split("Saved")[-1].strip()
-                    elif line.strip().startswith("File was already downloaded"):
-                        return line.split("File was already downloaded")[-1].strip()
-                raise FileNotFoundError(
-                    "unable to find downloaded file " +
-                    str(self) + "\nCMD:\n" +
-                    cmd + "\nOUT:\n" +
-                    out + "\nERR-O:\n" +
-                    err)
+            lines = out.split("\n")
+            for line in lines:
+                if line.strip().startswith("Saved "):
+                    return line.split("Saved")[-1].strip()
+                elif line.strip().startswith("File was already downloaded"):
+                    return line.split("File was already downloaded")[-1].strip()
+            raise FileNotFoundError(
+                "unable to find downloaded file " +
+                str(self) + "\nCMD:\n" +
+                cmd + "\nOUT:\n" +
+                out + "\nERR-O:\n" +
+                err)
 
         elif kind in ("wheel", "wheel2"):
             if source is not None:
@@ -743,27 +740,26 @@ class ModuleInstall:
             if ver[0] != "win32":
                 raise Exception(
                     "this option is not available on other systems than Windows, version={0}".format(ver))
-            else:
-                url, exe = self.get_exewheel_url_link(
-                    file_save=file_save) if kind == "exe" else self.get_exewheel_url_link2(
-                    file_save=file_save, source=source)
+            url, exe = self.get_exewheel_url_link(
+                file_save=file_save) if kind == "exe" else self.get_exewheel_url_link2(
+                file_save=file_save, source=source)
 
-                self.fLOG("[pymy] downloading", exe)
-                req = urllib_request.Request(
-                    url, headers={
-                        'User-agent': default_user_agent})
-                u = urllib_request.urlopen(req)
-                text = u.read()
-                u.close()
+            self.fLOG("[pymy] downloading", exe)
+            req = urllib_request.Request(
+                url, headers={
+                    'User-agent': default_user_agent})
+            u = urllib_request.urlopen(req)
+            text = u.read()
+            u.close()
 
-                if not os.path.exists(temp_folder):
-                    os.makedirs(temp_folder)
+            if not os.path.exists(temp_folder):
+                os.makedirs(temp_folder)
 
-                exename = os.path.join(temp_folder, exe)
-                self.fLOG("[pymy] writing", exe)
-                with open(exename, "wb") as f:
-                    f.write(text)
-                return exename
+            exename = os.path.join(temp_folder, exe)
+            self.fLOG("[pymy] writing", exe)
+            with open(exename, "wb") as f:
+                f.write(text)
+            return exename
 
         else:
             raise ImportError(
@@ -1202,10 +1198,9 @@ class ModuleInstall:
                         "\n" +
                         "\n".join(
                             str(_) for _ in setu))
-                else:
-                    self.fLOG(
-                        "[pymy] warning: more than one setup: " + str(setu))
-                    setu = [setu[0][1]]
+                self.fLOG(
+                    "[pymy] warning: more than one setup: " + str(setu))
+                setu = [setu[0][1]]
             setu = os.path.abspath(setu[0])
 
             self.fLOG("[pymy] install ", setu[0])
@@ -1259,9 +1254,8 @@ class ModuleInstall:
                         out +
                         "\nERR-X:\n" +
                         err)
-                else:
-                    self.fLOG(
-                        "warning: ``Successfully installed`` or ``install  C`` not found")
+                self.fLOG(
+                    "warning: ``Successfully installed`` or ``install  C`` not found")
                 if "Permission denied" in out:
                     raise PermissionError(" ".join(["(12) unable to install with github", str(self), "\n--CMD--:\n",
                                                     "\n".join(cmds), "\n--OUT--\n", out, "\n--ERR-Y--\n", err]))

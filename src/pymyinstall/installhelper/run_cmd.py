@@ -291,8 +291,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     if catch_exit:
                         raise RunCmdException("SystemExit raised with error code {0}\nOUT:\n{1}\nERR-0:\n{2}".format(
                             returnCode, "\n".join(out), "\n".join(err)))
-                    else:
-                        raise subprocess.CalledProcessError(returnCode, cmd)
+                    raise subprocess.CalledProcessError(returnCode, cmd)
 
                 if not skip_waiting:
                     pproc.wait()
