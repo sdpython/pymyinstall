@@ -650,7 +650,7 @@ class ModuleInstall:
                 out + "\nERR-O:\n" +
                 err)
 
-        elif kind in ("wheel", "wheel2"):
+        if kind in ("wheel", "wheel2"):
             if source is not None:
                 kind = "wheel2"
             ver = python_version()
@@ -733,7 +733,7 @@ class ModuleInstall:
             else:
                 return outfile
 
-        elif kind in ("exe", "exe2"):
+        if kind in ("exe", "exe2"):
             if source is not None:
                 kind = "exe2"
             ver = python_version()
