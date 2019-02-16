@@ -397,6 +397,8 @@ def extended_set():
         ModuleInstall(
             "gizeh", "pip", purpose="Simple Vector Graphics for Python"),
         ModuleInstall(
+            "imageio-ffmpeg", "pip", purpose="ffmpeg", usage="VIDEO"),
+        ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
             "xgboost", "wheel", purpose="Parallelized Stochastic Gradient Descent (only available on " +

@@ -46,7 +46,7 @@ pymyinstall
 ===========
 
 Installing packages on Windows is not necessarily easy when
-they contain C++ code. I usually use 
+they contain C++ code. I usually use
 `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_
 for one package but it requires some tricks to start from
 scratch and install all the needed packages.
