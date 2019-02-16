@@ -399,6 +399,8 @@ def extended_set():
         ModuleInstall("imageio-ffmpeg", "pip", mname="imageio_ffmpeg",
                       purpose="ffmpeg", usage="VIDEO"),
         ModuleInstall(
+            "proglog", "pip", purpose="Progress bar."),
+        ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
             "xgboost", "wheel", purpose="Parallelized Stochastic Gradient Descent (only available on " +
