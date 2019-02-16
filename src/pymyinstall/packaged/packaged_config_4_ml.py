@@ -641,7 +641,7 @@ def ensae_set():
         ModuleInstall("astor", "pip",
                       purpose="astor is designed to allow easy manipulation of Python source via the AST."),
         ModuleInstall("tensorboard", "pip", usage="DATA/ML",
-                      purpose="TensorBoard lets you watch Tensors Flow"),                      
+                      purpose="TensorBoard lets you watch Tensors Flow"),
         ModuleInstall("tensorflow-estimator", "pip", usage="DEEP LEARNING",
                       mname="tensorflow_estimator", purpose="Deep Learning from Google"),
         ModuleInstall("tensorflow", "wheel", usage="DEEP LEARNING",
