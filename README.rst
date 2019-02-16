@@ -1,9 +1,4 @@
 
-.. _l-README:
-
-README
-======
-
 .. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
     :target: https://travis-ci.org/sdpython/pymyinstall
     :alt: Build status
@@ -45,16 +40,18 @@ README
     :target: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
 
-**Links:**
+.. _l-README:
 
-* `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_
-* `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
-* `Blog <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/blog/main_0000.html#ap-main-0>`_
+pymyinstall
+===========
 
-Description
------------
-
-The module helps installing modules in Windows and Linux.
+Installing packages on Windows is not necessarily easy when
+they contain C++ code. I usually use 
+`Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_
+for one package but it requires some tricks to start from
+scratch and install all the needed packages.
+That's what this package is doing.
+The module helps installing modules in *Windows* and *Linux*.
 It installs two scripts. The first one installs modules:
 
     pymy_install3
@@ -73,8 +70,7 @@ To install a preconfigured set of modules::
 
 ``--help`` gives the usage.
 
-Functionalities
----------------
+It provides the following functionalities:
 
 * help installing module from GitHub, pip and setup
 * install other common tools or editors
@@ -86,3 +82,9 @@ Source of the packages:
 * `PyPI <https://pypi.python.org/pypi>`_: pure python packages
 * `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_: packages with C++
 * `xavierdupre.fr <http://www.xavierdupre.fr/>`_: custom build (xgboost, ...)
+
+**Links:**
+
+* `GitHub/pymyinstall <https://github.com/sdpython/pymyinstall>`_
+* `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_
+* `Blog <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/blog/main_0000.html#ap-main-0>`_
