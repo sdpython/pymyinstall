@@ -396,8 +396,8 @@ def extended_set():
             "cairosvg", "pip", purpose="Convert your SVG files to PDF and PNG."),
         ModuleInstall(
             "gizeh", "pip", purpose="Simple Vector Graphics for Python"),
-        ModuleInstall(
-            "imageio-ffmpeg", "pip", purpose="ffmpeg", usage="VIDEO"),
+        ModuleInstall("imageio-ffmpeg", "pip", mname="imageio_ffmpeg",
+                      purpose="ffmpeg", usage="VIDEO"),
         ModuleInstall(
             "moviepy", "pip", purpose="Video editing with Python", usage="VIDEO"),
         ModuleInstall(
