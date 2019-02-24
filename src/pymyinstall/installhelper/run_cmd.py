@@ -223,7 +223,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     "communicate should be True to send something on stdin")
             stdout, stderr = pproc.stdout, pproc.stderr
 
-            begin = time.clock()
+            begin = time.perf_counter()
             last_update = begin
             # with threads
             (stdoutReader, stdoutQueue) = _AsyncLineReader.getForFd(
@@ -240,7 +240,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     if fLOG is not None:
                         fLOG(decol.strip("\n\r"))
                     out.append(decol.strip("\n\r"))
-                    last_update = time.clock()
+                    last_update = time.perf_counter()
                     if stop_running_if is not None and stop_running_if(decol, None):
                         runloop = False
                         break
@@ -252,19 +252,19 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
                     if fLOG is not None:
                         fLOG(decol.strip("\n\r"))
                     err.append(decol.strip("\n\r"))
-                    last_update = time.clock()
+                    last_update = time.perf_counter()
                     if stop_running_if is not None and stop_running_if(None, decol):
                         runloop = False
                         break
                 time.sleep(0.05)
 
-                delta = time.clock() - last_update
+                delta = time.perf_counter() - last_update
                 if tell_if_no_output is not None and delta >= tell_if_no_output:
                     if fLOG is not None:
                         fLOG("[run_cmd] No update in {0} seconds for cmd: {1}".format(
                             "%5.1f" % (last_update - begin), cmd))
-                    last_update = time.clock()
-                full_delta = time.clock() - begin
+                    last_update = time.perf_counter()
+                full_delta = time.perf_counter() - begin
                 if timeout is not None and full_delta > timeout:
                     runloop = False
                     if fLOG is not None:

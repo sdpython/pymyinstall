@@ -78,7 +78,7 @@ def copy_icons(src, dest):
 
 
 def win_download(folder=None, module_list=None, verbose=False, fLOG=print,
-                 download_only=True, selection=None, source=None):
+                 download_only=True, selection=None, source=None, embed=True):
     """
     The function downloads everything needed to prepare a setup.
 
@@ -89,6 +89,7 @@ def win_download(folder=None, module_list=None, verbose=False, fLOG=print,
     @param      verbose         print more information
     @param      selection       selection of tools to install (dictionary { toolname: version or None})
     @param      source          source of python packages (see @see cl ModuleInstall)
+    @param      embed           use embedded version (or custom one)
     @return                     list of completed operations
 
     List of available tools:
@@ -189,7 +190,8 @@ def win_download(folder=None, module_list=None, verbose=False, fLOG=print,
         if verbose:
             fLOG("[pymy] --- download", "python")
         r = install_python(
-            temp_folder=folder, fLOG=fLOG, install=False, force_download=True, version=selection.get("python", None))
+            temp_folder=folder, fLOG=fLOG, install=False, force_download=True,
+            version=selection.get("python", None), custom=not embed)
         operations.append(("download", r))
         fLOG("[pymy] done")
 

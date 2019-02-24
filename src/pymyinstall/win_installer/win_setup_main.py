@@ -78,9 +78,10 @@ def architecture():
 def win_python_setup(folder="dist/win_python_setup_" + architecture(),
                      download_folder="build/win_python_setup_" + architecture(),
                      module_list=None, verbose=False, fLOG=print, download_only=False,
-                     no_setup=False, notebooks=None, selection={"R", "mingw", "tdm"},
+                     no_setup=False, notebooks=None, selection=None,
                      documentation=True, last_function=None, r_packages=True,
-                     julia_packages=True, tutorial=None, source=None):
+                     julia_packages=True, tutorial=None, source=None,
+                     embed=True):
     """
     Prepares a Windows distribution of Python based on InnoSetup,
     inspired from WinPython but more easier to tweak I hope.
@@ -92,7 +93,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     @param      no_setup        skip the building of the setup
     @param      verbose         print more information
     @param      notebooks       notebooks to copy to the workspace, list of ("subfolders", url)
-    @param      selection       selection of tools to install
+    @param      selection       selection of tools to install, example: ``{"R", "mingw", "tdm"}``,
+                                empty by default
     @param      last_function   function to execute just before running InnoSetup,
                                 see `win_setup_helper.py
                                 <https://github.com/sdpython/ensae_teaching_cs/blob/master/src/
@@ -104,15 +106,17 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     @param      tutorial        list of folders to copy in ``workspace/tutorial``,
                                 it can refer to internal tutorials (see folder ``win_installer/tutorial``)
     @param      source          source of python packages (see @see cl ModuleInstall)
+    @param      embed           custom *Python* or embedded distribution (False)
     @return                     list of completed operations
 
     The available tools to install must be chose among:
-        * `R <http://www.r-project.org/>`_
-        * `Julia <http://julialang.org/>`_
-        * `MinGW <http://www.mingw.org/>`_
-        * `TDM-GCC <http://tdm-gcc.tdragon.net/>`_
-        * `VS <https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx>`_
-        * `Java JDK <http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html>`_
+
+    * `R <http://www.r-project.org/>`_
+    * `Julia <http://julialang.org/>`_
+    * `MinGW <http://www.mingw.org/>`_
+    * `TDM-GCC <http://tdm-gcc.tdragon.net/>`_
+    * `VS <https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx>`_
+    * `Java JDK <http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html>`_
 
     By default, only R is included. Julia requires too much work.
     The command line does not always end. The building of the package
@@ -238,6 +242,8 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
 
     @todo Fix Julia installation.
     """
+    if selection is None:
+        selection = set()
     if notebooks is None:
         notebooks = _default_notebooks
 
@@ -328,10 +334,9 @@ def win_python_setup(folder="dist/win_python_setup_" + architecture(),
     operations.append(("download", "-"))
     op = win_download(folder=download_folder,
                       module_list=module_list,
-                      verbose=verbose,
-                      fLOG=fLOG,
-                      selection=selection,
-                      source=source)
+                      verbose=verbose, fLOG=fLOG,
+                      selection=selection, source=source,
+                      embed=embed)
     operations.extend(op)
     operations.append(("time", dtnow()))
 

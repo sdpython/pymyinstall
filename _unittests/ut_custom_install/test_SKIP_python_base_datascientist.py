@@ -46,14 +46,22 @@ class TestDownloadPythonDataScienstist(unittest.TestCase):
         vers = "%d%d" % sys.version_info[:2]
         temp = get_temp_folder(
             __file__, "temp_py%s_ds" % vers, clean=folder_older_than, persistent=True)
-        down = get_temp_folder(
-            __file__, "temp_py%s_ds_download" % vers, clean=True, persistent=True)
-        self.assertEqual(len(os.listdir(down)), 0)
 
-        clog = CustomLog(temp)
+        if __name__ == "__main__":
+            clog = fLOG
+            do_clean = False
+        else:
+            clog = CustomLog(temp)
+            do_clean = True
+
+        down = get_temp_folder(
+            __file__, "temp_py%s_ds_download" % vers, clean=do_clean, persistent=True)
+        if __name__ != "__main__":
+            self.assertEqual(len(os.listdir(down)), 0)
+
         install_python(install=True, temp_folder=temp,
                        fLOG=clog, modules="datascientistbase", custom=True, latest=True,
-                       download_folder=temp + "_download")
+                       download_folder=temp + "_download", version="3.7.0")
         if sys.platform.startswith("win"):
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")

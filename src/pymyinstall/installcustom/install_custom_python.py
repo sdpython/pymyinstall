@@ -187,20 +187,20 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                     raise ValueError(
                         "Not custom zip available for Python {0}".format(versioni))
                 url = "http://www.xavierdupre.fr/enseignement/setup/Python{0}{1}-{0}.{1}.{2}-amd64.zip".format(
-                    *sys.version_info[:3])
+                    *versioni[:3])
             else:
                 url = "https://www.python.org/ftp/python/{0}.{1}.{2}/python-{0}.{1}.{2}-embed-amd64.zip".format(
-                    *sys.version_info[:3])
+                    *versioni[:3])
         elif versioni >= (3, 6, 0):
             if custom:
                 if versioni > (3, 6, 5):
                     raise ValueError(
                         "Not custom zip available for Python {0}".format(versioni))
                 url = "http://www.xavierdupre.fr/enseignement/setup/Python{0}{1}-{0}.{1}.{2}-amd64.zip".format(
-                    *sys.version_info[:3])
+                    *versioni[:3])
             else:
                 url = "https://www.python.org/ftp/python/{0}.{1}.{2}/python-{0}.{1}.{2}-embed-amd64.zip".format(
-                    *sys.version_info[:3])
+                    *versioni[:3])
         elif versioni >= (3, 5, 0):
             if custom:
                 if versioni not in [(3, 5, 3), (3, 5, 2)]:
@@ -317,14 +317,16 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
             # following issue https://github.com/pypa/get-pip/issues/7
             if sys.platform.startswith("win"):
-                vers = "%d%d" % sys.version_info[:2]
+                vers = "%d%d" % versioni[:2]
                 if vers in ("36", "37"):
                     pth = os.path.join(temp_folder, "python%s._pth" % vers)
-                    with open(pth, "r") as f:
-                        content = f.read()
-                    content = content.replace("#import site", "import site")
-                    with open(pth, "w") as f:
-                        f.write(content)
+                    if os.path.exists(pth):
+                        with open(pth, "r") as f:
+                            content = f.read()
+                        content = content.replace(
+                            "#import site", "import site")
+                        with open(pth, "w") as f:
+                            f.write(content)
 
         # run get-pip.py
         if sys.platform.startswith("win"):

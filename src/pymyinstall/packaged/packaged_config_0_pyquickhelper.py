@@ -11,9 +11,10 @@ def pyquickhelper_set():
     list of modules needed to run unit test of module *pyquickhelper*
     """
     names = [
+        "alabaster",
         "asn1crypto",
         "astroid",
-        "alabaster",
+        "attrs",
         "autopep8",
         "babel",
         'backcall',
@@ -122,6 +123,7 @@ def pyquickhelper_set():
         "pylint",
         "pyparsing",
         'pypiserver',
+        'pyrsistent',
         "python-dateutil",
         "python-jenkins",
         "pytz",
