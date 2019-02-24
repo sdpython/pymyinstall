@@ -25,8 +25,6 @@ def extended_set():
                       purpose="Solves automatic numerical differentiation problems in one or more variables."),
         ModuleInstall("numpydoc", "pip",
                       purpose="Sphinx extension to support docstrings in Numpy format"),
-        ModuleInstall('attrs', 'pip',
-                      purpose="Attributes without boilerplate."),
         ModuleInstall("Automat", "pip", mname="automat",
                       purpose="Self-service finite-state machines for the programmer on the go."),
         ModuleInstall("guidata", "pip" if not sys.platform.startswith("win") else "wheel2",
