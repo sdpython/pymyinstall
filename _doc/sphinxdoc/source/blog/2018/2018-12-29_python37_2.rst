@@ -28,7 +28,7 @@
         apt-get install -y libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev
         apt-get install -y libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev libffi-dev
         apt-get install -y libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
-        apt-get install -y unrar
+        apt-get install -y unrar libstdc++
 
     *MKL*, see
     `MKL for .deb-based systems: An easy recipe <https://github.com/eddelbuettel/mkl4deb>`_.
