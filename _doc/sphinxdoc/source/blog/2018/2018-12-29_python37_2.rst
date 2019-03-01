@@ -80,7 +80,7 @@
         wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
         tar xzf Python-3.7.2.tgz
         cd Python-3.7.2
-        ./configure --enable-optimizations --with-ensurepip=install
+        ./configure --enable-shared --enable-optimizations --with-ensurepip=install
         make
         make altinstall
         chmod +x python3.7
@@ -89,6 +89,9 @@
         cd ..
         cd ~
 
+    About ``--enable-shared``, see
+    `Relocation R_X86_64_32S against '_Py_NotImplementedStruct' can not be used when making a shared object; recompile with -fPIC
+    <https://stackoverflow.com/questions/42582712/relocation-r-x86-64-32s-against-py-notimplementedstruct-can-not-be-used-when>`_.
     Add python to ``PATH``:
 
     ::
