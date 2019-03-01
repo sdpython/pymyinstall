@@ -61,7 +61,7 @@ class TestDownloadPythonDataScienstist(unittest.TestCase):
 
         install_python(install=True, temp_folder=temp,
                        fLOG=clog, modules="datascientistbase", custom=True, latest=True,
-                       download_folder=temp + "_download", version="3.7.0")
+                       download_folder=temp + "_download")
         if sys.platform.startswith("win"):
             pyt = os.path.join(temp, "python.exe")
             pip = os.path.join(temp, "Scripts", "pip.exe")
