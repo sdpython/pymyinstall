@@ -80,7 +80,7 @@
         wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
         tar xzf Python-3.7.2.tgz
         cd Python-3.7.2
-        ./configure --enable-shared --enable-optimizations --with-ensurepip=install
+        ./configure --enable-optimizations --with-ensurepip=install
         make
         make altinstall
         chmod +x python3.7
@@ -89,9 +89,27 @@
         cd ..
         cd ~
 
+    Some package requires a different build because they need shared libraries:
+
+    ::
+
+        ./configure --enable-optimizations --with-ensurepip=install --enable-shared --prefix=/opt/bin
+
     About ``--enable-shared``, see
     `Relocation R_X86_64_32S against '_Py_NotImplementedStruct' can not be used when making a shared object; recompile with -fPIC
-    <https://stackoverflow.com/questions/42582712/relocation-r-x86-64-32s-against-py-notimplementedstruct-can-not-be-used-when>`_.
+    <https://stackoverflow.com/questions/42582712/relocation-r-x86-64-32s-against-py-notimplementedstruct-can-not-be-used-when>`_,
+    `How to configure python with --enable-shared on Ubuntu 18.04
+    <https://stackoverflow.com/questions/53463903/how-to-configure-python-with-enable-shared-on-ubuntu-18-04>`_.
+    Option ``--enable-shared --prefix=/opt/python`` is needed when to embed *python*
+    interpreter in a C application, see
+    `Embedding the Python interpreter
+    <https://pybind11.readthedocs.io/en/stable/compiling.html#embedding-the-python-interpreter>`_.
+    Environment variable ``LD_LIBRARY_PATH`` must be set:
+
+    ::
+
+        export LD_LIBRARY_PATH=/opt/bin
+
     Add python to ``PATH``:
 
     ::
