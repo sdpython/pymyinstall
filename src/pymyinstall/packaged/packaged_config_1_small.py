@@ -252,8 +252,6 @@ def small_set():
             "jupyterlab-launcher", "pip", mname="jupyterlab_launcher",
             purpose="Jupyter Lab Launcher", usage="JUPYTER"),
         ModuleInstall("jupyterlab-server", "pip", mname="jupyterlab_server",
-                      purpose="Jupyter Lab", usage="JUPYTER"),
-        ModuleInstall("jupyterlab-server", "pip", mname="jupyterlab_server",
                       purpose="Jupyter Lab Server", usage="JUPYTER"),
         ModuleInstall(
             "jupyterlab", "pip", purpose="Jupyter Lab", usage="JUPYTER"),
