@@ -28,6 +28,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install memory_profiler!=0.48.0"
 #  check the status of rodeo
 # - "%PYTHON%\\Scripts\\pip install rodeo"
+  - "%PYTHON%\\Scripts\\pip install git+https://github.com/sdpython/nbconvert.git@fixes"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"
 
 build: off
