@@ -6,16 +6,6 @@
 """
 import os
 
-try:
-    # pip >= 10.0
-    from pip._internal.utils.misc import get_installed_distributions
-except ImportError:
-    # pip < 10.0
-    from pip import get_installed_distributions
-except KeyError:
-    from pyquickhelper.pycode.pip_helper import fix_pip_902
-    fix_pip_902()
-    from pip import get_installed_distributions
 import time
 from .module_install_version import get_pypi_version
 from ..packaged import all_set
@@ -41,6 +31,17 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
         row["classifier"] = classifiers2string(row["classifier"])
     keys = {mod["name"].lower(): mod for mod in rows}
     keys.update({mod["mname"].lower(): mod for mod in rows if mod["mname"]})
+
+    try:
+        # pip >= 10.0
+        from pip._internal.utils.misc import get_installed_distributions
+    except (ImportError, ModuleNotFoundError):
+        # pip < 10.0
+        from pip import get_installed_distributions
+    except KeyError:
+        from pyquickhelper.pycode.pip_helper import fix_pip_902
+        fix_pip_902()
+        from pip import get_installed_distributions
 
     all_installed = []
     dists = get_installed_distributions()
