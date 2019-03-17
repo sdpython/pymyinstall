@@ -28,10 +28,6 @@
     :alt: GitHub Issues
     :target: https://github.com/sdpython/pymyinstall/issues
 
-.. image:: https://badge.waffle.io/sdpython/pymyinstall.png?label=ready&title=Ready
-    :alt: Waffle
-    :target: https://waffle.io/sdpython/pymyinstall
-
 .. image:: https://www.codacy.com/app/sdpython/pymyinstall?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sdpython/pymyinstall&amp;utm_campaign=Badge_Grade
     :alt: Codacy Badge
     :target: https://www.codacy.com/app/sdpython/pymyinstall?

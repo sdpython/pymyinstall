@@ -54,13 +54,7 @@ def _main_pipdeptree(local_only=False):
     The function relies on module
     `pipdeptree.main <https://pypi.python.org/pypi/pipdeptree>`_.
     """
-    try:
-        # pip >= 10.0
-        from pip._internal.utils.misc import get_installed_distributions
-    except ImportError:
-        # pip < 10.0
-        from pip import get_installed_distributions
-
+    from pip._internal.utils.misc import get_installed_distributions
     default_skip = ['setuptools', 'pip', 'python', 'distribute', 'hypertemp']
     skip = default_skip + ['pipdeptree']
     pkgs = get_installed_distributions(local_only=local_only, skip=skip)

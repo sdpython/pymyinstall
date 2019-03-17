@@ -32,17 +32,7 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
     keys = {mod["name"].lower(): mod for mod in rows}
     keys.update({mod["mname"].lower(): mod for mod in rows if mod["mname"]})
 
-    try:
-        # pip >= 10.0
-        from pip._internal.utils.misc import get_installed_distributions
-    except (ImportError, ModuleNotFoundError):
-        # pip < 10.0
-        from pip import get_installed_distributions
-    except KeyError:
-        from pyquickhelper.pycode.pip_helper import fix_pip_902
-        fix_pip_902()
-        from pip import get_installed_distributions
-
+    from pip._internal.utils.misc import get_installed_distributions
     all_installed = []
     dists = get_installed_distributions()
     if short_list:
