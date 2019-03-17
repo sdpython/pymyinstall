@@ -196,6 +196,6 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
-        install_requires=["setuptools", "pip>=10"],
+        install_requires=["setuptools", "pip>=10.0"],
         entry_points=entry_points,
     )
