@@ -47,12 +47,7 @@ def call_get_installed_distributions(local_only=True, skip=None, include_editabl
         raise NotImplementedError("use_cmd should be False")
     # we disable this line, it fails on travis
     # reload(pip._vendor.pkg_resources)
-    try:
-        # for pip>=10.0
-        from pip._internal.utils.misc import get_installed_distributions
-    except ImportError:
-        # for pip<10.0
-        from pip.utils import get_installed_distributions
+    from pip._internal.utils.misc import get_installed_distributions
     if skip is None:
         try:
             # for pip >= 0.18.1
