@@ -1,12 +1,17 @@
 
+
 .. _l-HISTORY:
 
 =======
 History
 =======
 
-current - 2019-01-11 - 0.00Mb
+current - 2019-03-23 - 0.00Mb
 =============================
+
+* `65`: upgrade dependencies to pip >=10 (2019-03-17)
+* `63`: add ONNX modules (2019-02-02)
+* `60`: standalone installation on linux (2019-02-02)
 
 1.2.1676 - 2018-11-10 - 1.98Mb
 ==============================
