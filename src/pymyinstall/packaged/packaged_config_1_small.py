@@ -146,8 +146,6 @@ def small_set():
                       purpose="interpret RST format", usage="SPHINX"),
         ModuleInstall("packaging", "pip",
                       purpose="Core utilities for Python packages"),
-        ModuleInstall("sphinxcontrib-websupport", "pip", mname="sphinxcontrib.websupport",
-                      purpose="wepsupport for Sphinx", usage="SPHINX"),
         ModuleInstall("sphinxcontrib-applehelp", "pip", mname="sphinxcontrib.applehelp",
                       purpose="extension for Sphinx", usage="SPHINX"),
         ModuleInstall("sphinxcontrib-devhelp", "pip", mname="sphinxcontrib.devhelp",

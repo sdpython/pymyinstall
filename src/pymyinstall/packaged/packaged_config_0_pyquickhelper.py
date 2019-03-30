@@ -138,7 +138,6 @@ def pyquickhelper_set():
         "smmap2",
         'snowballstemmer',
         "sphinx",
-        "sphinxcontrib-websupport",
         "sphinx_gallery",
         'sphinxcontrib-applehelp',
         'sphinxcontrib-devhelp',
