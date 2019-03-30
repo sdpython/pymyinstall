@@ -1,29 +1,11 @@
 """
 @brief      test log(time=1s)
 """
-
-import sys
-import os
 import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall.installhelper.module_install import ModuleInstall
-from src.pymyinstall.installhelper.module_install_exceptions import MissingVersionOnPyPiException
+from pymyinstall.installhelper.module_install import ModuleInstall
+from pymyinstall.installhelper.module_install_exceptions import MissingVersionOnPyPiException
 
 
 class TestPyPiModule (unittest.TestCase):

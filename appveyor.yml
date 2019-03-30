@@ -30,6 +30,7 @@ install:
 # - "%PYTHON%\\Scripts\\pip install rodeo"
   - "%PYTHON%\\Scripts\\pip install git+https://github.com/sdpython/nbconvert.git@fixes"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"
+  - set PYTHONPATH=src
 
 build: off
 

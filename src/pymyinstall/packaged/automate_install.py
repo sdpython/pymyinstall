@@ -174,7 +174,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         os.makedirs(temp_folder)
     if not has_pip():
         fLOG("install pip")
-        from .get_pip import main
+        from .get_pip import main  # pylint: disable=E0401
         main()
 
     if skip_module is None:

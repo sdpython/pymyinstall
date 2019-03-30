@@ -12,7 +12,6 @@ from setuptools import find_packages
 
 project_var_name = "pymyinstall"
 project_owner = 'sdpython'
-sversion = "1.2"
 versionPython = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path = "Lib/site-packages/" + project_var_name
 readme = 'README.rst'
@@ -165,6 +164,7 @@ if not r:
     if len(sys.argv) in (1, 2) and sys.argv[-1] in ("--help-commands",):
         from pyquickhelper.pycode import process_standard_options_for_setup_help
         process_standard_options_for_setup_help(sys.argv)
+    from pymyinstall import __version__ as sversion
 
     entry_points = {
         'console_scripts': [

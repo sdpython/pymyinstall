@@ -1,27 +1,9 @@
 """
 @brief      test log(time=1s)
 """
-
-import sys
-import os
 import unittest
 from pyquickhelper.loghelper import fLOG
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pymyinstall.installhelper.module_install_version import choose_most_recent
+from pymyinstall.installhelper.module_install_version import choose_most_recent
 
 
 class TestInstallModuleVersionFast(unittest.TestCase):

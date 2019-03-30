@@ -10,26 +10,7 @@ import warnings
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyquickhelper.filehelper import synchronize_folder
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall.win_installer.win_patch import win_patch_paths
-
-
-if sys.version_info[0] == 2:
-    FileNotFoundError = Exception
+from pymyinstall.win_installer.win_patch import win_patch_paths
 
 
 class TestPatch(unittest.TestCase):

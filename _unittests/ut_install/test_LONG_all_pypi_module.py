@@ -1,41 +1,21 @@
 """
 @brief      test log(time=80s)
 """
-
-import sys
-import os
 import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pymyinstall.installhelper.module_install_exceptions import MissingPackageOnPyPiException
-from src.pymyinstall.installhelper.module_install_exceptions import MissingVersionOnPyPiException, AnnoyingPackageException
-from src.pymyinstall.packaged import ensae_fullset
+from pymyinstall.installhelper.module_install_exceptions import MissingPackageOnPyPiException
+from pymyinstall.installhelper.module_install_exceptions import MissingVersionOnPyPiException, AnnoyingPackageException
+from pymyinstall.packaged import ensae_fullset
 
 
-class TestAllPyPiModule (unittest.TestCase):
+class TestAllPyPiModule(unittest.TestCase):
 
     def test_pipy_version(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-
-        if sys.version_info[0] == 2:
-            return
 
         subset = {"cubehelix", "dataspyre", "ete3", "heapdict", "libpython", "natgrid", "onedrive-sdk-python",
                   "orange3", "orange3-associate", "orange3-network", "orange3-text",
@@ -50,9 +30,6 @@ class TestAllPyPiModule (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-
-        if sys.version_info[0] == 2:
-            return
 
         mods = ensae_fullset()
         self._pipy_version(mods)

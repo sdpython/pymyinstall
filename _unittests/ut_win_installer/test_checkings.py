@@ -1,28 +1,11 @@
 """
 @brief      test log(time=3s)
 """
-
 import sys
-import os
 import unittest
 from pyquickhelper.loghelper import fLOG
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall import is_travis_or_appveyor
-from src.pymyinstall.win_installer.win_setup_main_checkings import distribution_checkings
+from pymyinstall import is_travis_or_appveyor
+from pymyinstall.win_installer.win_setup_main_checkings import distribution_checkings
 
 
 class TestCheckings(unittest.TestCase):
@@ -33,9 +16,6 @@ class TestCheckings(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if sys.version_info[0] == 2:
-            # not maintained in Python 2.7
-            return
         if "Anaconda custom" in sys.version:
             try:
                 distribution_checkings(None, None, fLOG=fLOG, skip_import=True)

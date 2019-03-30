@@ -1,29 +1,11 @@
 """
 @brief      test log(time=2s)
 """
-
-import sys
-import os
 import unittest
 import pandas
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pandashelper import df2rst
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall.packaged import get_package_set, name_sets_dataframe
+from pymyinstall.packaged import get_package_set, name_sets_dataframe
 
 
 class TestNameSet(unittest.TestCase):
@@ -43,10 +25,6 @@ class TestNameSet(unittest.TestCase):
         rst = df2rst(df)
         fLOG(rst)
         assert len(rst) > 0
-
-        if sys.version_info[0] == 2:
-            # less tests on Python 2.7
-            return
 
         nb = 0
         for mod in r:

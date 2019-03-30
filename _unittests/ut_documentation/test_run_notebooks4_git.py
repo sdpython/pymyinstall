@@ -2,30 +2,13 @@
 """
 @brief      test log(time=10s)
 """
-
-import sys
 import os
 import unittest
 import pyquickhelper
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-import src.pymyinstall
+import pymyinstall
 
 
 class TestRunNotebooks4(unittest.TestCase):
@@ -67,7 +50,7 @@ class TestRunNotebooks4(unittest.TestCase):
         res = execute_notebook_list(
             temp, keepnote, fLOG=fLOG, valid=valid, additional_path=addpaths)
         execute_notebook_list_finalize_ut(
-            res, fLOG=fLOG, dump=src.pymyinstall)
+            res, fLOG=fLOG, dump=pymyinstall)
 
     def test_notebook_example_xgboost(self):
         fLOG(

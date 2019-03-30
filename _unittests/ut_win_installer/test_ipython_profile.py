@@ -8,27 +8,8 @@ import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall.win_installer.win_ipython_helper import ipython_create_profile, ipython_update_profile
-from src.pymyinstall.installhelper.run_cmd import RunCmdException
-
-if sys.version_info[0] < 3:
-    from codecs import open
-    FileNotFoundError = Exception
+from pymyinstall.win_installer.win_ipython_helper import ipython_create_profile, ipython_update_profile
+from pymyinstall.installhelper.run_cmd import RunCmdException
 
 
 class TestIPythonProfile(unittest.TestCase):

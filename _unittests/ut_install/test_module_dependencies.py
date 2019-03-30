@@ -1,30 +1,11 @@
 """
 @brief      test log(time=1s)
 """
-
-import sys
-import os
 import unittest
-import warnings
 from pyquickhelper.loghelper import fLOG
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall.installhelper import get_module_dependencies, get_module_metadata, version_consensus
-from src.pymyinstall.installhelper.module_install_exceptions import WrongVersionError
-from src.pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
+from pymyinstall.installhelper import get_module_dependencies, get_module_metadata, version_consensus
+from pymyinstall.installhelper.module_install_exceptions import WrongVersionError
+from pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
 
 
 class TestModuleDependencies (unittest.TestCase):
@@ -48,10 +29,6 @@ class TestModuleDependencies (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        if sys.version_info[0] == 2:
-            warnings.warn(
-                "test_dependencies_matplotlib: disable on Python 2.7")
-            return
         if not is_conda_distribution():
             self.common_function("matplotlib")
         else:

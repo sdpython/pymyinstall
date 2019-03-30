@@ -3,29 +3,12 @@
 
 skip this test for regular run
 """
-
 import sys
-import os
 import unittest
 import re
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall.packaged import all_set
+from pymyinstall.packaged import all_set
 
 
 class TestDownloadAll (unittest.TestCase):
@@ -49,10 +32,6 @@ class TestDownloadAll (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         assert len(pack) > 0
-
-        if sys.version_info[0] == 2:
-            # we skip that test on python 2
-            return
 
         for m in pack:
             if m.kind != "pip":

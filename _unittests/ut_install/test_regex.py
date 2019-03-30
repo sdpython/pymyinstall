@@ -8,24 +8,10 @@ import os
 import unittest
 import re
 from pyquickhelper.loghelper import fLOG
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pymyinstall.installhelper.module_install_page_wheel import extract_all_links, enumerate_links_module
-from src.pymyinstall.installhelper.install_cmd_helper import python_version
-from src.pymyinstall.installhelper.install_cmd_regex import regex_wheel_versions
-from src.pymyinstall.installhelper import get_wheel_version
+from pymyinstall.installhelper.module_install_page_wheel import extract_all_links, enumerate_links_module
+from pymyinstall.installhelper.install_cmd_helper import python_version
+from pymyinstall.installhelper.install_cmd_regex import regex_wheel_versions
+from pymyinstall.installhelper import get_wheel_version
 
 
 if sys.version_info[0] == 2:

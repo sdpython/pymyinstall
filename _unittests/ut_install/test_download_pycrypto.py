@@ -8,23 +8,8 @@ import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pymyinstall.packaged import find_module_install
-from src.pymyinstall.installhelper.module_install_exceptions import MissingWheelException
+from pymyinstall.packaged import find_module_install
+from pymyinstall.installhelper.module_install_exceptions import MissingWheelException
 
 
 class TestDownloadPyCrypto (unittest.TestCase):
