@@ -57,16 +57,9 @@ class TestCodeStyle(ExtTestCase):
                    pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
                                   'C0111', 'W0703', 'W0622', 'W0621', 'C0412', 'C0411',
                                   'R0915', 'W0107', 'W503'),
-                   skip=["src' imported but unused",
-                         "skip_' imported but unused",
-                         "skip__' imported but unused",
-                         "skip___' imported but unused",
-                         "Unused variable 'skip_'",
-                         "imported as skip_",
-                         "test_is_installed.py:41: E1101",
+                   skip=["test_is_installed.py:41: E1101",
                          "Unable to import 'selenium.webdriver'",
                          "Unable to import 'Queue'",
-                         "Unused import src",
                          ])
 
 
