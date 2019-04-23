@@ -9,22 +9,7 @@ import warnings
 import subprocess
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import is_travis_or_appveyor
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pymyinstall.installhelper.install_cmd_helper import run_cmd
+from pymyinstall.installhelper.install_cmd_helper import run_cmd
 
 
 class TestPyMyDepsCli(unittest.TestCase):
