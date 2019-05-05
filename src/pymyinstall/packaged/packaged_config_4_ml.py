@@ -153,8 +153,6 @@ def ensae_set():
             "pylzma", "wheel2", purpose="Python bindings for the LZMA library by Igor Pavlov."),
         ModuleInstall("nibabel", "pip",
                       purpose="Access a multitude of neuroimaging data formats."),
-        ModuleInstall("pymvpa2", "wheel", mname="mvpa2",
-                      purpose="PyMVPA is a Python module intended to ease pattern classification analyses of large datasets."),
         ModuleInstall(
             "pyodbc", "wheel", purpose="access to protocal ODBC (SQL databases)", usage="SQL"),
         ModuleInstall(

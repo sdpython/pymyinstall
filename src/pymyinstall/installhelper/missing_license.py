@@ -368,7 +368,6 @@ missing_module_licenses = {
     "pygal_sphinx_directives": "GNU LGPL v3+",
     "pyinstrument": "BSD",
     "pymatgen": "MIT",
-    "pymvpa2": "MIT",
     "pyopencl": "MIT",
     "PyOpenGL": "BSD",
     "pyPdf": "BSD",
