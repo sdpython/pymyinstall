@@ -144,8 +144,6 @@ def extended_set():
             'thriftpy', 'pip', purpose="pure python implemention of Apache Thrift."),
         # ModuleInstall('airflow', 'pip'),  # does not work on Python 3
         ModuleInstall(
-            'smopy', 'pip', purpose="OpenStreetMap image tiles in Python", usage="VIZ"),
-        ModuleInstall(
             'branca', 'pip', purpose="", usage="VIZ"),
         ModuleInstall('folium', 'pip', usage="VIZ",
                       purpose="This library is a spinoff from folium, that would host the " +
