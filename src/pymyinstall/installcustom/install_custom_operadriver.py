@@ -27,12 +27,12 @@ def install_operadriver(dest_folder=".", fLOG=print, install=True, version=None)
         content = download_page(
             "https://github.com/operasoftware/operachromiumdriver/releases")
         reg = re.compile(
-            "/tag/v([.][0-9]+[.][0-9]+)")
+            "/tag/v([.][0-9]+[.][0-9]+([.][0-9]+)?([.][0-9]+)?)")
         f = reg.findall(content)
         if not f:
             raise Exception(
                 "unable to get the last version number for OperaDriver")
-        version = f[0]
+        version = f[0][0]
     if sys.platform.startswith("win"):
         url = "https://github.com/operasoftware/operachromiumdriver/releases/download/v{0}/operadriver_win64.zip".format(
             version)
