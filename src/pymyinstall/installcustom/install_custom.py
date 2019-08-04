@@ -82,9 +82,11 @@ def download_file(url, outfile, fLOG=None):
         text = u.read()
         u.close()
     except urllib_error.HTTPError as e:
-        raise DownloadException("Unable to get archive from '{}'.".format(url)) from e
+        raise DownloadException(
+            "Unable to get archive from '{}'.".format(url)) from e
     except urllib_error.URLError as e:
-        raise DownloadException("Unable to get archive from '{}'.".format(url)) from e
+        raise DownloadException(
+            "Unable to get archive from '{}'.".format(url)) from e
     except http_client.IncompleteRead as ee:
         raise DownloadException(
             "unable to complete reading from: " + url) from ee
