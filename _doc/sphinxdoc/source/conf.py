@@ -34,6 +34,7 @@ epkg_dictionary.update({
     'ML.net': 'https://www.microsoft.com/net/learn/apps/machine-learning-and-ai/ml-dotnet',
     'mono': 'https://www.mono-project.com/',
     'nodejs': 'https://nodejs.org/en/',
+    'onnx': 'https://onnx.ai/',
     'pip': 'https://pip.pypa.io/en/stable/',
     'protobuf': 'https://github.com/protocolbuffers/protobuf',
     'pyaudio': 'https://people.csail.mit.edu/hubert/pyaudio/docs/',

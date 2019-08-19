@@ -290,7 +290,7 @@
 
     You might need to run ``chmod 777 -R /tmp/NuGetScratch;chmod 777 -R /tmp/NuGet``.
     I got the following issue
-    `Restore task fails in an multi user scenario <https://github.com/NuGet/Home/issues/3897>_`.
+    `Restore task fails in an multi user scenario <https://github.com/NuGet/Home/issues/3897>`_.
 
     For :epkg:`onnx`:
 
