@@ -1,4 +1,12 @@
 
+.. image:: https://github.com/sdpython/pymyinstall/blob/master/_doc/sphinxdoc/source/phdoc_static/project_ico.png?raw=true
+    :target: https://github.com/sdpython/pymyinstall/
+
+.. _l-README:
+
+pymyinstall
+===========
+
 .. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
     :target: https://travis-ci.org/sdpython/pymyinstall
     :alt: Build status
@@ -35,11 +43,6 @@
 .. image:: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/_images/nbcov.png
     :target: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
-
-.. _l-README:
-
-pymyinstall
-===========
 
 Installing packages on Windows is not necessarily easy when
 they contain C++ code. I usually use
