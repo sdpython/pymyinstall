@@ -4,8 +4,8 @@
 
 .. _l-README:
 
-pymyinstall
-===========
+pymyinstall: easier installation of packages
+============================================
 
 .. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
     :target: https://travis-ci.org/sdpython/pymyinstall
