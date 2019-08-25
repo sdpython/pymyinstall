@@ -1,0 +1,9 @@
+
+.. blogpost::
+    :title: Installation of pyproj on debian
+    :keywords: debian, FTP
+    :date: 2019-08-25
+    :categories: installation
+
+    Everything is here:
+    `config.yml <https://github.com/sdpython/ensae_teaching_cs/blob/master/.circleci/config.yml#L60>`_.
