@@ -44,6 +44,18 @@ pymyinstall: easier installation of packages
     :target: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
 
+.. image:: https://pepy.tech/badge/pymyinstall/month
+    :target: https://pepy.tech/project/pymyinstall/month
+    :alt: Downloads
+
+.. image:: https://img.shields.io/github/forks/sdpython/pymyinstall.svg
+    :target: https://github.com/sdpython/pymyinstall/
+    :alt: Forks
+
+.. image:: https://img.shields.io/github/stars/sdpython/pymyinstall.svg
+    :target: https://github.com/sdpython/pymyinstall/
+    :alt: Stars
+
 Installing packages on Windows is not necessarily easy when
 they contain C++ code. I usually use
 `Unofficial Windows Binaries for Python Extension Packages <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_
