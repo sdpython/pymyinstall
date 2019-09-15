@@ -27,13 +27,14 @@ def install_chromedriver(dest_folder=".", fLOG=print, install=True, version=None
         url = "https://sites.google.com/a/chromium.org/chromedriver/"
         content = download_page(url)
         reg = re.compile(
-            "Latest stable release: (</span>)?<a href=\\\"https://chromedriver."
+            "(<a href=\\\"https://chromedriver."
             "storage.googleapis.com/"
-            "index.html[?]path=([0-9]+([.][0-9]+){1,3})/")
+            "index.html[?]path=([0-9]+([.][0-9]+){1,3})/)")
         f = reg.findall(content)
         if not f:
             raise Exception(
-                "unable to get the last version number for ChromeDriver, url='{}'".format(url))
+                "Unable to get the last version number for ChromeDriver, "
+                "url='{}'".format(url))
         version = f[0][1]
     if sys.platform.startswith("win"):
         url = "http://chromedriver.storage.googleapis.com/{0}/chromedriver_win32.zip".format(
