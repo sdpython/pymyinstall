@@ -1,0 +1,61 @@
+
+.. blogpost::
+    :title: lighttpd - serve static content
+    :keywords: debian, FTP
+    :date: 2019-09-19
+    :categories: installation
+
+    On debian:
+
+    ::
+
+        apt-get install lighttpd
+
+    The configuration is located here:
+    ``/etc/lighttpd/lighttpd.conf``.
+    We let the firewall open port 80:
+    ``sudo ufw allow 80``. Let's add a user
+    for the server:
+
+    ::
+
+        useradd -m httpuser
+        passwd httpuser
+        chmod +r -R /home/ftpuser/ftp/web
+
+    ::
+
+        server.modules = (
+                "mod_access",
+                "mod_alias",
+                "mod_compress",
+                "mod_redirect",
+                "mod_accesslog",
+        )
+
+        server.document-root        = "/home/ftpuser/ftp/web"
+        server.upload-dirs          = ( "/var/cache/lighttpd/uploads" )
+        server.errorlog             = "/var/log/lighttpd/error.log"
+        server.pid-file             = "/var/run/lighttpd.pid"
+        server.username             = "www-data"
+        server.groupname            = "www-data"
+        server.port                 = 80
+        accesslog.filename          = "/var/log/lighttpd/access.log"
+
+        index-file.names            = ( "index.php", "index.html", "index.lighttpd.html" )
+        url.access-deny             = ( "~", ".inc" )
+        static-file.exclude-extensions = ( ".php", ".pl", ".fcgi" )
+
+        compress.cache-dir          = "/var/cache/lighttpd/compress/"
+        compress.filetype           = ( "application/javascript", "text/css", "text/html", "text/plain" )
+
+        # default listening port for IPv6 falls back to the IPv4 port
+        include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port
+        include_shell "/usr/share/lighttpd/create-mime.assign.pl"
+        include_shell "/usr/share/lighttpd/include-conf-enabled.pl"
+
+    Let's activate the service:
+
+    ::
+
+        systemctl start lighttpd.service
