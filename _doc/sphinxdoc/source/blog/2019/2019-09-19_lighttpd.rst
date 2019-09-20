@@ -1,11 +1,17 @@
 
 .. blogpost::
-    :title: lighttpd - serve static content
+    :title: lighttpd - serve static content - setup
     :keywords: debian, FTP
     :date: 2019-09-19
     :categories: installation
 
-    On debian:
+    I had to stop relying on friend to hold the
+    content of my website. I wrote earlier a blog on how to
+    setup a SFTP server. Let's now see how to set up
+    a http server with `lighttpd <https://www.lighttpd.net/>`_.
+    I usually avoid using *python* for this even though it is
+    sometimes more simple because it is easier to detect
+    python processes hanging on. On debian:
 
     ::
 
@@ -59,3 +65,38 @@
     ::
 
         systemctl start lighttpd.service
+
+    Last step, enable rotating logs. The file
+    ``/etc/logrotate.d/lighttpd`` should look like
+    this:
+
+    ::
+
+        {
+                daily
+                missingok
+                copytruncate
+                rotate 365000
+                compress
+            delaycompress
+                dateformat -%Y-%m-%d
+                dateext
+                notifempty
+                sharedscripts
+                postrotate
+                     if [ -x /usr/sbin/invoke-rc.d ]; then \
+                        invoke-rc.d lighttpd reopen-logs > /dev/null 2>&1; \
+                     else \
+                        /etc/init.d/lighttpd reopen-logs > /dev/null 2>&1; \
+                     fi; \
+                endscript
+        }
+
+    And restart the service.
+
+    ::
+
+        systemctl restart lighttpd.service
+
+    The folder ``ls /var/log/lighttpd/``
+    should contain the logs.
