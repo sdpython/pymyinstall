@@ -25,6 +25,7 @@ def datascientistbase_set():
         "dask",
         "gensim",
         "idna",
+        "joblib",
         "jmespath",
         "pythonnet",
         "pywin32" if sys.platform.startswith("win") else None,

@@ -10,9 +10,11 @@ Pillow
 pip>=10.0
 pivottablejs
 pyquickhelper>=1.9
+requests
 scikit-learn
 sphinx_readable_theme
 tornado<6.0
+urllib3
 version_information
 wheel
 xgboost

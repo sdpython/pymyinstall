@@ -214,6 +214,8 @@ def small_set():
         ModuleInstall(
             "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
         ModuleInstall(
+            "joblib", "pip", purpose="distribute jobs, parallelization"),
+        ModuleInstall(
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),
         # ipython
         ModuleInstall("pandocfilters", "pip",

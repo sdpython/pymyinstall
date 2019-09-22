@@ -167,9 +167,6 @@ def ensae_set():
         ModuleInstall(
             "zs", "wheel", purpose="S is a compressed, read-only file format for efficiently distributing, "
             + "querying, and archiving arbitrarily large record-oriented datasets."),
-        # machine learning
-        ModuleInstall(
-            "joblib", "pip", purpose="distribute jobs, parallelization"),
         #
         # teachings
         #
