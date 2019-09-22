@@ -428,7 +428,7 @@ class ModuleInstall:
 
         # Last filter. Removes modules with a longer name.
         pref1 = self.name.lower() + "-"
-        pref2 = self.name.lower().replace("-", "_") + "-"
+        pref2 = self.name.lower().replace("-", "_") + "_"
         pref3 = self.name.lower().replace("_", "-") + "-"
 
         def filter_cond(name):
