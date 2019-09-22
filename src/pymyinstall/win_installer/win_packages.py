@@ -100,8 +100,6 @@ def win_install_package_other_python(python_path, package, verbose=False, deps=T
     name = os.path.split(package)[-1]
     if (deps is not None and not deps) or name.startswith("zipline"):
         cmd += " --no-deps"
-    if sys.platform.startswith("win"):
-        cmd += " --no-warn-script-location"
     out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
 
     if cur != python_path:

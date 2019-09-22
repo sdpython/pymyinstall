@@ -628,8 +628,6 @@ class ModuleInstall:
                 diff = [_ for _ in self.pip_options if _ not in disable_options]
                 cmd += " " + " ".join(diff)
 
-            if sys.platform.startswith("win"):
-                cmd += " --no-warn-script-location"
             out, err = run_cmd(
                 cmd, wait=True, fLOG=self.fLOG)
             if "Successfully downloaded" not in out:
@@ -1039,8 +1037,6 @@ class ModuleInstall:
             if self.name == "kivy-garden":
                 memo = sys.argv
                 sys.argv = []
-            if sys.platform.startswith("win"):
-                cmd += " --no-warn-script-location"
             out, err = run_cmd(
                 cmd, wait=True, fLOG=self.fLOG)
             if out_streams is not None:
@@ -1090,8 +1086,6 @@ class ModuleInstall:
             if not deps:
                 cmd += ' --no-deps'
 
-            if sys.platform.startswith("win"):
-                cmd += " --no-warn-script-location"
             out, err = run_cmd(
                 cmd, wait=True, fLOG=self.fLOG)
             if out_streams is not None:
@@ -1153,8 +1147,6 @@ class ModuleInstall:
                 if not deps:
                     cmd += ' --no-deps'
 
-                if sys.platform.startswith("win"):
-                    cmd += " --no-warn-script-location"
                 out, err = run_cmd(
                     cmd, wait=True, fLOG=self.fLOG)
                 if out_streams is not None:
@@ -1224,7 +1216,7 @@ class ModuleInstall:
 
             def enumerate_filtered_option(options):
                 for o in options:
-                    if o not in ('--no-deps', '--upgrade', '--no-warn-script-location'):
+                    if o not in ('--no-deps', '--upgrade'):
                         yield o
 
             filter_options = list(enumerate_filtered_option(options))
@@ -1451,9 +1443,9 @@ class ModuleInstall:
         self.fLOG("[pymy] update of ", self)
 
         options = [] if options is None else list(options)
-        for opt in ["--upgrade", "--no-deps", "--no-warn-script-location"]:
+        for opt in ["--upgrade", "--no-deps"]:
             if opt not in options:
-                if not deps or (opt == "--no-deps" and opt == "--no-warn-script-location"):
+                if not deps or opt == "--no-deps":
                     options.append(opt)
 
         res = self.install(force_kind=force_kind, force=True,
