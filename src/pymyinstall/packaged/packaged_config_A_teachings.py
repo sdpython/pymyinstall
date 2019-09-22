@@ -51,8 +51,6 @@ def teachings_set():
                       "API and implements other functionalities for machine learning.", usage="TEACH"),
         ModuleInstall("manydataapi", "pip",
                       purpose="Helpers to access APIs", usage="TEACH"),
-        ModuleInstall("csharpy", "pip",
-                      purpose="Helpers for C# and Python", usage="TEACH"),
         ModuleInstall("cpyquickhelper", "wheel",
                       purpose="Experiments with C++ and Python", usage="TEACH"),
         ModuleInstall("mlinsights", "wheel",
@@ -62,7 +60,7 @@ def teachings_set():
         ModuleInstall("wrapclib", "wheel",
                       purpose="Wraps existing C libraries.", usage="TEACH"),
         ModuleInstall("csharpy", "wheel",
-                      purpose="Python + C#", usage="TEACH"),
+                      purpose="Python + C# + C", usage="TEACH"),
     ]
     #
     return [_ for _ in mod if _ is not None]
