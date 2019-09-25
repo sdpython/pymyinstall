@@ -31,8 +31,7 @@ class TestRunNotebooks(unittest.TestCase):
             if os.path.splitext(f)[-1] == ".ipynb":
                 if "install_module" in f:
                     continue
-                else:
-                    keepnote.append((os.path.join(fnb, f), code_init))
+                keepnote.append((os.path.join(fnb, f), code_init))
         self.assertTrue(len(keepnote) > 0)
 
         def valid(cell):

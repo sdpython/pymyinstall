@@ -1141,7 +1141,7 @@ class ModuleInstall:
                 if self.version is not None:
                     cmd += "=={0}".format(self.version)
                 if len(options) > 0:
-                    opts = [_ for _ in options]
+                    opts = list(options)
                     if len(opts):
                         cmd += " " + " ".join(opts)
                 if not deps:
@@ -1380,7 +1380,7 @@ class ModuleInstall:
             if k == "cmd_python":
                 # processed just above
                 continue
-            elif k == "pre_cmd":
+            if k == "pre_cmd":
                 if v == "module_install_preprocess":
                     self.fLOG("[pymy] _ module_install_preprocess [begin]")
                     self.module_install_preprocess(post)

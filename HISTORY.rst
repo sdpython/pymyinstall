@@ -5,9 +5,13 @@
 History
 =======
 
-current - 2019-03-23 - 0.00Mb
+current - 2019-09-25 - 0.00Mb
 =============================
 
+1.3.1776 - 2019-09-22 - 1.98Mb
+==============================
+
+* `66`: remove smopy, not maintained anymore (2019-06-05)
 * `65`: upgrade dependencies to pip >=10 (2019-03-17)
 * `63`: add ONNX modules (2019-02-02)
 * `60`: standalone installation on linux (2019-02-02)

@@ -1,0 +1,16 @@
+
+.. blogpost::
+    :title: Installation of proj
+    :keywords: cartopy, proj
+    :date: 2019-09-21
+    :categories: installation
+
+    This is required for :epkg:`cartopy`,
+    `PROJ <https://proj.org/install.html>`_ needs to
+    be installed otherwise the following error appears:
+
+    ::
+
+        setup.py:171: UserWarning: Unable to determine GEOS version. Ensure you have 3.3.3 or later installed, or installation may fail.
+        '.'.join(str(v) for v in GEOS_MIN_VERSION), ))
+        Proj 4.9.0 must be installed
