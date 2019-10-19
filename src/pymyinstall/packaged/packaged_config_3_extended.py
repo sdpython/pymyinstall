@@ -796,6 +796,25 @@ def extended_set():
                       purpose='The project packages jupyter-echarts and distributes it via pypi.'),
         ModuleInstall('yahoo-historical', 'pip', mname="yahoo_historical",
                       purpose='Python module to get stock data from Yahoo! Finance'),
+        #
+        # October 2019
+        #
+        ModuleInstall('hypercorn', 'pip',
+                      purpose='Hypercorn is an ASGI web server based on the sans-io hyper, h11, '
+                              'h2, and wsproto libraries and inspired by Gunicorn.'),
+        ModuleInstall('priority', 'pip',
+                      purpose='Priority is a pure-Python implementation of the priority logic '
+                              'for HTTP/2.'),
+        ModuleInstall('starlette', 'pip',
+                      purpose='Starlette is a lightweight ASGI framework/toolkit, which is ideal '
+                              'for building high performance asyncio services.'),
+        ModuleInstall('toml', 'pip', purpose='A Python library for parsing and creating TOML.'),
+        ModuleInstall('uvicorn', 'pip',
+                      purpose='Uvicorn is a lightning-fast ASGI server implementation, '
+                              'using uvloop and httptools.'),
+        ModuleInstall('websockets', 'pip',
+                      purpose='websockets is a library for building WebSocket servers and '
+                              'clients in Python with a focus on correctness and simplicity.'),
     ]
 
     return [_ for _ in mod if _ is not None]
