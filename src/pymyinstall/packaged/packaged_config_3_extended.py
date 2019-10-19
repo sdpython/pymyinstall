@@ -808,7 +808,6 @@ def extended_set():
         ModuleInstall('starlette', 'pip',
                       purpose='Starlette is a lightweight ASGI framework/toolkit, which is ideal '
                               'for building high performance asyncio services.'),
-        ModuleInstall('toml', 'pip', purpose='A Python library for parsing and creating TOML.'),
         ModuleInstall('uvicorn', 'pip',
                       purpose='Uvicorn is a lightning-fast ASGI server implementation, '
                               'using uvloop and httptools.'),
