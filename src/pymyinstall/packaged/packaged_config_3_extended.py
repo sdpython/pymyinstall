@@ -799,6 +799,15 @@ def extended_set():
         #
         # October 2019
         #
+        ModuleInstall('wsproto', 'pip',
+                      purpose='Pure Python, pure state-machine WebSocket implementation.'),
+        ModuleInstall('h11', 'pip',
+                      purpose='This is a little HTTP/1.1 library written from scratch in Python, '
+                              'heavily inspired by hyper-h2.'),
+        ModuleInstall('httptools', 'pip',
+                      purpose='httptools is a Python binding for nodejs HTTP parser. '
+                              'It\'s still in a very early development stage, expect '
+                              'APIs to break.'),
         ModuleInstall('hypercorn', 'pip',
                       purpose='Hypercorn is an ASGI web server based on the sans-io hyper, h11, '
                               'h2, and wsproto libraries and inspired by Gunicorn.'),
