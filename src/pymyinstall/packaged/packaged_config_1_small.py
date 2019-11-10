@@ -255,6 +255,8 @@ def small_set():
         ModuleInstall(
             "jupyter_client", "pip", purpose="Jupyter client", usage="JUPYTER"),
         ModuleInstall(
+            "jupyterlab_pygments", "pip", purpose="Jupyterlab", usage="JUPYTER"),
+        ModuleInstall(
             "nbformat", "pip", purpose="IPython, notebooks conversion, new in Jupyter 4.0", usage="JUPYTER"),
         ModuleInstall(
             "entrypoints", "pip", purpose="Discover and load entry points from installed packages.", usage="JUPYTER"),

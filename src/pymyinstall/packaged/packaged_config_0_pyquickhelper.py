@@ -65,6 +65,7 @@ def pyquickhelper_set():
         "jsonschema",
         "jupyter-console",
         "jupyter",
+        "jupyterlab_pygments",
         "jupyter_core",
         "jupyter_client",
         "jupyter-pip",
