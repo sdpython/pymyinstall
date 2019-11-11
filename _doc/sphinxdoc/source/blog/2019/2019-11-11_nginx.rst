@@ -1,0 +1,48 @@
+
+.. blogpost::
+    :title: Installation of nginx
+    :keywords: nginx
+    :date: 2019-11-11
+    :categories: installation
+
+    I switched to :epkg:`nginx` as :epkg:`lighttpd`
+    started to fail. To install it:
+
+    ::
+
+        apt-get install nginx-light
+
+    The configuration is stored in
+    ``/etc/nginx/sites-available/default``:
+
+    ::
+
+        server {
+                listen 80 default_server;
+                listen [::]:80 default_server;
+
+                # listen 443 ssl default_server;
+                # listen [::]:443 ssl default_server;
+
+                root /home/ftpuser/ftp/web;
+
+                index index.html index.htm index.nginx-debian.html;
+
+                server_name www.xavierdupre.fr;
+
+                location / {
+                        try_files $uri $uri/ =404;
+                }
+        }
+
+    A few useful commmand:
+
+    ::
+
+        systemctl stop nginx
+        systemctl start nginx
+        systemctl restart nginx
+
+    The https protocol can be set up by following the instructions
+    `Configuring HTTPS servers <https://nginx.org/en/docs/
+    http/configuring_https_servers.html#single_http_https_server>`_.
