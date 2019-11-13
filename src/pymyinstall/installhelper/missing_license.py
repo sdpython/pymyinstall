@@ -117,7 +117,6 @@ missing_module_licenses = {
     "tqdm": "MIT",
     "pandas-highcharts": "MIT",
     "holoviews": "BSD",
-    "Bottleneck": "Simplified BSD",
     "cyordereddict": "MIT",
     "future": "MIT",
     "python-gmaps": "BSD",

@@ -126,8 +126,6 @@ def ensae_set():
             "datrie", "wheel", purpose="Fast, efficiently stored Trie for Python.", usage="ALGO"),
         # ModuleInstall("pysparse", "pip"), #does not work
         ModuleInstall(
-            "Bottleneck", "wheel", mname="bottleneck", purpose="Fast NumPy array functions written in Cython, needed by la"),
-        ModuleInstall(
             "mahotas", "wheel", purpose="Mahotas: Computer Vision Library", usage="VIZ"),
         ModuleInstall("nitime", "wheel",
                       purpose="Nitime is a library for time-series analysis of data from neuroscience experiments.", usage="DATA/ML"),
