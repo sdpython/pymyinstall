@@ -22,6 +22,7 @@ def pyquickhelper_set():
         "backports.shutil-get-terminal-size",
         "bleach",
         "blockdiag",
+        "bottleneck",
         "brewer2mpl",
         "cairocffi",
         "cairosvg",

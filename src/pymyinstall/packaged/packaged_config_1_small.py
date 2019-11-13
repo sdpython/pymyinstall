@@ -188,6 +188,8 @@ def small_set():
         ModuleInstall("flake8", "pip",
                       purpose="verify pep8 on a script", usage="STYLE"),
         ModuleInstall(
+            "bottleneck", "wheel", purpose="pandas depenencies, faster arrays", usage="DATA/ML"),
+        ModuleInstall(
             "pandas", "wheel", purpose="manipulate table as SQL in memory", usage="DATA/ML"),
         ModuleInstall(
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
