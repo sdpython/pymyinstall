@@ -150,9 +150,9 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
     In that case, you should consider using ``custom=True``.
     The function work for :epkg:`Linux` too.
     List of steps done in linux:
-
+    
     ::
-
+    
         mkdir install_folder
         cd install_folder
         curl -O https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
@@ -163,7 +163,6 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         ./configure --enable-optimizations --with-ensurepip=install --prefix=/home/dupre/temp/temp_py/dist372/inst --exec-prefix=/home/dupre/temp/temp_py/dist372/bin --datadir=/home/dupre/temp/temp_py/dist372/data
     """
     cmds = []
-
     def clean_err(err):
         # remove a couple of warnings.
         lines = err.split("\n")
@@ -266,37 +265,38 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
             # See https://stackoverflow.com/questions/44708262/make-install-from-source-python-without-running-tests.
             os.environ["EXTRATESTOPTS"] = "--list-tests"
-            cmd = "make"
-            out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
-                               change_path=pyinstall)
-            cmds.append(cmd)
-            if err:
-                lines = []
-                for line in err.split("\n"):
-                    if "find: ‘build’: No such file or directory" in line:
-                        continue
-                    if "(ignored)" in line:
-                        continue
-                    if "Task was destroyed but it is pending!" in line:
-                        continue
-                    if "[libinstall] Error 1 (ignored)" in line:
-                        continue
-                    if "task: <Task finished coro=<<async_generator_athrow without __name__>()" in line:
-                        continue
-                    if "stty: 'standard input': Inappropriate ioctl for device" in line:
-                        continue
-                    if "task: <Task pending coro=<<async_generator_athrow without __name__>()>>" in line:
-                        continue
-                    if "unhandled exception during asyncio.run() shutdown" in line:
-                        continue
-                    if "RuntimeError: can't send non-None value to a just-started coroutine" in line:
-                        continue
-                    lines.append(line)
-                err = "\n".join(lines).strip() if lines else None
-            if err:
-                raise RuntimeError(
-                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
-                        cmd, url, out, err, pyinstall, "\n".join(cmds)))
+            if False:
+                cmd = "make"
+                out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                                   change_path=pyinstall)
+                cmds.append(cmd)
+                if err:
+                    lines = []
+                    for line in err.split("\n"):
+                        if "find: ‘build’: No such file or directory" in line:
+                            continue
+                        if "(ignored)" in line:
+                            continue
+                        if "Task was destroyed but it is pending!" in line:
+                            continue
+                        if "[libinstall] Error 1 (ignored)" in line:
+                            continue
+                        if "task: <Task finished coro=<<async_generator_athrow without __name__>()" in line:
+                            continue
+                        if "stty: 'standard input': Inappropriate ioctl for device" in line:
+                            continue
+                        if "task: <Task pending coro=<<async_generator_athrow without __name__>()>>" in line:
+                            continue
+                        if "unhandled exception during asyncio.run() shutdown" in line:
+                            continue
+                        if "RuntimeError: can't send non-None value to a just-started coroutine" in line:
+                            continue
+                        lines.append(line)
+                    err = "\n".join(lines).strip() if lines else None
+                if err:
+                    raise RuntimeError(
+                        "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
+                            cmd, url, out, err, pyinstall, "\n".join(cmds)))
 
             cmd = "make altinstall"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
