@@ -148,13 +148,22 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         error: [Errno 2] No such file or directory: '<python>\\python36.zip\\lib2to3\\Grammar.txt'
 
     In that case, you should consider using ``custom=True``.
+    The function work for :epkg:`Linux` too.
+    List of steps done in linux:
 
-    .. versionchanged:: 1.1
-        Add parameters *custom*, *latest*, *verbose*.
+    ::
 
-    .. versionchanged:: 1.2
-        Implements the version for :epkg:`Linux`.
+        mkdir install_folder
+        cd install_folder
+        curl -O https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
+        tar xzf Python-3.7.2.tgz
+        mkdir dist372
+        cd Python-3.7.2/
+        # current folder is /home/dupre/temp/temp_py/dist372/
+        ./configure --enable-optimizations --with-ensurepip=install --prefix=/home/dupre/temp/temp_py/dist372/inst --exec-prefix=/home/dupre/temp/temp_py/dist372/bin --datadir=/home/dupre/temp/temp_py/dist372/data
     """
+    cmds = []
+
     def clean_err(err):
         # remove a couple of warnings.
         lines = err.split("\n")
@@ -230,9 +239,11 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             cmd = "tar xzf {0}".format(outfile)
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=temp_folder)
+            cmds.append(cmd)
             if err:
                 raise RuntimeError(
-                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}".format(cmd, out, err, temp_folder))
+                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}\n--CMDS--\n{4}".format(
+                        cmd, out, err, temp_folder, "\n".join(cmds)))
             pyinstall = os.path.join(
                 temp_folder, "Python-{0}.{1}.{2}".format(*versioni))
 
@@ -240,6 +251,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             cmd = cmd.format(temp_folder)
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
+            cmds.append(cmd)
             if err:
                 lines = []
                 for line in err.split("\n"):
@@ -249,13 +261,15 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(lines).strip() if lines else None
             if err:
                 raise RuntimeError(
-                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
+                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--CMDS--\n{3}".format(
+                        cmd, out, err, "\n".join(cmds)))
 
             # See https://stackoverflow.com/questions/44708262/make-install-from-source-python-without-running-tests.
             os.environ["EXTRATESTOPTS"] = "--list-tests"
             cmd = "make"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
+            cmds.append(cmd)
             if err:
                 lines = []
                 for line in err.split("\n"):
@@ -281,12 +295,13 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(lines).strip() if lines else None
             if err:
                 raise RuntimeError(
-                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}".format(
-                        url, cmd, out, err, pyinstall))
+                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
+                        cmd, url, out, err, pyinstall, "\n".join(cmds)))
 
             cmd = "make altinstall"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
+            cmds.append(cmd)
             if err:
                 lines = []
                 for line in err.split("\n"):
@@ -296,8 +311,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(lines).strip() if lines else None
             if err:
                 raise RuntimeError(
-                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}".format(
-                        url, cmd, out, err, pyinstall))
+                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
+                        cmd, url, out, err, pyinstall, "\n".join(cmds)))
 
         # has pip?
         if sys.platform.startswith("win"):
@@ -305,6 +320,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         else:
             pyexe = os.path.join(temp_folder, "bin", "python")
         cmd = "{0} -m pip --help"
+        cmds.append(cmd)
         try:
             _, err = run_cmd(cmd, wait=True)
             has_pip = not err
@@ -345,6 +361,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         if not custom:
             cmd = '"{0}" -u "{1}"'.format(pyexe, outfile_pip)
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
+            cmds.append(cmd)
             if len(err) > 0:
                 skip = ['Consider adding this directory to PATH',
                         'which is not on PATH.']
@@ -361,7 +378,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(errs).strip(' \n\r')
             if len(err) > 0:
                 raise Exception(
-                    "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-B\n{2}".format(cmd, out, err))
+                    "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-B\n{2}\n---CMDS--\n{3}".format(
+                        cmd, out, err, "\n".join(cmds)))
         else:
             from ..win_installer.win_patch import win_patch_paths
             fLOG("[install_python] Patch scripts .exe")
@@ -398,6 +416,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             change_path = None
         fLOG("[install_python] " + cmd)
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=change_path)
+        cmds.append(cmd)
         err_keep = err
         err = [_ for _ in err.split("\n") if not _.startswith("pymyinstall.") and not _.startswith(
             "zip_safe flag not set; analyzing archive contents...") and not _.startswith("error removing build")]
@@ -423,6 +442,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             pyexe, modules, download_folder.replace("\\", "/"))
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                            communicate=False, catch_exit=True)
+        cmds.append(cmd)
         fLOG("[install_python] end installed modules.")
         if len(err) > 0:
             # We try a second time to make sure a second pass does not help.
@@ -433,8 +453,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             if len(err__) > 0:
                 mes = "[install_python2] end installed modules. Something went wrong:\n"
                 raise Exception(
-                    mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\nERR2-Dc\n{5}\n**CMD**\n{0}".format(
-                        cmd, out, err, out_, err_, err__))
+                    mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\nERR2-Dc\n{5}\n**CMD**\n{0}\n--CMDS--\n{6}".format(
+                        cmd, out, err, out_, err_, err__, "\n".join(cmds)))
             out += ("\n-------------" * 5) + "\n" + out_
             fLOG("[install_python2] end installed modules.")
         fLOG(out)
