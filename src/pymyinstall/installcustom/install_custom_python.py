@@ -281,7 +281,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(lines).strip() if lines else None
             if err:
                 raise RuntimeError(
-                    "Issue with running '{0}'\n---OUT---\n{1}\n---ERR---\n{2}\n---IN---\n{3}".format(cmd, out, err, pyinstall))
+                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}".format(
+                        url, cmd, out, err, pyinstall))
 
             cmd = "make altinstall"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
@@ -295,7 +296,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(lines).strip() if lines else None
             if err:
                 raise RuntimeError(
-                    "Issue with running '{0}'\n--OUT--\n{1}\n--ERR--\n{2}\n--IN--\n{3}".format(cmd, out, err, pyinstall))
+                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}".format(
+                        url, cmd, out, err, pyinstall))
 
         # has pip?
         if sys.platform.startswith("win"):
