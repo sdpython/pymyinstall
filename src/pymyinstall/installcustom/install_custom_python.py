@@ -120,7 +120,7 @@ def fix_resource_windows(path):
 
 def install_python(temp_folder=".", fLOG=print, install=True, force_download=False,  # pylint: disable=R0914
                    version=None, modules=None, custom=False, latest=False,
-                   download_folder="download", verbose=False):
+                   download_folder="download", verbose=False, make_first=False):
     """
     Installs :epkg:`python`.
     It does not do it a second time if it is already installed.
@@ -137,6 +137,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
     @param      latest          install this version of pymyinstall and not the pypi version
     @param      download_folder download folder for packages
     @param      verbose         more display
+    @param      make_first      run *make* before *make altinstall*
     @return                     temporary file
 
     The version is fixed to the current version of Python and amd64.
@@ -266,7 +267,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
             # See https://stackoverflow.com/questions/44708262/make-install-from-source-python-without-running-tests.
             os.environ["EXTRATESTOPTS"] = "--list-tests"
-            if False:
+            if make_first:
                 cmd = "make"
                 out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                    change_path=pyinstall)

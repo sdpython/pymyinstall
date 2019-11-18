@@ -47,11 +47,11 @@ def download_page(url, is406=False):
         text = u.read()
         u.close()
     except urllib_error.HTTPError as e:
-        raise DownloadException("unable to get archive from: " + url) from e
+        raise DownloadException("Unable to get archive from: '" + url + "'.") from e
     except urllib_error.URLError as e:
-        raise DownloadException("unable to get archive from: " + url) from e
+        raise DownloadException("Unable to get archive from: '" + url + "'.") from e
     except ConnectionResetError as e:
-        raise DownloadException("unable to get archive from: " + url) from e
+        raise DownloadException("Unable to get archive from: '" + url + "'.") from e
 
     typstr = str  # unicode#
     return typstr(text, encoding="utf8")
