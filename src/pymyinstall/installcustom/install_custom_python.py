@@ -150,9 +150,9 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
     In that case, you should consider using ``custom=True``.
     The function work for :epkg:`Linux` too.
     List of steps done in linux:
-    
+
     ::
-    
+
         mkdir install_folder
         cd install_folder
         curl -O https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
@@ -163,6 +163,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         ./configure --enable-optimizations --with-ensurepip=install --prefix=/home/dupre/temp/temp_py/dist372/inst --exec-prefix=/home/dupre/temp/temp_py/dist372/bin --datadir=/home/dupre/temp/temp_py/dist372/data
     """
     cmds = []
+
     def clean_err(err):
         # remove a couple of warnings.
         lines = err.split("\n")
