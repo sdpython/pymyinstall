@@ -814,6 +814,12 @@ def ensae_set():
                       purpose="Open Neural Network Exchange"),
         ModuleInstall('onnxmltools', 'pip', usage="ML",
                       purpose="Converts Machine Learning models to ONNX"),
+        ModuleInstall('sklearn-onnx', 'pip', usage="ML",
+                      purpose="Converts scikit-learn Machine Learning models to ONNX"),
+        ModuleInstall('keras-onnx', 'pip', usage="ML",
+                      purpose="Converts keras Machine Learning models to ONNX"),
+        ModuleInstall('tensorflow-onnx', 'pip', usage="ML",
+                      purpose="Converts tensorflow Machine Learning models to ONNX"),
 
         #
         # 2019-01

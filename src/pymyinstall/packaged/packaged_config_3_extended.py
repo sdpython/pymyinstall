@@ -818,6 +818,16 @@ def extended_set():
         ModuleInstall('websockets', 'pip',
                       purpose='websockets is a library for building WebSocket servers and '
                               'clients in Python with a focus on correctness and simplicity.'),
+        #
+        # December 2019
+        #
+        ModuleInstall('py-spy', 'pip',
+                      purpose='profiler implemented in rust, works like a C++ profiler'),
+        ModuleInstall('pydicom', 'pip',
+                      purpose='pydicom is a pure python package for working with DICOM files. '
+                              'It was made for inspecting and modifying DICOM data in an easy '
+                              '"pythonic" way. The modifications can be written again to a new '
+                              'file.'),
     ]
 
     return [_ for _ in mod if _ is not None]
