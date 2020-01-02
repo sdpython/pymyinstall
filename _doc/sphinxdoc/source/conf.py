@@ -45,6 +45,7 @@ epkg_dictionary.update({
     'pypi': 'https://pypi.org/',
     'pycuda': 'https://mathema.tician.de/software/pycuda/',
     'pycurl': 'http://pycurl.io/',
+    'pygame': 'https://www.pygame.org/',
     'pyopencl': 'https://documen.tician.de/pyopencl/',
     'pythonnet': 'https://github.com/pythonnet/pythonnet',
     'spacy': 'https://spacy.io/',

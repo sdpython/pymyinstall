@@ -89,7 +89,7 @@
         cd ..
         cd ~
 
-    Some package requires a different build because they need shared libraries:
+    Some package require a different build because they need shared libraries:
 
     ::
 

@@ -1,0 +1,114 @@
+
+.. blogpost::
+    :title: Installation of Python 3.8
+    :keywords: python 3.8
+    :date: 2019-12-31
+    :categories: installation
+    :lid: blog-2019-python38-linux2
+
+    ::
+    
+        apt-get update
+        apt-get install llvm
+        apt-get install python3-pygame
+    
+    I copy paste the instructions I used to
+    install Python 3.8.1 inspired from
+    :ref:`blog-2018-python37-linux2`.
+
+    ::
+
+        cd /usr/local
+        wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz
+        tar xzf Python-3.8.1.tgz
+        cd Python-3.8.1
+        ./configure --enable-optimizations --with-ensurepip=install
+        make
+        make altinstall
+        chmod +x python3.8
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        ./python get-pip.py
+        cd ..
+        cd ~
+
+    Installation of most of the common packages.
+
+    ::
+
+        curl https://raw.githubusercontent.com/sdpython/pyquickhelper/master/requirements.txt -o requirements.txt
+        python3.8 -c "from pip._internal import main;main('install -r requirements.txt'.split())"
+        python3.8 -c "from pip._internal import main;main('uninstall -y jyquickhelper'.split())"
+
+    Installation of :epkg:`pyproj`.
+
+    ::
+
+        apt-get install -y libproj-dev proj-bin proj-data libc6 libgeos-dev python-gdal gdal-bin
+        export PYPROJMAJVER=15
+        export PYPROJVERSION=6.2.1-1
+        wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj${PYPROJMAJVER}_${PYPROJVERSION}_amd64.deb
+        dpkg -i libproj${PYPROJMAJVER}_${PYPROJVERSION}_amd64.deb
+        wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj-dev_${PYPROJVERSION}_amd64.deb
+        dpkg -i libproj-dev_${PYPROJVERSION}_amd64.deb
+    
+    Installation of python packages.
+    
+    ::
+
+        pip3.8 install cython llvmlite
+        pip3.8 install pyproj
+        pip3.8 install geopandas descartes
+        pip3.8 install git+https://github.com/SciTools/cartopy.git
+        pip3.8 install tables nltk statsmodels imbalanced-learn seaborn gensim  networkx
+        pip3.8 install bqplot memory_profiler xarray folium antlr4-python3-runtime
+        pip3.8 install category_encoders
+        pip3.8 install chainer fcn
+        pip3.8 install spacy
+        pip3.8 install xlwt xlrd wikipedia pycurl xlsxwriter pyinstrument wptools flask dask bcolz
+        pip3.8 install sphinxcontrib.blockdiag sphinx_bootstrap_theme moviepy mutagen vprof solar-theme guzzle_sphinx_theme sphinx_modern_theme_modified sphinxjp.themes.basicstrap sphinx_readable_theme
+        pip3.8 install pyspark qgrid yahoo_historical py4j bayespy lightgbm version_information xgboost natsort pivottablejs prettytable
+        pip3.8 install colormap easydev dbfread quandl seaborn requests-file requests-ftp lxml opencv-python python-pptx
+        pip3.8 install reportlab sympy vispy cufflinks brythonmagic pydy seasonal treeinterpreter tutormagic pympler selenium httplib2
+        pip3.8 install tpot pygal google-api-python-client datashader PyQt5
+        pip3.8 install pyecharts pygal-maps-fr pythreejs vega yahoo-historical lifelines fast-histogram geoplotlib
+        pip3.8 install missingno mpl-scatter-density mizani lml macropy3 plotnine geopy zarr
+        pip3.8 install jsonpickle forestci pypi-server jupyterlab
+        pip3.8 install psycopg2 
+        pip3.8 install imageio pyaudio  pybind11
+        pip3.8 install cvxopt
+        pip3.8 install mpl-finance
+        pip3.8 install minepy # git+https://github.com/sdpython/minepy.git
+        
+        pip3.8 install git+https://github.com/sdpython/pyPdf.git --upgrade --no-deps
+
+        pip3.8 install --upgrade matplotlib pandas numpy scikit-learn scipy statsmodels tornado
+        pip3.8 install imageio-ffmpeg
+
+        pip3.8 install git+https://github.com/rkern/line_profiler.git
+        pip3.8 install git+https://github.com/sdpython/fairtest.git
+        pip3.8 install pygame
+
+        
+    *pythonnet*
+        
+    ::
+        git clone -b master https://github.com/pythonnet/pythonnet.git
+        cd pythonnet
+        python3.8 setup.py install --xplat
+        apt-get install -y beignet-opencl-icd ocl-icd-opencl-dev libpocl-dev nvidia-cuda-toolkit
+        pip3.8 install pyopencl pycuda tensorflow azure
+        python3.8 -m spacy download en
+
+    Installation of others tools:
+    
+    ::
+    
+        apt-get install -y libav-tools protobuf-compiler libprotoc-dev libcurl4-openssl-dev libssl-dev
+        apt-get install -y libhdf5-dev libblosc-dev liblzo2-dev libappindicator3-1 fonts-liberation
+        apt --fix-broken install
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        dpkg -i google-chrome-stable_current_amd64.deb
+        apt-get install -y chromium-driver
+        apt-get install -y portaudio19-dev libblas-dev liblapack-dev libsuitesparse-dev
+        apt-get install -y libasound2-dev libx11-dev xvfb pulseaudio python-pygame libunwind8
+    
