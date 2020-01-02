@@ -91,7 +91,6 @@ def pyquickhelper_set():
         "multi_key_dict",
         "nbformat",
         "nbconvert",
-        "nbpresent",
         "nose",
         "notebook",
         "notedown",
