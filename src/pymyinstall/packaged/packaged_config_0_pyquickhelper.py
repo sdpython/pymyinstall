@@ -80,11 +80,11 @@ def pyquickhelper_set():
         "matplotlib",
         "mbstrdecoder",
         "metakernel",
-        "micropython-libc" if not sys.platform.startswith("win") else None,
-        "micropython-ffilib" if not sys.platform.startswith(
-            "win") else None,
-        "micropython-fcntl" if not sys.platform.startswith(
-            "win") else None,
+        # "micropython-libc" if not sys.platform.startswith("win") else None,
+        # "micropython-ffilib" if not sys.platform.startswith(
+        #     "win") else None,
+        # "micropython-fcntl" if not sys.platform.startswith(
+        #     "win") else None,
         'markupsafe',
         "mccabe",
         "mistune",
