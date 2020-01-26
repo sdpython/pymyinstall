@@ -293,6 +293,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                             continue
                         if "RuntimeError: can't send non-None value to a just-started coroutine" in line:
                             continue
+                        if " which is not installed." in line:
+                            continue
                         lines.append(line)
                     err = "\n".join(lines).strip() if lines else None
                     errl = err.lower()
@@ -330,7 +332,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(lines).strip() if lines else None
             if err:
                 raise RuntimeError(
-                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
+                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---?-\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
                         cmd, url, out, err, pyinstall, "\n".join(cmds)))
 
         # has pip?
