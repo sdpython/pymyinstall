@@ -295,9 +295,26 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                             continue
                         lines.append(line)
                     err = "\n".join(lines).strip() if lines else None
+                    errl = err.lower()
+                    if 'error' not in errl and 'exception' not in errl:
+                        lines = []
+                        for line in err.split("\n"):
+                            if line.startswith('  '):
+                                continue
+                            if 'note: declared here' in line:
+                                continue
+                            if "In file included" in line:
+                                continue
+                            if "warning:" in line:
+                                continue
+                            if "In function " in line:
+                                continue
+                            lines.append(line)
+                    err = "\n".join(lines).strip() if lines else None
                 if err:
                     raise RuntimeError(
-                        "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
+                        "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n"
+                        "---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
                             cmd, url, out, err, pyinstall, "\n".join(cmds)))
 
             cmd = "make altinstall"
