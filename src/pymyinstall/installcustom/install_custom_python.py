@@ -118,6 +118,62 @@ def fix_resource_windows(path):
         f.write(module)
 
 
+def _clean_err1(err):
+    if err:
+        lines = []
+        for line in err.split("\n"):
+            if "find: ‘build’: No such file or directory" in line:
+                continue
+            if "(ignored)" in line:
+                continue
+            if "Task was destroyed but it is pending!" in line:
+                continue
+            if "[libinstall] Error 1 (ignored)" in line:
+                continue
+            if "task: <Task finished coro=<<async_generator_athrow without __name__>()" in line:
+                continue
+            if "stty: 'standard input': Inappropriate ioctl for device" in line:
+                continue
+            if "task: <Task pending coro=<<async_generator_athrow without __name__>()>>" in line:
+                continue
+            if "unhandled exception during asyncio.run() shutdown" in line:
+                continue
+            if "RuntimeError: can't send non-None value to a just-started coroutine" in line:
+                continue
+            if " which is not installed." in line:
+                continue
+            lines.append(line)
+        err = "\n".join(lines).strip() if lines else None
+        errl = err.lower()
+        if 'error' not in errl and 'exception' not in errl:
+            lines = []
+            for line in err.split("\n"):
+                if line.startswith('  '):
+                    continue
+                if 'note: declared here' in line:
+                    continue
+                if "In file included" in line:
+                    continue
+                if "warning:" in line:
+                    continue
+                if "In function " in line:
+                    continue
+                lines.append(line)
+        err = "\n".join(lines).strip() if lines else None
+    return err
+
+
+def _clean_err0(err):
+    # remove a couple of warnings.
+    lines = err.split("\n")
+    lines2 = [
+        _ for _ in lines if "UserWarning: Module pymyinstall was already imported" not in _]
+    if len(lines2) < len(lines):
+        lines2 = [
+            _ for _ in lines2 if "from pip._vendor import pkg_resources" not in _]
+    return "\n".join(lines2)
+
+
 def install_python(temp_folder=".", fLOG=print, install=True, force_download=False,  # pylint: disable=R0914
                    version=None, modules=None, custom=False, latest=False,
                    download_folder="download", verbose=False, make_first=False):
@@ -164,16 +220,6 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         ./configure --enable-optimizations --with-ensurepip=install --prefix=/home/dupre/temp/temp_py/dist372/inst --exec-prefix=/home/dupre/temp/temp_py/dist372/bin --datadir=/home/dupre/temp/temp_py/dist372/data
     """
     cmds = []
-
-    def clean_err(err):
-        # remove a couple of warnings.
-        lines = err.split("\n")
-        lines2 = [
-            _ for _ in lines if "UserWarning: Module pymyinstall was already imported" not in _]
-        if len(lines2) < len(lines):
-            lines2 = [
-                _ for _ in lines2 if "from pip._vendor import pkg_resources" not in _]
-        return "\n".join(lines2)
 
     if version is None:
         version = "%s.%s.%s" % sys.version_info[:3]
@@ -268,56 +314,12 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             # See https://stackoverflow.com/questions/44708262/make-install-from-source-python-without-running-tests.
             os.environ["EXTRATESTOPTS"] = "--list-tests"
 
-            def _clean_err(err):
-                if err:
-                    lines = []
-                    for line in err.split("\n"):
-                        if "find: ‘build’: No such file or directory" in line:
-                            continue
-                        if "(ignored)" in line:
-                            continue
-                        if "Task was destroyed but it is pending!" in line:
-                            continue
-                        if "[libinstall] Error 1 (ignored)" in line:
-                            continue
-                        if "task: <Task finished coro=<<async_generator_athrow without __name__>()" in line:
-                            continue
-                        if "stty: 'standard input': Inappropriate ioctl for device" in line:
-                            continue
-                        if "task: <Task pending coro=<<async_generator_athrow without __name__>()>>" in line:
-                            continue
-                        if "unhandled exception during asyncio.run() shutdown" in line:
-                            continue
-                        if "RuntimeError: can't send non-None value to a just-started coroutine" in line:
-                            continue
-                        if " which is not installed." in line:
-                            continue
-                        lines.append(line)
-                    err = "\n".join(lines).strip() if lines else None
-                    errl = err.lower()
-                    if 'error' not in errl and 'exception' not in errl:
-                        lines = []
-                        for line in err.split("\n"):
-                            if line.startswith('  '):
-                                continue
-                            if 'note: declared here' in line:
-                                continue
-                            if "In file included" in line:
-                                continue
-                            if "warning:" in line:
-                                continue
-                            if "In function " in line:
-                                continue
-                            lines.append(line)
-                    err = "\n".join(lines).strip() if lines else None
-                return err
-
             if make_first:
                 cmd = "make"
                 out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                    change_path=pyinstall)
                 cmds.append(cmd)
-                err = clean_err(err)
+                err = _clean_err1(err)
                 if err:
                     raise RuntimeError(
                         "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n"
@@ -328,7 +330,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             cmds.append(cmd)
-            err = clean_err(err)
+            err = _clean_err1(err)
             if err:
                 lines = []
                 for line in err.split("\n"):
@@ -476,7 +478,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             fLOG("[install_python2] install modules")
             out_, err_ = run_cmd(
                 cmd, wait=True, fLOG=fLOG, communicate=False, catch_exit=False)
-            err__ = clean_err(err_)
+            err__ = _clean_err0(err_)
             if len(err__) > 0:
                 mes = "[install_python2] end installed modules. Something went wrong:\n"
                 raise Exception(
