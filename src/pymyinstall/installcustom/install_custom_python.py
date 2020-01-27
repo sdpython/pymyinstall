@@ -267,11 +267,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
             # See https://stackoverflow.com/questions/44708262/make-install-from-source-python-without-running-tests.
             os.environ["EXTRATESTOPTS"] = "--list-tests"
-            if make_first:
-                cmd = "make"
-                out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
-                                   change_path=pyinstall)
-                cmds.append(cmd)
+
+            def _clean_err(err):
                 if err:
                     lines = []
                     for line in err.split("\n"):
@@ -313,16 +310,25 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                                 continue
                             lines.append(line)
                     err = "\n".join(lines).strip() if lines else None
+                return err
+
+            if make_first:
+                cmd = "make"
+                out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
+                                   change_path=pyinstall)
+                cmds.append(cmd)
+                err = clean_err(err)
                 if err:
                     raise RuntimeError(
                         "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n"
-                        "---ERR---\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
+                        "---ERR---?1-\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
                             cmd, url, out, err, pyinstall, "\n".join(cmds)))
 
             cmd = "make altinstall"
             out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
                                change_path=pyinstall)
             cmds.append(cmd)
+            err = clean_err(err)
             if err:
                 lines = []
                 for line in err.split("\n"):
@@ -332,7 +338,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 err = "\n".join(lines).strip() if lines else None
             if err:
                 raise RuntimeError(
-                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---?-\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
+                    "Issue while running '{0}'\n---URL---\n{1}\n---OUT---\n{2}\n---ERR---?2-\n{3}\n---IN---\n{4}\n---CMDS---\n{5}".format(
                         cmd, url, out, err, pyinstall, "\n".join(cmds)))
 
         # has pip?
