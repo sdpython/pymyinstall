@@ -4,7 +4,7 @@
 """
 import textwrap
 import unittest
-from pymyinstall.installcustom.install_custom_python import _clean_err
+from pymyinstall.installcustom.install_custom_python import _clean_err1
 
 
 class TestClearErr(unittest.TestCase):
@@ -36,7 +36,7 @@ class TestClearErr(unittest.TestCase):
                 ERROR: chainer 7.1.0 requires six>=1.9.0, which is not installed.
                 ERROR: chainer 7.1.0 requires typing-extensions, which is not installed.
                 """)
-        err2 = _clean_err(err)
+        err2 = _clean_err1(err)
         self.assertEqual(err2, None)
         
 
