@@ -31,6 +31,7 @@ def get_default_ignore_modules():
         "msgpack-python",   # Called msgpack now.
         "onnx",             # working on it
         "ordereddict",      # standard distribution (>= 3.4)
+        "path",             # subfolder of existing module
         "path.py",          # weird
         "pathlib",          # standard distribution (>= 3.5)
         "pip",              # almost standard distribution, should be rare
