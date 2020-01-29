@@ -7,11 +7,11 @@
     :lid: blog-2019-python38-linux2
 
     ::
-    
+
         apt-get update
         apt-get install llvm
         apt-get install python3-pygame
-    
+
     I copy paste the instructions I used to
     install Python 3.8.1 inspired from
     :ref:`blog-2018-python37-linux2`.
@@ -50,9 +50,9 @@
         dpkg -i libproj${PYPROJMAJVER}_${PYPROJVERSION}_amd64.deb
         wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj-dev_${PYPROJVERSION}_amd64.deb
         dpkg -i libproj-dev_${PYPROJVERSION}_amd64.deb
-    
+
     Installation of python packages.
-    
+
     ::
 
         pip3.8 install cython llvmlite
@@ -73,13 +73,13 @@
         pip3.8 install pyecharts pygal-maps-fr pythreejs vega yahoo-historical lifelines fast-histogram geoplotlib
         pip3.8 install missingno mpl-scatter-density mizani lml macropy3 plotnine geopy zarr
         pip3.8 install jsonpickle forestci pypi-server jupyterlab
-        pip3.8 install psycopg2 
+        pip3.8 install psycopg2
         pip3.8 install imageio pyaudio  pybind11
         pip3.8 install cvxopt
         pip3.8 install mpl-finance
         pip3.8 install keyring keyring.alt pycryptodome cryptography
         pip3.8 install minepy # git+https://github.com/sdpython/minepy.git
-        
+
         pip3.8 install git+https://github.com/sdpython/pyPdf.git --upgrade --no-deps
 
         pip3.8 install --upgrade matplotlib pandas numpy scikit-learn scipy statsmodels tornado
@@ -89,9 +89,8 @@
         pip3.8 install git+https://github.com/sdpython/fairtest.git
         pip3.8 install pygame
 
-        
     *pythonnet*
-        
+
     ::
         git clone -b master https://github.com/pythonnet/pythonnet.git
         cd pythonnet
@@ -101,9 +100,9 @@
         python3.8 -m spacy download en
 
     Installation of others tools:
-    
+
     ::
-    
+
         apt-get install -y libav-tools protobuf-compiler libprotoc-dev libcurl4-openssl-dev libssl-dev
         apt-get install -y libhdf5-dev libblosc-dev liblzo2-dev libappindicator3-1 fonts-liberation
         apt --fix-broken install
@@ -112,4 +111,3 @@
         apt-get install -y chromium-driver
         apt-get install -y portaudio19-dev libblas-dev liblapack-dev libsuitesparse-dev
         apt-get install -y libasound2-dev libx11-dev xvfb pulseaudio python-pygame libunwind8
-    

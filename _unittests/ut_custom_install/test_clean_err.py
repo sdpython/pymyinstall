@@ -11,8 +11,8 @@ class TestClearErr(unittest.TestCase):
 
     def test_clean_err(self):
         err = textwrap.dedent("""
-                /var/lib/jenkins/workspace/pymyinstall/tpath/temp_py38_minimal/Python-3.8.1/Modules/_testcapimodule.c: In function ‘PyInit__testcapi’:
-                /var/lib/jenkins/workspace/pymyinstall/tpath/temp_py38_minimal/Python-3.8.1/Modules/_testcapimodule.c:6216:5: warning: ‘tp_print’ is deprecated [-Wdeprecated-declarations]
+                /_testcapimodule.c: In function ‘PyInit__testcapi’:
+                /_testcapimodule.c:6216:5: warning: ‘tp_print’ is deprecated [-Wdeprecated-declarations]
                      MyList_Type.tp_print = 0;
                      ^~~~~~~~~~~
                 In file included from ./Include/object.h:746:0,
@@ -38,8 +38,6 @@ class TestClearErr(unittest.TestCase):
                 """)
         err2 = _clean_err1(err)
         self.assertEqual(err2, None)
-        
-
 
 
 if __name__ == "__main__":

@@ -34,6 +34,7 @@ class TestCodeStyle(ExtTestCase):
                          "install_custom.py:13: E0401",
                          "install_custom.py:14: E0401",
                          "install_custom.py:15: E0401",
+                         "install_custom_python.py:220",
                          "module_install_version.py:16: E0401",
                          "module_install_page_wheel.py:13: E0401",
                          "module_install_page_wheel.py:13: E0401",
