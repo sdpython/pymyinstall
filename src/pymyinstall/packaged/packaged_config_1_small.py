@@ -358,6 +358,8 @@ def small_set():
         ModuleInstall("jupyter-pip", "pip", mname="jupyterpip",
                       purpose="Allows Jupyter notebook extension writers to make their extension pip installable!",
                       usage="JUPYTER"),
+        ModuleInstall("portalocker", "pip", usage="JUPYTER",
+                      purpose="Portalocker is a library to provide an easy API to file locking."),
         ModuleInstall("ipyparallel", "pip", usage="JUPYTER",
                       purpose="Interactive Parallel Computing with IPython"),
         # end of ipython
