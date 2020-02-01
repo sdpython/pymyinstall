@@ -2,7 +2,6 @@
 @brief      test log(time=5s)
 """
 
-import sys
 import os
 import unittest
 from pyquickhelper.loghelper import fLOG, CustomLog
@@ -21,10 +20,6 @@ class TestCompareVersion(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         if is_travis_or_appveyor():
-            return
-
-        if sys.version_info[0] == 2:
-            # not maintaining for Python 2.7
             return
 
         mods = [mod for mod in all_set() if mod.kind in ("wheel",)]

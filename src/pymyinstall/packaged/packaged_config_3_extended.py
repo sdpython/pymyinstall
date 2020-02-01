@@ -744,7 +744,7 @@ def extended_set():
         #
         ModuleInstall('gdown', 'pip',
                       purpose="Google Drive direct download of big files."),
-        ModuleInstall('pytube', 'pip',
+        ModuleInstall('pytube3', 'pip',
                       purpose="play with youtube videos"),
         #
         # Mars, Avril 2018
