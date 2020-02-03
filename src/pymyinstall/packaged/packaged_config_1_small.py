@@ -216,6 +216,10 @@ def small_set():
         ModuleInstall(
             "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
         ModuleInstall(
+            "threadpoolctl", "pip", purpose="Python helpers to limit the number of threads used in the "
+            "threadpool-backed of common native libraries used for scientific computing and data science "
+            "(e.g. BLAS and OpenMP)."),
+        ModuleInstall(
             "joblib", "pip", purpose="distribute jobs, parallelization"),
         ModuleInstall(
             "scikit-learn", "wheel", mname="sklearn", purpose="machine learning", usage="DATA/ML"),

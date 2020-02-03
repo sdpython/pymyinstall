@@ -35,6 +35,7 @@ def datascientistbase_set():
         "scipy",
         "smart_open",
         "statsmodels",
+        "threadpoolctl",
         "toolz",
     ]
     from .automate_install import find_module_install
