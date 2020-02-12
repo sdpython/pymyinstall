@@ -162,6 +162,7 @@ def pyquickhelper_set():
         'tqdm',
         "traitlets",
         "typepy",
+        "typed_ast",
         "unify",
         "untokenize",
         "urllib3",

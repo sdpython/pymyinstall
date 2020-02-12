@@ -402,6 +402,10 @@ def small_set():
         ModuleInstall("wrapt", "wheel",
                       purpose="A Python module for decorators, wrappers and monkey patching."),
         ModuleInstall(
+            "typed_ast", "pip",
+            purpose="typed_ast is a Python 3 package that provides a Python 2.7 and Python 3 "
+            "parser similar to the standard ast library."),
+        ModuleInstall(
             "astroid", "pip",
             purpose="A abstract syntax tree for Python with inference support."),
         ModuleInstall(
