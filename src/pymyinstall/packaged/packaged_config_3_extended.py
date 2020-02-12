@@ -724,9 +724,6 @@ def extended_set():
         ModuleInstall('pybind11', 'pip', usage="C++",
                       purpose="pybind11 is a lightweight header-only library that exposes C++ types in Python and vice versa, " +
                       "mainly to create Python bindings of existing C++ code."),
-        ModuleInstall('typed_ast', 'pip',
-                      purpose="typed_ast is a Python 3 package that provides a Python 2.7 and Python 3 parser " +
-                      "similar to the standard ast library."),
         ModuleInstall('mypy_extensions', 'pip', purpose="for mypy"),
         ModuleInstall('mypy', 'pip',
                       purpose="Mypy is an experimental optional static type checker for Python that aims to combine the benefits of " +
