@@ -9,7 +9,7 @@ openpyxl
 Pillow
 pip>=10.0
 pivottablejs
-pyquickhelper>=1.9
+pyquickhelper>=1.9.3325
 requests
 scikit-learn
 sphinx_readable_theme
