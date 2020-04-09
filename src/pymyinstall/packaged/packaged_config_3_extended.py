@@ -44,6 +44,9 @@ def extended_set():
         ModuleInstall("atomicwrites", "pip", purpose="Atomic file writes."),
         ModuleInstall("pytest", "pip",
                       purpose="pytest: simple powerful testing with Python"),
+        ModuleInstall("parameterized", "pip",
+                      purpose="parameterized: For everything. Parameterized testing "
+                      "for nose, parameterized testing for py.test, parameterized testing for unittest."),
         ModuleInstall(
             "blist", "wheel",
             purpose="a list-like type with better asymptotic performance and similar performance on small lists"),
