@@ -6,7 +6,7 @@ import os
 import unittest
 import pyquickhelper
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder
+from pyquickhelper.pycode import get_temp_folder, skipif_circleci
 from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
 import pymyinstall
 
@@ -51,6 +51,7 @@ class TestRunNotebooks4(unittest.TestCase):
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=pymyinstall)
 
+    @skipif_circleci('too long')
     def test_notebook_example_xgboost(self):
         fLOG(
             __file__,
