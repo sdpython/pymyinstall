@@ -388,12 +388,13 @@ def run_cmd(cmd, sin="", shell=sys.platform.startswith("win"), wait=False, log_e
     @see fn run_cmd_private.
     """
     if old_behavior or not sys.platform.startswith("win"):
-        return run_cmd_old(cmd=cmd, sin=sin, shell=shell, wait=wait, log_error=log_error,
-                           secure=None, stop_waiting_if=stop_running_if, do_not_log=False,
-                           encerror=encerror, encoding=encoding, cwd=change_path, fLOG=fLOG)
-    else:
-        return run_cmd_private(cmd=cmd, sin=sin, shell=shell, wait=wait, log_error=log_error,
-                               stop_running_if=stop_running_if, encerror=encerror,
-                               encoding=encoding, change_path=change_path, communicate=communicate,
-                               preprocess=preprocess, timeout=timeout, catch_exit=catch_exit, fLOG=fLOG,
-                               tell_if_no_output=tell_if_no_output)
+        return run_cmd_old(
+            cmd=cmd, sin=sin, shell=shell, wait=wait, log_error=log_error,
+            secure=None, stop_waiting_if=stop_running_if, do_not_log=False,
+            encerror=encerror, encoding=encoding, cwd=change_path, fLOG=fLOG)
+    return run_cmd_private(
+        cmd=cmd, sin=sin, shell=shell, wait=wait, log_error=log_error,
+        stop_running_if=stop_running_if, encerror=encerror,
+        encoding=encoding, change_path=change_path, communicate=communicate,
+        preprocess=preprocess, timeout=timeout, catch_exit=catch_exit, fLOG=fLOG,
+        tell_if_no_output=tell_if_no_output)

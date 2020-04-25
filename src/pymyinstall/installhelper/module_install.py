@@ -38,6 +38,18 @@ else:
     import xmlrpc.client as xmlrpc_client
 
 
+def _filter_pip_out(out):
+    lines = out.split('\n')
+    res = []
+    for line in lines:
+        if "WARNING:" in line:
+            continue
+        if "Consider adding this directory to PATH" in line:
+            continue
+        res.append(line)
+    return "\n".join(res).strip(' \n\r\t')
+
+
 class ModuleInstall:
 
     """
@@ -1039,6 +1051,7 @@ class ModuleInstall:
                 sys.argv = []
             out, err = run_cmd(
                 cmd, wait=True, fLOG=self.fLOG)
+            out = _filter_pip_out(out)
             if out_streams is not None:
                 out_streams.append((cmd, out, err))
             if self.name == "kivy-garden":
