@@ -132,8 +132,7 @@ def cloud_set():
                  'azure_mgmt_managementgroups',
                  'azure_mgmt_devspaces',
                  'azure_mgmt_signalr',
-                 # main package
-                 'azure']:
+                 ]:
 
         # azure part
         mname = name.replace("-", ".").replace("_", ".")

@@ -26,7 +26,6 @@ install:
   - "%PYTHON%\\Scripts\\pip install joblib"
   - "%PYTHON%\\Scripts\\pip install memory_profiler!=0.48.0"
 #  check the status of rodeo
-# - "%PYTHON%\\Scripts\\pip install rodeo"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"
   - "%PYTHON%\\Scripts\\pip install -r requirements.txt"
   - set PYTHONPATH=src
