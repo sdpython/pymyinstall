@@ -28,6 +28,7 @@ install:
 #  check the status of rodeo
 # - "%PYTHON%\\Scripts\\pip install rodeo"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"
+  - "%PYTHON%\\Scripts\\pip install -r requirements.txt"
   - set PYTHONPATH=src
 
 build: off
