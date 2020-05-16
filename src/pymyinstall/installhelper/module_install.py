@@ -455,12 +455,12 @@ class ModuleInstall:
                                         self.name + "\n" + "\n".join(links) + prefs)
         links = links_
 
-        links = [(l.split("/")[-1], l) for l in links]
+        links = [(lu.split("/")[-1], lu) for lu in links]
         links0 = links
 
         if self.name == "numpy":
-            links = [l for l in links if "unoptimized" not in l[
-                0].lower() and "vanilla" not in l[0].lower()]
+            links = [lu for lu in links if "unoptimized" not in lu[
+                0].lower() and "vanilla" not in lu[0].lower()]
 
         if len(links) == 0:
             raise Exception("unable to find a single link for " +
@@ -529,15 +529,15 @@ class ModuleInstall:
                     f.write(page)
             raise MissingWheelException(
                 "Unable to find a single link for " + self.name)
-        nbnone = [l for l in links if l[2] is None]
+        nbnone = [lu for lu in links if lu[2] is None]
         if len(nbnone) * 2 > len(links):
             raise WrongWheelException("Unable to find any version in\n{0}".format(
                 "\n".join(str(_) for _ in links)))
         links0 = links
 
         if self.name == "numpy":
-            links = [l for l in links if "unoptimized" not in l[
-                0].lower() and "vanilla" not in l[0].lower()]
+            links = [lu for lu in links if "unoptimized" not in lu[
+                0].lower() and "vanilla" not in lu[0].lower()]
 
         if len(links) == 0:
             raise Exception("unable to find a single link for " +

@@ -148,11 +148,11 @@ def name_sets_dataframe(module_set=None):
     return [_[1] for _ in so]
 
 
-def classifiers2string(l):
+def classifiers2string(li):
     """
-    shorten the list of classifiers into a string
+    Shortens the list of classifiers into a string.
 
-    @param      l       list
+    @param      li      list
     @return             string
 
     Example::
@@ -162,10 +162,10 @@ def classifiers2string(l):
          'Programming Language :: Python :: 3', 'Programming Language :: Python :: 3.3',
          'Programming Language :: Python :: 3.4', 'License :: OSI Approved :: Apache Software License']
     """
-    if l is None:
+    if li is None:
         return ""
     res = []
-    for cl in sorted(set(l)):
+    for cl in sorted(set(li)):
         if cl == "Programming Language :: Python":
             s = "Python"
         else:
@@ -194,6 +194,7 @@ def classifiers2string(l):
             s = "Qt"
         elif s.startswith("Windows"):
             s = "Windows"
-        if "Framework" not in s and "Topic" not in s and "Intended Audience" not in s and "Natural Language" not in s:
+        if ("Framework" not in s and "Topic" not in s and
+                "Intended Audience" not in s and "Natural Language" not in s):
             res.append(s)
     return ", ".join(res)
