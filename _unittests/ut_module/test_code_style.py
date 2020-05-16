@@ -50,6 +50,7 @@ class TestCodeStyle(ExtTestCase):
                          "Unable to import 'src.pymyinstall.installhelper.status_helper'",
                          "[W503] line break before binary operator",
                          "install_custom_python.py:164",
+                         "ipython_helper.py:21: E1101",
                          ])
 
     def test_style_test(self):
