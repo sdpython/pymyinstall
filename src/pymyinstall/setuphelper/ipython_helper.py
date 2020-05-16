@@ -17,7 +17,7 @@ def install_mathjax():
     """
     install a local copy of mathjax
     """
-    from IPython.external import mathjax
+    from IPython.external import mathjax  # pylint: disable=E1101
     mathjax.install_mathjax()
 
 
