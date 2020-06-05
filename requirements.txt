@@ -3,6 +3,7 @@ coverage
 joblib
 jyquickhelper
 keyring
+matplotlib
 memory_profiler!=0.48.0
 natsort
 openpyxl
