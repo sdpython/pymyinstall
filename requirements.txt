@@ -11,6 +11,7 @@ Pillow
 pip>=10.0
 pivottablejs
 pandas
+pycodestyle
 pyquickhelper>=1.9.3325
 requests
 scikit-learn
