@@ -12,6 +12,7 @@ def pyquickhelper_set():
     """
     names = [
         "alabaster",
+        'appdirs',
         "asn1crypto",
         "astroid",
         "attrs",
@@ -39,6 +40,7 @@ def pyquickhelper_set():
         "DataProperty",
         "decorator",
         "defusedxml",  # cairosvg
+        'distlib',
         "docformatter",
         "docutils",
         "entrypoints",
@@ -132,6 +134,7 @@ def pyquickhelper_set():
         'pywinpty' if sys.platform.startswith("win") else None,
         "pyzmq",
         "qtconsole",
+        'qtpy',
         "requests",
         "secretstorage",
         "semantic_version",
@@ -158,6 +161,7 @@ def pyquickhelper_set():
         "terminado",
         "testpath",
         "tinycss2",
+        'toml',
         "tornado",
         'tqdm',
         "traitlets",

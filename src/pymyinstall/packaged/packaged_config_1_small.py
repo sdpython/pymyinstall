@@ -510,6 +510,9 @@ def small_set():
                       "under test with mock objects and make assertions about how they have been used."),
         ModuleInstall("multimethods", "pip",
                       purpose="A multimethod implementation, loosely based on Guido’s initial ‘Five-minute Multimethods in Python."),
+        ModuleInstall("distlib", "pip",
+                      purpose="Low-level components of distutils2/packaging, augmented with higher-level APIs for "
+                      "making packaging easier."),
         ModuleInstall("appdirs", "pip",
                       purpose="A small Python module for determining appropriate platform-specific dirs"),
         ModuleInstall("qgrid", "pip", usage="VIZ",
