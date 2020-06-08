@@ -30,6 +30,7 @@ def datascientistbase_set():
         "pythonnet",
         "pywin32" if sys.platform.startswith("win") else None,
         "pywin32-ctypes" if sys.platform.startswith("win") else None,
+        "pyyaml",
         "s3transfer",
         "scikit-learn",
         "scipy",
