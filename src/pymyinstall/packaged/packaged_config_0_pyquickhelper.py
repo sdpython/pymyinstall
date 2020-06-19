@@ -159,6 +159,7 @@ def pyquickhelper_set():
         'sphinx-rtd-theme',
         "tabledata",
         'tabulate',
+        'termcolor',
         "terminado",
         "testpath",
         "tinycss2",
