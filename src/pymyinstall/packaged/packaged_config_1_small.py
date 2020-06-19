@@ -195,6 +195,9 @@ def small_set():
             "statsmodels", "wheel", purpose="statistical modelling, depends on scipy", usage="DATA/ML"),
         ModuleInstall(
             "enum34", "pip", purpose="for ggplot, Object-oriented filesystem paths") if sys.version_info[:2] < (3, 4) else None,
+        ModuleInstall("fire", "pip",
+                      purpose="Python Fire is a library for automatically generating command line "
+                      "interfaces (CLIs) from absolutely any Python object."),
         ModuleInstall("pathlib2", "pip",
                       purpose="for ggplot, Object-oriented filesystem paths"),
         ModuleInstall("ggplot", "pip", purpose="ggplot graphics style"),
