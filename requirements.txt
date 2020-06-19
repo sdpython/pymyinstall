@@ -1,6 +1,7 @@
 autopep8
 cairocffi
 coverage
+fire
 joblib
 jyquickhelper
 keyring
