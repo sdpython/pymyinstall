@@ -46,6 +46,7 @@ def pyquickhelper_set():
         "entrypoints",
         "et_xmlfile",
         "filelock",
+        "fire",
         "funcparserlib",
         "git-pandas",
         "gitdb",
