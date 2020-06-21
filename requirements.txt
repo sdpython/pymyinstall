@@ -19,7 +19,9 @@ pylint
 pyquickhelper>=1.9.3325
 requests
 scikit-learn
+sphinx
 sphinx_readable_theme
+sphinx_gallery
 tornado<6.0
 urllib3
 version_information
