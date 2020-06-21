@@ -4,6 +4,7 @@ coverage
 docutils
 fire
 joblib
+jupyter_sphinx
 jyquickhelper
 keyring
 matplotlib
