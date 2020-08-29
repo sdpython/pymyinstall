@@ -215,7 +215,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         if not is_installed:
             continue
         if verbose:
-            fLOG("[wait] 0.5 sseconds")
+            fLOG("[wait] 0.5 seconds")
         time.sleep(0.5)
         if verbose:
             fLOG("[update-check] ##", mod.name, "## [begin]")
