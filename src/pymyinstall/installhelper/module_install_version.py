@@ -256,15 +256,15 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
             try:
                 available = pypi.package_releases(module_name, True)
                 return available
-            except TimeoutError as e:
-                nbtry += 1
-                warnings.warn(e)
             except Exception as e:
                 if "HTTPTooManyRequests" in str(type(e)):
                     nbtry += 1
                     warnings.warn(e)
                     time.sleep(90)
                     continue
+                if "TimeoutError" in str(type(e)):
+                    nbtry += 1
+                    warnings.warn(e)
                 raise e
         return None
 
