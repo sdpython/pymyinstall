@@ -252,7 +252,7 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
 
     def pypi_package_releases(module_name, b):
         nbtry = 0
-        while nbtry < 4:
+        while nbtry < 40:
             try:
                 available = pypi.package_releases(module_name, True)
                 return available
