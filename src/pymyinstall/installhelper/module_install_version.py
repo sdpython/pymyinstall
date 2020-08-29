@@ -260,13 +260,15 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
                 if ("HTTPTooManyRequests" in str(type(e)) or
                         "HTTPTooManyRequests" in str(e)):
                     nbtry += 1
-                    warnings.warn(e)
+                    warnings.warn(str(e))
                     time.sleep(90)
                     continue
                 if ("TimeoutError" in str(type(e)) or
                         "TimeoutError" in str(e)):
                     nbtry += 1
-                    warnings.warn(e)
+                    warnings.warn(str(e))
+                    time.sleep(20)
+                    continue
                 raise e
         return None
 
