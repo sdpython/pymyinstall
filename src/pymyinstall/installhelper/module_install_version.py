@@ -6,6 +6,7 @@ import sys
 import re
 import warnings
 import functools
+import time
 from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
 from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
@@ -247,139 +248,143 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
             return available
         elif available is not None and len(available) > 0:
             return available[0]
-        else:
-            return None
-    else:
+        return None
 
-        def pypi_package_releases(module_name, b):
-            nbtry = 0
-            while nbtry < 2:
-                try:
-                    available = pypi.package_releases(module_name, True)
-                    return available
-                except TimeoutError as e:
+    def pypi_package_releases(module_name, b):
+        nbtry = 0
+        while nbtry < 4:
+            try:
+                available = pypi.package_releases(module_name, True)
+                return available
+            except TimeoutError as e:
+                nbtry += 1
+                warnings.warn(e)
+            except Exception as e:
+                if "HTTPTooManyRequests" in str(type(e)):
                     nbtry += 1
                     warnings.warn(e)
-            return None
+                    time.sleep(90)
+                    continue
+                raise e
+        return None
 
-        def _inside_loop_(pypi, module_name, tried):
+    def _inside_loop_(pypi, module_name, tried):
 
-            available = pypi_package_releases(module_name, True)
-
-            if available is None or len(available) == 0:
-                ntry = module_name.capitalize()
-                if ntry not in tried:
-                    tried.append(ntry)
-                    available = pypi_package_releases(tried[-1], True)
-
-            if available is None or len(available) == 0:
-                ntry = module_name.replace("-", "_")
-                if ntry not in tried:
-                    tried.append(ntry)
-                    available = pypi_package_releases(tried[-1], True)
-
-            if available is None or len(available) == 0:
-                ntry = module_name.replace("_", "-")
-                if ntry not in tried:
-                    tried.append(ntry)
-                    available = pypi_package_releases(tried[-1], True)
-
-            if available is None or len(available) == 0:
-                ntry = module_name.lower()
-                if ntry not in tried:
-                    tried.append(ntry)
-                    available = pypi_package_releases(tried[-1], True)
-
-            if available is None or len(available) == 0:
-                ml = module_name.lower()
-                if ml == "markupsafe":
-                    tried.append("MarkupSafe")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "flask-sqlalchemy":
-                    tried.append("Flask-SQLAlchemy")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "apscheduler":
-                    tried.append("APScheduler")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "datashape":
-                    tried.append("DataShape")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "pycontracts":
-                    tried.append("PyContracts")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "pybrain":
-                    tried.append("PyBrain")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "pyexecjs":
-                    tried.append("PyExecJS")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "dataspyre":
-                    tried.append("DataSpyre")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "heapdict":
-                    tried.append("HeapDict")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "pyreact":
-                    tried.append("PyReact")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "qtpy":
-                    tried.append("QtPy")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "pythonqwt":
-                    tried.append("PythonQwt")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml == "onedrive-sdk-python":
-                    tried.append("onedrivesdk")
-                    available = pypi_package_releases(tried[-1], True)
-                elif ml.startswith("orange3-"):
-                    s = ml.split("-")[1]
-                    ntry = "Orange3-" + s[0].upper() + s[1:]
-                    tried.append(ntry)
-                    available = pypi_package_releases(tried[-1], True)
-                elif module_name in annoying_modules:
-                    raise AnnoyingPackageException(module_name)
-
-            # this raises a warning about an opened connection
-            # see documentation of the function
-            # del pypi
-
-            return available
-
-        tried = [module_name]
-
-        if sys.version_info[:2] <= (3, 4):
-            # the client does not an implemented of __exit__ for version <= 3.4
-            pypi = xmlrpc_client.ServerProxy(url)
-            available = _inside_loop_(pypi, module_name, tried)
-        else:
-            with xmlrpc_client.ServerProxy(url) as pypi:
-                available = _inside_loop_(pypi, module_name, tried)
+        available = pypi_package_releases(module_name, True)
 
         if available is None or len(available) == 0:
-            raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
+            ntry = module_name.capitalize()
+            if ntry not in tried:
+                tried.append(ntry)
+                available = pypi_package_releases(tried[-1], True)
 
-        def filter_betas(a):
-            spl = a.split(".")
-            if len(spl) in (2, 3):
-                last = spl[-1]
-                if not skip_betas or ("a" not in last and "b" not in last and "dev" not in last):
-                    return True
-            else:
-                # we don't really know here, so we assume it is not
+        if available is None or len(available) == 0:
+            ntry = module_name.replace("-", "_")
+            if ntry not in tried:
+                tried.append(ntry)
+                available = pypi_package_releases(tried[-1], True)
+
+        if available is None or len(available) == 0:
+            ntry = module_name.replace("_", "-")
+            if ntry not in tried:
+                tried.append(ntry)
+                available = pypi_package_releases(tried[-1], True)
+
+        if available is None or len(available) == 0:
+            ntry = module_name.lower()
+            if ntry not in tried:
+                tried.append(ntry)
+                available = pypi_package_releases(tried[-1], True)
+
+        if available is None or len(available) == 0:
+            ml = module_name.lower()
+            if ml == "markupsafe":
+                tried.append("MarkupSafe")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "flask-sqlalchemy":
+                tried.append("Flask-SQLAlchemy")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "apscheduler":
+                tried.append("APScheduler")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "datashape":
+                tried.append("DataShape")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "pycontracts":
+                tried.append("PyContracts")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "pybrain":
+                tried.append("PyBrain")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "pyexecjs":
+                tried.append("PyExecJS")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "dataspyre":
+                tried.append("DataSpyre")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "heapdict":
+                tried.append("HeapDict")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "pyreact":
+                tried.append("PyReact")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "qtpy":
+                tried.append("QtPy")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "pythonqwt":
+                tried.append("PythonQwt")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml == "onedrive-sdk-python":
+                tried.append("onedrivesdk")
+                available = pypi_package_releases(tried[-1], True)
+            elif ml.startswith("orange3-"):
+                s = ml.split("-")[1]
+                ntry = "Orange3-" + s[0].upper() + s[1:]
+                tried.append(ntry)
+                available = pypi_package_releases(tried[-1], True)
+            elif module_name in annoying_modules:
+                raise AnnoyingPackageException(module_name)
+
+        # this raises a warning about an opened connection
+        # see documentation of the function
+        # del pypi
+
+        return available
+
+    tried = [module_name]
+
+    if sys.version_info[:2] <= (3, 4):
+        # the client does not an implemented of __exit__ for version <= 3.4
+        pypi = xmlrpc_client.ServerProxy(url)
+        available = _inside_loop_(pypi, module_name, tried)
+    else:
+        with xmlrpc_client.ServerProxy(url) as pypi:
+            available = _inside_loop_(pypi, module_name, tried)
+
+    if available is None or len(available) == 0:
+        raise MissingPackageOnPyPiException("tried:\n" + "\n".join(tried))
+
+    def filter_betas(a):
+        spl = a.split(".")
+        if len(spl) in (2, 3):
+            last = spl[-1]
+            if not skip_betas or ("a" not in last and "b" not in last and "dev" not in last):
                 return True
-            return False
+        else:
+            # we don't really know here, so we assume it is not
+            return True
+        return False
 
-        if available:
-            available2 = list(filter(filter_betas, available))
-            if available2:
-                _get_pypi_version_memoize[key] = available2
-                if full_list:
-                    return available2
-                else:
-                    return available2[0]
+    if available:
+        available2 = list(filter(filter_betas, available))
+        if available2:
+            _get_pypi_version_memoize[key] = available2
+            if full_list:
+                return available2
+            return available2[0]
 
-        raise MissingVersionOnPyPiException(
-            "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
+    raise MissingVersionOnPyPiException(
+        "{0}\nversion:\n{1}".format(module_name, "\n".join(available)))
 
 
 def numeric_version(vers):
@@ -415,8 +420,7 @@ def compare_version(num, vers):
     if num is None:
         if vers is None:
             return 0
-        else:
-            return 1
+        return 1
     if vers is None:
         return -1
 
@@ -430,23 +434,22 @@ def compare_version(num, vers):
             if isinstance(a, int) and isinstance(b, int):
                 if a < b:
                     return -1
-                elif a > b:
+                if a > b:
                     return 1
             else:
                 a = str(a)
                 b = str(b)
                 if a < b:
                     return -1
-                elif a > b:
+                if a > b:
                     return 1
         return 0
-    else:
-        if len(num) < len(vers):
-            num = num + (0,) * (len(vers) - len(num))
-            return compare_version(num, vers)
-        else:
-            vers = vers + (0,) * (len(num) - len(vers))
-            return compare_version(num, vers)
+
+    if len(num) < len(vers):
+        num = num + (0,) * (len(vers) - len(num))
+        return compare_version(num, vers)
+    vers = vers + (0,) * (len(num) - len(vers))
+    return compare_version(num, vers)
 
 
 def version_consensus(v1, v2):
@@ -484,108 +487,108 @@ def version_consensus(v1, v2):
 
     if v1 is None:
         return v2
-    elif v2 is None:
+    if v2 is None:
         return v1
-    else:
-        s1, n1 = process_version(v1)
-        s2, n2 = process_version(v2)
 
-        if s1 not in ('<=', '==', '<', '>', '>='):
-            raise ValueError("wrong sign {0} for v1={1}".format(s1, v1))
-        if s2 not in ('<=', '==', '<', '>', '>='):
-            raise ValueError("wrong sign {0} for v1={1}".format(s2, v2))
+    s1, n1 = process_version(v1)
+    s2, n2 = process_version(v2)
 
-        if s1 == "==":
-            if s2 == "==":
-                if compare_version(n1, n2) != 0:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+    if s1 not in ('<=', '==', '<', '>', '>='):
+        raise ValueError("wrong sign {0} for v1={1}".format(s1, v1))
+    if s2 not in ('<=', '==', '<', '>', '>='):
+        raise ValueError("wrong sign {0} for v1={1}".format(s2, v2))
+
+    if s1 == "==":
+        if s2 == "==":
+            if compare_version(n1, n2) != 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+        else:
+            res = s1, n1
+
+    elif s1 == "<=":
+        if s2 == "<=":
+            res = s1, min(n1, n2)
+        elif s2 == "==":
+            if compare_version(n1, n2) < 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s2, n2
+        elif s2 == '<':
+            if compare_version(n1, n2) == -1:
+                res = s1, n1
+            else:
+                res = s2, n2
+        elif s2 in ('>', '>='):
+            if compare_version(n1, n2) <= 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s1, n1
+
+    elif s1 == "<":
+        if s2 == "<":
+            res = s1, min(n1, n2)
+        elif s2 == "==":
+            if compare_version(n1, n2) <= 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s2, n2
+        elif s2 == '<=':
+            if compare_version(n1, n2) <= 0:
+                res = s1, n1
+            else:
+                res = s2, n2
+        elif s2 in ('>', '>='):
+            if compare_version(n1, n2) <= 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s1, n1
+
+    elif s1 == ">=":
+        if s2 == ">=":
+            res = s1, max(n1, n2)
+        elif s2 == "==":
+            if compare_version(n1, n2) == -1:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s2, n2
+        elif s2 == '>':
+            if compare_version(n1, n2) <= 0:
+                res = s2, n2
             else:
                 res = s1, n1
+        elif s2 in ('<', '<='):
+            if compare_version(n1, n2) >= 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s2, n2
 
-        elif s1 == "<=":
-            if s2 == "<=":
-                res = s1, min(n1, n2)
-            elif s2 == "==":
-                if compare_version(n1, n2) < 0:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+    elif s1 == ">":
+        if s2 == ">":
+            res = s1, max(n1, n2)
+        elif s2 == "==":
+            if compare_version(n1, n2) >= 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s2, n2
+        elif s2 == '>=':
+            if compare_version(n1, n2) == -1:
                 res = s2, n2
-            elif s2 == '<':
-                if compare_version(n1, n2) == -1:
-                    res = s1, n1
-                else:
-                    res = s2, n2
-            elif s2 in ('>', '>='):
-                if compare_version(n1, n2) <= 0:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            else:
                 res = s1, n1
+        elif s2 in ('<', '<='):
+            if compare_version(n1, n2) == 1:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s2, n2
+    else:
+        res = None, None
 
-        elif s1 == "<":
-            if s2 == "<":
-                res = s1, min(n1, n2)
-            elif s2 == "==":
-                if compare_version(n1, n2) <= 0:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
-                res = s2, n2
-            elif s2 == '<=':
-                if compare_version(n1, n2) <= 0:
-                    res = s1, n1
-                else:
-                    res = s2, n2
-            elif s2 in ('>', '>='):
-                if compare_version(n1, n2) <= 0:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
-                res = s1, n1
+    if res[0] is None:
+        raise WrongVersionError(
+            "incompatible version and wrong format: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
 
-        elif s1 == ">=":
-            if s2 == ">=":
-                res = s1, max(n1, n2)
-            elif s2 == "==":
-                if compare_version(n1, n2) == -1:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
-                res = s2, n2
-            elif s2 == '>':
-                if compare_version(n1, n2) <= 0:
-                    res = s2, n2
-                else:
-                    res = s1, n1
-            elif s2 in ('<', '<='):
-                if compare_version(n1, n2) >= 0:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
-                res = s2, n2
-
-        elif s1 == ">":
-            if s2 == ">":
-                res = s1, max(n1, n2)
-            elif s2 == "==":
-                if compare_version(n1, n2) >= 0:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
-                res = s2, n2
-            elif s2 == '>=':
-                if compare_version(n1, n2) == -1:
-                    res = s2, n2
-                else:
-                    res = s1, n1
-            elif s2 in ('<', '<='):
-                if compare_version(n1, n2) == 1:
-                    raise WrongVersionError(
-                        "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
-                res = s2, n2
-        else:
-            res = None, None
-
-        if res[0] is None:
-            raise WrongVersionError(
-                "incompatible version and wrong format: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
-
-        return '{0}{1}'.format(res[0], '.'.join(str(_) for _ in res[1]))
+    return '{0}{1}'.format(res[0], '.'.join(str(_) for _ in res[1]))
 
 
 _get_module_dependencies_deps = None
@@ -722,9 +725,9 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                     final[name] = (v, ex)
         final = {k: (v[0], list(sorted(v[1]))) for k, v in final.items()}
         return final
-    else:
-        return [(name, version.strip('()') if version is not None else version, required)
-                for name, version, required in res]
+
+    return [(name, version.strip('()') if version is not None else version, required)
+            for name, version, required in res]
 
 
 def choose_most_recent(list_name):

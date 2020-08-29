@@ -17,6 +17,7 @@ from __future__ import print_function
 import sys
 import os
 import warnings
+import time
 from textwrap import wrap
 from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, get_module_dependencies
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException, MissingReferenceException
@@ -213,6 +214,9 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         is_installed = mod.is_installed_version()
         if not is_installed:
             continue
+        if verbose:
+            fLOG("[wait] 0.5 sseconds")
+        time.sleep(0.5)
         if verbose:
             fLOG("[update-check] ##", mod.name, "## [begin]")
 
