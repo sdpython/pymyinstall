@@ -17,7 +17,8 @@ class TestAllPyPiModule(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        subset = {"cubehelix", "dataspyre", "ete3", "heapdict", "libpython", "natgrid", "onedrive-sdk-python",
+        subset = {"cubehelix", "dataspyre", "ete3", "heapdict", "libpython",
+                  "natgrid", "onedrive-sdk-python",
                   "orange3", "orange3-associate", "orange3-network", "orange3-text",
                   "py-earth", "pyexecjs", "pymc3", "pyreact", "pythonqwt", "qtpy"}
 
@@ -31,7 +32,7 @@ class TestAllPyPiModule(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mods = ensae_fullset()
+        mods = ensae_fullset()[:10]
         self._pipy_version(mods)
 
     def _pipy_version(self, mods, nbmax=15):
