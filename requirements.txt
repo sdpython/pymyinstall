@@ -10,6 +10,7 @@ keyring
 matplotlib
 memory_profiler!=0.48.0
 natsort
+nbconvert>=6.0.2
 openpyxl
 Pillow
 pip>=10.0
