@@ -36,9 +36,8 @@ class TestPyMyStatusCli(unittest.TestCase):
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
                 return
-            else:
-                raise Exception(
-                    "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
+            raise Exception(
+                "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
         if len(err) > 0:
             raise Exception(
                 "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
