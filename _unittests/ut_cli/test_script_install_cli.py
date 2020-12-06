@@ -9,12 +9,13 @@ import os
 import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import is_travis_or_appveyor
+from pyquickhelper.pycode import is_travis_or_appveyor, skipif_circleci
 from pymyinstall.installhelper import run_cmd
 
 
 class TestScriptInstallCli(unittest.TestCase):
 
+    @skipif_circleci("stuck")
     def test_script_help(self):
         fLOG(
             __file__,
@@ -50,6 +51,7 @@ class TestScriptInstallCli(unittest.TestCase):
                 raise Exception(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
 
+    @skipif_circleci("stuck")
     def test_script_schedule(self):
         fLOG(
             __file__,
