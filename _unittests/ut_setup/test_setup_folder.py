@@ -4,6 +4,7 @@
 """
 import os
 import unittest
+import warnings
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder, ExtTestCase
 from pymyinstall.setuphelper import create_folder_setup
@@ -19,7 +20,11 @@ class TestSetupFolder(ExtTestCase):
 
         temp = get_temp_folder(__file__, "temp_setup_folder", clean=False)
 
-        import cairocffi
+        try:
+            import cairocffi
+        except (ImportError, OSError) as e:
+            warnings.warn(str(e))
+            return
         self.assertTrue(cairocffi is not None)
         st = create_folder_setup('cairocffi', fLOG=fLOG, output_path=temp)
         self.assertEqual(len(st), 1)
