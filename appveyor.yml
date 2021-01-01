@@ -11,15 +11,8 @@ init:
 install:
   - "%PYTHON%\\python -m pip install --upgrade pip"
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
-  # - "%PYTHON%\\Scripts\\pymy_install3 --set=pyquickhelper"
   - "%PYTHON%\\Scripts\\pip install numpy scipy"
-  - "%PYTHON%\\Scripts\\pymy_install3 pandas matplotlib shapely pyproj cffi cairocffi memory_profiler"
-  - "%PYTHON%\\Scripts\\pip install pyquickhelper jyquickhelper"
-  - "%PYTHON%\\Scripts\\pip install ggplot version_information pivottablejs"
-  - "%PYTHON%\\Scripts\\pip install spyder"
-  - "%PYTHON%\\Scripts\\pip install joblib"
-  - "%PYTHON%\\Scripts\\pip install memory_profiler!=0.48.0"
-#  check the status of rodeo
+  - "%PYTHON%\\Scripts\\pymy_install3 shapely pyproj llvmlite"
   - "%PYTHON%\\Scripts\\pip uninstall -y pymyinstall"
   - "%PYTHON%\\Scripts\\pip install -r requirements.txt"
   - set PYTHONPATH=src
