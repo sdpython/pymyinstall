@@ -5,8 +5,11 @@
 History
 =======
 
-current - 2019-09-25 - 0.00Mb
+current - 2021-01-01 - 0.00Mb
 =============================
+
+* `68`: Exception HTTPTooManyRequests when checking package versions (2020-08-29)
+* `67`: filter out some warnings when installing a package (2020-04-25)
 
 1.3.1776 - 2019-09-22 - 1.98Mb
 ==============================
@@ -15,10 +18,6 @@ current - 2019-09-25 - 0.00Mb
 * `65`: upgrade dependencies to pip >=10 (2019-03-17)
 * `63`: add ONNX modules (2019-02-02)
 * `60`: standalone installation on linux (2019-02-02)
-
-1.2.1676 - 2018-11-10 - 1.98Mb
-==============================
-
 * `62`: simplify sets of modules to install (2018-11-10)
 * `61`: fix import issue for pip 0.18.1 (2018-10-06)
 * `33`: add code to remove unneeded packages such as gdata (2018-07-31)
@@ -45,10 +44,6 @@ current - 2019-09-25 - 0.00Mb
 * `38`: add module asteval (lmfit), ipydatawidgets (pythreejs) (2018-03-31)
 * `37`: add module packaging (2018-03-30)
 * `35`: add python to PATH when testing datascientist distribution (2018-01-05)
-
-1.1.1431 - 2017-11-28 - 1.98Mb
-==============================
-
 * `34`: enable pip+git (2017-09-24)
 * `21`: fix ete3 (2017-09-17)
 * `32`: add Python 3.6.2 (2017-09-16)

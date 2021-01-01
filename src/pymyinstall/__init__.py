@@ -45,7 +45,7 @@ from .win_installer.win_setup_main import win_python_setup
 from .packaged import install_module, update_module, download_module
 
 
-__version__ = "1.3.1829"
+__version__ = "1.4.1869"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pymyinstall"
 __url__ = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html"

@@ -1,8 +1,8 @@
-dist: xenial
+dist: focal
 sudo: true
 language: python
 python:
-    - "3.7"
+    - "3.9"
 install: 
     - pip install -r requirements.txt
     - export PYTHONPATH=src
