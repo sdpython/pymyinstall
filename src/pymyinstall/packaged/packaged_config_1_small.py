@@ -217,8 +217,6 @@ def small_set():
         ModuleInstall(
             "xarray", "pip", purpose="pandas like library for cubes (N-dimensional data)", usage="DATA/ML"),
         ModuleInstall(
-            "bcolz", "wheel", purpose="compressed dataframe, in memory or on disk", usage="DATA/ML"),
-        ModuleInstall(
             "threadpoolctl", "pip", purpose="Python helpers to limit the number of threads used in the "
             "threadpool-backed of common native libraries used for scientific computing and data science "
             "(e.g. BLAS and OpenMP)."),

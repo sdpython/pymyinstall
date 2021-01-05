@@ -304,7 +304,7 @@ def extended_set():
         ModuleInstall(
             "bayespy", "pip", purpose="bayesian modelling and computation", usage="DATA/ML"),
         ModuleInstall(
-            "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas, bcolz and more."),
+            "numexpr", "wheel", purpose="Fast numerical array expression evaluator for Python, NumPy, PyTables, pandas and more."),
         #
         ModuleInstall("glue-core", "pip", mname="glue.core",
                       purpose="Multidimensional data visualzation across files"),
