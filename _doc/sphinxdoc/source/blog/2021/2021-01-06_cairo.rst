@@ -1,15 +1,24 @@
 
 .. blogpost::
-    :title: Automated jobs on jenkins
-    :keywords: jenkins
-    :date: 2020-02-02
-    :categories: automation
+    :title: Cannot load library libcairo-2.dll
+    :keywords: pycairo, cairo, libcairo
+    :date: 2021-01-06
+    :categories: installation
 
-    I don't know why but many of my jobs
-    fill the folder ``/var/lib/jenkins/.local/``
-    whether I only create virtual environments.
-    I need to delete it:
+    The following error may appear when using
+    `pycairo <https://pycairo.readthedocs.io/en/latest/>`_.
+    This module is usually not directly used but through
+    :epkg:`matplotlib`.
 
     ::
 
-        rm /var/lib/jenkins/.local/ -r -f
+        cannot load library '..\bin\libcairo-2.dll': error 0xc1
+        cannot load library 'libcairo.so.2': error 0x7e
+        cannot load library 'libcairo.2.dylib': error 0x7e
+        cannot load library 'libcairo-2.dll': error 0xc1
+
+    I was able to solved the issue by installing the
+    latest version of `Graphviz <https://graphviz.org/>`_
+    (2.44) which can be found here:
+    `www2.graphviz.org/...
+    <https://www2.graphviz.org/Packages/stable/windows/10/cmake/Release/Win32/>`_.
