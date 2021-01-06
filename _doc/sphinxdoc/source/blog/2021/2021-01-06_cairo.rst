@@ -1,0 +1,15 @@
+
+.. blogpost::
+    :title: Automated jobs on jenkins
+    :keywords: jenkins
+    :date: 2020-02-02
+    :categories: automation
+
+    I don't know why but many of my jobs
+    fill the folder ``/var/lib/jenkins/.local/``
+    whether I only create virtual environments.
+    I need to delete it:
+
+    ::
+
+        rm /var/lib/jenkins/.local/ -r -f
