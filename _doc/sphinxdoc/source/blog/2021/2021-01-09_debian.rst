@@ -1,0 +1,147 @@
+
+.. blogpost::
+    :title: Install Python 3.9 and many packages on Linux Debian 10
+    :keywords: python, debian
+    :date: 2021-01-09
+    :categories: installation
+
+    **Password**
+    
+    ::
+    
+        sudo passwd
+
+    **sudo**
+    
+    ::
+    
+        apt-get install sudo git
+
+    **Firewall**
+
+    Let's start with the firewall:
+    
+    ::
+    
+        apt-get install ufw
+        sudo ufw enable
+        sudo ufw allow ssh
+        sudo ufw allow 8080/tcp
+    
+    Another series of packages to install:
+    
+    ::
+    
+        apt-get install intel-mkl
+        apt-get install cmake apt-transport-https clang
+        apt-get protobuf-compiler libprotoc-dev
+        apt-get chromium-driver
+
+    **Python**
+
+    Then `Python 3.9 <https://tecadmin.net/how-to-install-python-3-9-on-debian-10/>`_.
+    Some package require a different build because they need shared libraries.
+    About --enable-shared, see `Relocation R_X86_64_32S against _Py_NotImplementedStruct
+    can not be used when making a shared object; recompile with -fPIC
+    <https://stackoverflow.com/questions/42582712/relocation-r-x86-64-32s-against-py-notimplementedstruct-can-not-be-used-when>`_,
+    `How to configure python with --enable-shared on Ubuntu 18.04
+    <https://stackoverflow.com/questions/53463903/how-to-configure-python-with-enable-shared-on-ubuntu-18-04>`_
+    Option `--enable-shared --prefix=/opt/python` is needed when to embed python
+    interpreter in a C application, see
+    `Embedding the Python interpreter
+    <https://pybind11.readthedocs.io/en/stable/compiling.html#embedding-the-python-interpreter>`_.
+    
+    ::
+    
+        sudo apt update && sudo apt upgrade 
+        sudo apt install wget build-essential libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev software-properties-common
+        wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz 
+        tar xzf Python-3.9.1.tgz 
+        cd Python-3.9.1 
+        ./configure --enable-optimizations --with-ensurepip=install
+        make altinstall
+    
+    If needed, do it again with:
+    
+    ::
+        ./configure --enable-optimizations --with-ensurepip=install
+        make altinstall --enable-shared --prefix=/opt/bin
+    
+    These settings must be added every time a python module is compiled:
+    
+    ::
+    
+        export LD_LIBRARY_PATH=/opt/bin
+        export PATH=/usr/local/Python-3.9.1:$PATH
+
+    **llvmlite**
+    
+    ::
+    
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh 10
+        ls /usr/bin/llvm*
+        
+    These settings must be also added:
+    
+    ::
+    
+        export LLVM_CONFIG=/usr/bin/llvm-config
+
+    **GEOS**
+    
+    Useful to draw maps.
+    
+    ::
+    
+        apt-get install libgeos-dev libproj-dev proj-data graphviz libblas-dev liblapack-dev
+
+    **Latex**
+    
+    ::
+    
+        apt-get install texlive texlive-latex-extra texlive-xetex
+
+    **Jenkins**
+
+    Then `Jenkins
+    <https://linuxize.com/post/how-to-install-jenkins-on-debian-10/>`_:
+
+    ::
+    
+        sudo apt update
+        sudo apt install default-jdk
+        wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+        sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+        sudo apt update
+        sudo apt install jenkins
+        sudo systemctl enable --now jenkins
+    
+    To retrieve the password:
+    
+    ::
+    
+        sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+    **Website**
+    
+    See `Installation of nginx <blog-nginx-install>`.
+    
+    **FTP server**
+    
+    See `Install FTP server on debian <blog-ftp-vsftpd>`.
+
+    **profile**
+    
+    Edit file:
+    
+    ::
+    
+        ~/.profile
+    
+    **pypiserver**
+    
+    ::
+    
+        nohup python3.9 -m pypiserver --port=8067 --root=/var/lib/jenkins/workspace/local_pypi/local_pypi_server/ > pypi.log &

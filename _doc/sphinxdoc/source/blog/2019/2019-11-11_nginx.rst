@@ -4,6 +4,7 @@
     :keywords: nginx
     :date: 2019-11-11
     :categories: installation
+    :lig: blog-nginx-install
 
     I switched to :epkg:`nginx` as :epkg:`lighttpd`
     started to fail. To install it:
