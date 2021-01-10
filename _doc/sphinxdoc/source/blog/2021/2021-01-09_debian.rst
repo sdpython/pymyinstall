@@ -34,8 +34,9 @@
     
         apt-get install intel-mkl
         apt-get install cmake apt-transport-https clang
-        apt-get protobuf-compiler libprotoc-dev
-        apt-get chromium-driver
+        apt-get install protobuf-compiler libprotoc-dev
+        apt-get install chromium-driver
+        apt-get install dvipng p7zip-full inkscape graphviz unrar 
 
     **Python**
 
