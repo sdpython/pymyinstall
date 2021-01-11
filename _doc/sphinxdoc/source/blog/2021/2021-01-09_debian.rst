@@ -166,3 +166,10 @@
         python3.9 -m pip install dbus-python keyring keyrings.cryptfile
 
         export $(dbus-launch)
+
+    **pycurl*
+
+    ::
+
+        apt-get install libcurl4-openssl-dev libssl-dev
+        python3.9 -m pip install pycurl
