@@ -9,34 +9,34 @@
     To build it `from source <https://www.tensorflow.org/install/source>`_,
     `bazel <https://docs.bazel.build/versions/master/install-ubuntu.html>`_
     must be installed first.
-    
+
     ::
-    
+
         curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg
         sudo mv bazel.gpg /etc/apt/trusted.gpg.d/
         echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
         apt update
         apt install bazel
         bazel --version
-    
+
     Then Tensorflow:
-    
+
     ::
-    
+
         pip install keras_preprocessing --no-deps
         git clone https://github.com/tensorflow/tensorflow.git
         cd tensorflow
         ./configure
-    
+
     The last script prompts to ask question. One of them
     is the CPU optimization. Some suggestions:
-    
+
     ::
-    
+
         --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2
-    
+
     Then build tensorflow:
-    
+
     ::
-    
+
         bazel build --config=mkl //tensorflow/tools/pip_package:build_pip_package
