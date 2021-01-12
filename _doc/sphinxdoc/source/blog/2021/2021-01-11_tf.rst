@@ -29,7 +29,7 @@
         ./configure
 
     The last script prompts to ask question. One of them
-    is the CPU optimization. Some suggestions:
+    is the CPU optimization. Nothing or some suggestions:
 
     ::
 
@@ -39,4 +39,10 @@
 
     ::
 
-        bazel build --config=mkl //tensorflow/tools/pip_package:build_pip_package
+        bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+
+    And finally:
+
+    ::
+
+        bazel-bin/tensorflow/tools/pip_package/build_pip_package --nightly_flag tensorflow_pkg
