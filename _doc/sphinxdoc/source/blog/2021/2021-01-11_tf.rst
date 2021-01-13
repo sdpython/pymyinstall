@@ -46,3 +46,6 @@
     ::
 
         bazel-bin/tensorflow/tools/pip_package/build_pip_package --nightly_flag tensorflow_pkg
+
+    It took me 5 to 6 hours to build the whole package. Then
+    `pip install ...`.
