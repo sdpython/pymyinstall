@@ -338,6 +338,8 @@ def update_pip(python_path=None, fLOG=print):
             lines = err.split("\n")
             keep = []
             for line in lines:
+                if "Prompt dismissed.." in line:
+                    continue
                 if not line.startswith(" ") and "RuntimeWarning: Config variable" not in line and \
                     not(" which is incompatible." in line and " has requirement " in line) and \
                         not(" requires " in line and " which is not installed." in line) and \
