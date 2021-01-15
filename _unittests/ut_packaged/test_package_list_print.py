@@ -3,7 +3,7 @@
 """
 import unittest
 from pyquickhelper.loghelper import fLOG
-from pymyinstall.packaged import all_set
+from pymyinstall.packaged import small_set
 
 
 class TestPackageListPrint(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestPackageListPrint(unittest.TestCase):
 
         every = {}
         duplicated = []
-        for _ in all_set():
+        for _ in small_set():
             name = _.name
             if name in every:
                 duplicated.append(name)

@@ -3,8 +3,7 @@
 """
 import unittest
 from pyquickhelper.loghelper import fLOG
-from pymyinstall.packaged import find_module_install
-from pymyinstall.packaged import ensae_set, pyensae_set, all_set, ensae_fullset
+from pymyinstall.packaged import find_module_install, minimal_set, small_set
 
 
 class TestDisributionSubSet(unittest.TestCase):
@@ -19,40 +18,22 @@ class TestDisributionSubSet(unittest.TestCase):
         assert nb > 0
         return nb
 
-    def test_ensae_set(self):
+    def test_small_set(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        nb = self.walk_text(ensae_set())
+        nb = self.walk_text(small_set())
         fLOG(self._testMethodName, nb)
 
-    def test_pyensae_set(self):
+    def test_minimal_set(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        nb = self.walk_text(pyensae_set())
-        fLOG(self._testMethodName, nb)
-
-    def test_all_set(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
-        nb = self.walk_text(all_set())
-        fLOG(self._testMethodName, nb)
-
-    def test_ensae_fullset(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
-        nb = self.walk_text(ensae_fullset())
+        nb = self.walk_text(minimal_set())
         fLOG(self._testMethodName, nb)
 
 

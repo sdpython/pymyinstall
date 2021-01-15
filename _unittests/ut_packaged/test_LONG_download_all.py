@@ -8,7 +8,7 @@ import unittest
 import re
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from pymyinstall.packaged import all_set
+from pymyinstall.packaged import small_set
 
 
 class TestDownloadAll (unittest.TestCase):
@@ -47,7 +47,7 @@ class TestDownloadAll (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         temp = get_temp_folder(__file__, "temp_download_all")
         skip_set = {'blz', 'dynd'}
-        pack = [_ for _ in all_set() if _.name not in skip_set]
+        pack = [_ for _ in small_set() if _.name not in skip_set]
         self._download_all(pack, temp)
 
     @unittest.skipIf(sys.version_info[:2] == (3, 7), reason="not released yet on Python 3.7")
@@ -57,7 +57,7 @@ class TestDownloadAll (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         temp = get_temp_folder(__file__, "temp_download_ad3")
-        pack = all_set()
+        pack = small_set()
         pack = [_ for _ in pack if _.name == "ad3"]
         self._download_all(pack, temp)
 

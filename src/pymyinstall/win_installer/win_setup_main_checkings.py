@@ -13,7 +13,7 @@ import sys
 from .win_exception import WinInstallDistributionError
 from ..packaged.automate_install import find_module_install
 from ..installhelper.install_venv_helper import run_cmd_path
-from ..packaged import all_set
+from ..packaged import small_set
 from ..installhelper.module_install import ModuleInstall, run_cmd
 
 if sys.version_info[0] == 2:
@@ -127,7 +127,7 @@ def import_every_module(python_path, module_list, only_installed=True, fLOG=prin
         python_path = os.path.dirname(python_path)
 
     if module_list is None:
-        module_list = all_set()
+        module_list = small_set()
 
     def tomod(m):
         if isinstance(m, ModuleInstall):

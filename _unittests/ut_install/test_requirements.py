@@ -4,7 +4,7 @@
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pymyinstall import build_requirements
-from pymyinstall.packaged import small_set, sphinx_theme_set, extended_set, ensae_set, teachings_set
+from pymyinstall.packaged import small_set
 
 
 class TestRequirements (unittest.TestCase):
@@ -15,8 +15,7 @@ class TestRequirements (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mod_list = small_set() + sphinx_theme_set() + extended_set() + \
-            ensae_set() + teachings_set()
+        mod_list = small_set()
         res = build_requirements(mod_list)
         lines = res.split("\n")
         fLOG(len(lines))
@@ -31,8 +30,7 @@ class TestRequirements (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mod_list = small_set() + sphinx_theme_set() + extended_set() + \
-            ensae_set() + teachings_set()
+        mod_list = small_set()
         mod_list.sort()
         build_requirements(mod_list)
         k = [_.usage for _ in mod_list if _.usage is not None]

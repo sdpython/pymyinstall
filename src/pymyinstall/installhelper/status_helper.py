@@ -8,7 +8,7 @@ import os
 
 import time
 from .module_install_version import get_pypi_version
-from ..packaged import all_set
+from ..packaged import small_set
 from ..packaged.packaged_config import classifiers2string
 
 
@@ -24,7 +24,7 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
     @param      fLOG            logging function
     @return                     list of dictionaries
     """
-    mod = all_set()
+    mod = small_set()
     mod.sort()
     rows = [_.as_dict(rst_link=True) for _ in mod]
     for row in rows:

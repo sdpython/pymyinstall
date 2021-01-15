@@ -6,7 +6,7 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG, CustomLog
 from pyquickhelper.pycode import is_travis_or_appveyor
-from pymyinstall.packaged import all_set
+from pymyinstall.packaged import small_set
 from pymyinstall.installhelper import get_wheel_version, compare_version
 from pymyinstall.installhelper.module_install_exceptions import MissingWheelException
 
@@ -22,7 +22,7 @@ class TestCompareVersion(unittest.TestCase):
         if is_travis_or_appveyor():
             return
 
-        mods = [mod for mod in all_set() if mod.kind in ("wheel",)]
+        mods = [mod for mod in small_set() if mod.kind in ("wheel",)]
         fLOG(len(mods))
         self.assertTrue(len(mods) > 0)
         clog = CustomLog(os.path.dirname(__file__),

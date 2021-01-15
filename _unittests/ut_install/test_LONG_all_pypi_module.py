@@ -6,7 +6,7 @@ import warnings
 from pyquickhelper.loghelper import fLOG
 from pymyinstall.installhelper.module_install_exceptions import MissingPackageOnPyPiException
 from pymyinstall.installhelper.module_install_exceptions import MissingVersionOnPyPiException, AnnoyingPackageException
-from pymyinstall.packaged import ensae_fullset
+from pymyinstall.packaged import small_set
 
 
 class TestAllPyPiModule(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestAllPyPiModule(unittest.TestCase):
                   "orange3", "orange3-associate", "orange3-network", "orange3-text",
                   "py-earth", "pyexecjs", "pymc3", "pyreact", "pythonqwt", "qtpy"}
 
-        mods = ensae_fullset()
+        mods = small_set()
         mods = [_ for _ in mods if _.name in subset]
         self._pipy_version(mods, nbmax=15)
 
@@ -32,7 +32,7 @@ class TestAllPyPiModule(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mods = ensae_fullset()[:10]
+        mods = small_set()[:10]
         self._pipy_version(mods)
 
     def _pipy_version(self, mods, nbmax=15):

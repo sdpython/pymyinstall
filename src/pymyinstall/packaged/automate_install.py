@@ -23,7 +23,7 @@ from ..installhelper import ModuleInstall, has_pip, update_pip, is_installed, ge
 from ..installhelper.module_install_exceptions import MissingVersionOnPyPiException, MissingPackageOnPyPiException, MissingReferenceException
 from ..installhelper.module_dependencies import missing_dependencies
 from .packaged_exception import ModuleNotFoundError
-from .packaged_config import all_set
+from .packaged_config import small_set
 
 
 def _build_reverse_index():
@@ -31,7 +31,7 @@ def _build_reverse_index():
     builds a reverse index of the module,
     """
     res = {}
-    mods = all_set()
+    mods = small_set()
     for m in mods:
         res[m.name] = m
         if m.mname is not None and m.mname != m.name:
@@ -110,7 +110,7 @@ def reorder_module_list(list_module):
     """
     inset = {m.name: m for m in list_module}
     res = []
-    for mod in all_set():
+    for mod in small_set():
         if mod.name in inset and inset[mod.name] is not None:
             res.append(mod.copy(version=inset[mod.name].version))
             inset[mod.name] = None
@@ -182,8 +182,8 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
         skip_module = []
 
     if list_module is None:
-        from ..packaged import ensae_fullset
-        list_module = ensae_fullset()
+        from ..packaged import small_set
+        list_module = small_set()
     elif isinstance(list_module, str  # unicode#
                     ):
         from .packaged_config import get_package_set
@@ -331,7 +331,7 @@ def install_all(temp_folder=".", fLOG=print, verbose=True,
         skip_module = []
 
     if list_module is None:
-        list_module = all_set()
+        list_module = small_set()
     elif isinstance(list_module, str  # unicode#
                     ):
         from .packaged_config import get_package_set

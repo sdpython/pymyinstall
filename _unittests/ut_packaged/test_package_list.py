@@ -4,7 +4,7 @@
 import os
 import unittest
 from pyquickhelper.loghelper import fLOG
-from pymyinstall.packaged import all_set
+from pymyinstall.packaged import small_set
 
 
 class TestPackageList(unittest.TestCase):
@@ -23,7 +23,7 @@ class TestPackageList(unittest.TestCase):
                 s = s.replace("\\", "/")[-1]
             return s.strip().lower().replace("_", "-")
 
-        every = set(clean(_.name) for _ in all_set())
+        every = set(clean(_.name) for _ in small_set())
 
         collected = set()
         success = set()

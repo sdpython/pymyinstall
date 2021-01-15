@@ -3,7 +3,7 @@
 """
 import unittest
 from pyquickhelper.loghelper import fLOG
-from pymyinstall.packaged import small_set, extended_set, ensae_fullset
+from pymyinstall.packaged import small_set
 
 
 class TestDifference(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestDifference(unittest.TestCase):
 
         name = set(_.name for _ in small_set())
         keep = []
-        for mod in extended_set():
+        for mod in small_set():
             if mod.name not in name:
                 keep.append(mod)
         assert len(keep) > 0
@@ -34,7 +34,7 @@ class TestDifference(unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        res = ensae_fullset()
+        res = small_set()
         count = {}
         for mod in res:
             count[mod.name] = 1

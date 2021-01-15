@@ -5,7 +5,7 @@ import unittest
 import pandas
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pandashelper import df2rst
-from pymyinstall.packaged import all_set, classifiers2string
+from pymyinstall.packaged import small_set, classifiers2string
 
 
 class TestDocumentation(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestDocumentation(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mod = all_set()
+        mod = small_set()
         mod.sort()
         df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
         df = df[["usage", "rst_link", "kind", "version",

@@ -5,69 +5,11 @@
 
 
 """
-from .packaged_config_0_minimal import minimal_set, pywin32_set
-from .packaged_config_0_pyquickhelper import pyquickhelper_set
-from .packaged_config_1_pyensae import pyensae_set
+from .packaged_config_0_minimal import minimal_set
 from .packaged_config_1_small import small_set
-from .packaged_config_2_cloud import cloud_set
-from .packaged_config_2_sphinx import sphinx_theme_set
-from .packaged_config_3_extended import extended_set
-from .packaged_config_4_ml import ml_set, ensae_set
-from .packaged_config_A_teachings import teachings_set
-from .packaged_config_A_orange import orange_set
-from .packaged_config_B_iot import iot_set
-from .packaged_config_C_webscraping import scraping_set
-from .packaged_config_Z_datascientist import datascientistbase_set
 
 
-def ensae_fullset():
-    """
-    Installation of all possible modules for my teachings at the ENSAE.
-    """
-    base = small_set() +  \
-        sphinx_theme_set() + \
-        cloud_set() + \
-        extended_set() + \
-        ensae_set() + \
-        teachings_set() + \
-        orange_set()
-
-    return base
-
-
-def all_set():
-    """
-    Installation of all possible modules listed in this module.
-    """
-    base = small_set() +  \
-        sphinx_theme_set() + \
-        cloud_set() + \
-        extended_set() + \
-        ensae_set() + \
-        teachings_set() + \
-        iot_set() + \
-        orange_set() + \
-        scraping_set()
-
-    return base
-
-
-_modules_set = [all_set,
-                cloud_set,
-                datascientistbase_set,
-                extended_set,
-                iot_set,
-                minimal_set,
-                ml_set, ensae_set,
-                orange_set,
-                pyensae_set,
-                pyquickhelper_set,
-                pywin32_set,
-                scraping_set,
-                small_set,
-                sphinx_theme_set,
-                teachings_set,
-                ]
+_modules_set = [minimal_set, small_set]
 
 
 def _function_set_name(f):
@@ -158,9 +100,8 @@ def classifiers2string(li):
     Example::
 
         ['Development Status :: 4 - Beta', 'Programming Language :: Python',
-         'Programming Language :: Python :: 2', 'Programming Language :: Python :: 2.7',
-         'Programming Language :: Python :: 3', 'Programming Language :: Python :: 3.3',
-         'Programming Language :: Python :: 3.4', 'License :: OSI Approved :: Apache Software License']
+         'Programming Language :: Python :: 3', 'Programming Language :: Python :: 3',
+         'Programming Language :: Python :: 3.9', 'License :: OSI Approved :: Apache Software License']
     """
     if li is None:
         return ""

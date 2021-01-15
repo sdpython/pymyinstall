@@ -6,7 +6,7 @@ import pandas
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pandashelper import df2rst
 from pymyinstall.installhelper.module_install_version import get_module_version, get_module_metadata
-from pymyinstall.packaged import ensae_fullset
+from pymyinstall.packaged import small_set
 
 
 class TestInstallModuleVersion(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestInstallModuleVersion(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        mod = ensae_fullset()
+        mod = small_set()
         mod.sort()
         df = pandas.DataFrame(_.as_dict(rst_link=True) for _ in mod)
         df = df[["usage", "rst_link", "kind", "version", "installed",

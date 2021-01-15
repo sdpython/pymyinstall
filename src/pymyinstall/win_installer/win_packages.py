@@ -8,7 +8,7 @@ import os
 import sys
 from .win_exception import WinInstallPackageException
 from ..installhelper.install_cmd_helper import run_cmd, get_pip_program
-from ..packaged import ensae_fullset, find_module_install
+from ..packaged import small_set, find_module_install
 
 if sys.version_info[0] == 2:
     FileNotFoundError = Exception
@@ -257,7 +257,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
     operations = []
     done = set()
     if module_list is None:
-        full_list = ensae_fullset()
+        full_list = small_set()
     else:
         full_list = module_list
 

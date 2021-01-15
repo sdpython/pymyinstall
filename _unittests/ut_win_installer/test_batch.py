@@ -5,7 +5,7 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from pymyinstall.packaged import ensae_fullset
+from pymyinstall.packaged import small_set
 from pymyinstall.win_installer.win_batch import create_win_batches
 
 
@@ -18,7 +18,7 @@ class TestBatch(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         temp = get_temp_folder(__file__, "temp_batch")
-        list_modules = ensae_fullset()
+        list_modules = small_set()
         folders = dict(tools=temp, config=temp)
         op = create_win_batches(
             folders, selection={"r", "julia"}, fLOG=fLOG, module_list=list_modules)
