@@ -70,7 +70,7 @@ class TestScriptInstallCli(unittest.TestCase):
 
         exe = sys.executable
 
-        cmd = exe + " " + script + " --schedule --set=minimal --source=2"
+        cmd = exe + " " + script + " --schedule Cartopy --source=2"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         fLOG(out)
         fLOG("---")
