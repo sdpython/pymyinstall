@@ -338,6 +338,8 @@ def update_pip(python_path=None, fLOG=print):
             lines = err.split("\n")
             keep = []
             for line in lines:
+                if len(line.strip("\n\r\t ")) == 0:
+                    continue
                 if "Prompt dismissed.." in line:
                     continue
                 if not line.startswith(" ") and "RuntimeWarning: Config variable" not in line and \
@@ -350,7 +352,8 @@ def update_pip(python_path=None, fLOG=print):
                 for _ in keep:
                     print("++", _)
                 raise UpdatePipError(
-                    "Unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR-F:\n{2}".format(cmd, out, err))
+                    "Unable to update pip.\nCMD:\n{0}\nOUT:\n{1}\nERR-F:"
+                    "\n{2}\n---KEPT---\n{3}".format(cmd, out, err, "\n".join(keep)))
     return out
 
 
