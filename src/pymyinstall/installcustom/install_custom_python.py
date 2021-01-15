@@ -336,6 +336,8 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                 for line in err.split("\n"):
                     if "[libinstall] Error 1 (ignored)" in line:
                         continue
+                    if ' which is not on PATH.' in line:
+                        continue
                     lines.append(line)
                 err = "\n".join(lines).strip() if lines else None
             if err:
