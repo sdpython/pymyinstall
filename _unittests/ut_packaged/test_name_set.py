@@ -19,12 +19,12 @@ class TestNameSet(unittest.TestCase):
         r = name_sets_dataframe()
         for m in r:
             fLOG("**", m)
-        assert len(r) >= 6
+        self.assertGreater(len(r), 1)
         df = pandas.DataFrame(r)
         df = df[["name", "description"]]
         rst = df2rst(df)
         fLOG(rst)
-        assert len(rst) > 0
+        self.assertGreater(len(rst), 1)
 
         nb = 0
         for mod in r:
@@ -32,7 +32,7 @@ class TestNameSet(unittest.TestCase):
             if len(lp()) == 0 and mod["name"] != "pywin32":
                 raise Exception("issue with module '{0}'".format(mod["name"]))
             nb += 1
-        assert nb > 0
+        self.assertGreater(nb, 1)
 
 
 if __name__ == "__main__":

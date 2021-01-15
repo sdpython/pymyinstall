@@ -3,10 +3,11 @@
 """
 import unittest
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import ExtTestCase
 from pymyinstall.packaged import small_set
 
 
-class TestDifference(unittest.TestCase):
+class TestDifference(ExtTestCase):
 
     def test_diff(self):
         fLOG(
@@ -19,7 +20,7 @@ class TestDifference(unittest.TestCase):
         for mod in small_set():
             if mod.name not in name:
                 keep.append(mod)
-        assert len(keep) > 0
+        self.assertGreater(len(keep), 0)
 
         for mod in keep:
             if mod.mname is None:
@@ -38,9 +39,7 @@ class TestDifference(unittest.TestCase):
         count = {}
         for mod in res:
             count[mod.name] = 1
-
-        assert "pyquickhelper" in count
-        assert "code_beatrix" in count
+        self.assertIn("coverage", count)
 
 
 if __name__ == "__main__":

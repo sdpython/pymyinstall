@@ -3,11 +3,12 @@
 """
 import unittest
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import ExtTestCase
 from pymyinstall import build_requirements
 from pymyinstall.packaged import small_set
 
 
-class TestRequirements (unittest.TestCase):
+class TestRequirements (ExtTestCase):
 
     def test_update_module(self):
         fLOG(
@@ -21,8 +22,8 @@ class TestRequirements (unittest.TestCase):
         fLOG(len(lines))
         for i, line in enumerate(lines):
             fLOG(i, line)
-        assert 'pep8' in res
-        assert len(lines) >= 550
+        self.assertIn('pep8', res)
+        self.assertGreater(len(lines), 100)
 
     def test_sort(self):
         fLOG(
@@ -37,7 +38,7 @@ class TestRequirements (unittest.TestCase):
         k2 = list(sorted(_.usage for _ in mod_list if _.usage is not None))
         fLOG(k)
         fLOG(k2)
-        assert k == k2
+        self.assertEqual(k, k2)
 
 
 if __name__ == "__main__":
