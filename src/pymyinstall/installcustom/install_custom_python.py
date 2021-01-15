@@ -449,14 +449,20 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=change_path)
         cmds.append(cmd)
         err_keep = err
-        err = [_ for _ in err.split("\n") if not _.startswith("pymyinstall.") and not _.startswith(
-            "zip_safe flag not set; analyzing archive contents...") and not _.startswith("error removing build")]
+        err = [_ for _ in err.split("\n")
+               if not _.startswith("pymyinstall.") and
+               not _.startswith("zip_safe flag not set; analyzing archive contents...") and
+               not _.startswith("error removing build") and
+               "UserWarning:" not in _ and
+               "warnings.warn(" not in _ and
+               "module references __file__" not in _]
         err = "\n".join(_ for _ in err if _)
 
         exp = ".zip/lib2to3/Grammar.txt"
         if len(err) > 0 and exp not in out.replace("\\", "/").replace("//", "/"):
             raise Exception(
-                "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-C\n{2}".format(cmd, out, err_keep))
+                "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-C\n{2}".format(
+                    cmd, out, err_keep))
         fLOG(out)
 
         dirpyexe = os.path.dirname(pyexe)
