@@ -75,18 +75,13 @@ class TestScriptInstallCli(unittest.TestCase):
         fLOG(out)
         fLOG("---")
         fLOG(err)
-        if "[install-check] ## flake8 ## [begin]" not in out and sys.version_info[0] > 2:
-            if is_travis_or_appveyor() == "appveyor":
-                warnings.warn(
-                    "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
-            else:
-                raise Exception(
-                    "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}\nFOUND STRING\n{3}".format(cmd,
-                                                                               out, err, "[install-check] flake8" not in out))
+        if "[install-check] ## flake8 ## [begin]" not in out:
+            warnings.warn(
+                "--CLI ISSUE cmd--\n{0}\n--OUT--\n{1}\n--ERR--\n{2}".format(cmd, out, err))
 
         cmd = exe + " " + scriptu + " --schedule --set=minimal --source=2"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
-        if "[update-check] ## pycodestyle ## [begin]" not in out and sys.version_info[0] > 2:
+        if "[update-check] ## pycodestyle ## [begin]" not in out:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
