@@ -26,7 +26,7 @@ class TestPyMyUpdateCli(unittest.TestCase):
         script = os.path.normpath(os.path.join(
             this, "..", "..", "src", "pymyinstall", "cli", "pymy_update.py"))
         cmd = "{0} -u {1} {2}".format(
-            sys.executable, script, "--set=pyquickhelper --schedule")
+            sys.executable, script, "--set=small --schedule")
         out, err = run_cmd(cmd, wait=True)
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
