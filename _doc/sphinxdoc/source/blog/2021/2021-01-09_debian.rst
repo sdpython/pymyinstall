@@ -59,21 +59,33 @@
         wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz
         tar xzf Python-3.9.1.tgz
         cd Python-3.9.1
-        ./configure --enable-optimizations --with-ensurepip=install
+        ./configure --enable-optimizations --with-ensurepip=install --enable-shared --prefix=/opt/python
+        make
         make altinstall
 
     If needed, do it again with:
 
     ::
-        ./configure --enable-optimizations --with-ensurepip=install
-        make altinstall --enable-shared --prefix=/opt/bin
+        ./configure --enable-optimizations --with-ensurepip=install --enable-shared
+        make
+        make altinstall
 
-    These settings must be added every time a python module is compiled:
+    These settings must be added every time python is run
+    or a python module is compiled:
 
     ::
 
-        export LD_LIBRARY_PATH=/opt/bin
-        export PATH=/usr/local/Python-3.9.1:$PATH
+        export LD_LIBRARY_PATH=/usr/local/lib/
+            
+    **/etc/environment/**
+    
+    You may add the following two lines in file
+    ``/etc/environment/**:
+    
+    ::
+    
+        export LLVM_CONFIG=/usr/bin/llvm-config
+        export LD_LIBRARY_PATH=/usr/local/lib/
 
     **llvmlite**
 
