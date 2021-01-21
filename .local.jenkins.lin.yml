@@ -19,12 +19,12 @@ install:
 
 script:
   - { CMD: "$PYINT -u setup.py unittests", NAME: "UT" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*chrome.*\"", NAME: "UT_LONG" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*chrome.*\"", NAME: "UT_LONG_CHROME" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*base.*\" -g \".*datascientist.*\"", NAME: "UT_SKIP_BASE", TIMEOUT: 7200 }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*sqlitespy.*\"", NAME: "UT_SKIP_SQLLITE", TIMEOUT: 7200 }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL", TIMEOUT: 7200 }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*notebook.*\"", NAME: "UT_SKIP_NB" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*chrome.*\"", NAME: "UT_LONG", SCHEDULER: "H H(1-2) 27 * *" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*chrome.*\"", NAME: "UT_LONG_CHROME", SCHEDULER: "H H(1-2) 27 * *" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*base.*\" -g \".*datascientist.*\"", NAME: "UT_SKIP_BASE", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*sqlitespy.*\"", NAME: "UT_SKIP_SQLLITE", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*notebook.*\"", NAME: "UT_SKIP_NB", SCHEDULER: "H H(1-2) 27 * *" }
 
 after_script:
   - $PYINT -u setup.py bdist_wheel
