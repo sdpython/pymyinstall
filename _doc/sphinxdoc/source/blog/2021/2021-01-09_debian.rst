@@ -179,7 +179,7 @@
 
         export $(dbus-launch)
 
-    **pycurl*
+    **pycurl**
 
     ::
 
