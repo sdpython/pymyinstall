@@ -184,8 +184,7 @@ def update_all(temp_folder=".", fLOG=print, verbose=True,
     if list_module is None:
         from ..packaged import small_set
         list_module = small_set()
-    elif isinstance(list_module, str  # unicode#
-                    ):
+    elif isinstance(list_module, str):
         from .packaged_config import get_package_set
         f = get_package_set(list_module)
         list_module = f()
