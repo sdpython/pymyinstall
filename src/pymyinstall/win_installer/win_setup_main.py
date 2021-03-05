@@ -57,10 +57,10 @@ THE SOFTWARE.
 """
 
 _default_notebooks = [
-    ("docs/ensae", ["http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td1a_cenonce_session_12.ipynb",
-                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td2a_cenonce_session_2A.ipynb",
-                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td2a_cenonce_session_2B.ipynb",
-                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/_downloads/td2a_cenonce_session_2C.ipynb",
+    ("docs/ensae", ["http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx/_downloads/td1a_cenonce_session_12.ipynb",
+                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx/_downloads/td2a_cenonce_session_2A.ipynb",
+                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx/_downloads/td2a_cenonce_session_2B.ipynb",
+                    "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx/_downloads/td2a_cenonce_session_2C.ipynb",
                     ]),
     ("docs/actuariat", ["http://www.xavierdupre.fr/app/actuariat_python/helpsphinx/_downloads/population_recuperation_donnees.ipynb",
                         ]),

@@ -1,7 +1,7 @@
 #define MyAppName "PythonENSAE"
 #define MyAppVersion "0.1"
 #define MyAppPublisher "Xavier Dupré"
-#define MyAppURL "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html"
+#define MyAppURL "http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx/index.html"
 #define MyAbsPath "__DISTPATH__"
 #define MyAppURLAct "http://www.xavierdupre.fr/app/actuariat_python/helpsphinx/index.html"
 #define MyAppURLCB "http://lesenfantscodaient.fr/"
