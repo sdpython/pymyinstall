@@ -223,7 +223,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
     if version is None:
         version = "%s.%s.%s" % sys.version_info[:3]
-    versioni = tuple([int(_) for _ in version.split(".")])
+    versioni = tuple(int(_) for _ in version.split("."))
     link = "https://www.python.org/downloads/release/python-%s/" % version.replace(
         ".", "")
     page = download_page(link)
