@@ -18,7 +18,8 @@ pivottablejs
 pandas
 pycodestyle
 pylint
-pyquickhelper>=1.9.3325
+pyquickhelper>=1.10
+pyquicksetup>=0.2
 requests
 scikit-learn
 sphinx
