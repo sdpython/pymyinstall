@@ -76,7 +76,7 @@ setup(
     packages=packages,
     package_dir=package_dir,
     package_data=package_data,
-    install_requires=["setuptools", "pip>=10.0", "urllib3",
-                      "requests", 'pyquicksetup>=0.2'],
+    setup_requires=['pyquicksetup>=0.2'],
+    install_requires=["setuptools", "pip>=10.0", "urllib3", "requests"],
     entry_points=entry_points,
 )
