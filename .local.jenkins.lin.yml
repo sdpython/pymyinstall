@@ -17,6 +17,9 @@ install:
   - $PYINT --version
   - $PYINT -m pip freeze
 
+before_script:
+  - $PYINT -u setup.py write_version
+
 script:
   - { CMD: "$PYINT -u setup.py unittests --covtoken=b67b3051-8c5d-460b-b2fa-51d81ab7008c", NAME: "UT" }
   - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*chrome.*\"", NAME: "UT_LONG", SCHEDULER: "H H(1-2) 27 * *" }
@@ -31,5 +34,5 @@ after_script:
   - if [ ${VERSION} == "3.9" and ${DIST} != "conda" and ${NAME} == "UT" ] then cp dist/*.whl {{root_path}}/../local_pypi/local_pypi_server fi
 
 documentation:
-  - if [ ${NAME} == "UT" ] then $PYINT -u setup.py build_sphinx fi
+  - if [ ${NAME} == "UT" ] then $PYINT -u setup.py build_sphinx --layout=html fi
   - if [ ${NAME} == "UT" ] then cp -R -f _doc/sphinxdoc/build/html dist/html fi
