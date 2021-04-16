@@ -36,7 +36,7 @@ pushd %current%dlib
 mkdir build_test
 pushd build_test
 cmake -G "Visual Studio 14 2015 Win64" -DPYTHON3=1 ..\..\tools\python
-rem ../dlib/test 
+rem ../dlib/test
 cmake --build . --config Release
 popd
 
@@ -80,4 +80,3 @@ copy %current%param\dist\*.whl %current%..\..\dist
 
 :end:
 @echo [dlib] Done.
-

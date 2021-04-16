@@ -42,7 +42,7 @@ popd
 if exist %current%boost\MYINST\share\boost-build\src\tools\gcc.py goto build:
 @echo [boost] B2 install
 pushd %current%boost\boost_%version%
-cmd /c b2 --prefix=%current%boost\MYINST install toolset=msvc runtime-link=static address-model=64 
+cmd /c b2 --prefix=%current%boost\MYINST install toolset=msvc runtime-link=static address-model=64
 popd
 @echo [boost] Done b2 install
 

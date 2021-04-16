@@ -76,14 +76,14 @@
     ::
 
         export LD_LIBRARY_PATH=/usr/local/lib/
-            
+
     **/etc/environment/**
-    
+
     You may add the following two lines in file
     ``/etc/environment/**:
-    
+
     ::
-    
+
         export LLVM_CONFIG=/usr/bin/llvm-config
         export LD_LIBRARY_PATH=/usr/local/lib/
 
