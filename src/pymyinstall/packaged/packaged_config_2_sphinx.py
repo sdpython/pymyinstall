@@ -46,8 +46,6 @@ def sphinx_theme_set():
                       purpose="simple autocompletion for the sphinx documentation", usage="SPHINX"),
         ModuleInstall("sphinxcontrib-imagesvg", "pip", mname="sphinxcontrib.imagesvg",
                       purpose="support svg in Sphinx", usage="SPHINX"),
-        ModuleInstall("sphinxcontrib-jsdemo", "pip", mname="sphinxcontrib.jsdemo",
-                      purpose="to demo HTML or Javascript in Sphinx documentation", usage="SPHINX"),
         ModuleInstall("zerovm-sphinx-theme", "pip", mname="zerovm_sphinx_theme",
                       purpose="sphinx theme", usage="SPHINX"),
         ModuleInstall("sphinx-corlab-theme", "pip", mname="sphinx_corlab_theme",

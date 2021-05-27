@@ -191,8 +191,6 @@ Building wheels for collected packages: sphinxtrap
 Installing collected packages: sphinxtrap
 Installing collected packages: sphinxcontrib-lunrsearch
 Installing collected packages: sphinxcontrib-imagesvg
-Building wheels for collected packages: sphinxcontrib-jsdemo
-Installing collected packages: sphinxcontrib-jsdemo
 Building wheels for collected packages: zerovm-sphinx-theme
 Installing collected packages: zerovm-sphinx-theme
 Building wheels for collected packages: sphinx-corlab-theme
@@ -768,8 +766,6 @@ Successfully built sphinxtrap
 Successfully installed sphinxtrap-0.2.3
 Successfully installed sphinxcontrib-lunrsearch-0.2
 Successfully installed sphinxcontrib-imagesvg-0.1
-Successfully built sphinxcontrib-jsdemo
-Successfully installed sphinxcontrib-jsdemo-0.1.4
 Successfully built zerovm-sphinx-theme
 Successfully installed zerovm-sphinx-theme-1.1
 Successfully built sphinx-corlab-theme
