@@ -21,6 +21,8 @@ def small_set():
             "wincertstore", "pip", purpose="Python module to extract CA and CRL certs from Windows' cert store (ctypes based).") \
         if sys.platform.startswith("win") else None,
         ModuleInstall(
+            "pyquicksetup", "pip", purpose="helpers for setup", usage="TEACH"),
+        ModuleInstall(
             "virtualenv", "pip", purpose="creatre virtual environments") if not is_conda_distribution() else None,
         ModuleInstall(
             "six", "pip", purpose="helpers for python 2/3 conversion"),
