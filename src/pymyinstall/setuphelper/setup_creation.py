@@ -86,8 +86,8 @@ _readme_rst = '''
 README / Changes
 ================
 
-.. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
-    :target: https://travis-ci.org/sdpython/pymyinstall
+.. image:: https://travis-ci.com/sdpython/pymyinstall.svg?branch=master
+    :target: https://travis-ci.com/sdpython/pymyinstall
     :alt: Build status
 
 .. image:: https://badge.fury.io/py/pymyinstall.svg

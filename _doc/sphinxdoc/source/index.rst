@@ -2,8 +2,8 @@
 pymyinstall documentation
 =========================
 
-.. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
-    :target: https://travis-ci.org/sdpython/pymyinstall
+.. image:: https://travis-ci.com/sdpython/pymyinstall.svg?branch=master
+    :target: https://travis-ci.com/sdpython/pymyinstall
     :alt: Build status
 
 .. image:: https://ci.appveyor.com/api/projects/status/ccsvoi29n3a71i6j?svg=true
@@ -43,7 +43,7 @@ pymyinstall documentation
 `github <https://github.com/sdpython/pymyinstall/>`_,
 `documentation <http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/index.html>`_,
 `wheel <http://www.xavierdupre.fr/site2013/index_code.html#pymyinstall>`_,
-`travis <https://travis-ci.org/sdpython/pymyinstalls>`_,
+`travis <https://travis-ci.com/sdpython/pymyinstalls>`_,
 :ref:`l-README`,
 :ref:`blog <ap-main-0>`,
 :ref:`l-issues-todolist`

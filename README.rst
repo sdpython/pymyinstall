@@ -7,8 +7,8 @@
 pymyinstall: easier installation of packages
 ============================================
 
-.. image:: https://travis-ci.org/sdpython/pymyinstall.svg?branch=master
-    :target: https://travis-ci.org/sdpython/pymyinstall
+.. image:: https://travis-ci.com/sdpython/pymyinstall.svg?branch=master
+    :target: https://travis-ci.com/sdpython/pymyinstall
     :alt: Build status
 
 .. image:: https://ci.appveyor.com/api/projects/status/ccsvoi29n3a71i6j?svg=true
