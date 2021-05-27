@@ -12,6 +12,8 @@ def teachings_set():
     """
     mod = [
         ModuleInstall(
+            "pyquicksetup", "pip", purpose="helpers for setup", usage="TEACH"),
+        ModuleInstall(
             "jyquickhelper", "pip", purpose="Helpers for Jupyter notebooks.", usage="TEACH"),
         ModuleInstall(
             "pyquickhelper", "pip", purpose="helpers to generation documentation", usage="TEACH"),
