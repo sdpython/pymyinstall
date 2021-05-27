@@ -432,6 +432,11 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
         # cmd = '"{0}" -u -c "import pip;pip.main([\'install\',
         #        \'https://github.com/sdpython/pymyinstall/archive/master.zip\'])"'.format(pyexe)
+        cmd = '"{0}" -u -c "import pip._internal;pip._internal.main([\'install\', \'pyquicksetup\'])"'.format(
+            pyexe)
+        fLOG("[install_python] " + cmd)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=change_path)
+        cmds.append(cmd)
         if latest:
             folder = os.path.normpath(os.path.join(os.path.abspath(
                 os.path.dirname(__file__)), "..", "..", ".."))
@@ -474,8 +479,9 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         os.environ['PATH'] = path
 
         fLOG("[install_python] install modules")
-        pattern = '"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all(fLOG=print, temp_folder=\'{2}\',' + \
-                  'verbose=True, source=\'2\', list_module=\'{1}\')"'
+        pattern = ('"{0}" -u -c "import sys;from pymyinstall.packaged import install_all;install_all'
+                   '(fLOG=print, temp_folder=\'{2}\','
+                   'verbose=True, source=\'2\', list_module=\'{1}\')"')
         cmd = pattern.format(
             pyexe, modules, download_folder.replace("\\", "/"))
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG,
