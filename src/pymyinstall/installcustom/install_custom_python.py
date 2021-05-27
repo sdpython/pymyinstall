@@ -435,7 +435,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
         cmd = '"{0}" -u -c "import pip._internal;pip._internal.main([\'install\', \'pyquicksetup\'])"'.format(
             pyexe)
         fLOG("[install_python] " + cmd)
-        out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=change_path)
+        out, err = run_cmd(cmd, wait=True, fLOG=fLOG, change_path=None)
         cmds.append(cmd)
         if latest:
             folder = os.path.normpath(os.path.join(os.path.abspath(
