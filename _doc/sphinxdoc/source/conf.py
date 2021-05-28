@@ -33,6 +33,7 @@ epkg_dictionary.update({
     'lighttpd': 'https://www.lighttpd.net/',
     'line_profiler': 'https://github.com/rkern/line_profiler',
     'minepy': 'https://github.com/minepy/minepy',
+    'Miniconda': 'https://docs.conda.io/en/latest/miniconda.html',
     'MKL': 'https://software.intel.com/en-us/mkl',
     'ML.net': 'https://www.microsoft.com/net/learn/apps/machine-learning-and-ai/ml-dotnet',
     'mono': 'https://www.mono-project.com/',

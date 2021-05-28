@@ -3,6 +3,7 @@ cairocffi
 coverage
 docutils
 fire
+IPython
 joblib
 jupyter_sphinx
 jyquickhelper
