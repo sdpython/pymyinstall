@@ -15,6 +15,7 @@ blog_root = "http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/"
 
 
 epkg_dictionary.update({
+    'Azure': 'https://github.com/Azure/azure-sdk-for-python',
     'avconv': 'http://debian-facile.org/doc:media:avconv',
     'boost': "http://www.boost.org/",
     'boost_python': "http://www.boost.org/doc/libs/release/libs/python/",
@@ -48,6 +49,7 @@ epkg_dictionary.update({
     'pycurl': 'http://pycurl.io/',
     'pygame': 'https://www.pygame.org/',
     'pyopencl': 'https://documen.tician.de/pyopencl/',
+    'pyproj': 'https://github.com/pyproj4/pyproj',
     'pythonnet': 'https://github.com/pythonnet/pythonnet',
     'spacy': 'https://spacy.io/',
     'SQLiteSpy': "https://www.yunqa.de/delphi/products/sqlitespy/index",
