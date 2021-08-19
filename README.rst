@@ -25,10 +25,6 @@ pymyinstall: easier installation of packages
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT
 
-.. image:: https://requires.io/github/sdpython/pymyinstall/requirements.svg?branch=master
-     :target: https://requires.io/github/sdpython/pymyinstall/requirements/?branch=master
-     :alt: Requirements Status
-
 .. image:: https://codecov.io/github/sdpython/pymyinstall/coverage.svg?branch=master
     :target: https://codecov.io/github/sdpython/pymyinstall?branch=master
 
