@@ -87,7 +87,7 @@ README / Changes
 ================
 
 .. image:: https://travis-ci.com/sdpython/pymyinstall.svg?branch=master
-    :target: https://travis-ci.com/sdpython/pymyinstall
+    :target: https://app.travis-ci.com/github/sdpython/pymyinstall
     :alt: Build status
 
 .. image:: https://badge.fury.io/py/pymyinstall.svg
