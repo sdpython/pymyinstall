@@ -232,7 +232,7 @@ def create_folder_setup(fold, wheel=True, output_path=None, fLOG=None, version=N
                     __FOLDER__=fold)
         fold = os.path.dirname(mod.__file__)
     else:
-        info = dict()
+        info = {}
 
     # Module name
     name = os.path.split(fold)[-1]
