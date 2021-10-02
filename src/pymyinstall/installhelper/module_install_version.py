@@ -83,7 +83,7 @@ def get_module_version(module, use_cmd=False):
         res = get_module_version(None, use_cmd=use_cmd)
         return res.get(modl, None)
 
-    global _get_module_version_manual_memoize
+    global _get_module_version_manual_memoize  # pylint: disable=W0602
     if len(_get_module_version_manual_memoize) > 0:
         return _get_module_version_manual_memoize
 
@@ -161,7 +161,7 @@ def get_module_metadata(module, use_cmd=False, refresh_cache=False):
             None, use_cmd=use_cmd, refresh_cache=refresh_cache)
         return res.get(modl, None)
 
-    global _get_module_metadata_manual_memoize
+    global _get_module_metadata_manual_memoize  # pylint: disable=W0602
     if not refresh_cache and len(_get_module_metadata_manual_memoize) > 0:
         return _get_module_metadata_manual_memoize
 
@@ -240,7 +240,7 @@ def get_pypi_version(module_name, full_list=False, url="https://pypi.python.org/
         ProtocolError: ProtocolError for pypi.python.org/pypi: 503 No healthy backends
     """
 
-    global _get_pypi_version_memoize
+    global _get_pypi_version_memoize  # pylint: disable=W0602
     key = module_name, full_list, url
     if key in _get_pypi_version_memoize:
         available = _get_pypi_version_memoize[key]

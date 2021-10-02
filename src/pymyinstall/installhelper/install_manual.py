@@ -26,7 +26,7 @@ def get_install_list():
     """
     returns the list of tools a developper might need
     """
-    global _tools
+    global _tools  # pylint: disable=W0602
     return list(_tools.keys())
 
 
@@ -36,7 +36,7 @@ def open_tool_on_browser(tool=None):
 
     @param      tool        tool name
     """
-    global _tools
+    global _tools  # pylint: disable=W0602
     if isinstance(tool, str):
         tool = [tool]
     elif tool is None:
