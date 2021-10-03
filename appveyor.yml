@@ -21,7 +21,7 @@ build: off
 
 test_script:
   - "%PYTHON%\\python -u setup.py build_script"
-  - "%PYTHON%\\python -u setup.py unittests"
+  - "%PYTHON%\\python -u setup.py unittests -d 50 -g \".*((LONG)|(SKIP)).*\""
 
 after_test:
   - "%PYTHON%\\python -u setup.py bdist_wheel"
