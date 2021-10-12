@@ -9,8 +9,9 @@ import unittest
 import pyquickhelper
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
-from pyquickhelper.pycode import is_travis_or_appveyor
+from pyquickhelper.ipythonhelper import (
+    execute_notebook_list, execute_notebook_list_finalize_ut)
+from pyquickhelper.pycode import is_travis_or_appveyor, skipif_appveyor
 import pymyinstall
 
 
@@ -55,7 +56,7 @@ class TestRunNotebooks2(unittest.TestCase):
         execute_notebook_list_finalize_ut(
             res, fLOG=fLOG, dump=pymyinstall)
 
-    @unittest.skipIf(sys.version_info[0] == 2, reason="notebook for python 3")
+    @skipif_appveyor("Proactor event loop does not implement add_reader")
     def test_notebook_pivottablejs(self):
         fLOG(
             __file__,

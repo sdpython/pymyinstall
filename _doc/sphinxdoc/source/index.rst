@@ -27,10 +27,6 @@ pymyinstall documentation
     :alt: GitHub Issues
     :target: https://github.com/sdpython/pymyinstall/issues
 
-.. image:: https://www.codacy.com/app/sdpython/pymyinstall?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sdpython/pymyinstall&amp;utm_campaign=Badge_Grade
-    :alt: Codacy Badge
-    :target: https://www.codacy.com/app/sdpython/pymyinstall?
-
 .. image:: nbcov.png
     :target: http://www.xavierdupre.fr/app/pymyinstall/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
