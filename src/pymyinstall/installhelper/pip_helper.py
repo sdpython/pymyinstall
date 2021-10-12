@@ -16,6 +16,7 @@ class Distribution:
 
     .. versionadded:: 1.5
     """
+
     def __init__(self, dist):
         self.dist = dist
 
