@@ -2,6 +2,7 @@
 @file
 @brief Guess missing dependencies
 """
+from .pip_helper import get_installed_distributions
 
 
 def get_default_ignore_modules():
@@ -56,7 +57,6 @@ def _main_pipdeptree(local_only=False):
     The function relies on module
     `pipdeptree.main <https://pypi.python.org/pypi/pipdeptree>`_.
     """
-    from pip._internal.utils.misc import get_installed_distributions
     default_skip = ['setuptools', 'pip', 'python', 'distribute', 'hypertemp']
     skip = default_skip + ['pipdeptree']
     pkgs = get_installed_distributions(local_only=local_only, skip=skip)

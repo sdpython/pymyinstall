@@ -10,6 +10,7 @@ import time
 from .module_install_version import get_pypi_version
 from ..packaged import small_set
 from ..packaged.packaged_config import classifiers2string
+from .pip_helper import get_installed_distributions
 
 
 def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, short_list=None):
@@ -32,7 +33,6 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
     keys = {mod["name"].lower(): mod for mod in rows}
     keys.update({mod["mname"].lower(): mod for mod in rows if mod["mname"]})
 
-    from pip._internal.utils.misc import get_installed_distributions
     all_installed = []
     dists = get_installed_distributions()
     if short_list:
@@ -89,8 +89,9 @@ def get_installed_modules(pypi=False, skip_betas=False, fLOG=None, stop=-1, shor
         res["diff_pypi"] = msg
 
         if fLOG:
-            pkg_info = '{dist.project_name:30} {dist.version:20}'.format(
-                dist=dist)
+            sdist = str(dist.version)
+            pkg_info = '{dist.project_name:30} {sdist:20}'.format(
+                dist=dist, sdist=sdist)
             key = key if dist.key != dist.project_name else ""
             mes = '{pkg_info} {msg:3} - {date:20} --- {available} - {location}'
             mes = mes.format(pkg_info=pkg_info, msg=msg, date=date, dist=dist,

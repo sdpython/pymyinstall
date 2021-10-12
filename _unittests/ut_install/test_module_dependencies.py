@@ -6,6 +6,7 @@ from pyquickhelper.loghelper import fLOG
 from pymyinstall.installhelper import get_module_dependencies, get_module_metadata, version_consensus
 from pymyinstall.installhelper.module_install_exceptions import WrongVersionError
 from pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
+from pymyinstall.installhelper.pip_helper import get_installed_distributions
 
 
 class TestModuleDependencies (unittest.TestCase):
@@ -16,13 +17,12 @@ class TestModuleDependencies (unittest.TestCase):
             assert isinstance(v, tuple)
             fLOG(k, "-->", v)
         if len(res) < 3:
-            from pip._internal.utils.misc import get_installed_distributions
             pkgs = get_installed_distributions(
                 local_only=False, skip=[])
             req_map = dict((p.key, (p, p.requires())) for p in pkgs)
             mat = req_map.get(name, None)
-            raise Exception("len(res)={0}\nres={1}\ndata={2}\nmat={3}".format(len(res),
-                                                                              res, get_module_metadata(name), mat))
+            raise AssertionError("len(res)={0}\nres={1}\ndata={2}\nmat={3}".format(
+                len(res), res, get_module_metadata(name), mat))
 
     def test_dependencies_matplotlib(self):
         fLOG(
