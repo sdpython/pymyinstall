@@ -18,8 +18,7 @@ class TestInstallModuleVersion(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         res = get_module_version("matplotlib")
-        fLOG(res)
-        self.assertTrue(len(res) > 0)
+        self.assertTrue(len(str(res)) > 0)
 
         res = get_module_metadata("matplotlib")
         fLOG(res)
