@@ -7,64 +7,17 @@ import re
 import warnings
 import functools
 import time
+import xmlrpc.client as xmlrpc_client
 from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
 from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
 from .install_cmd_regex import regex_wheel_versions
-
-if sys.version_info[0] == 2:
-    FileNotFoundError = Exception
-    import xmlrpclib as xmlrpc_client
-    TimeoutError = Exception
-else:
-    import xmlrpc.client as xmlrpc_client
-    # from importlib import reload
+from .pip_helper import get_installed_distributions
 
 
 annoying_modules = {"pygame", "liblinear", "mlpy", "VideoCapture",
                     "libsvm", "opencv_python", "scikits.cuda",
                     "NLopt"}
-
-
-def call_get_installed_distributions(local_only=True, skip=None, include_editables=True,
-                                     editables_only=False, user_only=False, use_cmd=False):
-    """
-    Directs call to function *get_installed_distributions* from :epkg:`pip`.
-
-    Return a list of installed Distribution objects.
-
-    @param  local_only      if True (default), only return installations
-                            local to the current virtualenv, if in a virtualenv.
-    @param  skip            argument is an iterable of lower-case project names to
-                            ignore; defaults to ``pip.compat.stdlib_pkgs`` (if *skip* is None)
-    @param  editables       if False, don't report editables.
-    @param  editables_only  if True , only report editables.
-    @param  user_only       if True , only report installations in the user
-                            site directory.
-    @param  use_cmd         if True, use a different process (updated package list)
-    @return                 list of installed Distribution objects.
-    """
-    if use_cmd:
-        raise NotImplementedError("use_cmd should be False")
-    # we disable this line, it fails on travis
-    # reload(pip._vendor.pkg_resources)
-    from pip._internal.utils.misc import get_installed_distributions
-    if skip is None:
-        try:
-            # for pip >= 0.18.1
-            from pip._internal.utils.compat import stdlib_pkgs
-        except ImportError:
-            try:
-                # for pip>=10.0 and pip < 0.18.1
-                from pip._internal.compat import stdlib_pkgs
-            except ImportError:
-                # for pip<10.0
-                from pip.compat import stdlib_pkgs
-        skip = stdlib_pkgs
-    return get_installed_distributions(local_only=local_only, skip=skip,
-                                       include_editables=include_editables,
-                                       editables_only=editables_only,
-                                       user_only=user_only)
 
 
 _get_module_version_manual_memoize = {}
@@ -114,7 +67,7 @@ def get_module_version(module, use_cmd=False):
     else:
         # local_only must be False to get all modules
         # not only the ones installed in the virtual environment
-        dist = call_get_installed_distributions(local_only=False)
+        dist = get_installed_distributions(local_only=False)
         if len(dist) == 0:
             raise ConfigurationError("no installed module, unexpected (pip should be there): " +
                                      "sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
@@ -167,7 +120,7 @@ def get_module_metadata(module, use_cmd=False, refresh_cache=False):
 
     # local_only must be False to get all modules
     # not only the ones installed in the virtual environment
-    dist = call_get_installed_distributions(local_only=False, use_cmd=use_cmd)
+    dist = get_installed_distributions(local_only=False, use_cmd=use_cmd)
     if len(dist) == 0:
         raise ConfigurationError("no installed module, unexpected (pip should be there): " +
                                  "sys.executable={0}, sys.prefix={1}, sys.base_prefix={2}".format(
@@ -640,7 +593,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
     if use_pip:
         global _get_module_dependencies_deps
         if _get_module_dependencies_deps is None or refresh_cache:
-            temp = call_get_installed_distributions(
+            temp = get_installed_distributions(
                 local_only=False, skip=[], use_cmd=use_cmd)
             _get_module_dependencies_deps = dict(
                 (p.key, (p, p.requires())) for p in temp)
