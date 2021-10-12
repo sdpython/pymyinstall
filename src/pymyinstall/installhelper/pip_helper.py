@@ -1,16 +1,21 @@
 """
 @file
-@brief Helpers for virtualenv
+@brief Helpers for pip.
+
+.. versionadded:: 1.5
 """
 try:
     from pip._internal.utils.compat import stdlib_pkgs
 except ImportError:
     stdlib_pkgs = None
-    stop
 
 
 class Distribution:
+    """
+    Common interface for old and recent pip packages.
 
+    .. versionadded:: 1.5
+    """
     def __init__(self, dist):
         self.dist = dist
 
@@ -46,6 +51,8 @@ def get_installed_distributions(local_only=True, skip=stdlib_pkgs,
         site directory.
     :param use_cmd: if True, use a different process (updated package list)
     :return: list of installed Distribution objects.
+
+    .. versionadded:: 1.5
     """
     if use_cmd:
         raise NotImplementedError("use_cmd should be False")
