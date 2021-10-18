@@ -355,7 +355,7 @@ def numeric_version(vers):
         return vers
     if isinstance(vers, list):
         raise Exception("unexpected value:" + str(vers))
-    spl = vers.split(".")
+    spl = str(vers).split(".")
     r = []
     for _ in spl:
         try:
