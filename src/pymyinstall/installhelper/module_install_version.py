@@ -9,8 +9,11 @@ import functools
 import time
 import xmlrpc.client as xmlrpc_client
 from .install_cmd_helper import run_cmd, get_pip_program
-from .module_install_exceptions import MissingPackageOnPyPiException, AnnoyingPackageException
-from .module_install_exceptions import ConfigurationError, MissingVersionOnPyPiException, WrongVersionError, MissingVersionWheelException
+from .module_install_exceptions import (
+    MissingPackageOnPyPiException, AnnoyingPackageException)
+from .module_install_exceptions import (
+    ConfigurationError, MissingVersionOnPyPiException,
+    WrongVersionError, MissingVersionWheelException)
 from .install_cmd_regex import regex_wheel_versions
 from .pip_helper import get_installed_distributions
 
@@ -573,8 +576,6 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         use_pip = not sys.platform.startswith("win")
 
     def evaluate_condition(cond, full):
-        # example python_version=="3.3" or python_version=="2.7" and extra ==
-        # \'test\'
         python_version = ".".join(str(_) for _ in sys.version_info[:3])
         extra = ""
         sys_platform = sys.platform
@@ -585,10 +586,11 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                 # probably something like cycler (>=0.10)
                 # we don't check that
                 return True
-            else:
-                mes = "Unable to evaluate condition '{0}' from '{1}', extra='{2}', python_version='{3}', sys_platform='{4}'.".format(
-                    cond, full, extra, python_version, sys_platform)
-                raise Exception(mes)
+            mes = ("Unable to evaluate condition '{0}' from '{1}', "
+                   "extra='{2}', python_version='{3}', "
+                   "sys_platform='{4}'.").format(
+                cond, full, extra, python_version, sys_platform)
+            raise Exception(mes)
 
     if use_pip:
         global _get_module_dependencies_deps
