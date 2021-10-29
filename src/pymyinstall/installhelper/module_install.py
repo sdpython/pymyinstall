@@ -10,6 +10,11 @@ import time
 import importlib
 import datetime
 import warnings
+from urllib.parse import urlsplit
+import urllib.request as urllib_request
+import urllib.error as urllib_error
+import importlib.util
+import xmlrpc.client as xmlrpc_client
 from pip import __version__ as pip_version
 from .install_cmd_helper import python_version, run_cmd, unzip_files, get_pip_program
 from .install_cmd_helper import get_python_program, get_file_modification_date, get_conda_program, is_conda_distribution
@@ -21,21 +26,6 @@ from .module_install_page_wheel import get_page_wheel, read_page_wheel, save_pag
 from .missing_license import missing_module_licenses
 from .internet_settings import default_user_agent
 from .install_cmd_regex import regex_wheel_versions
-
-if sys.version_info[0] == 2:
-    from urlparse import urlsplit
-    import urllib2 as urllib_request
-    import urllib2 as urllib_error
-    import xmlrpclib as xmlrpc_client
-    from codecs import open
-    FileNotFoundError = Exception
-    PermissionError = Exception
-else:
-    from urllib.parse import urlsplit
-    import urllib.request as urllib_request
-    import urllib.error as urllib_error
-    import importlib.util
-    import xmlrpc.client as xmlrpc_client
 
 
 def _filter_pip_out(out):
@@ -275,6 +265,16 @@ class ModuleInstall:
         """
         if self.script is None:
             return "{0}:{1}:import {2}:v{3}".format(
+                self.name, self.kind, self.ImportName, self.version)
+        else:
+            return "{0}:{1}:{2}:v{3}".format(self.name, self.kind, self.Script, self.version)
+
+    def __repr__(self):
+        """
+        usual
+        """
+        if self.script is None:
+            return "ModuleInstall({0}:{1}:import {2}:v{3})".format(
                 self.name, self.kind, self.ImportName, self.version)
         else:
             return "{0}:{1}:{2}:v{3}".format(self.name, self.kind, self.Script, self.version)
