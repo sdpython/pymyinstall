@@ -61,7 +61,7 @@ class TestLONGInstallModule (unittest.TestCase):
 
         mod = ModuleInstall("pandas", "wheel")
         res = mod.is_installed_version()
-        if res is not None:
+        if res is None:
             raise AssertionError(
                 "Issue with module (res empty) %r." % mod)
         fLOG("****", mod.get_installed_version(), mod.get_pypi_version())
