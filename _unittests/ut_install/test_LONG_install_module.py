@@ -65,7 +65,8 @@ class TestLONGInstallModule (unittest.TestCase):
             raise AssertionError(
                 "Issue with module (res empty) %r." % mod)
         fLOG("****", mod.get_installed_version(), mod.get_pypi_version())
-        if mod.get_installed_version() != mod.get_pypi_version():
+        if (mod.get_installed_version() != mod.get_pypi_version() and
+                mod.get_pypi_version() not in str(mod.get_installed_version())):
             if not mod.has_update():
                 raise AssertionError(
                     "Issue with module %r - (%r != %r)." % (
