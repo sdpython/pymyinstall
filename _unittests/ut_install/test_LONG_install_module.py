@@ -68,7 +68,9 @@ class TestLONGInstallModule (unittest.TestCase):
         if mod.get_installed_version() != mod.get_pypi_version():
             if not mod.has_update():
                 raise AssertionError(
-                    "Issue with module %r." % mod)
+                    "Issue with module %r - (%r != %r)." % (
+                        mod, mod.get_installed_version(),
+                        mod.get_pypi_version()))
 
 
 if __name__ == "__main__":
