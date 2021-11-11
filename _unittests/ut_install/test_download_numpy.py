@@ -7,7 +7,7 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import (
-    is_travis_or_appveyor, get_temp_folder, skipif_appveyor
+    is_travis_or_appveyor, get_temp_folder, skipif_appveyor)
 from pymyinstall.installhelper.module_install import ModuleInstall
 from pymyinstall.installhelper import compare_version
 
