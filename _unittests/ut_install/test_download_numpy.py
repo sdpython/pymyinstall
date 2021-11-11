@@ -6,13 +6,15 @@ import sys
 import os
 import unittest
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import is_travis_or_appveyor, get_temp_folder
+from pyquickhelper.pycode import (
+    is_travis_or_appveyor, get_temp_folder, skipif_appveyor
 from pymyinstall.installhelper.module_install import ModuleInstall
 from pymyinstall.installhelper import compare_version
 
 
 class TestDownloadNumpy (unittest.TestCase):
 
+    @skipif_appveyor("skip numpy test")
     def test_install_numpy(self):
         fLOG(
             __file__,

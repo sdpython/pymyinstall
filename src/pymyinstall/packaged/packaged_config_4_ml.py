@@ -828,6 +828,12 @@ def ensae_set():
         ModuleInstall('python-louvain', 'pip', usage="ML",
                       purpose="Louvain algorithm"),
 
+        #
+        # 2021-11
+        #
+        ModuleInstall('onnxruntime_training', 'wheel', usage="ML", purpose="onnxruntime training"),
+        ModuleInstall('aten_op_executor', 'wheel', usage="ML", purpose="onnxruntime training"),
+        ModuleInstall('torch_interop_utils', 'wheel', usage="ML", purpose="onnxruntime training"),
     ]
 
     if sys.version_info[0] == 2:

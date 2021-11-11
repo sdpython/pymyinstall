@@ -7,6 +7,7 @@ import re
 import warnings
 import functools
 import time
+import platform
 import xmlrpc.client as xmlrpc_client
 from .install_cmd_helper import run_cmd, get_pip_program
 from .module_install_exceptions import (
@@ -579,6 +580,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         python_version = ".".join(str(_) for _ in sys.version_info[:3])
         extra = ""
         sys_platform = sys.platform
+        platform_machine = platform.machine
         try:
             return eval(cond)
         except Exception:
