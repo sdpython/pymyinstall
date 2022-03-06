@@ -20,7 +20,7 @@ readme = 'README.rst'
 history = "HISTORY.rst"
 requirements = None
 
-KEYWORDS = project_var_name + ', installation, Xavier Dupré'
+KEYWORDS = [project_var_name, 'installation', 'Xavier Dupré']
 DESCRIPTION = """Easy installation of modules for data scientists"""
 CLASSIFIERS = [
     'Programming Language :: Python :: 3',
