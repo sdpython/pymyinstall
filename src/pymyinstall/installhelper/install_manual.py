@@ -1,4 +1,4 @@
-# coding: latin-1
+# coding: utf-8
 """
 @file
 @brief Contains a list of web site with some useful tools.
