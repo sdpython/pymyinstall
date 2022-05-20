@@ -597,9 +597,10 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                 return True
             mes = ("Unable to evaluate condition '{0}' from '{1}', "
                    "extra='{2}', python_version='{3}', "
-                   "sys_platform='{4}' platform_machine='{5}'.").format(
+                   "sys_platform='{4}' platform_machine='{5}', "
+                   "platform_python_implementation='{6}'.").format(
                 cond, full, extra, python_version, sys_platform,
-                platform_machine)
+                platform_machine, platform_python_implementation)
             raise Exception(mes)
 
     if use_pip:
