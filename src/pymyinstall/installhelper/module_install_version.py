@@ -427,7 +427,7 @@ def version_consensus(v1, v2):
 
     * ``v1='<=1.6'``, ``v2='(>=1.5)'`` --> ``v='==1.6'``
     """
-    reg = re.compile("([><=]*)([^><=]+)")
+    reg = re.compile("([><=!]*)([^><=!]+)")
 
     def process_version(v):
         if isinstance(v, str  # unicode#
@@ -454,16 +454,17 @@ def version_consensus(v1, v2):
     s1, n1 = process_version(v1)
     s2, n2 = process_version(v2)
 
-    if s1 not in ('<=', '==', '<', '>', '>='):
-        raise ValueError("wrong sign {0} for v1={1}".format(s1, v1))
-    if s2 not in ('<=', '==', '<', '>', '>='):
-        raise ValueError("wrong sign {0} for v1={1}".format(s2, v2))
+    if s1 not in ('<=', '==', '<', '>', '>=', '!='):
+        raise ValueError("wrong sign '{0}' for v1='{1}'".format(s1, v1))
+    if s2 not in ('<=', '==', '<', '>', '>=', '!='):
+        raise ValueError("wrong sign '{0}' for v1='{1}'".format(s2, v2))
 
     if s1 == "==":
         if s2 == "==":
             if compare_version(n1, n2) != 0:
                 raise WrongVersionError(
                     "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s1, n1
         else:
             res = s1, n1
 
@@ -523,6 +524,11 @@ def version_consensus(v1, v2):
                 raise WrongVersionError(
                     "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
             res = s2, n2
+        elif s2 == '!=':
+            if compare_version(n1, n2) == 0:
+                raise WrongVersionError(
+                    "incompatible version: {0}{1} and {2}{3}".format(s1, n1, s2, n2))
+            res = s1, max(n1, n2)
 
     elif s1 == ">":
         if s2 == ">":
@@ -581,6 +587,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
         extra = ""
         sys_platform = sys.platform
         platform_machine = platform.machine
+        platform_python_implementation = platform.python_implementation
         try:
             return eval(cond)
         except Exception:
@@ -629,8 +636,8 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                 spl = v.split()
                 if len(spl) > 1:
                     spl = [spl[0], " ".join(spl[1:])]
-                if len(spl) == 1:
-                    key = (v, None, module)
+                if len(spl) <= 1:
+                    key = (module, None, v)
                 else:
                     conds = spl[1].split(";")
                     ok = [evaluate_condition(cond, v) for cond in conds]
@@ -661,9 +668,12 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                 if r[0] not in done:
                     if r[0].lower() < 'a' or r[0].lower() > 'z' or r[0].endswith(";"):
                         raise NameError(
-                            "A module has an unexpected name '{0}', r={1} when looking for dependencies of '{2}'.".format(r[0], r, module))
+                            "A module has an unexpected name '{0}', r={1} "
+                            "when looking for dependencies of '{2}'.".format(
+                                r[0], r, module))
                     temp = get_module_dependencies(
-                        r[0], use_cmd=use_cmd, deep=deep, collapse=False, use_pip=use_pip, refresh_cache=refresh_cache)
+                        r[0], use_cmd=use_cmd, deep=deep, collapse=False,
+                        use_pip=use_pip, refresh_cache=refresh_cache)
                     for key in temp:
                         if key not in res:
                             res.append(key)

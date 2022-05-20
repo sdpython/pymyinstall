@@ -9,7 +9,7 @@ from pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
 from pymyinstall.installhelper.pip_helper import get_installed_distributions
 
 
-class TestModuleDependencies (unittest.TestCase):
+class TestModuleDependencies(unittest.TestCase):
 
     def common_function(self, name, use_pip=None):
         res = get_module_dependencies(name, deep=True, use_pip=use_pip)
@@ -82,4 +82,5 @@ class TestModuleDependencies (unittest.TestCase):
 
 
 if __name__ == "__main__":
+    # TestModuleDependencies().test_dependencies_matplotlib()
     unittest.main()
