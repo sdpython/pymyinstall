@@ -106,8 +106,6 @@ def extended_set():
             'pycosat', 'wheel', purpose="PicoSAT is a popular SAT solver written by Armin Biere in pure C."),
         ModuleInstall('pyshp', 'pip', mname='shapefile',
                       purpose="Pure Python read/write support for ESRI Shapefile format"),
-        ModuleInstall('Shapely', 'wheel', mname='shapely',
-                      purpose="Manipulation and analysis of geometric objects in the Cartesian plane."),
         ModuleInstall('descartes', 'pip',
                       purpose="Use Shapely or GeoJSON-like geometric objects as matplotlib paths and patches"),
         ModuleInstall('geopandas', 'pip',
@@ -159,19 +157,11 @@ def extended_set():
                       "the direct and inverse problems for an ellipsoid of revolution."),
         ModuleInstall('geopy', 'pip',
                       purpose="Python Geocoding Toolbox", usage="VIZ"),
-        ModuleInstall('pyproj', 'wheel',
-                      purpose="python interface to PROJ4 library for cartographic transformations " +
-                      "https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
         ModuleInstall('geojson', 'pip',
                       purpose="Functions for encoding and decoding GeoJSON formatted data"),
         # Deprecated
         # ModuleInstall('basemap', 'wheel', mname='mpl_toolkits.basemap',
         #               purpose="maps extension for matplotlib", usage="VIZ"),
-        ModuleInstall('Cartopy', 'wheel', mname="cartopy",
-                      purpose="Cartopy is a Python package designed to make drawing maps for data analysis " +
-                      "and visualisation as easy as possible (issue on Linux and Anaconda)", usage="VIZ"),
-        # the module cartopy requires GEOS https://trac.osgeo.org/geos/
-        #
         ModuleInstall("python3-linkedin", "pip", mname="linkedin",
                       purpose="Python Interface to the LinkedIn API"),
         # access to linkedin
@@ -606,8 +596,6 @@ def extended_set():
                       purpose="A dot-accessible dictionary (a la JavaScript objects)."),
         ModuleInstall("cligj", "pip",
                       purpose="Click params for commmand line interfaces to GeoJSON"),
-        ModuleInstall("Fiona", "wheel", usage="GEO", mname="fiona",
-                      purpose="Fiona is OGR’s neat, nimble, no-nonsense API for Python programmers."),
         ModuleInstall("brythonmagic", "pip",
                       purpose="Magics to use brython in Jupyter notebook."),
         ModuleInstall(

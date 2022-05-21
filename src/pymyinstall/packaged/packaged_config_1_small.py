@@ -593,6 +593,20 @@ def small_set():
         ModuleInstall(
             "sphinxcontrib-blockdiag", "pip", mname="sphinxcontrib.blockdiag",
             purpose="Sphinx 'blockdiag' extension"),
+        ModuleInstall('pyproj', 'wheel',
+                      purpose="python interface to PROJ4 library for cartographic transformations " +
+                      "https://jswhit.github.io/pyproj, needed by cartopy", usage="VIZ"),
+        ModuleInstall('Cartopy', 'wheel', mname="cartopy",
+                      purpose="Cartopy is a Python package designed to make drawing maps for data analysis " +
+                      "and visualisation as easy as possible (issue on Linux and Anaconda)", usage="VIZ"),
+        ModuleInstall('Shapely', 'wheel', mname='shapely',
+                      purpose="Manipulation and analysis of geometric objects in the Cartesian plane."),
+        ModuleInstall("Fiona", "wheel", usage="GEO", mname="fiona",
+                      purpose="Fiona is OGR’s neat, nimble, no-nonsense API for Python programmers."),
+        ModuleInstall("GDAL", "wheel", mname="osgeo",
+                      purpose="GDAL is a translator library for raster and vector geospatial data formats "
+                      + "that is released under an X/MIT style "
+                      + "Open Source license by the Open Source Geospatial Foundation."),
     ]
 
     return [_ for _ in mod if _ is not None]
