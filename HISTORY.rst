@@ -5,8 +5,16 @@
 History
 =======
 
-current - 2021-11-11 - 0.00Mb
+current - 2022-05-21 - 0.00Mb
 =============================
+
+* #71: Moves Cartopy, GDAL, fiona, Shapely to the small set. (2022-05-21)
+
+1.4.1956 - 2022-05-21 - 2.39Mb
+==============================
+
+1.4.1949 - 2021-11-11 - 1.94Mb
+==============================
 
 * #70: Add onnxruntime_training and its extension (2021-11-11)
 
