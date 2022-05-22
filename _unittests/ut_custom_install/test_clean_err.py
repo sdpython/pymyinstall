@@ -34,7 +34,6 @@ class TestClearErr(unittest.TestCase):
                 ERROR: chainer 7.1.0 requires numpy>=1.9.0, which is not installed.
                 ERROR: chainer 7.1.0 requires protobuf>=3.0.0, which is not installed.
                 ERROR: chainer 7.1.0 requires six>=1.9.0, which is not installed.
-                ERROR: chainer 7.1.0 requires typing-extensions, which is not installed.
                 """)
         err2 = _clean_err1(err)
         self.assertEqual(err2, None)

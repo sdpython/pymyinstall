@@ -48,7 +48,6 @@ def get_default_ignore_modules():
         "pywin32_ctypes",   # manny names for this one
         "rope",             # for spyder
         "setuptools",       # standard distribution
-        "typing",           # standard distribution (>= 3.6)
     ]
 
 

@@ -808,8 +808,6 @@ def ensae_set():
         #
         ModuleInstall('pyltr', 'pip', usage="ML", purpose="pyltr is a Python learning-to-rank toolkit "
                       "with ranking models, evaluation metrics, data wrangling helpers, and more."),
-        ModuleInstall('typing_extensions', 'pip', usage="ML",
-                      purpose="Typing Extensions - Backported and Experimental Type Hints for Python"),
         ModuleInstall('onnx', 'wheel2', usage="ML",
                       purpose="Open Neural Network Exchange"),
         ModuleInstall('onnxmltools', 'pip', usage="ML",

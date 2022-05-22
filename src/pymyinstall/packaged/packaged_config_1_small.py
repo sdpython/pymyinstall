@@ -371,8 +371,6 @@ def small_set():
                       purpose="Interactive Parallel Computing with IPython"),
         # end of ipython
         #
-        ModuleInstall("typing", "pip", purpose="Type Hints for Python") if sys.version_info[
-            :2] < (3, 5) else None,
         ModuleInstall("typecheck-decorator", "pip", mname="typecheck",
                       purpose="verifies decorators at running time"),
         ModuleInstall("requests-cache", "pip", mname="requests_cache",
