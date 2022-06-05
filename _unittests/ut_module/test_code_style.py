@@ -13,13 +13,13 @@ class TestCodeStyle(ExtTestCase):
         thi = os.path.abspath(os.path.dirname(__file__))
         src_ = os.path.normpath(os.path.join(thi, "..", "..", "src"))
         check_pep8(src_, fLOG=fLOG,
-                   pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
+                   pylint_ignore=('C0103', 'C1801', 'R1705', 'W0108', 'W0613',
                                   'R1703', 'C0111', 'C0201', 'R1702',
                                   'W0703', 'W0622', 'C0412', 'R0912',
                                   'W0603', 'W0212', 'W0123', 'W0201',
                                   'C0200', 'W0122', 'C0302', 'W0102',
                                   'W0621', 'R1710', 'R0401', 'R1714',
-                                  'R0915', 'W0107', 'W503', 'C0415',
+                                  'R0915', 'W0107', 'C0415',
                                   'W0707', 'R1725', 'R1732', 'C0207',
                                   'W1514', 'C0209'),
                    skip=["__init__.py:1: R0401",
@@ -59,9 +59,9 @@ class TestCodeStyle(ExtTestCase):
         thi = os.path.abspath(os.path.dirname(__file__))
         test = os.path.normpath(os.path.join(thi, "..", ))
         check_pep8(test, fLOG=fLOG, neg_pattern="temp_.*",
-                   pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
+                   pylint_ignore=('C0103', 'C1801', 'R1705', 'W0108', 'W0613',
                                   'C0111', 'W0703', 'W0622', 'W0621', 'C0412', 'C0411',
-                                  'R0915', 'W0107', 'W503', 'C0415', 'W0707', 'R1725',
+                                  'R0915', 'W0107', 'C0415', 'W0707', 'R1725',
                                   'R1732', 'C0207', 'W1514', 'C0209'),
                    skip=["test_is_installed.py:41: E1101",
                          "Unable to import 'selenium.webdriver'",

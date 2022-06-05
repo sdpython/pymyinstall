@@ -2,7 +2,7 @@
 language: python
 
 python:
-  - { PATH: "{{Python38}}", VERSION: 3.9, DIST: std, PYINT: python3.9, PYTHONPATH: src }
+  - { PATH: "{{Python39}}", VERSION: 3.9, DIST: std, PYINT: python3.9, PYTHONPATH: src }
   
 virtualenv:
   - path: {{ospathjoin(root_path, pickname("$NAME_JENKINS", project_name + "_$VERSION_$DIST_$NAME"), "_venv")}}
@@ -22,12 +22,12 @@ before_script:
 
 script:
   - { CMD: "$PYINT -u setup.py unittests --covtoken=b67b3051-8c5d-460b-b2fa-51d81ab7008c", NAME: "UT" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*chrome.*\"", NAME: "UT_LONG", SCHEDULER: "H H(1-2) 27 * *" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*chrome.*\"", NAME: "UT_LONG_CHROME", SCHEDULER: "H H(1-2) 27 * *" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*base.*\" -g \".*datascientist.*\"", NAME: "UT_SKIP_BASE", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*sqlitespy.*\"", NAME: "UT_SKIP_SQLLITE", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
-  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*notebook.*\"", NAME: "UT_SKIP_NB", SCHEDULER: "H H(1-2) 27 * *" }
+  # - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*chrome.*\"", NAME: "UT_LONG", SCHEDULER: "H H(1-2) 27 * *" }
+  # - { CMD: "$PYINT -u setup.py unittests -e \".*chrome.*\"", NAME: "UT_LONG_CHROME", SCHEDULER: "H H(1-2) 27 * *" }
+  # - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*base.*\" -g \".*datascientist.*\"", NAME: "UT_SKIP_BASE", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
+  # - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*sqlitespy.*\"", NAME: "UT_SKIP_SQLLITE", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
+  # - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*minimal.*\"", NAME: "UT_SKIP_MINIMAL", TIMEOUT: 7200, SCHEDULER: "H H(1-2) 27 * *" }
+  # - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*notebook.*\"", NAME: "UT_SKIP_NB", SCHEDULER: "H H(1-2) 27 * *" }
 
 after_script:
   - $PYINT -u setup.py bdist_wheel
