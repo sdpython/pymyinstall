@@ -1,8 +1,8 @@
 """
 @file
-@brief Various functions to install some application such as `pandoc <http://johnmacfarlane.net/pandoc/>`_.
+@brief Various functions to install some application such as
+`pandoc <http://johnmacfarlane.net/pandoc/>`_.
 """
-from __future__ import print_function
 import os
 import sys
 from ..installhelper.install_memoize import install_memoize2
@@ -127,7 +127,8 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
         import requests
 
     try:
-        req = requests.get(url, allow_redirects=True, stream=True)
+        req = requests.get(url, allow_redirects=True,
+                           stream=True, timeout=10)
         text = req.raw.read()
         fLOG("[pymy] len ", len(text))
     except urllib_error.HTTPError as e:

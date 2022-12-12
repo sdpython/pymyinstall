@@ -20,6 +20,7 @@ def download_revealjs(
         fLOG=print,
         force_download=False,
         pattern="https://github.com/hakimel/reveal.js/archive/refs/tags/%s.zip",
+        location="https://github.com/hakimel/reveal.js/releases",
         clean=True,
         version="4.4.0"):
     """
@@ -31,6 +32,7 @@ def download_revealjs(
     @param      fLOG            logging function
     @param      install         install (otherwise only download)
     @param      force_download  force the downloading of pandoc
+    @param      pattern         url pattern if version is specified
     @param      location        location of reveal.js release
     @param      clean           clean unnecessary files
     @param      version         version to download (unused)
