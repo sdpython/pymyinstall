@@ -19,9 +19,9 @@ def download_revealjs(
         unzip_to=".",
         fLOG=print,
         force_download=False,
-        location="https://github.com/hakimel/reveal.js/releases",
+        pattern="https://github.com/hakimel/reveal.js/archive/refs/tags/%s.zip",
         clean=True,
-        version=None):
+        version="4.4.0"):
     """
     Download `reveal.js <https://github.com/hakimel/reveal.js/releases>`_ release.
     and unzip it.
@@ -36,20 +36,21 @@ def download_revealjs(
     @param      version         version to download (unused)
     @return                     list of downloaded and unzipped files
     """
-    if version is not None:
-        raise ValueError("cannot specify a version")
-    link = location
-    page = download_page(link)
-    reg = re.compile("href=\\\"(.*?[.]zip)\\\"")
-    alls = reg.findall(page)
-    if len(alls) == 0:
-        raise Exception(
-            "unable to find a link on a .zip file on page: " +
-            page)
+    if version is None:
+        link = location
+        page = download_page(link)
+        reg = re.compile("href=\\\"(.*?[.]zip)\\\"")
+        alls = reg.findall(page)
+        if len(alls) == 0:
+            raise ValueError(
+                f"Unable to find a link on a .zip file on page: {page!r}.")
+        filename = alls[0].split("/")[-1]
+        filel = location.replace("releases", "").rstrip(
+            "/") + "/archive/{0}".format(filename)
+    else:
+        filel = pattern % version
+        filename = filel.split("/")[-1]
 
-    filename = alls[0].split("/")[-1]
-    filel = location.replace("releases", "").rstrip(
-        "/") + "/archive/{0}".format(filename)
     outfile = os.path.join(temp_folder, "reveal.js." + filename)
     version = ".".join(filel.split("/")[-1].split(".")[:-1])
     fLOG("[pymy] download ", filel, "to", outfile, "version", version)
