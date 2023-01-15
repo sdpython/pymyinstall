@@ -50,13 +50,19 @@ def get_page_wheel(page, sele=True):
             from ..installcustom.install_custom_chromedriver import install_chromedriver
             import selenium.webdriver
             install_chromedriver(fLOG=None)
-            browser = selenium.webdriver.Chrome()
+            try:
+                browser = selenium.webdriver.Chrome()
+            except Exception as ex:
+                raise ValueError(
+                    f"Unable to load {page!r} (selenium failed too {ex}).") from ee
             browser.get(page)
             text = browser.page_source
             browser.close()
             if len(text) < 1000:
                 raise ValueError(
-                    "Unable to retrieve information from '{0}' with selenium len={1}".format(page, len(text)))
+                    "Unable to retrieve information from '{0}' with selenium "
+                    "len={1}".format(page, len(text)))
+            print(text)
         else:
             raise ee
     except Exception as e:

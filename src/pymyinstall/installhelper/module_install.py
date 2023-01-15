@@ -55,7 +55,8 @@ class ModuleInstall:
     """
 
     allowedKind = ["pip", "github", "exe", "exe2", "wheel", "wheel2"]
-    exeLocation = "https://www.lfd.uci.edu/~gohlke/pythonlibs/"
+    exeLocation = "http://www.xavierdupre.fr/enseignement/setup/"
+    # https://www.lfd.uci.edu/~gohlke/pythonlibs/ stopped
     exeLocationXd_Default = "http://www.xavierdupre.fr/enseignement/setup/"
     gitexe = r"C:\Program Files (x86)\Git"
     github_pattern_zip = "https://github.com/{1}/{0}/archive/{2}.zip"
