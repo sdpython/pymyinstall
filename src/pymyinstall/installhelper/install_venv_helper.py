@@ -12,7 +12,7 @@ if sys.version_info[0] == 2:
     FileNotFoundError = Exception
 
 
-class VirtualEnvError(Exception):
+class VirtualEnvError(RuntimeError):
     """
     exception raised by the function implemented in this file
     """

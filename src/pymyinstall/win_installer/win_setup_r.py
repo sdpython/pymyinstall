@@ -14,7 +14,7 @@ _script = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "R_install.r")
 
 
-class RBatchException(Exception):
+class RBatchException(RuntimeError):
 
     """
     raised when running R in batch mode

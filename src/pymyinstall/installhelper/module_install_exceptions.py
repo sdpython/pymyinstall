@@ -4,7 +4,7 @@
 """
 
 
-class MissingPackageOnPyPiException(Exception):
+class MissingPackageOnPyPiException(RuntimeError):
 
     """
     raised when a package is not found on pipy
@@ -12,7 +12,7 @@ class MissingPackageOnPyPiException(Exception):
     pass
 
 
-class MissingInstalledPackageException(Exception):
+class MissingInstalledPackageException(RuntimeError):
 
     """
     raised when a package is not installed
@@ -20,7 +20,7 @@ class MissingInstalledPackageException(Exception):
     pass
 
 
-class AnnoyingPackageException(Exception):
+class AnnoyingPackageException(RuntimeError):
 
     """
     raised when a package is not on pypi
@@ -28,7 +28,7 @@ class AnnoyingPackageException(Exception):
     pass
 
 
-class MissingVersionOnPyPiException(Exception):
+class MissingVersionOnPyPiException(RuntimeError):
 
     """
     raised when a version is missing on pipy
@@ -36,7 +36,7 @@ class MissingVersionOnPyPiException(Exception):
     pass
 
 
-class MissingVersionWheelException(Exception):
+class MissingVersionWheelException(RuntimeError):
 
     """
     raised when a version is missing as a wheel
@@ -44,7 +44,7 @@ class MissingVersionWheelException(Exception):
     pass
 
 
-class MissingWheelException(Exception):
+class MissingWheelException(RuntimeError):
 
     """
     raised when a wheel is missing
@@ -52,7 +52,7 @@ class MissingWheelException(Exception):
     pass
 
 
-class MissingReferenceException(Exception):
+class MissingReferenceException(RuntimeError):
 
     """
     raised when a module is not referenced by this package
@@ -60,56 +60,56 @@ class MissingReferenceException(Exception):
     pass
 
 
-class InstallError(Exception):
+class InstallError(RuntimeError):
     """
     raised when a package cannot be installed
     """
     pass
 
 
-class DownloadError(Exception):
+class DownloadError(RuntimeError):
     """
     raised when a package cannot be downloaded
     """
     pass
 
 
-class ConfigurationError(Exception):
+class ConfigurationError(RuntimeError):
     """
     raised when something is wrong the current configuration
     """
     pass
 
 
-class UpdatePipError(Exception):
+class UpdatePipError(RuntimeError):
     """
     raised when pip cannot be update or reinstalled
     """
     pass
 
 
-class RunCmdError(Exception):
+class RunCmdError(RuntimeError):
     """
     raised when a command line cannot be run
     """
     pass
 
 
-class WrongVersionError(Exception):
+class WrongVersionError(RuntimeError):
     """
     cannot interpret a version
     """
     pass
 
 
-class WrongWheelException(Exception):
+class WrongWheelException(RuntimeError):
     """
     raised when the downloaded wheel seems wrong
     """
     pass
 
 
-class UnavailableCustomBuildError(Exception):
+class UnavailableCustomBuildError(RuntimeError):
     """
     raise when a module does not have a custom build
     """

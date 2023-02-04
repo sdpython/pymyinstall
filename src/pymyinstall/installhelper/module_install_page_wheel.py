@@ -19,7 +19,7 @@ else:
     from urllib.error import URLError
 
 
-class InternalJsException(Exception):
+class InternalJsException(RuntimeError):
     """
     Raises when a javascript url cannot be decrypted.
     """

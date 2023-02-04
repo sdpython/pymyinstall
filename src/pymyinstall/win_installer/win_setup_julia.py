@@ -23,7 +23,7 @@ _script_init = os.path.join(
     os.path.abspath(os.path.dirname(__file__)), "Julia_init.jl")
 
 
-class JuliaBatchException(Exception):
+class JuliaBatchException(RuntimeError):
 
     """
     raised when running R in batch mode

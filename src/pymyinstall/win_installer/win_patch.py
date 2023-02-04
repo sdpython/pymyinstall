@@ -8,7 +8,7 @@ import os
 import re
 
 
-class ShebangException(Exception):
+class ShebangException(RuntimeError):
     """
     exception raised when the shebang is not correct
     """

@@ -14,7 +14,7 @@ if sys.version_info[0] == 2:
     FileNotFoundError = Exception
 
 
-class InnoSetupException(Exception):
+class InnoSetupException(RuntimeError):
 
     """
     Exception happening with InnoSetup

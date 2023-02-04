@@ -19,7 +19,7 @@ else:
     import http.client as http_client
 
 
-class DownloadException(Exception):
+class DownloadException(RuntimeError):
     """
     Cannot download.
     """

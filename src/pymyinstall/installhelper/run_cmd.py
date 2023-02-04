@@ -19,7 +19,7 @@ else:
     import queue
 
 
-class RunCmdException(Exception):
+class RunCmdException(RuntimeError):
     """
     raised by function @see fn run_cmd
     """

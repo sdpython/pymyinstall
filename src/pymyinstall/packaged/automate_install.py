@@ -120,7 +120,7 @@ def reorder_module_list(list_module):
     return res
 
 
-class FileShouldNotBeFound(Exception):
+class FileShouldNotBeFound(RuntimeError):
     """
     Raised by function @see fn check_sys_path.
     """

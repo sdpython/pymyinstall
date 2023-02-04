@@ -4,7 +4,7 @@
 """
 
 
-class ManualDownloadException(Exception):
+class ManualDownloadException(RuntimeError):
     """
     raised when a manual download is required
     """

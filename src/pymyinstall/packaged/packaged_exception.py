@@ -4,7 +4,7 @@
 """
 
 
-class ModuleNotFoundError(Exception):
+class ModuleNotFoundError(RuntimeError):
     """
     raised when a module was not found
     """
