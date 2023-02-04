@@ -63,7 +63,7 @@ def install_sqlitespy(temp_folder=".", fLOG=print, install=True, version=None, b
                 "href=[\\\"'](https://www.yunqa.de/delphi/downloads/SQLiteSpy.*?[.]zip)[\\\"']")
             alls = reg.findall(page)
             if len(alls) == 0:
-                raise Exception(
+                raise RuntimeError(
                     "Unable to find a link on a .zip file on page: " + page)
 
             file = alls[0].replace("&amp;", "&")

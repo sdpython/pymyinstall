@@ -32,7 +32,7 @@ def install_7z(
         reg = re.compile("href=\\\"(.*?x64[.]msi)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0:
-            raise Exception(
+            raise AssertionError(
                 "unable to find a link on a .msi file on page: " + link + "\n" +
                 page)
 

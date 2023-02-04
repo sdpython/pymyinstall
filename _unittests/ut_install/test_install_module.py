@@ -18,7 +18,7 @@ class TestInstallModule (unittest.TestCase):
         if len(d) < 10:
             for k, v in sorted(d.items()):
                 fLOG(k, v)
-            raise Exception("el {0}\nD\n{1}".format(len(d), d))
+            raise AssertionError("el {0}\nD\n{1}".format(len(d), d))
 
     def test_compare_version(self):
         fLOG(

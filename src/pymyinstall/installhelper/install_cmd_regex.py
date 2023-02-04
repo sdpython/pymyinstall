@@ -37,4 +37,4 @@ if __name__ == "__main__":
             try:
                 reg = re.compile(v)
             except Exception as e:
-                raise Exception("issue with {}:\n{}".format(k, v))
+                raise RuntimeError("issue with {}:\n{}".format(k, v))

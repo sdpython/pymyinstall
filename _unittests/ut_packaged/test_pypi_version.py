@@ -16,7 +16,7 @@ class TestPypiVersion(unittest.TestCase):
 
         ver = get_pypi_version("virtualenv")
         if len(ver) == 0:
-            raise Exception(str(ver))
+            raise AssertionError(str(ver))
 
 
 if __name__ == "__main__":

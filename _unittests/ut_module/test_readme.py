@@ -63,7 +63,7 @@ class TestReadme(unittest.TestCase):
             content = h.read()
 
         if "System Message" in content:
-            raise Exception(content)
+            raise AssertionError(content)
 
 
 if __name__ == "__main__":

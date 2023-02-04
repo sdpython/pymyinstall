@@ -30,7 +30,7 @@ def install_operadriver(dest_folder=".", fLOG=print, install=True, version=None)
             "/tag/v([.][0-9]+[.][0-9]+([.][0-9]+)?([.][0-9]+)?)")
         f = reg.findall(content)
         if not f:
-            raise Exception(
+            raise RuntimeError(
                 "unable to get the last version number for OperaDriver")
         version = f[0][0]
     if sys.platform.startswith("win"):

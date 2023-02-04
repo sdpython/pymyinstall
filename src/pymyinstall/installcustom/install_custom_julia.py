@@ -68,7 +68,7 @@ def install_julia(
         reg = re.compile("href=\\\"(.*?win64[.]exe)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0:
-            raise Exception(
+            raise RuntimeError(
                 "unable to find a link on a .exe file on page: " +
                 page)
 

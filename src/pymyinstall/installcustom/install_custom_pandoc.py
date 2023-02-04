@@ -48,7 +48,7 @@ def install_pandoc(
         reg = re.compile("href=\\\"(.*?[.]msi)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0:
-            raise Exception(
+            raise RuntimeError(
                 "unable to find a link on a .msi file on page: " +
                 page)
 

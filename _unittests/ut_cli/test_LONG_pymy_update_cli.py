@@ -33,7 +33,7 @@ class TestPyMyUpdateCli(unittest.TestCase):
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
-                raise Exception(
+                raise AssertionError(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
 
 

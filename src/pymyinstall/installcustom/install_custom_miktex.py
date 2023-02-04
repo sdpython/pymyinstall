@@ -33,7 +33,7 @@ def install_miktex(dest_folder=".", fLOG=print, install=True, version=None):
         reg = re.compile("href=\\\"(.*?basic.*?x64[.]exe)\\\"")
         alls = reg.findall(page)
         if len(alls) == 0:
-            raise Exception(
+            raise RuntimeError(
                 "unable to find a link on a .exe file on page: " +
                 page)
 

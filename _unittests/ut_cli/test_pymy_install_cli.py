@@ -31,13 +31,13 @@ class TestPyMyInstallCli(unittest.TestCase):
         except subprocess.CalledProcessError as e:
             mes = "CMD\n{0}\nOUT\n{1}\nERR\n{2}".format(
                 e.cmd, e.output, e.stderr.read() if e.stderr else "")
-            raise Exception(mes) from e
+            raise AssertionError(mes) from e
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
-                raise Exception(
+                raise AssertionError(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
 
     def test_install_download(self):
@@ -63,7 +63,7 @@ class TestPyMyInstallCli(unittest.TestCase):
                 "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             return
         if "downloaded modules" not in out:
-            raise Exception(
+            raise AssertionError(
                 "CMD: {0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
         content = os.listdir(temp)
         if len(content) != 2:
@@ -71,7 +71,7 @@ class TestPyMyInstallCli(unittest.TestCase):
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
-                raise Exception(
+                raise AssertionError(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
 
 

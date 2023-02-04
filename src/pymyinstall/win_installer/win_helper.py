@@ -171,7 +171,7 @@ def python_query(cmd, path):
     """Execute Python command using the Python interpreter located in *path*"""
     res = exec_shell_cmd('python -c "%s"' % cmd, path).splitlines()
     if not res:
-        raise Exception(
+        raise RuntimeError(
             "CMD:\n{0}\nRES:\n{1}\nPATH:\n{2}".format(cmd, res, path))
     return res[0]
 

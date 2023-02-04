@@ -36,12 +36,12 @@ def get_modules_version(python_path):
     try:
         out, err = run_cmd(cmd, wait=True, fLOG=None, change_path=python_path)
     except Exception as e:
-        raise Exception("unable to run: {0}".format(cmd)) from e
+        raise RuntimeError("unable to run: {0}".format(cmd)) from e
 
     if err is not None and len(err) > 0:
         if len(err.split("\n")) > 3 or \
            "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
-            raise Exception("unable to run, #lines {0}\nERR-8:\n{1}\nOUT:\n{2}".format(
+            raise RuntimeError("unable to run, #lines {0}\nERR-8:\n{1}\nOUT:\n{2}".format(
                 len(err.split("\n")), err, out))
 
     lines = out.split("\n")
@@ -277,7 +277,7 @@ def win_install_packages_other_python(python_path, package_folder, verbose=False
                         python_path, full, verbose=verbose, deps=mod.deps, fLOG=fLOG)
                 except Exception as e:
                     mes = "failed to install {0}: {1}".format(mod.name, full)
-                    raise Exception(mes) from e
+                    raise RuntimeError(mes) from e
                 if len(op) > 0:
                     fLOG("[pymy] installed", mod.name, " with ", a)
                 operations.extend(op)

@@ -90,7 +90,7 @@ def win_patch_paths(folder, path_to_python="", fLOG=print):
                         mes = ("unable to overwrite '{0}', it will have to be manually done, " +
                                "another file was created with .replace as an extension").format(
                             full)
-                        raise Exception(mes) from e
+                        raise RuntimeError(mes) from e
             else:
                 pass
 

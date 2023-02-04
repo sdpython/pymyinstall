@@ -31,14 +31,14 @@ class TestPyMyDepsCli(unittest.TestCase):
         except subprocess.CalledProcessError as e:
             mes = "CMD\n{0}\nOUT\n{1}\nERR\n{2}".format(
                 e.cmd, e.output, e.stderr.read() if e.stderr else "")
-            raise Exception(mes) from e
+            raise AssertionError(mes) from e
         out = out.strip()
         if len(out) == 0:
             if is_travis_or_appveyor() == "appveyor":
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
-                raise Exception(
+                raise AssertionError(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
         else:
             fLOG(out)
@@ -49,13 +49,13 @@ class TestPyMyDepsCli(unittest.TestCase):
                 if len(err) == 0 and sys.version_info[:2] == (3, 6):
                     # I don't know why this test is failing.
                     return
-                raise Exception(
+                raise AssertionError(
                     "(1)CMD:\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
             if "['pandas']" not in out:
                 if len(err) == 0 and sys.version_info[:2] == (3, 6):
                     # I don't know why this test is failing.
                     return
-                raise Exception(
+                raise AssertionError(
                     "(2)CMD:\n{0}\nOUT\n{1}\nERR\n{2}".format(cmd, out, err))
 
 

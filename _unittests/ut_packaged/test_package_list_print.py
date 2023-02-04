@@ -23,7 +23,7 @@ class TestPackageListPrint(unittest.TestCase):
             every[name] = 1
 
         if len(duplicated) > 0:
-            raise Exception("Duplicated modules\n{0}".format(
+            raise AssertionError("Duplicated modules\n{0}".format(
                 "\n".join(duplicated)))
 
         fLOG(len(every))

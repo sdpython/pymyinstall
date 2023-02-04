@@ -65,7 +65,7 @@ def setup_ipython(current_path=None, additional_path=None, apply_modification=Tr
             out, err = run_cmd(cmd, wait=True, fLOG=noLOG)
 
             if not os.path.exists(ipython_notebook_config):
-                raise Exception(
+                raise RuntimeError(
                     "unable to create jupyter configuration in \n'{0}'\nbecause of:\n{1}\nERR-4:\n{2}\ncmd={3}".format(
                         ipython_notebook_config, out, err, cmd))
 

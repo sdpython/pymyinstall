@@ -52,7 +52,7 @@ class TestInstallWithDeps(unittest.TestCase):
 
         out = run_venv_script(temp, file_script, fLOG=fLOG, file=True)
         if "installing module  six" not in out:
-            raise Exception(out)
+            raise AssertionError(out)
 
 
 if __name__ == "__main__":

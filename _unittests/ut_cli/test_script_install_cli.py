@@ -28,18 +28,18 @@ class TestScriptInstallCli(unittest.TestCase):
         script = os.path.join(os.path.dirname(os.path.abspath(
             __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_install.py")
         if not os.path.exists(script):
-            raise Exception(script)
+            raise AssertionError(script)
         scriptu = os.path.join(os.path.dirname(os.path.abspath(
             __file__)), "..", "..", "src", "pymyinstall", "cli", "pymy_update.py")
         if not os.path.exists(script):
-            raise Exception(script)
+            raise AssertionError(script)
 
         exe = sys.executable
 
         cmd = exe + " " + script + " --help"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
         if "usage: pymy_install.py" not in out:
-            raise Exception(out)
+            raise AssertionError(out)
 
         cmd = exe + " " + scriptu + " --help"
         out, err = run_cmd(cmd, wait=True, fLOG=fLOG)
@@ -48,7 +48,7 @@ class TestScriptInstallCli(unittest.TestCase):
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
-                raise Exception(
+                raise AssertionError(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
 
     @skipif_circleci("stuck")
@@ -86,7 +86,7 @@ class TestScriptInstallCli(unittest.TestCase):
                 warnings.warn(
                     "CLI ISSUE cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
             else:
-                raise Exception(
+                raise AssertionError(
                     "cmd:\n{0}\nOUT:\n{1}\nERR\n{2}".format(cmd, out, err))
 
 

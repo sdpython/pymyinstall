@@ -56,7 +56,7 @@ def install_putty(dest_folder=".", fLOG=print, install=True, version=None):
     if len(find) != 1:
         mes = "unable to find the file to download at {0}\nfound: {1}\npattern: {2}\nOUT:\n{3}".format(
             url, len(find), reg.pattern, "\n".join(find))
-        raise Exception(mes)
+        raise RuntimeError(mes)
 
     # should be something like http://www.scintilla.org/wscite356.zip
     newurl = find[0]
@@ -65,7 +65,7 @@ def install_putty(dest_folder=".", fLOG=print, install=True, version=None):
         try:
             download_file(newurl, outfile)
         except Exception as e:
-            raise Exception("unable to download\n{0}\nto{1}".format(
+            raise RuntimeError("unable to download\n{0}\nto{1}".format(
                 newurl, outfile)) from e
 
         if not os.path.exists(outfile):

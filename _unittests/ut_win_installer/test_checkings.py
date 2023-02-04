@@ -29,14 +29,14 @@ class TestCheckings(unittest.TestCase):
                         # rodeo is not checked anymore, the installation
                         # changed
                         if "spyder" not in line:
-                            raise Exception(
+                            raise AssertionError(
                                 "spyder not found in line\n{0}".format(line)) from e
         elif not is_travis_or_appveyor():
             try:
                 distribution_checkings(None, None, fLOG=fLOG, skip_import=True)
             except Exception as e:
                 if '_venv' not in str(e) or ('Scripts' not in str(e) and '.exe' not in str(e)):
-                    raise Exception("version: " + sys.version) from e
+                    raise AssertionError("version: " + sys.version) from e
 
 
 if __name__ == "__main__":

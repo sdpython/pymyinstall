@@ -39,8 +39,8 @@ def install_tdm_gcc(dest_folder=".", fLOG=print, install=False, version=None):
         "<a href=\\\"http://sourceforge.net/projects/tdm-gcc/files/TDM-GCC[%]20Installer/(tdm64-.*?[.]exe)/download\\\"")
     find = reg.findall(page)
     if len(find) == 0:
-        raise Exception("unable to find the file to download at " +
-                        url + "\nfound: " + str(len(find)) + "\n" + "\n".join(find))
+        raise RuntimeError("unable to find the file to download at " +
+                           url + "\nfound: " + str(len(find)) + "\n" + "\n".join(find))
     name = find[0]
 
     newurl = "http://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/{0}/download?use_mirror=autoselect".format(

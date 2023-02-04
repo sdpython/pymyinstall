@@ -150,12 +150,12 @@ class ModuleInstall:
             "https://pypi.python.org/pypi/" + self.name)
 
         if self.kind not in ModuleInstall.allowedKind:
-            raise Exception(
+            raise RuntimeError(
                 "unable to interpret kind {0}, it should be in {1}".format(
                     kind, ",".join(
                         ModuleInstall.allowedKind)))
         if self.kind == "github" and self.gitrepo is None:
-            raise Exception("gitrepo cannot be empty")
+            raise RuntimeError("gitrepo cannot be empty")
 
         self.fLOG = fLOG
 
@@ -411,7 +411,7 @@ class ModuleInstall:
                 lline = line.lower()
                 if self.name in lline or (self.mname and self.mname in lline):
                     keep.append(line)
-            raise Exception(
+            raise RuntimeError(
                 "module " +
                 self.name + "\nexample:\n" + "\n".join(keep))
 
@@ -464,10 +464,10 @@ class ModuleInstall:
                 0].lower() and "vanilla" not in lu[0].lower()]
 
         if len(links) == 0:
-            raise Exception("unable to find a single link for " +
-                            self.name +
-                            "\nEX:\n" +
-                            "\n".join(str(_) for _ in links0))
+            raise RuntimeError("unable to find a single link for " +
+                               self.name +
+                               "\nEX:\n" +
+                               "\n".join(str(_) for _ in links0))
 
         link = choose_most_recent(links)
         self.existing_version = self.extract_version(link[0])
@@ -514,7 +514,7 @@ class ModuleInstall:
                 lline = line.lower()
                 if self.name in lline or (self.mname and self.mname in lline):
                     keep.append(line)
-            raise Exception(
+            raise RuntimeError(
                 "module " +
                 self.name + "\nexample:\n" + "\n".join(keep))
 
@@ -541,10 +541,10 @@ class ModuleInstall:
                 0].lower() and "vanilla" not in lu[0].lower()]
 
         if len(links) == 0:
-            raise Exception("unable to find a single link for " +
-                            self.name +
-                            "\nEX:\n" +
-                            "\n".join(str(_) for _ in links0))
+            raise RuntimeError("unable to find a single link for " +
+                               self.name +
+                               "\nEX:\n" +
+                               "\n".join(str(_) for _ in links0))
 
         link = choose_most_recent(links)
         self.existing_version = self.extract_version(link[0])
@@ -729,7 +729,7 @@ class ModuleInstall:
                     text = u.read()
                     u.close()
                 except urllib_error.HTTPError as e:
-                    raise Exception(
+                    raise RuntimeError(
                         "unable to get archive from: " +
                         zipurl) from e
 
@@ -751,7 +751,7 @@ class ModuleInstall:
                 kind = "exe2"
             ver = python_version()
             if ver[0] != "win32":
-                raise Exception(
+                raise RuntimeError(
                     "this option is not available on other systems than Windows, version={0}".format(ver))
             url, exe = self.get_exewheel_url_link(
                 file_save=file_save) if kind == "exe" else self.get_exewheel_url_link2(
@@ -1198,7 +1198,7 @@ class ModuleInstall:
                                   force=force, unzipFile=True)
             setu = [_ for _ in files if _.endswith("setup.py")]
             if len(setu) == 0:
-                raise Exception(
+                raise RuntimeError(
                     "unable to find setup.py for module " +
                     self.name)
             if len(setu) > 1:
@@ -1325,7 +1325,7 @@ class ModuleInstall:
         # at this stage, there is a bug, for some executable, the execution
         # takes longer than expected
         # if not self.is_installed_version() :
-        #    raise Exception("unable to install module: {0}, str:{1}".format(self.name, self))
+        #    raise RuntimeError("unable to install module: {0}, str:{1}".format(self.name, self))
 
         if ret is not None and ret and self.script is not None:
             if sys.platform.startswith("win"):

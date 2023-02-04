@@ -51,11 +51,12 @@ class TestPatch(unittest.TestCase):
             with open(full, "rb") as f:
                 content = f.read()
             if binto not in content:
-                raise Exception("file:{}\ncontent:\n{}".format(full, content))
+                raise AssertionError(
+                    "file:{}\ncontent:\n{}".format(full, content))
             i += 1
         exp = 3
         if i != exp:
-            raise Exception("i != " + str(exp) + "\n" + str(op))
+            raise AssertionError("i != " + str(exp) + "\n" + str(op))
 
         op = win_patch_paths(dest, None, fLOG=fLOG)
 

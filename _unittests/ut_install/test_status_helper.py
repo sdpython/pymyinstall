@@ -34,7 +34,7 @@ class TestStatusHelper(unittest.TestCase):
         for f in res:
             fLOG(f)
         if len(res) != 5:
-            raise Exception("\n".join(
+            raise AssertionError("\n".join(
                 "\n---------\n{0}/{1} {2}".format(i + 1, len(res), _) for i, _ in enumerate(res)))
 
 

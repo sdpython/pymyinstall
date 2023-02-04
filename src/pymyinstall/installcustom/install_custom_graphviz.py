@@ -49,7 +49,7 @@ def install_graphviz(temp_folder=".", fLOG=print, install=True,
             reg = re.compile("href=\\\"(.*?[.]msi)\\\"")
             alls = reg.findall(page)
             if len(alls) == 0:
-                raise Exception(
+                raise ValueError(
                     "unable to find a link on a .msi file on page: " +
                     page)
 

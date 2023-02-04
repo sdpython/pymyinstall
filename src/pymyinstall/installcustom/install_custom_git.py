@@ -32,7 +32,7 @@ def install_git(
         reg = re.compile("href=\\\"(.*?64-bit[.]((msi)|(exe)))\\\"")
         alls = reg.findall(page)
         if len(alls) == 0:
-            raise Exception(
+            raise AssertionError(
                 "unable to find a link on a .msi file on page: " + link + "\n" +
                 page)
 

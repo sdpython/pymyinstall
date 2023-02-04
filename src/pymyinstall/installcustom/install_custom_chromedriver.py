@@ -32,7 +32,7 @@ def install_chromedriver(dest_folder=".", fLOG=print, install=True, version=None
             "index.html[?]path=([0-9]+([.][0-9]+){1,3})/)")
         f = reg.findall(content)
         if not f:
-            raise Exception(
+            raise AssertionError(
                 "Unable to get the last version number for ChromeDriver, "
                 "url='{}'".format(url))
         version = f[0][1]

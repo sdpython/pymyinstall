@@ -79,9 +79,9 @@ def decode_outerr(outerr, encoding, encerror, msg):
             return out
         except Exception as e:
             out = outerr.decode(encoding, errors='ignore')
-            raise Exception("issue with cmd (" + encoding + "):" +
-                            typstr(msg) + "\n" + typstr(exu) + "\n-----\n" + out) from e
-    raise Exception("complete issue with cmd:" + typstr(msg))
+            raise RuntimeError("issue with cmd (" + encoding + "):" +
+                               typstr(msg) + "\n" + typstr(exu) + "\n-----\n" + out) from e
+    raise RuntimeError("complete issue with cmd:" + typstr(msg))
 
 
 def skip_run_cmd(cmd, sin="", shell=True, wait=False, log_error=True,
@@ -219,7 +219,7 @@ def run_cmd_private(cmd, sin="", shell=True, wait=False, log_error=True,
         else:
             # communicate is False: use of threads
             if sin is not None and len(sin) > 0:
-                raise Exception(
+                raise RuntimeError(
                     "communicate should be True to send something on stdin")
             stdout, stderr = pproc.stdout, pproc.stderr
 

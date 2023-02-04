@@ -138,7 +138,7 @@ def download_from_sourceforge(url, outfile, fLOG=print, temp_folder="."):
 
     if len(text) < 20 and text.decode(
             "ascii").lower().startswith("bad request"):
-        raise Exception("Bad Request for url: " + url)
+        raise RuntimeError("Bad Request for url: " + url)
 
     with open(outfile, "wb") as f:
         f.write(text)

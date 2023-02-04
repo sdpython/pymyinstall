@@ -30,7 +30,7 @@ class TestDownloadPyOpenGL(ExtTestCase):
             self.assertIn("accelerate", m.name)
             down = os.listdir(temp)
             if len(down) != 1:
-                raise Exception(down)
+                raise AssertionError(down)
             self.assertIn("accelerate", down[0])
 
 

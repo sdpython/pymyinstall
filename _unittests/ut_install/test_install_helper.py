@@ -16,11 +16,11 @@ class TestInstallHelper(unittest.TestCase):
 
         v = get_wheel_version("rpy2-2.6.0-cp34-none-win_amd64.whl")
         if v != "2.6.0":
-            raise Exception(v)
+            raise AssertionError(v)
 
         v = get_wheel_version("tornado-4.2-cp34-none-win_amd64.whl")
         if v != "4.2":
-            raise Exception(v)
+            raise AssertionError(v)
 
 
 if __name__ == "__main__":

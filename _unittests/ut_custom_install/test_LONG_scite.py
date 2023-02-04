@@ -47,7 +47,7 @@ class TestScite (unittest.TestCase):
                 content = f.read().lower()
             if sys.executable.lower() not in content and \
                sys.executable.lower().replace(".exe", "w.exe") not in content:
-                raise Exception(
+                raise AssertionError(
                     "{0} or {1} not in \n{2}".format(
                         sys.executable,
                         sys.executable.replace(

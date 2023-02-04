@@ -35,7 +35,8 @@ class TestPyMyInstallCliTool(unittest.TestCase):
         if not content:
             comp = "OUT:\n{0}\nERR:\n{1}".format(out, err)
             if sys.platform.startswith("win"):
-                raise Exception("content is empty for: " + temp + "\n" + comp)
+                raise AssertionError(
+                    "content is empty for: " + temp + "\n" + comp)
 
 
 if __name__ == "__main__":

@@ -66,7 +66,7 @@ def get_page_wheel(page, sele=True):
         else:
             raise ee
     except Exception as e:
-        raise Exception(
+        raise RuntimeError(
             "unable to get '{0}' '{1}'".format(page, type(e))) from e
 
     if ull:

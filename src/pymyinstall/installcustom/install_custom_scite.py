@@ -69,15 +69,15 @@ def install_scite(dest_folder=".", fLOG=print, install=True, change_python_path=
     rel = re.compile("Release ([0-9.]+)")
     rel = rel.findall(page)
     if len(rel) == 0:
-        raise Exception("unable to find the release version")
+        raise RuntimeError("unable to find the release version")
     rel = rel[0]
     fLOG("[pymy] SciTE, release version ", rel)
 
     reg = re.compile("<a href=\\\"(.*zip.*)\\\">full download</a>")
     find = reg.findall(page)
     if len(find) != 1:
-        raise Exception("unable to find the file to download at " +
-                        url + "\nfound: " + str(len(find)) + "\n" + "\n".join(find))
+        raise RuntimeError("unable to find the file to download at " +
+                           url + "\nfound: " + str(len(find)) + "\n" + "\n".join(find))
 
     # should be something like http://www.scintilla.org/wscite356.zip
     newurl = find[0]

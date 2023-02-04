@@ -54,7 +54,7 @@ def get_module_version(module, use_cmd=False):
         if err is not None and len(err) > 0:
             if len(err.split("\n")) > 3 or \
                "You should consider upgrading via the 'pip install --upgrade pip' command." not in err:
-                raise Exception("unable to run, #lines {0}\nCMD:\n{3}\nERR-J:\n{1}\nOUT:\n{2}".format(
+                raise RuntimeError("unable to run, #lines {0}\nCMD:\n{3}\nERR-J:\n{1}\nOUT:\n{2}".format(
                     len(err.split("\n")), err, out, cmd))
         lines = out.split("\n")
 
@@ -358,7 +358,7 @@ def numeric_version(vers):
     if isinstance(vers, tuple):
         return vers
     if isinstance(vers, list):
-        raise Exception("unexpected value:" + str(vers))
+        raise RuntimeError("unexpected value:" + str(vers))
     spl = str(vers).split(".")
     r = []
     for _ in spl:
@@ -601,7 +601,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
                    "platform_python_implementation='{6}'.").format(
                 cond, full, extra, python_version, sys_platform,
                 platform_machine, platform_python_implementation)
-            raise Exception(mes)
+            raise RuntimeError(mes)
 
     if use_pip:
         global _get_module_dependencies_deps

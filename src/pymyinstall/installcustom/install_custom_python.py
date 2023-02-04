@@ -44,7 +44,7 @@ def unzip7_files(filename_7z, fLOG=print, dest="."):
     out, err = run_cmd(cmd, wait=True)
 
     if err is not None and len(err) > 0:
-        raise Exception("OUT:\n{0}\nERR-A:\n{1}".format(out, err))
+        raise RuntimeError("OUT:\n{0}\nERR-A:\n{1}".format(out, err))
 
     return out
 
@@ -57,7 +57,7 @@ def fix_fcntl_windows(path):
     @param   path       path to the python installation
     """
     if not sys.platform.startswith("win"):
-        raise Exception("fcntl should only be added on Windows.")
+        raise RuntimeError("fcntl should only be added on Windows.")
     dest = os.path.join(path, "Lib", "fcntl.py")
     if os.path.exists(dest):
         # already done
@@ -87,7 +87,7 @@ def fix_termios_windows(path):
     @param   path       path to the python installation
     """
     if not sys.platform.startswith("win"):
-        raise Exception("fcntl should only be added on Windows.")
+        raise RuntimeError("fcntl should only be added on Windows.")
     dest = os.path.join(path, "Lib", "termios.py")
     if os.path.exists(dest):
         # already done
@@ -107,7 +107,7 @@ def fix_resource_windows(path):
     @param   path       path to the python installation
     """
     if not sys.platform.startswith("win"):
-        raise Exception("fcntl should only be added on Windows.")
+        raise RuntimeError("fcntl should only be added on Windows.")
     dest = os.path.join(path, "Lib", "resource.py")
     if os.path.exists(dest):
         # already done
@@ -267,7 +267,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             else:
                 url = "https://www.python.org/ftp/python/3.5.3/python-3.5.3-embed-amd64.zip"
         else:
-            raise Exception(
+            raise RuntimeError(
                 "Unable to find a proper version for version {0}".format(version))
     else:
         url = "https://www.python.org/ftp/python/{0}.{1}.{2}/Python-{0}.{1}.{2}.tgz".format(
@@ -409,7 +409,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
                         errs.append(line)
                 err = "\n".join(errs).strip(' \n\r')
             if len(err) > 0:
-                raise Exception(
+                raise RuntimeError(
                     "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-B\n{2}\n---CMDS--\n{3}".format(
                         cmd, out, err, "\n".join(cmds)))
         else:
@@ -466,7 +466,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
 
         exp = ".zip/lib2to3/Grammar.txt"
         if len(err) > 0 and exp not in out.replace("\\", "/").replace("//", "/"):
-            raise Exception(
+            raise RuntimeError(
                 "Something went wrong:\nCMD\n{0}\nOUT\n{1}\nERR-C\n{2}".format(
                     cmd, out, err_keep))
         fLOG(out)
@@ -496,7 +496,7 @@ def install_python(temp_folder=".", fLOG=print, install=True, force_download=Fal
             err__ = _clean_err0(err_)
             if len(err__) > 0:
                 mes = "[install_python2] end installed modules. Something went wrong:\n"
-                raise Exception(
+                raise RuntimeError(
                     mes + "ERR-D-CMD\n{0}\nOUT\n{1}\nOUT2\n{3}\nERR-D\n{2}\nERR2-D\n{4}\nERR2-Dc\n{5}\n**CMD**\n{0}\n--CMDS--\n{6}".format(
                         cmd, out, err, out_, err_, err__, "\n".join(cmds)))
             out += ("\n-------------" * 5) + "\n" + out_

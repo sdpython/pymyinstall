@@ -31,7 +31,7 @@ class TestIPythonProfile(unittest.TestCase):
                 warnings.warn("needs to add custom command line")
                 return
             else:
-                raise Exception(
+                raise AssertionError(
                     "Error message\n---\n{0}\n---".format(e)) from e
 
         fLOG(path)

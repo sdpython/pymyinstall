@@ -40,7 +40,7 @@ class TestDownloadPythonMinimal(unittest.TestCase):
             with open(post, "r") as f:
                 content = f.read()
             if "os.path.exists(dest)" not in content:
-                raise Exception(
+                raise AssertionError(
                     "'os.path.exists(dest)' not found in '{0}'".format(post))
         else:
             # already checked
