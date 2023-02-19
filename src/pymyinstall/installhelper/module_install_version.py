@@ -667,7 +667,7 @@ def get_module_dependencies(module, use_cmd=False, deep=False, collapse=True, us
             mod = 0
             for r in res:
                 if r[0] not in done:
-                    if r[0].lower() < 'a' or r[0].lower() > 'z' or r[0].endswith(";"):
+                    if r[0].lower() < 'a' or r[0].lower() > 'zzzzzz' or r[0].endswith(";"):
                         raise NameError(
                             "A module has an unexpected name '{0}', r={1} "
                             "when looking for dependencies of '{2}'.".format(
